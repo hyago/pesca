@@ -1,0 +1,70 @@
+<?=$this->doctype('XHTML1_TRANSITIONAL')?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <base href="http://<?=$_SERVER['HTTP_HOST'] . $this->baseUrl()?>/" />
+        
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">
+
+        <!-- 
+        TODO
+        Verificação com jquery
+        -->
+        <script>
+        function verificaCampos(){
+            var x=document.forms["login"]["usuario"].value;
+            var y=document.forms["login"]["senha"].value;
+            if (x==null || x==""){
+                alert("Digite o nome de usuário!"); 
+                return false;
+            }
+            if(y==null || y==""){
+                alert("Digite sua senha!");
+                return false;
+            }
+        }
+        </script>        
+        
+        <title>
+            Projeto de Monitoramento da Atividade Pesqueira
+        </title>
+    </head>
+    <body>
+        <div id="principal">
+            <div id="topo">
+            </div>
+            
+            <div id="menu">
+                <ul>
+                    <li><a href="<?=$this->url(array("controller"=>"index","action"=>"index"),null,true)?>">Página Inicial</a></li>
+                    <li><a href="<?=$this->url(array("controller"=>"equipe","action"=>"index"),null,true)?>">Equipe</a></li>
+                    <li><a href="<?=$this->url(array("controller"=>"noticias","action"=>"index"),null,true)?>">Ultimas Notícias</a></li>
+                    <form name="login" onsubmit="return verificaCampos()" method="post" >
+                        <li><input type="text" name="usuario" PlaceHolder="Usuário" id="user"></li>
+                        <li><input type="password" name="senha" PlaceHolder="Senha" id="senha"></li>
+                        <input type="submit" value="Entrar"/>
+                        <a href="#" class="recupSenha">Esqueceu sua senha?</a>
+                    </form>
+                </ul>
+            </div>
+            <div id="conteudo">
+
+            <?php echo $this->layout()->content; ?>
+
+            </div>
+
+        </div>
+        
+        <div id="rodape">
+            <p>
+                UNIVERSIDADE ESTADUAL DE SANTA CRUZ <br />
+                Campus Soane Nazaré de Andrade, Rodovia Jorge Amado, Km 16, Bairro Salobrinho <br/>
+                CEP 45662-900. Ilhéus-Bahia <br />
+            </p>
+        </div>
+        
+        <div id="nbcgib">
+            <a href="http://nbcgib.uesc.br/nbcgib" target="_blank"><img class="imgparc" src="img/nbcgib.png" alt="NBCGIB" title="NBCGIB" style="float:left;"></a>
+        </div>
+    </body>
+</html>
