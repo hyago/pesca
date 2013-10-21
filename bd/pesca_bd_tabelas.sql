@@ -36,12 +36,12 @@ CREATE  TABLE "Usuario" (
   UNIQUE (email) ,
   CONSTRAINT fk_Usuario_Perfil
     FOREIGN KEY ("Perfil_idPerfil" )
-    REFERENCES Perfil ("idPerfil" )
+    REFERENCES "Perfil" ("idPerfil" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_Usuario_Endereco1
     FOREIGN KEY ("Endereco_idEndereco" )
-    REFERENCES Endereco ("idEndereco" )
+    REFERENCES "Endereco" ("idEndereco" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
@@ -56,7 +56,7 @@ CREATE  TABLE "Login" (
   UNIQUE ("Usuario_idUsuario") ,
   CONSTRAINT fk_Login_Usuario1
     FOREIGN KEY ("Usuario_idUsuario" )
-    REFERENCES Usuario ("idUsuario" )
+    REFERENCES "Usuario" ("idUsuario" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
@@ -69,7 +69,7 @@ CREATE  TABLE "AlteracaoSenha" (
   PRIMARY KEY (chave) ,
   CONSTRAINT fk_AlteracaoSenha_Usuario1
     FOREIGN KEY ("Usuario_idUsuario" )
-    REFERENCES Usuario ("idUsuario" )
+    REFERENCES "Usuario" ("idUsuario" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;

@@ -4,26 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <base href="http://<?=$_SERVER['HTTP_HOST'] . $this->baseUrl()?>/" />
         
-        <link rel="stylesheet" type="text/css" href="css/estilos.css">
-
-        <!-- 
-        TODO
-        Verificação com jquery
-        -->
-        <script>
-        function verificaCampos(){
-            var x=document.forms["login"]["usuario"].value;
-            var y=document.forms["login"]["senha"].value;
-            if (x==null || x==""){
-                alert("Digite o nome de usuário!"); 
-                return false;
-            }
-            if(y==null || y==""){
-                alert("Digite sua senha!");
-                return false;
-            }
-        }
-        </script>        
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">   
         
         <title>
             Projeto de Monitoramento da Atividade Pesqueira
@@ -39,8 +20,8 @@
                     <li><a href="<?=$this->url(array("controller"=>"index","action"=>"index"),null,true)?>">Página Inicial</a></li>
                     <li><a href="<?=$this->url(array("controller"=>"equipe","action"=>"index"),null,true)?>">Equipe</a></li>
                     <li><a href="<?=$this->url(array("controller"=>"noticias","action"=>"index"),null,true)?>">Ultimas Notícias</a></li>
-                    <form name="login" onsubmit="return verificaCampos()" method="post" >
-                        <li><input type="text" name="usuario" PlaceHolder="Usuário" id="user"></li>
+                    <form name="login" method="post" action="<?=$this->url(array('controller'=>'autenticacao','action'=>'login'),null,true)?>">
+                        <li><input type="text" name="login" PlaceHolder="Usuário" id="user"></li>
                         <li><input type="password" name="senha" PlaceHolder="Senha" id="senha"></li>
                         <input type="submit" value="Entrar"/>
                         <a href="#" class="recupSenha">Esqueceu sua senha?</a>
