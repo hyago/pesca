@@ -1,5 +1,16 @@
 <?php
 
+/** 
+ * Model de usuários
+ * 
+ * @package Pesca
+ * @subpackage Models
+ * @author Elenildo João <elenildo.joao@gmail.com>
+ * @version 0.1
+ * @access public
+ *
+ */
+
 class Application_Model_Usuario
 {
     public function select($where = null, $order = null, $limit = null)

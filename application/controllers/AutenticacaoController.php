@@ -1,5 +1,16 @@
 <?php
 
+/** 
+ * Controller de autenticação
+ * 
+ * @package Pesca
+ * @subpackage Controllers
+ * @author Elenildo João <elenildo.joao@gmail.com>
+ * @version 0.1
+ * @access public
+ *
+ */
+
 class AutenticacaoController extends Zend_Controller_Action
 {
 
@@ -12,7 +23,10 @@ class AutenticacaoController extends Zend_Controller_Action
     {
         
     }
-    
+
+    /*
+     * Login de usuários
+     */
     public function loginAction()
     {
         $this->_helper->viewRenderer->setNoRender();
@@ -41,6 +55,9 @@ class AutenticacaoController extends Zend_Controller_Action
         }
     }
     
+    /*
+     * Logout de usuários
+     */
     public function logoutAction()
     {
         Zend_Auth::getInstance()->clearIdentity();

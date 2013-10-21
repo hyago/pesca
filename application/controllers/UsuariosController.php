@@ -1,5 +1,16 @@
 <?php
 
+/** 
+ * Controller de Usuários
+ * 
+ * @package Pesca
+ * @subpackage Controllers
+ * @author Elenildo João <elenildo.joao@gmail.com>
+ * @version 0.1
+ * @access public
+ *
+ */
+
 class UsuariosController extends Zend_Controller_Action
 {
 
