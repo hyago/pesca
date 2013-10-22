@@ -29,29 +29,36 @@ class AutenticacaoController extends Zend_Controller_Action
      */
     public function loginAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $login = $this->_getParam('login');
+        $senha = $this->_getParam('senha');
         
-        $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
-        $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-        
-        $authAdapter->setTableName('Login')
-            ->setIdentityColumn('login')
-            ->setCredentialColumn('hashSenha');
-        
-        $authAdapter->setIdentity($this->_getParam('login'))
-            ->setCredential(sha1($this->_getParam('senha')));
-        
-        $result = $authAdapter->authenticate();
-        
-        if($result->isValid()){        
-            $usuario = $authAdapter->getResultRowObject();
+        if (empty($login) || empty($senha)){
+            $this->view->mensagem = "Preencha o formulário corretamente.";
+        }else{                
+            $this->_helper->viewRenderer->setNoRender();
 
-            $storage = Zend_Auth::getInstance()->getStorage();
-            $storage->write($usuario);
+            $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
+            $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
 
-            $this->_redirect('index');
-        }else{
-            $this->_redirect('autenticacao/falha');
+            $authAdapter->setTableName('Login')
+                ->setIdentityColumn('login')
+                ->setCredentialColumn('hashSenha');
+
+            $authAdapter->setIdentity($login)
+                ->setCredential(sha1($senha));
+
+            $result = $authAdapter->authenticate();
+
+            if($result->isValid()){        
+                $usuario = $authAdapter->getResultRowObject();
+
+                $storage = Zend_Auth::getInstance()->getStorage();
+                $storage->write($usuario);
+
+                $this->_redirect('index');
+            }else{
+                $this->_redirect('autenticacao/falha');
+            }
         }
     }
     
