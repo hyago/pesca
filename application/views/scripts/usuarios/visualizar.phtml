@@ -1,0 +1,40 @@
+<h1>Visualizar Usuário</h1>
+
+<a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>">Voltar</a>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Login</th>
+        <th>Perfil</th>
+        <th>E-mail</th>
+        <th>Sexo</th>
+        <th>RG</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Logradouro</th>
+        <th>Número</th>
+        <th>Bairro</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>CEP</th>
+        <th>Complemento</th>     
+    </tr>
+    <tr>
+        <td><?= $this->usuario['nome'] ?></td>
+        <td><?= $this->usuario['login'] ?></td>
+        <td><?= $this->usuario['perfil'] ?></td>
+        <td><?= $this->usuario['email'] ?></td>
+        <td><?= $this->usuario['sexo'] ?></td>
+        <td><?= $this->usuario['rg'] ?></td>
+        <td><?= $this->usuario['cpf'] ?></td>
+        <td><?= $this->usuario['telefone'] ?></td>
+        <td><?= $this->usuario['logradouro'] ?></td>
+        <td><?= $this->usuario['numero'] ?></td>
+        <td><?= $this->usuario['bairro'] ?></td>
+        <td><?= $this->usuario['cidade'] ?></td>
+        <td><?= $this->usuario['estado'] ?></td>
+        <td><?= $this->usuario['cep'] ?></td>
+        <td><?= $this->usuario['complemento'] ?></td>
+    </tr>
+</table>

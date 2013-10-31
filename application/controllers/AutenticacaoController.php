@@ -54,7 +54,6 @@ class AutenticacaoController extends Zend_Controller_Action
 
                 $storage = Zend_Auth::getInstance()->getStorage();
                 $storage->write($usuario);
-
                 $this->_redirect('index');
             }else{
                 $this->_redirect('autenticacao/falha');

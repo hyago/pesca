@@ -33,8 +33,14 @@
       <modelsDirectory>
         <dbTableDirectory>
           <dbTableFile dbTableName="Usuario"/>
+          <dbTableFile dbTableName="Endereco"/>
+          <dbTableFile dbTableName="Login"/>
+          <dbTableFile dbTableName="AlteracaoSenha"/>
+          <dbTableFile dbTableName="Perfil"/>
+          <dbTableFile dbTableName="VUsuario"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
+        <modelFile modelName="Perfil"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

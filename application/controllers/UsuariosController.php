@@ -21,15 +21,20 @@ class UsuariosController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         
+        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
+        $this->view->usuarioLogado = $this->usuarioLogado;
+        
         $this->modelUsuario = new Application_Model_Usuario();
     }
     
     /*
-     * Lista todos os usuários
+     * Lista todos os usuários ativos
      */
     public function indexAction()
     {
-        $dados = $this->modelUsuario->select();
+        $whereUsuario= '"usuarioDeletado" IS FALSE';
+        
+        $dados = $this->modelUsuario->select($whereUsuario);
       
         $this->view->assign("dados", $dados);
     }
@@ -49,7 +54,12 @@ class UsuariosController extends Zend_Controller_Action
      */
     public function novoAction()
     {
-
+        $modelPerfil = new Application_Model_Perfil();
+        $perfis = $modelPerfil->select();
+        
+        $this->view->assign("perfis", $perfis);
+        $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
+	
     }
  
     /*
@@ -67,8 +77,12 @@ class UsuariosController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        $modelPerfil = new Application_Model_Perfil();
+        $perfis = $modelPerfil->select();
         $usuario = $this->modelUsuario->find($this->_getParam('id'));
-
+        
+        $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
+        $this->view->assign("perfis", $perfis);
         $this->view->assign("usuario", $usuario);
     }
    

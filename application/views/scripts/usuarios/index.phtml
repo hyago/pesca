@@ -1,0 +1,22 @@
+<h1>Lista de Usuários</h1>
+
+<a href="<?=$this->url(array("controller"=>"usuarios","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $usuario):
+    ?>
+    <tr>
+        <td><?= $usuario['nome'] ?></td>
+        <td><?= $usuario['email'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"visualizar", "id" => $usuario['idUsuario']),null,true)?>">Visualizar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"editar", "id" => $usuario['idUsuario']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"excluir", "id" => $usuario['idUsuario']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>
