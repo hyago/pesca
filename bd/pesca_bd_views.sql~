@@ -29,6 +29,6 @@ FROM
 WHERE 
   "T_Usuario"."TE_ID" = "T_Endereco"."TE_ID" AND
   "T_Usuario"."TP_ID" = "T_Perfil"."TP_ID" AND
-  "T_Usuario"."TL_ID" = "T_Login"."TL_ID"
+  "T_Usuario"."TL_ID" = "T_Login"."TL_ID";
 ORDER BY
   "T_Usuario"."TU_ID" ASC;

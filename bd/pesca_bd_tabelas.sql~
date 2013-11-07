@@ -2,9 +2,9 @@
 --CREATE DATABASE "DB_Pesca" TEMPLATE template1 ENCODING "UTF8";
 
 -- -----------------------------------------------------
--- Table "T_Login"
+-- Table "DB_Pesca"."T_Login"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Login" (
+CREATE  TABLE "DB_Pesca"."T_Login" (
   "TL_ID" SERIAL ,
   "TL_Login" VARCHAR(12) NOT NULL ,
   "TL_HashSenha" CHAR(40) NOT NULL ,
@@ -15,9 +15,9 @@ CREATE  TABLE "T_Login" (
 
 
 -- -----------------------------------------------------
--- Table "T_Perfil"
+-- Table "DB_Pesca"."T_Perfil"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Perfil" (
+CREATE  TABLE "DB_Pesca"."T_Perfil" (
   "TP_ID" SERIAL,
   "TP_Perfil" VARCHAR(14) NOT NULL ,
   PRIMARY KEY ("TP_ID") )
@@ -25,9 +25,9 @@ CREATE  TABLE "T_Perfil" (
 
 
 -- -----------------------------------------------------
--- Table "T_Endereco"
+-- Table "DB_Pesca"."T_Endereco"
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS "T_Endereco" (
+CREATE  TABLE IF NOT EXISTS "DB_Pesca"."T_Endereco" (
   "TE_ID" SERIAL,
   "TE_Logradouro" VARCHAR(30) NOT NULL ,
   "TE_Numero" VARCHAR(6) NOT NULL ,
@@ -41,9 +41,9 @@ CREATE  TABLE IF NOT EXISTS "T_Endereco" (
 
 
 -- -----------------------------------------------------
--- Table "T_Usuario"
+-- Table "DB_Pesca"."T_Usuario"
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS "T_Usuario" (
+CREATE  TABLE IF NOT EXISTS "DB_Pesca"."T_Usuario" (
   "TU_ID" SERIAL ,
   "TU_Nome" VARCHAR(45) NOT NULL ,
   "TU_Sexo" VARCHAR(1) NOT NULL ,
@@ -60,26 +60,26 @@ CREATE  TABLE IF NOT EXISTS "T_Usuario" (
   UNIQUE ("TU_Email") ,
   CONSTRAINT "fk_T_Usuario_T_Login1"
     FOREIGN KEY ("TL_ID" )
-    REFERENCES "T_Login" ("TL_ID" )
+    REFERENCES "DB_Pesca"."T_Login" ("TL_ID" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT "fk_T_Usuario_T_Perfil1"
     FOREIGN KEY ("TP_ID" )
-    REFERENCES "T_Perfil" ("TP_ID" )
+    REFERENCES "DB_Pesca"."T_Perfil" ("TP_ID" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT "fk_T_Usuario_T_Endereco1"
     FOREIGN KEY ("TE_ID" )
-    REFERENCES "T_Endereco" ("TE_ID" )
+    REFERENCES "DB_Pesca"."T_Endereco" ("TE_ID" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
 
 
 -- -----------------------------------------------------
--- Table "T_AlteracaoSenha"
+-- Table "DB_Pesca"."T_AlteracaoSenha"
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS "T_AlteracaoSenha" (
+CREATE  TABLE IF NOT EXISTS "DB_Pesca"."T_AlteracaoSenha" (
   "TAS_Token" CHAR(40) NOT NULL ,
   "TAS_dataSolicitacao" TIMESTAMP NOT NULL ,
   "TAS_dataAlteracao" TIMESTAMP NULL ,
@@ -87,7 +87,7 @@ CREATE  TABLE IF NOT EXISTS "T_AlteracaoSenha" (
   PRIMARY KEY ("TAS_Token") ,
   CONSTRAINT "fk_T_AlteracaoSenha_T_Usuario1"
     FOREIGN KEY ("TU_ID" )
-    REFERENCES "T_Usuario" ("TU_ID" )
+    REFERENCES "DB_Pesca"."T_Usuario" ("TU_ID" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
