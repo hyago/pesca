@@ -1,4 +1,4 @@
-<h1>Visualizar Usuário</h1>
+<h2>Visualizar Usuário</h2>
 
 <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>">Voltar</a>
 
@@ -21,20 +21,20 @@
         <th>Complemento</th>     
     </tr>
     <tr>
-        <td><?= $this->usuario['nome'] ?></td>
-        <td><?= $this->usuario['login'] ?></td>
-        <td><?= $this->usuario['perfil'] ?></td>
-        <td><?= $this->usuario['email'] ?></td>
-        <td><?= $this->usuario['sexo'] ?></td>
-        <td><?= $this->usuario['rg'] ?></td>
-        <td><?= $this->usuario['cpf'] ?></td>
-        <td><?= $this->usuario['telefone'] ?></td>
-        <td><?= $this->usuario['logradouro'] ?></td>
-        <td><?= $this->usuario['numero'] ?></td>
-        <td><?= $this->usuario['bairro'] ?></td>
-        <td><?= $this->usuario['cidade'] ?></td>
-        <td><?= $this->usuario['estado'] ?></td>
-        <td><?= $this->usuario['cep'] ?></td>
-        <td><?= $this->usuario['complemento'] ?></td>
+        <td><?= $this->usuario['TU_Nome'] ?></td>
+        <td><?= $this->usuario['TL_Login'] ?></td>
+        <td><?= $this->usuario['TP_Perfil'] ?></td>
+        <td><?= $this->usuario['TU_Email'] ?></td>
+        <td><?= $this->usuario['TU_Sexo'] ?></td>
+        <td><?= $this->usuario['TU_RG'] ?></td>
+        <td><?= $this->usuario['TU_CPF'] ?></td>
+        <td><?= $this->usuario['TU_Telefone'] ?></td>
+        <td><?= $this->usuario['TE_Logradouro'] ?></td>
+        <td><?= $this->usuario['TE_Numero'] ?></td>
+        <td><?= $this->usuario['TE_Bairro'] ?></td>
+        <td><?= $this->usuario['TE_Cidade'] ?></td>
+        <td><?= $this->usuario['TE_Estado'] ?></td>
+        <td><?= $this->usuario['TE_CEP'] ?></td>
+        <td><?= $this->usuario['TE_Complemento'] ?></td>
     </tr>
 </table>

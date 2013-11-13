@@ -23,6 +23,12 @@
         <controllerFile controllerName="Usuarios">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Contato">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="EsqueciSenha">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -62,6 +68,12 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Usuarios">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Contato">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="EsqueciSenha">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

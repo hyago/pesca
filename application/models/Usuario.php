@@ -1,7 +1,7 @@
 <?php
 
 /** 
- * Model de usuários
+ * Model Usuario
  * 
  * @package Pesca
  * @subpackage Models
@@ -40,37 +40,37 @@ class Application_Model_Usuario
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
-            'logradouro'  => $request['logradouro'],
-            'numero'      => $request['numero'],
-            'bairro'      => $request['bairro'],
-            'cidade'      => $request['cidade'],
-            'estado'      => $request['estado'],
-            'cep'         => $request['cep'],
-            'complemento' => $request['complemento']
+            'TE_Logradouro'  => $request['logradouro'],
+            'TE_Numero'      => $request['numero'],
+            'TE_Bairro'      => $request['bairro'],
+            'TE_Cidade'      => $request['cidade'],
+            'TE_Estado'      => $request['estado'],
+            'TE_CEP'         => $request['cep'],
+            'TE_Complemento' => $request['complemento']
         );
         
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
         
-        $dadosUsuario = array(
-            'Perfil_idPerfil'     => $request['perfil'],
-            'Endereco_idEndereco' => $idEndereco,
-            'nome'                => $request['nome'],
-            'sexo'                => $request['sexo'],
-            'rg'                  => $request['rg'],
-            'cpf'                 => $request['cpf'],
-            'email'               => $request['email'],
-            'telefone'            => $request['telefone']
-        );
-        
-        $idUsuario = $dbTableUsuario->insert($dadosUsuario);
-        
         $dadosLogin = array(
-            'login'             => $request['login'],
-            'Usuario_idUsuario' => $idUsuario,
-            'hashSenha'         => sha1($request['login'])
+            'TL_Login'     => $request['login'],
+            'TL_HashSenha' => sha1($request['login'])
         );
         
-        $dbTableLogin->insert($dadosLogin);
+        $idLogin = $dbTableLogin->insert($dadosLogin);
+        
+        $dadosUsuario = array(
+            'TP_ID'       => $request['perfil'],
+            'TE_ID'       => $idEndereco,
+            'TL_ID'       => $idLogin,
+            'TU_Nome'     => $request['nome'],
+            'TU_Sexo'     => $request['sexo'],
+            'TU_RG'       => $request['rg'],
+            'TU_CPF'      => $request['cpf'],
+            'TU_Email'    => $request['email'],
+            'TU_Telefone' => $request['telefone']
+        );
+        
+        $dbTableUsuario->insert($dadosUsuario);
 
         return;
     }
@@ -81,27 +81,27 @@ class Application_Model_Usuario
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
-            'logradouro'  => $request['logradouro'],
-            'numero'      => $request['numero'],
-            'bairro'      => $request['bairro'],
-            'cidade'      => $request['cidade'],
-            'estado'      => $request['estado'],
-            'cep'         => $request['cep'],
-            'complemento' => $request['complemento']
+            'TE_Logradouro'  => $request['logradouro'],
+            'TE_Numero'      => $request['numero'],
+            'TE_Bairro'      => $request['bairro'],
+            'TE_Cidade'      => $request['cidade'],
+            'TE_Estado'      => $request['estado'],
+            'TE_CEP'         => $request['cep'],
+            'TE_Complemento' => $request['complemento']
         );
         
         $dadosUsuario = array(
-            'Perfil_idPerfil'     => $request['perfil'],
-            'nome'                => $request['nome'],
-            'sexo'                => $request['sexo'],
-            'rg'                  => $request['rg'],
-            'cpf'                 => $request['cpf'],
-            'email'               => $request['email'],
-            'telefone'            => $request['telefone']
+            'TP_ID'       => $request['perfil'],
+            'TU_Nome'     => $request['nome'],
+            'TU_Sexo'     => $request['sexo'],
+            'TU_RG'       => $request['rg'],
+            'TU_CPF'      => $request['cpf'],
+            'TU_Email'    => $request['email'],
+            'TU_Telefone' => $request['telefone']
         );
         
-        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"idUsuario" = ?', $request['idUsuario']);
-        $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"idEndereco" = ?', $request['idEndereco']);
+        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"TU_ID" = ?', $request['idUsuario']);
+        $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"TE_ID" = ?', $request['idEndereco']);
         
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
@@ -112,11 +112,11 @@ class Application_Model_Usuario
         $dbTableUsuario = new Application_Model_DbTable_Usuario();        
                 
         $dadosUsuario = array(
-            'usuarioDeletado' => TRUE
+            'TU_UsuarioDeletado' => TRUE
         );
         
-        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"idUsuario" = ?', $idUsuario);
+        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"TU_ID" = ?', $idUsuario);
         
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
-    }   
+    }
 }

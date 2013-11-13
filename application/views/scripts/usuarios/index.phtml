@@ -1,4 +1,4 @@
-<h1>Lista de Usuários</h1>
+<h2>Lista de Usuários</h2>
 
 <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"novo"),null,true)?>">Novo</a>
 
@@ -12,11 +12,11 @@
     foreach ($this->dados as $key => $usuario):
     ?>
     <tr>
-        <td><?= $usuario['nome'] ?></td>
-        <td><?= $usuario['email'] ?></td>
-        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"visualizar", "id" => $usuario['idUsuario']),null,true)?>">Visualizar</a></td>
-        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"editar", "id" => $usuario['idUsuario']),null,true)?>">Editar</a></td>
-        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"excluir", "id" => $usuario['idUsuario']),null,true)?>">Excluir</a></td>
+        <td><?= $usuario['TU_Nome'] ?></td>
+        <td><?= $usuario['TU_Email'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"visualizar", "id" => $usuario['TU_ID']),null,true)?>">Visualizar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"editar", "id" => $usuario['TU_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"excluir", "id" => $usuario['TU_ID']),null,true)?>">Excluir</a></td>
     </tr>
     <?php endforeach; ?>
 </table>

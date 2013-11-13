@@ -21,6 +21,8 @@ class UsuariosController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         
+        $this->_helper->layout->setLayout('admin');
+        
         $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuarioLogado = $this->usuarioLogado;
         
@@ -32,7 +34,7 @@ class UsuariosController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $whereUsuario= '"usuarioDeletado" IS FALSE';
+        $whereUsuario= '"TU_UsuarioDeletado" IS FALSE';
         
         $dados = $this->modelUsuario->select($whereUsuario);
       

@@ -1,4 +1,4 @@
-<h1>Novo Usuário</h1>
+<h2>Novo Usuário</h2>
 
 <form action="<?=$this->url(array("controller"=>"usuarios","action"=>"criar"),null,true)?>" method="post">
     <label>Nome: <input type="text" name="nome" /></label> <br />
@@ -6,7 +6,7 @@
     <label>Perfil: 
         <select name="perfil">
             <?php foreach ($this->perfis as $key => $perfil): ?>
-            <option value="<?= $perfil['idPerfil']; ?>"><?= $perfil['perfil']; ?></option>
+            <option value="<?= $perfil['TP_ID']; ?>"><?= $perfil['TP_Perfil']; ?></option>
             <?php endforeach; ?>
         </select>
     </label> <br />    

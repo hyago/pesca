@@ -1,0 +1,210 @@
+#geral
+{
+	margin: 0 auto;
+	width: 900px;
+	background: #fff;
+}
+
+#topo
+{
+	height: 123px;
+	background-image: url('/img/banner.png');
+}
+
+#menu
+{
+	float: left;
+	width: 900px;
+	background: #8B8386;
+	min-height: 45px;
+}
+
+#menu ul
+{
+	margin: 0;
+	padding: 0;
+}
+
+#menu ul li
+{
+	list-style-type: none;
+	display: inline;
+}
+
+#menu li a
+{
+	display: block;
+	float: left;
+	margin: 10px 0;
+	padding: 5px 10px;
+	font-size: 15px;
+	color: #fff;
+	text-decoration: none;
+	border-right: 1px solid #fff;
+}
+
+#menu li a:hover { background: #4F4F4F; }
+
+#login
+{
+	float: right;
+	margin: 5px 0;
+}
+
+#login form { margin: 0 5px 2px 0; }
+
+#login .login {	width: 10em; }
+
+#login a
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+#login a:hover { background: #4F4F4F; }
+
+#conteudo-geral
+{
+	float: left;
+	width: 900px;
+	background: #f8f8ff;	
+}
+
+#conteudo
+{	
+	width: 900px;
+	min-height: 350px;
+	padding: 20px 0;
+	text-align: justify;
+}
+
+#conteudo p
+{
+	margin-left: 130px;
+	margin-right: 130px;
+}
+
+#conteudo ul
+{
+    padding: 0;
+	margin-left: 130px;
+	margin-right: 130px;
+}
+
+#conteudo h2 { 
+	margin: 0 0 0 130px; 
+	padding: 0;
+}
+
+#conteudo ul{
+	list-style-type: none;
+}
+
+#conteudo table, th, td
+{
+	border: 1px solid black;
+	border-collapse:collapse;
+}
+
+#conteudo tr th{
+	background-color: #8B8386;
+}
+
+#conteudo table{
+	width: 100%;
+}
+
+#label{	width: 150px; }
+
+#input{
+	margin-left: 150px;
+	margin-top: -129px;
+	float: left;
+}
+
+#menu-lateral
+{
+	float: left;
+	width: 190px;
+	padding: 0;
+	margin: 0;
+}
+
+#menu-lateral ul {
+	margin: 25px 0; 
+	padding: 0;
+}
+
+#menu-lateral li {
+	margin: 0; 
+	padding: 0;
+	border-bottom: 1px solid #CCC;
+	text-align: left;
+	list-style-type: none;
+}
+
+#menu-lateral a{
+	text-decoration: none;
+	color: #fff;
+}
+
+#menu-lateral a:link {
+	background: #8B8386;
+	color: #fff;
+	text-decoration: none;
+	padding: 8px;
+	margin: 0;
+	display: block;
+}
+
+#menu-lateral a:hover { background: #4F4F4F; }
+
+#menu-lateral ul li.atual { list-style-type: circle; }
+
+#rodape
+{	
+	margin: -50px 0;
+	clear: both;
+	background: #f8f8ff;
+	text-align: left;
+	height: 70px;
+
+}
+
+#rodape-texto
+{
+	margin: -30px 0;
+	padding-left: 10px;
+	height: 70px;
+	width: 900px;
+	background: #8B8386;
+	float: left;
+	color: #fff;
+	font-size: 12px;
+}
+
+#parceiros{
+	margin: 0 0;
+	width: 800px;
+	height: 100px;
+
+}
+
+#nbcgib
+{
+	margin: 0px 0;
+	width: 160px;
+	height: 70px;
+}
+
+#isus
+{
+	width: 160px;
+	margin-left: 160px;
+	margin-top: -70px;
+}
+
+#bamin{
+	margin-left: 320px;
+	margin-top: -70px;	
+}

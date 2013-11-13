@@ -1,7 +1,7 @@
 <?php
 
 /** 
- * Model de perfil
+ * Model Perfil
  * 
  * @package Pesca
  * @subpackage Models
