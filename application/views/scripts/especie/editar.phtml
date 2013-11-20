@@ -1,0 +1,7 @@
+<h2>Editar Especie</h2>
+
+<form action="<?=$this->url(array("controller"=>"especie","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idEspecie" value="<?=$this->especie['TEC_ID']?>" />
+    <label>Especie: <input type="text" name="especie" value="<?=$this->especie['TEC_Especie']?>"/></label> <br />
+    <input type="submit" value="Atualizar" />
+</form>

@@ -1,0 +1,19 @@
+<h2>Lista de Areas de Pesca</h2>
+
+<a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Area de Pesca</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $areaPesca):
+    ?>
+    <tr>
+        <td><?= $areaPesca['TAreaP_AreaPesca'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"editar", "id" => $areaPesca['TAreaP_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"excluir", "id" => $areaPesca['TAreaP_ID']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

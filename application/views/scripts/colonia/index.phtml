@@ -1,0 +1,33 @@
+<h2>Lista de Colonias</h2>
+
+<a href="<?=$this->url(array("controller"=>"colonia","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Colonia</th>
+        <th>Logradouro</th>
+        <th>Número</th>
+        <th>Bairro</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>CEP</th>
+        <th>Complemento</th> 
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $colonia):
+    ?>
+    <tr>
+        <td><?= $colonia['TC_Nome'] ?></td>
+        <td><?= $colonia['TE_Logradouro'] ?></td>
+        <td><?= $colonia['TE_Numero'] ?></td>
+        <td><?= $colonia['TE_Bairro'] ?></td>
+        <td><?= $colonia['TE_Cidade'] ?></td>
+        <td><?= $colonia['TE_Estado'] ?></td>
+        <td><?= $colonia['TE_CEP'] ?></td>
+        <td><?= $colonia['TE_Complemento'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"colonia","action"=>"editar", "id" => $colonia['TC_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"colonia","action"=>"excluir", "id" => $colonia['TC_ID']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

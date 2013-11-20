@@ -1,0 +1,19 @@
+<h2>Lista de Comunidades</h2>
+
+<a href="<?=$this->url(array("controller"=>"comunidade","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Comunidade</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $comunidade):
+    ?>
+    <tr>
+        <td><?= $comunidade['TCom_Nome'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"editar", "id" => $comunidade['TCom_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"excluir", "id" => $comunidade['TCom_ID']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

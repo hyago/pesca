@@ -1,0 +1,19 @@
+<h2>Nova Colonia</h2>
+
+<form action="<?=$this->url(array("controller"=>"colonia","action"=>"criar"),null,true)?>" method="post">
+    <label>Colonia: <input type="text" name="nome" /></label> <br />
+    <label>Logradouro: <input type="text" name="logradouro" /></label> <br />
+    <label>Número: <input type="text" name="numero" /></label> <br />
+    <label>Bairro: <input type="text" name="bairro" /></label> <br />
+    <label>Cidade: <input type="text" name="cidade" /></label> <br />
+    <label>Estado: 
+        <select name="estado">
+            <?php foreach ($this->estados as $estado): ?>
+            <option value="<?= $estado; ?>" <?=($estado == "BA") ? 'selected="selected"' : '';?>><?= $estado; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br />
+    <label>CEP: <input type="text" name="cep" /></label> <br />
+    <label>Complemento: <input type="text" name="complemento" /></label> <br />
+    <input type="submit" value="Cadastrar" />
+</form>

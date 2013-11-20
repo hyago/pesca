@@ -29,6 +29,24 @@
         <controllerFile controllerName="EsqueciSenha">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="ArtePesca">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Especie">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="AreaPesca">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="TipoEmbarcacao">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Comunidade">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Colonia">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -44,9 +62,23 @@
           <dbTableFile dbTableName="AlteracaoSenha"/>
           <dbTableFile dbTableName="Perfil"/>
           <dbTableFile dbTableName="VUsuario"/>
+          <dbTableFile dbTableName="ArtePesca"/>
+          <dbTableFile dbTableName="Especie"/>
+          <dbTableFile dbTableName="AreaPesca"/>
+          <dbTableFile dbTableName="TipoEmbarcacao"/>
+          <dbTableFile dbTableName="Comunidade"/>
+          <dbTableFile dbTableName="Colonia"/>
+          <dbTableFile dbTableName="VColonia"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
+        <modelFile modelName="Email"/>
+        <modelFile modelName="ArtePesca"/>
+        <modelFile modelName="Especie"/>
+        <modelFile modelName="AreaPesca"/>
+        <modelFile modelName="TipoEmbarcacao"/>
+        <modelFile modelName="Comunidade"/>
+        <modelFile modelName="Colonia"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -74,6 +106,24 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="EsqueciSenha">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ArtePesca">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Especie">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="AreaPesca">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoEmbarcacao">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Comunidade">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Colonia">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

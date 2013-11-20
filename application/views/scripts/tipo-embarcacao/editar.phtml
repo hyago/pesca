@@ -1,0 +1,7 @@
+<h2>Editar Tipo de Embarcação</h2>
+
+<form action="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idTipoEmbarcacao" value="<?=$this->tipoEmbarcacao['TTE_ID']?>" />
+    <label>Tipo de Embarcacao: <input type="text" name="tipoEmbarcacao" value="<?=$this->tipoEmbarcacao['TTE_TipoEmbarcacao']?>"/></label> <br />
+    <input type="submit" value="Atualizar" />
+</form>

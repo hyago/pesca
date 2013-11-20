@@ -1,0 +1,19 @@
+<h2>Lista de Tipos de Embarcações</h2>
+
+<a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Tipo de Embarcação</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $tipoEmbarcacao):
+    ?>
+    <tr>
+        <td><?= $tipoEmbarcacao['TTE_TipoEmbarcacao'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"editar", "id" => $tipoEmbarcacao['TTE_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"excluir", "id" => $tipoEmbarcacao['TTE_ID']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

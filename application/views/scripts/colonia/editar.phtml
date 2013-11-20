@@ -1,0 +1,21 @@
+<h2>Editar Colonia</h2>
+
+<form action="<?=$this->url(array("controller"=>"colonia","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idColonia" value="<?=$this->colonia['TC_ID']?>" />
+    <input type="hidden" name="idEndereco" value="<?=$this->colonia['TE_ID']?>" />
+    <label>Colonia: <input type="text" name="nome" value="<?=$this->colonia['TC_Nome']?>"/></label> <br />
+    <label>Logradouro: <input type="text" name="logradouro" value="<?=$this->colonia['TE_Logradouro'];?>" /></label> <br />
+    <label>Número: <input type="text" name="numero" value="<?=$this->colonia['TE_Numero'];?>" /></label> <br />
+    <label>Bairro: <input type="text" name="bairro" value="<?=$this->colonia['TE_Bairro'];?>" /></label> <br />
+    <label>Cidade: <input type="text" name="cidade" value="<?=$this->colonia['TE_Cidade'];?>" /></label> <br />
+    <label>Estado: 
+        <select name="estado">
+            <?php foreach ($this->estados as $estado): ?>
+            <option value="<?= $estado; ?>" <?=($estado == $this->colonia['TE_Estado']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br />
+    <label>CEP: <input type="text" name="cep" value="<?=$this->colonia['TE_CEP'];?>" /></label> <br />
+    <label>Complemento: <input type="text" name="complemento" value="<?=$this->colonia['TE_Complemento'];?>" /></label> <br />
+    <input type="submit" value="Atualizar" />
+</form>

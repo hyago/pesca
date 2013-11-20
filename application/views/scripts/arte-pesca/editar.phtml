@@ -1,0 +1,7 @@
+<h2>Editar Arte de Pesca</h2>
+
+<form action="<?=$this->url(array("controller"=>"arte-pesca","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idArtePesca" value="<?=$this->artePesca['TAP_ID']?>" />
+    <label>Arte de Pesca: <input type="text" name="artePesca" value="<?=$this->artePesca['TAP_ArtePesca']?>"/></label> <br />
+    <input type="submit" value="Atualizar" />
+</form>

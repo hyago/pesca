@@ -1,0 +1,19 @@
+<h2>Lista de Especies</h2>
+
+<a href="<?=$this->url(array("controller"=>"especie","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Especie</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $especie):
+    ?>
+    <tr>
+        <td><?= $especie['TEC_Especie'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"especie","action"=>"editar", "id" => $especie['TEC_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $especie['TEC_ID']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

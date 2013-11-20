@@ -1,0 +1,19 @@
+<h2>Lista de Artes de Pesca</h2>
+
+<a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Arte de Pesca</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $artePesca):
+    ?>
+    <tr>
+        <td><?= $artePesca['TAP_ArtePesca'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"editar", "id" => $artePesca['TAP_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"excluir", "id" => $artePesca['TAP_ID']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

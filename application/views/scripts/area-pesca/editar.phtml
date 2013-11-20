@@ -1,0 +1,7 @@
+<h2>Editar Area de Pesca</h2>
+
+<form action="<?=$this->url(array("controller"=>"area-pesca","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idAreaPesca" value="<?=$this->areaPesca['TAreaP_ID']?>" />
+    <label>Area de Pesca: <input type="text" name="areaPesca" value="<?=$this->areaPesca['TAreaP_AreaPesca']?>"/></label> <br />
+    <input type="submit" value="Atualizar" />
+</form>
