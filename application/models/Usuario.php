@@ -43,10 +43,9 @@ class Application_Model_Usuario
             'TE_Logradouro'  => $request['logradouro'],
             'TE_Numero'      => $request['numero'],
             'TE_Bairro'      => $request['bairro'],
-            'TE_Cidade'      => $request['cidade'],
-            'TE_Estado'      => $request['estado'],
             'TE_CEP'         => $request['cep'],
-            'TE_Complemento' => $request['complemento']
+            'TE_Comp'        => $request['complemento'],
+            'TMun_ID'        => $request['municipio']
         );
         
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
@@ -66,8 +65,7 @@ class Application_Model_Usuario
             'TU_Sexo'     => $request['sexo'],
             'TU_RG'       => $request['rg'],
             'TU_CPF'      => $request['cpf'],
-            'TU_Email'    => $request['email'],
-            'TU_Telefone' => $request['telefone']
+            'TU_Email'    => $request['email']
         );
         
         $dbTableUsuario->insert($dadosUsuario);
@@ -84,10 +82,8 @@ class Application_Model_Usuario
             'TE_Logradouro'  => $request['logradouro'],
             'TE_Numero'      => $request['numero'],
             'TE_Bairro'      => $request['bairro'],
-            'TE_Cidade'      => $request['cidade'],
-            'TE_Estado'      => $request['estado'],
             'TE_CEP'         => $request['cep'],
-            'TE_Complemento' => $request['complemento']
+            'TE_Comp'        => $request['complemento']
         );
         
         $dadosUsuario = array(
@@ -96,8 +92,7 @@ class Application_Model_Usuario
             'TU_Sexo'     => $request['sexo'],
             'TU_RG'       => $request['rg'],
             'TU_CPF'      => $request['cpf'],
-            'TU_Email'    => $request['email'],
-            'TU_Telefone' => $request['telefone']
+            'TU_Email'    => $request['email']
         );
         
         $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"TU_ID" = ?', $request['idUsuario']);

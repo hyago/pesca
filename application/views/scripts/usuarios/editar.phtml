@@ -21,19 +21,20 @@
     <label>E-mail: <input type="text" name="email" value="<?=$this->usuario['TU_Email'];?>" /></label> <br />
     <label>RG: <input type="text" name="rg" value="<?=$this->usuario['TU_RG'];?>" /></label> <br />
     <label>CPF: <input type="text" name="cpf" value="<?=$this->usuario['TU_CPF'];?>" /></label> <br />
-    <label>Telefone: <input type="text" name="telefone" value="<?=$this->usuario['TU_Telefone'];?>" /></label> <br />
+    <label>Telefone Residencial: <input type="text" name="telefoneResidencial" value="" /></label> <br />
+    <label>Telefone Celular: <input type="text" name="telefoneCelular" value="" /></label> <br />
     <label>Logradouro: <input type="text" name="logradouro" value="<?=$this->usuario['TE_Logradouro'];?>" /></label> <br />
     <label>Número: <input type="text" name="numero" value="<?=$this->usuario['TE_Numero'];?>" /></label> <br />
     <label>Bairro: <input type="text" name="bairro" value="<?=$this->usuario['TE_Bairro'];?>" /></label> <br />
-    <label>Cidade: <input type="text" name="cidade" value="<?=$this->usuario['TE_Cidade'];?>" /></label> <br />
+    <label>Cidade: <input type="text" name="cidade" value="<?=$this->usuario['TMun_Municipio'];?>" /></label> <br />
     <label>Estado: 
         <select name="estado">
             <?php foreach ($this->estados as $estado): ?>
-            <option value="<?= $estado; ?>" <?=($estado == $this->usuario['TE_Estado']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
+            <option value="<?= $estado; ?>" <?=($estado == $this->usuario['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
             <?php endforeach; ?>
         </select>
     </label> <br />
     <label>CEP: <input type="text" name="cep" value="<?=$this->usuario['TE_CEP'];?>" /></label> <br />
-    <label>Complemento: <input type="text" name="complemento" value="<?=$this->usuario['TE_Complemento'];?>" /></label> <br />
+    <label>Complemento: <input type="text" name="complemento" value="<?=$this->usuario['TE_Comp'];?>" /></label> <br />
     <input type="submit" value="Atualizar" />
 </form>

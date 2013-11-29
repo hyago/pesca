@@ -35,19 +35,6 @@ class Application_Model_Email
         $mail->setSubject ($this->assunto);
         $mail->setBodyText ($this->mensagem);
         $mail->send($transport);
-        
-        /*
-        $smtp = "smtp.google.com";
-        $mailTransport = new Zend_Mail_Transport_Smtp($smtp, $this->getConfiguracao());
-
-        $mail = new Zend_Mail();
-        $mail->setBodyHtml($this->mensagem, 'utf-8');
-        $mail->setFrom('noreply.pesca@gmail.com', utf8_decode('Pesca') );
-        $mail->addTo($this->destinatario['email'], $this->destinatario['nome']);
-        $mail->setSubject($this->assunto);
-        return $mail->send($mailTransport);
-         
-         */
     }
 
     private function getConfiguracao(){        

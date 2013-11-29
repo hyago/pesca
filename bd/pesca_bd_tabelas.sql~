@@ -98,6 +98,7 @@ CREATE  TABLE "T_Pescador" (
   "TP_DataNasc" DATE NULL ,
   "TMun_ID_Natural" INT NOT NULL ,
   "TE_ID" INT NOT NULL ,
+  "TTCont_ID" INT NOT NULL ,
   PRIMARY KEY ("TP_ID") ,
   CONSTRAINT "fk_T_Pescador_T_Municipio1"
     FOREIGN KEY ("TMun_ID_Natural" )
@@ -107,6 +108,11 @@ CREATE  TABLE "T_Pescador" (
   CONSTRAINT "fk_T_Pescador_T_Endereco1"
     FOREIGN KEY ("TE_ID" )
     REFERENCES "T_Endereco" ("TE_ID" )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_T_Pescador_T_TelefoneContato1"
+    FOREIGN KEY ("TTCont_ID" )
+    REFERENCES "T_TelefoneContato" ("TTCont_ID" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
@@ -272,6 +278,7 @@ CREATE  TABLE "T_Usuario" (
   "TL_ID" INT NOT NULL ,
   "TP_ID" INT NOT NULL ,
   "TE_ID" INT NOT NULL ,
+  "TTCont_ID" INT NOT NULL ,
   PRIMARY KEY ("TU_ID") ,
   UNIQUE ("TU_CPF") ,
   UNIQUE ("TU_Email") ,
@@ -288,6 +295,11 @@ CREATE  TABLE "T_Usuario" (
   CONSTRAINT "fk_T_Usuario_T_Endereco1"
     FOREIGN KEY ("TE_ID" )
     REFERENCES "T_Endereco" ("TE_ID" )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_T_Usuario_T_TelefoneContato1"
+    FOREIGN KEY ("TTCont_ID" )
+    REFERENCES "T_TelefoneContato" ("TTCont_ID" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
@@ -456,46 +468,6 @@ CREATE  TABLE "T_AlteracaoSenha" (
   CONSTRAINT "fk_T_AlteracaoSenha_T_Usuario1"
     FOREIGN KEY ("TU_ID" )
     REFERENCES "T_Usuario" ("TU_ID" )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
-
-
--- -----------------------------------------------------
--- Table "T_Usuario_has_T_TelefoneContato"
--- -----------------------------------------------------
-CREATE  TABLE "T_Usuario_has_T_TelefoneContato" (
-  "TU_ID" INT NOT NULL ,
-  "TTCont_ID" INT NOT NULL ,
-  PRIMARY KEY ("TU_ID", "TTCont_ID") ,
-  CONSTRAINT "fk_T_Usuario_has_T_TelefoneContato_T_Usuario1"
-    FOREIGN KEY ("TU_ID" )
-    REFERENCES "T_Usuario" ("TU_ID" )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT "fk_T_Usuario_has_T_TelefoneContato_T_TelefoneContato1"
-    FOREIGN KEY ("TTCont_ID" )
-    REFERENCES "T_TelefoneContato" ("TTCont_ID" )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
-
-
--- -----------------------------------------------------
--- Table "T_Pescador_has_T_TelefoneContato"
--- -----------------------------------------------------
-CREATE  TABLE "T_Pescador_has_T_TelefoneContato" (
-  "TP_ID" INT NOT NULL ,
-  "TTCont_ID" INT NOT NULL ,
-  PRIMARY KEY ("TP_ID", "TTCont_ID") ,
-  CONSTRAINT "fk_T_Pescador_has_T_TelefoneContato_T_Pescador1"
-    FOREIGN KEY ("TP_ID" )
-    REFERENCES "T_Pescador" ("TP_ID" )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT "fk_T_Pescador_has_T_TelefoneContato_T_TelefoneContato1"
-    FOREIGN KEY ("TTCont_ID" )
-    REFERENCES "T_TelefoneContato" ("TTCont_ID" )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;

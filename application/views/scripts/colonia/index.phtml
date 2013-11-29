@@ -5,6 +5,8 @@
 <table>
     <tr>
         <th>Colonia</th>
+        <th>Comunidade</th>
+        <th>Especificidade</th>
         <th>Logradouro</th>
         <th>Número</th>
         <th>Bairro</th>
@@ -19,13 +21,15 @@
     ?>
     <tr>
         <td><?= $colonia['TC_Nome'] ?></td>
+        <td><?= $colonia['TCOM_NOME'] ?></td>
+        <td><?= $colonia['TC_Especificidade'] ?></td>
         <td><?= $colonia['TE_Logradouro'] ?></td>
         <td><?= $colonia['TE_Numero'] ?></td>
         <td><?= $colonia['TE_Bairro'] ?></td>
-        <td><?= $colonia['TE_Cidade'] ?></td>
-        <td><?= $colonia['TE_Estado'] ?></td>
+        <td><?= $colonia['TMun_Municipio'] ?></td>
+        <td><?= $colonia['TUF_Sigla'] ?></td>
         <td><?= $colonia['TE_CEP'] ?></td>
-        <td><?= $colonia['TE_Complemento'] ?></td>
+        <td><?= $colonia['TE_Comp'] ?></td>
         <td><a href="<?=$this->url(array("controller"=>"colonia","action"=>"editar", "id" => $colonia['TC_ID']),null,true)?>">Editar</a></td>
         <td><a href="<?=$this->url(array("controller"=>"colonia","action"=>"excluir", "id" => $colonia['TC_ID']),null,true)?>">Excluir</a></td>
     </tr>

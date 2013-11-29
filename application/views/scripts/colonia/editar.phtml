@@ -4,18 +4,32 @@
     <input type="hidden" name="idColonia" value="<?=$this->colonia['TC_ID']?>" />
     <input type="hidden" name="idEndereco" value="<?=$this->colonia['TE_ID']?>" />
     <label>Colonia: <input type="text" name="nome" value="<?=$this->colonia['TC_Nome']?>"/></label> <br />
+    <label>Comunidade: 
+        <select name="comunidade">
+            <?php foreach ($this->comunidades as $key => $comunidade): ?>
+            <option value="<?= $comunidade['TCOM_ID']; ?>" <?=($comunidade['TCOM_ID'] == $this->colonia['TCOM_ID']) ? 'selected="selected"' : '';?>><?= $comunidade['TCOM_Nome']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br /> 
+    <label>Especificidade: <input type="text" name="especificidade" value="<?=$this->colonia['TC_Especificidade']?>"/></label> <br />
     <label>Logradouro: <input type="text" name="logradouro" value="<?=$this->colonia['TE_Logradouro'];?>" /></label> <br />
     <label>Número: <input type="text" name="numero" value="<?=$this->colonia['TE_Numero'];?>" /></label> <br />
     <label>Bairro: <input type="text" name="bairro" value="<?=$this->colonia['TE_Bairro'];?>" /></label> <br />
-    <label>Cidade: <input type="text" name="cidade" value="<?=$this->colonia['TE_Cidade'];?>" /></label> <br />
+    <label>Municipio: 
+        <select name="municipio">
+            <?php foreach ($this->municipios as $key => $municipio): ?>
+            <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br /> 
     <label>Estado: 
         <select name="estado">
             <?php foreach ($this->estados as $estado): ?>
-            <option value="<?= $estado; ?>" <?=($estado == $this->colonia['TE_Estado']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
+            <option value="<?= $estado; ?>" <?=($estado == $this->colonia['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
             <?php endforeach; ?>
         </select>
     </label> <br />
     <label>CEP: <input type="text" name="cep" value="<?=$this->colonia['TE_CEP'];?>" /></label> <br />
-    <label>Complemento: <input type="text" name="complemento" value="<?=$this->colonia['TE_Complemento'];?>" /></label> <br />
+    <label>Complemento: <input type="text" name="complemento" value="<?=$this->colonia['TE_Comp'];?>" /></label> <br />
     <input type="submit" value="Atualizar" />
 </form>

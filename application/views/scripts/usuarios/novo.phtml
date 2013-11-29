@@ -23,7 +23,13 @@
     <label>Logradouro: <input type="text" name="logradouro" /></label> <br />
     <label>Número: <input type="text" name="numero" /></label> <br />
     <label>Bairro: <input type="text" name="bairro" /></label> <br />
-    <label>Cidade: <input type="text" name="cidade" /></label> <br />
+    <label>Municipio: 
+        <select name="municipio">
+            <?php foreach ($this->municipios as $key => $municipio): ?>
+            <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br />  
     <label>Estado: 
         <select name="estado">
             <?php foreach ($this->estados as $estado): ?>

@@ -154,49 +154,25 @@
 #menu-lateral ul li.atual { list-style-type: circle; }
 
 #rodape
-{	
-	margin: -50px 0;
-	clear: both;
-	background: #f8f8ff;
-	text-align: left;
-	height: 70px;
-
-}
-
-#rodape-texto
 {
-	margin: -30px 0;
-	padding-left: 10px;
-	height: 70px;
-	width: 900px;
-	background: #8B8386;
-	float: left;
-	color: #fff;
-	font-size: 12px;
+    clear: both;
+    background: #f8f8ff;
+    text-align: left;
+    height: 70px;
+
 }
 
 #parceiros{
-	margin: 0 0;
-	width: 800px;
-	height: 100px;
+    margin: 0 0;
+    width: 800px;
+    height: 100px;
 
 }
+#parceiros ul{
+    list-style: none;
 
-#nbcgib
-{
-	margin: 0px 0;
-	width: 160px;
-	height: 70px;
 }
-
-#isus
-{
-	width: 160px;
-	margin-left: 160px;
-	margin-top: -70px;
-}
-
-#bamin{
-	margin-left: 320px;
-	margin-top: -70px;	
+#parceiros ul li{
+    display: inline;
+    padding-left: 80px; 
 }

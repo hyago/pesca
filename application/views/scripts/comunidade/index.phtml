@@ -11,9 +11,9 @@
     foreach ($this->dados as $key => $comunidade):
     ?>
     <tr>
-        <td><?= $comunidade['TCom_Nome'] ?></td>
-        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"editar", "id" => $comunidade['TCom_ID']),null,true)?>">Editar</a></td>
-        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"excluir", "id" => $comunidade['TCom_ID']),null,true)?>">Excluir</a></td>
+        <td><?= $comunidade['TCOM_Nome'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"editar", "id" => $comunidade['TCOM_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"excluir", "id" => $comunidade['TCOM_ID']),null,true)?>">Excluir</a></td>
     </tr>
     <?php endforeach; ?>
 </table>

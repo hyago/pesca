@@ -1,0 +1,14 @@
+<h2>Editar Municipio</h2>
+
+<form action="<?=$this->url(array("controller"=>"municipio","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idMunicipio" value="<?=$this->municipio['TMun_ID']?>" />
+    <label>Municipio: <input type="text" name="municipio" value="<?=$this->municipio['TMun_Municipio']?>"/></label> <br />
+    <label>Estado: 
+        <select name="estado">
+            <?php foreach ($this->estados as $estado): ?>
+            <option value="<?= $estado; ?>" <?=($estado == $this->municipio['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br />
+    <input type="submit" value="Atualizar" />
+</form>

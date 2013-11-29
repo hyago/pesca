@@ -47,6 +47,9 @@
         <controllerFile controllerName="Colonia">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Municipio">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -69,6 +72,7 @@
           <dbTableFile dbTableName="Comunidade"/>
           <dbTableFile dbTableName="Colonia"/>
           <dbTableFile dbTableName="VColonia"/>
+          <dbTableFile dbTableName="VUsuarioHasTelefone"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -124,6 +128,9 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Colonia">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Municipio">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

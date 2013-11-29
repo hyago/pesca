@@ -44,17 +44,18 @@ class Application_Model_Colonia
             'TE_Logradouro'  => $request['logradouro'],
             'TE_Numero'      => $request['numero'],
             'TE_Bairro'      => $request['bairro'],
-            'TE_Cidade'      => $request['cidade'],
-            'TE_Estado'      => $request['estado'],
             'TE_CEP'         => $request['cep'],
-            'TE_Complemento' => $request['complemento']
+            'TE_Comp'        => $request['complemento'],
+            'TMun_ID'        => $request['municipio']
         );
         
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
         
         $dadosColonia = array(
-            'TC_Nome' => $request['nome'],
-            'TE_ID'   => $idEndereco
+            'TC_Nome'           => $request['nome'],
+            'TCOM_ID'           => $request['comunidade'],
+            'TC_Especificidade' => $request['nome'],
+            'TE_ID'             => $idEndereco
         );
         
         $this->dbTableColonia->insert($dadosColonia);

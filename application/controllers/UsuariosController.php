@@ -59,7 +59,11 @@ class UsuariosController extends Zend_Controller_Action
         $modelPerfil = new Application_Model_Perfil();
         $perfis = $modelPerfil->select();
         
+        $modelMunicipio = new Application_Model_Municipio();
+        $municipios = $modelMunicipio->select();
+        
         $this->view->assign("perfis", $perfis);
+        $this->view->assign("municipios", $municipios);
         $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
 	
     }

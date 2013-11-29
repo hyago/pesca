@@ -1,7 +1,7 @@
 <h2>Editar Comunidade</h2>
 
 <form action="<?=$this->url(array("controller"=>"comunidade","action"=>"atualizar"),null,true)?>" method="post">
-    <input type="hidden" name="idComunidade" value="<?=$this->comunidade['TCom_ID']?>" />
-    <label>Comunidade: <input type="text" name="nome" value="<?=$this->comunidade['TCom_Nome']?>"/></label> <br />
+    <input type="hidden" name="idComunidade" value="<?=$this->comunidade['TCOM_ID']?>" />
+    <label>Comunidade: <input type="text" name="nome" value="<?=$this->comunidade['TCOM_Nome']?>"/></label> <br />
     <input type="submit" value="Atualizar" />
 </form>

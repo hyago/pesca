@@ -1,8 +1,8 @@
 <?php
 
 /** 
- * Controller de Colonias
- * 
+ * Controller de Municipios
+ * teste
  * @package Pesca
  * @subpackage Controllers
  * @author Elenildo João <elenildo.joao@gmail.com>
@@ -11,9 +11,9 @@
  *
  */
 
-class ColoniaController extends Zend_Controller_Action
+class MunicipioController extends Zend_Controller_Action
 {
-    private $modelColonia;
+    private $modelMunicipio;
 
     public function init()
     {
@@ -26,15 +26,15 @@ class ColoniaController extends Zend_Controller_Action
         $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuarioLogado = $this->usuarioLogado;
         
-        $this->modelColonia = new Application_Model_Colonia();
+        $this->modelMunicipio = new Application_Model_Municipio();
     }
 
     /*
-     * Lista todas as artes de pesca
+     * Lista todas as areas de pesca
      */
     public function indexAction()
     {        
-        $dados = $this->modelColonia->select();
+        $dados = $this->modelMunicipio->select();
       
         $this->view->assign("dados", $dados);
     }
@@ -45,25 +45,16 @@ class ColoniaController extends Zend_Controller_Action
     public function novoAction()
     {
         $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
-    
-        $modelMunicipio = new Application_Model_Municipio();
-        $municipios = $modelMunicipio->select();
-        
-        $modelComunidade = new Application_Model_Comunidade();
-        $comunidades = $modelComunidade->select();
-        
-        $this->view->assign("municipios", $municipios);
-        $this->view->assign("comunidades", $comunidades);
     }
     
     /*
-     * Cadastra uma Arte de Pesca
+     * Cadastra uma Area de Pesca
      */
     public function criarAction()
     {
-        $this->modelColonia->insert($this->_getAllParams());
+        $this->modelMunicipio->insert($this->_getAllParams());
 
-        $this->_redirect('colonia/index');
+        $this->_redirect('municipio/index');
     }
     
     /*
@@ -71,18 +62,9 @@ class ColoniaController extends Zend_Controller_Action
      */
     public function editarAction()
     {
-        $colonia = $this->modelColonia->find($this->_getParam('id'));
-        
-        $modelMunicipio = new Application_Model_Municipio();
-        $municipios = $modelMunicipio->select();
-        
-        $modelComunidade = new Application_Model_Comunidade();
-        $comunidades = $modelComunidade->select();
-        
-        $this->view->assign("municipios", $municipios);
-        $this->view->assign("comunidades", $comunidades);
-        $this->view->assign("colonia", $colonia);
+        $municipio = $this->modelMunicipio->find($this->_getParam('id'));
         $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
+        $this->view->assign("municipio", $municipio);
     }
    
     /*
@@ -90,9 +72,9 @@ class ColoniaController extends Zend_Controller_Action
      */
     public function atualizarAction()
     {
-        $this->modelColonia->update($this->_getAllParams());
+        $this->modelMunicipio->update($this->_getAllParams());
 
-        $this->_redirect('colonia/index');
+        $this->_redirect('municipio/index');
     }
  
     /*
@@ -100,9 +82,9 @@ class ColoniaController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
-        $this->modelColonia->delete($this->_getParam('id'));
+        $this->modelMunicipio->delete($this->_getParam('id'));
 
-        $this->_redirect('colonia/index');
+        $this->_redirect('municipio/index');
     }
     
 }

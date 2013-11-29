@@ -1,0 +1,21 @@
+<h2>Lista de Municipios</h2>
+
+<a href="<?=$this->url(array("controller"=>"municipio","action"=>"novo"),null,true)?>">Novo</a>
+
+<table>
+    <tr>
+        <th>Municipio</th>
+        <th>Estado</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $municipio):
+    ?>
+    <tr>
+        <td><?= $municipio['TMun_Municipio'] ?></td>
+        <td><?= $municipio['TUF_Sigla'] ?></td>
+        <td><a href="<?=$this->url(array("controller"=>"municipio","action"=>"editar", "id" => $municipio['TMun_ID']),null,true)?>">Editar</a></td>
+        <td><a href="<?=$this->url(array("controller"=>"municipio","action"=>"excluir", "id" => $municipio['TMun_ID']),null,true)?>">Excluir</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

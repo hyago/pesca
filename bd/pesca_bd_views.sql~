@@ -80,7 +80,7 @@ WHERE
   "T_Colonia"."TE_ID" = "V_Endereco"."TE_ID";
 
 
-CREATE OR REPLACE VIEW "V_UsuarioHasTelefone" ("TU_ID", "TTCont_ID", "TTCont_DDD", "TTCont_Telefone", "TTEL_ID", "TTEL_Desc") AS
+CREATE OR REPLACE VIEW "V_UsuarioHasTelefone" ("TU_ID", "TC_Nome", "TTCont_ID", "TTCont_DDD", "TTCont_Telefone", "TTEL_ID", "TTEL_Desc") AS
 SELECT 
   "T_Usuario_has_T_TelefoneContato"."TU_ID", 
   "T_TelefoneContato"."TTCont_ID", 

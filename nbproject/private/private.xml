@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/pesca/application/controllers/ColoniaController.php</file>
-            <file>file:/var/www/pesca/application/views/scripts/colonia/novo.phtml</file>
-            <file>file:/var/www/pesca/application/views/scripts/colonia/index.phtml</file>
-            <file>file:/var/www/pesca/application/models/DbTable/VUsuario.php</file>
-            <file>file:/var/www/pesca/application/models/Usuario.php</file>
-            <file>file:/var/www/pesca/application/models/Colonia.php</file>
-            <file>file:/var/www/pesca/application/views/scripts/colonia/editar.phtml</file>
-            <file>file:/var/www/pesca/application/models/DbTable/VColonia.php</file>
-            <file>file:/var/www/pesca/application/views/scripts/usuarios/visualizar.phtml</file>
-            <file>file:/var/www/pesca/application/layouts/scripts/admin.phtml</file>
+            <file>file:/var/www/pesca/application/models/AreaPesca.php</file>
+            <file>file:/var/www/pesca/application/views/scripts/municipio/novo.phtml</file>
+            <file>file:/var/www/pesca/application/models/Municipio.php</file>
+            <file>file:/var/www/pesca/application/views/scripts/municipio/editar.phtml</file>
+            <file>file:/var/www/pesca/application/views/scripts/municipio/index.phtml</file>
+            <file>file:/var/www/pesca/application/controllers/MunicipioController.php</file>
         </group>
     </open-files>
 </project-private>
