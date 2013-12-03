@@ -95,4 +95,3 @@ FROM
 WHERE 
   "T_TelefoneContato"."TTEL_ID" = "T_TipoTel"."TTEL_ID" AND
   "T_Usuario_has_T_TelefoneContato"."TTCont_ID" = "T_TelefoneContato"."TTCont_ID";
-
