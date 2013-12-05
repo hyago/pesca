@@ -163,24 +163,30 @@
 
 #rodape
 {
-	clear: both;
-	background: #f8f8ff;
-	text-align: left;
-	height: 70px;
+    clear: both;
+    background: #f8f8ff;
+    text-align: left;
+    height: 70px;
 
 }
 
 #parceiros{
-	margin: 0 0;
-	width: 800px;
-	height: 100px;
+    margin: 0 0;
+    width: 800px;
+    height: 100px;
 
 }
+
 #parceiros ul{
-	list-style: none;
+    list-style: none;
 
 }
+
 #parceiros ul li{
-	display: inline;
-	padding-left: 80px; 
+    display: inline;
+    padding-left: 80px; 
+}
+
+input[type=submit]{
+    font-size: 80%;
 }

@@ -1,5 +1,7 @@
 <h2>Nova Comunidade</h2>
 
+<a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
 <form action="<?=$this->url(array("controller"=>"comunidade","action"=>"criar"),null,true)?>" method="post">
     <label>Comunidade: <input type="text" name="nome" /></label> <br />
     <input type="submit" value="Cadastrar" />

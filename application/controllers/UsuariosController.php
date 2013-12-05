@@ -46,9 +46,17 @@ class UsuariosController extends Zend_Controller_Action
      */
     public function visualizarAction()
     {
-        $usuario = $this->modelUsuario->find($this->_getParam('id'));
- 
+        $idUsuario = $this->_getParam('id');
+        
+        $usuario = $this->modelUsuario->find($idUsuario);
+        
+        $modelTelefone = new Application_Model_Telefone();
+        $telefoneResidencial = $modelTelefone->getTelefone($idUsuario, 'Residencial');
+        $telefoneCelular = $modelTelefone->getTelefone($idUsuario, 'Celular');
+         
         $this->view->assign("usuario", $usuario);
+        $this->view->assign("telefoneResidencial", $telefoneResidencial);
+        $this->view->assign("telefoneCelular", $telefoneCelular);
     }
  
     /*

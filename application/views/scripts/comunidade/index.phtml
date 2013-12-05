@@ -1,6 +1,6 @@
 <h2>Lista de Comunidades</h2>
 
-<a href="<?=$this->url(array("controller"=>"comunidade","action"=>"novo"),null,true)?>">Novo</a>
+<a href="<?=$this->url(array("controller"=>"comunidade","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
 
 <table>
     <tr>
@@ -12,8 +12,20 @@
     ?>
     <tr>
         <td><?= $comunidade['TCOM_Nome'] ?></td>
-        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"editar", "id" => $comunidade['TCOM_ID']),null,true)?>">Editar</a></td>
-        <td><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"excluir", "id" => $comunidade['TCOM_ID']),null,true)?>">Excluir</a></td>
+        <td>
+            <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"editar", "id" => $comunidade['TCOM_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td>
+            <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"excluir", "id" => $comunidade['TCOM_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
     </tr>
     <?php endforeach; ?>
 </table>

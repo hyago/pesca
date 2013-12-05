@@ -1,5 +1,7 @@
 <h2>Editar Especie</h2>
 
+<a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
 <form action="<?=$this->url(array("controller"=>"especie","action"=>"atualizar"),null,true)?>" method="post">
     <input type="hidden" name="idEspecie" value="<?=$this->especie['TEC_ID']?>" />
     <label>Especie: <input type="text" name="especie" value="<?=$this->especie['TEC_Especie']?>"/></label> <br />

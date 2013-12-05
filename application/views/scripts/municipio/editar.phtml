@@ -1,5 +1,7 @@
 <h2>Editar Municipio</h2>
 
+<a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
 <form action="<?=$this->url(array("controller"=>"municipio","action"=>"atualizar"),null,true)?>" method="post">
     <input type="hidden" name="idMunicipio" value="<?=$this->municipio['TMun_ID']?>" />
     <label>Municipio: <input type="text" name="municipio" value="<?=$this->municipio['TMun_Municipio']?>"/></label> <br />

@@ -1,4 +1,6 @@
-<h1>Editar Usuário</h1>
+<h2>Editar Usuário</h2>
+
+<a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"usuarios","action"=>"atualizar"),null,true)?>" method="post">
     <input type="hidden" name="idUsuario" value="<?=$this->usuario['TU_ID']?>" />

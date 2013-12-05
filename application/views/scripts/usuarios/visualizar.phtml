@@ -1,6 +1,6 @@
 <h2>Visualizar Usuário</h2>
 
-<a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>">Voltar</a>
+<a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <table>
     <tr>
@@ -29,8 +29,8 @@
         <td><?= $this->usuario['TU_Sexo'] ?></td>
         <td><?= $this->usuario['TU_RG'] ?></td>
         <td><?= $this->usuario['TU_CPF'] ?></td>
-        <td></td>
-        <td></td>
+        <td><?= $this->telefoneResidencial['TTCont_DDD'] . $this->telefoneResidencial['TTCont_Telefone'] ?></td>
+        <td><?= $this->telefoneCelular['TTCont_DDD'] . $this->telefoneCelular['TTCont_Telefone'] ?></td>
         <td><?= $this->usuario['TE_Logradouro'] ?></td>
         <td><?= $this->usuario['TE_Numero'] ?></td>
         <td><?= $this->usuario['TE_Bairro'] ?></td>

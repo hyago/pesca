@@ -3,26 +3,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <base href="http://<?=$_SERVER['HTTP_HOST'] . $this->baseUrl()?>/" />        
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">   
+        <?php
+            $this->headLink()->prependStylesheet('/css/estilo.css');
+            $this->headLink()->appendStylesheet('/css/smoothness/jquery-ui-1.10.3.custom.min.css');
+            $this->headScript()->prependFile('/js/jquery-1.10.2.min.js'); 
+            $this->headScript()->appendFile('/js/jquery-ui-1.10.3.custom.min.js');
+            $this->headScript()->appendFile('/js/jquery-ui-functions.js');
+            
+            echo $this->headLink() . "\n";
+            echo $this->headScript() . "\n";
+        ?> 
         
         <title>
             Projeto de Monitoramento da Atividade Pesqueira
         </title>
-        
-        <script>
-            function verificaCampos(){
-                var x=document.forms["login"]["usuario"].value;
-                var y=document.forms["login"]["senha"].value;
-                if (x==null || x==""){
-                    alert("Digite o nome de usuário!"); 
-                    return false;
-                }
-                if(y==null || y==""){
-                    alert("Digite sua senha!");
-                    return false;
-                }
-            }
-        </script>
     </head>
     <body>
     <div id="geral">

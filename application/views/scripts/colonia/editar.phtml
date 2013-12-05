@@ -1,5 +1,7 @@
 <h2>Editar Colonia</h2>
 
+<a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
 <form action="<?=$this->url(array("controller"=>"colonia","action"=>"atualizar"),null,true)?>" method="post">
     <input type="hidden" name="idColonia" value="<?=$this->colonia['TC_ID']?>" />
     <input type="hidden" name="idEndereco" value="<?=$this->colonia['TE_ID']?>" />

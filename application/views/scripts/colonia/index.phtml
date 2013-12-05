@@ -1,6 +1,6 @@
 <h2>Lista de Colonias</h2>
 
-<a href="<?=$this->url(array("controller"=>"colonia","action"=>"novo"),null,true)?>">Novo</a>
+<a href="<?=$this->url(array("controller"=>"colonia","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
 
 <table>
     <tr>
@@ -30,8 +30,20 @@
         <td><?= $colonia['TUF_Sigla'] ?></td>
         <td><?= $colonia['TE_CEP'] ?></td>
         <td><?= $colonia['TE_Comp'] ?></td>
-        <td><a href="<?=$this->url(array("controller"=>"colonia","action"=>"editar", "id" => $colonia['TC_ID']),null,true)?>">Editar</a></td>
-        <td><a href="<?=$this->url(array("controller"=>"colonia","action"=>"excluir", "id" => $colonia['TC_ID']),null,true)?>">Excluir</a></td>
+        <td>
+            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"editar", "id" => $colonia['TC_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td>
+            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"excluir", "id" => $colonia['TC_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
     </tr>
     <?php endforeach; ?>
 </table>

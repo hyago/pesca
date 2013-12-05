@@ -73,6 +73,7 @@
           <dbTableFile dbTableName="Colonia"/>
           <dbTableFile dbTableName="VColonia"/>
           <dbTableFile dbTableName="VUsuarioHasTelefone"/>
+          <dbTableFile dbTableName="VUsuarioHasTelelefone"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -83,6 +84,7 @@
         <modelFile modelName="TipoEmbarcacao"/>
         <modelFile modelName="Comunidade"/>
         <modelFile modelName="Colonia"/>
+        <modelFile modelName="Telefone"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

@@ -1,5 +1,7 @@
 <h2>Editar Arte de Pesca</h2>
 
+<a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
 <form action="<?=$this->url(array("controller"=>"arte-pesca","action"=>"atualizar"),null,true)?>" method="post">
     <input type="hidden" name="idArtePesca" value="<?=$this->artePesca['TAP_ID']?>" />
     <label>Arte de Pesca: <input type="text" name="artePesca" value="<?=$this->artePesca['TAP_ArtePesca']?>"/></label> <br />
