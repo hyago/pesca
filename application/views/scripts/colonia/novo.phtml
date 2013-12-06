@@ -1,3 +1,8 @@
+<?php
+$this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
+$this->headScript()->appendFile('/js/mascaras.js');
+?>
+
 <h2>Nova Colonia</h2>
 
 <a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
@@ -29,7 +34,7 @@
             <?php endforeach; ?>
         </select>
     </label> <br />
-    <label>CEP: <input type="text" name="cep" /></label> <br />
+    <label>CEP: <input type="text" name="cep" id="cep" /></label> <br />
     <label>Complemento: <input type="text" name="complemento" /></label> <br />
     <input type="submit" value="Cadastrar" />
 </form>

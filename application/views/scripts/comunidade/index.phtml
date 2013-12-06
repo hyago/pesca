@@ -12,14 +12,14 @@
     ?>
     <tr>
         <td><?= $comunidade['TCOM_Nome'] ?></td>
-        <td>
+        <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"editar", "id" => $comunidade['TCOM_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
-        <td>
+        <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"excluir", "id" => $comunidade['TCOM_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>

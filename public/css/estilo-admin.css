@@ -87,20 +87,6 @@
 	list-style-type: none;
 }
 
-#conteudo table, th, td
-{
-	border: 1px solid black;
-	border-collapse:collapse;
-}
-
-#conteudo tr th{
-	background-color: #8B8386;
-}
-
-#conteudo table{
-	width: 100%;
-}
-
 #conteudo h2 { 
 	margin-top: 0; 
 	padding: 0;
@@ -197,4 +183,33 @@
 #botao-ancora, input[type=submit]{
     font-size: 80%;
     margin-bottom: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 95%;
+}
+
+tr th{
+    background-color: #8b8386;
+    color: white;
+}
+
+th, td {
+  padding: 0.25em;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+tbody tr:nth-child(odd) {
+  background: #eee;
+}
+
+.td-botao {
+    width: 3px;
+    height: 3px;
+    padding: 0;
+    border: 0px;
+    background: #f8f8ff;
 }

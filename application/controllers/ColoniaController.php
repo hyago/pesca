@@ -39,6 +39,13 @@ class ColoniaController extends Zend_Controller_Action
         $this->view->assign("dados", $dados);
     }
     
+    public function visualizarAction()
+    {
+        $colonia = $this->modelColonia->find($this->_getParam('id'));
+         
+        $this->view->assign("colonia", $colonia);
+    }
+    
     /*
      * Exibe formulário para cadastro de um usuário
      */
