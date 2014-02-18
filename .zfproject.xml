@@ -50,6 +50,9 @@
         <controllerFile controllerName="Municipio">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Pescador">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -74,6 +77,14 @@
           <dbTableFile dbTableName="VColonia"/>
           <dbTableFile dbTableName="VUsuarioHasTelefone"/>
           <dbTableFile dbTableName="VUsuarioHasTelelefone"/>
+          <dbTableFile dbTableName="Pescador"/>
+          <dbTableFile dbTableName="PorteEmbarcacao"/>
+          <dbTableFile dbTableName="PescadorHasAreaPesca"/>
+          <dbTableFile dbTableName="PescadorHasEmbarcacao"/>
+          <dbTableFile dbTableName="PescadorHasEspecieCapturada"/>
+          <dbTableFile dbTableName="PescadorHasArtePesca"/>
+          <dbTableFile dbTableName="PescadorHasColonia"/>
+          <dbTableFile dbTableName="VPescador"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -85,6 +96,8 @@
         <modelFile modelName="Comunidade"/>
         <modelFile modelName="Colonia"/>
         <modelFile modelName="Telefone"/>
+        <modelFile modelName="Pescador"/>
+        <modelFile modelName="PorteEmbarcacao"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -133,6 +146,9 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Municipio">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Pescador">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

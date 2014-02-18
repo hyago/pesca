@@ -1,9 +1,20 @@
+<?php
+$this->headLink()->appendStylesheet('/css/forms-nr-min.css');
+?>
+
 <h2>Editar Tipo de Embarcação</h2>
 
 <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
-<form action="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"atualizar"),null,true)?>" method="post">
+<form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"atualizar"),null,true)?>" method="post">
     <input type="hidden" name="idTipoEmbarcacao" value="<?=$this->tipoEmbarcacao['TTE_ID']?>" />
-    <label>Tipo de Embarcacao: <input type="text" name="tipoEmbarcacao" value="<?=$this->tipoEmbarcacao['TTE_TipoEmbarcacao']?>"/></label> <br />
-    <input type="submit" value="Atualizar" />
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="tipoEmbarcacao">Tipo de Embarcação</label>
+            <input type="text" name="tipoEmbarcacao" id="tipoEmbarcacao" placeholder="Tipo de Embarcação" value="<?=$this->tipoEmbarcacao['TTE_TipoEmbarcacao']?>"/>
+        </div>
+        <div class="pure-controls">
+            <input type="submit" value="Atualizar" />
+        </div>
+    </fieldset>
 </form>

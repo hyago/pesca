@@ -213,3 +213,17 @@ tbody tr:nth-child(odd) {
     border: 0px;
     background: #f8f8ff;
 }
+
+#esquerda{
+    float: left;
+    padding: 0;
+    width: 333px;
+    height: auto;
+}
+
+#direita{
+    float: right;
+    padding: 0;
+    width: 333px;
+    height: auto;
+}

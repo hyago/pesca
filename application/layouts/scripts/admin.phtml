@@ -9,6 +9,7 @@
             $this->headScript()->prependFile('/js/jquery-1.10.2.min.js'); 
             $this->headScript()->appendFile('/js/jquery-ui-1.10.3.custom.min.js');
             $this->headScript()->appendFile('/js/jquery-ui-functions.js');
+            $this->headScript()->appendFile('/js/funcoesJquery.js');
             
             echo $this->headLink() . "\n";
             echo $this->headScript() . "\n";
@@ -35,14 +36,50 @@
             <div id="conteudo-geral">
                 <div id="menu-lateral">
                     <ul>
-                        <li><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>">Usuários</a></li>
-                        <li><a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"index"),null,true)?>">Artes de pesca</a></li>
-                        <li><a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"index"),null,true)?>">Áreas de pesca</a></li>
-                        <li><a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>">Especies</a></li>     
-                        <li><a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"index"),null,true)?>">Tipos de embarcações</a></li>
-                        <li><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>">Comunidades</a></li>
-                        <li><a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>">Colônias</a></li>
-                        <li><a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>">Municipios</a></li>
+                        <li><a id="for-Social" href="#">Perfil Social</a></li>
+                        <ul id="Social">
+                            <li><a href="<?=$this->url(array("controller"=>"pescador","action"=>"index"),null,true)?>">Pescadores</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"index"),null,true)?>">Artes de pesca</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"index"),null,true)?>">Áreas de pesca</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>">Especies</a></li>     
+                            <li><a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"index"),null,true)?>">Tipos de embarcações</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>">Comunidades</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>">Colônias</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>">Municipios</a></li>
+                        </ul>
+                        <li><a id="for-Dsbq" href="#">Controle de Desembarque</a></li>
+                        <ul id="Dsbq"> 
+                            <li><a href="">Ficha Diária</a></li>
+                            <li><a id="for-Filo" href="#">Filogenia</a></li>
+                            <ul id="Filo">
+                            <li><a href="">Grupo</a></li>
+                            <li><a href="">Ordem</a></li>
+                            <li><a href="">Família</a></li>
+                            <li><a href="">Genero</a></li>
+                            <li><a href="">Espécie</a></li>
+                            </ul>
+                            <li><a href="">Maré</a></li>
+                            <li><a href="">Tempo</a></li>
+                            <li><a href="">Vento</a></li>
+                            <li><a href="">Porto</a></li>
+                            <li><a href="">Pesqueiro</a></li>
+                        </ul>
+                        <li><a href="#">Tráfego de Embarcações</a></li>
+                        <li><a href="#">Notícias</a></li>
+                    </ul>
+                    <div id="admin">
+                        <ul>
+                            <li><a  href="#">Administrador</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>">Usuários</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+                
+                <div id="menu-lateral">
+                    <ul>
+                        
+                        
                     </ul>
                 </div>
                 <div id="conteudo">

@@ -1,9 +1,20 @@
+<?php
+$this->headLink()->appendStylesheet('/css/forms-nr-min.css');
+?>
+
 <h2>Editar Especie</h2>
 
 <a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
-<form action="<?=$this->url(array("controller"=>"especie","action"=>"atualizar"),null,true)?>" method="post">
+<form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"especie","action"=>"atualizar"),null,true)?>" method="post">
     <input type="hidden" name="idEspecie" value="<?=$this->especie['TEC_ID']?>" />
-    <label>Especie: <input type="text" name="especie" value="<?=$this->especie['TEC_Especie']?>"/></label> <br />
-    <input type="submit" value="Atualizar" />
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="especie">Especie</label>
+            <input type="text" name="especie" id="especie" placeholder="Especie" value="<?=$this->especie['TEC_Especie']?>"/>
+        </div>
+        <div class="pure-controls">
+            <input type="submit" value="Atualizar" />
+        </div>
+    </fieldset>
 </form>

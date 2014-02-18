@@ -1,8 +1,19 @@
+<?php
+$this->headLink()->appendStylesheet('/css/forms-nr-min.css');
+?>
+
 <h2>Nova Especie</h2>
 
 <a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
-<form action="<?=$this->url(array("controller"=>"especie","action"=>"criar"),null,true)?>" method="post">
-    <label>Especie: <input type="text" name="especie" /></label> <br />
-    <input type="submit" value="Cadastrar" />
+<form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"especie","action"=>"criar"),null,true)?>" method="post">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="especie">Especie</label>
+            <input type="text" name="especie" id="especie" placeholder="Especie"/>
+        </div>
+        <div class="pure-controls">
+            <input type="submit" value="Cadastrar" />
+        </div>
+    </fieldset>
 </form>
