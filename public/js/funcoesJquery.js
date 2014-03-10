@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 		//funcoes para formulários
     
@@ -10,22 +9,55 @@ $(document).ready(function(){
 		$('input[id*=numeric]').attr("size", "3px");
 		$('input[id*=nome]').attr("size", "25px");
         
-			  function removeCampo() {
-				$(".removerCampo").unbind("click");
-				$(".removerCampo").bind("click", function () {
-				   if($("tr.linhas").length > 1){
+		function removeCampo() {
+			$(".removerCampo").unbind("click");
+			$(".removerCampo").bind("click", function () {
+				if($("tr.linhas").length > 1){
 					$(this).parent().parent().remove();
-				   }
-				});
-			  }
-			$(".adicionarCampo").click(function () {
-				novoCampo = $("tr.linhas:first").clone();
-				novoCampo.find("input").val("");
-				novoCampo.insertAfter("tr.linhas:last");
-				removeCampo();
+				}
 			});
+		}
+        function removeCampo1() {
+			$(".removerCampo1").unbind("click");
+			$(".removerCampo1").bind("click", function () {
+				if($("tr.linhas1").length > 1){
+					$(this).parent().parent().remove();
+				}
+			});
+		}
+		$(".adicionarCampo").click(function () {
+			novoCampo = $("tr.linhas:first").clone();
+			novoCampo.find("input").val("");
+			novoCampo.insertAfter("tr.linhas:last");
+			removeCampo();
+		});
+		$(".adicionarCampo1").click(function () {
+			novoCampo1 = $("tr.linhas1:first").clone();
+			novoCampo1.find("input").val("");
+			novoCampo1.insertAfter("tr.linhas1:last");
+			removeCampo1();
+		});
 	   
 		//funcoes para formularios
+		
+		
+		//funcoes para entrevistas
+		
+		if($('option').attr("value","Pesca de Linha")){
+			$('#novaEntrevista').attr("href","EntrevistaPescaLinha.html");
+		}
+		else if($('option').attr("value","Arrasto de Fundo")){
+			$('#novaEntrevista').attr("href","EntrevistaArrastoFundo.html");
+		}
+		else if($('option').attr("value","Pesca de Rede")){
+			$('#novaEntrevista').attr("href","EntrevistaPescaRede.html");
+		}
+		else if($('option').attr("value","Mariscagem")){
+			$('#novaEntrevista').attr("href","EntrevistaMariscagem.html");
+		}
+		
+		//funcoes para entrevistas
+		
 		
 		//funções para menu-lateral
 		if($("fieldset").attr('id') == "Social"){
@@ -60,6 +92,22 @@ $(document).ready(function(){
                 $("#Filo").slideToggle();
         });
         //funcoes para menu
+        
+        
+        var pressedCtrl = false; 
+        $(document).keyup(function (e) { 
+            if(e.which == 17){ 
+                pressedCtrl=false;
+            }
+        });
+        $(document).keydown(function (e) { 
+            if(e.which == 17) 
+                pressedCtrl = true; 
+            if(e.which == 68 && pressedCtrl == true) 
+            { //Aqui vai o código e chamadas de funções para o ctrl+s 
+               $("#fichaDsbq").load($(this).attr('href'));
 
+            } 
+        });
         
 });
