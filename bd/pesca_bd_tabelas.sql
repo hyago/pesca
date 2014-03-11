@@ -610,10 +610,56 @@ CREATE TABLE IF NOT EXISTS "DSBQ_Entrevista_Pescador" (
   "EP_DataHoraChegada" TIMESTAMP NULL,
   "SA_ID" INT NOT NULL,
   "EP_DestinoDoPescado" VARCHAR(45) NULL,
+  "MNT_ID" INT NOT NULL,
   PRIMARY KEY ("EP_ID"),
-  CONSTRAINT "fk_DSBQ_Entrevista_Pescador_DSBQ_Subamostra"
+  CONSTRAINT "fk_DSBQ_Entrevista_Pescador_DSBQ_Subamostra1"
     FOREIGN KEY ("SA_ID")
     REFERENCES "DSBQ_Subamostra" ("SA_ID")
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_DSBQ_Entrevista_Pescador_DSBQ_Monitoramento1"
+    FOREIGN KEY ("MNT_ID")
+    REFERENCES "DSBQ_Monitoramento" ("MNT_ID")
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION
- );
+);
+ CREATE TABLE IF NOT EXISTS "DSBQ_Ficha_Diaria" (
+  "FD_ID" INT NOT NULL,
+  "FD_Data" DATE NULL,
+  "FD_Hora_Inicio" TIME NULL,
+  "FD_Hora_Termino" TIME NULL,
+  "OBS" VARCHAR(100) NULL,
+  "TMP_ID" INT NOT NULL,
+  "VNT_ID" INT NOT NULL,
+  "PTO_ID" INT NOT NULL,
+  PRIMARY KEY ("FD_ID"),
+  CONSTRAINT "fk_DSBQ_Ficha_Diaria_DSBQ_Tempo1"
+    FOREIGN KEY ("TMP_ID")
+    REFERENCES "DSBQ_Tempo" ("TMP_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_DSBQ_Ficha_Diaria_DSBQ_Vento1"
+    FOREIGN KEY ("VNT_ID")
+    REFERENCES "DSBQ_Vento" ("VNT_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_DSBQ_Ficha_Diaria_DSBQ_Porto1"
+    FOREIGN KEY ("PTO_ID")
+    REFERENCES "DSBQ_Porto" ("PTO_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+CREATE TABLE IF NOT EXISTS "DSBQ_Monitoramento" (
+  "MNT_ID" INT NOT NULL,
+  "MNT_Arte" INT NULL,
+  "MNT_Quantidade" INT NULL,
+  "MNT_Monitorado" TINYINT(1) NULL,
+  "MNT_Embarcado" TINYINT(1) NULL,
+  "FD_ID" INT NOT NULL,
+  PRIMARY KEY ("MNT_ID"),
+  CONSTRAINT "fk_DSBQ_Monitoramento_DSBQ_Ficha_Diaria1"
+    FOREIGN KEY ("FD_ID")
+    REFERENCES "DSBQ_Ficha_Diaria" ("FD_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
