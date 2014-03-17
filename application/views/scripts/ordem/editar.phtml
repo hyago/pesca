@@ -2,15 +2,15 @@
 
 <a href="<?=$this->url(array("controller"=>"ordem","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
-<form action="<?=$this->url(array("controller"=>"ordem","action"=>"criar"),null,true)?>" method="post">
+    <form action="<?=$this->url(array("controller"=>"ordem","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
               <legend><h3>Ordem:</h3></legend>
               <label for="id">ID:</label>
-              <input type="text" name="id_ordem" id="id_ordem"/><br />
+              <input type="text" name="id_ordem" id="id_ordem" value="<?=$this->ordem["ORD_ID"]?>"/><br />
               <label for="tipo">Nome:</label>
-              <input type="text" id="nome_ordem" name="nome_ordem"/><br />
+              <input type="text" id="nome_ordem" name="nome_ordem" value="<?=$this->ordem["ORD_Nome"]?>"/><br />
               <label for="tipo">Característica:</label>
-              <input type="text" id="caracteristica_ordem" name="caracteristica_ordem"/><br />
+              <input type="text" id="caracteristica_ordem" name="caracteristica_ordem" value="<?=$this->ordem["ORD_Caracteristica"]?>"/><br />
               <label for="tipo">Grupo:</label>
               <select name="select_grupo_ordem" id="grupo_ordem">
               <?php

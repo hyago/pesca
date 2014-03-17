@@ -1,4 +1,36 @@
-<h2>Filogenia--Ordem</h2>
+<h2>Filogenia->Ordem</h2>
 
 <a href="<?=$this->url(array("controller"=>"ordem","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
 <fieldset id="Filogenia"></fieldset>
+
+<table>
+    <tr>
+        <th>Ordem</th>
+        <th>Caracteristica</th>
+        <th>Grupo</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $ordem):
+    ?>
+    <tr>
+        <td><?= $ordem['ORD_Nome'] ?></td>
+        <td><?= $ordem['ORD_Caracteristica'] ?></td>
+        <td><?= $ordem['GRP_ID'] ?></td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"ordem","action"=>"editar", "id" => $ordem['ORD_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"ordem","action"=>"excluir", "id" => $ordem['GRP_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

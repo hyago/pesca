@@ -1,4 +1,31 @@
-<h2>Filogenia--Grupo</h2>
+<h2>Filogenia--Grupo</h2>   
 
 <a href="<?=$this->url(array("controller"=>"grupo","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
 <fieldset id="Filogenia"></fieldset>
+<table>
+    <tr>
+        <th>Grupo</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $grupo):
+    ?>
+    <tr>
+        <td><?= $grupo['GRP_Nome'] ?></td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"grupo","action"=>"editar", "id" => $grupo['GRP_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"grupo","action"=>"excluir", "id" => $grupo['GRP_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

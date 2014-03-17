@@ -1,19 +1,8 @@
 <?php
 
-/** 
- * Controller de Especies
- * 
- * @package Pesca
- * @subpackage Controllers
- * @author Elenildo João <elenildo.joao@gmail.com>
- * @version 0.1
- * @access public
- *
- */
-
-class EspecieController extends Zend_Controller_Action
+class EspecieCapturadaController extends Zend_Controller_Action
 {
-    private $modelEspecie;
+    private $modelEspecieCapturada;
 
     public function init()
     {
@@ -27,7 +16,7 @@ class EspecieController extends Zend_Controller_Action
         $this->view->usuarioLogado = $this->usuarioLogado;
         
         $this->modelEspecie = new Application_Model_Especie();
-        $this->modelGenero = new Application_Model_Genero();
+        $this->modelEpecieCapturada = new Application_Model_EspecieCapturada();
     }
 
     /*
@@ -35,7 +24,7 @@ class EspecieController extends Zend_Controller_Action
      */
     public function indexAction()
     {        
-        $dados = $this->modelEspecie->select();
+        $dados = $this->modelEspecieCapturada->select();
       
         $this->view->assign("dados", $dados);
     }
@@ -45,7 +34,7 @@ class EspecieController extends Zend_Controller_Action
      */
     public function novoAction()
     {
-        $dados = $this->modelGenero->select();
+        $dados = $this->modelEspecie->select();
       
         $this->view->assign("dados", $dados);
     }
@@ -95,4 +84,5 @@ class EspecieController extends Zend_Controller_Action
     }
     
 }
+
 

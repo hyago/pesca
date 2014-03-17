@@ -1,4 +1,36 @@
-<h2>Filogenia--Família</h2>
+<h2>Filogenia->Família</h2>
 
 <a href="<?=$this->url(array("controller"=>"familia","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
 <fieldset id="Filogenia"></fieldset>
+
+<table>
+    <tr>
+        <th>Família</th>
+        <th>Tipo</th>
+        <th>Característica</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $familia):
+    ?>
+    <tr>
+        <td><?= $familia['FAM_Nome'] ?></td>
+        <td><?= $familia['FAM_Tipo']?></td>
+        <td><?= $familia['FAM_Caracteristica']?></td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"familia","action"=>"editar", "id" => $familia['FAM_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"familia","action"=>"excluir", "id" => $familia['FAM_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

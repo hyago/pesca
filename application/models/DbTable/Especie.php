@@ -14,8 +14,8 @@
 class Application_Model_DbTable_Especie extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_EspecieCapturada';
-    protected $_primary = 'TEC_ID';
+    protected $_name = 'DSBQ_Especie';
+    protected $_primary = 'ESP_ID';
     
 }
 

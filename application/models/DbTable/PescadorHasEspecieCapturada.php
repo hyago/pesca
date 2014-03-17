@@ -5,6 +5,7 @@ class Application_Model_DbTable_PescadorHasEspecieCapturada extends Zend_Db_Tabl
 
     protected $_name = 'T_Pescador_has_T_EspecieCapturadas';
     protected $_primary = 'TP_ID';
+    protected $_primary = 'ESP_ID';
 
 }
 

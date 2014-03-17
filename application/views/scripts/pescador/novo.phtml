@@ -15,208 +15,208 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" id="nome" placeholder="Nome"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
-                <label for="sexo">Sexo</label>
+                <label for="sexo">Sexo</label><br/>
                 <select name="sexo" id="sexo">
                     <option value="M">Masculino</option>
                     <option value="F">Feminino</option>
                 </select>            
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="matricula">Matricula</label>
                 <input type="text" name="matricula" id="matricula" placeholder="Matricula"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="apelido">Apelido</label>
                 <input type="text" name="apelido" id="apelido" placeholder="Apelido"/>
             </div>
-     
+            <br/>
             <div class="pure-control-group">
                 <label for="filiacaoPai">Nome de Pai</label>
                 <input type="text" name="filiacaoPai" id="filiacaoPai" placeholder="Nome de Pai"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="filiacaoMae">Nome da Mãe</label>
                 <input type="text" name="filiacaoMae" id="filiacaoMae" placeholder="Nome da Mãe"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="rg">RG</label>
                 <input type="text" name="rg" id="rg" placeholder="RG"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="cpf">CPF</label>
                 <input type="text" name="cpf" id="cpf" placeholder="CPF"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="telefoneResidencial">Tel. Residencial</label>
                 <input type="text" name="telefoneResidencial" id="telefoneResidencial" class="telefone" placeholder="Tel. Residencial"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="telefoneCelular">Tel. Celular</label>
                 <input type="text" name="telefoneCelular" id="telefoneCelular" class="telefone" placeholder="Tel. Celular"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="dataNasc">Data Nascimento</label>
                 <input type="text" name="dataNasc" id="dataNasc" placeholder="Data Nascimento"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
-                <label for="municipioNat">Município (Naturalidade)</label>
+                <label for="municipioNat">Município (Naturalidade)</label><br/>
                 <select name="municipioNat" id="municipioNat">
                     <?php foreach ($this->municipios as $key => $municipio): ?>
                     <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
                     <?php endforeach; ?>
                 </select>            
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="ctps">CTPS</label>
                 <input type="text" name="ctps" id="ctps" placeholder="CTPS"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
-                <label for="artePesca" class="pure-checkbox">Arte de Pesca</label>                
+                <label for="artePesca" class="pure-checkbox">Arte de Pesca</label><br/>                
                 <select name="artePesca" id="artePesca">
                     <?php foreach ($this->artesPesca as $key => $artePesca): ?>
                     <option value="<?= $artePesca['TAP_ID']; ?>"><?= $artePesca['TAP_ArtePesca'];; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
-            
+            <br/>
             <div class="pure-control-group">
-                <label for="tipoEmbarcacao" class="pure-checkbox">Tipo de Embarcação</label>                
+                <label for="tipoEmbarcacao" class="pure-checkbox">Tipo de Embarcação</label><br/>                
                 <select name="tipoEmbarcacao" id="tipoEmbarcacao">
                     <?php foreach ($this->tiposEmbarcacao as $key => $tipoEmbarcacao): ?>
                     <option value="<?= $tipoEmbarcacao['TTE_ID']; ?>"><?= $tipoEmbarcacao['TTE_TipoEmbarcacao'];; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
-            
+            <br/>
             <div class="pure-control-group">
-                <label for="porteEmbarcacao" class="pure-checkbox">Porte da Embarcação</label>                
+                <label for="porteEmbarcacao" class="pure-checkbox">Porte da Embarcação</label><br/>             
                 <select name="porteEmbarcacao" id="porteEmbarcacao">
                     <?php foreach ($this->portesEmbarcacao as $key => $porteEmbarcacao): ?>
                     <option value="<?= $porteEmbarcacao['TPE_ID']; ?>"><?= $porteEmbarcacao['TPE_Porte'];; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
+            <br/>
             
-            <div class="pure-controls">
-                <input type="submit" value="Cadastrar" />
             </div>
-            </div>
-
-        <div id="direita">
+        
+            <div id="direita">
                 <div class="pure-control-group">
                 <label for="logradouro">Logradouro</label>
                 <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="numero">Número</label>
                 <input type="text" name="numero" id="numero" placeholder="Número"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="bairro">Bairro</label>
                 <input type="text" name="bairro" id="bairro" placeholder="Bairro"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
-                <label for="municipio">Município</label>
+                <label for="municipio">Município</label><br/>
                 <select name="municipio" id="municipio">
                     <?php foreach ($this->municipios as $key => $municipio): ?>
                     <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
                     <?php endforeach; ?>
                 </select>            
             </div>
-
+            <br/>
             <div class="pure-control-group">
-                <label for="estado">Estado</label>
+                <label for="estado">Estado</label><br/>
                 <select name="estado" id="estado">
                     <?php foreach ($this->estados as $estado): ?>
                     <option value="<?= $estado; ?>" <?=($estado == "BA") ? 'selected="selected"' : '';?>><?= $estado; ?></option>
                     <?php endforeach; ?>
                 </select>            
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="cep">CEP</label>
                 <input type="text" name="cep" id="cep" placeholder="CEP"/>
             </div>
-
+            <br/>
             <div class="pure-control-group">
                 <label for="complemento">Complemento</label>
                 <input type="text" name="complemento" id="complemento" placeholder="Complemento"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
-                <label for="colonia" class="pure-checkbox">Colônia</label>                
+                <label for="colonia" class="pure-checkbox">Colônia</label><br/>   
                 <select name="colonia" id="colonia">
                     <?php foreach ($this->colonias as $key => $colonia): ?>
                     <option value="<?= $colonia['TC_ID']; ?>"><?= $colonia['TC_Nome'];; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="pis">PIS</label>
                 <input type="text" name="pis" id="pis" placeholder="PIS"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="inss">INSS</label>
                 <input type="text" name="inss" id="inss" placeholder="INSS"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="nit_cei">NIT CEI</label>
                 <input type="text" name="nit_cei" id="nit_cei" placeholder="NIT CEI"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="cma">CMA</label>
                 <input type="text" name="cma" id="cma" placeholder="CMA"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="rgb_maa_ibama">RGB MAA IBAMA</label>
                 <input type="text" name="rgb_maa_ibama" id="rgb_maa_ibama" placeholder="RGB MAA IBAMA"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
                 <label for="cir_cap_porto">CIR Cap. Porto</label>
                 <input type="text" name="cir_cap_porto" id="cir_cap_porto" placeholder="CIR Cap. Portos"/>
             </div>
-            
+            <br/>
             <div class="pure-control-group">
-                <label for="areaPesca" class="pure-checkbox">Area de Pesca</label>                
+                <label for="areaPesca" class="pure-checkbox">Area de Pesca</label><br/>              
                 <select name="areaPesca" id="areaPesca">
                     <?php foreach ($this->areasPesca as $key => $areaPesca): ?>
                     <option value="<?= $areaPesca['TAreaP_ID']; ?>"><?= $areaPesca['TAreaP_AreaPesca'];; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
-            
+            <br/>
             <div class="pure-control-group">
-                <label for="especie" class="pure-checkbox">Especie Capturada</label>                
+                <label for="especie" class="pure-checkbox">Especie Capturada</label><br/>             
                 <select name="especie" id="especie">
                     <?php foreach ($this->especies as $key => $especie): ?>
                     <option value="<?= $especie['TEC_ID']; ?>"><?= $especie['TEC_Especie'];; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
-            
+            <br/>
         </div>
-        
+        <div class="pure-controls">
+                <input type="submit" value="Cadastrar" />
+        </div>
     </fieldset>
 </form>

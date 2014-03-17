@@ -1,4 +1,31 @@
-<h2>Filogenia--Gênero</h2>
+<h2>Filogenia->Gênero</h2>
 
 <a href="<?=$this->url(array("controller"=>"genero","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
 <fieldset id="Filogenia"></fieldset>
+<table>
+    <tr>
+        <th>Genero</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $genero):
+    ?>
+    <tr>
+        <td><?= $genero['GEN_Nome'] ?></td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"genero","action"=>"editar", "id" => $genero['GEN_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"genero","action"=>"excluir", "id" => $genero['GEN_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

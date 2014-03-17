@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ordem/novo.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ordem/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/especie-capturada/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Especie.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/EspecieController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/genero/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/especie-capturada/novo.phtml</file>
         </group>
     </open-files>
 </project-private>

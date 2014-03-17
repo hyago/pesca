@@ -28,7 +28,7 @@
                 </ul>
                 <div id="login">
                     <p>
-                        Olá, Elenildo João |
+                        Olá, <?=$this->login['TL_Login'];?>
                         <a href="<?=$this->url(array("controller"=>"autenticacao","action"=>"logout"),null,true)?>">Sair</a>
                     </p>
                 </div>
@@ -40,8 +40,7 @@
                         <ul id="Social">
                             <li><a href="<?=$this->url(array("controller"=>"pescador","action"=>"index"),null,true)?>">Pescadores</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"index"),null,true)?>">Artes de pesca</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"index"),null,true)?>">Áreas de pesca</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>">Especies</a></li>     
+                            <li><a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"index"),null,true)?>">Áreas de pesca</a></li>     
                             <li><a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"index"),null,true)?>">Tipos de embarcações</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>">Comunidades</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>">Colônias</a></li>
@@ -56,7 +55,7 @@
                             <li><a href="<?=$this->url(array("controller"=>"ordem","action"=>"index"),null,true)?>">Ordem</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"familia","action"=>"index"),null,true)?>">Família</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"genero","action"=>"index"),null,true)?>">Genero</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"","action"=>"index"),null,true)?>">Espécie</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>">Espécie</a></li>
                             </ul>
                             <li><a href="<?=$this->url(array("controller"=>"mare","action"=>"index"),null,true)?>">Maré</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"tempo","action"=>"index"),null,true)?>">Tempo</a></li>

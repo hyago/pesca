@@ -42,7 +42,7 @@ $(document).ready(function(){
 		
 		
 		//funcoes para entrevistas
-		
+	/*	
 		if($('option').attr("value","Pesca de Linha")){
 			$('#novaEntrevista').attr("href","EntrevistaPescaLinha.html");
 		}
@@ -55,7 +55,7 @@ $(document).ready(function(){
 		else if($('option').attr("value","Mariscagem")){
 			$('#novaEntrevista').attr("href","EntrevistaMariscagem.html");
 		}
-		
+	*/	
 		//funcoes para entrevistas
 		
 		
@@ -94,20 +94,6 @@ $(document).ready(function(){
         //funcoes para menu
         
         
-        var pressedCtrl = false; 
-        $(document).keyup(function (e) { 
-            if(e.which == 17){ 
-                pressedCtrl=false;
-            }
-        });
-        $(document).keydown(function (e) { 
-            if(e.which == 17) 
-                pressedCtrl = true; 
-            if(e.which == 68 && pressedCtrl == true) 
-            { //Aqui vai o código e chamadas de funções para o ctrl+s 
-               $("#fichaDsbq").load($(this).attr('href'));
 
-            } 
-        });
         
 });

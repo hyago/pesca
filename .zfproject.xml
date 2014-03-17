@@ -53,6 +53,36 @@
         <controllerFile controllerName="Pescador">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Mare">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Vento">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Tempo">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Porto">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Pesqueiro">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Grupo">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Ordem">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Familia">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Genero">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="EspecieCapturada">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -85,6 +115,12 @@
           <dbTableFile dbTableName="PescadorHasArtePesca"/>
           <dbTableFile dbTableName="PescadorHasColonia"/>
           <dbTableFile dbTableName="VPescador"/>
+          <dbTableFile dbTableName="Tempo"/>
+          <dbTableFile dbTableName="Grupo"/>
+          <dbTableFile dbTableName="Genero"/>
+          <dbTableFile dbTableName="Ordem"/>
+          <dbTableFile dbTableName="Familia"/>
+          <dbTableFile dbTableName="EspecieCapturada"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -98,6 +134,12 @@
         <modelFile modelName="Telefone"/>
         <modelFile modelName="Pescador"/>
         <modelFile modelName="PorteEmbarcacao"/>
+        <modelFile modelName="Tempo"/>
+        <modelFile modelName="Grupo"/>
+        <modelFile modelName="Genero"/>
+        <modelFile modelName="Ordem"/>
+        <modelFile modelName="Familia"/>
+        <modelFile modelName="EspecieCapturada"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -149,6 +191,36 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Pescador">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mare">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vento">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Tempo">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Porto">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Pesqueiro">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Grupo">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ordem">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Familia">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Genero">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="EspecieCapturada">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

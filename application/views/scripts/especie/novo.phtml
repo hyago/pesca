@@ -2,15 +2,35 @@
 $this->headLink()->appendStylesheet('/css/forms-nr-min.css');
 ?>
 
-<h2>Nova Especie</h2>
+<h2>Filogenia->Espécie</h2>
 
 <a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"especie","action"=>"criar"),null,true)?>" method="post">
-    <fieldset>
+    <fieldset id="Filogenia">
         <div class="pure-control-group">
-            <label for="especie">Especie</label>
-            <input type="text" name="especie" id="especie" placeholder="Especie"/>
+            <fieldset id="Filogenia">
+              <label for="id">ID:</label>
+              <input type="text" name="id_especie" id="id_especie"/><br />
+              <label for="tipo">Nome:</label>
+              <input type="text" id="nome_especie" name="nome_especie"/><br />
+              <label for="tipo">Descritor:</label>
+              <input type="text" id="descritor_especie" name="descritor_especie"/><br />
+              <label for="tipo">Nome Comum:</label>
+              <input type="text" id="nome_comum" name="nome_comum"/><br />
+              <label for="tipo">Gênero:</label>
+              <select name="select_genero_especie" id="genero_especie">
+              <?php
+                    foreach ($this->dados as $key => $genero):
+               ?>
+              
+		<option nome="genero_especie" value="<?=$genero['GEN_ID']?>"><?= $genero['GEN_Nome']?></option>
+              
+              <?php
+                endforeach;
+              ?>
+              </select></br>
+            </fieldset>
         </div>
         <div class="pure-controls">
             <input type="submit" value="Cadastrar" />

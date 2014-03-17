@@ -1,26 +1,30 @@
-<h2>Lista de Especies</h2>
+<h2>Filogenia->Espécie</h2>
 
 <a href="<?=$this->url(array("controller"=>"especie","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-
+<fieldset id="Filogenia"></fieldset>
 <table>
     <tr>
         <th>Especie</th>
+        <th>Descritor</th>
+        <th>Nome Comum</th>
     </tr>
     
     <?php
     foreach ($this->dados as $key => $especie):
     ?>
     <tr>
-        <td><?= $especie['TEC_Especie'] ?></td>
+        <td><?= $especie['ESP_Nome'] ?></td>
+        <td><?= $especie['ESP_Descritor'] ?></td>
+        <td><?= $especie['ESP_Nome_Comum'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"especie","action"=>"editar", "id" => $especie['TEC_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"especie","action"=>"editar", "id" => $especie['ESP_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $especie['TEC_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $especie['ESP_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

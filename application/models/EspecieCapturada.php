@@ -1,25 +1,14 @@
 <?php
 
-/** 
- * Model Especie
- * 
- * @package Pesca
- * @subpackage Models
- * @author Elenildo João <elenildo.joao@gmail.com>
- * @version 0.1
- * @access public
- *
- */
-
-class Application_Model_Especie
+class Application_Model_EspecieCapturada
 {
-    private $dbTableEspecie;
+    private $dbTableEspecieCapturada;
 
     public function select($where = null, $order = null, $limit = null)
     {
-        $this->dbTableEspecie = new Application_Model_DbTable_Especie();
-        $select = $this->dbTableEspecie->select()
-                ->from($this->dbTableEspecie)->order($order)->limit($limit);
+        $this->dbTableEspecieCapturada = new Application_Model_DbTable_Especie();
+        $select = $this->dbTableEspecieCapturada->select()
+                ->from($this->dbTableEspecieCapturada)->order($order)->limit($limit);
 
         if(!is_null($where)){
             $select->where($where);
@@ -79,6 +68,7 @@ class Application_Model_Especie
         
         $this->dbTableEspecie->delete($whereEspecie);
     }
+
 
 }
 

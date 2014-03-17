@@ -2,19 +2,38 @@
 $this->headLink()->appendStylesheet('/css/forms-nr-min.css');
 ?>
 
-<h2>Editar Especie</h2>
+<h2>Filogenia->Espécie</h2>
 
 <a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"especie","action"=>"atualizar"),null,true)?>" method="post">
-    <input type="hidden" name="idEspecie" value="<?=$this->especie['TEC_ID']?>" />
-    <fieldset>
+    <fieldset id="Filogenia">
         <div class="pure-control-group">
-            <label for="especie">Especie</label>
-            <input type="text" name="especie" id="especie" placeholder="Especie" value="<?=$this->especie['TEC_Especie']?>"/>
+            <fieldset id="Filogenia">
+              <label for="id" >ID:</label>
+              <input type="text" name="id_especie" id="id_especie" value="<?=$this->especie["ESP_ID"]?>"/><br />
+              <label for="tipo">Nome:</label>
+              <input type="text" id="nome_especie" name="nome_especie"value="<?=$this->especie["ESP_Nome"]?>"/><br />
+              <label for="tipo">Descritor:</label>
+              <input type="text" id="descritor_especie" name="descritor_especie"value="<?=$this->especie["ESP_Descritor"]?>"/><br />
+              <label for="tipo">Nome Comum:</label>
+              <input type="text" id="nome_comum" name="nome_comum"value="<?=$this->especie["ESP_Nome_Comum"]?>"/><br />
+              <label for="tipo">Gênero:</label>
+              <select name="select_genero_especie" id="genero_especie">
+              <?php
+                    foreach ($this->dados as $key => $genero):
+               ?>
+              
+		<option nome="genero_especie" value="<?=$genero['GEN_ID']?>"><?= $genero['GEN_Nome']?></option>
+              
+              <?php
+                endforeach;
+              ?>
+              </select></br>
+            </fieldset>
         </div>
         <div class="pure-controls">
-            <input type="submit" value="Atualizar" />
+            <input type="submit" value="Cadastrar" />
         </div>
     </fieldset>
 </form>
