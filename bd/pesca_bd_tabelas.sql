@@ -4,7 +4,7 @@
 -- -----------------------------------------------------
 -- Table "T_UF"
 -- -----------------------------------------------------
-CREATE  TABLE "T_UF" (
+CREATE TABLE IF NOT EXISTS "T_UF" (
   "TUF_Sigla" VARCHAR(2) NOT NULL ,
   "TUF_Nome" VARCHAR(25) NOT NULL ,
   PRIMARY KEY ("TUF_Sigla") )
@@ -14,7 +14,7 @@ CREATE  TABLE "T_UF" (
 -- -----------------------------------------------------
 -- Table "T_Municipio"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Municipio" (
+CREATE  TABLE IF NOT EXISTS "T_Municipio" (
   "TMun_ID" SERIAL ,
   "TMun_Municipio" VARCHAR(50) NOT NULL ,
   "TUF_Sigla" VARCHAR(2) NOT NULL ,
@@ -31,7 +31,7 @@ CREATE  TABLE "T_Municipio" (
 -- -----------------------------------------------------
 -- Table "T_Endereco"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Endereco" (
+CREATE  TABLE IF NOT EXISTS "T_Endereco" (
   "TE_ID" SERIAL ,
   "TE_Logradouro" VARCHAR(50) NOT NULL ,
   "TE_Numero" VARCHAR(6) NOT NULL ,
@@ -51,7 +51,7 @@ CREATE  TABLE "T_Endereco" (
 -- -----------------------------------------------------
 -- Table "T_TipoTel"
 -- -----------------------------------------------------
-CREATE  TABLE "T_TipoTel" (
+CREATE  TABLE IF NOT EXISTS "T_TipoTel" (
   "TTEL_ID" SERIAL ,
   "TTEL_Desc" VARCHAR(50) NOT NULL ,
   PRIMARY KEY ("TTEL_ID") )
@@ -61,7 +61,7 @@ CREATE  TABLE "T_TipoTel" (
 -- -----------------------------------------------------
 -- Table "T_TelefoneContato"
 -- -----------------------------------------------------
-CREATE  TABLE "T_TelefoneContato" (
+CREATE  TABLE IF NOT EXISTS "T_TelefoneContato" (
   "TTCont_ID" SERIAL ,
   "TTCont_DDD" DECIMAL(2) NOT NULL ,
   "TTCont_Telefone" DECIMAL(10) NOT NULL ,
@@ -78,7 +78,7 @@ CREATE  TABLE "T_TelefoneContato" (
 -- -----------------------------------------------------
 -- Table "T_Pescador"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Pescador" (
+CREATE  TABLE IF NOT EXISTS "T_Pescador" (
   "TP_ID" SERIAL ,
   "TP_Nome" VARCHAR(45) NOT NULL ,
   "TP_Sexo" VARCHAR(1) NOT NULL ,
@@ -115,7 +115,7 @@ CREATE  TABLE "T_Pescador" (
 -- -----------------------------------------------------
 -- Table "T_TipoDependente"
 -- -----------------------------------------------------
-CREATE  TABLE "T_TipoDependente" (
+CREATE  TABLE IF NOT EXISTS "T_TipoDependente" (
   "TTD_ID" SERIAL,
   "TTP_TipoDependente" VARCHAR(50) NOT NULL ,
   PRIMARY KEY ("TTD_ID") )
@@ -125,7 +125,7 @@ CREATE  TABLE "T_TipoDependente" (
 -- -----------------------------------------------------
 -- Table "T_Dependente"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Dependente" (
+CREATE  TABLE IF NOT EXISTS "T_Dependente" (
   "TP_ID" INT NOT NULL ,
   "TTD_ID" INT NOT NULL ,
   "TDP_Nome" VARCHAR(50) NOT NULL ,
@@ -148,7 +148,7 @@ CREATE  TABLE "T_Dependente" (
 -- -----------------------------------------------------
 -- Table "T_Comunidade"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Comunidade" (
+CREATE  TABLE IF NOT EXISTS "T_Comunidade" (
   "TCOM_ID" SERIAL ,
   "TCOM_NOME" VARCHAR(50) NOT NULL ,
   PRIMARY KEY ("TCOM_ID") ,
@@ -159,7 +159,7 @@ CREATE  TABLE "T_Comunidade" (
 -- -----------------------------------------------------
 -- Table "T_Colonia"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Colonia" (
+CREATE  TABLE IF NOT EXISTS "T_Colonia" (
   "TC_ID" SERIAL ,
   "TC_Nome" VARCHAR(50) NOT NULL ,
   "TC_Especificidade" VARCHAR(50) NULL ,
@@ -183,7 +183,7 @@ CREATE  TABLE "T_Colonia" (
 -- -----------------------------------------------------
 -- Table "T_ArtePesca"
 -- -----------------------------------------------------
-CREATE  TABLE "T_ArtePesca" (
+CREATE  TABLE IF NOT EXISTS "T_ArtePesca" (
   "TAP_ID" SERIAL ,
   "TAP_ArtePesca" VARCHAR(50) NOT NULL ,
   PRIMARY KEY ("TAP_ID") ,
@@ -194,7 +194,7 @@ CREATE  TABLE "T_ArtePesca" (
 -- -----------------------------------------------------
 -- Table "T_TipoEmbarcacao"
 -- -----------------------------------------------------
-CREATE  TABLE "T_TipoEmbarcacao" (
+CREATE  TABLE IF NOT EXISTS "T_TipoEmbarcacao" (
   "TTE_ID" SERIAL ,
   "TTE_TipoEmbarcacao" VARCHAR(50) NOT NULL ,
   PRIMARY KEY ("TTE_ID") ,
@@ -205,7 +205,7 @@ CREATE  TABLE "T_TipoEmbarcacao" (
 -- -----------------------------------------------------
 -- Table "T_AreaPesca"
 -- -----------------------------------------------------
-CREATE  TABLE "T_AreaPesca" (
+CREATE  TABLE IF NOT EXISTS "T_AreaPesca" (
   "TAreaP_ID" SERIAL ,
   "TAreaP_AreaPesca" VARCHAR(50) NOT NULL ,
   PRIMARY KEY ("TAreaP_ID") ,
@@ -216,7 +216,7 @@ CREATE  TABLE "T_AreaPesca" (
 -- -----------------------------------------------------
 -- Table "T_EspecieCapturada"
 -- -----------------------------------------------------
-CREATE  TABLE "T_EspecieCapturada" (
+CREATE  TABLE IF NOT EXISTS "T_EspecieCapturada" (
   "TEC_ID" SERIAL ,
   "TEC_Especie" VARCHAR(50) NOT NULL ,
   PRIMARY KEY ("TEC_ID") ,
@@ -227,7 +227,7 @@ CREATE  TABLE "T_EspecieCapturada" (
 -- -----------------------------------------------------
 -- Table "T_Situacao"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Situacao" (
+CREATE  TABLE IF NOT EXISTS "T_Situacao" (
   "TS_ID" SERIAL ,
   "TS_Situacao" BOOLEAN NOT NULL DEFAULT TRUE ,
   "TS_Motivo" VARCHAR(45) NULL ,
@@ -238,7 +238,7 @@ CREATE  TABLE "T_Situacao" (
 -- -----------------------------------------------------
 -- Table "T_Login"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Login" (
+CREATE  TABLE IF NOT EXISTS "T_Login" (
   "TL_ID" SERIAL ,
   "TL_Login" VARCHAR(12) NOT NULL ,
   "TL_HashSenha" CHAR(40) NOT NULL ,
@@ -251,7 +251,7 @@ CREATE  TABLE "T_Login" (
 -- -----------------------------------------------------
 -- Table "T_Perfil"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Perfil" (
+CREATE  TABLE IF NOT EXISTS "T_Perfil" (
   "TP_ID" SERIAL ,
   "TP_Perfil" VARCHAR(14) NOT NULL ,
   PRIMARY KEY ("TP_ID") )
@@ -261,7 +261,7 @@ CREATE  TABLE "T_Perfil" (
 -- -----------------------------------------------------
 -- Table "T_Usuario"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Usuario" (
+CREATE  TABLE IF NOT EXISTS "T_Usuario" (
   "TU_ID" SERIAL ,
   "TU_Nome" VARCHAR(45) NOT NULL ,
   "TU_Sexo" VARCHAR(1) NOT NULL ,
@@ -296,7 +296,7 @@ CREATE  TABLE "T_Usuario" (
 -- -----------------------------------------------------
 -- Table "T_HistoricoRecadastramento"
 -- -----------------------------------------------------
-CREATE  TABLE "T_HistoricoRecadastramento" (
+CREATE  TABLE IF NOT EXISTS "T_HistoricoRecadastramento" (
   "THR_Data" DATE NOT NULL ,
   "TP_ID" INT NOT NULL ,
   "TS_ID" INT NOT NULL ,
@@ -329,7 +329,7 @@ CREATE  TABLE "T_HistoricoRecadastramento" (
 -- -----------------------------------------------------
 -- Table "T_Pescador_has_T_TipoArtePesca"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Pescador_has_T_TipoArtePesca" (
+CREATE  TABLE IF NOT EXISTS "T_Pescador_has_T_TipoArtePesca" (
   "TP_ID" INT NOT NULL ,
   "TAP_ID" INT NOT NULL ,
   PRIMARY KEY ("TP_ID", "TAP_ID") ,
@@ -349,7 +349,7 @@ CREATE  TABLE "T_Pescador_has_T_TipoArtePesca" (
 -- -----------------------------------------------------
 -- Table "T_Pescador_has_T_EspecieCapturadas"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Pescador_has_T_EspecieCapturada" (
+CREATE  TABLE IF NOT EXISTS "T_Pescador_has_T_EspecieCapturada" (
   "TP_ID" INT NOT NULL ,
   "TEC_ID" INT NOT NULL ,
   PRIMARY KEY ("TP_ID", "TEC_ID") ,
@@ -369,7 +369,7 @@ CREATE  TABLE "T_Pescador_has_T_EspecieCapturada" (
 -- -----------------------------------------------------
 -- Table "T_AreaPesca_has_T_Pescador"
 -- -----------------------------------------------------
-CREATE  TABLE "T_AreaPesca_has_T_Pescador" (
+CREATE  TABLE IF NOT EXISTS "T_AreaPesca_has_T_Pescador" (
   "TAreaP_ID" INT NOT NULL ,
   "TP_ID" INT NOT NULL ,
   PRIMARY KEY ("TAreaP_ID", "TP_ID") ,
@@ -389,7 +389,7 @@ CREATE  TABLE "T_AreaPesca_has_T_Pescador" (
 -- -----------------------------------------------------
 -- Table "T_PorteEmbarcacao"
 -- -----------------------------------------------------
-CREATE  TABLE "T_PorteEmbarcacao" (
+CREATE  TABLE IF NOT EXISTS "T_PorteEmbarcacao" (
   "TPE_ID" SERIAL ,
   "TPE_Porte" VARCHAR(7) NOT NULL ,
   PRIMARY KEY ("TPE_ID") )
@@ -399,7 +399,7 @@ CREATE  TABLE "T_PorteEmbarcacao" (
 -- -----------------------------------------------------
 -- Table "T_Pescador_has_T_Embarcacao"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Pescador_has_T_Embarcacao" (
+CREATE  TABLE IF NOT EXISTS "T_Pescador_has_T_Embarcacao" (
   "TTE_ID" INT NOT NULL ,
   "TP_ID" INT NOT NULL ,
   "TPTE_Motor" BOOLEAN NOT NULL DEFAULT FALSE ,
@@ -426,7 +426,7 @@ CREATE  TABLE "T_Pescador_has_T_Embarcacao" (
 -- -----------------------------------------------------
 -- Table "T_Pescador_has_T_Colonia"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Pescador_has_T_Colonia" (
+CREATE  TABLE IF NOT EXISTS "T_Pescador_has_T_Colonia" (
   "TP_ID" INT NOT NULL ,
   "TC_ID" INT NOT NULL ,
   "TPTC_DataInscColonia" DATE NULL ,
@@ -447,7 +447,7 @@ CREATE  TABLE "T_Pescador_has_T_Colonia" (
 -- -----------------------------------------------------
 -- Table "T_AlteracaoSenha"
 -- -----------------------------------------------------
-CREATE  TABLE "T_AlteracaoSenha" (
+CREATE  TABLE IF NOT EXISTS "T_AlteracaoSenha" (
   "TAS_Token" CHAR(40) NOT NULL ,
   "TAS_DataSolicitacao" TIMESTAMP NOT NULL ,
   "TAS_DataAlteracao" TIMESTAMP NULL ,
@@ -464,7 +464,7 @@ CREATE  TABLE "T_AlteracaoSenha" (
 -- -----------------------------------------------------
 -- Table "T_Usuario_has_T_TelefoneContato"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Usuario_has_T_TelefoneContato" (
+CREATE  TABLE IF NOT EXISTS "T_Usuario_has_T_TelefoneContato" (
   "TU_ID" INT NOT NULL ,
   "TTCont_ID" INT NOT NULL ,
   PRIMARY KEY ("TU_ID", "TTCont_ID") ,
@@ -484,7 +484,7 @@ CREATE  TABLE "T_Usuario_has_T_TelefoneContato" (
 -- -----------------------------------------------------
 -- Table "T_Pescador_has_T_TelefoneContato"
 -- -----------------------------------------------------
-CREATE  TABLE "T_Pescador_has_T_TelefoneContato" (
+CREATE  TABLE IF NOT EXISTS "T_Pescador_has_T_TelefoneContato" (
   "TP_ID" INT NOT NULL ,
   "TTCont_ID" INT NOT NULL ,
   PRIMARY KEY ("TP_ID", "TTCont_ID") ,
@@ -500,3 +500,166 @@ CREATE  TABLE "T_Pescador_has_T_TelefoneContato" (
     ON UPDATE NO ACTION)
 ;
 
+CREATE TABLE IF NOT EXISTS "DSBQ_Grupo"(
+	"GRP_ID" INT NOT NULL,
+	"DSBQ_Nome" VARCHAR(45) NULL,
+	PRIMARY KEY ("GRP_ID")
+);
+CREATE TABLE IF NOT EXISTS "DSBQ_Ordem" (
+  "ORD_ID" INT NOT NULL,
+  "ORD_Nome" VARCHAR(30) NULL,
+  "ORD_Caracteristica" VARCHAR(45) NULL,
+  "GRP_ID" INT NOT NULL,
+  PRIMARY KEY ("ORD_ID"),
+  CONSTRAINT "fk_DSBQ_Ordem_DSBQ_Grupo"
+    FOREIGN KEY ("GRP_ID")
+    REFERENCES "DSBQ_Grupo" ("GRP_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+ );
+ CREATE TABLE IF NOT EXISTS "DSBQ_Familia" (
+  "FAM_ID" INT NOT NULL,
+  "FAM_Nome" VARCHAR(45) NULL,
+  "FAM_Ordem_Filogenetica" INT NULL,
+  "FAM_Tipo" VARCHAR(45) NULL,
+  "FAM_Caracteristica" VARCHAR(120) NULL,
+  "ORD_ID" INT NOT NULL,
+  PRIMARY KEY ("FAM_ID"),
+  CONSTRAINT "fk_DSBQ_Familia_DSBQ_Ordem"
+    FOREIGN KEY ("ORD_ID")
+    REFERENCES "DSBQ_Ordem" ("ORD_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+CREATE TABLE IF NOT EXISTS "DSBQ_Genero" (
+  "GEN_ID" INT NOT NULL,
+  "GEN_Nome" VARCHAR(45) NULL,
+  "FAM_ID" INT NOT NULL,
+  PRIMARY KEY ("GEN_ID"),
+  CONSTRAINT "fk_DSBQ_Genero_DSBQ_Familia"
+    FOREIGN KEY ("FAM_ID")
+    REFERENCES "DSBQ_Familia" ("FAM_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+CREATE TABLE IF NOT EXISTS "DSBQ_Especie" (
+  "ESP_ID" INT NOT NULL,
+  "ESP_Nome" VARCHAR(45) NULL,
+  "ESP_Descritor" VARCHAR(45) NULL,
+  "ESP_Nome_Comum" VARCHAR(45) NULL,
+  "GEN_ID" INT NOT NULL,
+  PRIMARY KEY ("ESP_ID"),
+
+  CONSTRAINT "fk_DSBQ_Espécie_DSBQ_Genero"
+    FOREIGN KEY ("GEN_ID")
+    REFERENCES "DSBQ_Genero" ("GEN_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS "DSBQ_Especie_Capturada" (
+  "SPC_ID" INT NOT NULL,
+  "SPC_Nome" VARCHAR(45) NULL,
+  "SPC_Quantidade" INT NULL,
+  "SPC_Peso(kg)" INT NULL,
+  "SPC_Preco" DECIMAL(5) NULL,
+  "ESP_ID" INT NOT NULL,
+  "ECE_ID" INT NOT NULL,
+  PRIMARY KEY ("SPC_ID"),
+  CONSTRAINT "fk_DSBQ_Especie_Capturada_DSBQ_Especie"
+    FOREIGN KEY ("ESP_ID")
+    REFERENCES "DSBQ_Especie" ("ESP_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS "DSBQ_Tempo" (
+  "TMP_ID" INT NOT NULL,
+  "TMP_Tempo" VARCHAR(20) NULL,
+  PRIMARY KEY ("TMP_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "DSBQ_Vento" (
+  "VNT_ID" INT NOT NULL,
+  "VNT_Intensidade" VARCHAR(20) NULL,
+  PRIMARY KEY ("VNT_ID")
+);
+
+CREATE TABLE IF NOT EXISTS "DSBQ_Porto" (
+  "PTO_ID" INT NOT NULL,
+  "PTO_Nome" VARCHAR(45) NULL,
+  "PTO_Local" VARCHAR(45) NULL,
+  "TMun_ID" INT NOT NULL,
+  PRIMARY KEY ("PTO_ID"),
+  CONSTRAINT "fk_DSBQ_Porto_T_Municipio"
+    FOREIGN KEY ("TMun_ID")
+    REFERENCES "T_Municipio" ("TMun_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+CREATE TABLE IF NOT EXISTS "DSBQ_Subamostra" (
+  "SA_ID" INT NOT NULL,
+  "SA_Subamostra" smallint NULL,
+  PRIMARY KEY ("SA_ID")
+);
+CREATE TABLE IF NOT EXISTS "DSBQ_Entrevista_Pescador" (
+  "EP_ID" INT NOT NULL,
+  "EP_CodParaDesembarque" INT NULL,
+  "EP_NumPescadores" INT NULL,
+  "EP_DataEHoraSaida" TIMESTAMP NULL,
+  "EP_DataHoraChegada" TIMESTAMP NULL,
+  "SA_ID" INT NOT NULL,
+  "EP_DestinoDoPescado" VARCHAR(45) NULL,
+  "MNT_ID" INT NOT NULL,
+  PRIMARY KEY ("EP_ID"),
+  CONSTRAINT "fk_DSBQ_Entrevista_Pescador_DSBQ_Subamostra1"
+    FOREIGN KEY ("SA_ID")
+    REFERENCES "DSBQ_Subamostra" ("SA_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_DSBQ_Entrevista_Pescador_DSBQ_Monitoramento1"
+    FOREIGN KEY ("MNT_ID")
+    REFERENCES "DSBQ_Monitoramento" ("MNT_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+ CREATE TABLE IF NOT EXISTS "DSBQ_Ficha_Diaria" (
+  "FD_ID" INT NOT NULL,
+  "FD_Data" DATE NULL,
+  "FD_Hora_Inicio" TIME NULL,
+  "FD_Hora_Termino" TIME NULL,
+  "OBS" VARCHAR(100) NULL,
+  "TMP_ID" INT NOT NULL,
+  "VNT_ID" INT NOT NULL,
+  "PTO_ID" INT NOT NULL,
+  PRIMARY KEY ("FD_ID"),
+  CONSTRAINT "fk_DSBQ_Ficha_Diaria_DSBQ_Tempo1"
+    FOREIGN KEY ("TMP_ID")
+    REFERENCES "DSBQ_Tempo" ("TMP_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_DSBQ_Ficha_Diaria_DSBQ_Vento1"
+    FOREIGN KEY ("VNT_ID")
+    REFERENCES "DSBQ_Vento" ("VNT_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT "fk_DSBQ_Ficha_Diaria_DSBQ_Porto1"
+    FOREIGN KEY ("PTO_ID")
+    REFERENCES "DSBQ_Porto" ("PTO_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+CREATE TABLE IF NOT EXISTS "DSBQ_Monitoramento" (
+  "MNT_ID" INT NOT NULL,
+  "MNT_Arte" INT NULL,
+  "MNT_Quantidade" INT NULL,
+  "MNT_Monitorado" TINYINT(1) NULL,
+  "MNT_Embarcado" TINYINT(1) NULL,
+  "FD_ID" INT NOT NULL,
+  PRIMARY KEY ("MNT_ID"),
+  CONSTRAINT "fk_DSBQ_Monitoramento_DSBQ_Ficha_Diaria1"
+    FOREIGN KEY ("FD_ID")
+    REFERENCES "DSBQ_Ficha_Diaria" ("FD_ID")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);

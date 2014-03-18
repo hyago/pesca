@@ -4,6 +4,7 @@ class TempoController extends Zend_Controller_Action
 {
     private $modelTempo;
 
+
     public function init()
     {
         if(!Zend_Auth::getInstance()->hasIdentity()){
