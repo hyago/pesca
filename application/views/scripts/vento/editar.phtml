@@ -1,0 +1,9 @@
+<h2>Editar Vento</h2>
+
+<a href="<?=$this->url(array("controller"=>"vento","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
+<form action="<?=$this->url(array("controller"=>"vento","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idVento" value="<?=$this->vento['VNT_ID']?>" />
+    <label>Vento: <input type="text" name="vento" value="<?=$this->vento['VNT_Intensidade']?>"/></label> <br />
+    <input type="submit" value="Atualizar" />
+</form>

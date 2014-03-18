@@ -1,0 +1,31 @@
+<h2>Lista de Ventos</h2>
+
+<a href="<?=$this->url(array("controller"=>"vento","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
+
+<table>
+    <tr>
+        <th>Vento</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $vento):
+    ?>
+    <tr>
+        <td><?= $vento['VNT_Intensidade'] ?></td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"vento","action"=>"editar", "id" => $vento['VNT_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"vento","action"=>"excluir", "id" => $vento['VNT_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
