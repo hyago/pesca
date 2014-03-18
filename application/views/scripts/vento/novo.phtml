@@ -1,0 +1,8 @@
+<h2>Novo Vento</h2>
+
+<a href="<?=$this->url(array("controller"=>"vento","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
+<form action="<?=$this->url(array("controller"=>"vento","action"=>"criar"),null,true)?>" method="post">
+    <label>Vento: <input type="text" name="vento" /></label> <br />
+    <input type="submit" value="Cadastrar" />
+</form>

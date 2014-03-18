@@ -1,0 +1,33 @@
+<h2>Lista de Portos</h2>
+
+<a href="<?=$this->url(array("controller"=>"porto","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Local</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $porto):
+    ?>
+    <tr>
+        <td><?= $porto['PTO_Nome'] ?></td>
+        <td><?= $porto['PTO_Local'] ?></td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"porto","action"=>"editar", "id" => $porto['PTO_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"porto","action"=>"excluir", "id" => $porto['PTO_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

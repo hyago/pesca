@@ -1,0 +1,18 @@
+<h2>Editar Porto</h2>
+
+<a href="<?=$this->url(array("controller"=>"porto","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
+<form action="<?=$this->url(array("controller"=>"porto","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idPorto" value="<?= $this->porto['PTO_ID'] ?>" />
+    
+    <label>Nome: <input type="text" name="nome" value="<?= $this->porto['PTO_Nome'] ?>"/></label> <br />
+    <label>Local: <input type="text" name="local" value="<?= $this->porto['PTO_Local'] ?>"/></label> <br />
+    <label>Municipio: 
+        <select name="municipio">
+            <?php foreach ($this->municipios as $key => $municipio): ?>
+            <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br /> 
+    <input type="submit" value="Cadastrar" />
+</form>

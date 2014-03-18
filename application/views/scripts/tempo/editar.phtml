@@ -1,0 +1,9 @@
+<h2>Editar Tempo</h2>
+
+<a href="<?=$this->url(array("controller"=>"tempo","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
+<form action="<?=$this->url(array("controller"=>"tempo","action"=>"atualizar"),null,true)?>" method="post">
+    <input type="hidden" name="idTempo" value="<?=$this->tempo['TMP_ID']?>" />
+    <label>Tempo: <input type="text" name="tempo" value="<?=$this->tempo['TMP_Tempo']?>"/></label> <br />
+    <input type="submit" value="Atualizar" />
+</form>

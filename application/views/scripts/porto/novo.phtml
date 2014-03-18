@@ -1,0 +1,16 @@
+<h2>Novo Porto</h2>
+
+<a href="<?=$this->url(array("controller"=>"porto","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
+<form action="<?=$this->url(array("controller"=>"porto","action"=>"criar"),null,true)?>" method="post">
+    <label>Nome: <input type="text" name="nome" /></label> <br />
+    <label>Local: <input type="text" name="local" /></label> <br />
+    <label>Municipio: 
+        <select name="municipio">
+            <?php foreach ($this->municipios as $key => $municipio): ?>
+            <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label> <br /> 
+    <input type="submit" value="Cadastrar" />
+</form>
