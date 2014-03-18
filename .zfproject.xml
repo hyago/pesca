@@ -83,6 +83,15 @@
         <controllerFile controllerName="EspecieCapturada">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="FichaDiaria">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Tempo1">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Vento1">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -121,6 +130,10 @@
           <dbTableFile dbTableName="Ordem"/>
           <dbTableFile dbTableName="Familia"/>
           <dbTableFile dbTableName="EspecieCapturada"/>
+          <dbTableFile dbTableName="Porto"/>
+          <dbTableFile dbTableName="FichaDiaria"/>
+          <dbTableFile dbTableName="Tempo1"/>
+          <dbTableFile dbTableName="Vento1"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -140,6 +153,10 @@
         <modelFile modelName="Ordem"/>
         <modelFile modelName="Familia"/>
         <modelFile modelName="EspecieCapturada"/>
+        <modelFile modelName="Porto"/>
+        <modelFile modelName="FichaDiaria"/>
+        <modelFile modelName="Tempo1"/>
+        <modelFile modelName="Vento"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -221,6 +238,15 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="EspecieCapturada">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="FichaDiaria">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Tempo1">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vento1">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
