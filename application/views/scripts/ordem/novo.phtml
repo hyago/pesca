@@ -1,17 +1,23 @@
 <h2>Filogenia->Ordem</h2>
-
+<h3>Novo</h3>
 <a href="<?=$this->url(array("controller"=>"ordem","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"ordem","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
-              <legend><h3>Ordem:</h3></legend>
-              <label for="id">ID:</label>
-              <input type="text" name="id_ordem" id="id_ordem"/><br />
-              <label for="tipo">Nome:</label>
-              <input type="text" id="nome_ordem" name="nome_ordem"/><br />
-              <label for="tipo">Característica:</label>
-              <input type="text" id="caracteristica_ordem" name="caracteristica_ordem"/><br />
-              <label for="tipo">Grupo:</label>
+              <div id="form-esq">
+              <label for="id">ID:</label><br/>
+              <input type="text" name="id_ordem" placeholder="Id" id="id_ordem" /><br />
+        </div>
+        <div id="form-esq"> 
+              <label for="tipo">Nome:</label><br/>
+              <input type="text" id="nome_ordem" placeholder="Nome" name="nome_ordem" /><br />
+        </div>
+        <div id="form-esq">   
+              <label for="tipo">Característica:</label><br/>
+              <input type="text" id="caracteristica_ordem" placeholder="Caracteristica" name="caracteristica_ordem"/><br />
+        </div>
+        <div id="form-esq">    
+              <label for="tipo">Grupo:</label><br/>
               <select name="select_grupo_ordem" id="grupo_ordem">
               <?php
                     foreach ($this->dados as $key => $grupo):
@@ -23,7 +29,10 @@
                 endforeach;
               ?>
                 </select><br/>
-              <input type="submit" value="Enviar"/>
+        </div>
+        <div id="Submit">      
+               <input type="submit" value="Enviar"/>
+        </div>
     </fieldset>
               
 </form>

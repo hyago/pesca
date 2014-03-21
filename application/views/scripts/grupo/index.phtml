@@ -4,6 +4,7 @@
 <fieldset id="Filogenia"></fieldset>
 <table>
     <tr>
+        <th>ID</th>
         <th>Grupo</th>
     </tr>
     
@@ -11,7 +12,9 @@
     foreach ($this->dados as $key => $grupo):
     ?>
     <tr>
-        <td><?= $grupo['GRP_Nome'] ?></td>
+        <td><?= $grupo['GRP_ID']?></td>
+        <td><?= $grupo['GRP_Nome']?></td>
+        
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"grupo","action"=>"editar", "id" => $grupo['GRP_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

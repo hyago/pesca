@@ -1,11 +1,12 @@
-<h2>Lista de Portos</h2>
+<h2>Desembarque->Porto</h2>
 
 <a href="<?=$this->url(array("controller"=>"porto","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-
+<fieldset id="Desembarque"></fieldset>
 <table>
     <tr>
+        <th>ID</th>
         <th>Nome</th>
-        <th>Local</th>
+        <th>Municipio</th>
     </tr>
     
     <?php
@@ -13,7 +14,8 @@
     ?>
     <tr>
         <td><?= $porto['PTO_Nome'] ?></td>
-        <td><?= $porto['PTO_Local'] ?></td>
+        <td><?= $porto['PTO_Nome'] ?></td>
+        <td><?= $porto['TMun_ID'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"porto","action"=>"editar", "id" => $porto['PTO_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

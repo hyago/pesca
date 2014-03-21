@@ -5,6 +5,7 @@
 
 <table>
     <tr>
+        <th>ID</th>
         <th>Família</th>
         <th>Tipo</th>
         <th>Característica</th>
@@ -14,6 +15,7 @@
     foreach ($this->dados as $key => $familia):
     ?>
     <tr>
+        <td><?= $familia['FAM_ID'] ?></td>
         <td><?= $familia['FAM_Nome'] ?></td>
         <td><?= $familia['FAM_Tipo']?></td>
         <td><?= $familia['FAM_Caracteristica']?></td>

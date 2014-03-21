@@ -1,16 +1,18 @@
-<h2>Lista de Comunidades</h2>
+<h2>Perfil Social->Comunidade</h2>
 
 <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-
+<fieldset id="Social"></fieldset>
 <table>
     <tr>
         <th>Comunidade</th>
+        <th>ID</th>
     </tr>
     
     <?php
     foreach ($this->dados as $key => $comunidade):
     ?>
     <tr>
+        <td><?= $comunidade['TCOM_ID'] ?></td>
         <td><?= $comunidade['TCOM_Nome'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"editar", "id" => $comunidade['TCOM_ID']),null,true)?>">

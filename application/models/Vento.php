@@ -29,7 +29,7 @@ class Application_Model_Vento
         $this->dbTableVento = new Application_Model_DbTable_Vento();
         
         $dadosVento = array(
-            'VNT_Intensidade' => $request['vento']
+            'VNT_Forca' => $request['vento']
         );
         
         $this->dbTableVento->insert($dadosVento);
@@ -42,7 +42,7 @@ class Application_Model_Vento
         $this->dbTableVento = new Application_Model_DbTable_Vento();
         
         $dadosVento = array(
-            'VNT_Intensidade' => $request['vento']
+            'VNT_Forca' => $request['vento']
         );
         
         $whereVento= $this->dbTableVento->getAdapter()

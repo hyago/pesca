@@ -1,17 +1,12 @@
-<h2>Lista de Colonias</h2>
+
+
+<h2>Perfil Social-> Colônias</h2>
 
 <a href="<?=$this->url(array("controller"=>"colonia","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-
+<fieldset id="Social"></fieldset>
 <table>
     <tr>
         <th>Colonia</th>
-        <th>Comunidade</th>
-        <th>Especificidade</th>
-        <th>Logradouro</th>
-        <th>Número</th>
-        <th>Bairro</th>
-        <th>Cidade</th>
-        <th>Estado</th>
         <th>CEP</th>
         <th>Complemento</th> 
     </tr>
@@ -21,13 +16,6 @@
     ?>
     <tr>
         <td><?= $colonia['TC_Nome'] ?></td>
-        <td><?= $colonia['TCOM_NOME'] ?></td>
-        <td><?= $colonia['TC_Especificidade'] ?></td>
-        <td><?= $colonia['TE_Logradouro'] ?></td>
-        <td><?= $colonia['TE_Numero'] ?></td>
-        <td><?= $colonia['TE_Bairro'] ?></td>
-        <td><?= $colonia['TMun_Municipio'] ?></td>
-        <td><?= $colonia['TUF_Sigla'] ?></td>
         <td><?= $colonia['TE_CEP'] ?></td>
         <td><?= $colonia['TE_Comp'] ?></td>
         <td class="td-botao">

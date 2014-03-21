@@ -7,8 +7,7 @@
         <th>Estagiário</th>
         <th>Monitor</th>
         <th>Data</th>
-        <th>Hora Inicio</th>
-        <th>Hora Termino</th>
+        <th>Turno</th>
         <th>Porto Desembarque</th>
         
     </tr>
@@ -20,8 +19,7 @@
         <td><?= $fichadiaria['T_Estagiario_TU_ID'] ?></td>
         <td><?= $fichadiaria['T_Monitor_TU_ID'] ?></td>
         <td><?= $fichadiaria['FD_Data'] ?></td>
-        <td><?= $fichadiaria['FD_Hora_Inicio'] ?></td>
-        <td><?= $fichadiaria['FD_Hora_Termino'] ?></td>
+        <td><?= $fichadiaria['FD_Turno'] ?></td>
         <td><?= $fichadiaria['PTO_ID'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"editar", "id" => $fichadiaria['FD_ID']),null,true)?>">

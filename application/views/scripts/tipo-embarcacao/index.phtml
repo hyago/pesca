@@ -1,9 +1,11 @@
-<h2>Lista de Tipos de Embarcações</h2>
+<h2>Perfil Social->Tipo de Embarcação</h2>
+
 
 <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-
+<fieldset id="Social"></fieldset>
 <table>
     <tr>
+        <th>ID</th>
         <th>Tipo de Embarcação</th>
     </tr>
     
@@ -11,6 +13,7 @@
     foreach ($this->dados as $key => $tipoEmbarcacao):
     ?>
     <tr>
+        <td><?= $tipoEmbarcacao['TTE_ID'] ?></td>
         <td><?= $tipoEmbarcacao['TTE_TipoEmbarcacao'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"editar", "id" => $tipoEmbarcacao['TTE_ID']),null,true)?>">

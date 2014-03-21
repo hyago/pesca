@@ -5,6 +5,7 @@
 
 <table>
     <tr>
+        <th>ID</th>
         <th>Ordem</th>
         <th>Caracteristica</th>
         <th>Grupo</th>
@@ -14,6 +15,7 @@
     foreach ($this->dados as $key => $ordem):
     ?>
     <tr>
+        <td><?= $ordem['ORD_ID'] ?></td>
         <td><?= $ordem['ORD_Nome'] ?></td>
         <td><?= $ordem['ORD_Caracteristica'] ?></td>
         <td><?= $ordem['GRP_ID'] ?></td>

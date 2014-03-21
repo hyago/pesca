@@ -1,24 +1,28 @@
-<?php
-$this->headLink()->appendStylesheet('/css/forms-nr-min.css');
-?>
-
 <h2>Filogenia->Espécie</h2>
+<h3>Editar</h3>
 
 <a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"especie","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
-        <div class="pure-control-group">
-            <fieldset id="Filogenia">
-              <label for="id" >ID:</label>
-              <input type="text" name="id_especie" id="id_especie" value="<?=$this->especie["ESP_ID"]?>"/><br />
-              <label for="tipo">Nome:</label>
-              <input type="text" id="nome_especie" name="nome_especie"value="<?=$this->especie["ESP_Nome"]?>"/><br />
-              <label for="tipo">Descritor:</label>
-              <input type="text" id="descritor_especie" name="descritor_especie"value="<?=$this->especie["ESP_Descritor"]?>"/><br />
-              <label for="tipo">Nome Comum:</label>
-              <input type="text" id="nome_comum" name="nome_comum"value="<?=$this->especie["ESP_Nome_Comum"]?>"/><br />
-              <label for="tipo">Gênero:</label>
+         <div id="form-esq">     
+            <label for="id" >ID:</label><br/>
+            <input type="text" name="id_especie" id="id_especie" value="<?=$this->especie["ESP_ID"]?>"/><br />
+         </div>
+         <div id="form-esq">   
+            <label for="tipo">Nome:</label><br/>
+            <input type="text" id="nome_especie" name="nome_especie"value="<?=$this->especie["ESP_Nome"]?>"/><br />
+         </div>  
+         <div id="form-esq">   
+            <label for="tipo">Descritor:</label><br/>
+            <input type="text" id="descritor_especie" name="descritor_especie"value="<?=$this->especie["ESP_Descritor"]?>"/><br />
+         </div>   
+         <div id="form-esq">   
+            <label for="tipo">Nome Comum:</label><br/>
+            <input type="text" id="nome_comum" name="nome_comum"value="<?=$this->especie["ESP_Nome_Comum"]?>"/><br />
+         </div>
+         <div id="form-esq">   
+            <label for="tipo">Gênero:</label><br/>
               <select name="select_genero_especie" id="genero_especie">
               <?php
                     foreach ($this->dados as $key => $genero):
@@ -30,9 +34,8 @@ $this->headLink()->appendStylesheet('/css/forms-nr-min.css');
                 endforeach;
               ?>
               </select></br>
-            </fieldset>
-        </div>
-        <div class="pure-controls">
+          </div>  
+        <div id="Submit">
             <input type="submit" value="Cadastrar" />
         </div>
     </fieldset>

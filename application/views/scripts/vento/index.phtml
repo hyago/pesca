@@ -1,7 +1,7 @@
-<h2>Lista de Ventos</h2>
+<h2>Desembarque->Vento</h2>
 
 <a href="<?=$this->url(array("controller"=>"vento","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-
+<fieldset id="Desembarque"></fieldset>
 <table>
     <tr>
         <th>Vento</th>
@@ -11,7 +11,7 @@
     foreach ($this->dados as $key => $vento):
     ?>
     <tr>
-        <td><?= $vento['VNT_Intensidade'] ?></td>
+        <td><?= $vento['VNT_Forca'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"vento","action"=>"editar", "id" => $vento['VNT_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

@@ -1,19 +1,16 @@
-<?php
-$this->headLink()->appendStylesheet('/css/forms-nr-min.css');
-?>
-
-<h2>Novo Tipo de Embarcação</h2>
+<h2>Perfil Social->Tipo de Embarcação</h2>
+<h3>Novo</h3>
 
 <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"criar"),null,true)?>" method="post">
-    <fieldset>
-        <div class="pure-control-group">
-            <label for="tipoEmbarcacao">Tipo de Embarcação</label>
+    <fieldset id="Social">
+        <div id="form-esq">
+            <label for="tipoEmbarcacao">Tipo de Embarcação</label><br/>
             <input type="text" name="tipoEmbarcacao" id="tipoEmbarcacao" placeholder="Tipo de Embarcação"/>
         </div>
-        <div class="pure-controls">
-            <input type="submit" value="Cadastrar" />
+        <div class="Submit">
+            <input type="submit" value="Enviar" />
         </div>
     </fieldset>
 </form>

@@ -92,13 +92,7 @@
 	padding: 0;
 }
 
-#label{	width: 150px; }
 
-#input{
-	margin-left: 150px;
-	margin-top: -129px;
-	float: left;
-}
 
 #menu-lateral
 {
@@ -217,7 +211,7 @@ tbody tr:nth-child(odd) {
 #esquerda{
     float: left;
     padding: 0;
-    width: 333px;
+    width: 200px;
     height: auto;
 }
 
@@ -227,9 +221,30 @@ tbody tr:nth-child(odd) {
     width: 333px;
     height: auto;
 }
-label,  input {
-	display: block;
-	float: left;
+#Submit{
+    padding-top: 20px;
+ 
+}
+#tam_medio{
+    width: 120px;
+    
+}
+select{
+    width: 175px;
+    height: 25px;
+    background: white; 
+}
+#form-dir{
+    padding: 10px;
+    padding-left: 0px;
+}
+#form-esq{
+    padding: 10px;
+    padding-left: 0px;
+}
+input {
+    height: 25px;
+    border-radius: 5px;
 }
 tr td input{
 	float: right;

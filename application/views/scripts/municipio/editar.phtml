@@ -1,16 +1,28 @@
-<h2>Editar Municipio</h2>
+<h2>Perfil Social->Município</h2>
+<h3>Editar</h3>
 
 <a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"municipio","action"=>"atualizar"),null,true)?>" method="post">
-    <input type="hidden" name="idMunicipio" value="<?=$this->municipio['TMun_ID']?>" />
-    <label>Municipio: <input type="text" name="municipio" value="<?=$this->municipio['TMun_Municipio']?>"/></label> <br />
-    <label>Estado: 
-        <select name="estado">
-            <?php foreach ($this->estados as $estado): ?>
-            <option value="<?= $estado; ?>" <?=($estado == $this->municipio['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </label> <br />
-    <input type="submit" value="Atualizar" />
+    <fieldset id="Social">
+        <input type="hidden" name="idMunicipio" value="<?=$this->municipio['TMun_ID']?>" />
+        <div id="form-esq">
+            <label>Municipio: </label> <br/>
+            <input type="text" name="municipio" value="<?=$this->municipio['TMun_Municipio']?>"/> <br/>
+        </div>
+        
+        <div id="form-esq">
+            <label>Estado: </label> <br/>
+            <select name="estado">
+                <?php foreach ($this->estados as $estado): ?>
+                <option value="<?= $estado; ?>" <?=($estado == $this->municipio['TUF_Sigla']) ? 'selected="selected"' : 'BA';?>><?= $estado; ?></option>
+                <?php endforeach; ?>
+            </select>
+        <br />
+        </div>
+        
+        <div id="Submit">
+            <input type="submit" value="Atualizar" />
+        </div>
+    </fieldset>
 </form>

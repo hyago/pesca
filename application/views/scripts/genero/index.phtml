@@ -4,14 +4,18 @@
 <fieldset id="Filogenia"></fieldset>
 <table>
     <tr>
+        <th>ID</th>
         <th>Genero</th>
+        <th>Familia</th>
     </tr>
     
     <?php
     foreach ($this->dados as $key => $genero):
     ?>
     <tr>
+        <td><?= $genero['GEN_ID'] ?></td>
         <td><?= $genero['GEN_Nome'] ?></td>
+        <td><?= $genero['FAM_ID'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"genero","action"=>"editar", "id" => $genero['GEN_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

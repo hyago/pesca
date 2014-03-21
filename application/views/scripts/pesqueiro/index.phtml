@@ -1,4 +1,40 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Pesqueiro</b> and script/action name <b>index</b></p>
-</div>
+<a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
+<fieldset id="Desembarque"></fieldset>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Local</th>
+        <th>Municipio</th>
+    </tr>
+    
+    <?php
+    foreach ($this->dados as $key => $pesqueiro):
+    ?>
+    <tr>
+        <td><?= $pesqueiro['PSQ_Nome'] ?></td>
+        <td><?= $pesqueiro['TP_Matricula'] ?></td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"visualizar", "id" => $pesqueiro['TP_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"editar", "id" => $pesqueiro['TP_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"excluir", "id" => $pesqueiro['TP_ID']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

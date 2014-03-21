@@ -1,8 +1,16 @@
-<h2>Novo Vento</h2>
+<h2>Desembarque->Vento</h2>
+<h3>Novo</h3>
 
 <a href="<?=$this->url(array("controller"=>"vento","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"vento","action"=>"criar"),null,true)?>" method="post">
-    <label>Vento: <input type="text" name="vento" /></label> <br />
-    <input type="submit" value="Cadastrar" />
+    <fieldset id="Desembarque">
+      <div id="form-esq">  
+        <input type="hidden" name="idVento" value="<?=$this->vento['VNT_ID']?>" />
+        <label>Vento: </label><br/>
+        <input type="text" name="vento" placeholder="Vento"/> <br />
+      </div>
+    <input type="submit" value="Enviar" />
+
+    </fieldset>
 </form>

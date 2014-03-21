@@ -1,9 +1,15 @@
-<h2>Editar Arte de Pesca</h2>
-
+<h2>Perfil Social->Arte de Pesca</h2>
+<h3>Editar</h3>
 <a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"arte-pesca","action"=>"atualizar"),null,true)?>" method="post">
-    <input type="hidden" name="idArtePesca" value="<?=$this->artePesca['TAP_ID']?>" />
-    <label>Arte de Pesca: <input type="text" name="artePesca" value="<?=$this->artePesca['TAP_ArtePesca']?>"/></label> <br />
-    <input type="submit" value="Atualizar" />
+    <input type="hidden" name="idArtePesca" value="<?=$this->artePesca['TAP_ID']?>" <br/>
+    <div id="form-esq">
+        
+        <label>Arte de Pesca:</label><br/> 
+        <input type="text" name="artePesca" placeholder="Arte de Pesca" value="<?=$this->artePesca['TAP_ArtePesca']?>"/> <br />
+    </div>
+    <div id="Submit">    
+        <input type="submit" value="Atualizar" />
+    </div>
 </form>

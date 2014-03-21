@@ -62,6 +62,8 @@ $(document).ready(function(){
 		//funções para menu-lateral
 		if($("fieldset").attr('id') == "Social"){
 			$("#Social").show();
+                        $("#Filo").hide();
+			$("#Dsbq").hide();
 		}
 		else if($("fieldset").attr('id') == "Desembarque"){
 			$("#Dsbq").show();

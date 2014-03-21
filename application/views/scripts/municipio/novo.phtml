@@ -3,13 +3,25 @@
 <a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"municipio","action"=>"criar"),null,true)?>" method="post">
-    <label>Municipio: <input type="text" name="municipio" /></label> <br />
-    <label>Estado: 
-        <select name="estado">
-            <?php foreach ($this->estados as $estado): ?>
-            <option value="<?= $estado; ?>" <?=($estado == "BA") ? 'selected="selected"' : '';?>><?= $estado; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </label> <br />
-    <input type="submit" value="Cadastrar" />
+    <fieldset id="Social">
+        <input type="hidden" name="idMunicipio" />
+        <div id="form-esq">
+            <label>Municipio: </label> <br/>
+            <input type="text" name="municipio" value="<?=$this->municipio['TMun_Municipio']?>"/> <br/>
+        </div>
+        
+        <div id="form-esq">
+            <label>Estado: </label> <br/>
+            <select name="estado">
+                <?php foreach ($this->estados as $estado): ?>
+                <option value="<?= $estado; ?>" <?=($estado == $this->municipio['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
+                <?php endforeach; ?>
+            </select>
+        <br />
+        </div>
+        
+        <div id="Submit">
+            <input type="submit" value="Atualizar" />
+        </div>
+    </fieldset>
 </form>
