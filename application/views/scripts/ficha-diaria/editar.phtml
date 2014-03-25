@@ -9,14 +9,14 @@ $this->headScript()->appendFile('/js/mascaras.js');
 <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 <form id="formulario" action="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"criar"),null,true)?>" method="post">
    <fieldset id="Desembarque">
-      
+      <div id="esquerda">
        <div id="form-esq">
-         <label for="id">ID:</label><br/>
+         <label for="id">ID:</label>
          <input type="text" name="id_fichaDiaria" placeholder="Id" id="id_fichaDiaria" value="<?=$this->fichadiara['FD_ID']?>"/><br />
        </div>
        
        <div id="form-esq">
-         <label for="tipo">Estagiário:</label><br/>
+         <label for="tipo">Estagiário:</label>
          <select name="select_nome_estagiario" id="ficha_diaria_estagiario">
               <?php
                     foreach ($this->dados as $key => $estagiario):
@@ -31,8 +31,8 @@ $this->headScript()->appendFile('/js/mascaras.js');
           </select></br>
         </div>
        
-         <div id="form-dir">
-            <label for="tipo">Monitor:</label><br/>
+         <div id="form-esq">
+            <label for="tipo">Monitor:</label>
             <select name="select_nome_monitor" id="ficha_diaria_monitor">
                  <?php
                        foreach ($this->dados as $key => $monitor):
@@ -47,12 +47,12 @@ $this->headScript()->appendFile('/js/mascaras.js');
          </div>
        
        <div id="form-esq">
-         <label for="tipo">Data:</label><br/>
+         <label for="tipo">Data:</label>
          <input type="text" id="data_Viagem" placeholder="Data" name="data_ficha"value="<?=$this->fichadiara['FD_Data']?>"/><br />
        </div>
        
        <div id="form-esq">
-         <label for="tipo">Turno:</label><br/>
+         <label for="tipo">Turno:</label>
          <select name="select_turno" id="ficha_diaria_porto">
 		<option nome="turno" value="Matutino">Matutino</option>
                 <option nome="turno" value="Vespertino">Vespertino</option>
@@ -61,7 +61,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
        
        
        <div id="form-esq">  
-         <label for="tipo">Porto:</label><br/>
+         <label for="tipo">Porto:</label>
          <select name="select_nome_porto" id="ficha_diaria_porto">
               <?php
                     foreach ($this->dados_porto as $key => $porto):
@@ -75,8 +75,8 @@ $this->headScript()->appendFile('/js/mascaras.js');
          </select></br>
        </div>   
       
-      <div id="form-dir">        
-          <label for="tipo">Tempo: </label><br/>
+      <div id="form-esq">        
+          <label for="tipo">Tempo: </label>
          <select name="select_tempo" id="ficha_diaria_tempo">
              <?php
                   foreach ($this->dados_tempo as $key => $tempo):
@@ -90,8 +90,8 @@ $this->headScript()->appendFile('/js/mascaras.js');
          </select><br/>
       </div>   
          
-       <div id="form-dir"> 
-         <label>Vento:</label><br/> 
+       <div id="form-esq"> 
+         <label>Vento:</label> 
          <select name="select_vento" id="ficha_diaria_vento">
              <?php
                   foreach ($this->dados_vento as $key => $vento):
@@ -106,9 +106,9 @@ $this->headScript()->appendFile('/js/mascaras.js');
          </select><br/><br/>  
        </div>
        
-       <div id="form-dir">  
-         <label for="tipo">Observação:</label><br/>
-         <input type="text" id="estado_tempo" name="estado_tempo" size="60px"value="<?=$this->fichadiara['OBS']?>"/><br />
+       <div id="form-esq">  
+         <label for="tipo">Observação:</label>
+         <input type="text-area" id="obs" name="obs"  value="<?=$this->fichadiara['OBS']?>"/><br />
          <br/>
        </div>
        
@@ -139,14 +139,14 @@ $this->headScript()->appendFile('/js/mascaras.js');
 		</select>
 		</td>
 		<td class="td-botao">
-                    <a href="#" id="novaEntrevista" target="_blank">
+                    <a  id="novaEntrevista" target="_blank">
                     <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-arrowreturnthick-1-e"></span></li>
                     </ul>
                     </a>
                 </td>
 		<td class="td-botao"> 
-                    <a href="#rodape" class="removerCampo" title="Remover linha">
+                    <a  class="removerCampo" title="Remover linha">
                     <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-circle-close"></span></li>
                     </ul>
@@ -155,11 +155,13 @@ $this->headScript()->appendFile('/js/mascaras.js');
 		</tr>
 		</table>
 		<br/>
-                    <a href=""<?=$this->url(array("controller"=>"ficha-diaria","action"=>"#index"),null,true)?> class="adicionarCampo" title="Adicionar item">
+                    <a class="adicionarCampo" title="Adicionar item">
                     <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-circle-plus"></span></li>
                     </ul>
                     </a>
-                </fieldset>
-					
-        </form> 
+      
+           </fieldset>
+	</div>
+   </fieldset>
+</form> 

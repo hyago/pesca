@@ -5,12 +5,15 @@
 
 <form action="<?=$this->url(array("controller"=>"vento","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Desembarque">
+     <div id="esquerda">
       <div id="form-esq">  
-        <input type="hidden" name="idVento" value="<?=$this->vento['VNT_ID']?>" />
-        <label>Vento: </label><br/>
+        <input type="hidden" name="idVento" />
+        <label>Vento: </label>
         <input type="text" name="vento" placeholder="Vento"/> <br />
-      </div>
-    <input type="submit" value="Enviar" />
-
+       </div>
+      <div id="Submit">  
+       <input type="submit" value="Enviar" />
+      </div> 
+    </div>
     </fieldset>
 </form>

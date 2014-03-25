@@ -29,7 +29,7 @@ class Application_Model_Tempo
         $this->dbTableTempo = new Application_Model_DbTable_Tempo();
         
         $dadosTempo = array(
-            'TMP_Tempo' => $request['tempo']
+            'TMP_Estado' => $request['tempo']
         );
         
         $this->dbTableTempo->insert($dadosTempo);
@@ -42,7 +42,7 @@ class Application_Model_Tempo
         $this->dbTableTempo = new Application_Model_DbTable_Tempo();
         
         $dadosTempo = array(
-            'TMP_Tempo' => $request['tempo']
+            'TMP_Estado' => $request['tempo']
         );
         
         $whereTempo= $this->dbTableTempo->getAdapter()

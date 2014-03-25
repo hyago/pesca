@@ -3,19 +3,20 @@
 <a href="<?=$this->url(array("controller"=>"grupo","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"grupo","action"=>"atualizar"),null,true)?>" method="post"> 
-    <fieldset id="Filogenia">              
+    <fieldset id="Filogenia">
+        <div id="esquerda">
         <div id="form-esq">   
-            <label for="id">ID:</label><br/>
+            <label for="id">ID:</label>
               <input type="text" name="id_grupo" id="id_grupo" value="<?=$this->grupo["GRP_ID"]?>"/><br />
         </div>
         
         <div id="form-esq">
-              <label for="tipo">Nome:</label><br/>
+              <label for="tipo">Nome:</label>
               <input type="text" id="nome_grupo" name="nome_grupo" value="<?=$this->grupo["GRP_Nome"]?>"/><br />
         </div>
         <div id="Submit">
               <input type="submit" value="enviar"/>
         </div>
-        
+      </div>  
     </fieldset>
 </form>

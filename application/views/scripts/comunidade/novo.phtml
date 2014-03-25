@@ -5,12 +5,15 @@
 
 <form action="<?=$this->url(array("controller"=>"comunidade","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Social">
-    <div id="form-esq">
-        <label>Comunidade: </label><br/>
-        <input type="text" placeholder="Comunidade" name="nome_comunidade" /> <br />
-    </div>
-    <div id="Submit">
-        <input type="submit" value="Enviar"/>
-    </div>
+         <div id="esquerda">
+            <div id="form-esq">
+                <label>Comunidade: </label>
+                <input type="text" placeholder="Comunidade" name="nome_comunidade" /> <br />
+            </div>
+             <br/>
+            <div id="Submit">
+                <input type="submit" value="Enviar"/>
+            </div>
+         </div>
     </fieldset>
 </form>

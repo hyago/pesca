@@ -4,14 +4,15 @@
 
 <form action="<?=$this->url(array("controller"=>"municipio","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Social">
+       <div id="esquerda"> 
         <input type="hidden" name="idMunicipio" />
         <div id="form-esq">
-            <label>Municipio: </label> <br/>
+            <label>Municipio: </label>
             <input type="text" name="municipio" value="<?=$this->municipio['TMun_Municipio']?>"/> <br/>
         </div>
         
         <div id="form-esq">
-            <label>Estado: </label> <br/>
+            <label>Estado: </label>
             <select name="estado">
                 <?php foreach ($this->estados as $estado): ?>
                 <option value="<?= $estado; ?>" <?=($estado == $this->municipio['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
@@ -21,7 +22,8 @@
         </div>
         
         <div id="Submit">
-            <input type="submit" value="Atualizar" />
+            <input type="submit" value="Enviar" />
         </div>
+       </div>
     </fieldset>
 </form>

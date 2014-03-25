@@ -5,12 +5,15 @@
 
 <form class="pure-form pure-form-aligned" id="cadastro-usuario" action="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Social">
+        <div id="esquerda">
         <div id="form-esq">
-            <label for="tipoEmbarcacao">Tipo de Embarcação</label><br/>
+            <label for="tipoEmbarcacao">Tipo Embarcação</label>
             <input type="text" name="tipoEmbarcacao" id="tipoEmbarcacao" placeholder="Tipo de Embarcação"/>
-        </div>
-        <div class="Submit">
+        </div>   
+        <div id="Submit">
+            <br/>
             <input type="submit" value="Enviar" />
+        </div>
         </div>
     </fieldset>
 </form>

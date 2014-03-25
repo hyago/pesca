@@ -10,43 +10,43 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
 <form action="<?=$this->url(array("controller"=>"colonia","action"=>"criar"),null,true)?>" method="post">
  <fieldset id="Social">
-
+     <div id="esquerda">
         <input type="hidden" name="idColonia" />
         <input type="hidden" name="idEndereco" />
         <div id="form-esq">
-            <label>Colônia: </label> <br/>
+            <label>Colônia: </label>
             <input type="text" name="nome" placeholder="Colônia"/><br/>
         </div>
         <div id="form-esq">
-            <label>Comunidade: </label><br/>
+            <label>Comunidade: </label>
             <select name="comunidade">
                 <?php foreach ($this->comunidades as $key => $comunidade): ?>
-                <option value="<?= $comunidade['TCOM_ID']; ?>" <?=($comunidade['TCOM_ID'] == $this->colonia['TCOM_ID']) ? 'selected="selected"' : '';?>><?= $comunidade['TCOM_Nome']; ?></option>
+                <option value="<?= $comunidade['TCOM_ID']; ?>" <?=($comunidade['TCOM_ID'] == $this->colonia['TCOM_ID']) ? 'selected="selected"' : '';?>><?= $comunidade['TCOM_NOME']; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
 
         <div id="form-esq">
-            <label>Especificidade: </label> <br/>
+            <label>Especificidade: </label>
             <input type="text" name="especificidade" placeholder="Especificidade" /> <br/>
         </div>
         <div id="form-esq">
-            <label>Logradouro: </label> <br/> 
+            <label>Logradouro: </label> 
             <input type="text" name="logradouro" placeholder="Logradouro" /><br />
         </div>
 
         <div id="form-esq">
-            <label>Número: </label> <br/>
+            <label>Número: </label>
             <input type="text" name="numero" placeholder="Número" /><br />
         </div>
 
         <div id="form-esq">
-            <label>Bairro: </label></br> 
+            <label>Bairro: </label>
             <input type="text" name="bairro" placeholder="Bairro" /><br/>
         </div>
         
         <div id="form-esq">    
-            <label>Municipio:</label><br/>
+            <label>Municipio:</label>
                 <select name="municipio">
                     <?php foreach ($this->municipios as $key => $municipio): ?>
                     <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
@@ -55,7 +55,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
         </div>
 
         <div id="form-esq">
-            <label>Estado: </label><br/>
+            <label>Estado: </label>
             <select name="estado">
                 <?php foreach ($this->estados as $estado): ?>
                 <option value="<?= $estado; ?>" <?=($estado == $this->colonia['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
@@ -65,18 +65,18 @@ $this->headScript()->appendFile('/js/mascaras.js');
         
 
         <div id="form-esq">
-            <label>CEP: </label> <br/>
+            <label>CEP: </label>
             <input type="text" name="cep" placeholder="CEP" id="cep"/> <br />
         </div>
         
         <div id="form-esq">           
-            <label>Complemento: </label> <br/>
+            <label>Complemento: </label>
             <input type="text" name="complemento" placeholder="Complemento" /> <br />
         </div>    
         <div id="Submit">
-            <input type="submit" value="Atualizar" />
+            <input type="submit" value="Enviar" />
         </div>
-        
+     </div>
     </fieldset>
 
 </form>

@@ -40,7 +40,7 @@ class Application_Model_Comunidade
         $this->dbTableComunidade = new Application_Model_DbTable_Comunidade();
         
         $dadosComunidade = array(
-            'TCOM_Nome' => $request['nome']
+            'TCOM_NOME' => $request['nome_comunidade']
         );
         
         $this->dbTableComunidade->insert($dadosComunidade);
@@ -53,7 +53,7 @@ class Application_Model_Comunidade
         $this->dbTableComunidade = new Application_Model_DbTable_Comunidade();
         
         $dadosComunidade = array(
-            'TCOM_Nome' => $request['nome']
+            'TCOM_NOME' => $request['nome_comunidade']
         );
         
         $whereComunidade= $this->dbTableComunidade->getAdapter()

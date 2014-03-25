@@ -4,7 +4,6 @@
     <tr>
         <th>ID</th>
         <th>Nome</th>
-        <th>Local</th>
         <th>Municipio</th>
     </tr>
     
@@ -12,8 +11,9 @@
     foreach ($this->dados as $key => $pesqueiro):
     ?>
     <tr>
+        <td><?= $pesqueiro['PSQ_ID'] ?></td>
         <td><?= $pesqueiro['PSQ_Nome'] ?></td>
-        <td><?= $pesqueiro['TP_Matricula'] ?></td>
+        <td><?= $pesqueiro['TMun_ID'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"visualizar", "id" => $pesqueiro['TP_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

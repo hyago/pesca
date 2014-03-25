@@ -7,7 +7,7 @@ $(document).ready(function(){
 		
 		
 		$('input[id*=numeric]').attr("size", "3px");
-		$('input[id*=nome]').attr("size", "25px");
+		$('input[id*=nome]').attr("size", "23px");
         
 		function removeCampo() {
 			$(".removerCampo").unbind("click");
@@ -42,20 +42,20 @@ $(document).ready(function(){
 		
 		
 		//funcoes para entrevistas
-	/*	
-		if($('option').attr("value","Pesca de Linha")){
+		
+		if($('select.option').attr("value","Pesca de Linha")){
 			$('#novaEntrevista').attr("href","EntrevistaPescaLinha.html");
 		}
-		else if($('option').attr("value","Arrasto de Fundo")){
+		else if($('select.option').attr("value","Arrasto de Fundo")){
 			$('#novaEntrevista').attr("href","EntrevistaArrastoFundo.html");
 		}
-		else if($('option').attr("value","Pesca de Rede")){
+		else if($('select.option').attr("value","Pesca de Rede")){
 			$('#novaEntrevista').attr("href","EntrevistaPescaRede.html");
 		}
-		else if($('option').attr("value","Mariscagem")){
+		else if($('select.option').attr("value","Mariscagem")){
 			$('#novaEntrevista').attr("href","EntrevistaMariscagem.html");
 		}
-	*/	
+		
 		//funcoes para entrevistas
 		
 		

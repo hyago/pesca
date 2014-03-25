@@ -30,7 +30,6 @@ class Application_Model_Porto
         
         $dadosPorto = array(
             'PTO_Nome'  => $request['nome'],
-            'PTO_Local' => $request['local'],
             'TMun_ID'   => $request['municipo']
         );
         
@@ -45,7 +44,6 @@ class Application_Model_Porto
         
         $dadosPorto = array(
             'PTO_Nome'  => $request['nome'],
-            'PTO_Local' => $request['local'],
             'TMun_ID'   => $request['municipo']
         );
         

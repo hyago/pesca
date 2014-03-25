@@ -4,26 +4,27 @@
 
  <form action="<?=$this->url(array("controller"=>"ordem","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
+      <div id="esquerda">  
         <div id="form-esq">
-              <label for="id">ID:</label><br/>
+              <label for="id">ID:</label>
               <input type="text" name="id_ordem" id="id_ordem" value="<?=$this->ordem["ORD_ID"]?>"/><br />
         </div>
         <div id="form-esq"> 
-              <label for="tipo">Nome:</label><br/>
+              <label for="tipo">Nome:</label>
               <input type="text" id="nome_ordem" name="nome_ordem" value="<?=$this->ordem["ORD_Nome"]?>"/><br />
         </div>
         <div id="form-esq">   
-              <label for="tipo">Característica:</label><br/>
+              <label for="tipo">Característica:</label>
               <input type="text" id="caracteristica_ordem" name="caracteristica_ordem" value="<?=$this->ordem["ORD_Caracteristica"]?>"/><br />
         </div>
         <div id="form-esq">    
-              <label for="tipo">Grupo:</label><br/>
+              <label for="tipo">Grupo:</label>
               <select name="select_grupo_ordem" id="grupo_ordem">
               <?php
                     foreach ($this->dados as $key => $grupo):
                ?>
               
-		<option nome="grupo_ordem" value="<?=$grupo['GRP_ID']?>"><?= $grupo['GRP_Nome']?></option>
+                  <option nome="grupo_ordem" value="<?=$grupo['GRP_ID']?>"><?=$grupo['GRP_Nome']?></option>
               
               <?php
                 endforeach;
@@ -33,6 +34,7 @@
         <div id="Submit">      
                <input type="submit" value="Enviar"/>
         </div>
+      </div>        
     </fieldset>
               
 </form>

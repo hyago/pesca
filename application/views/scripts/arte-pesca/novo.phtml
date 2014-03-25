@@ -4,12 +4,17 @@
 <a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"arte-pesca","action"=>"criar"),null,true)?>" method="post">
-   <div id="form-esq">
-        
-        <label>Arte de Pesca:</label><br/> 
-        <input type="text" name="artePesca" placeholder="Arte de Pesca" accept=""value="<?=$this->artePesca['TAP_ArtePesca']?>"/> <br />
+    <fieldset id="Social">
+    <div id="esquerda">
+        <div id="form-esq">
+
+            <label>Arte de Pesca:</label> 
+            <input type="text" name="artePesca" placeholder="Arte de Pesca" accept=""value="<?=$this->artePesca['TAP_ArtePesca']?>"/> <br />
+        </div>
+        <div id="Submit">    
+            <input type="submit" value="Enviar" />
+        </div>
+
     </div>
-    <div id="Submit">    
-        <input type="submit" value="Atualizar" />
-    </div>
+    </fieldset>
 </form>

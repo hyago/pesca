@@ -1,9 +1,10 @@
-<h2>Lista de Tempos</h2>
+<h2>Desembarque->Tempos</h2>
 
 <a href="<?=$this->url(array("controller"=>"tempo","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-
+<fieldset id="Desembarque"></fieldset>
 <table>
     <tr>
+        <th>ID</th>
         <th>Tempo</th>
     </tr>
     
@@ -11,7 +12,8 @@
     foreach ($this->dados as $key => $tempo):
     ?>
     <tr>
-        <td><?= $tempo['TMP_Tempo'] ?></td>
+        <td><?= $tempo['TMP_ID'] ?></td>
+        <td><?= $tempo['TMP_Estado'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"tempo","action"=>"editar", "id" => $tempo['TMP_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

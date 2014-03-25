@@ -6,18 +6,16 @@
 <fieldset id="Social"></fieldset>
 <table>
     <tr>
+        <th>ID</th>
         <th>Colonia</th>
-        <th>CEP</th>
-        <th>Complemento</th> 
     </tr>
     
     <?php
     foreach ($this->dados as $key => $colonia):
     ?>
     <tr>
+        <td><?= $colonia['TC_ID'] ?></td>
         <td><?= $colonia['TC_Nome'] ?></td>
-        <td><?= $colonia['TE_CEP'] ?></td>
-        <td><?= $colonia['TE_Comp'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"colonia","action"=>"visualizar", "id" => $colonia['TC_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

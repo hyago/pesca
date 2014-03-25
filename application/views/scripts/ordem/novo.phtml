@@ -4,20 +4,21 @@
 
 <form action="<?=$this->url(array("controller"=>"ordem","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
-              <div id="form-esq">
-              <label for="id">ID:</label><br/>
+      <div id="esquerda">  
+        <div id="form-esq">
+              <label for="id">ID:</label>
               <input type="text" name="id_ordem" placeholder="Id" id="id_ordem" /><br />
         </div>
         <div id="form-esq"> 
-              <label for="tipo">Nome:</label><br/>
+              <label for="tipo">Nome:</label>
               <input type="text" id="nome_ordem" placeholder="Nome" name="nome_ordem" /><br />
         </div>
         <div id="form-esq">   
-              <label for="tipo">Característica:</label><br/>
+              <label for="tipo">Característica:</label>
               <input type="text" id="caracteristica_ordem" placeholder="Caracteristica" name="caracteristica_ordem"/><br />
         </div>
         <div id="form-esq">    
-              <label for="tipo">Grupo:</label><br/>
+              <label for="tipo">Grupo:</label>
               <select name="select_grupo_ordem" id="grupo_ordem">
               <?php
                     foreach ($this->dados as $key => $grupo):
@@ -33,6 +34,7 @@
         <div id="Submit">      
                <input type="submit" value="Enviar"/>
         </div>
+      </div>
     </fieldset>
-              
+               
 </form>

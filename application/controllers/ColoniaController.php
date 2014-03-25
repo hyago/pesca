@@ -27,15 +27,19 @@ class ColoniaController extends Zend_Controller_Action
         $this->view->usuarioLogado = $this->usuarioLogado;
         
         $this->modelColonia = new Application_Model_Colonia();
+        
     }
 
     /*
      * Lista todas as artes de pesca
      */
     public function indexAction()
-    {        
+    {   
+        
         $dados = $this->modelColonia->select();
-      
+        
+        
+        
         $this->view->assign("dados", $dados);
     }
     

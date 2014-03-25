@@ -6,13 +6,15 @@
 
 <form action="<?=$this->url(array("controller"=>"area-pesca","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Social">
-        <input type="hidden" name="idAreaPesca" value="<?=$this->areaPesca['TAreaP_ID']?>" />
-        <div id="form-esq">
-            <label>Área de Pesca: </label><br/>
-            <input type="text" name="areaPesca" placeholder="Área de Pesca" value="<?=$this->areaPesca['TAreaP_AreaPesca']?>"/> <br />
-        </div>
-        <div id="Submit">
-            <input type="submit" value="Atualizar" />
+        <div id="esquerda">
+            <input type="hidden" name="idAreaPesca" value="<?=$this->areaPesca['TAreaP_ID']?>" />
+            <div id="form-esq">
+                <label>Área de Pesca: </label>
+                <input type="text" name="areaPesca" placeholder="Área de Pesca" value="<?=$this->areaPesca['TAreaP_AreaPesca']?>"/> <br />
+            </div>
+            <div id="Submit">
+                <input type="submit" value="Atualizar" />
+            </div>
         </div>
     <fieldset>
 </form>

@@ -4,6 +4,7 @@
 
 <table>
     <tr>
+        <th>ID</th>
         <th>Nome</th>
         <th>E-mail</th>
     </tr>
@@ -12,6 +13,7 @@
     foreach ($this->dados as $key => $usuario):
     ?>
     <tr>
+        <td><?= $usuario['TU_ID'] ?></td>
         <td><?= $usuario['TU_Nome'] ?></td>
         <td><?= $usuario['TU_Email'] ?></td>
         <td class="td-botao">

@@ -5,13 +5,15 @@
 
 <form action="<?=$this->url(array("controller"=>"comunidade","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Social">
-        <input type="hidden" name="idComunidade" value="<?=$this->comunidade['TCOM_ID']?>" />
-        <div id="form-esq">
-            <label>Comunidade:</label><br/>
-            <input type="text" name="nome_comunidade" placeholder="Comunidade" value="<?=$this->comunidade['TCOM_Nome']?>"/> <br/>
-        </div>
-        <div id="Submit">
-            <input type="submit" value="Atualizar" />
+        <div id="esquerda">
+            <input type="hidden" name="idComunidade" value="<?=$this->comunidade['TCOM_ID']?>" />
+            <div id="form-esq">
+                <label>Comunidade:</label>
+                <input type="text" name="nome_comunidade" placeholder="Comunidade" value="<?=$this->comunidade['TCOM_NOME']?>"/> <br/>
+            </div>
+            <div id="Submit">
+                <input type="submit" value="Atualizar" />
+            </div>
         </div>
     </fieldset>
 </form>

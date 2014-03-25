@@ -1,15 +1,19 @@
 <h2>Desembarque->Vento</h2>
 <h3>Editar</h3>
+
 <a href="<?=$this->url(array("controller"=>"vento","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"vento","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Desembarque">
-      <div id="form-esq">  
-        <input type="hidden" name="idVento" value="<?=$this->vento['VNT_ID']?>" />
-        <label>Vento: </label><br/>
-        <input type="text" name="vento" value="<?=$this->vento['VNT_Forca']?>"/> <br />
-      </div>
-    <input type="submit" value="Atualizar" />
-
+      <div id="esquerda">  
+        <div id="form-esq">  
+          <input type="hidden" name="idVento" value="<?=$this->vento['VNT_ID']?>" />
+          <label>Vento: </label>
+          <input type="text" name="vento" value="<?=$this->vento['VNT_Forca']?>"/> <br />
+        </div>
+        <div id="Submit">   
+            <input type="submit" value="Atualizar" />
+        </div>
+      </div>     
     </fieldset>
 </form>

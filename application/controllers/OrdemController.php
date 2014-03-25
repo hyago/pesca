@@ -46,6 +46,10 @@ class OrdemController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        $dados = $this->modelGrupo->select();
+        
+        $this->view->assign("dados", $dados);
+        
         $ordem = $this->modelOrdem->find($this->_getParam('id'));
         
         $this->view->assign("ordem", $ordem);

@@ -18,6 +18,8 @@ class FichaDiariaController extends Zend_Controller_Action
         
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
         $this->modelPorto = new Application_Model_Porto();
+        $this->modelTempo = new Application_Model_Tempo();
+        $this->modelVento = new Application_Model_Vento();
     }
 
     /*
@@ -35,13 +37,22 @@ class FichaDiariaController extends Zend_Controller_Action
      */
     public function novoAction()
     {
+        //------------------------------------------
         $dados = $this->modelFichaDiaria->select();
       
         $this->view->assign("dados", $dados);
-        
+        //--------------------------------------
         $porto = $this->modelPorto->select();
         
         $this->view->assign("dados_porto", $porto);
+        //----------------------------------------
+        $tempo = $this->modelTempo->select();
+        
+        $this->view->assign("dados_tempo", $tempo);
+        //-------------------------------------------
+        $vento = $this->modelVento->select();
+        
+        $this->view->assign("dados_vento", $vento);
     }
     
     /*
