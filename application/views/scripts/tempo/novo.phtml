@@ -1,7 +1,7 @@
-<h2>Desembarque->Tempo</h2>
-<h3>Novo</h3>
-<a href="<?=$this->url(array("controller"=>"tempo","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
-
+<div id="titulos">
+    <h2>Desembarque->Tempo</h2>
+    <h3>Novo</h3>
+</div>
 <form action="<?=$this->url(array("controller"=>"tempo","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Desembarque">
        <div id="esquerda"> 
@@ -10,7 +10,8 @@
             <input type="text" name="tempo" placeholder="Tempo"/><br />
         </div>
         <div id="Submit">
-            <input type="submit" value="Enviar"/>
+            <a href="<?=$this->url(array("controller"=>"tempo","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
         </div>
        </div>     
     </fieldset>

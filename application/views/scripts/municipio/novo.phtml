@@ -1,6 +1,9 @@
-<h2>Novo Municipio</h2>
+<div id="titulos">
+    <h2>Perfil Social->Municipio</h2>
+    <h3>Novo</h3>
+</div>
 
-<a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+
 
 <form action="<?=$this->url(array("controller"=>"municipio","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Social">
@@ -18,11 +21,10 @@
                 <option value="<?= $estado; ?>" <?=($estado == $this->municipio['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
                 <?php endforeach; ?>
             </select>
-        <br />
         </div>
-        
         <div id="Submit">
-            <input type="submit" value="Enviar" />
+            <a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
         </div>
        </div>
     </fieldset>

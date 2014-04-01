@@ -2,11 +2,11 @@
 $this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
 $this->headScript()->appendFile('/js/mascaras.js');
 ?>
+<div id="titulos">
+    <h2>Perfil Social->Colônia</h2>
+    <h3>Novo</h3>
+</div>
 
-<h2>Perfil Social->Colônia</h2>
-<h3>Novo</h3>
-
-<a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"colonia","action"=>"criar"),null,true)?>" method="post">
  <fieldset id="Social">
@@ -72,9 +72,10 @@ $this->headScript()->appendFile('/js/mascaras.js');
         <div id="form-esq">           
             <label>Complemento: </label>
             <input type="text" name="complemento" placeholder="Complemento" /> <br />
-        </div>    
+        </div>
         <div id="Submit">
-            <input type="submit" value="Enviar" />
+            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
         </div>
      </div>
     </fieldset>

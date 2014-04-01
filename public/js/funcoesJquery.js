@@ -7,7 +7,7 @@ $(document).ready(function(){
 		
 		
 		$('input[id*=numeric]').attr("size", "3px");
-		$('input[id*=nome]').attr("size", "23px");
+		
         
 		function removeCampo() {
 			$(".removerCampo").unbind("click");

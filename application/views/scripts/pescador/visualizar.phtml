@@ -1,7 +1,10 @@
-<h2>Visualizar Pescador</h2>
 
-<a href="<?=$this->url(array("controller"=>"pescador","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+<div id="titulos">
+    <h2>Perfil Social->Pescador</h2>
+    <h3>Visualizar</h3>
+</div>
 
+<fieldset id="Social">
 <table>
     <tr>
         <th>Nome</th>
@@ -39,4 +42,8 @@
         <td><?= $this->pescador['TE_CEP'] ?></td>
         <td><?= $this->pescador['TE_Comp'] ?></td>
     </tr>
+    <div id="Submit">
+        <a href="<?=$this->url(array("controller"=>"pescador","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+    </div>
 </table>
+</fieldset>

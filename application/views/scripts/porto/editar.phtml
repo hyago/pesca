@@ -1,7 +1,7 @@
-<h2>Desembarque->Porto</h2>
-<h3>Editar</h3>
-
-<a href="<?=$this->url(array("controller"=>"porto","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+<div id="titulos">
+    <h2>Desembarque->Porto</h2>
+    <h3>Editar</h3>
+</div>
 
 <form action="<?=$this->url(array("controller"=>"porto","action"=>"atualizar"),null,true)?>" method="post">
    <input type="hidden" name="idPorto" value="<?= $this->porto['PTO_ID'] ?>" />
@@ -21,8 +21,9 @@
                 </select>
             <br />
         </div>
-           <div id="Submit">
-            <input type="submit" value="Cadastrar" />
+         <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"porto","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+            <input type="submit" value="Atualizar" />
         </div>
       </div> 
     </fieldset>

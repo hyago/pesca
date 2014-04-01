@@ -1,3 +1,7 @@
+body{
+    font-family: "Bitstream Charter",sans-serif;
+    
+}
 #geral
 {
         font-size: 13px;
@@ -83,7 +87,15 @@
 	display: inline;
 	text-align: justify;
 }
-
+#titulos{
+    width: 350px;
+    height: auto;
+}
+#titulos h3{
+    color: gray;
+    margin: -35px;
+    float: right;
+}
 #conteudo ul{
 	list-style-type: none;
 }
@@ -99,16 +111,16 @@
 {
 	float: left;
 	width: 190px;
-	padding: 0;
-	margin: 0;
+	margin: 0px;
 }
 
 #menu-lateral ul {
-	margin: 25px 0; 
-	padding: 0;
+	margin: 15px 0; 
+	padding-left: 8px;
 }
 
 #menu-lateral li {
+        background: #8B8386;
 	margin: 0; 
 	padding: 0;
 	border-bottom: 1px solid #CCC;
@@ -116,10 +128,17 @@
 	list-style-type: none;
 }
 
-
-
+#menu-lateral ul li ul li a{
+    background: black;
+    
+}
+#Social li{
+    background: #9C9698;
+}
+#Dsbq li{
+    background: #9C9698;
+}
 #menu-lateral a{
-	background: #8B8386;
 	color: #fff;
 	text-decoration: none;
 	padding: 8px;
@@ -129,7 +148,7 @@
 
 #menu-lateral a:hover { background: #4F4F4F; }
 
-#menu-lateral ul li.atual { list-style-type: circle; }
+
 
 #rodape
 {
@@ -173,7 +192,7 @@
 }
 
 #botao-ancora, input[type=submit]{
-    font-size: 80%;
+    font-size: 12px;
     margin-bottom: 10px;
 }
 
@@ -219,13 +238,19 @@ tbody tr:nth-child(odd) {
     width: 310px;
     height: auto;
 }
+
 #Submit{
-    padding-top: 20px;
+    width: 200px;
+    float: right;
+    padding-top: 30px;
     float: left;
 }
+
 #Submit input{
     height: 25px;
 }
+
+
 #tam_medio{
     width: 120px;
     

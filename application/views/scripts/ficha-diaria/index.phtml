@@ -4,6 +4,7 @@
 <fieldset id="Desembarque"></fieldset>
 <table>
     <tr>
+        <th>ID</th>
         <th>Estagiário</th>
         <th>Monitor</th>
         <th>Data</th>
@@ -16,6 +17,7 @@
     foreach ($this->dados as $key => $fichadiaria):
     ?>
     <tr>
+        <td><?= $fichadiaria['TE_ID'] ?></td>
         <td><?= $fichadiaria['T_Estagiario_TU_ID'] ?></td>
         <td><?= $fichadiaria['T_Monitor_TU_ID'] ?></td>
         <td><?= $fichadiaria['FD_Data'] ?></td>

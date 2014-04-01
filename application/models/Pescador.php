@@ -13,6 +13,7 @@
 
 class Application_Model_Pescador
 {
+    
     public function select($where = null, $order = null, $limit = null)
     {
         $dao = new Application_Model_DbTable_Pescador();
@@ -170,6 +171,10 @@ class Application_Model_Pescador
         
         $dbTablePescador->update($dadosPescador, $wherePescador);
     }
+        
+        
+    }
     
-}
+    
+
 

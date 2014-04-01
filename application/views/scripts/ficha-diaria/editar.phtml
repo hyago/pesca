@@ -3,10 +3,11 @@ $this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
 $this->headScript()->appendFile('/js/mascaras.js');
 ?>
 
-<h2>Desembarque->Ficha Diária</h2>
-<h3>Editar</h3>
+<div id="titulos">
+    <h2>Desembarque->Ficha Diária</h2>
+    <h3>Editar</h3>
+</div>
 
-<a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 <form id="formulario" action="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"criar"),null,true)?>" method="post">
    <fieldset id="Desembarque">
       <div id="esquerda">
@@ -163,5 +164,10 @@ $this->headScript()->appendFile('/js/mascaras.js');
       
            </fieldset>
 	</div>
+       <br/>
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+            <input type="submit" value="Atualizar" />
+        </div>
    </fieldset>
 </form> 

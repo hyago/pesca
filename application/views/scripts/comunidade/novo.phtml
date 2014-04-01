@@ -1,19 +1,19 @@
-<h2>Perfil Social->Comunidade</h2>
-<h3>Novo</h3>
-
-<a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+<div id="titulos">
+    <h2>Perfil Social->Comunidade</h2>
+    <h3>Novo</h3>
+</div>
 
 <form action="<?=$this->url(array("controller"=>"comunidade","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Social">
          <div id="esquerda">
             <div id="form-esq">
                 <label>Comunidade: </label>
-                <input type="text" placeholder="Comunidade" name="nome_comunidade" /> <br />
+                <input type="text" placeholder="Comunidade" name="nome_comunidade"/>
             </div>
-             <br/>
-            <div id="Submit">
-                <input type="submit" value="Enviar"/>
-            </div>
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
+        </div>
          </div>
     </fieldset>
 </form>

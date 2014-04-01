@@ -2,10 +2,11 @@
 $this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
 $this->headScript()->appendFile('/js/mascaras.js');
 ?>
+<div id="titulos">
+    <h2>Usuário</h2>
+    <h3>Novo</h3>
+</div>
 
-<h2>Novo Usuário</h2>
-
-<a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form id="cadastro-usuario" action="<?=$this->url(array("controller"=>"usuarios","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Usuarios">
@@ -112,6 +113,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
         
     </fieldset>
     <div id="Submit">
-        <input type="submit" value="Cadastrar" />
-    </div>
+            <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
+        </div>
 </form>

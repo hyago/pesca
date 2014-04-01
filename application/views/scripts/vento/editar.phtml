@@ -1,7 +1,8 @@
-<h2>Desembarque->Vento</h2>
-<h3>Editar</h3>
+<div id="titulos">
+    <h2>Desembarque->Vento</h2>
+    <h3>Editar</h3>
+</div>
 
-<a href="<?=$this->url(array("controller"=>"vento","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"vento","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Desembarque">
@@ -11,7 +12,8 @@
           <label>Vento: </label>
           <input type="text" name="vento" value="<?=$this->vento['VNT_Forca']?>"/> <br />
         </div>
-        <div id="Submit">   
+          <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"vento","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
             <input type="submit" value="Atualizar" />
         </div>
       </div>     

@@ -1,8 +1,7 @@
-<h2>Perfil Social->Área de Pesca</h2>
-<h3>Novo</h3>
-
-
-<a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+<div id="titulos">
+    <h2>Perfil Social->Área de Pesca</h2>
+    <h3>Novo</h3>
+</div>
 
 <form action="<?=$this->url(array("controller"=>"area-pesca","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Social">
@@ -11,9 +10,10 @@
                 <label>Área de Pesca: </label>
                 <input type="text" placeholder="Área de Pesca" name="areaPesca" /> <br/>
             </div>
-            <div id="Submit">
-                <input type="submit" value="Cadastrar" />
-            </div>
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
+        </div> 
         </div>
     </fieldset>
 </form>

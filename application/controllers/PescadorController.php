@@ -10,7 +10,7 @@
  * @access public
  *
  */
-
+require_once "../library/fpdf/fpdf.php";
 class PescadorController extends Zend_Controller_Action
 {
     
@@ -18,6 +18,7 @@ class PescadorController extends Zend_Controller_Action
     
     public function init()
     {
+        
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
@@ -35,6 +36,8 @@ class PescadorController extends Zend_Controller_Action
         $dados = $this->modelPescador->select();
       
         $this->view->assign("dados", $dados);
+        
+        
     }
     
     /*
@@ -149,6 +152,94 @@ class PescadorController extends Zend_Controller_Action
         $this->modelPescador->delete($this->_getParam('id'));
 
         $this->_redirect('pescador/index');
+    }
+    
+    public function relatorioAction()
+    {
+        $width = 25;
+        $height = 10;
+        $same_line = 0;
+        $next_line = 1;
+        $border_true = 1;
+        $border_false = 0;
+        
+        $modelPescador = new Application_Model_Pescador();
+        $modelMunicipio = new Application_Model_Municipio();
+        $modelArtePesca = new Application_Model_ArtePesca();
+        $modelAreaPesca = new Application_Model_AreaPesca();
+        $modelColonia = new Application_Model_Colonia();
+        $modelEspecie = new Application_Model_Especie();
+        $modelTipoEmbarcacao= new Application_Model_TipoEmbarcacao();
+        $modelPorteEmbarcacao= new Application_Model_PorteEmbarcacao();
+        
+        $pescador = $modelPescador->select();
+        $municipios = $modelMunicipio->select();
+        $artesPesca = $modelArtePesca->select();
+        $areasPesca = $modelAreaPesca->select();
+        $colonias = $modelColonia->select();
+        $especies = $modelEspecie->select();
+        $tiposEmbarcacao = $modelTipoEmbarcacao->select();
+        $portesEmbarcacao = $modelPorteEmbarcacao->select();
+        
+        $this->view->assign("pescador", $pescador);
+        $this->view->assign("municipios", $municipios);
+        $this->view->assign("artesPesca", $artesPesca);
+        $this->view->assign("areasPesca", $areasPesca);
+        $this->view->assign("colonias", $colonias);
+        $this->view->assign("especies", $especies);
+        $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
+        $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
+        
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        
+        $pdf = new FPDF("P", "mm", "A4");
+        $pdf->Open();
+        
+        $pdf->SetMargins(10, 20, 10);
+        
+        $pdf->AddPage();
+        $pdf->SetFont("Arial", "",12);
+        $pdf->SetTitle("Cadastro Pescador");
+        //Title
+        $pdf->SetFont("Arial", "",12);
+        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Nome", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Sexo", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Matricula",$border_true,$same_line);
+        $pdf->Cell($width, $height, "Apelido",$border_true,$same_line);
+        $pdf->Cell($width, $height, "Pai", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Mae", $border_true,$next_line);
+        
+        //Title
+        $pdf->Cell($width/2, $height/4, "", $border_true,$same_line);
+        $pdf->Cell($width, $height/4, "", $border_true,$same_line);
+        $pdf->Cell($width, $height/4, "", $border_true,$same_line);
+        $pdf->Cell($width, $height/4, "", $border_true,$same_line);
+        $pdf->Cell($width, $height/4, "", $border_true,$same_line);
+        $pdf->Cell($width, $height/4, "", $border_true,$same_line);
+        $pdf->Cell($width, $height/4, "",$border_true,$next_line);
+        
+        
+        //Dados
+        foreach($pescador as $dados){
+            $pdf->Cell($width/2, $height, $dados['TP_ID'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TP_Nome'],$border_true,$same_line);
+                if($dados['TP_Sexo']=="M"){
+                    $pdf->Cell($width, $height, "Masculino",$border_true,$same_line);
+                }
+                else{
+                    $pdf->Cell($width, $height, "Feminino",$border_true,$same_line);
+                }
+            
+            $pdf->Cell($width, $height, $dados['TP_Matricula'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TP_Apelido'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TP_FiliacaoPai'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TP_FiliacaoMae'],$border_true,$next_line);
+        }
+        //Dados
+        
+        $pdf->Output("cadastroPdf.pdf", 'I');
     }
 
 }

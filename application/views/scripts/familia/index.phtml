@@ -9,6 +9,7 @@
         <th>Família</th>
         <th>Tipo</th>
         <th>Característica</th>
+        <th>Ordem</th>
     </tr>
     
     <?php
@@ -19,6 +20,7 @@
         <td><?= $familia['FAM_Nome'] ?></td>
         <td><?= $familia['FAM_Tipo']?></td>
         <td><?= $familia['FAM_Caracteristica']?></td>
+        <td><?= $familia['ORD_ID']?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"familia","action"=>"editar", "id" => $familia['FAM_ID']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

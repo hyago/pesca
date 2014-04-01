@@ -1,7 +1,8 @@
-<h2>Perfil Social->Município</h2>
-<h3>Editar</h3>
+<div id="titulos">
+    <h2>Perfil Social->Município</h2>
+    <h3>Editar</h3>
+</div>
 
-<a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 <form action="<?=$this->url(array("controller"=>"municipio","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Social">
@@ -21,8 +22,8 @@
             </select>
         <br />
         </div>
-        
         <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
             <input type="submit" value="Atualizar" />
         </div>
       </div>

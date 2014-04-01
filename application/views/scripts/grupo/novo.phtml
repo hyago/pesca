@@ -1,6 +1,7 @@
-<h2>Filogenia->Grupo</h2>
-<h3>Novo</h3>
-<a href="<?=$this->url(array("controller"=>"grupo","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+<div id="titulos">
+    <h2>Filogenia->Grupo</h2>
+    <h3>Novo</h3>
+</div>
 
 <form id="grupo" action="<?=$this->url(array("controller"=>"grupo","action"=>"criar"),null,true)?>" method="post">
      <fieldset id="Filogenia">    
@@ -15,7 +16,8 @@
               <input type="text" id="nome_grupo" placeholder="Nome" name="nome_grupo"  /><br />
         </div>
         <div id="Submit">
-              <input type="submit" value="enviar"/>
+            <a href="<?=$this->url(array("controller"=>"grupo","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
         </div>
        </div> 
     </fieldset>

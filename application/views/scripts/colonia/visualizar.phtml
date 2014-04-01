@@ -1,7 +1,9 @@
-<h2>Perfil Social->Colonia</h2>
-<h3>Visualizar</h3>
-<a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
-<fieldset id="Social"></fieldset>
+<div id="titulos">
+    <h2>Perfil Social->Colonia</h2>
+    <h3>Visualizar</h3>
+</div>
+
+<fieldset id="Social">
 <table>
     <tr>
         <th>Colonia</th>
@@ -27,4 +29,9 @@
         <td><?= $this->colonia['TE_CEP'] ?></td>
         <td><?= $this->colonia['TE_Comp'] ?></td>
     </tr>
+     
 </table>
+    <div id="Submit-esq">
+        <a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+    </div>
+</fieldset>

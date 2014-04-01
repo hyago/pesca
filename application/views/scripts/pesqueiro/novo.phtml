@@ -1,34 +1,39 @@
-<h2>Desembarque->Pesqueiro</h2>
-<h3>Novo</h3>
+<div id="titulos">
+    <h2>Desembarque->Pesqueiro</h2>
+    <h3>Novo</h3>
+</div>
 
-<a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
 
 
 <form action="<?=$this->url(array("controller"=>"especie","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Desembarque">
+        <div id="esquerda">
          <div id="form-esq">
-              <label for="id">ID do Pesqueiro:</label><br/>
+              <label for="id">ID do Pesqueiro:</label>
               <input type="text" name="id_Pesqueiro" id="id_pesqueiro"/><br />
          </div>
          <div id="form-esq">     
-              <label for="tipo">Nome:</label><br/>
+              <label for="tipo">Nome:</label>
               <input type="text" id="nome_pesqueiro" name="nome_pesqueiro"/><br />
          </div>     
          <div id="form-esq">     
-              <label for="tipo">Local:</label><br/>
+              <label for="tipo">Local:</label>
               <input type="text" id="nome_local" name="local_pesqueiro" /><br />
          </div>     
          <div id="form-esq">     
-              <label>Municipio: </label><br/>
+              <label>Municipio: </label>
               <select name="municipio">
                 <?php foreach ($this->municipios as $key => $municipio): ?>
                 <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
                 <?php endforeach; ?>
               </select><br/>
-         </div> 
-         <div id="Submit">
-              <input type="submit" value="enviar"/>
          </div>
+        
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
+        </div>
+            </div>
     </fieldset>
                 
 </form>

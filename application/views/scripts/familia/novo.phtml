@@ -1,6 +1,7 @@
-<h2>Filogenia->Família</h2>
-<h3>Novo</h3>
-<a href="<?=$this->url(array("controller"=>"familia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+<div id="titulos">
+    <h2>Filogenia->Família</h2>
+    <h3>Novo</h3>
+</div>
 
 <form id="familia" action="<?=$this->url(array("controller"=>"familia","action"=>"criar"),null,true)?>">
       <fieldset id="Filogenia">
@@ -34,10 +35,11 @@
                 endforeach;
               ?>
                 </select><br/>
-            </div>    
-            <div id="Submit">  
-               <input type="submit" value="enviar"/>
             </div>
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"familia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
+        </div>
           </div>
       </fieldset>              
 </form>

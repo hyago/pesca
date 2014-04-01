@@ -1,7 +1,7 @@
-<h2>Perfil Social->Comunidade</h2>
-<h3>Editar</h3>
-
-<a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+<div id="titulos">
+    <h2>Perfil Social->Comunidade</h2>
+    <h3>Editar</h3>
+</div>
 
 <form action="<?=$this->url(array("controller"=>"comunidade","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Social">
@@ -11,9 +11,10 @@
                 <label>Comunidade:</label>
                 <input type="text" name="nome_comunidade" placeholder="Comunidade" value="<?=$this->comunidade['TCOM_NOME']?>"/> <br/>
             </div>
-            <div id="Submit">
-                <input type="submit" value="Atualizar" />
-            </div>
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"comunidade","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+            <input type="submit" value="Atualizar" />
+        </div>
         </div>
     </fieldset>
 </form>
