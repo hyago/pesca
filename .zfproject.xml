@@ -92,6 +92,12 @@
         <controllerFile controllerName="Vento1">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Name">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="EntrevistaPescador">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -247,6 +253,12 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Vento1">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Name">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="EntrevistaPescador">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

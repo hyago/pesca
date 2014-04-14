@@ -17,7 +17,7 @@ $(document).ready(function(){
 				}
 			});
 		}
-        function removeCampo1() {
+                function removeCampo1() {
 			$(".removerCampo1").unbind("click");
 			$(".removerCampo1").bind("click", function () {
 				if($("tr.linhas1").length > 1){
@@ -95,6 +95,14 @@ $(document).ready(function(){
         });
         //funcoes para menu
         
+        //Entrevistas
+        $(function() {
+            $( "#accordion" ).accordion({
+            heightStyle: "content"
+            });
+            $("#active").accordion("disabled");
+        });
+        //Entrevistas
         
 
         

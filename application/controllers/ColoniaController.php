@@ -10,7 +10,7 @@
  * @access public
  *
  */
-
+require_once "../library/fpdf/fpdf.php";
 class ColoniaController extends Zend_Controller_Action
 {
     private $modelColonia;
@@ -87,9 +87,13 @@ class ColoniaController extends Zend_Controller_Action
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select();
         
+        $modelEndereco = new Application_Model_DbTable_Endereco();
+        $endereco = $modelEndereco->select();
+        
         $modelComunidade = new Application_Model_Comunidade();
         $comunidades = $modelComunidade->select();
         
+        $this->view->assign("enderecos", $endereco);
         $this->view->assign("municipios", $municipios);
         $this->view->assign("comunidades", $comunidades);
         $this->view->assign("colonia", $colonia);
@@ -114,6 +118,64 @@ class ColoniaController extends Zend_Controller_Action
         $this->modelColonia->delete($this->_getParam('id'));
 
         $this->_redirect('colonia/index');
+    }
+    public function relatorioAction(){
+        
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        
+        $modelMunicipio = new Application_Model_Municipio();
+        $municipios = $modelMunicipio->select();
+        
+        $modelComunidade = new Application_Model_Comunidade();
+        $comunidades = $modelComunidade->select();
+        
+        $modelColonia = new Application_Model_Colonia();
+        $colonia = $modelColonia->select();
+        $this->view->assign("municipios", $municipios);
+        $this->view->assign("comunidades", $comunidades);
+        $this->view->assign("colonia", $colonia);
+        $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
+        //Title 
+        $y = 55;
+        $width = 20;
+        $height = 7;
+        $same_line = 0;
+        $next_line = 1;
+        $border_true = 1;
+        
+       
+        $pdf = new FPDF("P", "mm", "A4");
+        $pdf->Open();
+        $pdf->SetMargins(10, 20, 5);
+        $pdf->setTitulo("Colônia");
+        $pdf->SetAutoPageBreak(true, 40);
+        $pdf->AddPage();
+        
+        
+        //Title
+        $pdf->SetFont("Arial", "B",8);
+        $pdf->SetY($y);
+        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Nome", $border_true,$same_line);
+        $pdf->Cell($width+5, $height, "Especificidade", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Comunidade", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Logradouro", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Número", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Bairro", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Município", $border_true,$same_line);
+        
+        $pdf->Cell($width, $height, "Complemento", $border_true,$next_line);
+        
+        
+        $pdf->SetFont("Arial", "",8);
+        
+        foreach($colonia as $dados){
+            $pdf->Cell($width/2, $height, $dados['TC_ID'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TC_Nome'],$border_true,$same_line);
+            $pdf->Cell($width+5, $height, $dados['TC_Especificidade'],$border_true,$next_line);
+        }
+        $pdf->Output("coloniasPdf.pdf", 'I');
     }
     
 }

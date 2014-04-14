@@ -10,7 +10,7 @@
  * @access public
  *
  */
-
+require_once "../library/fpdf/fpdf.php";
 class TipoEmbarcacaoController extends Zend_Controller_Action
 {
     private $modelTipoEmbarcacao;
@@ -86,5 +86,36 @@ class TipoEmbarcacaoController extends Zend_Controller_Action
 
         $this->_redirect('tipo-embarcacao/index');
     }
+    
+    public function relatorioAction(){
+        
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        
+        $embarcacoes = $this->modelTipoEmbarcacao->select();
+      
+        $this->view->assign("embarcacoes", $embarcacoes);
+        
+        
+        //Title 
+        $y = 55;
+        $width = 20;
+        $height = 7;
+        $same_line = 0;
+        $next_line = 1;
+        $border_true = 1;
+        
+       
+        $pdf = new FPDF("P", "mm", "A4");
+        $pdf->Open();
+        $pdf->SetMargins(10, 20, 5);
+        $pdf->setTitulo("Embarcações");
+        $pdf->SetAutoPageBreak(true, 40);
+        $pdf->AddPage();
+        //Title
+        
+        $pdf->Output("TiposEmbarcacaoPdf.pdf", 'I');
+    }
 
 }
+ 

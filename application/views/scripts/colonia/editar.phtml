@@ -31,7 +31,9 @@ $this->headScript()->appendFile('/js/mascaras.js');
         </div>
         <div id="form-esq">
             <label>Logradouro: </label>
-            <input type="text" name="logradouro" placeholder="Logradouro" value="<?=$this->colonia['TE_Logradouro'];?>" /><br />
+            <?php foreach ($this->enderecos as $key => $endereco): ?>
+            <input type="text" name="logradouro" placeholder="Logradouro" value="<?=$endereco['TE_Logradouro']?> " /><br />
+            <?php endforeach; ?>
         </div>
 
         <div id="form-esq">

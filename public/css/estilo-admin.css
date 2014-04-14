@@ -238,6 +238,19 @@ tbody tr:nth-child(odd) {
     width: 310px;
     height: auto;
 }
+#esquerda-entrevista{
+    float: left;
+    padding: 0;
+    width: 340px;
+    height: auto;
+}
+
+#direita-entrevista{
+    float: right;
+    padding: 0;
+    width: 290px;
+    height: auto;
+}
 
 #Submit{
     width: 200px;

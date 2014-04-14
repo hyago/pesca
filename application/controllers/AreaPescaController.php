@@ -10,7 +10,7 @@
  * @access public
  *
  */
-
+require_once "../library/fpdf/fpdf.php";
 class AreaPescaController extends Zend_Controller_Action
 {
     private $modelAreaPesca;
@@ -87,5 +87,45 @@ class AreaPescaController extends Zend_Controller_Action
         $this->_redirect('area-pesca/index');
     }
     
+    public function relatorioAction(){
+        
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        $dados = $this->modelAreaPesca->select();
+      
+        $this->view->assign("dados", $dados);
+        
+        $y = 55;
+        $width = 20;
+        $height = 7;
+        $same_line = 0;
+        $next_line = 1;
+        $border_true = 1;
+        $border_false = 0;
+       
+        $pdf = new FPDF("P", "mm", "A4");
+        $pdf->Open();
+        $pdf->SetMargins(10, 20, 5);
+        $pdf->SetTitle("Área de Pesca");
+        $pdf->setTitulo("Área de Pesca");
+        $pdf->SetAutoPageBreak(true, 40);
+        $pdf->AddPage();
+        
+        
+        //Title
+        $pdf->SetFont("Arial", "B",10);
+        $pdf->SetY($y);
+        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
+        $pdf->Cell($width+10, $height, "Nome", $border_true,$next_line);
+        
+        
+        $pdf->SetFont("Arial", "",10);
+        sort($dados);
+        foreach($dados as $dados){
+            $pdf->Cell($width/2, $height, $dados['TAreaP_ID'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['TAreaP_AreaPesca'],$border_true,$next_line);
+        }
+        $pdf->Output("areapescaPdf.pdf", 'I');
+    }
+    
 }
-

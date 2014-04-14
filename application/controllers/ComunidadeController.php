@@ -86,5 +86,8 @@ class ComunidadeController extends Zend_Controller_Action
 
         $this->_redirect('comunidade/index');
     }
-    
+    public function relatorioAction(){
+        
+        
+    }
 }

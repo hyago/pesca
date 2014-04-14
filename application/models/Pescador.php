@@ -55,6 +55,9 @@ class Application_Model_Pescador
         
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
         
+        $data = explode('/', $request['dataNasc']);
+        $data = $data[2] . '-' . $data[1] . '-' . $data[0];
+        
         $dadosPescador = array(
             'TP_Nome'          => $request['nome'],
             'TP_Sexo'          => $request['sexo'],
@@ -71,7 +74,7 @@ class Application_Model_Pescador
             'TP_CMA'           => $request['cma'],
             'TP_RGB_MAA_IBAMA' => $request['rgb_maa_ibama'],
             'TP_CIR_Cap_Porto' => $request['cir_cap_porto'],
-            'TP_DataNasc'      => $request['dataNasc'],
+            'TP_DataNasc'      => $data,
             'TMun_ID_Natural'  => $request['municipioNat'],
             'TE_ID'            => $idEndereco
         );
