@@ -10,10 +10,7 @@
  * @access public
  *
  */
-require_once "../library/fpdf/fpdf.php";
-
-
- 
+require_once "../library/fpdf/fpdf.php"; 
 class PescadorController extends Zend_Controller_Action{
     
     private $modelPescador;
@@ -36,7 +33,9 @@ class PescadorController extends Zend_Controller_Action{
     public function indexAction()
     {
         $dados = $this->modelPescador->select();
-      
+        
+        
+        
         $this->view->assign("dados", $dados);
         
         
@@ -178,14 +177,6 @@ class PescadorController extends Zend_Controller_Action{
         $tiposEmbarcacao = $modelTipoEmbarcacao->select();
         $portesEmbarcacao = $modelPorteEmbarcacao->select();
         
-        $this->view->assign("pescador", $pescador);
-        $this->view->assign("municipios", $municipios);
-        $this->view->assign("artesPesca", $artesPesca);
-        $this->view->assign("areasPesca", $areasPesca);
-        $this->view->assign("colonias", $colonias);
-        $this->view->assign("especies", $especies);
-        $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
-        $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
         
         
         $y = 55;
@@ -194,13 +185,18 @@ class PescadorController extends Zend_Controller_Action{
         $same_line = 0;
         $next_line = 1;
         $border_true = 1;
-        $border_false = 0;
+        
+        foreach($pescador as $dados){
+            $arrayNomes = array($dados['TP_Nome']);
+        }
+        
+        
        
-        $pdf = new FPDF("P", "mm", "A4");
+        $pdf = new FPDF("L", "mm", "A4");
+        $widthNome = $pdf->GetStringWidth(max($arrayNomes));
         $pdf->Open();
         $pdf->SetMargins(10, 20, 5);
-        $pdf->SetTitle("Cadastro Pescador");
-        $pdf = new PDF();
+        $pdf->SetTitle("Pescadores");
         $pdf->SetAutoPageBreak(true, 40);
         $pdf->AddPage();
         
@@ -209,18 +205,18 @@ class PescadorController extends Zend_Controller_Action{
         $pdf->SetFont("Arial", "B",10);
         $pdf->SetY($y);
         $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
-        $pdf->Cell($width+10, $height, "Nome", $border_true,$same_line);
+        $pdf->Cell($width+50, $height, "Nome", $border_true,$same_line);
         $pdf->Cell($width, $height, "Sexo", $border_true,$same_line);
         $pdf->Cell($width, $height, "Matricula",$border_true,$same_line);
         $pdf->Cell($width, $height, "Apelido",$border_true,$same_line);
         $pdf->Cell($width, $height, "Pai", $border_true,$same_line);
-        $pdf->Cell($width, $height, "Mãe", $border_true,$next_line);
-        
+        $pdf->Cell($width, $height, "Mãe", $border_true,$same_line);
+        $pdf->Cell($width+10, $height, "Naturalidade", $border_true,$next_line);
         //Dados
-        $pdf->SetFont("Arial", "",10);
+        $pdf->SetFont("Arial", "",8);
         foreach($pescador as $dados){
             $pdf->Cell($width/2, $height, $dados['TP_ID'],$border_true,$same_line);
-            $pdf->Cell($width+10, $height, $dados['TP_Nome'],$border_true,$same_line);
+            $pdf->Cell($width+50, $height, $dados['TP_Nome'],$border_true,$same_line);
                 if($dados['TP_Sexo']=="M"){
                     $pdf->Cell($width, $height, "Masculino",$border_true,$same_line);
                 }
@@ -231,61 +227,18 @@ class PescadorController extends Zend_Controller_Action{
             $pdf->Cell($width, $height, $dados['TP_Matricula'],$border_true,$same_line);
             $pdf->Cell($width, $height, $dados['TP_Apelido'],$border_true,$same_line);
             $pdf->Cell($width, $height, $dados['TP_FiliacaoPai'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TP_FiliacaoMae'],$border_true,$next_line);
-            
+            $pdf->Cell($width, $height, $dados['TP_FiliacaoMae'],$border_true,$same_line);
+            foreach($municipios as $dadosMun){
+                if($dadosMun['TMun_ID'] == $dados['TMun_ID_Natural']){
+                    $pdf->Cell($width+10, $height, $dadosMun['TMun_Municipio'],$border_true,$next_line);
+                }
+            }
             
         }
+        
+        
         $pdf->Output("cadastroPdf.pdf", 'I');
         
     }
-    
-}
-
-class PDF Extends FPDF{
-       
-    function Header(){
-        
-        
-        $view = "Pescador";
-        $width = 30;
-        $height = 7;
-        $same_line = 0;
-        $next_line = 1;
-        $border_false = 0;
-        $y = 0;
-
-        date_default_timezone_set('America/Bahia');
-        //Cabecalho
-        $this->SetY($y);
-        $this->SetFont("Arial", "B",14);
-        $this->Image("img/Cabecalho1.jpg", null, null, 180, 30);
-        $this->SetTextColor(78, 22, 35);
-        $this->Cell($width, $height, "Relatorio ->", $border_false, $same_line);
-        $this->Cell($width+70, $height, $view, $border_false, $same_line);
-        $this->Cell($width, $height, date("d/m/Y - H:i:s"), $border_false, $next_line);
-        $this->Cell($width, $height, "___________________________________________________________________", $border_false, $next_line);
-        $this->Cell($width, $height, "Dados:", $border_false, $next_line);
-        $this->Cell($width, $height, "", $border_false, $next_line);
-            
-    } 
-    
-    
-   function Footer(){
-       
-       $y = 255;
-       $width = 0;
-       $height = 5;
-       $center = 100;
-       
-       $this->SetY($y);
-       $this->Cell(0, 5, "________________________________________________________________________________________________", 0, 1);
-       $this->SetFont('Arial','I',8);
-       $this->MultiCell($width, $height, $this->page, 0, "R");
-       $this->SetX($center-6);
-       $this->Image("img/isus.jpg",10, null, 20, 10);
-       $this->Image("img/bamin.jpg", 175, 265, 20, 10);
-       
-    }    
-  
     
 }

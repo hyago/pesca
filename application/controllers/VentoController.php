@@ -1,5 +1,5 @@
 <?php
-
+require_once "../library/fpdf/fpdf.php";
 class VentoController extends Zend_Controller_Action
 {
     private $modelVento;
@@ -58,53 +58,44 @@ class VentoController extends Zend_Controller_Action
         $this->_redirect('vento/index');
     }
 
-}
-
-class PDF Extends FPDF{
-       
-    function Header(){
+    public function relatorioAction(){
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        
+        $vento = $this->modelVento->select();
+      
+        $this->view->assign("vento", $vento);
+        
+        //Title 
+        $y = 55;
+        $width = 20;
         
         
-        $view = "Pescador";
-        $width = 30;
         $height = 7;
         $same_line = 0;
         $next_line = 1;
-        $border_false = 0;
-        $y = 0;
-
-        date_default_timezone_set('America/Bahia');
-        //Cabecalho
-        $this->SetY($y);
-        $this->SetFont("Arial", "B",14);
-        $this->Image("img/Cabecalho1.jpg", null, null, 180, 30);
-        $this->SetTextColor(78, 22, 35);
-        $this->Cell($width, $height, "Relatorio ->", $border_false, $same_line);
-        $this->Cell($width+70, $height, $view, $border_false, $same_line);
-        $this->Cell($width, $height, date("d/m/Y - H:i:s"), $border_false, $next_line);
-        $this->Cell($width, $height, "___________________________________________________________________", $border_false, $next_line);
-        $this->Cell($width, $height, "Dados:", $border_false, $next_line);
-        $this->Cell($width, $height, "", $border_false, $next_line);
-            
-    } 
-    
-    
-   function Footer(){
-       
-       $y = 255;
-       $width = 0;
-       $height = 5;
-       $center = 100;
-       
-       $this->SetY($y);
-       $this->Cell(0, 5, "_____________________________________________________________________________________________", 0, 1);
-       $this->SetFont('Arial','I',8);
-       $this->MultiCell($width, $height, $this->page, 0, "C");
-       $this->SetX($center-6);
-       $this->Image("img/isus.jpg",10, null, 20, 10);
-       $this->Image("img/bamin.jpg", 175, 265, 20, 10);
-       
-    }    
-  
-    
+        $border_true = 1;
+        
+        $pdf = new FPDF("P", "mm", "A4");
+        $pdf->Open();
+        $pdf->SetMargins(10, 20, 5);
+        $pdf->setTitulo("Tipos de Ventos");
+        $pdf->SetAutoPageBreak(true, 40);
+        $pdf->AddPage();
+        //Title
+        
+        $pdf->SetFont("Arial", "B",10);
+        $pdf->SetY($y);
+        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Força", $border_true,$next_line);
+        
+        $pdf->SetFont("Arial", "",10);
+        sort($vento);
+        foreach($vento as $dados){
+            $pdf->Cell($width/2, $height, $dados['VNT_ID'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['VNT_Forca'],$border_true,$next_line);
+        }
+        
+        $pdf->Output("VentoRelatorio.pdf", 'I');
+    }
 }

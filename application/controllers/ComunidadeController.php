@@ -10,7 +10,7 @@
  * @access public
  *
  */
-
+require_once "../library/fpdf/fpdf.php";
 class ComunidadeController extends Zend_Controller_Action
 {
     private $modelComunidade;
@@ -88,6 +88,43 @@ class ComunidadeController extends Zend_Controller_Action
     }
     public function relatorioAction(){
         
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
         
+        $comunidade = $this->modelComunidade->select();
+      
+        $this->view->assign("comunidade", $comunidade);
+        
+        
+        //Title 
+        $y = 55;
+        $width = 20;
+        $height = 7;
+        $same_line = 0;
+        $next_line = 1;
+        $border_true = 1;
+        
+       
+        $pdf = new FPDF("P", "mm", "A4");
+        $pdf->Open();
+        $pdf->SetMargins(10, 20, 5);
+        $pdf->setTitulo("Comunidades");
+        $pdf->SetAutoPageBreak(true, 40);
+        $pdf->AddPage();
+        //Title
+        
+        $pdf->SetFont("Arial", "B",10);
+        $pdf->SetY($y);
+        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
+        $pdf->Cell($width+10, $height, "Comunidade", $border_true,$next_line);
+        
+        
+        $pdf->SetFont("Arial", "",10);
+        sort($comunidade);
+        foreach($comunidade as $dados){
+            $pdf->Cell($width/2, $height, $dados['TCOM_ID'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['TCOM_NOME'],$border_true,$next_line);
+        }
+        $pdf->Output("TiposEmbarcacaoPdf.pdf", 'I');
     }
 }

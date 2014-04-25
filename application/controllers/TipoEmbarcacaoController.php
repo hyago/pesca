@@ -109,11 +109,23 @@ class TipoEmbarcacaoController extends Zend_Controller_Action
         $pdf = new FPDF("P", "mm", "A4");
         $pdf->Open();
         $pdf->SetMargins(10, 20, 5);
-        $pdf->setTitulo("Embarcações");
+        $pdf->setTitulo("Tipos de Embarcações");
         $pdf->SetAutoPageBreak(true, 40);
         $pdf->AddPage();
         //Title
         
+        $pdf->SetFont("Arial", "B",10);
+        $pdf->SetY($y);
+        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
+        $pdf->Cell($width+10, $height, "Tipo", $border_true,$next_line);
+        
+        
+        $pdf->SetFont("Arial", "",10);
+        sort($embarcacoes);
+        foreach($embarcacoes as $dados){
+            $pdf->Cell($width/2, $height, $dados['TTE_ID'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['TTE_TipoEmbarcacao'],$border_true,$next_line);
+        }
         $pdf->Output("TiposEmbarcacaoPdf.pdf", 'I');
     }
 

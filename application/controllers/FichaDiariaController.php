@@ -1,5 +1,7 @@
 <?php
 
+
+require_once "../library/fpdf/fpdf.php";
 class FichaDiariaController extends Zend_Controller_Action
 {
 
@@ -97,6 +99,64 @@ class FichaDiariaController extends Zend_Controller_Action
         $this->modelFichaDiaria->delete($this->_getParam('id'));
 
         $this->_redirect('ficha-diaria/index');
+    }
+    
+    public function relatorioAction(){
+        
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        
+        $fichadiaria = $this->modelFichaDiaria->select();
+      
+        $this->view->assign("fichasdiarias", $fichadiaria);
+        
+        
+        //Title 
+        $y = 55;
+        $width = 20;
+        $height = 7;
+        $same_line = 0;
+        $next_line = 1;
+        $border_true = 1;
+        
+       
+        $pdf = new FPDF("P", "mm", "A4");
+        $pdf->Open();
+        $pdf->SetMargins(10, 20, 5);
+        $pdf->setTitulo("Ficha Diária");
+        $pdf->SetAutoPageBreak(true, 40);
+        $pdf->AddPage();
+        //Title
+        
+        $pdf->SetFont("Arial", "B",10);
+        $pdf->SetY($y);
+        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Estagiário", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Monitor", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Data", $border_true,$same_line);
+        $pdf->Cell($width, $height, "OBS", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Porto", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Tempo", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Vento", $border_true,$same_line);
+        $pdf->Cell($width+10, $height, "Turno", $border_true,$next_line);
+        
+        
+        $pdf->SetFont("Arial", "",10);
+        sort($fichadiaria);
+        foreach($fichadiaria as $dados){
+            $pdf->Cell($width/2, $height, $dados['FD_ID'],$border_true,$same_line);
+            $pdf->Cell($width   , $height, $dados['T_Estagiario_TU_ID'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['T_Monitor_TU_ID1'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['FD_Data'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['OBS'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['PTO_ID'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['TMP_ID'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['VNT_ID'],$border_true,$same_line);
+            $pdf->Cell($width+10, $height, $dados['FD_Turno'],$border_true,$same_line);
+            
+            
+        }
+        $pdf->Output("FichaDiaria.pdf", 'I');
     }
 
 }

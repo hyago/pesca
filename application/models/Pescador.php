@@ -22,7 +22,7 @@ class Application_Model_Pescador
         if(!is_null($where)){
             $select->where($where);
         }
-
+        
         return $dao->fetchAll($select)->toArray();
     }
     
@@ -112,7 +112,7 @@ class Application_Model_Pescador
         $dbTablePescadorHasEmbarcacao->insert($dadosPescadorHasEmbarcacao);
         
         $dadosPescadorHasEspecieCapturada = array(
-            'TEC_ID'     => $request['especie'],
+            'SPC_ID'     => $request['especie'],
             'TP_ID'      => $idPescador
         );
         
@@ -174,9 +174,15 @@ class Application_Model_Pescador
         
         $dbTablePescador->update($dadosPescador, $wherePescador);
     }
+    public function pescadorByMunicipio($municipio){
+        $pescador = new Application_Model_DbTable_Pescador();
         
+        $select = $pescador->select()->from('T_Pescador')->join('T_Municipio', 'T_Pescador.TMun_ID = T_Municipio.TMun_ID')->where('T_Municipio.TMun_Municipio = ?', $municipio);
         
-    }
+        return $pescador->fetchAll($select);
+    }    
+        
+}
     
     
 
