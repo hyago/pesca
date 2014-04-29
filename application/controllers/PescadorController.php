@@ -168,7 +168,9 @@ class PescadorController extends Zend_Controller_Action{
         $modelTipoEmbarcacao= new Application_Model_TipoEmbarcacao();
         $modelPorteEmbarcacao= new Application_Model_PorteEmbarcacao();
         
-        $pescador = $modelPescador->select();
+        $pescador = $modelPescador->select_Pescador_By_Municipio();
+        //$pescador1 = $modelPescador->pescadorByMunicipio($municipio);
+        
         $municipios = $modelMunicipio->select();
         $artesPesca = $modelArtePesca->select();
         $areasPesca = $modelAreaPesca->select();
@@ -178,45 +180,39 @@ class PescadorController extends Zend_Controller_Action{
         $portesEmbarcacao = $modelPorteEmbarcacao->select();
         
         
-        
         $y = 55;
         $width = 20;
-        $height = 7;
+        $height = 6;
         $same_line = 0;
         $next_line = 1;
         $border_true = 1;
-        
-        foreach($pescador as $dados){
-            $arrayNomes = array($dados['TP_Nome']);
-        }
-        
-        
        
         $pdf = new FPDF("L", "mm", "A4");
-        $widthNome = $pdf->GetStringWidth(max($arrayNomes));
+        
         $pdf->Open();
         $pdf->SetMargins(10, 20, 5);
-        $pdf->SetTitle("Pescadores");
+        $pdf->setTitulo("Pescadores");
         $pdf->SetAutoPageBreak(true, 40);
         $pdf->AddPage();
-        
-        
+ 
         //Title
-        $pdf->SetFont("Arial", "B",10);
+        $pdf->SetFont("Arial", "B",8);
         $pdf->SetY($y);
         $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
-        $pdf->Cell($width+50, $height, "Nome", $border_true,$same_line);
+        $pdf->Cell($width+20, $height, "Nome", $border_true,$same_line);
         $pdf->Cell($width, $height, "Sexo", $border_true,$same_line);
         $pdf->Cell($width, $height, "Matricula",$border_true,$same_line);
         $pdf->Cell($width, $height, "Apelido",$border_true,$same_line);
-        $pdf->Cell($width, $height, "Pai", $border_true,$same_line);
-        $pdf->Cell($width, $height, "Mãe", $border_true,$same_line);
-        $pdf->Cell($width+10, $height, "Naturalidade", $border_true,$next_line);
+        $pdf->Cell($width+20, $height, "Pai", $border_true,$same_line);
+        $pdf->Cell($width+20, $height, "Mãe", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Naturalidade", $border_true,$same_line);
+        $pdf->Cell($width, $height, "Estado", $border_true,$next_line);
         //Dados
         $pdf->SetFont("Arial", "",8);
+        sort($pescador);
         foreach($pescador as $dados){
             $pdf->Cell($width/2, $height, $dados['TP_ID'],$border_true,$same_line);
-            $pdf->Cell($width+50, $height, $dados['TP_Nome'],$border_true,$same_line);
+            $pdf->Cell($width+20, $height, $dados['TP_Nome'],$border_true,$same_line);
                 if($dados['TP_Sexo']=="M"){
                     $pdf->Cell($width, $height, "Masculino",$border_true,$same_line);
                 }
@@ -226,13 +222,10 @@ class PescadorController extends Zend_Controller_Action{
             
             $pdf->Cell($width, $height, $dados['TP_Matricula'],$border_true,$same_line);
             $pdf->Cell($width, $height, $dados['TP_Apelido'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TP_FiliacaoPai'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TP_FiliacaoMae'],$border_true,$same_line);
-            foreach($municipios as $dadosMun){
-                if($dadosMun['TMun_ID'] == $dados['TMun_ID_Natural']){
-                    $pdf->Cell($width+10, $height, $dadosMun['TMun_Municipio'],$border_true,$next_line);
-                }
-            }
+            $pdf->Cell($width+20, $height, $dados['TP_FiliacaoPai'],$border_true,$same_line);
+            $pdf->Cell($width+20, $height, $dados['TP_FiliacaoMae'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TMun_Municipio'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados["TUF_Sigla"],$border_true,$next_line);
             
         }
         

@@ -131,7 +131,7 @@ class ColoniaController extends Zend_Controller_Action
         $comunidades = $modelComunidade->select();
         
         $modelColonia = new Application_Model_Colonia();
-        $colonia = $modelColonia->select();
+        $colonia = $modelColonia->selectWithEndereco();
         $this->view->assign("municipios", $municipios);
         $this->view->assign("comunidades", $comunidades);
         $this->view->assign("colonia", $colonia);
@@ -173,7 +173,14 @@ class ColoniaController extends Zend_Controller_Action
         foreach($colonia as $dados){
             $pdf->Cell($width/2, $height, $dados['TC_ID'],$border_true,$same_line);
             $pdf->Cell($width, $height, $dados['TC_Nome'],$border_true,$same_line);
-            $pdf->Cell($width+5, $height, $dados['TC_Especificidade'],$border_true,$next_line);
+            $pdf->Cell($width+5, $height, $dados['TC_Especificidade'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TCOM_NOME'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TE_Logradouro'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TE_Numero'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TE_Bairro'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TMun_Municipio'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['TE_Comp'],$border_true,$next_line);
+            
         }
         $pdf->Output("coloniasPdf.pdf", 'I');
     }

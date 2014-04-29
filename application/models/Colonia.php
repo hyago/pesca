@@ -100,5 +100,13 @@ class Application_Model_Colonia
         
         $this->dbTableColonia->delete($whereColonia);
     }
+    public function selectWithEndereco()
+    {
+        $this->dbTableColonia = new Application_Model_DbTable_VColoniaByEndereco();
+        $select = $this->dbTableColonia->select();
+
+
+        return $this->dbTableColonia->fetchAll($select)->toArray();
+    }
 
 }

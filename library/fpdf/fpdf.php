@@ -371,7 +371,7 @@ function AddPage($orientation='', $size='')
 	$this->ColorFlag = $cf;
 }
 
-    function setTitulo($titulo){
+function setTitulo($titulo){
         $this->titulo = $titulo;
     }
 function Header(){
@@ -398,10 +398,15 @@ function Header(){
             
     } 
     
-    
-   function Footer(){
+ function Footer(){
        
-       $y = 255;
+       if( strtolower($this->CurOrientation) =="l"){
+          $y = 180;
+          
+       }
+       else{
+          $y = 265;
+       }
        $width = 0;
        $height = 5;
        $left = 150;
@@ -410,10 +415,11 @@ function Header(){
        $this->SetFont('Arial','B',14);
        $this->Cell(0, 5, "___________________________________________________________________", 0, 1);
        $this->SetFont('Arial','I',8);
-       $this->MultiCell($width, $height, $this->page, 0, "R");
+       $this->SetX(185);
+       $this->Cell($width, $height, $this->page, 0, 1);
        $this->SetX($left-6);
        $this->Image("img/isus.jpg",10, null, 20, 10);
-       $this->Image("img/bamin.jpg", 175, 265, 20, 10);
+       $this->Image("img/bamin.jpg", 175, $y+10, 20, 10);
        
     }    
   

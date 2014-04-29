@@ -211,7 +211,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <label for="especie" id="pure-checkbox">Especie Capturada</label>                
                 <select name="especie" id="especie">
                     <?php foreach ($this->especies as $key => $especie): ?>
-                    <option value="<?= $especie['TEC_ID']; ?>"><?= $especie['ESP_Nome']; ?></option>
+                    <option value="<?= $especie['ESP_ID']; ?>"><?= $especie['ESP_Nome']; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
