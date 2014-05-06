@@ -14,8 +14,8 @@
 class Application_Model_DbTable_AlteracaoSenha extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_AlteracaoSenha';
-    protected $_primary = 'TAS_Token';
+    protected $_name = 't_alteracaosenha';
+    protected $_primary = 'tas_token';
     
 }
 

@@ -17,7 +17,7 @@ class Application_Model_Colonia
 
     public function select($where = null, $order = null, $limit = null)
     {
-        $this->dbTableColonia = new Application_Model_DbTable_VColonia();
+        $this->dbTableColonia = new Application_Model_DbTable_Colonia();
         $select = $this->dbTableColonia->select()
                 ->from($this->dbTableColonia)->order($order)->limit($limit);
 
