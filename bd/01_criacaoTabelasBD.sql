@@ -1045,13 +1045,7 @@ CREATE VIEW V_USUARIO AS
     T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID AND
     T_USUARIO.TP_ID = T_PERFIL.TP_ID;
 
-/*    
-CREATE VIEW V_Colonia AS
-   SELECT T_Colonia.TC_ID, T_Colonia.TC_Nome, 
-   T_Colonia.TC_Especificidade, 
-   T_Colonia.TCOM_ID, T_Colonia.TE_ID FROM T_Colonia;
    
-       
 CREATE VIEW V_UsuarioHasTelefone AS
     SELECT T_Usuario_has_T_TelefoneContato.TU_ID, 
     T_Usuario_has_T_TelefoneContato.TTCont_ID 

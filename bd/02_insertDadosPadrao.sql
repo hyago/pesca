@@ -52,9 +52,6 @@ INSERT INTO T_Perfil (TP_ID, TP_Perfil) VALUES (3, 'Subcoordenador');
 INSERT INTO T_Perfil (TP_ID, TP_Perfil) VALUES (4, 'Estagiário');
 INSERT INTO T_Perfil (TP_ID, TP_Perfil) VALUES (5, 'Bamin');
 
-INSERT INTO T_Municipio (TMun_ID, TMun_Municipio, TUF_Sigla) VALUES (1, 'Itacaré', 'BA');
-INSERT INTO T_Municipio (TMun_ID, TMun_Municipio, TUF_Sigla) VALUES (3, 'Itabuna', 'BA');
-INSERT INTO T_Municipio (TMun_ID, TMun_Municipio, TUF_Sigla) VALUES (2, 'Ilhéus', 'BA');
 
 
 INSERT INTO T_Endereco (TE_ID, TE_Logradouro, TE_Numero, TE_Bairro, TE_CEP, TE_Comp, TMun_ID) VALUES (12, '112', '1213', 'Centro', '12345677', 'Casa', 1);

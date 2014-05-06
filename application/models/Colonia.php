@@ -37,7 +37,6 @@ class Application_Model_Colonia
     
     public function insert(array $request)
     {
-        $this->dbTableColonia = new Application_Model_DbTable_Colonia();
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
@@ -52,42 +51,29 @@ class Application_Model_Colonia
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
         
         $dadosColonia = array(
-            'tc_nome'           => $request['nome'],
             'tcom_id'           => $request['comunidade'],
-            'tc_especificidade' => $request['nome'],
             'te_id'             => $idEndereco
         );
         
-        $this->dbTableColonia->insert($dadosColonia);
 
         return;
     }
     
     public function update(array $request)
     {
-        $this->dbTableColonia = new Application_Model_DbTable_Colonia();
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
             'te_logradouro'  => $request['logradouro'],
             'te_numero'      => $request['numero'],
             'te_bairro'      => $request['bairro'],
-            'te_cidade'      => $request['cidade'],
-            'te_estado'      => $request['estado'],
             'te_cep'         => $request['cep'],
-            'te_complemento' => $request['complemento']
         );
         
         $dadosColonia = array(
-            'tc_nome' => $request['nome']
         );
         
-        $whereColonia= $this->dbTableColonia->getAdapter()
-                ->quoteInto('"tc_id" = ?', $request['idColonia']);
-        $whereEndereco= $dbTableEndereco->getAdapter()
-                ->quoteInto('"te_id" = ?', $request['idEndereco']);
         
-        $this->dbTableColonia->update($dadosColonia, $whereColonia);
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
     }
     
