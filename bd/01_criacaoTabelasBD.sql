@@ -102,11 +102,15 @@ CREATE TABLE IF NOT EXISTS T_Comunidade (
 -- -----------------------------------------------------
 -- Table T_Colonia
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Colonia (
-  TC_ID serial,
-  TC_Nome VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS T_COLONIA (
+  TC_ID SERIAL,
+  TC_NOME VARCHAR(50) NOT NULL,
+  TC_Especificidade character varying(50),
+  TCOM_ID integer NOT NULL,
+  TE_ID integer NOT NULL,
   PRIMARY KEY (TC_ID),
-  UNIQUE (TC_Nome));
+  UNIQUE (TC_NOME));
+
 
 
 
@@ -224,6 +228,8 @@ CREATE TABLE IF NOT EXISTS T_Usuario (
   TU_CPF VARCHAR(14) NOT NULL,
   TU_RG VARCHAR(11) NOT NULL,
   TU_Email VARCHAR(30) NOT NULL,
+    TU_TELRES NUMERIC (14,0),
+  TU_TELCEL NUMERIC (14,0),
   TU_UsuarioDeletado boolean DEFAULT false NOT NULL,
   TL_ID INT NOT NULL,
   TP_ID INT NOT NULL,
@@ -1017,3 +1023,38 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Comunidade (
     REFERENCES T_Comunidade (TCOM_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+-- -----------------------------------------------------
+-- VIEW USUARIO
+-- -----------------------------------------------------
+CREATE VIEW V_USUARIO AS
+    SELECT T_USUARIO.TU_ID, 
+    T_USUARIO.TU_NOME, T_USUARIO.TU_SEXO, 
+    T_USUARIO.TU_CPF, T_USUARIO.TU_RG, 
+    T_USUARIO.TU_EMAIL, T_USUARIO.TU_USUARIODELETADO,
+    T_USUARIO.TU_TELRES, T_USUARIO.TU_TELCEL,
+    T_USUARIO.TL_ID, 
+    T_USUARIO.TP_ID, T_PERFIL.TP_PERFIL,
+    T_USUARIO.TE_ID,
+    T_LOGIN.TL_LOGIN, 
+    T_ENDERECO.TE_LOGRADOURO, T_ENDERECO.TE_NUMERO, T_ENDERECO.TE_COMP, T_ENDERECO.TE_BAIRRO, T_ENDERECO.TE_CEP,
+    T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
+    FROM T_USUARIO, T_LOGIN, T_ENDERECO, T_MUNICIPIO, T_PERFIL
+    WHERE T_USUARIO.TL_ID = T_LOGIN.TL_ID AND		
+    T_USUARIO.TE_ID = T_ENDERECO.TE_ID AND
+    T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID AND
+    T_USUARIO.TP_ID = T_PERFIL.TP_ID;
+
+/*    
+CREATE VIEW V_Colonia AS
+   SELECT T_Colonia.TC_ID, T_Colonia.TC_Nome, 
+   T_Colonia.TC_Especificidade, 
+   T_Colonia.TCOM_ID, T_Colonia.TE_ID FROM T_Colonia;
+   
+       
+CREATE VIEW V_UsuarioHasTelefone AS
+    SELECT T_Usuario_has_T_TelefoneContato.TU_ID, 
+    T_Usuario_has_T_TelefoneContato.TTCont_ID 
+    FROM T_Usuario_has_T_TelefoneContato;
+    */
+    
