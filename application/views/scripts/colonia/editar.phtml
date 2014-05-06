@@ -31,6 +31,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
         </div>
         <div id="form-esq">
             <label>Logradouro: </label>
+            <input type="text" name="logradouro" placeholder="Logradouro" value="<?=$this->colonia['te_logradouro']?>" /><br/>
         </div>
 
         <div id="form-esq">
@@ -44,7 +45,12 @@ $this->headScript()->appendFile('/js/mascaras.js');
         </div>
         
         <div id="form-esq">
+            <label for="municipio">Município</label>
+            <select name="municipio" id="municipio">
+                <?php foreach ($this->municipios as $key => $municipio): ?>
+                <option value="<?= $municipio['tmun_id']; ?>" <?= ($municipio['tmun_municipio'] == $this->colonia['tmun_municipio']) ? 'selected="selected"' : '';?>><?= $municipio['tuf_sigla'], ' ',$municipio['tmun_municipio']; ?></option>
                 <?php endforeach; ?>
+            </select>            
         </div>
         
         <div id="form-esq">
@@ -57,6 +63,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
             <input type="text" name="complemento" placeholder="Complemento" value = "<?=$this->colonia['te_comp'];?>" /> <br />
         </div>
         <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
             <input type="submit" value="Atualizar" />
         </div>
       </div>

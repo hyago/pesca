@@ -4,6 +4,7 @@
 <fieldset id="Social"></fieldset>
 <table>
     <tr>
+    <th>ID</th>
         <th>Area de Pesca</th>
     </tr>
     
@@ -11,6 +12,7 @@
     foreach ($this->dados as $key => $areaPesca):
     ?>
     <tr>
+        <td><?= $areaPesca['tareap_id'] ?></td>
         <td><?= $areaPesca['tareap_areapesca'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"editar", "id" => $areaPesca['tareap_id']),null,true)?>">
