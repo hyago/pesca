@@ -21,7 +21,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
             <label>Comunidade: </label>
             <select name="comunidade">
                 <?php foreach ($this->comunidades as $key => $comunidade): ?>
-                <option value="<?= $comunidade['TCOM_ID']; ?>" <?=($comunidade['TCOM_ID'] == $this->colonia['TCOM_ID']) ? 'selected="selected"' : '';?>><?= $comunidade['TCOM_NOME']; ?></option>
+                <option value="<?= $comunidade['tcom_id']; ?>" <?=($comunidade['tcom_id'] == $this->colonia['tcom_id']) ? 'selected="selected"' : '';?>><?= $comunidade['tcom_nome']; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -49,7 +49,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
             <label>Municipio:</label>
                 <select name="municipio">
                     <?php foreach ($this->municipios as $key => $municipio): ?>
-                    <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
+                    <option value="<?= $municipio['tmun_id']; ?>"><?= $municipio['tmun_municipio']; ?></option>
                     <?php endforeach; ?>
                 </select> 
         </div>
@@ -58,7 +58,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
             <label>Estado: </label>
             <select name="estado">
                 <?php foreach ($this->estados as $estado): ?>
-                <option value="<?= $estado; ?>" <?=($estado == $this->colonia['TUF_Sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
+                <option value="<?= $estado; ?>" <?=($estado == $this->colonia['tuf_sigla']) ? 'selected="selected"' : '';?>><?= $estado; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

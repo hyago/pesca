@@ -31,9 +31,9 @@ class Application_Model_Ordem
         $this->dbTableOrdem = new Application_Model_DbTable_Ordem();
         
         $dadosOrdem = array(
-            'ORD_Nome' => $request['nome_ordem'],
-            'ORD_Caracteristica' => $request['caracteristica_ordem'],
-            'GRP_ID' => $request['select_grupo_ordem']
+            'ord_nome' => $request['nome_ordem'],
+            'ord_caracteristica' => $request['caracteristica_ordem'],
+            'grp_id' => $request['select_grupo_ordem']
         );
         
         $this->dbTableOrdem->insert($dadosOrdem);
@@ -47,16 +47,16 @@ class Application_Model_Ordem
 
         
         $dadosOrdem = array(
-            'ORD_Nome' => $request['nome_ordem'],
-            'ORD_Caracteristica' => $request['caracteristica_ordem'],
-            'GRP_ID' => $request['select_grupo_ordem']
+            'ord_nome' => $request['nome_ordem'],
+            'ord_caracteristica' => $request['caracteristica_ordem'],
+            'grp_id' => $request['select_grupo_ordem']
         );
         $dadosGrupo = array(
-            'GRP_Nome' => $request['nome_grupo']
+            'grp_nome' => $request['nome_grupo']
         );
         
         $whereOrdem = $this->dbTableOrdem->getAdapter()
-                ->quoteInto('"ORD_ID" = ?', $request['id_ordem']);
+                ->quoteInto('"ord_id" = ?', $request['id_ordem']);
 
         
         $this->dbTableOrdem->update($dadosOrdem, $whereOrdem);
@@ -68,7 +68,7 @@ class Application_Model_Ordem
         $this->dbTableOrdem = new Application_Model_DbTable_Ordem();       
                 
         $whereOrdem = $this->dbTableOrdem->getAdapter()
-                ->quoteInto('"ORD_ID" = ?', $idOrdem);
+                ->quoteInto('"ord_id" = ?', $idOrdem);
         
         $this->dbTableOrdem->delete($whereOrdem);
     }

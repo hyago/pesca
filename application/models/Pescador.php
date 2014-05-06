@@ -96,8 +96,8 @@ class Application_Model_Pescador
         $dbTablePescadorHasArtePesca->insert($dadosPescadorHasArtePesca);
         
         $dadosPescadorHasColonia = array(
-            'TC_ID' => $request['colonia'],
-            'TP_ID' => $idPescador
+            'tc_id' => $request['colonia'],
+            'tp_id' => $idPescador
         );
         
         $dbTablePescadorHasColonia->insert($dadosPescadorHasColonia);

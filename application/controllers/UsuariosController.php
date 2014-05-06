@@ -11,6 +11,10 @@
  *
  */
 
+
+ require_once "../library/fpdf/fpdf.php";
+
+
 class UsuariosController extends Zend_Controller_Action
 {
     private $modelUsuario;
@@ -34,7 +38,7 @@ class UsuariosController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $whereUsuario= '"TU_UsuarioDeletado" IS FALSE';
+        $whereUsuario= '"tu_usuariodeletado" IS FALSE';
         
         $dados = $this->modelUsuario->select($whereUsuario);
       

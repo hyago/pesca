@@ -40,32 +40,32 @@ class Application_Model_Usuario
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
-            'TE_Logradouro'  => $request['logradouro'],
-            'TE_Numero'      => $request['numero'],
-            'TE_Bairro'      => $request['bairro'],
-            'TE_CEP'         => $request['cep'],
-            'TE_Comp'        => $request['complemento'],
-            'TMun_ID'        => $request['municipio']
+            'te_logradouro'  => $request['logradouro'],
+            'te_numero'      => $request['numero'],
+            'te_bairro'      => $request['bairro'],
+            'te_cep'         => $request['cep'],
+            'te_comp'        => $request['complemento'],
+            'tmun_id'        => $request['municipio']
         );
         
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
         
         $dadosLogin = array(
-            'TL_Login'     => $request['login'],
-            'TL_HashSenha' => sha1($request['login'])
+            'tl_login'     => $request['login'],
+            'tl_hashsenha' => sha1($request['login'])
         );
         
         $idLogin = $dbTableLogin->insert($dadosLogin);
         
         $dadosUsuario = array(
-            'TP_ID'       => $request['perfil'],
-            'TE_ID'       => $idEndereco,
-            'TL_ID'       => $idLogin,
-            'TU_Nome'     => $request['nome'],
-            'TU_Sexo'     => $request['sexo'],
-            'TU_RG'       => $request['rg'],
-            'TU_CPF'      => $request['cpf'],
-            'TU_Email'    => $request['email']
+            'tp_id'       => $request['perfil'],
+            'te_id'       => $idEndereco,
+            'tl_id'       => $idLogin,
+            'tu_nome'     => $request['nome'],
+            'tu_sexo'     => $request['sexo'],
+            'tu_rg'       => $request['rg'],
+            'tu_cpf'      => $request['cpf'],
+            'tu_email'    => $request['email']
         );
         
         $dbTableUsuario->insert($dadosUsuario);
@@ -79,24 +79,24 @@ class Application_Model_Usuario
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
-            'TE_Logradouro'  => $request['logradouro'],
-            'TE_Numero'      => $request['numero'],
-            'TE_Bairro'      => $request['bairro'],
-            'TE_CEP'         => $request['cep'],
-            'TE_Comp'        => $request['complemento']
+            'te_logradouro'  => $request['logradouro'],
+            'te_numero'      => $request['numero'],
+            'te_bairro'      => $request['bairro'],
+            'te_cep'         => $request['cep'],
+            'te_comp'        => $request['complemento']
         );
         
         $dadosUsuario = array(
-            'TP_ID'       => $request['perfil'],
-            'TU_Nome'     => $request['nome'],
-            'TU_Sexo'     => $request['sexo'],
-            'TU_RG'       => $request['rg'],
-            'TU_CPF'      => $request['cpf'],
-            'TU_Email'    => $request['email']
+            'tp_id'       => $request['perfil'],
+            'tu_nome'     => $request['nome'],
+            'tu_sexo'     => $request['sexo'],
+            'tu_rg'       => $request['rg'],
+            'tu_cpf'      => $request['cpf'],
+            'tu_email'    => $request['email']
         );
         
-        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"TU_ID" = ?', $request['idUsuario']);
-        $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"TE_ID" = ?', $request['idEndereco']);
+        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"tu_id" = ?', $request['idUsuario']);
+        $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"te_id" = ?', $request['idEndereco']);
         
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
@@ -107,10 +107,10 @@ class Application_Model_Usuario
         $dbTableUsuario = new Application_Model_DbTable_Usuario();        
                 
         $dadosUsuario = array(
-            'TU_UsuarioDeletado' => TRUE
+            'tu_usuariodeletado' => TRUE
         );
         
-        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"TU_ID" = ?', $idUsuario);
+        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"tu_id" = ?', $idUsuario);
         
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
     }

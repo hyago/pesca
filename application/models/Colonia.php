@@ -41,21 +41,21 @@ class Application_Model_Colonia
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
-            'TE_Logradouro'  => $request['logradouro'],
-            'TE_Numero'      => $request['numero'],
-            'TE_Bairro'      => $request['bairro'],
-            'TE_CEP'         => $request['cep'],
-            'TE_Comp'        => $request['complemento'],
-            'TMun_ID'        => $request['municipio']
+            'te_logradouro'  => $request['logradouro'],
+            'te_numero'      => $request['numero'],
+            'te_bairro'      => $request['bairro'],
+            'te_cep'         => $request['cep'],
+            'te_comp'        => $request['complemento'],
+            'tmun_id'        => $request['municipio']
         );
         
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
         
         $dadosColonia = array(
-            'TC_Nome'           => $request['nome'],
-            'TCOM_ID'           => $request['comunidade'],
-            'TC_Especificidade' => $request['nome'],
-            'TE_ID'             => $idEndereco
+            'tc_nome'           => $request['nome'],
+            'tcom_id'           => $request['comunidade'],
+            'tc_especificidade' => $request['nome'],
+            'te_id'             => $idEndereco
         );
         
         $this->dbTableColonia->insert($dadosColonia);
@@ -69,23 +69,23 @@ class Application_Model_Colonia
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
-            'TE_Logradouro'  => $request['logradouro'],
-            'TE_Numero'      => $request['numero'],
-            'TE_Bairro'      => $request['bairro'],
-            'TE_Cidade'      => $request['cidade'],
-            'TE_Estado'      => $request['estado'],
-            'TE_CEP'         => $request['cep'],
-            'TE_Complemento' => $request['complemento']
+            'te_logradouro'  => $request['logradouro'],
+            'te_numero'      => $request['numero'],
+            'te_bairro'      => $request['bairro'],
+            'te_cidade'      => $request['cidade'],
+            'te_estado'      => $request['estado'],
+            'te_cep'         => $request['cep'],
+            'te_complemento' => $request['complemento']
         );
         
         $dadosColonia = array(
-            'TC_Nome' => $request['nome']
+            'tc_nome' => $request['nome']
         );
         
         $whereColonia= $this->dbTableColonia->getAdapter()
-                ->quoteInto('"TC_ID" = ?', $request['idColonia']);
+                ->quoteInto('"tc_id" = ?', $request['idColonia']);
         $whereEndereco= $dbTableEndereco->getAdapter()
-                ->quoteInto('"TE_ID" = ?', $request['idEndereco']);
+                ->quoteInto('"te_id" = ?', $request['idEndereco']);
         
         $this->dbTableColonia->update($dadosColonia, $whereColonia);
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
@@ -96,7 +96,7 @@ class Application_Model_Colonia
         $this->dbTableColonia = new Application_Model_DbTable_Colonia();       
                 
         $whereColonia= $this->dbTableColonia->getAdapter()
-                ->quoteInto('"TC_ID" = ?', $idColonia);
+                ->quoteInto('"tc_id" = ?', $idColonia);
         
         $this->dbTableColonia->delete($whereColonia);
     }

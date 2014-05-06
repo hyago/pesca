@@ -7,8 +7,8 @@ class Application_Model_Telefone
     {
         $dbTableTelefone = new Application_Model_DbTable_VUsuarioHasTelelefone();
         
-        $where = $dbTableTelefone->getAdapter()->quoteInto('"TU_ID" = ?', $idUsuario);
-        $where = $dbTableTelefone->getAdapter()->quoteInto('"TTEL_Desc" = ?', $tipo);
+        $where = $dbTableTelefone->getAdapter()->quoteInto('"tu_id" = ?', $idUsuario);
+        $where = $dbTableTelefone->getAdapter()->quoteInto('"ttel_desc" = ?', $tipo);
         
         $select = $dbTableTelefone->select()->from($dbTableTelefone)
                 ->where($where);

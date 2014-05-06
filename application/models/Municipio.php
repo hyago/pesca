@@ -33,8 +33,8 @@ class Application_Model_Municipio
         $this->dbTableMunicipio = new Application_Model_DbTable_Municipio();
         
         $dadosMunicipio = array(
-            'TMun_Municipio' => $request['municipio'],
-            'TUF_Sigla'      => $request['estado']
+            'tmun_municipio' => $request['municipio'],
+            'tuf_sigla'      => $request['estado']
         );
         
         $this->dbTableMunicipio->insert($dadosMunicipio);
@@ -47,12 +47,12 @@ class Application_Model_Municipio
         $this->dbTableMunicipio = new Application_Model_DbTable_Municipio();
         
         $dadosMunicipio = array(
-            'TMun_Municipio' => $request['municipio'],
-            'TUF_Sigla'      => $request['estado']
+            'tmun_municipio' => $request['municipio'],
+            'tuf_sigla'      => $request['estado']
         );
         
         $whereMunicipio= $this->dbTableMunicipio->getAdapter()
-                ->quoteInto('"TMun_ID" = ?', $request['idMunicipio']);
+                ->quoteInto('"tmun_id" = ?', $request['idMunicipio']);
         
         $this->dbTableMunicipio->update($dadosMunicipio, $whereMunicipio);
     }
@@ -62,7 +62,7 @@ class Application_Model_Municipio
         $this->dbTableMunicipio = new Application_Model_DbTable_Municipio();       
                 
         $whereMunicipio= $this->dbTableMunicipio->getAdapter()
-                ->quoteInto('"TMun_ID" = ?', $idMunicipio);
+                ->quoteInto('"tmun_id" = ?', $idMunicipio);
         
         $this->dbTableMunicipio->delete($whereMunicipio);
     }

@@ -19,10 +19,10 @@ class Application_Model_Login
         $dbTableLogin = new Application_Model_DbTable_Login();
         
         $dadosLogin = array(
-            'TL_HashSenha'  => $senha
+            'tl_hashsenha'  => $senha
         );
         
-        $whereLogin = $dbTableLogin->getAdapter()->quoteInto('"TL_Login" = ?', $login);
+        $whereLogin = $dbTableLogin->getAdapter()->quoteInto('"tl_login" = ?', $login);
         
         $dbTableLogin->update($dadosLogin, $whereLogin);
     }

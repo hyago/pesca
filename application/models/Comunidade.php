@@ -40,7 +40,7 @@ class Application_Model_Comunidade
         $this->dbTableComunidade = new Application_Model_DbTable_Comunidade();
         
         $dadosComunidade = array(
-            'TCOM_NOME' => $request['nome_comunidade']
+            'tcom_nome' => $request['nome_comunidade']
         );
         
         $this->dbTableComunidade->insert($dadosComunidade);
@@ -53,11 +53,11 @@ class Application_Model_Comunidade
         $this->dbTableComunidade = new Application_Model_DbTable_Comunidade();
         
         $dadosComunidade = array(
-            'TCOM_NOME' => $request['nome_comunidade']
+            'tcom_nome' => $request['nome_comunidade']
         );
         
         $whereComunidade= $this->dbTableComunidade->getAdapter()
-                ->quoteInto('"TCOM_ID" = ?', $request['idComunidade']);
+                ->quoteInto('"tcom_id" = ?', $request['idComunidade']);
         
         $this->dbTableComunidade->update($dadosComunidade, $whereComunidade);
     }
@@ -67,7 +67,7 @@ class Application_Model_Comunidade
         $this->dbTableComunidade = new Application_Model_DbTable_Comunidade();       
                 
         $whereComunidade= $this->dbTableComunidade->getAdapter()
-                ->quoteInto('"TCOM_ID" = ?', $idComunidade);
+                ->quoteInto('"tcom_id" = ?', $idComunidade);
         
         $this->dbTableComunidade->delete($whereComunidade);
     }

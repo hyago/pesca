@@ -14,7 +14,7 @@
 class Application_Model_DbTable_AreaPesca extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_AreaPesca';
-    protected $_primary = 'TAreaP_ID';
+    protected $_name = 't_areapesca';
+    protected $_primary = 'tareap_id';
     
 }

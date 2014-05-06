@@ -163,7 +163,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <label for="colonia" id="pure-checkbox">Colônia</label>                
                 <select name="colonia" id="colonia">
                     <?php foreach ($this->colonias as $key => $colonia): ?>
-                    <option value="<?= $colonia['TC_ID']; ?>"><?= $colonia['TC_Nome']; ?></option>
+                    <option value="<?= $colonia['tc_id']; ?>"><?= $colonia['tc_nome']; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>

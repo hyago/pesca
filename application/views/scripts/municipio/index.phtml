@@ -12,17 +12,17 @@
     foreach ($this->dados as $key => $municipio):
     ?>
     <tr>
-        <td><?= $municipio['TMun_Municipio'] ?></td>
-        <td><?= $municipio['TUF_Sigla'] ?></td>
+        <td><?= $municipio['tmun_municipio'] ?></td>
+        <td><?= $municipio['tuf_sigla'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"municipio","action"=>"editar", "id" => $municipio['TMun_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"municipio","action"=>"editar", "id" => $municipio['tmun_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"municipio","action"=>"excluir", "id" => $municipio['TMun_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"municipio","action"=>"excluir", "id" => $municipio['tmun_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

@@ -171,15 +171,15 @@ class ColoniaController extends Zend_Controller_Action
         $pdf->SetFont("Arial", "",8);
         
         foreach($colonia as $dados){
-            $pdf->Cell($width/2, $height, $dados['TC_ID'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TC_Nome'],$border_true,$same_line);
-            $pdf->Cell($width+5, $height, $dados['TC_Especificidade'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TCOM_NOME'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TE_Logradouro'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TE_Numero'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TE_Bairro'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TMun_Municipio'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TE_Comp'],$border_true,$next_line);
+            $pdf->Cell($width/2, $height, $dados['tc_id'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['tc_nome'],$border_true,$same_line);
+            $pdf->Cell($width+5, $height, $dados['tc_especificidade'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['tcom_nome'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['te_logradouro'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['te_numero'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['te_bairro'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['tmun_municipio'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['te_comp'],$border_true,$next_line);
             
         }
         $pdf->Output("coloniasPdf.pdf", 'I');

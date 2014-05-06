@@ -13,17 +13,17 @@
     foreach ($this->dados as $key => $tipoEmbarcacao):
     ?>
     <tr>
-        <td><?= $tipoEmbarcacao['TTE_ID'] ?></td>
-        <td><?= $tipoEmbarcacao['TTE_TipoEmbarcacao'] ?></td>
+        <td><?= $tipoEmbarcacao['tte_id'] ?></td>
+        <td><?= $tipoEmbarcacao['tte_tipoembarcacao'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"editar", "id" => $tipoEmbarcacao['TTE_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"editar", "id" => $tipoEmbarcacao['tte_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"excluir", "id" => $tipoEmbarcacao['TTE_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"tipo-embarcacao","action"=>"excluir", "id" => $tipoEmbarcacao['tte_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

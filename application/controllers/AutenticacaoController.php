@@ -40,9 +40,9 @@ class AutenticacaoController extends Zend_Controller_Action
             $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
             $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
 
-            $authAdapter->setTableName('T_Login')
-                ->setIdentityColumn('TL_Login')
-                ->setCredentialColumn('TL_HashSenha');
+            $authAdapter->setTableName('t_login')
+                ->setIdentityColumn('tl_login')
+                ->setCredentialColumn('tl_hashsenha');
 
             $authAdapter->setIdentity($login)
                 ->setCredential(sha1($senha));

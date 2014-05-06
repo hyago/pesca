@@ -40,7 +40,7 @@ class Application_Model_ArtePesca
         $this->dbTableArtePesca = new Application_Model_DbTable_ArtePesca();
         
         $dadosArtePesca = array(
-            'TAP_ArtePesca' => $request['artePesca']
+            'tap_artepesca' => $request['artePesca']
         );
         
         $this->dbTableArtePesca->insert($dadosArtePesca);
@@ -53,11 +53,11 @@ class Application_Model_ArtePesca
         $this->dbTableArtePesca = new Application_Model_DbTable_ArtePesca();
         
         $dadosArtePesca = array(
-            'TAP_ArtePesca' => $request['artePesca']
+            'tap_artepesca' => $request['artePesca']
         );
         
         $whereArtePesca= $this->dbTableArtePesca->getAdapter()
-                ->quoteInto('"TAP_ID" = ?', $request['idArtePesca']);
+                ->quoteInto('"tap_id" = ?', $request['idArtePesca']);
         
         $this->dbTableArtePesca->update($dadosArtePesca, $whereArtePesca);
     }
@@ -67,7 +67,7 @@ class Application_Model_ArtePesca
         $this->dbTableArtePesca = new Application_Model_DbTable_ArtePesca();       
                 
         $whereArtePesca= $this->dbTableArtePesca->getAdapter()
-                ->quoteInto('"TAP_ID" = ?', $idArtePesca);
+                ->quoteInto('"tap_id" = ?', $idArtePesca);
         
         $this->dbTableArtePesca->delete($whereArtePesca);
     }

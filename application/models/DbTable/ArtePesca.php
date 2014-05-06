@@ -14,8 +14,8 @@
 class Application_Model_DbTable_ArtePesca extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_ArtePesca';
-    protected $_primary = 'TAP_ID';
+    protected $_name = 't_artepesca';
+    protected $_primary = 'tap_id';
     
 }
 

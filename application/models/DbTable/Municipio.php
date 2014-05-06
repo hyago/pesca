@@ -14,7 +14,7 @@
 class Application_Model_DbTable_Municipio extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_Municipio';
-    protected $_primary = 'TMun_ID';
+    protected $_name = 't_municipio';
+    protected $_primary = 'tmun_id';
 
 }

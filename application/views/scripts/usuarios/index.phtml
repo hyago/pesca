@@ -13,25 +13,25 @@
     foreach ($this->dados as $key => $usuario):
     ?>
     <tr>
-        <td><?= $usuario['TU_ID'] ?></td>
-        <td><?= $usuario['TU_Nome'] ?></td>
-        <td><?= $usuario['TU_Email'] ?></td>
+        <td><?= $usuario['tu_id'] ?></td>
+        <td><?= $usuario['tu_nome'] ?></td>
+        <td><?= $usuario['tu_email'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"visualizar", "id" => $usuario['TU_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"visualizar", "id" => $usuario['tu_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"editar", "id" => $usuario['TU_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"editar", "id" => $usuario['tu_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"excluir", "id" => $usuario['TU_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"excluir", "id" => $usuario['tu_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

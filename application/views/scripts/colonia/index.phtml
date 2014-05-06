@@ -12,24 +12,24 @@
     foreach ($this->dados as $key => $colonia):
     ?>
     <tr>
-        <td><?= $colonia['TC_ID'] ?></td>
-        <td><?= $colonia['TC_Nome'] ?></td>
+        <td><?= $colonia['tc_id'] ?></td>
+        <td><?= $colonia['tc_nome'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"visualizar", "id" => $colonia['TC_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"visualizar", "id" => $colonia['tc_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"editar", "id" => $colonia['TC_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"editar", "id" => $colonia['tc_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"excluir", "id" => $colonia['TC_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"colonia","action"=>"excluir", "id" => $colonia['tc_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

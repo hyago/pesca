@@ -107,9 +107,9 @@ class OrdemController extends Zend_Controller_Action
         $pdf->SetFont("Arial", "",10);
         sort($ordem);
         foreach($ordem as $dados){
-            $pdf->Cell($width/2, $height, $dados['ORD_ID'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['ORD_Nome'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['GRP_ID'],$border_true,$next_line);
+            $pdf->Cell($width/2, $height, $dados['ord_id'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['ord_nome'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['grp_id'],$border_true,$next_line);
         }
         
         $pdf->Output("OrdemRelatorio.pdf", 'I');

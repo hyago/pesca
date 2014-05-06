@@ -14,8 +14,8 @@
 class Application_Model_DbTable_VUsuario extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'V_Usuario';
-    protected $_primary = 'TU_ID';
+    protected $_name = 'v_usuario';
+    protected $_primary = 'tu_id';
 
 }
 

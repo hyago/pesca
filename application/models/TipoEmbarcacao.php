@@ -40,7 +40,7 @@ class Application_Model_TipoEmbarcacao
         $this->dbTableTipoEmbarcacao = new Application_Model_DbTable_TipoEmbarcacao();
         
         $dadosTipoEmbarcacao = array(
-            'TTE_TipoEmbarcacao' => $request['tipoEmbarcacao']
+            'tte_tipoembarcacao' => $request['tipoEmbarcacao']
         );
         
         $this->dbTableTipoEmbarcacao->insert($dadosTipoEmbarcacao);
@@ -53,11 +53,11 @@ class Application_Model_TipoEmbarcacao
         $this->dbTableTipoEmbarcacao = new Application_Model_DbTable_TipoEmbarcacao();
         
         $dadosTipoEmbarcacao = array(
-            'TTE_TipoEmbarcacao' => $request['tipoEmbarcacao']
+            'tte_tipoembarcacao' => $request['tipoEmbarcacao']
         );
         
         $whereTipoEmbarcacao= $this->dbTableTipoEmbarcacao->getAdapter()
-                ->quoteInto('"TTE_ID" = ?', $request['idTipoEmbarcacao']);
+                ->quoteInto('"tte_id" = ?', $request['idtipoembarcacao']);
         
         $this->dbTableTipoEmbarcacao->update($dadosTipoEmbarcacao, $whereTipoEmbarcacao);
     }
@@ -67,7 +67,7 @@ class Application_Model_TipoEmbarcacao
         $this->dbTableTipoEmbarcacao = new Application_Model_DbTable_TipoEmbarcacao();       
                 
         $whereTipoEmbarcacao= $this->dbTableTipoEmbarcacao->getAdapter()
-                ->quoteInto('"TTE_ID" = ?', $idTipoEmbarcacao);
+                ->quoteInto('"tte_id" = ?', $idTipoEmbarcacao);
         
         $this->dbTableTipoEmbarcacao->delete($whereTipoEmbarcacao);
     }

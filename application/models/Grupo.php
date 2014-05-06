@@ -31,7 +31,7 @@ class Application_Model_Grupo
         $this->dbTableGrupo = new Application_Model_DbTable_Grupo();
         
         $dadosGrupo = array(
-            'GRP_Nome' => $request['nome_grupo']
+            'grp_nome' => $request['nome_grupo']
         );
         
         $this->dbTableGrupo->insert($dadosGrupo);
@@ -43,12 +43,9 @@ class Application_Model_Grupo
     {
         $this->dbTableGrupo = new Application_Model_DbTable_Grupo();
         
-        $dadosGrupo = array(
-            'GRP_Nome' => $request['nome_grupo']
-        );
+        $dadosGrupo = array('grp_nome' => $request['nome_grupo']);
         
-        $whereGrupo = $this->dbTableGrupo->getAdapter()
-                ->quoteInto('"GRP_ID" = ?', $request['id_grupo']);
+        $whereGrupo = $this->dbTableGrupo->getAdapter()->quoteInto('"grp_id" = ?', $request['id_grupo'], 'INTEGER');
         
         $this->dbTableGrupo->update($dadosGrupo, $whereGrupo);
     }
@@ -57,8 +54,7 @@ class Application_Model_Grupo
     {
         $this->dbTableGrupo = new Application_Model_DbTable_Grupo();       
                 
-        $whereGrupo = $this->dbTableGrupo->getAdapter()
-                ->quoteInto('"GRP_ID" = ?', $idGrupo);
+        $whereGrupo = $this->dbTableGrupo->getAdapter()->quoteInto('"grp_id" = ?', $idGrupo);
         
         $this->dbTableGrupo->delete($whereGrupo);
     }

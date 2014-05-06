@@ -14,8 +14,8 @@
 class Application_Model_DbTable_Perfil extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_Perfil';
-    protected $_primary = 'TP_ID';
+    protected $_name = 't_perfil';
+    protected $_primary = 'tp_id';
 
 }
 

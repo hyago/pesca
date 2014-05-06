@@ -11,16 +11,16 @@
     foreach ($this->dados as $key => $areaPesca):
     ?>
     <tr>
-        <td><?= $areaPesca['TAreaP_AreaPesca'] ?></td>
+        <td><?= $areaPesca['tareap_areapesca'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"editar", "id" => $areaPesca['TAreaP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"editar", "id" => $areaPesca['tareap_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"excluir", "id" => $areaPesca['TAreaP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"area-pesca","action"=>"excluir", "id" => $areaPesca['tareap_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

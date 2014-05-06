@@ -13,24 +13,24 @@
     foreach ($this->dados as $key => $pescador):
     ?>
     <tr>
-        <td><?= $pescador['TP_Nome'] ?></td>
-        <td><?= $pescador['TP_Matricula'] ?></td>
+        <td><?= $pescador['tp_nome'] ?></td>
+        <td><?= $pescador['tp_matricula'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"visualizar", "id" => $pescador['TP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"visualizar", "id" => $pescador['tp_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"editar", "id" => $pescador['TP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"editar", "id" => $pescador['tp_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"excluir", "id" => $pescador['TP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"excluir", "id" => $pescador['tp_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

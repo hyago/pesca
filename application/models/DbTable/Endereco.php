@@ -14,8 +14,8 @@
 class Application_Model_DbTable_Endereco extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_Endereco';
-    protected $_primary = 'TE_ID';
+    protected $_name = 't_endereco';
+    protected $_primary = 'te_id';
 
 }
 

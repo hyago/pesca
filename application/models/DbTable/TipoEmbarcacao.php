@@ -14,8 +14,8 @@
 class Application_Model_DbTable_TipoEmbarcacao extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_TipoEmbarcacao';
-    protected $_primary = 'TTE_ID';
+    protected $_name = 't_tipoembarcacao';
+    protected $_primary = 'tte_id';
 
 }
 

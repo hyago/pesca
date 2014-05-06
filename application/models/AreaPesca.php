@@ -40,7 +40,7 @@ class Application_Model_AreaPesca
         $this->dbTableAreaPesca = new Application_Model_DbTable_AreaPesca();
         
         $dadosAreaPesca = array(
-            'TAreaP_AreaPesca' => $request['areaPesca']
+            'tareap_areapesca' => $request['areaPesca']
         );
         
         $this->dbTableAreaPesca->insert($dadosAreaPesca);
@@ -53,11 +53,11 @@ class Application_Model_AreaPesca
         $this->dbTableAreaPesca = new Application_Model_DbTable_AreaPesca();
         
         $dadosAreaPesca = array(
-            'TAreaP_AreaPesca' => $request['areaPesca']
+            'tareap_areapesca' => $request['areaPesca']
         );
         
         $whereAreaPesca= $this->dbTableAreaPesca->getAdapter()
-                ->quoteInto('"TAreaP_ID" = ?', $request['idAreaPesca']);
+                ->quoteInto('"tareap_id" = ?', $request['idAreaPesca']);
         
         $this->dbTableAreaPesca->update($dadosAreaPesca, $whereAreaPesca);
     }
@@ -67,7 +67,7 @@ class Application_Model_AreaPesca
         $this->dbTableAreaPesca = new Application_Model_DbTable_AreaPesca();       
                 
         $whereAreaPesca= $this->dbTableAreaPesca->getAdapter()
-                ->quoteInto('"TAreaP_ID" = ?', $idAreaPesca);
+                ->quoteInto('"tareap_id" = ?', $idAreaPesca);
         
         $this->dbTableAreaPesca->delete($whereAreaPesca);
     }

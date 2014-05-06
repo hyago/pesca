@@ -6,9 +6,9 @@ class Application_Model_AlteracaoSenha
     {
         date_default_timezone_set('America/Bahia');
         $dados = array(
-            "TAS_Token"           => $token,
-            "TAS_DataSolicitacao" => date('Y-m-d H:i:s'),
-            "TU_ID"               => $idUsuario
+            "tas_token"           => $token,
+            "tas_datasolicitacao" => date('Y-m-d H:i:s'),
+            "tu_id"               => $idUsuario
         );
         
         $dbTableAlteracaoSenha = new Application_Model_DbTable_AlteracaoSenha();
@@ -28,7 +28,7 @@ class Application_Model_AlteracaoSenha
         
         date_default_timezone_set('America/Bahia');
         $dados = array(
-            "TAS_DataAlteracao" => date('Y-m-d H:i:s')
+            "tas_dataalteracao" => date('Y-m-d H:i:s')
         );
         
         $where = $dbTableAlteracaoSenha->getAdapter()->quoteInto('"TAS_Token" = ?', $token);

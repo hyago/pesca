@@ -98,8 +98,8 @@ class GrupoController extends Zend_Controller_Action
         $pdf->SetFont("Arial", "",10);
         sort($grupo);
         foreach($grupo as $dados){
-            $pdf->Cell($width/2, $height, $dados['GRP_ID'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['GRP_Nome'],$border_true,$next_line);
+            $pdf->Cell($width/2, $height, $dados['grp_id'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['grp_nome'],$border_true,$next_line);
         }
         
         $pdf->Output("GrupoRelatorio.pdf", 'I');
