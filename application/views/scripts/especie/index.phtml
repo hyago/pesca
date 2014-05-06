@@ -16,20 +16,20 @@
     foreach ($this->dados as $key => $especie):
     ?>
     <tr>
-        <td><?= $especie['ESP_ID'] ?></td>
-        <td><?= $especie['ESP_Nome'] ?></td>
-        <td><?= $especie['ESP_Descritor'] ?></td>
-        <td><?= $especie['ESP_Nome_Comum'] ?></td>
-        <td><?= $especie['GEN_ID'] ?></td>
+        <td><?= $especie['esp_id'] ?></td>
+        <td><?= $especie['esp_nome'] ?></td>
+        <td><?= $especie['esp_descritor'] ?></td>
+        <td><?= $especie['esp_nome_comum'] ?></td>
+        <td><?= $especie['gen_id'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"especie","action"=>"editar", "id" => $especie['ESP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"especie","action"=>"editar", "id" => $especie['esp_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $especie['ESP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $especie['esp_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>
