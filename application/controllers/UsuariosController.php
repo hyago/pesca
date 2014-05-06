@@ -97,10 +97,18 @@ class UsuariosController extends Zend_Controller_Action
     {
         $modelPerfil = new Application_Model_Perfil();
         $perfis = $modelPerfil->select();
+        
+        $modelMunicipios = new Application_Model_Municipio();
+        $municipios = $modelMunicipios->select();
+        
+        $modelUf = new Application_Model_UfMapper();
+        $ufs = $modelUf->select();
+        
         $usuario = $this->modelUsuario->find($this->_getParam('id'));
         
-        $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
         $this->view->assign("perfis", $perfis);
+        $this->view->assign("municipios", $municipios);
+        $this->view->assign("ufs", $ufs);
         $this->view->assign("usuario", $usuario);
     }
    

@@ -31,7 +31,7 @@ class Application_Model_AlteracaoSenha
             "tas_dataalteracao" => date('Y-m-d H:i:s')
         );
         
-        $where = $dbTableAlteracaoSenha->getAdapter()->quoteInto('"TAS_Token" = ?', $token);
+        $where = $dbTableAlteracaoSenha->getAdapter()->quoteInto('"tas_token" = ?', $token);
         return $dbTableAlteracaoSenha->update($dados, $where);
     }
 }

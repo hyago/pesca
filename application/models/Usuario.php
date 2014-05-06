@@ -65,7 +65,9 @@ class Application_Model_Usuario
             'tu_sexo'     => $request['sexo'],
             'tu_rg'       => $request['rg'],
             'tu_cpf'      => $request['cpf'],
-            'tu_email'    => $request['email']
+            'tu_email'    => $request['email'],
+            'tu_telres'    => $request['telefoneResidencial'],
+            'tu_telcel'    => $request['telefoneCelular']
         );
         
         $dbTableUsuario->insert($dadosUsuario);
@@ -83,7 +85,8 @@ class Application_Model_Usuario
             'te_numero'      => $request['numero'],
             'te_bairro'      => $request['bairro'],
             'te_cep'         => $request['cep'],
-            'te_comp'        => $request['complemento']
+            'te_comp'        => $request['complemento'],
+            'tmun_id'        => $request['municipio']
         );
         
         $dadosUsuario = array(
@@ -92,7 +95,9 @@ class Application_Model_Usuario
             'tu_sexo'     => $request['sexo'],
             'tu_rg'       => $request['rg'],
             'tu_cpf'      => $request['cpf'],
-            'tu_email'    => $request['email']
+            'tu_email'    => $request['email'],
+            'tu_telres'    => $request['telefoneResidencial'],
+            'tu_telcel'    => $request['telefoneCelular']
         );
         
         $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"tu_id" = ?', $request['idUsuario']);

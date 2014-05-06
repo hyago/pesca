@@ -140,6 +140,7 @@
           <dbTableFile dbTableName="FichaDiaria"/>
           <dbTableFile dbTableName="Tempo1"/>
           <dbTableFile dbTableName="Vento1"/>
+          <dbTableFile dbTableName="UfDbtable"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -163,6 +164,7 @@
         <modelFile modelName="FichaDiaria"/>
         <modelFile modelName="Tempo1"/>
         <modelFile modelName="Vento"/>
+        <modelFile modelName="UfMapper"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

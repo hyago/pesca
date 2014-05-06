@@ -19,13 +19,13 @@ class EsqueciSenhaController extends Zend_Controller_Action
         
         $modelUsuario = new Application_Model_Usuario();
         
-        $usuario = $modelUsuario->select('"TU_Email" = \''.$email.'\'');
+        $usuario = $modelUsuario->select('"tu_email" = \''.$email.'\'');
         
         if ($usuario)
         {
-            $token = sha1($usuario[0]['TU_Email'] . time());
+            $token = sha1($usuario[0]['tu_email'] . time());
             $modelAlteracaoSenha = new Application_Model_AlteracaoSenha();
-            $modelAlteracaoSenha->solicitar($usuario[0]['TU_ID'], $token);
+            $modelAlteracaoSenha->solicitar($usuario[0]['tu_id'], $token);
             
             $mensagem = "Clique no link a seguir para alterar a sua senha:<br />";
             $mensagem .= 'http://' . $_SERVER['HTTP_HOST'] . $this->view->baseUrl() . 
@@ -33,7 +33,7 @@ class EsqueciSenhaController extends Zend_Controller_Action
             
             $assunto = 'Redefinir a senha no Pesca.';
             
-            $email = new Application_Model_Email($mensagem, $assunto, $usuario[0]['TU_Email'], $usuario[0]['TU_Nome']);
+            $email = new Application_Model_Email($mensagem, $assunto, $usuario[0]['tu_email'], $usuario[0]['tu_nome']);
             $email->enviar();
             
             $this->view->mensagem = "Uma mensagem com instruções para redefinir a senha foi 
@@ -58,16 +58,16 @@ class EsqueciSenhaController extends Zend_Controller_Action
         {
             $alteracaoSenha = $alteracaoSenha[0];
             
-            if ($alteracaoSenha['TAS_DataAlteracao'])
+            if ($alteracaoSenha['tas_dataalteracao'])
             {
                 $this->view->mensagem = "Solicitação já atendida.";
             }
             else
             {            
                 $modelUsuario = new Application_Model_Usuario();
-                $usuario = $modelUsuario->find($alteracaoSenha['TU_ID']);
+                $usuario = $modelUsuario->find($alteracaoSenha['tu_id']);
 
-                $this->view->login = $usuario['TL_Login'];
+                $this->view->login = $usuario['tl_login'];
                 $this->view->token = $token;
             }
         }

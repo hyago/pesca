@@ -14,8 +14,8 @@
 class Application_Model_DbTable_Pescador extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'T_Pescador';
-    protected $_primary = 'TP_ID';
+    protected $_name = 't_pescador';
+    protected $_primary = 'tp_id';
 
 }
 
