@@ -29,7 +29,7 @@ class Application_Model_Vento
         $this->dbTableVento = new Application_Model_DbTable_Vento();
         
         $dadosVento = array(
-            'VNT_Forca' => $request['vento']
+            'vnt_forca' => $request['vento']
         );
         
         $this->dbTableVento->insert($dadosVento);
@@ -42,11 +42,11 @@ class Application_Model_Vento
         $this->dbTableVento = new Application_Model_DbTable_Vento();
         
         $dadosVento = array(
-            'VNT_Forca' => $request['vento']
+            'vnt_forca' => $request['vento']
         );
         
         $whereVento= $this->dbTableVento->getAdapter()
-                ->quoteInto('"VNT_ID" = ?', $request['idVento']);
+                ->quoteInto('"vnt_id" = ?', $request['idVento']);
         
         $this->dbTableVento->update($dadosVento, $whereVento);
     }
@@ -56,7 +56,7 @@ class Application_Model_Vento
         $this->dbTableVento = new Application_Model_DbTable_Vento();       
                 
         $whereVento= $this->dbTableVento->getAdapter()
-                ->quoteInto('"VNT_ID" = ?', $idVento);
+                ->quoteInto('"vnt_id" = ?', $idVento);
         
         $this->dbTableVento->delete($whereVento);
     }

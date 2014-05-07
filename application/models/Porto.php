@@ -7,8 +7,7 @@ class Application_Model_Porto
     public function select($where = null, $order = null, $limit = null)
     {
         $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $select = $this->dbTablePorto->select()
-                ->from($this->dbTablePorto)->order($order)->limit($limit);
+        $select = $this->dbTablePorto->select()->from($this->dbTablePorto)->order($order)->limit($limit);
 
         if(!is_null($where)){
             $select->where($where);
@@ -29,8 +28,9 @@ class Application_Model_Porto
         $this->dbTablePorto = new Application_Model_DbTable_Porto();
         
         $dadosPorto = array(
-            'PTO_Nome'  => $request['nome'],
-            'TMun_ID'   => $request['municipo']
+            'pto_nome'  => $request['nome'],
+            'pto_local'  => $request['local'],
+            'tmun_id'   => $request['municipio']
         );
         
         $this->dbTablePorto->insert($dadosPorto);
@@ -43,12 +43,12 @@ class Application_Model_Porto
         $this->dbTablePorto = new Application_Model_DbTable_Porto();
         
         $dadosPorto = array(
-            'PTO_Nome'  => $request['nome'],
-            'TMun_ID'   => $request['municipo']
+            'pto_nome'  => $request['nome'],
+            'pto_local'  => $request['local'],
+            'tmun_id'   => $request['municipio']
         );
         
-        $wherePorto= $this->dbTablePorto->getAdapter()
-                ->quoteInto('"PTO_ID" = ?', $request['idPorto']);
+        $wherePorto= $this->dbTablePorto->getAdapter()->quoteInto('"pto_id" = ?', $request['idPorto']);
         
         $this->dbTablePorto->update($dadosPorto, $wherePorto);
     }
@@ -57,8 +57,7 @@ class Application_Model_Porto
     {
         $this->dbTablePorto = new Application_Model_DbTable_Porto();       
                 
-        $wherePorto= $this->dbTablePorto->getAdapter()
-                ->quoteInto('"PTO_ID" = ?', $idPorto);
+        $wherePorto= $this->dbTablePorto->getAdapter()->quoteInto('"pto_id" = ?', $idPorto);
         
         $this->dbTablePorto->delete($wherePorto);
     }

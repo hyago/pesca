@@ -6,10 +6,10 @@
 <form action="<?=$this->url(array("controller"=>"tempo","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Desembarque">
        <div id="esquerda">  
-        <input type="hidden" name="idTempo" value="<?=$this->tempo['TMP_ID']?>" />
+        <input type="hidden" name="idTempo" value="<?=$this->tempo['tmp_id']?>" />
         <div id="form-esq">
             <label>Tempo: </label>
-            <input type="text" name="tempo" value="<?=$this->tempo['TMP_Estado']?>"/><br />
+            <input type="text" name="tempo" value="<?=$this->tempo['tmp_estado']?>"/><br />
         </div>
         <div id="Submit">
             <a href="<?=$this->url(array("controller"=>"tempo","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 

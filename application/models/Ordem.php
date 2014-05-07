@@ -33,7 +33,7 @@ class Application_Model_Ordem
         $dadosOrdem = array(
             'ord_nome' => $request['nome_ordem'],
             'ord_caracteristica' => $request['caracteristica_ordem'],
-            'grp_id' => $request['select_grupo_ordem']
+            'grp_id' => $request['grupo_ordem']
         );
         
         $this->dbTableOrdem->insert($dadosOrdem);
@@ -44,31 +44,23 @@ class Application_Model_Ordem
     {
         $this->dbTableGrupo = new Application_Model_DbTable_Grupo();
         $this->dbTableOrdem = new Application_Model_DbTable_Ordem();
-
-        
+       
         $dadosOrdem = array(
             'ord_nome' => $request['nome_ordem'],
             'ord_caracteristica' => $request['caracteristica_ordem'],
-            'grp_id' => $request['select_grupo_ordem']
+            'grp_id' => $request['grupo_ordem']
         );
-        $dadosGrupo = array(
-            'grp_nome' => $request['nome_grupo']
-        );
-        
-        $whereOrdem = $this->dbTableOrdem->getAdapter()
-                ->quoteInto('"ord_id" = ?', $request['id_ordem']);
 
-        
+        $whereOrdem = $this->dbTableOrdem->getAdapter()->quoteInto('"ord_id" = ?', $request['id_ordem']);
+
         $this->dbTableOrdem->update($dadosOrdem, $whereOrdem);
-        $this->dbTableGrupo->update($dadosGrupo, $whereGrupo);
     }
     
     public function delete($idOrdem)
     {
         $this->dbTableOrdem = new Application_Model_DbTable_Ordem();       
                 
-        $whereOrdem = $this->dbTableOrdem->getAdapter()
-                ->quoteInto('"ord_id" = ?', $idOrdem);
+        $whereOrdem = $this->dbTableOrdem->getAdapter()->quoteInto('"ord_id" = ?', $idOrdem);
         
         $this->dbTableOrdem->delete($whereOrdem);
     }

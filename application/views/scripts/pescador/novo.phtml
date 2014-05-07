@@ -10,13 +10,13 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
 <form  id="cadastro-usuario" action="<?=$this->url(array("controller"=>"pescador","action"=>"criar"),null,true)?>" method="post">
      <fieldset id="Social">
-        <input type="hidden" name="idPescador" value="<?=$this->pescador['TP_ID']?>" />
-        <input type="hidden" name="idEndereco" value="<?=$this->pescador['TE_ID']?>" />
+        <input type="hidden" name="idPescador" value="<?=$this->pescador['tp_id']?>" />
+        <input type="hidden" name="idEndereco" value="<?=$this->pescador['te_id']?>" />
         
         <div id="esquerda">
             <div id="form-dir">
                 <label for="nome">Nome</label>
-                <input type="text" name="nome" id="nome" placeholder="Nome" value="<?=$this->pescador['TP_Nome']?>"/><br/>
+                <input type="text" name="nome" id="nome" placeholder="Nome" value="<?=$this->pescador['tp_nome']?>"/><br/>
             </div>
             <div id="form-dir">
                 <label for="sexo">Sexo</label>
@@ -58,12 +58,12 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
             <div id="form-dir">
                 <label for="telefoneResidencial">Tel. Residencial</label>
-                <input type="text" name="telefoneResidencial" id="telefoneResidencial" id="telefone" placeholder="Tel. Residencial"/>
+                <input type="text" name="telefoneResidencial" id="telefoneResidencial" id="telefone" class="telefone" placeholder="Tel. Residencial"/>
             </div>
 
             <div id="form-dir">
                 <label for="telefoneCelular">Tel. Celular</label>
-                <input type="text" name="telefoneCelular" id="telefoneCelular" id="telefone" placeholder="Tel. Celular"/>
+                <input type="text" name="telefoneCelular" id="telefoneCelular" id="telefone" class="telefone" placeholder="Tel. Celular"/>
             </div>
             
             <div id="form-dir">
@@ -71,25 +71,26 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <input type="text" name="dataNasc" id="data_Nasc" placeholder="Data Nascimento" />
             </div>
             
-            <div id="form-dir">
-                <label for="municipioNat">Naturalidade</label>
-                <select name="municipioNat" id="municipioNat">
-                    <?php foreach ($this->municipios as $key => $municipio): ?>
-                    <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
-                    <?php endforeach; ?>
-                </select>            
-            </div>
+                     <div id="form-dir">
+            <label for="municipioNat">Naturalidade</label>
+            <select name="municipioNat" id="municipioNat">
+                <?php foreach ($this->municipios as $key => $municipio): ?>
+                <option value="<?= $municipio['tmun_id']; ?>"><?= $municipio['tuf_sigla'], ' ',$municipio['tmun_municipio']; ?></option>
+                <?php endforeach; ?>
+            </select>            
+        </div>
+        
             
             <div id="form-dir">
                 <label for="ctps">CTPS</label>
-                <input type="text" name="ctps" id="ctps" placeholder="CTPS" value="<?=$this->pescador['TP_CTPS']?>"/>
+                <input type="text" name="ctps" id="ctps" placeholder="CTPS" value="<?=$this->pescador['tp_ctps']?>"/>
             </div>
 
             <div id="form-dir">
                 <label for="artePesca" id="pure-checkbox">Arte de Pesca</label>                
                 <select name="artePesca" id="artePesca">
                     <?php foreach ($this->artesPesca as $key => $artePesca): ?>
-                    <option value="<?= $artePesca['TAP_ID']; ?>"><?= $artePesca['TAP_ArtePesca']; ?></option>
+                    <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
@@ -98,16 +99,16 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <label for="tipoEmbarcacao" id="pure-checkbox">Embarcação</label>
                 <select name="tipoEmbarcacao" id="tipoEmbarcacao">
                     <?php foreach ($this->tiposEmbarcacao as $key => $tipoEmbarcacao): ?>
-                    <option value="<?= $tipoEmbarcacao['TTE_ID']; ?>"><?= $tipoEmbarcacao['TTE_TipoEmbarcacao']; ?></option>
+                    <option value="<?= $tipoEmbarcacao['tte_id']; ?>"><?= $tipoEmbarcacao['tte_tipoembarcacao']; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
             
             <div id="form-dir">
-                <label for="porteEmbarcacao" id="pure-checkbox">Porte-Embarcação</label>             
-                <select name="porteEmbarcacao" id="porteEmbarcacao">
-                    <?php foreach ($this->portesEmbarcacao as $key => $porteEmbarcacao): ?>
-                    <option value="<?= $porteEmbarcacao['TPE_ID']; ?>"><?= $porteEmbarcacao['TPE_Porte']; ?></option>
+                <label for="portesEmbarcacao" id="pure-checkbox">Porte-Embarcação</label>             
+                <select name="portesEmbarcacao" id="portesEmbarcacao">
+                    <?php foreach ($this->portesEmbarcacao as $key => $portesEmbarcacao): ?>
+                    <option value="<?= $portesEmbarcacao['tpe_id']; ?>"><?= $portesEmbarcacao['tpe_porte']; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
@@ -118,36 +119,27 @@ $this->headScript()->appendFile('/js/mascaras.js');
         <div id="direita">
                 <div id="form-dir">
                 <label for="logradouro">Logradouro</label>
-                <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro" value="<?=$this->pescador['TE_Logradouro']?>"/>
+                <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro" value="<?=$this->pescador['te_logradouro']?>"/>
             </div>
 
             <div id="form-dir">
                 <label for="numero">Número</label>
-                <input type="text" name="numero" id="numero" placeholder="Número" value="<?=$this->pescador['TE_Numero']?>"/>
+                <input type="text" name="numero" id="numero" placeholder="Número" value="<?=$this->pescador['te_numero']?>"/>
             </div>
 
             <div id="form-dir">
                 <label for="bairro">Bairro</label>
                 <input type="text" name="bairro" id="bairro" placeholder="Bairro" />
             </div>
-
+            
             <div id="form-dir">
-                <label for="municipio">Município</label>
-                <select name="municipio" id="municipio">
-                    <?php foreach ($this->municipios as $key => $municipio): ?>
-                    <option value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
-                    <?php endforeach; ?>
-                </select>            
-            </div>
-
-            <div id="form-dir">
-                <label for="estado">Estado</label>
-                <select name="estado" id="estado">
-                    <?php foreach ($this->estados as $estado): ?>
-                    <option value="<?= $estado; ?>" <?=($estado == "BA") ? 'selected="selected"' : '';?>><?= $estado; ?></option>
-                    <?php endforeach; ?>
-                </select>            
-            </div>
+            <label for="municipio">Município</label>
+            <select name="municipio" id="municipio">
+                <?php foreach ($this->municipios as $key => $municipio): ?>
+                <option value="<?= $municipio['tmun_id']; ?>"><?= $municipio['tuf_sigla'], ' ',$municipio['tmun_municipio']; ?></option>
+                <?php endforeach; ?>
+            </select>            
+        </div>
 
             <div id="form-dir">
                 <label for="cep">CEP</label>
@@ -202,7 +194,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <label for="areaPesca" id="pure-checkbox">Area de Pesca</label>                
                 <select name="areaPesca" id="areaPesca">
                     <?php foreach ($this->areasPesca as $key => $areaPesca): ?>
-                    <option value="<?= $areaPesca['TAreaP_ID']; ?>"><?= $areaPesca['TAreaP_AreaPesca']; ?></option>
+                    <option value="<?= $areaPesca['tareap_id']; ?>"><?= $areaPesca['tareap_areapesca']; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>
@@ -211,7 +203,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <label for="especie" id="pure-checkbox">Especie Capturada</label>                
                 <select name="especie" id="especie">
                     <?php foreach ($this->especies as $key => $especie): ?>
-                    <option value="<?= $especie['ESP_ID']; ?>"><?= $especie['ESP_Nome']; ?></option>
+                    <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome']; ?></option>
                     <?php endforeach; ?>
                 </select>           
             </div>

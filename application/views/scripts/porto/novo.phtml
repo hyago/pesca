@@ -8,20 +8,26 @@
    <input type="hidden" name="idPorto" placeholder="ID" />
    <fieldset id="Desembarque">
       <div id="esquerda">
+      
         <div id="form-esq"> 
             <label>Nome: </label>
             <input type="text" name="nome" placeholder="Nome"/> <br />
         </div>
 
-        <div id="form-esq">
-            <label>Municipio: </label>
-                <select name="municipio">
-                    <?php foreach ($this->municipios as $key => $municipio): ?>
-                    <option name="municipio" value="<?= $municipio['TMun_ID']; ?>"><?= $municipio['TMun_Municipio']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            <br />
+        <div id="form-esq"> 
+            <label>Local: </label>
+            <input type="text" name="local" placeholder="Local"/> <br />
         </div>
+
+        <div id="form-dir">
+            <label for="municipio">Município</label>
+            <select name="municipio" id="municipio">
+                <?php foreach ($this->municipios as $key => $municipio): ?>
+                <option value="<?= $municipio['tmun_id']; ?>"><?= $municipio['tuf_sigla'], ' ',$municipio['tmun_municipio']; ?></option>
+                <?php endforeach; ?>
+            </select>            
+        </div>
+        
           <div id="Submit">
             <a href="<?=$this->url(array("controller"=>"porto","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
             <input type="submit" value="Cadastrar" />

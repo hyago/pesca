@@ -12,17 +12,17 @@
     foreach ($this->dados as $key => $tempo):
     ?>
     <tr>
-        <td><?= $tempo['TMP_ID'] ?></td>
-        <td><?= $tempo['TMP_Estado'] ?></td>
+        <td><?= $tempo['tmp_id'] ?></td>
+        <td><?= $tempo['tmp_estado'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"tempo","action"=>"editar", "id" => $tempo['TMP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"tempo","action"=>"editar", "id" => $tempo['tmp_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"tempo","action"=>"excluir", "id" => $tempo['TMP_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"tempo","action"=>"excluir", "id" => $tempo['tmp_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

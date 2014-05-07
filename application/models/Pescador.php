@@ -45,12 +45,12 @@ class Application_Model_Pescador
         
         
         $dadosEndereco = array(
-            'TE_Logradouro'  => $request['logradouro'],
-            'TE_Numero'      => $request['numero'],
-            'TE_Bairro'      => $request['bairro'],
-            'TE_CEP'         => $request['cep'],
-            'TE_Comp'        => $request['complemento'],
-            'TMun_ID'        => $request['municipio']
+            'te_logradouro'  => $request['logradouro'],
+            'te_numero'      => $request['numero'],
+            'te_bairro'      => $request['bairro'],
+            'te_cep'         => $request['cep'],
+            'te_comp'        => $request['complemento'],
+            'tmun_id'        => $request['municipio']
         );
         
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
@@ -59,38 +59,38 @@ class Application_Model_Pescador
         $data = $data[2] . '-' . $data[1] . '-' . $data[0];
         
         $dadosPescador = array(
-            'TP_Nome'          => $request['nome'],
-            'TP_Sexo'          => $request['sexo'],
-            'TP_RG'            => $request['rg'],
-            'TP_CPF'           => $request['cpf'],
-            'TP_Apelido'       => $request['apelido'],
-            'TP_Matricula'     => $request['matricula'],
-            'TP_FiliacaoPai'   => $request['filiacaoPai'],
-            'TP_FiliacaoMae'   => $request['filiacaoMae'],
-            'TP_CTPS'          => $request['ctps'],
-            'TP_PIS'           => $request['pis'],
-            'TP_INSS'          => $request['inss'],
-            'TP_NIT_CEI'       => $request['nit_cei'],
-            'TP_CMA'           => $request['cma'],
-            'TP_RGB_MAA_IBAMA' => $request['rgb_maa_ibama'],
-            'TP_CIR_Cap_Porto' => $request['cir_cap_porto'],
-            'TP_DataNasc'      => $data,
-            'TMun_ID_Natural'  => $request['municipioNat'],
-            'TE_ID'            => $idEndereco
+            'tp_nome'          => $request['nome'],
+            'tp_sexo'          => $request['sexo'],
+            'tp_rg'            => $request['rg'],
+            'tp_cpf'           => $request['cpf'],
+            'tp_apelido'       => $request['apelido'],
+            'tp_matricula'     => $request['matricula'],
+            'tp_filiacaopai'   => $request['filiacaoPai'],
+            'tp_filiacaomae'   => $request['filiacaoMae'],
+            'tp_ctps'          => $request['ctps'],
+            'tp_pis'           => $request['pis'],
+            'tp_inss'          => $request['inss'],
+            'tp_nit_cei'       => $request['nit_cei'],
+            'tp_cma'           => $request['cma'],
+            'tp_rgb_maa_ibama' => $request['rgb_maa_ibama'],
+            'tp_cir_cap_porto' => $request['cir_cap_porto'],
+            'tp_datanasc'      => $data,
+            'tmun_id_natural'  => $request['municipioNat'],
+            'te_id'            => $idEndereco
         );
         
         $idPescador = $dbTablePescador->insert($dadosPescador);
         
         $dadosPescadorHasAreaPesca = array(
-            'TAreaP_ID' => $request['areaPesca'],
-            'TP_ID'     => $idPescador
+            'tareap_id' => $request['areaPesca'],
+            'tp_id'     => $idPescador
         );
         
         $dbTablePescadorHasAreaPesca->insert($dadosPescadorHasAreaPesca);
         
         $dadosPescadorHasArtePesca = array(
-            'TAP_ID' => $request['artePesca'],
-            'TP_ID'  => $idPescador
+            'tap_id' => $request['artePesca'],
+            'tp_id'  => $idPescador
         );
         
         $dbTablePescadorHasArtePesca->insert($dadosPescadorHasArtePesca);
@@ -103,17 +103,17 @@ class Application_Model_Pescador
         $dbTablePescadorHasColonia->insert($dadosPescadorHasColonia);
         
         $dadosPescadorHasEmbarcacao = array(
-            'TTE_ID'     => $request['tipoEmbarcacao'],
-            'TPE_ID'     => $request['porteEmbarcacao'],
-            'TPTE_Motor' => TRUE,
-            'TP_ID'      => $idPescador
+            'tte_id'     => $request['tipoEmbarcacao'],
+            'tpe_id'     => $request['porteEmbarcacao'],
+            'tpte_motor' => TRUE,
+            'tp_id'      => $idPescador
         );
         
         $dbTablePescadorHasEmbarcacao->insert($dadosPescadorHasEmbarcacao);
         
         $dadosPescadorHasEspecieCapturada = array(
-            'ESP_ID'     => $request['especie'],
-            'TP_ID'      => $idPescador
+            'esp_id'     => $request['especie'],
+            'tp_id'      => $idPescador
         );
         
         $dbTablePescadorHasEspecieCapturada->insert($dadosPescadorHasEspecieCapturada);
@@ -127,36 +127,36 @@ class Application_Model_Pescador
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
         $dadosEndereco = array(
-            'TE_Logradouro'  => $request['logradouro'],
-            'TE_Numero'      => $request['numero'],
-            'TE_Bairro'      => $request['bairro'],
-            'TE_CEP'         => $request['cep'],
-            'TE_Comp'        => $request['complemento'],
-            'TMun_ID'        => $request['municipio']
+            'te_logradouro'  => $request['logradouro'],
+            'te_numero'      => $request['numero'],
+            'te_bairro'      => $request['bairro'],
+            'te_cep'         => $request['cep'],
+            'te_comp'        => $request['complemento'],
+            'tmun_id'        => $request['municipio']
         );
         
         $dadosPescador = array(
-            'TP_Nome'          => $request['nome'],
-            'TP_Sexo'          => $request['sexo'],
-            'TP_RG'            => $request['rg'],
-            'TP_CPF'           => $request['cpf'],
-            'TP_Apelido'       => $request['apelido'],
-            'TP_Matricula'     => $request['matricula'],
-            'TP_FiliacaoPai'   => $request['filiacaoPai'],
-            'TP_FiliacaoMae'   => $request['filiacaoMae'],
-            'TP_CTPS'          => $request['ctps'],
-            'TP_PIS'           => $request['pis'],
-            'TP_INSS'          => $request['inss'],
-            'TP_NIT_CEI'       => $request['nit_cei'],
-            'TP_CMA'           => $request['cma'],
-            'TP_RGB_MAA_IBAMA' => $request['rgb_maa_ibama'],
-            'TP_CIR_Cap_Porto' => $request['cir_cap_porto'],
-            'TP_DataNasc'      => $request['dataNasc'],
-            'TMun_ID_Natural'  => $request['municipioNat']
+            'tp_nome'          => $request['nome'],
+            'tp_sexo'          => $request['sexo'],
+            'tp_rg'            => $request['rg'],
+            'tp_cpf'           => $request['cpf'],
+            'tp_apelido'       => $request['apelido'],
+            'tp_matricula'     => $request['matricula'],
+            'tp_filiacaopai'   => $request['filiacaoPai'],
+            'tp_filiacaomae'   => $request['filiacaoMae'],
+            'tp_ctps'          => $request['ctps'],
+            'tp_pis'           => $request['pis'],
+            'tp_inss'          => $request['inss'],
+            'tp_nit_cei'       => $request['nit_cei'],
+            'tp_cma'           => $request['cma'],
+            'tp_rgb_maa_ibama' => $request['rgb_maa_ibama'],
+            'tp_cir_cap_porto' => $request['cir_cap_porto'],
+            'tp_datanasc'      => $request['dataNasc'],
+            'tmun_id_natural'  => $request['municipioNat']
         );
         
-        $wherePescador= $dbTablePescador->getAdapter()->quoteInto('"TP_ID" = ?', $request['idPescador']);
-        $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"TE_ID" = ?', $request['idEndereco']);
+        $wherePescador= $dbTablePescador->getAdapter()->quoteInto('"tp_id" = ?', $request['idPescador']);
+        $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"te_id" = ?', $request['idEndereco']);
         
         $dbTablePescador->update($dadosPescador, $wherePescador);
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
@@ -167,10 +167,10 @@ class Application_Model_Pescador
         $dbTablePescador = new Application_Model_DbTable_Pescador();        
                 
         $dadosPescador = array(
-            'TP_PescadorDeletado' => TRUE
+            'tp_pescadordeletado' => TRUE
         );
         
-        $wherePescador= $dbTablePescador->getAdapter()->quoteInto('"TP_ID" = ?', $idPescador);
+        $wherePescador= $dbTablePescador->getAdapter()->quoteInto('"tp_id" = ?', $idPescador);
         
         $dbTablePescador->update($dadosPescador, $wherePescador);
     }

@@ -92,8 +92,8 @@ class TempoController extends Zend_Controller_Action
         $pdf->SetFont("Arial", "",10);
         sort($tempo);
         foreach($tempo as $dados){
-            $pdf->Cell($width/2, $height, $dados['TMP_ID'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['TMP_Estado'],$border_true,$next_line);
+            $pdf->Cell($width/2, $height, $dados['tmp_id'],$border_true,$same_line);
+            $pdf->Cell($width, $height, $dados['tmp_estado'],$border_true,$next_line);
         }
         
         $pdf->Output("TempoRelatorio.pdf", 'I');

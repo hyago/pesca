@@ -4,6 +4,7 @@
 <fieldset id="Desembarque"></fieldset>
 <table>
     <tr>
+    <th>ID</th>
         <th>Vento</th>
     </tr>
     
@@ -11,16 +12,18 @@
     foreach ($this->dados as $key => $vento):
     ?>
     <tr>
-        <td><?= $vento['VNT_Forca'] ?></td>
+    <td><?= $vento['vnt_id'] ?></td>
+        <td><?= $vento['vnt_forca'] ?></td>
+        
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"vento","action"=>"editar", "id" => $vento['VNT_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"vento","action"=>"editar", "id" => $vento['vnt_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"vento","action"=>"excluir", "id" => $vento['VNT_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"vento","action"=>"excluir", "id" => $vento['vnt_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>

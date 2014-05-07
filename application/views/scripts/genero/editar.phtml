@@ -5,34 +5,31 @@
 </div>
 
 <form id="genero" action="<?=$this->url(array("controller"=>"genero","action"=>"atualizar"),null,true)?>">
-      <fieldset id="Filogenia">
-        <div id="esquerda">  
-          <div id="form-esq">
-              <label for="id">ID:</label>
-              <input type="text" name="id_genero" id="id_genero" value="<?=$this->genero["GEN_ID"]?>"/><br />
-          </div>
-         <div id="form-esq">    
-              <label for="tipo">Nome:</label>
-              <input type="text" id="nome_genero" name="nome_genero" value="<?=$this->genero["GEN_Nome"]?>"/><br />
-         </div>
-         <div id="form-esq">    
-              <label for="tipo">Família:</label>
-              <select name="select_familia_genero" id="familia_genero">
-              <?php
-                    foreach ($this->dados as $key => $familia):
-               ?>
-              
-		<option nome="ordem_familia" value="<?=$familia['FAM_ID']?>"><?= $familia['FAM_Nome']?></option>
-              
-              <?php
-                endforeach;
-              ?>
-                </select><br/>
-         </div>
-        <div id="Submit">
-            <a href="<?=$this->url(array("controller"=>"genero","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
-            <input type="submit" value="Atualizar" />
-        </div>      
-      </div>
-      </fieldset>
+	  <fieldset id="Filogenia">
+		<div id="esquerda">  
+		  <div id="form-esq">
+			  <label for="id">ID:</label>
+			  <input type="text" name="id_genero" value="<?=$this->genero["gen_id"]?>"/><br />
+		  </div>
+		<div id="form-esq">    
+			  <label for="tipo">Nome:</label>
+			  <input type="text" name="nome_genero" value="<?=$this->genero["gen_nome"]?>"/><br />
+		</div>
+
+		<div id="form-esq">
+            <label>Família: </label>
+            <select name="familia_genero">
+                <?php foreach ($this->dados as $key => $familia): ?>
+                <option value="<?= $familia['fam_id']; ?>" <?=($familia['fam_id'] == $this->genero['fam_id']) ? 'selected="selected"' : '';?>><?= $familia['fam_nome']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+		
+		
+		<div id="Submit">
+			<a href="<?=$this->url(array("controller"=>"genero","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+			<input type="submit" value="Atualizar" />
+		</div>      
+	  </div>
+	  </fieldset>
 </form>

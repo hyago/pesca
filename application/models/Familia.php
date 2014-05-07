@@ -31,11 +31,11 @@ class Application_Model_Familia
         $this->dbTableFamilia = new Application_Model_DbTable_Familia();
         
         $dadosFamilia = array(
-            'FAM_Nome' => $request['nome_familia'],
-            'FAM_Ordem_Filogenetica' => $request['ordem_filogenetica'],
-            'FAM_Tipo' => $request['tipo_familia'],
-            'FAM_Caracteristica' => $request['caracteristica_familia'],
-            'ORD_ID' => $request['select_ordem_familia']
+            'fam_nome' 					=> $request['nome_familia'],
+            'fam_ordem_filogenetica'	=> $request['ordem_filogenetica'],
+            'fam_tipo' 					=> $request['tipo_familia'],
+            'fam_caracteristica' 		=> $request['caracteristica_familia'],
+            'ord_id' 					=> $request['ordem_familia']
         );
         
         $this->dbTableFamilia->insert($dadosFamilia);
@@ -45,29 +45,26 @@ class Application_Model_Familia
     
     public function update(array $request)
     {
-        $this->dbTableOrdem = new Application_Model_DbTable_Ordem();
         $this->dbTableFamilia = new Application_Model_DbTable_Familia();
 
         $dadosFamilia = array(
-            'FAM_Nome' => $request['nome_familia'],
-            'FAM_Ordem_Filogenetica' => $request['ordem_filogenetica'],
-            'FAM_Tipo' => $request['tipo_familia'],
-            'FAM_Caracteristica' => $request['caracteristica_familia'],
-            'ORD_ID' => $request['select_ordem_familia']
+            'fam_nome' 					=> $request['nome_familia'],
+            'fam_ordem_filogenetica'	=> $request['ordem_filogenetica'],
+            'fam_tipo' 					=> $request['tipo_familia'],
+            'fam_caracteristica' 		=> $request['caracteristica_familia'],
+            'ord_id' 					=> $request['ordem_familia']
         );
         
-        $whereFamilia = $this->dbTableFamilia->getAdapter()
-                ->quoteInto('"FAM_ID" = ?', $request['id_familia']);
+        $whereFamilia = $this->dbTableFamilia->getAdapter()->quoteInto('"fam_id" = ?', $request['id_familia']);
         
         $this->dbTableFamilia->update($dadosFamilia, $whereFamilia);
     }
     
     public function delete($idFamilia)
     {
-        $this->dbTableFamilia = new Application_Model_DbTable_Familia();       
+        $this->dbTableFamilia = new Application_Model_DbTable_Familia();
                 
-        $whereFamilia = $this->dbTableFamilia->getAdapter()
-                ->quoteInto('"FAM_ID" = ?', $idFamilia);
+        $whereFamilia = $this->dbTableFamilia->getAdapter()->quoteInto('"fam_id" = ?', $idFamilia);
         
         $this->dbTableFamilia->delete($whereFamilia);
     }

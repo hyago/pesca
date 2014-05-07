@@ -6,7 +6,7 @@
     <tr>
         <th>ID</th>
         <th>Nome</th>
-        <th>Municipio</th>
+        <th>Local</th>
     </tr>
     
     <?php
@@ -15,7 +15,7 @@
     <tr>
         <td><?= $porto['pto_id'] ?></td>
         <td><?= $porto['pto_nome'] ?></td>
-        <td><?= $porto['tmun_id'] ?></td>
+        <td><?= $porto['pto_local'] ?></td>
         <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"porto","action"=>"editar", "id" => $porto['pto_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

@@ -4,42 +4,42 @@
 </div>
 
 <form id="cadastro-usuario" action="<?=$this->url(array("controller"=>"especie","action"=>"atualizar"),null,true)?>" method="post">
-    <fieldset id="Filogenia">
-       <div id="esquerda">  
-        <div id="form-esq">     
-            <label for="id" >ID:</label>
-            <input type="text" name="id_especie" id="id_especie" value="<?=$this->especie["ESP_ID"]?>"/><br />
-         </div>
-         <div id="form-esq">   
-            <label for="tipo">Nome:</label>
-            <input type="text" id="nome_especie" name="nome_especie"value="<?=$this->especie["ESP_Nome"]?>"/><br />
-         </div>  
-         <div id="form-esq">   
-            <label for="tipo">Descritor:</label>
-            <input type="text" id="descritor_especie" name="descritor_especie"value="<?=$this->especie["ESP_Descritor"]?>"/><br />
-         </div>   
-         <div id="form-esq">   
-            <label for="tipo">Nome Comum:</label>
-            <input type="text" id="nome_comum" name="nome_comum"value="<?=$this->especie["ESP_Nome_Comum"]?>"/><br />
-         </div>
-         <div id="form-esq">   
-            <label for="tipo">Gênero:</label>
-              <select name="select_genero_especie" id="genero_especie">
-              <?php
-                    foreach ($this->dados as $key => $genero):
-               ?>
-              
-		<option nome="genero_especie" value="<?=$genero['GEN_ID']?>"><?= $genero['GEN_Nome']?></option>
-              
-              <?php
-                endforeach;
-              ?>
-              </select></br>
-          </div>
-        <div id="Submit">
-            <a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
-            <input type="submit" value="Atualizar" />
+	<fieldset id="Filogenia">
+	  <div id="esquerda">  
+		
+		<div id="form-esq">     
+			<label for="id" >ID:</label>
+			<input type="text" name="id_especie" value="<?=$this->especie["esp_id"]?>"/><br />
+		</div>
+		
+		<div id="form-esq">   
+			<label for="tipo">Nome:</label>
+			<input type="text" name="nome_especie" value="<?=$this->especie["esp_nome"]?>"/><br />
+		</div>  
+		
+		<div id="form-esq">   
+			<label for="tipo">Descritor:</label>
+			<input type="text" name="descritor_especie" value="<?=$this->especie["esp_descritor"]?>"/><br />
+		</div>   
+		
+		<div id="form-esq">   
+			<label for="tipo">Nome Comum:</label>
+			<input type="text" name="nome_comum" value="<?=$this->especie["esp_nome_comum"]?>"/><br />
+		</div>
+		
+		<div id="form-esq">
+            <label>Gênero: </label>
+            <select name="genero_especie">
+                <?php foreach ($this->dados as $key => $genero): ?>
+                <option value="<?= $genero['gen_id']; ?>" <?=($genero['gen_id'] == $this->especie['gen_id']) ? 'selected="selected"' : '';?>><?= $genero['gen_nome']; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
-       </div>     
-    </fieldset>
+		  
+		<div id="Submit">
+			<a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+			<input type="submit" value="Atualizar" />
+		</div>
+	  </div>     
+	</fieldset>
 </form>

@@ -29,7 +29,7 @@ class Application_Model_Tempo
         $this->dbTableTempo = new Application_Model_DbTable_Tempo();
         
         $dadosTempo = array(
-            'TMP_Estado' => $request['tempo']
+            'tmp_estado' => $request['tempo']
         );
         
         $this->dbTableTempo->insert($dadosTempo);
@@ -42,11 +42,11 @@ class Application_Model_Tempo
         $this->dbTableTempo = new Application_Model_DbTable_Tempo();
         
         $dadosTempo = array(
-            'TMP_Estado' => $request['tempo']
+            'tmp_estado' => $request['tempo']
         );
         
         $whereTempo= $this->dbTableTempo->getAdapter()
-                ->quoteInto('"TMP_ID" = ?', $request['idTempo']);
+                ->quoteInto('"tmp_id" = ?', $request['idTempo']);
         
         $this->dbTableTempo->update($dadosTempo, $whereTempo);
     }
@@ -56,7 +56,7 @@ class Application_Model_Tempo
         $this->dbTableTempo = new Application_Model_DbTable_Tempo();       
                 
         $whereTempo= $this->dbTableTempo->getAdapter()
-                ->quoteInto('"TMP_ID" = ?', $idTempo);
+                ->quoteInto('"tmp_id" = ?', $idTempo);
         
         $this->dbTableTempo->delete($whereTempo);
     }

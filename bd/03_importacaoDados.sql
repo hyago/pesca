@@ -856,3 +856,17 @@ INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (8,'mais que 5 salários');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (9,'subsistência');
 
 
+
+
+
+
+
+
+
+--- Tem que ser no final do arquivo
+
+SELECT pg_catalog.setval('t_ordem_ord_id_seq', 30, true);
+SELECT pg_catalog.setval('t_familia_fam_id_seq', 130, true);
+SELECT pg_catalog.setval('t_genero_gen_id_seq', 162, true);
+
+

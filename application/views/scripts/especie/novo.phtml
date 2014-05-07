@@ -24,12 +24,12 @@
          </div>
          <div id="form-esq">   
             <label for="tipo">Gênero:</label>
-              <select name="select_genero_especie" id="genero_especie">
+              <select name="genero_especie" id="genero_especie">
               <?php
                     foreach ($this->dados as $key => $genero):
                ?>
               
-		<option nome="genero_especie" value="<?=$genero['GEN_ID']?>"><?= $genero['GEN_Nome']?></option>
+		<option nome="genero_especie" value="<?=$genero['gen_id']?>"><?= $genero['gen_nome']?></option>
               
               <?php
                 endforeach;

@@ -18,20 +18,19 @@
               <label for="tipo">Característica:</label>
               <input type="text" name="caracteristica_ordem" value="<?=$this->ordem['ord_caracteristica']?>"/><br />
         </div>
-        <div id="form-esq">    
-              <label for="tipo">Grupo:</label>
-              <select name="select_grupo_ordem" id="grupo_ordem">
-              <?php
-                    foreach ($this->dados as $key => $grupo):
-               ?>
-              
-                  <option nome="grupo_ordem" value="<?=$grupo['grp_id']?>"><?=$grupo['grp_nome']?></option>
-              
-              <?php
-                endforeach;
-              ?>
-                </select><br/>
+        
+                <div id="form-esq">
+            <label>Grupo: </label>
+            <select name="grupo_ordem">
+                <?php foreach ($this->grupos as $key => $grupo): ?>
+                <option value="<?= $grupo['grp_id']; ?>" <?=($grupo['grp_id'] == $this->ordem['grp_id']) ? 'selected="selected"' : '';?>><?= $grupo['grp_nome']; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
+        
+      
+
+        
         <div id="Submit">
             <a href="<?=$this->url(array("controller"=>"usuarios","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
             <input type="submit" value="Atualizar" />

@@ -41,10 +41,10 @@ class Application_Model_Especie
         $this->dbTableGenero = new Application_Model_DbTable_Genero();
         
         $dadosEspecie = array(
-            'ESP_Nome' => $request['nome_especie'],
-            'ESP_Descritor' => $request['descritor_especie'],
-            'ESP_Nome_Comum' => $request['nome_comum'], 
-            'GEN_ID' => $request['select_genero_especie']
+            'esp_nome'			=> $request['nome_especie'],
+            'esp_descritor'		=> $request['descritor_especie'],
+            'esp_nome_comum'	=> $request['nome_comum'], 
+            'gen_id'			=> $request['genero_especie']
         );
         
         $this->dbTableEspecie->insert($dadosEspecie);
@@ -56,16 +56,13 @@ class Application_Model_Especie
         $this->dbTableEspecie = new Application_Model_DbTable_Especie();
         
         $dadosEspecie = array(
-            'ESP_Nome' => $request['nome_especie'],
-            'ESP_Descritor' => $request['descritor_especie'],
-            'ESP_Nome_Comum' => $request['nome_comum'], 
-            'GEN_ID' => $request['select_genero_especie']
+            'esp_nome'			=> $request['nome_especie'],
+            'esp_descritor'		=> $request['descritor_especie'],
+            'esp_nome_comum'	=> $request['nome_comum'], 
+            'gen_id'			=> $request['genero_especie']
         );
- 
-        
-        $whereEspecie= $this->dbTableEspecie->getAdapter()
-                ->quoteInto('"ESP_ID" = ?', $request['id_especie']);
-        
+		
+		$whereEspecie= $this->dbTableEspecie->getAdapter()->quoteInto('"esp_id" = ?', $request['id_especie']);
         
         $this->dbTableEspecie->update($dadosEspecie, $whereEspecie);
     }
@@ -73,10 +70,9 @@ class Application_Model_Especie
     public function delete($idEspecie)
     {
         $this->dbTableEspecie = new Application_Model_DbTable_Especie();       
-                
-        $whereEspecie= $this->dbTableEspecie->getAdapter()
-                ->quoteInto('"ESP_ID" = ?', $idEspecie);
-        
+
+        $whereEspecie= $this->dbTableEspecie->getAdapter()->quoteInto('"esp_id" = ?', $idEspecie);
+
         $this->dbTableEspecie->delete($whereEspecie);
     }
 

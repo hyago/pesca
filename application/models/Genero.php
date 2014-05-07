@@ -31,8 +31,8 @@ class Application_Model_Genero
         $this->dbTableFamilia = new Application_Model_DbTable_Familia();
         
         $dadosGenero = array(
-            'GEN_Nome' => $request['nome_genero'],
-            'FAM_ID' => $request['select_familia_genero']
+            'gen_nome' => $request['nome_genero'],
+            'fam_id' => $request['familia_genero']
         );
         
         $this->dbTableGenero->insert($dadosGenero);
@@ -45,13 +45,12 @@ class Application_Model_Genero
         $this->dbTableGenero = new Application_Model_DbTable_Genero();
         
         $dadosGenero = array(
-            'GEN_Nome' => $request['nome_genero'],
-            'FAM_ID' => $request['select_familia_genero']
+            'gen_nome' => $request['nome_genero'],
+            'fam_id' => $request['familia_genero']
         );
         
         
-        $whereGenero = $this->dbTableGenero->getAdapter()
-                ->quoteInto('"GEN_ID" = ?', $request['idGenero']);
+        $whereGenero = $this->dbTableGenero->getAdapter() ->quoteInto('"gen_id" = ?', $request['id_genero']);
         
         $this->dbTableGenero->update($dadosGenero, $whereGenero);
     }
@@ -61,7 +60,7 @@ class Application_Model_Genero
         $this->dbTableGenero = new Application_Model_DbTable_Genero();       
                 
         $whereGenero = $this->dbTableGenero->getAdapter()
-                ->quoteInto('"GEN_ID" = ?', $idGenero);
+                ->quoteInto('"gen_id" = ?', $idGenero);
         
         $this->dbTableGenero->delete($whereGenero);
     }
