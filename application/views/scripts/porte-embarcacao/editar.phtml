@@ -1,0 +1,29 @@
+<!--<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>PorteEmbarcacao</b> and script/action name <b>editar</b></p>
+</div>-->
+
+<div id="titulos">
+    <h2>Perfil Social->Porte Embarcação</h2>
+    <h3>Editar</h3>
+</div>
+
+<form action="<?=$this->url(array("controller"=>"porte-embarcacao","action"=>"atualizar"),null,true)?>" method="post">
+    <fieldset id="Social">
+        
+        <div id="esquerda">
+            <input type="hidden" name="idPorteEmb" value="<?=$this->porteEmbarcacao['tpe_id']?>" />
+            
+            <div id="form-esq">
+                <label>Porte: </label>
+                <input type="text" name="porteEmb" placeholder="Porte Embarcação" value="<?=$this->porteEmbarcacao['tpe_porte']?>"/> <br />
+            </div>
+            
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"porte-embarcacao","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+            <input type="submit" value="Atualizar" />
+        </div>
+            
+        </div>
+    <fieldset>
+</form>

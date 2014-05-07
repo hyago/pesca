@@ -362,7 +362,7 @@ CREATE TABLE IF NOT EXISTS T_AreaPesca_has_T_Pescador (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_PorteEmbarcacao (
   TPE_ID serial,
-  TPE_Porte VARCHAR(7) NOT NULL,
+  TPE_Porte VARCHAR(30) NOT NULL,
   PRIMARY KEY (TPE_ID));
 
 

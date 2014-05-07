@@ -868,5 +868,5 @@ INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (9,'subsistência');
 SELECT pg_catalog.setval('t_ordem_ord_id_seq', 30, true);
 SELECT pg_catalog.setval('t_familia_fam_id_seq', 130, true);
 SELECT pg_catalog.setval('t_genero_gen_id_seq', 162, true);
-
+SELECT pg_catalog.setval('T_PorteEmbarcacao_tpe_id_seq', 4, true);
 

@@ -98,6 +98,9 @@
         <controllerFile controllerName="EntrevistaPescador">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="PorteEmbarcacao">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -262,6 +265,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="EntrevistaPescador">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="PorteEmbarcacao">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="PorteEmbarcacao">
+            <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="PorteEmbarcacao">
+            <viewScriptFile forActionName="novo"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

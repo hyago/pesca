@@ -112,7 +112,7 @@ class Application_Model_Pescador
         $dbTablePescadorHasEmbarcacao->insert($dadosPescadorHasEmbarcacao);
         
         $dadosPescadorHasEspecieCapturada = array(
-            'esp_id'     => $request['especie'],
+            't_tipocapturada_itc_id'     => $request['especie'],
             'tp_id'      => $idPescador
         );
         
