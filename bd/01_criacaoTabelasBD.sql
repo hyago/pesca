@@ -86,7 +86,103 @@ CREATE TABLE IF NOT EXISTS T_Pescador (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+-- -----------------------------------------------------
+-- Table T_Escolaridade
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_Escolaridade (
+  ESC_ID serial,
+  ESC_Nivel VARCHAR(25) NULL,
+  PRIMARY KEY (ESC_ID));
+  
+-- -----------------------------------------------------
+-- Table T_Pescador_has_T_Escolaridade
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Escolaridade (
+  ESC_ID INT NOT NULL,
+  TP_ID INT NOT NULL,
+  PRIMARY KEY (ESC_ID),
+  CONSTRAINT fk_T_Pescador_has_T_Escolaridade_T_Pescador1
+    FOREIGN KEY (TP_ID)
+    REFERENCES T_Pescador (TP_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Pescador_has_T_Escolaridade_T_Escolaridade1
+    FOREIGN KEY (ESC_ID)
+    REFERENCES T_Escolaridade (ESC_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+	
+-- -----------------------------------------------------
+-- Table T_Renda
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_Renda (
+  REN_ID serial,
+  REN_Renda VARCHAR(25) NULL,
+  PRIMARY KEY (REN_ID));
 
+-- -----------------------------------------------------
+-- Table T_Pescador_has_T_Renda
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Renda (
+  REN_ID INT NOT NULL,
+  TP_ID INT NOT NULL,
+  TPR_OutraRenda SMALLINT NULL,
+  TPR_Qual VARCHAR(60) NULL,
+  PRIMARY KEY (REN_ID),
+  CONSTRAINT fk_T_Pescador_has_T_Renda_T_Renda1
+    FOREIGN KEY (REN_ID)
+    REFERENCES T_Renda (REN_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Pescador_has_T_Renda_T_Pescador1
+    FOREIGN KEY (TP_ID)
+    REFERENCES T_Pescador (TP_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+  
+-- -----------------------------------------------------
+-- Table T_ProgramaSocial
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ProgramaSocial (
+  PRS_ID INT NOT NULL,
+  PRS_Programa VARCHAR(30) NULL,
+  PRIMARY KEY (PRS_ID));
+  
+-- -----------------------------------------------------
+-- Table T_Pescador_has_T_ProgramaSocial
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_Pescador_has_T_ProgramaSocial (
+  TP_ID INT NOT NULL,
+  PRS_ID INT NOT NULL,
+  PRIMARY KEY (TP_ID, PRS_ID),
+  CONSTRAINT fk_T_Pescador_has_T_ProgramaSocial_T_Pescador1
+    FOREIGN KEY (TP_ID)
+    REFERENCES T_Pescador (TP_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Pescador_has_T_ProgramaSocial_T_ProgramaSocial1
+    FOREIGN KEY (PRS_ID)
+    REFERENCES T_ProgramaSocial (PRS_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+-- -----------------------------------------------------
+-- Table T_Pescador_has_T_Endereco
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Endereco (
+  TP_ID INT NOT NULL,
+  TE_ID INT NOT NULL,
+  PRIMARY KEY (TE_ID),
+  CONSTRAINT fk_T_Pescador_has_T_Endereco_T_Pescador1
+    FOREIGN KEY (TP_ID)
+    REFERENCES T_Pescador (TP_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Pescador_has_T_Endereco_T_Endereco1
+    FOREIGN KEY (TE_ID)
+    REFERENCES T_Endereco (TE_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 -- -----------------------------------------------------
 -- Table T_Comunidade
