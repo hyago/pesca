@@ -101,6 +101,9 @@
         <controllerFile controllerName="PorteEmbarcacao">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="TipoCapturada">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -144,6 +147,7 @@
           <dbTableFile dbTableName="Tempo1"/>
           <dbTableFile dbTableName="Vento1"/>
           <dbTableFile dbTableName="UfDbtable"/>
+          <dbTableFile dbTableName="TipoCapturadaDbtable"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -168,6 +172,7 @@
         <modelFile modelName="Tempo1"/>
         <modelFile modelName="Vento"/>
         <modelFile modelName="UfMapper"/>
+        <modelFile modelName="TipoCapturadaModel"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -274,6 +279,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="PorteEmbarcacao">
             <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoCapturada">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoCapturada">
+            <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoCapturada">
+            <viewScriptFile forActionName="editar"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

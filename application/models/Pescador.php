@@ -14,24 +14,24 @@
 class Application_Model_Pescador
 {
     
-    public function select($where = null, $order = null, $limit = null)
-    {
-        $dao = new Application_Model_DbTable_Pescador();
-        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+	public function select($where = null, $order = null, $limit = null)
+	{
+		$dao = new Application_Model_DbTable_Pescador();
+		$select = $dao->select()->from($dao)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-        
-        return $dao->fetchAll($select)->toArray();
-    }
+		if(!is_null($where)){
+			$select->where($where);
+		}
+		
+		return $dao->fetchAll($select)->toArray();
+	}
     
-    public function find($id)
-    {
-        $dao = new Application_Model_DbTable_VPescador();
-        $arr = $dao->find($id)->toArray();
-        return $arr[0];
-    }
+	public function find($id)
+	{
+		$dao = new Application_Model_DbTable_VPescador();
+		$arr = $dao->find($id)->toArray();
+		return $arr[0];
+	}
     
     public function insert(array $request)
     {
@@ -42,6 +42,7 @@ class Application_Model_Pescador
         $dbTablePescadorHasColonia = new Application_Model_DbTable_PescadorHasColonia();
         $dbTablePescadorHasEmbarcacao = new Application_Model_DbTable_PescadorHasEmbarcacao();
         $dbTablePescadorHasEspecieCapturada = new Application_Model_DbTable_PescadorHasEspecieCapturada();
+        $dbTable_EspecieCapturada = new Application_Model_DbTable_EspecieCapturada();
         
         
         $dadosEndereco = array(
@@ -63,6 +64,8 @@ class Application_Model_Pescador
             'tp_sexo'          => $request['sexo'],
             'tp_rg'            => $request['rg'],
             'tp_cpf'           => $request['cpf'],
+            'tp_telres'           => $request['telefoneResidencial'],
+            'tp_telcel'           => $request['telefoneCelular'],
             'tp_apelido'       => $request['apelido'],
             'tp_matricula'     => $request['matricula'],
             'tp_filiacaopai'   => $request['filiacaoPai'],
@@ -112,7 +115,7 @@ class Application_Model_Pescador
         $dbTablePescadorHasEmbarcacao->insert($dadosPescadorHasEmbarcacao);
         
         $dadosPescadorHasEspecieCapturada = array(
-            't_tipocapturada_itc_id'     => $request['especie'],
+            't_tipocapturada_itc_id'     => $request['tipocapturada'],
             'tp_id'      => $idPescador
         );
         
@@ -125,6 +128,13 @@ class Application_Model_Pescador
     {
         $dbTablePescador = new Application_Model_DbTable_Pescador();
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
+        $dbTable_EspecieCapturada = new Application_Model_DbTable_EspecieCapturada();
+        
+        $dbTablePescadorHasAreaPesca = new Application_Model_DbTable_PescadorHasAreaPesca();
+        $dbTablePescadorHasArtePesca = new Application_Model_DbTable_PescadorHasArtePesca();
+        $dbTablePescadorHasColonia = new Application_Model_DbTable_PescadorHasColonia();
+        $dbTablePescadorHasEmbarcacao = new Application_Model_DbTable_PescadorHasEmbarcacao();
+        $dbTablePescadorHasEspecieCapturada = new Application_Model_DbTable_PescadorHasEspecieCapturada();
         
         $dadosEndereco = array(
             'te_logradouro'  => $request['logradouro'],
@@ -135,11 +145,16 @@ class Application_Model_Pescador
             'tmun_id'        => $request['municipio']
         );
         
+        $data = explode('/', $request['dataNasc']);
+        $data = $data[2] . '-' . $data[1] . '-' . $data[0];
+        
         $dadosPescador = array(
             'tp_nome'          => $request['nome'],
             'tp_sexo'          => $request['sexo'],
             'tp_rg'            => $request['rg'],
             'tp_cpf'           => $request['cpf'],
+            'tp_telres'           => $request['telefoneResidencial'],
+            'tp_telcel'           => $request['telefoneCelular'],
             'tp_apelido'       => $request['apelido'],
             'tp_matricula'     => $request['matricula'],
             'tp_filiacaopai'   => $request['filiacaoPai'],
@@ -151,15 +166,33 @@ class Application_Model_Pescador
             'tp_cma'           => $request['cma'],
             'tp_rgb_maa_ibama' => $request['rgb_maa_ibama'],
             'tp_cir_cap_porto' => $request['cir_cap_porto'],
-            'tp_datanasc'      => $request['dataNasc'],
-            'tmun_id_natural'  => $request['municipioNat']
+            'tp_datanasc'      => $data,
+            'tmun_id_natural'  => $request['municipioNat'],
+            'te_id'            => $request['idEndereco']
         );
+        /*
+         $dadosPescadorHasArtePesca = array(
+            'tap_id' => $request['artePesca'],
+            'tp_id'  => $request['idPescador']
+        );
+        
+        
+                $dadosPescadorHasEmbarcacao = array(
+            'tte_id'     => $request['tipoEmbarcacao'],
+            'tpe_id'     => $request['porteEmbarcacao'],
+            'tpte_motor' => TRUE,
+            'tp_id'      => $idPescador
+        );*/
         
         $wherePescador= $dbTablePescador->getAdapter()->quoteInto('"tp_id" = ?', $request['idPescador']);
         $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"te_id" = ?', $request['idEndereco']);
+//         $whereArtePesca= $dbTablePescadorHasArtePesca->getAdapter()->quoteInto('"tap_id" = ?', $request['artePesca']);
+//         $whereArtePesca= $dbTablePescadorHasArtePesca->getAdapter()->quoteInto('"tap_id" = ?', $request['artePesca']);
+        
         
         $dbTablePescador->update($dadosPescador, $wherePescador);
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
+//         $dbTablePescadorHasArtePesca->update($dadosPescadorHasArtePesca, $whereArtePesca);
     }
     
     public function delete($idPescador)
@@ -174,6 +207,8 @@ class Application_Model_Pescador
         
         $dbTablePescador->update($dadosPescador, $wherePescador);
     }
+    
+
     public function select_Pescador_By_Municipio($where = null, $order = null, $limit = null)
     {
         $dao = new Application_Model_DbTable_VPescadorByMunicipio();

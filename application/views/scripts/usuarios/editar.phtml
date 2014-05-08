@@ -90,7 +90,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
             <label for="municipio">Município</label>
             <select name="municipio" id="municipio">
                 <?php foreach ($this->municipios as $key => $municipio): ?>
-                <option value="<?= $municipio['tmun_id']; ?>" <?= ($municipio['tmun_municipio'] == $this->usuario['tmun_municipio']) ? 'selected="selected"' : '';?>><?= $municipio['tuf_sigla'], ' ',$municipio['tmun_municipio']; ?></option>
+                <option value="<?= $municipio['tmun_id']; ?>" <?= ($municipio['tmun_id'] == $this->usuario['tmun_id']) ? 'selected="selected"' : '';?>><?= $municipio['tuf_sigla'], ' ',$municipio['tmun_municipio']; ?></option>
                 <?php endforeach; ?>
             </select>            
         </div>

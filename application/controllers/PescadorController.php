@@ -71,22 +71,28 @@ class PescadorController extends Zend_Controller_Action{
         $modelEspecie = new Application_Model_Especie();
         $modelTipoEmbarcacao= new Application_Model_TipoEmbarcacao();
         $modelPorteEmbarcacao= new Application_Model_PorteEmbarcacao();
+        $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
         
         $municipios = $modelMunicipio->select();
+        $municipiosNat = $modelMunicipio->select();
         $artesPesca = $modelArtePesca->select();
         $areasPesca = $modelAreaPesca->select();
         $colonias = $modelColonia->select();
         $especies = $modelEspecie->select();
         $tiposEmbarcacao = $modelTipoEmbarcacao->select();
         $portesEmbarcacao = $modelPorteEmbarcacao->select();
+        $tipoCapturadas = $modelTipoCapturada->select();
         
         $this->view->assign("municipios", $municipios);
+        $this->view->assign("municipiosNat", $municipiosNat);
         $this->view->assign("artesPesca", $artesPesca);
         $this->view->assign("areasPesca", $areasPesca);
         $this->view->assign("colonias", $colonias);
         $this->view->assign("especies", $especies);
         $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
         $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
+        $this->view->assign("tipoCapturadas", $tipoCapturadas);
+        
         $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
 	
     }
@@ -113,26 +119,31 @@ class PescadorController extends Zend_Controller_Action{
         $modelEspecie = new Application_Model_Especie();
         $modelTipoEmbarcacao= new Application_Model_TipoEmbarcacao();
         $modelPorteEmbarcacao= new Application_Model_PorteEmbarcacao();
+        $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
         
         $municipios = $modelMunicipio->select();
+        $municipiosNat = $modelMunicipio->select();
         $artesPesca = $modelArtePesca->select();
         $areasPesca = $modelAreaPesca->select();
         $colonias = $modelColonia->select();
         $especies = $modelEspecie->select();
         $tiposEmbarcacao = $modelTipoEmbarcacao->select();
         $portesEmbarcacao = $modelPorteEmbarcacao->select();
+        $tipoCapturadas = $modelTipoCapturada->select();
 
         $pescador= $this->modelPescador->find($this->_getParam('id'));
         
         $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
         $this->view->assign("pescador", $pescador);
         $this->view->assign("municipios", $municipios);
+        $this->view->assign("municipiosNat", $municipiosNat);
         $this->view->assign("artesPesca", $artesPesca);
         $this->view->assign("areasPesca", $areasPesca);
         $this->view->assign("colonias", $colonias);
         $this->view->assign("especies", $especies);
         $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
         $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
+        $this->view->assign("tipoCapturadas", $tipoCapturadas);
     }
    
     /*

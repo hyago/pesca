@@ -869,4 +869,16 @@ SELECT pg_catalog.setval('t_ordem_ord_id_seq', 30, true);
 SELECT pg_catalog.setval('t_familia_fam_id_seq', 130, true);
 SELECT pg_catalog.setval('t_genero_gen_id_seq', 162, true);
 SELECT pg_catalog.setval('T_PorteEmbarcacao_tpe_id_seq', 4, true);
+SELECT pg_catalog.setval('t_tipocapturada_itc_id_seq', 8, true);
+SELECT pg_catalog.setval('t_login_tl_id_seq', 8, true);
+SELECT pg_catalog.setval('t_usuario_tu_id_seq', 8, true);
+
+
+
+
+
+
+
+
+
 

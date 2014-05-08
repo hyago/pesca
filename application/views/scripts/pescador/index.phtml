@@ -5,6 +5,7 @@
 <fieldset id="Social"></fieldset>
 <table>
     <tr>
+    <th>ID</th>
         <th>Nome</th>
         <th>Matricula</th>
     </tr>
@@ -13,6 +14,7 @@
     foreach ($this->dados as $key => $pescador):
     ?>
     <tr>
+    <td><?= $pescador['tp_id'] ?></td>
         <td><?= $pescador['tp_nome'] ?></td>
         <td><?= $pescador['tp_matricula'] ?></td>
         <td class="td-botao">
