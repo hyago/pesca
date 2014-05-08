@@ -1,0 +1,23 @@
+<div id="titulos">
+    <h2>Social->Renda</h2>
+    <h3>Editar</h3>
+</div>
+
+<form action="<?=$this->url(array("controller"=>"Renda","action"=>"atualizar"),null,true)?>" method="post">
+   <input type="hidden" name="idRenda" value="<?= $this->rendas['ren_id'] ?>" />
+   <fieldset id="Renda">
+     <div id="esquerda">   
+
+     <div id="form-esq"> 
+            <label>Renda: </label>
+            <input type="text" name="renRenda" value="<?= $this->rendas['ren_renda'] ?>"/> <br />
+        </div>
+        
+        
+         <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"Renda","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+            <input type="submit" value="Atualizar" />
+        </div>
+      </div> 
+    </fieldset>
+</form>

@@ -104,6 +104,9 @@
         <controllerFile controllerName="TipoCapturada">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Renda">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -148,6 +151,7 @@
           <dbTableFile dbTableName="Vento1"/>
           <dbTableFile dbTableName="UfDbtable"/>
           <dbTableFile dbTableName="TipoCapturadaDbtable"/>
+          <dbTableFile dbTableName="RendaDbtable"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -173,6 +177,7 @@
         <modelFile modelName="Vento"/>
         <modelFile modelName="UfMapper"/>
         <modelFile modelName="TipoCapturadaModel"/>
+        <modelFile modelName="Renda"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -287,6 +292,15 @@
             <viewScriptFile forActionName="novo"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TipoCapturada">
+            <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Renda">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Renda">
+            <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Renda">
             <viewScriptFile forActionName="editar"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

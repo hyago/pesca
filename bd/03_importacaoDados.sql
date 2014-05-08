@@ -845,6 +845,13 @@ INSERT INTO T_ProgramaSocial (PRS_ID, PRS_Programa) VALUES (1,'Bolsa Família');
 INSERT INTO T_ProgramaSocial (PRS_ID, PRS_Programa) VALUES (2,'Minha Casa, Minha Vida');
 
 -- Renda
+CREATE TABLE T_RENDA (
+  REN_ID SERIAL,
+  REN_RENDA VARCHAR(25) NOT NULL,
+  PRIMARY KEY (REN_ID)
+  );
+
+
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (1,'até 1/2 salário');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (2,'1 salário');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (3,'de 1/2 a 1 salário');
@@ -855,14 +862,6 @@ INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (7,'de 4 a 5 salários');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (8,'mais que 5 salários');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (9,'subsistência');
 
-
-
-
-
-
-
-
-
 --- Tem que ser no final do arquivo
 
 SELECT pg_catalog.setval('t_ordem_ord_id_seq', 30, true);
@@ -872,6 +871,8 @@ SELECT pg_catalog.setval('T_PorteEmbarcacao_tpe_id_seq', 4, true);
 SELECT pg_catalog.setval('t_tipocapturada_itc_id_seq', 8, true);
 SELECT pg_catalog.setval('t_login_tl_id_seq', 8, true);
 SELECT pg_catalog.setval('t_usuario_tu_id_seq', 8, true);
+SELECT pg_catalog.setval('t_renda_ren_id_seq', 8, true);
+
 
 
 
