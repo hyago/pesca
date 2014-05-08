@@ -5,6 +5,61 @@
 
 -- Alterado: T_Especie_Capturada SPC_Peso(kg) -> SPC_Peso_kg
 
+drop table  t_alteracaosenha cascade;
+drop table  t_areapesca cascade;
+drop table  t_areapesca_has_t_pescador  cascade;
+drop table  t_artepesca cascade;
+drop table  t_colonia  cascade;
+drop table  t_comunidade cascade;
+drop table  t_dados_calao  cascade;
+drop table  t_dados_emalhe  cascade;
+drop table  t_dados_tarrafa cascade;
+drop table  t_endereco  cascade;
+drop table  t_entrevista_pescador  cascade;
+drop table  t_escolaridade  cascade;
+drop table  t_especie  cascade;
+drop table  t_familia  cascade;
+drop table  t_ficha_diaria  cascade;
+drop table  t_genero cascade;
+drop table  t_grupo cascade;
+drop table  t_historicorecadastramento  cascade;
+drop table  t_isca  cascade;
+drop table  t_login cascade;
+drop table  t_mare  cascade;
+drop table  t_monitoramento cascade;
+drop table  t_municipio cascade;
+drop table  t_ordem cascade;
+drop table  t_perfil cascade;
+drop table  t_pescador  cascade;
+drop table  t_pescador_has_t_colonia cascade;
+drop table  t_pescador_has_t_comunidade cascade;
+drop table  t_pescador_has_t_embarcacao cascade;
+drop table  t_pescador_has_t_endereco  cascade;
+drop table  t_pescador_has_t_escolaridade  cascade;
+drop table  t_pescador_has_t_especiecapturadas  cascade;
+drop table  t_pescador_has_t_programasocial cascade;
+drop table  t_pescador_has_t_renda  cascade;
+drop table  t_pescador_has_t_telefonecontato cascade;
+drop table  t_pescador_has_t_tipoartepesca  cascade;
+drop table  t_pescador_has_tt_dependente cascade;
+drop table  t_porteembarcacao  cascade;
+drop table  t_porto cascade;
+drop table  t_programasocial cascade;
+drop table  t_renda cascade;
+drop table  t_situacao  cascade;
+drop table  t_subamostra cascade;
+drop table  t_telefonecontato  cascade;
+drop table  t_tempo cascade;
+drop table  t_tipocapturada cascade;
+drop table  t_tipodependente cascade;
+drop table  t_tipoembarcacao cascade;
+drop table  t_tipotel  cascade;
+drop table  t_uf cascade;
+drop table  t_usuario  cascade;
+drop table  t_usuario_has_t_telefonecontato cascade;
+drop table  t_vento cascade;
+
+
 -- -----------------------------------------------------
 -- Table T_UF
 -- -----------------------------------------------------
@@ -28,8 +83,6 @@ CREATE TABLE IF NOT EXISTS T_Municipio (
     REFERENCES T_UF (TUF_Sigla)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
-
 
 -- -----------------------------------------------------
 -- Table T_Endereco
@@ -59,7 +112,7 @@ CREATE TABLE IF NOT EXISTS T_Pescador (
   TP_Nome VARCHAR(45) NOT NULL,
   TP_Sexo VARCHAR(1) NOT NULL,
   TP_Matricula VARCHAR(45) NULL,
-  TP_Apelido VARCHAR(20) NULL,
+  TP_Apelido VARCHAR(45) NULL,
   TP_FiliacaoPai VARCHAR(45) NULL,
   TP_FiliacaoMae VARCHAR(45) NULL,
   TP_CTPS VARCHAR(45) NULL,
@@ -74,8 +127,9 @@ CREATE TABLE IF NOT EXISTS T_Pescador (
       TP_TELRES NUMERIC (14,0) NULL,
   Tp_TELCEL NUMERIC (14,0) NULL,
   TP_DataNasc DATE NULL,
-  TMun_ID_Natural INT NOT NULL,
-  TE_ID INT NOT NULL,
+  TMun_ID_Natural INT NULL,
+ TE_ID INT NULL,
+TP_Especificidade varchar(200) NULL,
   PRIMARY KEY (TP_ID),
   CONSTRAINT fk_T_Pescador_T_Municipio1
     FOREIGN KEY (TMun_ID_Natural)
@@ -204,8 +258,8 @@ CREATE TABLE IF NOT EXISTS T_COLONIA (
   TC_ID SERIAL,
   TC_NOME VARCHAR(50) NOT NULL,
   TC_Especificidade character varying(50),
-  TCOM_ID integer NOT NULL,
-  TE_ID integer NOT NULL,
+  TCOM_ID integer NULL,
+  TE_ID integer NULL,
   PRIMARY KEY (TC_ID),
   UNIQUE (TC_NOME));
 
