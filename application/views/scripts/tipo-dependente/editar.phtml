@@ -1,0 +1,23 @@
+<div id="titulos">
+    <h2>Perfil Social->Tipo Dependente</h2>
+    <h3>Editar</h3>
+</div>
+
+<form action="<?=$this->url(array("controller"=>"tipo-dependente","action"=>"atualizar"),null,true)?>" method="post">
+   <input type="hidden" name="idTipoDependente" value="<?= $this->assignTipoDependente['ttd_id'] ?>" />
+   <fieldset id="TipoDependente">
+     <div id="esquerda">   
+
+     <div id="form-esq"> 
+            <label>Tipo Dependente: </label>
+            <input type="text" name="tipoDependente" value="<?= $this->assignTipoDependente['ttd_tipodependente'] ?>"/> <br />
+        </div>
+        
+        
+         <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"tipo-dependente","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+            <input type="submit" value="Atualizar" />
+        </div>
+      </div> 
+    </fieldset>
+</form>
