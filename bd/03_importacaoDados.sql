@@ -17,15 +17,12 @@ delete from T_ArtePesca;
 
 delete from t_tempo;
 delete from t_vento;
-
 delete from T_Especie;
 delete from T_Genero;
 delete from T_Familia;
 delete from T_Ordem;
 -- delete from T_OrdemA;
 delete from T_Grupo;
-
-
 -- -- -----------------------------------------------------
 -- -- Data for table T_ArtePesca
 -- -- -----------------------------------------------------
@@ -110,18 +107,14 @@ delete from T_Grupo;
 -- INSERT INTO T_PorteEmbarcacao (TPE_ID, TPE_Porte) VALUES (NULL,'Pequeno');
 -- INSERT INTO T_PorteEmbarcacao (TPE_ID, TPE_Porte) VALUES (NULL,'Médio');
 -- INSERT INTO T_PorteEmbarcacao (TPE_ID, TPE_Porte) VALUES (NULL,'Grande');
-
 -- t_vtempo
 INSERT INTO T_TEMPO (TMP_ID, TMP_ESTADO) VALUES ( 1,'Chuva');
 INSERT INTO T_TEMPO (TMP_ID, TMP_ESTADO) VALUES ( 2,'Nublado');
 INSERT INTO T_TEMPO (TMP_ID, TMP_ESTADO) VALUES ( 3,'Sol');
-
 -- t_vento
 INSERT INTO T_VENTO (VNT_ID, VNT_FORCA) VALUES ( 1,'Forte');
 INSERT INTO T_VENTO (VNT_ID, VNT_FORCA) VALUES ( 2,'Fraco');
 INSERT INTO T_VENTO (VNT_ID, VNT_FORCA) VALUES ( 3,'Moderado');
-
-
 -- GRUPO
 INSERT INTO T_Grupo (GRP_ID, GRP_Nome) VALUES (1,'Actinopterigyii');
 INSERT INTO T_Grupo (GRP_ID, GRP_Nome) VALUES (2,'Chondrichthyes');
@@ -129,7 +122,6 @@ INSERT INTO T_Grupo (GRP_ID, GRP_Nome) VALUES (3,'Elasmobrânquios');
 INSERT INTO T_Grupo (GRP_ID, GRP_Nome) VALUES (4,'Crustáceos');
 INSERT INTO T_Grupo (GRP_ID, GRP_Nome) VALUES (5,'Moluscos');
 INSERT INTO T_Grupo (GRP_ID, GRP_Nome) VALUES (6,'Outros');
-
 -- ORDEM
 INSERT INTO T_Ordem (ORD_ID, ORD_Nome, ORD_Caracteristica, GRP_ID) VALUES (1,'Anguilliformes','Enguias', 1);
 INSERT INTO T_Ordem (ORD_ID, ORD_Nome, ORD_Caracteristica, GRP_ID) VALUES (2,'Gasterosteiformes','Peixes trombeta', 1);
@@ -159,8 +151,6 @@ INSERT INTO T_Ordem (ORD_ID, ORD_Nome, ORD_Caracteristica, GRP_ID) VALUES (25,'B
 INSERT INTO T_Ordem (ORD_ID, ORD_Nome, ORD_Caracteristica, GRP_ID) VALUES (26,'Cypriniformes','Carpas', 1);
 INSERT INTO T_Ordem (ORD_ID, ORD_Nome, ORD_Caracteristica, GRP_ID) VALUES (27,'Characiformes','piabas', 1);
 INSERT INTO T_Ordem (ORD_ID, ORD_Nome, ORD_Caracteristica, GRP_ID) VALUES (29,'Elopíformes', NULL, 1);
-
-
 -- --
 -- -- Teste de cadastro de ORDEM com tabela de características
 -- --
@@ -248,9 +238,7 @@ INSERT INTO T_Ordem (ORD_ID, ORD_Nome, ORD_Caracteristica, GRP_ID) VALUES (29,'E
 -- --
 -- -- FIM Teste de cadastro de ORDEM com tabela de características
 -- --
-
 -- ALTER TABLE T_Familia ALTER COLUMN FAM_Caracteristica TYPE character varying(240);
-
 -- FAMILIA
 INSERT INTO T_Familia (FAM_ID, FAM_Nome, FAM_Tipo, ORD_ID, FAM_Ordem_Filogenetica, FAM_Caracteristica) VALUES (1,'Ariidae','bagres', 4, NULL, NULL);
 INSERT INTO T_Familia (FAM_ID, FAM_Nome, FAM_Tipo, ORD_ID, FAM_Ordem_Filogenetica, FAM_Caracteristica) VALUES (3,'Carangidae','pampos', 10,1505, NULL);
@@ -334,7 +322,6 @@ INSERT INTO T_Familia (FAM_ID, FAM_Nome, FAM_Tipo, ORD_ID, FAM_Ordem_Filogenetic
 INSERT INTO T_Familia (FAM_ID, FAM_Nome, FAM_Tipo, ORD_ID, FAM_Ordem_Filogenetica, FAM_Caracteristica) VALUES (124,'Scaridae', NULL, 10,7005, NULL);
 INSERT INTO T_Familia (FAM_ID, FAM_Nome, FAM_Tipo, ORD_ID, FAM_Ordem_Filogenetica, FAM_Caracteristica) VALUES (125,'Molidae','Peixe lua', 12,7010, NULL);
 INSERT INTO T_Familia (FAM_ID, FAM_Nome, FAM_Tipo, ORD_ID, FAM_Ordem_Filogenetica, FAM_Caracteristica) VALUES (126,'Eleotridae', NULL, 10,7015, NULL);
-
 --Genero
 INSERT INTO T_Genero (GEN_ID, GEN_Nome, FAM_ID) VALUES (1,'Arius', 1);
 INSERT INTO T_Genero (GEN_ID, GEN_Nome, FAM_ID) VALUES (2,'Cathorops', 1);
@@ -481,7 +468,6 @@ INSERT INTO T_Genero (GEN_ID, GEN_Nome, FAM_ID) VALUES (158,'Sametaria', 15);
 INSERT INTO T_Genero (GEN_ID, GEN_Nome, FAM_ID) VALUES (159,'Cação', 88);
 INSERT INTO T_Genero (GEN_ID, GEN_Nome, FAM_ID) VALUES (160,'Dormitator', 126);
 INSERT INTO T_Genero (GEN_ID, GEN_Nome, FAM_ID) VALUES (161,'Morea', 67);
-
 -- Espécie
 INSERT INTO T_Especie (ESP_ID, ESP_Nome, ESP_Nome_Comum,  ESP_Descritor, GEN_ID) VALUES ( 4151,'Caranx latus','Graçaim','(Agassiz, 1831)', 25);
 INSERT INTO T_Especie (ESP_ID, ESP_Nome, ESP_Nome_Comum,  ESP_Descritor, GEN_ID) VALUES ( 4154,'Caranx crysus','Guaricema', NULL, 25);
@@ -668,7 +654,6 @@ INSERT INTO T_AreaPesca (TAreaP_ID, TAreaP_AreaPesca) VALUES (5,'Mangue');
 INSERT INTO T_AreaPesca (TAreaP_ID, TAreaP_AreaPesca) VALUES (6,'Mar');
 INSERT INTO T_AreaPesca (TAreaP_ID, TAreaP_AreaPesca) VALUES (7,'Pedras');
 INSERT INTO T_AreaPesca (TAreaP_ID, TAreaP_AreaPesca) VALUES (8,'Rio');
-
 -- Colônias
 INSERT INTO T_Colonia (TC_ID, TC_Nome) VALUES (1,'A-87');
 INSERT INTO T_Colonia (TC_ID, TC_Nome) VALUES (2,'Z-18');
@@ -676,7 +661,6 @@ INSERT INTO T_Colonia (TC_ID, TC_Nome) VALUES (3,'Z-19');
 INSERT INTO T_Colonia (TC_ID, TC_Nome) VALUES (4,'Z-34');
 INSERT INTO T_Colonia (TC_ID, TC_Nome) VALUES (5,'Não Colonizado');
 INSERT INTO T_Colonia (TC_ID, TC_Nome) VALUES (6,'Z-22');
-
 -- Embarcação
 INSERT INTO T_TipoEmbarcacao (TTE_ID, TTE_TipoEmbarcacao) VALUES (1,'Barco');
 INSERT INTO T_TipoEmbarcacao (TTE_ID, TTE_TipoEmbarcacao) VALUES (2,'Bote');
@@ -685,7 +669,6 @@ INSERT INTO T_TipoEmbarcacao (TTE_ID, TTE_TipoEmbarcacao) VALUES (4,'Jangada');
 INSERT INTO T_TipoEmbarcacao (TTE_ID, TTE_TipoEmbarcacao) VALUES (5,'Lancha');
 INSERT INTO T_TipoEmbarcacao (TTE_ID, TTE_TipoEmbarcacao) VALUES (6,'Batera');
 INSERT INTO T_TipoEmbarcacao (TTE_ID, TTE_TipoEmbarcacao) VALUES (7,'Guincho');
-
 -- Porte Embarcacao
 INSERT INTO T_PorteEmbarcacao (TPE_ID, TPE_Porte) VALUES (1,'Pequeno');
 INSERT INTO T_PorteEmbarcacao (TPE_ID, TPE_Porte) VALUES (2,'Médio');
@@ -699,7 +682,6 @@ INSERT INTO T_TipoDependente (TTD_ID, TTD_TipoDependente) VALUES (4,'Neto/Bisnet
 INSERT INTO T_TipoDependente (TTD_ID, TTD_TipoDependente) VALUES (5,'Pais');
 INSERT INTO T_TipoDependente (TTD_ID, TTD_TipoDependente) VALUES (6,'Outros Familiares');
 INSERT INTO T_TipoDependente (TTD_ID, TTD_TipoDependente) VALUES (7,'Outros');
-
 -- Tipo de Captura
 INSERT INTO T_TipoCapturada (ITC_ID, ITC_Tipo) VALUES (1,'Camarão');
 INSERT INTO T_TipoCapturada (ITC_ID, ITC_Tipo) VALUES (2,'Caranguejo');
@@ -727,7 +709,6 @@ INSERT INTO T_Porto (PTO_ID, PTO_Nome, TMun_ID) VALUES (8,'São Miguel',7);
 INSERT INTO T_Porto (PTO_ID, PTO_Nome, TMun_ID) VALUES (18,'Sobradinho',16);
 INSERT INTO T_Porto (PTO_ID, PTO_Nome, TMun_ID) VALUES (10,'Terminal Pesqueiro',7);
 INSERT INTO T_Porto (PTO_ID, PTO_Nome, TMun_ID) VALUES (12,'Urucutuca',3553);
-
 -- Escolaridade
 INSERT INTO T_Escolaridade (ESC_ID, ESC_Nivel) VALUES (1,'Fundamental Completo');
 INSERT INTO T_Escolaridade (ESC_ID, ESC_Nivel) VALUES (2,'Fundamental Incompleto');
@@ -736,12 +717,10 @@ INSERT INTO T_Escolaridade (ESC_ID, ESC_Nivel) VALUES (4,'Médio Incompleto');
 INSERT INTO T_Escolaridade (ESC_ID, ESC_Nivel) VALUES (5,'Não Alfabetizado');
 INSERT INTO T_Escolaridade (ESC_ID, ESC_Nivel) VALUES (6,'Superior Completo');
 INSERT INTO T_Escolaridade (ESC_ID, ESC_Nivel) VALUES (7,'Superior Incompleto');
-
 -- Programa Social
 INSERT INTO T_ProgramaSocial (PRS_ID, PRS_Programa) VALUES (1,'Bolsa Família');
 INSERT INTO T_ProgramaSocial (PRS_ID, PRS_Programa) VALUES (2,'Minha Casa, Minha Vida');
-
--- Programa Social
+-- Renda
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (1,'até 1/2 salário');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (2,'1 salário');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (3,'de 1/2 a 1 salário');
