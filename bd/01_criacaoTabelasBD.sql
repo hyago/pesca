@@ -1107,18 +1107,18 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_TT_Dependente (
 -- Table T_Pescador_has_T_Comunidade
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Comunidade (
-  T_Pescador_TP_ID INT NOT NULL,
-  T_Comunidade_TCOM_ID INT NOT NULL,
+  TP_ID INT NOT NULL,
+  TCOM_ID INT NOT NULL,
 --  INDEX fk_T_Pescador_has_T_Comunidade_T_Pescador1_idx (T_Pescador_TP_ID ASC),
 --  INDEX fk_T_Pescador_has_T_Comunidade_T_Comunidade1_idx (T_Comunidade_TCOM_ID ASC),
-  PRIMARY KEY (T_Comunidade_TCOM_ID),
+  PRIMARY KEY (TCOM_ID),
   CONSTRAINT fk_T_Pescador_has_T_Comunidade_T_Pescador1
-    FOREIGN KEY (T_Pescador_TP_ID)
+    FOREIGN KEY (TP_ID)
     REFERENCES T_Pescador (TP_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Pescador_has_T_Comunidade_T_Comunidade1
-    FOREIGN KEY (T_Comunidade_TCOM_ID)
+    FOREIGN KEY (TCOM_ID)
     REFERENCES T_Comunidade (TCOM_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
