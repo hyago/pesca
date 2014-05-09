@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS T_Pescador (
   TP_RGB_MAA_IBAMA VARCHAR(45) NULL,
   TP_CIR_Cap_Porto VARCHAR(45) NULL,
   TP_CPF VARCHAR(11) NULL,
-      TP_TELRES NUMERIC (14,0) NULL,
+  TP_TELRES NUMERIC (14,0) NULL,
   Tp_TELCEL NUMERIC (14,0) NULL,
   TP_DataNasc DATE NULL,
   TMun_ID_Natural INT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Renda (
 -- Table T_ProgramaSocial
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_ProgramaSocial (
-  PRS_ID INT NOT NULL,
+  PRS_ID serial NOT NULL,
   PRS_Programa VARCHAR(30) NULL,
   PRIMARY KEY (PRS_ID));
   
@@ -844,7 +844,7 @@ CREATE TABLE IF NOT EXISTS T_Entrevista_Pescador (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_Esp_Arte_Pesca (
   EAP_ID serial,
-  EAP_Especializacao,
+  EAP_Especializacao VARCHAR(45) NULL,
   TAP_ID INT NOT NULL,
   EP_ID INT NOT NULL,
   PRIMARY KEY (EAP_ID),

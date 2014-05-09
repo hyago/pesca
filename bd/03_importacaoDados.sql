@@ -741,6 +741,7 @@ INSERT INTO T_Escolaridade (ESC_ID, ESC_Nivel) VALUES (7,'Superior Incompleto');
 INSERT INTO T_ProgramaSocial (PRS_ID, PRS_Programa) VALUES (1,'Bolsa Família');
 INSERT INTO T_ProgramaSocial (PRS_ID, PRS_Programa) VALUES (2,'Minha Casa, Minha Vida');
 
+-- Programa Social
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (1,'até 1/2 salário');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (2,'1 salário');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (3,'de 1/2 a 1 salário');
@@ -750,3 +751,44 @@ INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (6,'de 3 a 4 salários');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (7,'de 4 a 5 salários');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (8,'mais que 5 salários');
 INSERT INTO T_Renda (REN_ID, REN_Renda) VALUES (9,'subsistência');
+
+-- 
+-- --- Tem que ser no final do arquivo
+-- 
+SELECT pg_catalog.setval(' t_areapesca_tareap_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_artepesca_tap_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_colonia_tc_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_comunidade_tcom_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_dados_calao_dca_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_dados_emalhe_dem_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_dados_tarrafa_dta_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_endereco_te_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_entrevista_pescador_ep_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_escolaridade_esc_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_especie_esp_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_familia_fam_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_ficha_diaria_fd_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_genero_gen_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_grupo_grp_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_isca_is_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_login_tl_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_mare_mr_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_monitoramento_mnt_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_municipio_tmun_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_ordem_ord_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_perfil_tp_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_pescador_tp_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_porteembarcacao_tpe_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_porto_pto_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_renda_ren_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_situacao_ts_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_subamostra_sa_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_telefonecontato_ttcont_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_tempo_tmp_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_tipocapturada_itc_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_tipodependente_ttd_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_tipoembarcacao_tte_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_tipotel_ttel_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_usuario_tu_id_seq', 10000, true);
+SELECT pg_catalog.setval(' t_vento_vnt_id_seq ', 10000, true);
+SELECT pg_catalog.setval(' t_programasocial_prs_id_seq ', 10000, true);
