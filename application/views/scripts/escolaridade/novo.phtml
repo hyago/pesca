@@ -1,0 +1,24 @@
+
+
+<div id="escolaridade">
+    <h2>Perfil Social->Escolaridade</h2>
+    <h3>Novo</h3>
+</div>
+
+<form action="<?=$this->url(array("controller"=>"escolaridade","action"=>"criar"),null,true)?>" method="post">
+   <input type="hidden" name="idEscolaridade" placeholder="ID" />
+   <fieldset id="Escolaridade">
+      <div id="esquerda">
+      
+        <div id="form-esq"> 
+            <label>Nível de Escolaridade: </label>
+            <input type="text" name="nivelEscolaridade" placeholder="NivelEscolaridade"/> <br />
+        </div>
+
+          <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"escolaridade","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
+        </div>
+      </div>   
+    </fieldset>
+</form>

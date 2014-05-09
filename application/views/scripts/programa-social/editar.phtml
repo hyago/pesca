@@ -1,0 +1,23 @@
+<div id="titulos">
+    <h2>Perfil Social->Programas Sociais</h2>
+    <h3>Editar</h3>
+</div>
+
+<form action="<?=$this->url(array("controller"=>"programa-social","action"=>"atualizar"),null,true)?>" method="post">
+   <input type="hidden" name="idProgramaSocial" value="<?= $this->programasSocial['prs_id'] ?>" />
+   <fieldset id="ProgramaSocial">
+     <div id="esquerda">   
+
+     <div id="form-esq"> 
+            <label>Programa Social: </label>
+            <input type="text" name="nomeProgramaSocial" value="<?= $this->programasSocial['prs_programa'] ?>"/> <br />
+        </div>
+        
+        
+         <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"programa-social","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
+            <input type="submit" value="Atualizar" />
+        </div>
+      </div> 
+    </fieldset>
+</form>
