@@ -43,7 +43,7 @@ class Application_Model_Pescador
         $dbTablePescadorHasEmbarcacao = new Application_Model_DbTable_PescadorHasEmbarcacao();
         $dbTablePescadorHasEspecieCapturada = new Application_Model_DbTable_PescadorHasEspecieCapturada();
         $dbTable_EspecieCapturada = new Application_Model_DbTable_EspecieCapturada();
-        
+        $dbTable_Escolaridade = new Application_Model_DbTable_EscolaridadeDbtable();
         
         $dadosEndereco = array(
             'te_logradouro'  => $request['logradouro'],
@@ -64,8 +64,8 @@ class Application_Model_Pescador
             'tp_sexo'          => $request['sexo'],
             'tp_rg'            => $request['rg'],
             'tp_cpf'           => $request['cpf'],
-            'tp_telres'           => $request['telefoneResidencial'],
-            'tp_telcel'           => $request['telefoneCelular'],
+            'tp_telres'        => $request['telefoneResidencial'],
+            'tp_telcel'        => $request['telefoneCelular'],
             'tp_apelido'       => $request['apelido'],
             'tp_matricula'     => $request['matricula'],
             'tp_filiacaopai'   => $request['filiacaoPai'],
@@ -79,7 +79,8 @@ class Application_Model_Pescador
             'tp_cir_cap_porto' => $request['cir_cap_porto'],
             'tp_datanasc'      => $data,
             'tmun_id_natural'  => $request['municipioNat'],
-            'te_id'            => $idEndereco
+            'te_id'            => $idEndereco,
+            'esc_id'           => $request['escolaridade_pescador']
         );
         
         $idPescador = $dbTablePescador->insert($dadosPescador);

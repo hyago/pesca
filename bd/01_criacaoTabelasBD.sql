@@ -128,8 +128,9 @@ CREATE TABLE IF NOT EXISTS T_Pescador (
   Tp_TELCEL NUMERIC (14,0) NULL,
   TP_DataNasc DATE NULL,
   TMun_ID_Natural INT NULL,
- TE_ID INT NULL,
-TP_Especificidade varchar(200) NULL,
+  TE_ID INT NULL,
+  TP_Especificidade varchar(200) NULL,
+  ESC_ID INT NULL,
   PRIMARY KEY (TP_ID),
   CONSTRAINT fk_T_Pescador_T_Municipio1
     FOREIGN KEY (TMun_ID_Natural)
