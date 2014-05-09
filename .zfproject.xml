@@ -107,6 +107,15 @@
         <controllerFile controllerName="Renda">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="ProgramaSocial">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Escolaridade">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="TipoDependente">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -152,6 +161,9 @@
           <dbTableFile dbTableName="UfDbtable"/>
           <dbTableFile dbTableName="TipoCapturadaDbtable"/>
           <dbTableFile dbTableName="RendaDbtable"/>
+          <dbTableFile dbTableName="ProgramaSocialDbtable"/>
+          <dbTableFile dbTableName="EscolaridadeDbtable"/>
+          <dbTableFile dbTableName="TipoDependenteDbtable"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -178,6 +190,9 @@
         <modelFile modelName="UfMapper"/>
         <modelFile modelName="TipoCapturadaModel"/>
         <modelFile modelName="Renda"/>
+        <modelFile modelName="ProgramaSocial"/>
+        <modelFile modelName="Escolaridade"/>
+        <modelFile modelName="TipoDependente"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -301,6 +316,33 @@
             <viewScriptFile forActionName="novo"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Renda">
+            <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ProgramaSocial">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ProgramaSocial">
+            <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ProgramaSocial">
+            <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Escolaridade">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Escolaridade">
+            <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Escolaridade">
+            <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoDependente">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoDependente">
+            <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoDependente">
             <viewScriptFile forActionName="editar"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
