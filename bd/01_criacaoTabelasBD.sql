@@ -411,12 +411,12 @@ CREATE TABLE IF NOT EXISTS T_Usuario (
 -- Table T_HistoricoRecadastramento
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_HistoricoRecadastramento (
-  THR_Data DATE NOT NULL,
-  TP_ID INT NOT NULL,
-  TS_ID INT NOT NULL,
+  THR_Data NOT NULL,
+  TP_ID INT NULL,
+  TS_ID INT NULL,
   THR_Descricao VARCHAR(45) NULL,
-  TU_ID_Resp_Coleta INT NOT NULL,
-  TU_ID_Resp_Digita INT NOT NULL,
+  TU_ID_Resp_Coleta INT NULL,
+  TU_ID_Resp_Digita INT NULL,
   PRIMARY KEY (THR_Data, TP_ID, TS_ID),
   CONSTRAINT fk_T_DataRecadastramento_T_Pescador1
     FOREIGN KEY (TP_ID)
