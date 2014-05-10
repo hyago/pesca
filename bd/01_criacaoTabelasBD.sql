@@ -183,7 +183,8 @@ CREATE TABLE IF NOT EXISTS T_Renda (
 CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Renda (
   REN_ID INT NOT NULL,
   TP_ID INT NOT NULL,
-  TPR_OutraRenda SMALLINT NULL,
+  TPR_OutraRenda boolean NULL,
+  TPR_OutraRenda boolean NULL,
   TPR_Qual VARCHAR(60) NULL,
   PRIMARY KEY (REN_ID),
   CONSTRAINT fk_T_Pescador_has_T_Renda_T_Renda1
@@ -315,7 +316,7 @@ CREATE TABLE IF NOT EXISTS T_AreaPesca (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_Situacao (
   TS_ID serial,
-  TS_Situacao boolean DEFAULT TRUE NOT NULL,
+  TS_Situacao boolean DEFAULT TRUE NULL,
   TS_Motivo VARCHAR(45) NULL,
   PRIMARY KEY (TS_ID));
 
