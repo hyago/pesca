@@ -124,8 +124,6 @@ CREATE TABLE IF NOT EXISTS T_Pescador (
   TP_RGB_MAA_IBAMA VARCHAR(45) NULL,
   TP_CIR_Cap_Porto VARCHAR(45) NULL,
   TP_CPF VARCHAR(11) NULL,
-  TP_TELRES NUMERIC (14,0) NULL,
-  Tp_TELCEL NUMERIC (14,0) NULL,
   TP_DataNasc DATE NULL,
   TMun_ID_Natural INT NULL,
   TE_ID INT NULL,
@@ -1140,10 +1138,12 @@ CREATE TABLE IF NOT EXISTS T_Especie_Capturada (
 -- Table T_Pescador_has_TT_Dependente
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_Pescador_has_TT_Dependente (
+  Tptd_id serial,
   TP_ID INT NOT NULL,
   T_TipoDependente_TTD_ID INT NOT NULL,
+  tp_td_quantidade integer,
+  Primary Key (tptd_id),
 --  INDEX fk_T_Pescador_has_TT_Dependente_T_Pescador1_idx (TP_ID ASC),
-  PRIMARY KEY (TP_ID),
 --  INDEX fk_T_Pescador_has_TT_Dependente_T_TipoDependente1_idx (T_TipoDependente_TTD_ID ASC),
   CONSTRAINT fk_T_Pescador_has_TT_Dependente_T_Pescador1
     FOREIGN KEY (TP_ID)
