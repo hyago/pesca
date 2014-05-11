@@ -89,10 +89,10 @@ CREATE TABLE IF NOT EXISTS T_Municipio (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_Endereco (
   TE_ID serial,
-  TE_Logradouro VARCHAR(50) NOT NULL,
-  TE_Numero VARCHAR(45) NOT NULL,
-  TE_Bairro VARCHAR(50) NOT NULL,
-  TE_CEP DECIMAL(8) NOT NULL,
+  TE_Logradouro VARCHAR(100) NULL,
+  TE_Numero VARCHAR(45) NULL,
+  TE_Bairro VARCHAR(50) NULL,
+  TE_CEP DECIMAL(8) NULL,
   TE_Comp VARCHAR(50) NULL,
   TMun_ID INT NOT NULL,
   PRIMARY KEY (TE_ID),
