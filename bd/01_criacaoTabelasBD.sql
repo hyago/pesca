@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Renda (
   REN_ID INT NOT NULL,
   TP_ID INT NOT NULL,
   TPR_OutraRenda boolean NULL,
-  TPR_OutraRenda boolean NULL,
+--   TPR_OutraRenda boolean NULL,
   TPR_Qual VARCHAR(60) NULL,
   PRIMARY KEY (REN_ID),
   CONSTRAINT fk_T_Pescador_has_T_Renda_T_Renda1
@@ -409,7 +409,7 @@ CREATE TABLE IF NOT EXISTS T_Usuario (
 -- Table T_HistoricoRecadastramento
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_HistoricoRecadastramento (
-  THR_Data NOT NULL,
+  THR_Data date NOT NULL,
   TP_ID INT NULL,
   TS_ID INT NULL,
   THR_Descricao VARCHAR(45) NULL,
@@ -1223,7 +1223,8 @@ TP.TP_PIS, TP.TP_INSS,
 TP.TP_NIT_CEI, TP.TP_RG,
 TP.TP_CMA, TP.TP_RGB_MAA_IBAMA,
 TP.TP_CIR_CAP_PORTO, TP.TP_CPF,
-TP.TP_TELRES,TP_TELCEL, TP.TP_DATANASC, 
+-- TP.TP_TELRES,TP_TELCEL,
+ TP.TP_DATANASC, 
 TP.TMUN_ID_NATURAL, TM.TMUN_MUNICIPIO "MUNNAT", TM.TUF_SIGLA "SIGNAT",
 TP.TE_ID, TE.TE_LOGRADOURO, TE.TE_NUMERO,
 TE.TE_COMP, TE.TE_BAIRRO, TE.TE_CEP,
