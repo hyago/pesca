@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ArrastoFundoController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/arrasto-fundo/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/EmalheController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/calao/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/entrevista-pescador/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/TarrafaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/tarrafa/index.phtml</file>
+        </group>
     </open-files>
 </project-private>
