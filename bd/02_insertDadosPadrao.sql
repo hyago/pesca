@@ -157,14 +157,14 @@ INSERT INTO T_Municipio (TMun_ID, TMun_Municipio, TUF_Sigla) VALUES (112,'Vera C
 INSERT INTO T_Municipio (TMun_ID, TMun_Municipio, TUF_Sigla) VALUES (113,'Vitória Da Conquista','BA');
 INSERT INTO T_Municipio (TMun_ID, TMun_Municipio, TUF_Sigla) VALUES (114,'Vitorino Freire','MA');
 
-INSERT INTO T_Endereco (TE_ID, TE_Logradouro, TE_Numero, TE_Bairro, TE_CEP, TE_Comp, TMun_ID) VALUES (2, '112', '1213', 'Centro', '12345677', 'Casa', 1);
-INSERT INTO T_Endereco (TE_ID, TE_Logradouro, TE_Numero, TE_Bairro, TE_CEP, TE_Comp, TMun_ID) VALUES (1, 'Teste', '12', 'Teste', '54565677', 'Teste', 1);
-INSERT INTO T_Endereco (TE_ID, TE_Logradouro, TE_Numero, TE_Bairro, TE_CEP, TE_Comp, TMun_ID) VALUES (3, 'Teste3', '3', 'Teste3', '333333', 'Teste3', 2);
+INSERT INTO T_Endereco (TE_ID, TE_Logradouro, TE_Numero, TE_Bairro, TE_CEP, TE_Comp, TMun_ID) VALUES (10002, '112', '1213', 'Centro', '12345677', 'Casa', 1);
+INSERT INTO T_Endereco (TE_ID, TE_Logradouro, TE_Numero, TE_Bairro, TE_CEP, TE_Comp, TMun_ID) VALUES (10001, 'Teste', '12', 'Teste', '54565677', 'Teste', 1);
+INSERT INTO T_Endereco (TE_ID, TE_Logradouro, TE_Numero, TE_Bairro, TE_CEP, TE_Comp, TMun_ID) VALUES (10003, 'Teste3', '3', 'Teste3', '333333', 'Teste3', 2);
 
 INSERT INTO T_Login (TL_ID, TL_Login, TL_HashSenha, TL_UltimoAcesso) VALUES (1, 'stefano', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO T_Login (TL_ID, TL_Login, TL_HashSenha, TL_UltimoAcesso) VALUES (2, 'elenildo', '271ef194466bb4f3e9a962a1e2772c73ab87f8ad', NULL);
 INSERT INTO T_Login (TL_ID, TL_Login, TL_HashSenha, TL_UltimoAcesso) VALUES (3, 'mohonda', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 
-INSERT INTO T_Usuario (TU_ID, TU_Nome, TU_Sexo, TU_CPF, TU_RG, TU_Email, TU_UsuarioDeletado, TL_ID, TP_ID, TE_ID) VALUES (1, 'Stefano', 'M', '12211221', '122222112', 'stefano@stefano.br', false, 1, 1, 1);
-INSERT INTO T_Usuario (TU_ID, TU_Nome, TU_Sexo, TU_CPF, TU_RG, TU_Email, TU_UsuarioDeletado, TL_ID, TP_ID, TE_ID) VALUES (2, 'Elenildo', 'M', '121.131.242-34', '123456', 'elenildo@uesc.br', false, 2, 1, 2);
-INSERT INTO T_Usuario (TU_ID, TU_Nome, TU_Sexo, TU_CPF, TU_RG, TU_Email, TU_UsuarioDeletado, TL_ID, TP_ID, TE_ID) VALUES (3, 'mohonda', 'M', '3333', '3333', 'mohonda@uesc.br', false, 3, 1, 3);
+INSERT INTO T_Usuario (TU_ID, TU_Nome, TU_Sexo, TU_CPF, TU_RG, TU_Email, TU_UsuarioDeletado, TL_ID, TP_ID, TE_ID) VALUES (1, 'Stefano', 'M', '12211221', '122222112', 'stefano@stefano.br', false, 1, 1, 10001);
+INSERT INTO T_Usuario (TU_ID, TU_Nome, TU_Sexo, TU_CPF, TU_RG, TU_Email, TU_UsuarioDeletado, TL_ID, TP_ID, TE_ID) VALUES (2, 'Elenildo', 'M', '121.131.242-34', '123456', 'elenildo@uesc.br', false, 2, 1, 10002);
+INSERT INTO T_Usuario (TU_ID, TU_Nome, TU_Sexo, TU_CPF, TU_RG, TU_Email, TU_UsuarioDeletado, TL_ID, TP_ID, TE_ID) VALUES (3, 'mohonda', 'M', '3333', '3333', 'mohonda@uesc.br', false, 3, 1, 10003);
