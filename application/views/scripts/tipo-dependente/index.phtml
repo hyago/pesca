@@ -1,3 +1,8 @@
+<?php
+//$this->HeadScript()->appendFile('/js/funcoes.js','text/javascript');
+$this->headScript()->appendFile('/js/funcoes.js');
+//$this->view->headScript()->appendFile('/js/funcoes.js');
+?>
 
 <h2>Perfil Social->Tipo Dependente</h2>
 
@@ -30,6 +35,19 @@
             </a>
         </td>
         
+        
+        <td class="td-botao">
+            <a href="javascript:teste();">testando
+            <!--<a href="<?=$this->headScript();?>">
+                <?=$this->headScript();?> -->
+            
+                
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+
     </tr>
     <?php endforeach; ?>
 </table>

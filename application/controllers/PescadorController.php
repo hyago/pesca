@@ -10,7 +10,11 @@
  * @access public
  *
  */
+
+
+
 require_once "../library/fpdf/fpdf.php"; 
+
 class PescadorController extends Zend_Controller_Action{
     
     private $modelPescador;
@@ -72,6 +76,7 @@ class PescadorController extends Zend_Controller_Action{
         $modelTipoEmbarcacao= new Application_Model_TipoEmbarcacao();
         $modelPorteEmbarcacao= new Application_Model_PorteEmbarcacao();
         $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
+        $modelTipoTelefone = new Application_Model_TipoTelefone();
         
         $municipios = $modelMunicipio->select();
         $municipiosNat = $modelMunicipio->select();
@@ -82,6 +87,7 @@ class PescadorController extends Zend_Controller_Action{
         $tiposEmbarcacao = $modelTipoEmbarcacao->select();
         $portesEmbarcacao = $modelPorteEmbarcacao->select();
         $tipoCapturadas = $modelTipoCapturada->select();
+        $tipoTelefones = $modelTipoTelefone->select();
         
         $this->view->assign("municipios", $municipios);
         $this->view->assign("municipiosNat", $municipiosNat);
@@ -92,6 +98,9 @@ class PescadorController extends Zend_Controller_Action{
         $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
         $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
         $this->view->assign("tipoCapturadas", $tipoCapturadas);
+        $this->view->assign("assignTipoTelefones", $tipoTelefones);
+        
+        $this->view->assign("assignFieldsetTelefonesPescador", FALSE);
         
         $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
 	
@@ -165,6 +174,16 @@ class PescadorController extends Zend_Controller_Action{
 
         $this->_redirect('pescador/index');
     }
+    
+    public function testeAction()
+    {
+        $this->view->assign("assignFieldsetTelefonesPescador", TRUE);
+        
+//       $this->modelPescador->update($this->_getAllParams('id'));
+
+//        $this->_redirect('pescador/index'); 
+    }
+    
     public function relatorioAction(){
         
         $this->_helper->viewRenderer->setNoRender();

@@ -116,6 +116,9 @@
         <controllerFile controllerName="TipoDependente">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="TipoTelefone">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -164,6 +167,7 @@
           <dbTableFile dbTableName="ProgramaSocialDbtable"/>
           <dbTableFile dbTableName="EscolaridadeDbtable"/>
           <dbTableFile dbTableName="TipoDependenteDbtable"/>
+          <dbTableFile dbTableName="TipoTelefoneDbtable"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -193,6 +197,7 @@
         <modelFile modelName="ProgramaSocial"/>
         <modelFile modelName="Escolaridade"/>
         <modelFile modelName="TipoDependente"/>
+        <modelFile modelName="TipoTelefone"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -344,6 +349,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TipoDependente">
             <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoTelefone">
+            <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoTelefone">
+            <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoTelefone">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

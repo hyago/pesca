@@ -14,6 +14,10 @@ $this->headScript()->appendFile('/js/mascaras.js');
         <input type="hidden" name="idPescador" value="<?=$this->pescador['tp_id']?>" />
         <input type="hidden" name="idEndereco" value="<?=$this->pescador['te_id']?>" />
         <div id="esquerda">
+            <div id="form-dir">
+                 <label for="idPescador">Código</label>                 
+                 <input readonly="" type="text" name="idPescador" value="<?=$this->pescador['tp_id']?>" />
+            </div>
         
             <div id="form-dir">
                 <label for="nome">Nome</label>

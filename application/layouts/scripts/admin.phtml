@@ -10,6 +10,7 @@
             $this->headScript()->appendFile('/js/jquery-ui-1.10.3.custom.min.js');
             $this->headScript()->appendFile('/js/jquery-ui-functions.js');
             $this->headScript()->appendFile('/js/funcoesJquery.js');
+            $this->HeadScript()->appendFile('/js/funcoes.js','text/javascript');
             
             echo $this->headLink() . "\n";
             echo $this->headScript() . "\n";
@@ -51,6 +52,7 @@
                             <li><a href="<?=$this->url(array("controller"=>"programa-social","action"=>"index"),null,true)?>">Programa Social</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"escolaridade","action"=>"index"),null,true)?>">Escolaridade</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"tipo-dependente","action"=>"index"),null,true)?>">Tipo Dependente</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"tipo-telefone","action"=>"index"),null,true)?>">Tipo Telefone</a></li>
                         </ul>
                         <li><a id="for-Dsbq">Controle de Desembarque</a></li>
                         <ul id="Dsbq"> 

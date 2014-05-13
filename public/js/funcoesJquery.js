@@ -107,3 +107,23 @@ $(document).ready(function(){
 
         
 });
+
+
+$(function() {
+    function removeCampoTelefonesPescador() {
+        $(".removeCampoTelefonesPescador").unbind("click");
+        $(".removeCampoTelefonesPescador").bind("click", function() {
+            if($("tr.tr_listasTelefonesPescador").length > 1){
+					$(this).parent().parent().remove();
+				}
+        });
+    }
+    removeCampoTelefonesPescador();
+    $(".adicionarCampoTelefonesPescador").click(function() {
+        novoCampo1 = $("tr.tr_listasTelefonesPescador:first").clone();
+			novoCampo1.find("input").val("");
+			novoCampo1.insertAfter("tr.tr_listasTelefonesPescador:last");
+        removeCampoTelefonesPescador();
+    });
+});
+

@@ -1,10 +1,11 @@
+
 <?php
 //$this->view->headScript()->appendFile('/js/filename.js');
 //$this->headScript()->appendFile('/js/funcoes.js');
 
-class TipoDependenteController extends Zend_Controller_Action
+class TipoTelefoneController extends Zend_Controller_Action
 {
-      private $modeloTipoDependente;
+      private $modeloTipoTelefone;
 
     public function init()
     {
@@ -18,14 +19,14 @@ class TipoDependenteController extends Zend_Controller_Action
         
         $this->view->usuarioLogado = $this->usuarioLogado;
         
-        $this->modeloTipoDependente = new Application_Model_TipoDependente();
+        $this->modeloTipoTelefone = new Application_Model_TipoTelefone();
     }
 
     public function indexAction()
     {
-        $tipoDependente = $this->modeloTipoDependente->select();
+        $tipoTelefone = $this->modeloTipoTelefone->select();
       
-        $this->view->assign("assignTipoDependente", $tipoDependente);
+        $this->view->assign("assignTipoTelefone", $tipoTelefone);
     }
     
     public function novoAction()
@@ -38,9 +39,9 @@ class TipoDependenteController extends Zend_Controller_Action
      */
     public function criarAction()
     {
-        $this->modeloTipoDependente->insert($this->_getAllParams());
+        $this->modeloTipoTelefone->insert($this->_getAllParams());
 
-        $this->_redirect('tipo-dependente/index');
+        $this->_redirect('tipo-telefone/index');
     }
     
     /*
@@ -48,9 +49,9 @@ class TipoDependenteController extends Zend_Controller_Action
      */
     public function editarAction()
     {
-        $tipoDependente = $this->modeloTipoDependente->find($this->_getParam('id'));
+        $tipoTelefone = $this->modeloTipoTelefone->find($this->_getParam('id'));
         
-        $this->view->assign("assignTipoDependente", $tipoDependente);
+        $this->view->assign("assignTipoTelefone", $tipoTelefone);
     }
    
     /*
@@ -58,9 +59,9 @@ class TipoDependenteController extends Zend_Controller_Action
      */
     public function atualizarAction()
     {
-        $this->modeloTipoDependente->update($this->_getAllParams());
+        $this->modeloTipoTelefone->update($this->_getAllParams());
 
-        $this->_redirect('tipo-dependente/index');
+        $this->_redirect('tipo-telefone/index');
     }
  
     /*
@@ -68,9 +69,9 @@ class TipoDependenteController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
-        $this->modeloTipoDependente->delete($this->_getParam('id'));
+        $this->modeloTipoTelefone->delete($this->_getParam('id'));
 
-        $this->_redirect('tipo-dependente/index');
+        $this->_redirect('tipo-telefone/index');
     }
     
     public function beforeExcluirAction()

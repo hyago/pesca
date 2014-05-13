@@ -1,0 +1,23 @@
+
+<div id="tipoDependnete">
+    <h2>Perfil Social->Tipo Telefone</h2>
+    <h3>Novo</h3>
+</div>
+
+<form action="<?= $this->url(array("controller" => "tipo-telefone", "action" => "criar"), null, true) ?>" method="post">
+    <input type="hidden" name="idTipoDependente" placeholder="ID" />
+    <fieldset id="TipoDependente">
+        <div id="esquerda">
+
+            <div id="form-esq">
+                <label>Tipo Telefone: </label>
+                <input type="text" name="tipoTelefone" placeholder="TipoDependente"/> <br />
+            </div>
+
+            <div id="Submit">
+                <a href="<?= $this->url(array("controller" => "tipo-telefone", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
+                <input type="submit" value="Cadastrar" />
+            </div>
+        </div>
+    </fieldset>
+</form>
