@@ -108,18 +108,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
                     </div>
 
                     <div id="form-dir">
-                        <label for="telefoneResidencial">Tel. Residencial</label>
-                        <input type="text" name="telefoneResidencial" id="telefoneResidencial" placeholder="Tel. Residencial" value="<?= $this->pescador['tp_telres'] ?>"/>
-
-                    </div>
-
-                    <div id="form-dir">
-                        <label for="telefoneCelular">Tel. Celular</label>
-                        <input type="text" name="telefoneCelular" id="telefoneCelular" placeholder="Tel. Celular" value="<?= $this->pescador['tp_telcel'] ?>"/>
-
-                    </div>
-
-                    <div id="form-dir">
                         <label for="dataNasc">Data Nascimento</label>
                         <input type="text" name="dataNasc" id="data_Nasc" placeholder="Data Nascimento" value="<?= $this->pescador['tp_datanasc'] ?>"/>
                     </div>
@@ -138,49 +126,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
                         <label for="ctps">CTPS</label>
                         <input type="text" name="ctps" id="ctps" placeholder="CTPS" value="<?= $this->pescador['tp_ctps'] ?>"/>
                     </div>
-
-
-
-
-                    <div id="form-dir">
-                        <label for="$artePesca">Arte de Pesca</label>
-                        <select name="artePesca" id="artePesca">
-                            <?php foreach ($this->artesPesca as $key => $artePesca): ?>
-                                <option value="<?= $artePesca['tap_id']; ?>" <?=
-                                ($artePesca['tap_id'] == $this->pescador['tap_id']) ? 'selected="selected"' :
-                                        '';
-                                ?>><?= $artePesca['tap_artepesca']; ?></option>
-                                    <?php endforeach; ?>
-                        </select>
-                    </div>
-
-
-                    <div id="form-dir">
-                        <label for="$porteEmbarcacao">Porte da Embarcação</label>
-                        <select name="porteEmbarcacao" id="porteEmbarcacao">
-                            <?php foreach ($this->portesEmbarcacao as $key => $porteEmbarcacao): ?>
-                                <option value="<?= $porteEmbarcacao['tpe_id']; ?>" <?=
-                                ($porteEmbarcacao['tpe_id'] == $this->pescador['tpe_id']) ? 'selected="selected"' :
-                                        '';
-                                ?>><?= $porteEmbarcacao['tpe_porte']; ?></option>
-                                    <?php endforeach; ?>
-                        </select>
-                    </div>
-
-
-
-                    <div id="form-dir">
-                        <label for="$tipoEmbarcacao">Tipo de Embarcação</label>
-                        <select name="tipoEmbarcacao" id="tipoEmbarcacao">
-                            <?php foreach ($this->tiposEmbarcacao as $key => $tipoEmbarcacao): ?>
-                                <option value="<?= $tipoEmbarcacao['tte_id']; ?>" <?=
-                                ($tipoEmbarcacao['tte_id'] == $this->pescador['tte_id']) ? 'selected="selected"' :
-                                        '';
-                                ?>><?= $tipoEmbarcacao['tte_tipoembarcacao']; ?></option>
-                                    <?php endforeach; ?>
-                        </select>
-                    </div>
-
 
                 </div>
 
@@ -283,14 +228,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                     </div>-->
 
 
-                    <div id="form-dir">
-                        <label for="tipocapturada" id="pure-checkbox">Tipo Capturada</label>
-                        <select name="tipocapturada" id="tipocapturada">
-                            <?php foreach ($this->tipoCapturadas as $key => $tipoCapturadas): ?>
-                                <option value="<?= $tipoCapturadas['itc_id']; ?>"><?= $tipoCapturadas['itc_tipo']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+
 
 
                 </div>
@@ -298,7 +236,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
 
             <fieldset class="noEditable"><legend>Telefones:</legend>
-
                 <fieldset class="noEditable"><legend>Adicionar Telefone:</legend>
 
                     <div id="base">
@@ -312,7 +249,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 </fieldset>
                 <br>
                 <fieldset class="noEditable" id="itemRows"><legend>Telefone listados:</legend>
-                    
+
                     <?php foreach ($this->assign_vPescadorHasTelefone as $key => $vPescadorHasTelefone): ?>
                         <div class="noEditable"><p id="rowNum<?=$key?>">
                                 <input type="button" value="Remove" onclick="removeRowPhone( <?=$key?> );">
@@ -320,14 +257,109 @@ $this->headScript()->appendFile('/js/mascaras.js');
                                 <input type="text" readonly size="15" name="inputTipo[]" value="<?= $vPescadorHasTelefone['ttel_desc'] ?>">
                                 <input type="text" readonly size="8" name="inputTipoID[]" value="<?= $vPescadorHasTelefone['tpt_ttel_id'] ?><?=$key?>">
                                 <br>
-                            </p>
-                        </div>
-                            <?php endforeach; ?>
-                            
-                    
+                            </p></div>
+                    <?php endforeach; ?>
 
                 </fieldset>
             </fieldset>
+
+            <fieldset class="noEditable"><legend>Artes de Pesca e Tipos de Capturas:</legend>
+                <fieldset class="noEditable"><legend>Adicionar Artes de Pesca e Tipos de Capturas:</legend>
+
+                    <div id="base">
+                        <input onclick="addRowPhone(this.form);" type="button" value="Add row" />
+
+                        <select name="tipocapturada" id="tipocapturada">
+                            <?php foreach ($this->tipoCapturadas as $key => $tipoCapturadas): ?>
+                                <option value="<?= $tipoCapturadas['itc_id']; ?>"><?= $tipoCapturadas['itc_tipo']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <select name="artePesca" id="artePesca">
+                            <?php foreach ($this->artesPesca as $key => $artePesca): ?>
+                                <option value="<?= $artePesca['tap_id']; ?>" <?=
+                                ($artePesca['tap_id'] == $this->pescador['tap_id']) ? 'selected="selected"' :
+                                        '';
+                                ?>><?= $artePesca['tap_artepesca']; ?></option>
+                                    <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                </fieldset>
+                <br>
+                <fieldset class="noEditable" id="itemArteTipoRows"><legend>Artes de Pesca e Tipos de Capturas listados:</legend>
+
+
+                </fieldset>
+            </fieldset>
+            <br>
+            <fieldset class="noEditable"><legend>Embarcações e Porte das Embarcações:</legend>
+                <fieldset class="noEditable"><legend>Adicionar Embarcações e Porte das Embarcações:</legend>
+
+                    <div id="base">
+                        <input onclick="addRowPhone(this.form);" type="button" value="Add row" />
+
+
+                        <select name="porteEmbarcacao" id="porteEmbarcacao">
+                            <?php foreach ($this->portesEmbarcacao as $key => $porteEmbarcacao): ?>
+                                <option value="<?= $porteEmbarcacao['tpe_id']; ?>" <?=
+                                ($porteEmbarcacao['tpe_id'] == $this->pescador['tpe_id']) ? 'selected="selected"' :
+                                        '';
+                                ?>><?= $porteEmbarcacao['tpe_porte']; ?></option>
+                                    <?php endforeach; ?>
+                        </select>
+
+                        <select name="tipoEmbarcacao" id="tipoEmbarcacao">
+                            <?php foreach ($this->tiposEmbarcacao as $key => $tipoEmbarcacao): ?>
+                                <option value="<?= $tipoEmbarcacao['tte_id']; ?>" <?=
+                                ($tipoEmbarcacao['tte_id'] == $this->pescador['tte_id']) ? 'selected="selected"' :
+                                        '';
+                                ?>><?= $tipoEmbarcacao['tte_tipoembarcacao']; ?></option>
+                                    <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                </fieldset>
+                <br>
+                <fieldset class="noEditable" id="itemEmbarcacoesPorteRows"><legend>Embarcações e Porte das Embarcações listados:</legend>
+
+
+                </fieldset>
+            </fieldset>            
+            <br>
+            <fieldset class="noEditable"><legend>Embarcações e Porte das Embarcações:</legend>
+                <fieldset class="noEditable"><legend>Adicionar Embarcações e Porte das Embarcações:</legend>
+
+                    <div id="base">
+                        <input onclick="addRowPhone(this.form);" type="button" value="Add row" />
+
+
+                        <select name="porteEmbarcacao" id="porteEmbarcacao">
+                            <?php foreach ($this->portesEmbarcacao as $key => $porteEmbarcacao): ?>
+                                <option value="<?= $porteEmbarcacao['tpe_id']; ?>" <?=
+                                ($porteEmbarcacao['tpe_id'] == $this->pescador['tpe_id']) ? 'selected="selected"' :
+                                        '';
+                                ?>><?= $porteEmbarcacao['tpe_porte']; ?></option>
+                                    <?php endforeach; ?>
+                        </select>
+
+                        <select name="tipoEmbarcacao" id="tipoEmbarcacao">
+                            <?php foreach ($this->tiposEmbarcacao as $key => $tipoEmbarcacao): ?>
+                                <option value="<?= $tipoEmbarcacao['tte_id']; ?>" <?=
+                                ($tipoEmbarcacao['tte_id'] == $this->pescador['tte_id']) ? 'selected="selected"' :
+                                        '';
+                                ?>><?= $tipoEmbarcacao['tte_tipoembarcacao']; ?></option>
+                                    <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                </fieldset>
+                <br>
+                <fieldset class="noEditable" id="itemEmbarcacoesPorteRows"><legend>Embarcações e Porte das Embarcações listados:</legend>
+
+
+                </fieldset>
+            </fieldset>            
+
 
 
             <div id="Submit">

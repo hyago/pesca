@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/pesca/application/controllers/TipoTelefoneController.php</file>
-            <file>file:/srv/www/pesca/application/controllers/TipoDependenteController.php</file>
-            <file>file:/srv/www/pesca/application/models/DbTable/TipoTelefoneDbtable.php</file>
-            <file>file:/srv/www/pesca/application/views/scripts/pescador/novo.phtml</file>
-            <file>file:/srv/www/pesca/public/js/funcoesJquery.js</file>
-            <file>file:/srv/www/pesca/application/views/scripts/tipo-telefone/editar.phtml</file>
-            <file>file:/srv/www/pesca/application/models/TipoTelefone.php</file>
+            <file>file:/srv/www/pesca/application/models/VPescadorHasTelefone.php</file>
+            <file>file:/srv/www/pesca/bd/01_criacaoTabelasBD.sql</file>
+            <file>file:/srv/www/pesca/application/models/Pescador.php</file>
             <file>file:/srv/www/pesca/application/controllers/PescadorController.php</file>
-            <file>file:/srv/www/pesca/application/views/scripts/pescador/index.phtml</file>
-            <file>file:/srv/www/pesca/application/views/scripts/tipo-telefone/novo.phtml</file>
-            <file>file:/srv/www/pesca/application/views/scripts/tipo-telefone/index.phtml</file>
+            <file>file:/srv/www/pesca/application/views/scripts/pescador/editar.phtml</file>
+            <file>file:/srv/www/pesca/application/models/Porto.php</file>
         </group>
     </open-files>
 </project-private>
