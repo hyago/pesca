@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS T_Escolaridade (
   ESC_ID serial,
   ESC_Nivel VARCHAR(25) NULL,
   PRIMARY KEY (ESC_ID));
-  
+
 -- -----------------------------------------------------
 -- Table T_Pescador_has_T_Escolaridade
 -- -----------------------------------------------------
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Escolaridade (
     REFERENCES T_Escolaridade (ESC_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-	
+
 -- -----------------------------------------------------
 -- Table T_Renda
 -- -----------------------------------------------------
@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Renda (
     REFERENCES T_Pescador (TP_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-  
+
 -- -----------------------------------------------------
 -- Table T_ProgramaSocial
 -- -----------------------------------------------------
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS T_ProgramaSocial (
   PRS_ID serial NOT NULL,
   PRS_Programa VARCHAR(30) NULL,
   PRIMARY KEY (PRS_ID));
-  
+
 -- -----------------------------------------------------
 -- Table T_Pescador_has_T_ProgramaSocial
 -- -----------------------------------------------------
@@ -1182,39 +1182,39 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Comunidade (
 -- VIEW USUARIO
 -- -----------------------------------------------------
 CREATE VIEW V_USUARIO AS
-    SELECT T_USUARIO.TU_ID, 
-    T_USUARIO.TU_NOME, T_USUARIO.TU_SEXO, 
-    T_USUARIO.TU_CPF, T_USUARIO.TU_RG, 
+    SELECT T_USUARIO.TU_ID,
+    T_USUARIO.TU_NOME, T_USUARIO.TU_SEXO,
+    T_USUARIO.TU_CPF, T_USUARIO.TU_RG,
     T_USUARIO.TU_EMAIL, T_USUARIO.TU_USUARIODELETADO,
     T_USUARIO.TU_TELRES, T_USUARIO.TU_TELCEL,
-    T_USUARIO.TL_ID, 
+    T_USUARIO.TL_ID,
     T_USUARIO.TP_ID, T_PERFIL.TP_PERFIL,
     T_USUARIO.TE_ID,
-    T_LOGIN.TL_LOGIN, 
+    T_LOGIN.TL_LOGIN,
     T_ENDERECO.TE_LOGRADOURO, T_ENDERECO.TE_NUMERO, T_ENDERECO.TE_COMP, T_ENDERECO.TE_BAIRRO, T_ENDERECO.TE_CEP,
     T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
     FROM T_USUARIO, T_LOGIN, T_ENDERECO, T_MUNICIPIO, T_PERFIL
-    WHERE T_USUARIO.TL_ID = T_LOGIN.TL_ID AND		
+    WHERE T_USUARIO.TL_ID = T_LOGIN.TL_ID AND
     T_USUARIO.TE_ID = T_ENDERECO.TE_ID AND
     T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID AND
     T_USUARIO.TP_ID = T_PERFIL.TP_ID;
 
-    
+
 CREATE VIEW V_COLONIA AS
-   SELECT T_COLONIA.TC_ID, T_COLONIA.TC_NOME, T_COLONIA.TC_ESPECIFICIDADE, T_COLONIA.TCOM_ID, 
+   SELECT T_COLONIA.TC_ID, T_COLONIA.TC_NOME, T_COLONIA.TC_ESPECIFICIDADE, T_COLONIA.TCOM_ID,
    T_COLONIA.TE_ID, T_ENDERECO.TE_LOGRADOURO, T_ENDERECO.TE_NUMERO, T_ENDERECO.TE_COMP, T_ENDERECO.TE_BAIRRO, T_ENDERECO.TE_CEP,
    T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
    FROM T_COLONIA, T_ENDERECO, T_MUNICIPIO
    WHERE T_COLONIA.TE_ID = T_ENDERECO.TE_ID AND
    T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID;
 
-   
-   
-   
+
+
+
 -- DROP VIEW V_PESCADOR;
 
 CREATE VIEW V_PESCADOR AS
-SELECT 
+SELECT
 TP.TP_ID, TP.TP_NOME,
 TP.TP_SEXO, TP.TP_MATRICULA,
 TP.TP_APELIDO, TP.TP_FILIACAOPAI,
@@ -1224,7 +1224,7 @@ TP.TP_NIT_CEI, TP.TP_RG,
 TP.TP_CMA, TP.TP_RGB_MAA_IBAMA,
 TP.TP_CIR_CAP_PORTO, TP.TP_CPF,
 -- TP.TP_TELRES,TP_TELCEL,
- TP.TP_DATANASC, 
+ TP.TP_DATANASC,
 TP.TMUN_ID_NATURAL, TM.TMUN_MUNICIPIO "MUNNAT", TM.TUF_SIGLA "SIGNAT",
 TP.TE_ID, TE.TE_LOGRADOURO, TE.TE_NUMERO,
 TE.TE_COMP, TE.TE_BAIRRO, TE.TE_CEP,
@@ -1235,12 +1235,17 @@ WHERE
 TP.TMUN_ID_NATURAL = TM.TMUN_ID AND
 TP.TE_ID = TE.TE_ID;
 
+CREATE TABLE t_pescador_has_telefone
+(
+  tpt_tp_id integer not null,
+  tpt_ttel_id integer not null,
+  tpt_telefone numeric(14,0) not null,
+  CONSTRAINT t_pescadorcontato_pkey PRIMARY KEY (tpt_tp_id, tpt_ttel_id),
+  CONSTRAINT fk_tpt_tp FOREIGN KEY (tpt_tp_id) REFERENCES t_pescador (tp_id),
+  CONSTRAINT fk_tpt_ttel FOREIGN KEY (tpt_ttel_id) REFERENCES t_tipotel (ttel_id)
+)
 
-   
-/*       
-CREATE VIEW V_UsuarioHasTelefone AS
-    SELECT T_Usuario_has_T_TelefoneContato.TU_ID, 
-    T_Usuario_has_T_TelefoneContato.TTCont_ID 
-    FROM T_Usuario_has_T_TelefoneContato;
-    */
-    
+CREATE VIEW V_PescadorHasTelefone AS
+select pt.tpt_tp_id, pt.tpt_ttel_id, pt.tpt_telefone, tt.ttel_desc
+from t_pescador_has_telefone as PT, t_tipotel as TT
+where pt.tpt_ttel_id = tt.ttel_id;

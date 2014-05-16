@@ -168,6 +168,8 @@
           <dbTableFile dbTableName="EscolaridadeDbtable"/>
           <dbTableFile dbTableName="TipoDependenteDbtable"/>
           <dbTableFile dbTableName="TipoTelefoneDbtable"/>
+          <dbTableFile dbTableName="PescadorHasTelefone"/>
+          <dbTableFile dbTableName="VPescadorHasTelefone"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -198,6 +200,7 @@
         <modelFile modelName="Escolaridade"/>
         <modelFile modelName="TipoDependente"/>
         <modelFile modelName="TipoTelefone"/>
+        <modelFile modelName="VPescadorHasTelefone"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

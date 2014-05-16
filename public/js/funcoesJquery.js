@@ -1,14 +1,14 @@
 $(document).ready(function(){
 		//funcoes para formulários
-    
+
 		$('input[id*=id_]').attr("disabled", true);
 		$('input[id*=id_]').css("background-color", "#cccccc");
 		$('input[id*=id_]').attr("size", "3px");
-		
-		
+
+
 		$('input[id*=numeric]').attr("size", "3px");
-		
-        
+
+
 		function removeCampo() {
 			$(".removerCampo").unbind("click");
 			$(".removerCampo").bind("click", function () {
@@ -37,12 +37,12 @@ $(document).ready(function(){
 			novoCampo1.insertAfter("tr.linhas1:last");
 			removeCampo1();
 		});
-	   
+
 		//funcoes para formularios
-		
-		
+
+
 		//funcoes para entrevistas
-		
+
 		if($('select.option').attr("value","Pesca de Linha")){
 			$('#novaEntrevista').attr("href","EntrevistaPescaLinha.html");
 		}
@@ -55,10 +55,10 @@ $(document).ready(function(){
 		else if($('select.option').attr("value","Mariscagem")){
 			$('#novaEntrevista').attr("href","EntrevistaMariscagem.html");
 		}
-		
+
 		//funcoes para entrevistas
-		
-		
+
+
 		//funções para menu-lateral
 		if($("fieldset").attr('id') == "Social"){
 			$("#Social").show();
@@ -74,14 +74,14 @@ $(document).ready(function(){
 			$("#Dsbq").show();
 			$("#Filo").show();
 			$("#Social").hide();
-			
+
 		}
 		else{
 			$("#Dsbq").hide();
 			$("#Filo").hide();
 			$("#Social").hide();
 		}
-		
+
 
 
 		$("#for-Social").click(function(){
@@ -94,7 +94,7 @@ $(document).ready(function(){
                 $("#Filo").slideToggle();
         });
         //funcoes para menu
-        
+
         //Entrevistas
         $(function() {
             $( "#accordion" ).accordion({
@@ -103,9 +103,9 @@ $(document).ready(function(){
             $("#active").accordion("disabled");
         });
         //Entrevistas
-        
 
-        
+
+
 });
 
 
@@ -126,4 +126,3 @@ $(function() {
         removeCampoTelefonesPescador();
     });
 });
-
