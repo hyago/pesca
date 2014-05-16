@@ -5,7 +5,14 @@ class EmalheController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        if(!Zend_Auth::getInstance()->hasIdentity()){
+            $this->_redirect('index');
+        }
+        
+        $this->_helper->layout->setLayout('admin');
+        
+        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
+        $this->view->usuarioLogado = $this->usuarioLogado;
     }
 
     public function indexAction()

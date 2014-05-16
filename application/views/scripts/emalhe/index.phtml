@@ -1,4 +1,190 @@
-Emalhe<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Emalhe</b> and script/action name <b>index</b></p>
+<div id="titulos">
+    <h2>Desembarque->Pesca de Emalhe</h2>
+    <h3>Entrevista</h3>
 </div>
+
+<div id="esquerda-entrevista">
+    <form>
+        <fieldset id="Desembarque">
+            <div id="esquerda">
+            <div id="form-esq">
+                <label>ID da ficha diária:</label>
+                <input type="text" name="id_fichaDiaria" placeholder="ID" id="id_fichaDiaria" /><br />
+            </div>
+            <div id="form-esq">
+                <label for="tipo">ID Entrevista:</label>
+                <input type="text" id="id_entrevista" placeholder = "ID" name="id_entrevista"/><br />
+            </div>
+            </div>
+            <br/>
+            <div id="esquerda">
+		<legend><h4>Embarcação:</h4></legend>
+                    <div id="form-esq">
+                        <label>Utilizou Barco?</label>
+                        <input type="checkbox" id="nome" name="barco" checked="true"/><br />
+                    </div>
+                    <div id="form-esq">
+                        <label>Barco:</label>
+                        <input type="text" id="nome" name="barco" placeholder="Nome do Barco" /><br />
+                    </div>
+                    <div id="form-esq">
+                        <label>Tipo de Barco:</label>
+                        <input type="text" id="nome" name="tipo_barco" placeholder="Tipo de Barco"/><br />
+                    </div>
+                    
+            </div>
+            <div id="direita-entrevista">
+                    <div id="form-esq">    
+                        <label>Pescador Entrevistado:</label>
+                        <input type="text" id="nome" name="mestre" placeholder="Entrevistado"/><br />
+                    </div>
+                    <div id="form-esq">
+                        <label>Qtd de Pescadores:</label>
+                        <input type="text" id="numeric" name="num_pescadores" placeholder="Num"/><br />
+                    </div>
+            </div>
+            <div id="esquerda">
+                <legend><h4>Lançamento e Recolhimento:</h4></legend>
+                <div id="form-esq">
+                    
+                    <label>Data:</label>
+                    <input type="text" name="num_pescadores" placeholder="Data de Lançamento"/>
+                </div>
+                <div id="form-esq">
+                    <label>Horas:</label>
+                    <input type="text" name="num_pescadores" placeholder="Hora de Recolhimento"/>
+                </div>
+            </div>
+           <div id="direita-entrevista">
+                <div id="form-esq">
+                    <label>Data:</label>
+                    <input type="text" name="num_pescadores" placeholder="Data da Volta"/>
+                </div>
+               <div id="form-esq">
+                    <label>Horas:</label>
+                    <input type="text" name="num_pescadores" placeholder="Hora da Volta"/>
+                </div>
+           </div>
+            <div id="esquerda">
+                <div id="form-esq">
+                    <legend><h4>Gastos:</h4></legend>
+                    <label>Diesel(L):</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Diesel"/>
+                </div>
+                <div id="form-dir">    
+                    <label>Óleo(L):</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Óleo"/><br />
+                </div>
+            </div>
+            <div id="direita-entrevista">
+                <div id="form-dir">    
+                    <label>Alimento($):</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Alimento"/><br />
+                </div>
+                <div id="form-dir">    
+                    <label>Gelo($):</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Gelo"/><br />
+                </div>
+            </div>
+            <br/>
+            <div id="esquerda">
+                <div id="form-esq">
+                    <legend><h4>Esforço:</h4></legend>
+                    <label>Tamanho(m):</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Diesel"/>
+                </div>
+                <div id="form-dir">    
+                    <label>Altura(m):</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Óleo"/><br />
+                </div>
+            </div>
+            <div id="direita-entrevista">
+                <div id="form-dir">    
+                    <label>Número de Panos:</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Alimento"/><br />
+                </div>
+                <div id="form-dir">    
+                    <label>Malha:</label>
+                    <input type="text" id="numeric" name="num_pescadores" placeholder="Gelo"/><br />
+                </div>
+            </div><br/>
+            <div id="esquerda">
+                <legend><h4>Outros dados:</h4></legend>
+                <div id="form-esq">    
+                    <label>Avistou:</label>
+                    <input type="text" name="num_pescadores" placeholder="Num"/><br />
+                </div>
+                <div id="form-esq">
+                    <label for="tipo">Subamostra?:</label>
+                    <input type="checkbox" id="subamostra" name="subamostra" /><br />
+                </div>
+                <div id="form-esq">
+                    <label for="tipo">Observacao:</label>
+                    <input type="text" id="obs" name="subamostra" placeholder="Observacao" /><br />
+                </div>
+            </div>
+         <br/>
+         <br/>
+         <br/>
+         <div id="esquerda-entrevista">
+         <fieldset id="Pesqueiros">
+            <td>Quais Pesqueiros e Quanto tempo em cada:</td>
+               <table style="border:none">
+               <tr class="linhas">
+               <br/>
+               <td>
+                   <select name="Pesqueiro[]" style="float:left">
+                    <option value="" selected="selected">Pesqueiro</option>
+                   </select>
+               </td>
+               <td>
+                   <label>Tempo</label>
+                   <input type="text" name="qtd_peixes[]" id="numeric"/>
+               </td>
+               <td>
+                   <a  class="removerCampo" title="Remover linha">Remove Campo</a>
+               </td>
+                            
+              </tr>
+              </table>
+                      
+            <a href="#rodape" class="adicionarCampo" title="Adicionar item">Add Campo</a>
+         </fieldset>
+         </div>
+         <div id="esquerda-entrevista">
+         <fieldset id="ArtePesca">
+          <td><label for="tipo">Quantidade de Peixes Capturadas:</label></td>
+              <table style="border:none">
+              <tr class="linhas">
+              <br/>
+              <td>
+                  <select name="Especie[]" id="Especie">
+                      <option value="" selected="selected">Espécie</option>
+                  </select>
+	      </td>
+              <td>
+                  <label>Quantidade</label>
+                  <input type="text" name="qtd_peixes[]" id="numeric"/>
+              </td>
+              <td>
+                  <label for="tipo">Peso (Kg):</label>
+                  <input type="text" id="numeric" name="peso_pescaLinha"/>           
+              </td>
+              <td>
+                  <label for="tipo">Preço por Kg:</label>
+                  <input type="text" id="numeric" name="preco_pescaLinha"/>           
+              </td>
+              <td>
+                  <a class="removerCampo" title="Remover linha">Remove Campo</a>
+              </td>
+	      </tr>
+              </table>
+              <br/>
+              <a  class="adicionarCampo" title="Adicionar item">Add Campo</a>
+       </fieldset>       
+         </div>
+        </fieldset>
+        <div id="Submit">
+            <input type="submit" value="Enviar"/>
+        </div>
+    </form>
