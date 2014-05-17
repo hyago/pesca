@@ -11,37 +11,108 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 alert("Hello world!");
             }
 
-            var rowNum = 1000; //Não sobrepor numeração existente
+//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/
+            var rowNumTelefone = 0;
             function addRowPhone(frm) {
-                rowNum++;
+                rowNumTelefone++;
 
                 var tmpTelefone = frm.inputTelefone.value;
-                var tmpSelectText = frm.selectTipoTelefone.text;
+                var tmpSelectText = frm.selectTipoTelefone[frm.selectTipoTelefone.selectedIndex].text;
                 var tmpSelectID = frm.selectTipoTelefone.value;
-
-                for (var i = 0; i < frm.selectTipoTelefone.length; i++) {
-                    if (frm.selectTipoTelefone[i].value == tmpSelectID) {
-                        tmpSelectText = frm.selectTipoTelefone[i].text;
-                    }
-                }
 
                 if (tmpSelectText && tmpTelefone) {
 
-                    var linhaTelefones = '<div class="noEditable"><p id="rowNum' + rowNum + '">';
-                    linhaTelefones = linhaTelefones.concat('<input type="button" value="Remove" onclick="removeRowPhone(' + rowNum + ');">');
+                    var linhaTelefones = '<div class="noEditable"><p id="rowNumTelefone' + rowNumTelefone + '">';
+                    linhaTelefones = linhaTelefones.concat('<input type="button" value="Remove" onclick="removeRowNumTelefone(' + rowNumTelefone + ');">');
                     linhaTelefones = linhaTelefones.concat('<input type="text" readonly size="15" name="inputTelefone[]" class="telefone" value="' + tmpTelefone + '">');
                     linhaTelefones = linhaTelefones.concat('<input type="text" readonly size="15" name="inputTipo[]" value="' + tmpSelectText + '">');
                     linhaTelefones = linhaTelefones.concat('<input type="text" readonly size="8" name="inputTipoID[]" value="' + tmpSelectID + '">');
                     linhaTelefones = linhaTelefones.concat('<br></p></div>');
 
-                    jQuery('#itemRows').append(linhaTelefones);
+                    jQuery('#rowNumTelefone').append(linhaTelefones);
                     frm.inputTelefone.value = '';
                     frm.selectTipoTelefone.value = '';
                 }
             }
 
-            function removeRowPhone(rnum) {
-                jQuery('#rowNum' + rnum).remove();
+            function removeRowNumTelefone(localRowNumTelefone) {
+                jQuery('#rowNumTelefone' + localRowNumTelefone).remove();
+            }
+            
+//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Colonia /_/_/_/_/_/_/_/_/_/_/_/_/_/
+            var rowNumColonia = 0;
+            function addRowColonia(frm) {
+                rowNumColonia++;
+
+                var linhaColonia = '<div class="noEditable"><p id="itemColoniaRows' + rowNumColonia + '">';
+                linhaColonia = linhaColonia.concat('<input type="button" value="Remove" onclick="removeRowNumColonia(' + rowNumColonia + ');">');
+                
+                linhaColonia = linhaColonia.concat('<input type="date" readonly size="15" name="inputDataInscricaoColonia[]" value="' + frm.inputDataInscricaoColonia.value + '">');
+
+
+                linhaColonia = linhaColonia.concat('<input type="text" readonly size="10" name="inputColonia[]" " value="' + frm.SelectColonia[frm.SelectColonia.selectedIndex].text + '">');
+                linhaColonia = linhaColonia.concat('<input type="text" readonly size="2" name="inputColoniaID[]" " value="' + frm.SelectColonia.value + '">');
+
+                linhaColonia = linhaColonia.concat('<br></p></div>');
+
+                jQuery('#itemColoniaRows').append(linhaColonia);
+            }
+            
+            function removeRowNumColonia(localRowNumColonia) {
+                jQuery('#itemColoniaRows' + localRowNumColonia).remove();
+            }  
+            
+//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ ArtePesca /_/_/_/_/_/_/_/_/_/_/_/_/_/
+            var rowNumArte = 0;
+            function addRowArte(frm) {
+                rowNumArte++;
+
+                var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumArte + '">';
+                linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumArte(' + rowNumArte + ');">');
+
+                linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputMotor[]" value="' + frm.selectAreaPesca[frm.selectAreaPesca.selectedIndex].text + '">');
+                linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputMotorID[]" value="' + frm.selectAreaPesca.value + '">');
+
+                linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputPorte[]" " value="' + frm.selectTipocapturada[frm.selectTipocapturada.selectedIndex].text + '">');
+                linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputPorte[]" " value="' + frm.selectTipocapturada.value + '">');
+
+                linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputBarco[]" " value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
+                linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputBarco[]" " value="' + frm.SelectArtePesca.value + '">');
+
+                linhaArte = linhaArte.concat('<br></p></div>');
+
+                jQuery('#itemArteTipoRows').append(linhaArte);
+            }
+
+            function removeRowNumArte(localRowNumArte) {
+                jQuery('#itemArteTipoRows' + localRowNumArte).remove();
+            }  
+   
+
+//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/
+            var rowNumEmbarcacao = 0;
+            function addRowEmbarcacao(frm) {
+                rowNumEmbarcacao++;
+
+                var linhaEmbarcacao = '<div class="noEditable"><p id="itemEmbarcacoesRows' + rowNumEmbarcacao + '">';
+                linhaEmbarcacao = linhaEmbarcacao.concat('<input type="button" value="Remove" onclick="removeRowNumEmbarcacao(' + rowNumEmbarcacao + ');">');
+
+                linhaEmbarcacao = linhaEmbarcacao.concat('<input type="text" readonly size="10" name="inputMotor[]" value="' + frm.selectMotorEmbarcacao[frm.selectMotorEmbarcacao.selectedIndex].text + '">');
+                linhaEmbarcacao = linhaEmbarcacao.concat('<input type="text" readonly size="2" name="inputMotorID[]" value="' + frm.selectMotorEmbarcacao.value + '">');
+
+                linhaEmbarcacao = linhaEmbarcacao.concat('<input type="text" readonly size="10" name="inputPorte[]" " value="' + frm.selectPorteEmbarcacao[frm.selectPorteEmbarcacao.selectedIndex].text + '">');
+                linhaEmbarcacao = linhaEmbarcacao.concat('<input type="text" readonly size="2" name="inputPorte[]" " value="' + frm.selectPorteEmbarcacao.value + '">');
+
+                linhaEmbarcacao = linhaEmbarcacao.concat('<input type="text" readonly size="10" name="inputBarco[]" " value="' + frm.selectTipoEmbarcacao[frm.selectTipoEmbarcacao.selectedIndex].text + '">');
+                linhaEmbarcacao = linhaEmbarcacao.concat('<input type="text" readonly size="2" name="inputBarco[]" " value="' + frm.selectTipoEmbarcacao.value + '">');
+
+                linhaEmbarcacao = linhaEmbarcacao.concat('<br></p></div>');
+
+                jQuery('#itemEmbarcacoesRows').append(linhaEmbarcacao);
+            }
+
+            function removeRowNumEmbarcacao(localRowNumEmbarcacao) {
+                jQuery('#itemEmbarcacoesRows' + localRowNumEmbarcacao).remove();
             }
 
         </script>
@@ -215,11 +286,11 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <fieldset class="noEditable" id="itemRows"><legend>Telefone listados:</legend>
 
                     <?php foreach ($this->assign_vPescadorHasTelefone as $key => $vPescadorHasTelefone): ?>
-                        <div class="noEditable"><p id="rowNum<?=$key?>">
-                                <input type="button" value="Remove" onclick="removeRowPhone( <?=$key?> );">
+                        <div class="noEditable"><p id="rowNum<?= $key ?>">
+                                <input type="button" value="Remove" onclick="removeRowPhone(<?= $key ?>);">
                                 <input type="text" readonly size="15" name="inputTelefone[]" class="telefone" value="<?= $vPescadorHasTelefone['tpt_telefone'] ?>">
                                 <input type="text" readonly size="15" name="inputTipo[]" value="<?= $vPescadorHasTelefone['ttel_desc'] ?>">
-                                <input type="text" readonly size="8" name="inputTipoID[]" value="<?= $vPescadorHasTelefone['tpt_ttel_id'] ?><?=$key?>">
+                                <input type="text" readonly size="8" name="inputTipoID[]" value="<?= $vPescadorHasTelefone['tpt_ttel_id'] ?><?= $key ?>">
                                 <br>
                             </p></div>
                     <?php endforeach; ?>
@@ -233,13 +304,13 @@ $this->headScript()->appendFile('/js/mascaras.js');
                     <div id="base">
                         <input onclick="addRowColonia(this.form);" type="button" value="Add row" />
                         <input type="date" name="inputDataInscricaoColonia" placeholder="Data Inscrição na Colonia" size="20"  />
-                        
-                        <select name="colonia" id="colonia">
+
+                        <select name="SelectColonia" id="colonia">
                             <?php foreach ($this->colonias as $key => $colonia): ?>
-                            <option value="<?= $colonia['tc_id']; ?>">
-                            <?= $colonia['tc_nome']; ?></option><?php endforeach; ?>
+                                <option value="<?= $colonia['tc_id']; ?>">
+                                    <?= $colonia['tc_nome']; ?></option><?php endforeach; ?>
                         </select>
-                        
+
                     </div>
 
                 </fieldset>
@@ -254,22 +325,22 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                     <div id="base">
                         <input onclick="addRowArte(this.form);" type="button" value="Add row" />
-                        
-                        <select name="areaPesca" id="areaPesca">
+
+                        <select name="selectAreaPesca" id="areaPesca">
                             <?php foreach ($this->areasPesca as $key => $areaPesca): ?>
                                 <option value="<?= $areaPesca['tareap_id']; ?>"><?= $areaPesca['tareap_areapesca']; ?></option>
                             <?php endforeach; ?>
                         </select>
 
-                        <select name="tipocapturada" id="tipocapturada">
+                        <select name="selectTipocapturada" id="tipocapturada">
                             <?php foreach ($this->tipoCapturadas as $key => $tipoCapturadas): ?>
                                 <option value="<?= $tipoCapturadas['itc_id']; ?>"><?= $tipoCapturadas['itc_tipo']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <select name="artePesca" id="artePesca">
+                        <select name="SelectArtePesca" id="artePesca">
                             <?php foreach ($this->artesPesca as $key => $artePesca): ?>
                                 <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
-                                    <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -285,22 +356,22 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                     <div id="base">
                         <input onclick="addRowEmbarcacao(this.form);" type="button" value="Adicionar" />
-                        
-                        <select name="motorEmbarcacao" id="motorEmbarcacao">
+
+                        <select name="selectMotorEmbarcacao" id="motorEmbarcacao">
                             <option value="0" >Sem motor</option>
                             <option value="1" >Com motor</option>
                         </select>
 
-                        <select name="porteEmbarcacao" id="porteEmbarcacao">
+                        <select name="selectPorteEmbarcacao" id="porteEmbarcacao">
                             <?php foreach ($this->portesEmbarcacao as $key => $porteEmbarcacao): ?>
                                 <option value="<?= $porteEmbarcacao['tpe_id']; ?>"><?= $porteEmbarcacao['tpe_porte']; ?></option>
-                                    <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </select>
 
-                        <select name="tipoEmbarcacao" id="tipoEmbarcacao">
+                        <select name="selectTipoEmbarcacao" id="tipoEmbarcacao">
                             <?php foreach ($this->tiposEmbarcacao as $key => $tipoEmbarcacao): ?>
                                 <option value="<?= $tipoEmbarcacao['tte_id']; ?>"><?= $tipoEmbarcacao['tte_tipoembarcacao']; ?></option>
-                                    <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -309,7 +380,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <fieldset class="noEditable" id="itemEmbarcacoesRows"><legend>Embarcações listadas:</legend>
                     <!--Area para inserir os itens-->
                 </fieldset>
-            </fieldset>            
+            </fieldset>
             <br>
 
             <div id="Submit">
