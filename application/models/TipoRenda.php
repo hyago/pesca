@@ -28,7 +28,7 @@ class Application_Model_TipoRenda
     {
         $this->dbTableTiploRenda = new Application_Model_DbTable_TipoRenda();
         
-        $dadosTipoRenda = array( 'ttr_descricao' => $request['tipoRenda' ] );
+        $dadosTipoRenda = array( 'ttr_descricao' => $request['inputTipoRenda' ] );
         
         $this->dbTableTiploRenda->insert($dadosTipoRenda);
 
@@ -39,7 +39,7 @@ class Application_Model_TipoRenda
     {
         $this->dbTableTiploRenda = new Application_Model_DbTable_TipoRenda();
         
-        $dadosTipoRenda = array( 'ttr_descricao' => $request['tipoRenda' ] );
+        $dadosTipoRenda = array( 'ttr_descricao' => $request['inputTipoRenda' ] );
         
         $whereTipoRenda= $this->dbTableTiploRenda->getAdapter() ->quoteInto('"ttr_id" = ?', $request['idTipoRenda']);
         
