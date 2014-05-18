@@ -176,27 +176,6 @@ CREATE TABLE IF NOT EXISTS T_Renda (
   PRIMARY KEY (REN_ID));
 
 -- -----------------------------------------------------
--- Table T_Pescador_has_T_Renda
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Renda (
-  REN_ID INT NOT NULL,
-  TP_ID INT NOT NULL,
-  TPR_OutraRenda boolean NULL,
---   TPR_OutraRenda boolean NULL,
-  TPR_Qual VARCHAR(60) NULL,
-  PRIMARY KEY (REN_ID),
-  CONSTRAINT fk_T_Pescador_has_T_Renda_T_Renda1
-    FOREIGN KEY (REN_ID)
-    REFERENCES T_Renda (REN_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_Renda_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- -----------------------------------------------------
 -- Table T_ProgramaSocial
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_ProgramaSocial (
@@ -443,8 +422,10 @@ CREATE TABLE IF NOT EXISTS T_HistoricoRecadastramento (
 -- Table T_Pescador_has_T_TipoArtePesca
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_Pescador_has_T_TipoArtePesca (
-  TP_ID INT NOT NULL,
-  TAP_ID INT NOT NULL,
+    TP_ID INT NOT NULL,
+    TAP_ID INT NOT NULL,
+    tareap_id int null,
+    itc_id int null,
   PRIMARY KEY (TP_ID, TAP_ID),
   CONSTRAINT fk_T_Pescador_has_T_TipoArtePesca_T_Pescador1
     FOREIGN KEY (TP_ID)
@@ -455,7 +436,15 @@ CREATE TABLE IF NOT EXISTS T_Pescador_has_T_TipoArtePesca (
     FOREIGN KEY (TAP_ID)
     REFERENCES T_ArtePesca (TAP_ID)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION,
+CONSTRAINT fk_T_Pescador_has_T_areapesca
+    FOREIGN KEY (tareap_id)
+    REFERENCES t_areapesca (tareap_id),
+CONSTRAINT fk_T_Pescador_has_T_tipocapturada
+    FOREIGN KEY (itc_id)
+    REFERENCES t_tipocapturada (itc_id)
+);
+
 
 
 
@@ -1223,8 +1212,8 @@ TP.TP_PIS, TP.TP_INSS,
 TP.TP_NIT_CEI, TP.TP_RG,
 TP.TP_CMA, TP.TP_RGB_MAA_IBAMA,
 TP.TP_CIR_CAP_PORTO, TP.TP_CPF,
--- TP.TP_TELRES,TP_TELCEL,
- TP.TP_DATANASC,
+TP.TP_DATANASC,
+TP.tp_especificidade, TP.esc_id,
 TP.TMUN_ID_NATURAL, TM.TMUN_MUNICIPIO "MUNNAT", TM.TUF_SIGLA "SIGNAT",
 TP.TE_ID, TE.TE_LOGRADOURO, TE.TE_NUMERO,
 TE.TE_COMP, TE.TE_BAIRRO, TE.TE_CEP,
@@ -1249,3 +1238,110 @@ CREATE VIEW V_PescadorHasTelefone AS
 select pt.tpt_tp_id, pt.tpt_ttel_id, pt.tpt_telefone, tt.ttel_desc
 from t_pescador_has_telefone as PT, t_tipotel as TT
 where pt.tpt_ttel_id = tt.ttel_id;
+
+CREATE VIEW V_PESCADORHASDEPENDENTE AS
+SELECT
+PD.TP_ID, PD.TTD_ID, PD.TPTD_QUANTIDADE,
+TD.TTD_TIPODEPENDENTE
+FROM 
+T_PESCADOR_HAS_T_TIPODEPENDENTE AS PD,
+T_TIPODEPENDENTE AS TD
+WHERE
+PD.TTD_ID = TD.TTD_ID;
+
+
+CREATE TABLE t_pescador_has_t_tipodependente
+(
+  tp_id integer NOT NULL,
+  ttd_id integer NOT NULL,
+  tptd_quantidade integer,
+  CONSTRAINT t_pescador_has_t_tipodependente_pkey PRIMARY KEY (tp_id, ttd_id),
+  CONSTRAINT fk_t_pescador_has_t_tipodependente_tp_id FOREIGN KEY (tp_id) REFERENCES t_pescador (tp_id),
+  CONSTRAINT fk_t_pescador_has_t_tipodependente_ttd_id FOREIGN KEY (ttd_id) REFERENCES t_tipodependente (ttd_id)
+);
+
+INSERT INTO t_pescador_has_t_tipodependente (tp_id, ttd_id, tptd_quantidade)
+SELECT tp_id, t_tipodependente_ttd_id, tp_td_quantidade FROM t_pescador_has_tt_dependente ;
+
+
+CREATE TABLE t_tiporenda (
+ttr_id serial,
+ttr_descricao  VARCHAR(45) not null,
+CONSTRAINT t_tiporenda_pkey PRIMARY KEY (ttr_id)
+);
+
+insert into t_tiporenda values (1, 'Pesca');
+insert into t_tiporenda values (2, 'Outra renda');
+
+
+--DROP TABLE t_pescador_has_t_renda;
+
+CREATE TABLE t_pescador_has_t_renda
+(
+  tp_id integer NOT NULL,
+  ren_id integer NOT NULL,
+  ttr_id integer NOT NULL,
+  CONSTRAINT t_pescador_has_t_renda_pkey PRIMARY KEY (tp_id, ren_id, ttr_id),
+  CONSTRAINT fk_t_pescador_has_t_renda_tp_id FOREIGN KEY (tp_id) REFERENCES t_pescador (tp_id),
+  CONSTRAINT fk_t_pescador_has_t_renda FOREIGN KEY (ren_id) REFERENCES t_renda (ren_id),
+CONSTRAINT fk_t_pescador_has_t_renda_ttr_id FOREIGN KEY (ttr_id) REFERENCES t_tiporenda (ttr_id)
+);
+
+alter table t_pescador ADD CONSTRAINT fk_pescador_esc_id FOREIGN KEY (esc_id) REFERENCES t_escolaridade(esc_id);
+
+CREATE VIEW V_PESCADORHASRENDA AS
+SELECT
+PHR.TP_ID, 
+PHR.REN_ID, TR.REN_RENDA,
+PHR.TTR_ID, TTR.TTR_DESCRICAO
+FROM 
+T_PESCADOR_HAS_T_RENDA AS PHR,
+T_RENDA AS TR,
+T_TIPORENDA AS TTR
+WHERE
+PHR.REN_ID = TR.REN_ID AND
+PHR.TTR_ID = TTR.TTR_ID;
+
+CREATE VIEW V_PESCADORHASCOLONIA AS
+SELECT
+PHC.TP_ID, 
+PHC.TC_ID, TC.TC_NOME,
+PHC.TPTC_DATAINSCCOLONIA
+FROM 
+T_PESCADOR_HAS_T_COLONIA AS PHC,
+T_COLONIA AS TC
+WHERE
+PHC.TC_ID = TC.TC_ID;
+
+--V_PESCADORHASEMBARCACAO
+CREATE VIEW V_PESCADORHASEMBARCACAO AS
+SELECT
+PHE.TP_ID,
+PHE.TTE_ID, TTE.TTE_TIPOEMBARCACAO,
+PHE.TPTE_MOTOR,
+PHE.TPE_ID,  TPE.TPE_PORTE
+FROM 
+T_PESCADOR_HAS_T_EMBARCACAO AS PHE,
+T_TIPOEMBARCACAO AS TTE,
+T_PORTEEMBARCACAO AS TPE
+WHERE
+PHE.TTE_ID = TTE.TTE_ID AND
+PHE.TPE_ID = TPE.TPE_ID;
+
+--V_PESCADORHASARTETIPOAREA
+CREATE VIEW V_PESCADORHASARTETIPOAREA AS
+SELECT
+PATA.TP_ID,
+PATA.TAP_ID, ARTE.TAP_ARTEPESCA,
+PATA.TAREAP_ID, AREA.TAREAP_AREAPESCA,
+PATA.ITC_ID,  TIPO.ITC_TIPO
+FROM 
+T_PESCADOR_HAS_T_TIPOARTEPESCA AS PATA,
+T_AREAPESCA AS AREA,
+T_TIPOCAPTURADA AS TIPO,
+T_ARTEPESCA AS ARTE
+WHERE
+PATA.TAREAP_ID = AREA.TAREAP_ID AND
+PATA.ITC_ID = TIPO.ITC_ID AND
+PATA.TAP_ID = ARTE.TAP_ID;
+

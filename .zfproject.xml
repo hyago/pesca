@@ -170,6 +170,14 @@
           <dbTableFile dbTableName="TipoTelefoneDbtable"/>
           <dbTableFile dbTableName="PescadorHasTelefone"/>
           <dbTableFile dbTableName="VPescadorHasTelefone"/>
+          <dbTableFile dbTableName="PescadorHasDependente"/>
+          <dbTableFile dbTableName="TipoRenda"/>
+          <dbTableFile dbTableName="PescadorHasRenda"/>
+          <dbTableFile dbTableName="VPescadorHasDependente"/>
+          <dbTableFile dbTableName="VPescadorHasRenda"/>
+          <dbTableFile dbTableName="VPescadorHasColonia"/>
+          <dbTableFile dbTableName="VPescadorHasEmbarcacao"/>
+          <dbTableFile dbTableName="VPescadorHasArteTipoArea"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -201,6 +209,12 @@
         <modelFile modelName="TipoDependente"/>
         <modelFile modelName="TipoTelefone"/>
         <modelFile modelName="VPescadorHasTelefone"/>
+        <modelFile modelName="TipoRenda"/>
+        <modelFile modelName="VPescadorHasDependente"/>
+        <modelFile modelName="VPescadorHasRenda"/>
+        <modelFile modelName="VPescadorHasColonia"/>
+        <modelFile modelName="VPescadorHasEmbarcacao"/>
+        <modelFile modelName="VPescadorHasArteTipoArea"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

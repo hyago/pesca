@@ -1,17 +1,3 @@
-<!--<html>
-<head>
-<script>
-
-    function msgTeste(){
-    $decisao = confirm("Deseja continuar");
-    if(($decisao)){
-        location.href=' http://localhost/projeto/public/nomeController/NomeAction ';
-    }
-}
-
-</script>
-</head>-->
-
 <?php
 /**
  * Controller de Pescadores
@@ -46,77 +32,84 @@ class PescadorController extends Zend_Controller_Action {
     public function indexAction() {
         $dados = $this->modelPescador->select();
 
-
-
         $this->view->assign("dados", $dados);
     }
 
     /*
      * Consulta um pescador
      */
-
     public function visualizarAction() {
         $idPescador = $this->_getParam('id');
 
         $usuario = $this->modelPescador->find($idPescador);
 
-        $modelTelefone = new Application_Model_Telefone();
-        $telefoneResidencial = $modelTelefone->getTelefone($idPescador, 'Residencial');
-        $telefoneCelular = $modelTelefone->getTelefone($idPescador, 'Celular');
-
         $this->view->assign("pescador", $usuario);
-        $this->view->assign("telefoneResidencial", $telefoneResidencial);
-        $this->view->assign("telefoneCelular", $telefoneCelular);
     }
 
     /*
      * Exibe formulário para cadastro de um pescador
      */
-
     public function novoAction() {
         $modelMunicipio = new Application_Model_Municipio();
-        $modelArtePesca = new Application_Model_ArtePesca();
-        $modelAreaPesca = new Application_Model_AreaPesca();
-        $modelColonia = new Application_Model_Colonia();
-        $modelEspecie = new Application_Model_Especie();
-        $modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
-        $modelPorteEmbarcacao = new Application_Model_PorteEmbarcacao();
-        $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
-        $modelTipoTelefone = new Application_Model_TipoTelefone();
-
         $municipios = $modelMunicipio->select();
-        $municipiosNat = $modelMunicipio->select();
-        $artesPesca = $modelArtePesca->select();
-        $areasPesca = $modelAreaPesca->select();
-        $colonias = $modelColonia->select();
-        $especies = $modelEspecie->select();
-        $tiposEmbarcacao = $modelTipoEmbarcacao->select();
-        $portesEmbarcacao = $modelPorteEmbarcacao->select();
-        $tipoCapturadas = $modelTipoCapturada->select();
-        $tipoTelefones = $modelTipoTelefone->select();
-
         $this->view->assign("municipios", $municipios);
-        $this->view->assign("municipiosNat", $municipiosNat);
+
+        $modelArtePesca = new Application_Model_ArtePesca();
+        $artesPesca = $modelArtePesca->select();
         $this->view->assign("artesPesca", $artesPesca);
+
+        $modelAreaPesca = new Application_Model_AreaPesca();
+        $areasPesca = $modelAreaPesca->select();
         $this->view->assign("areasPesca", $areasPesca);
+
+        $modelColonia = new Application_Model_Colonia();
+        $colonias = $modelColonia->select();
         $this->view->assign("colonias", $colonias);
+
+        $modelEspecie = new Application_Model_Especie();
+        $especies = $modelEspecie->select();
         $this->view->assign("especies", $especies);
+
+        $modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
+        $tiposEmbarcacao = $modelTipoEmbarcacao->select();
         $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
+
+        $modelPorteEmbarcacao = new Application_Model_PorteEmbarcacao();
+        $portesEmbarcacao = $modelPorteEmbarcacao->select();
         $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
+
+        $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
+        $tipoCapturadas = $modelTipoCapturada->select();
         $this->view->assign("tipoCapturadas", $tipoCapturadas);
+
+        $modelTipoTelefone = new Application_Model_TipoTelefone();
+        $tipoTelefones = $modelTipoTelefone->select();
         $this->view->assign("assignTipoTelefones", $tipoTelefones);
 
         $this->view->assign("assignFieldsetTelefonesPescador", FALSE);
-
-        $this->view->estados = array("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
+        
+        $modelEscolaridade= new Application_Model_Escolaridade();
+        $escolaridade = $modelEscolaridade->select();
+        $this->view->assign("assignEscolaridades", $escolaridade);
+        
+        $modelTipoDependente = new Application_Model_TipoDependente();
+        $tipoDependentes = $modelTipoDependente->select();
+        $this->view->assign("assignTipoDependentes", $tipoDependentes);
+        
+        $modelRenda = new Application_Model_Renda();
+        $rendas = $modelRenda->select();
+        $this->view->assign("assignRendas", $rendas);
+        
+        $modelTipoRenda = new Application_Model_TipoRenda();
+        $tipoRendas = $modelTipoRenda->select();
+        $this->view->assign("assignTipoRendas", $tipoRendas);
     }
 
     /*
      * Cadastra um pescador
      */
-
     public function criarAction() {
-        $this->modelPescador->insert($this->_getAllParams());
+        $this->modelPescador->insert( $this->_getAllParams() );
 
         $this->_redirect('pescador/index');
     }
@@ -126,51 +119,90 @@ class PescadorController extends Zend_Controller_Action {
      */
 
     public function editarAction() {
-        $modelMunicipio = new Application_Model_Municipio();
-        $modelArtePesca = new Application_Model_ArtePesca();
-        $modelAreaPesca = new Application_Model_AreaPesca();
-        $modelColonia = new Application_Model_Colonia();
-        $modelEspecie = new Application_Model_Especie();
-        $modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
-        $modelPorteEmbarcacao = new Application_Model_PorteEmbarcacao();
-        $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
-        $modelTipoTelefone = new Application_Model_TipoTelefone();
-
-        $municipios = $modelMunicipio->select();
-        $municipiosNat = $modelMunicipio->select();
-        $artesPesca = $modelArtePesca->select();
-        $areasPesca = $modelAreaPesca->select();
-        $colonias = $modelColonia->select();
-        $especies = $modelEspecie->select();
-        $tiposEmbarcacao = $modelTipoEmbarcacao->select();
-        $portesEmbarcacao = $modelPorteEmbarcacao->select();
-        $tipoCapturadas = $modelTipoCapturada->select();
-        $tipoTelefones = $modelTipoTelefone->select();
-
-        $pescador = $this->modelPescador->find($this->_getParam('id'));
-
-        $this->view->estados = array("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
+         $pescador = $this->modelPescador->find($this->_getParam('id'));
         $this->view->assign("pescador", $pescador);
+
+        $modelMunicipio = new Application_Model_Municipio();
+        $municipios = $modelMunicipio->select();
         $this->view->assign("municipios", $municipios);
-        $this->view->assign("municipiosNat", $municipiosNat);
+
+        $modelArtePesca = new Application_Model_ArtePesca();
+        $artesPesca = $modelArtePesca->select();
         $this->view->assign("artesPesca", $artesPesca);
+
+        $modelAreaPesca = new Application_Model_AreaPesca();
+        $areasPesca = $modelAreaPesca->select();
         $this->view->assign("areasPesca", $areasPesca);
+
+        $modelColonia = new Application_Model_Colonia();
+        $colonias = $modelColonia->select();
         $this->view->assign("colonias", $colonias);
+
+        $modelEspecie = new Application_Model_Especie();
+        $especies = $modelEspecie->select();
         $this->view->assign("especies", $especies);
+
+        $modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
+        $tiposEmbarcacao = $modelTipoEmbarcacao->select();
         $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
+
+        $modelPorteEmbarcacao = new Application_Model_PorteEmbarcacao();
+        $portesEmbarcacao = $modelPorteEmbarcacao->select();
         $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
+
+        $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
+        $tipoCapturadas = $modelTipoCapturada->select();
         $this->view->assign("tipoCapturadas", $tipoCapturadas);
+
+        $modelTipoTelefone = new Application_Model_TipoTelefone();
+        $tipoTelefones = $modelTipoTelefone->select();
         $this->view->assign("assignTipoTelefones", $tipoTelefones);
 
+        $modelEscolaridade= new Application_Model_Escolaridade();
+        $escolaridade = $modelEscolaridade->select();
+        $this->view->assign("assignEscolaridades", $escolaridade);
+        
+        $modelTipoDependente = new Application_Model_TipoDependente();
+        $tipoDependentes = $modelTipoDependente->select();
+        $this->view->assign("assignTipoDependentes", $tipoDependentes);
+        
+        $modelRenda = new Application_Model_Renda();
+        $rendas = $modelRenda->select();
+        $this->view->assign("assignRendas", $rendas);
+        
+        $modelTipoRenda = new Application_Model_TipoRenda();
+        $tipoRendas = $modelTipoRenda->select();
+        $this->view->assign("assignTipoRendas", $tipoRendas);
+        
+//     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
+        $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
+        $vPescadorHasDependente = $model_VPescadorHasDependente->select("tp_id=" . $pescador['tp_id'], "ttd_tipodependente", null);
+        $this->view->assign("assign_vPescadorDependente", $vPescadorHasDependente);
+        
+        $model_VPescadorHasRenda = new Application_Model_VPescadorHasRenda();
+        $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $pescador['tp_id'], "ttr_descricao", null);
+        $this->view->assign("assign_vPescadorRenda", $vPescadorHasRenda);
+        
         $model_VPescadorHasTelefone = new Application_Model_VPescadorHasTelefone();
         $vPescadorHasTelefone = $model_VPescadorHasTelefone->select("tpt_tp_id=" . $pescador['tp_id'], "ttel_desc", null);
         $this->view->assign("assign_vPescadorHasTelefone", $vPescadorHasTelefone);
+        
+        $model_VPescadorHasColonia = new Application_Model_VPescadorHasColonia();
+        $vPescadorHasColonia = $model_VPescadorHasColonia->select("tp_id=" . $pescador['tp_id'], "tc_nome", null);
+        $this->view->assign("assign_vPescadorColonia", $vPescadorHasColonia);        
+        
+        $model_VPescadorHasArteTipoArea = new Application_Model_VPescadorHasArteTipoArea();
+        $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $pescador['tp_id'], "tap_artepesca", null);
+        $this->view->assign("assign_vPescadorArteTipoArea", $vPescadorHasArteTipoArea);   
+        
+        $model_VPescadorHasEmbarcacao = new Application_Model_VPescadorHasEmbarcacao();
+        $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $pescador['tp_id'], "tte_tipoembarcacao", null);
+        $this->view->assign("assign_vPescadorEmbarcacao", $vPescadorHasEmbarcacao);         
     }
 
     /*
      * Atualiza os dados do pescador
      */
-
     public function atualizarAction() {
         $this->modelPescador->update($this->_getAllParams());
 
@@ -180,21 +212,15 @@ class PescadorController extends Zend_Controller_Action {
     /*
      *
      */
-
     public function excluirAction() {
         $this->modelPescador->delete($this->_getParam('id'));
 
         $this->_redirect('pescador/index');
     }
 
-    public function testeAction() {
-        msgTeste();
-        $this->view->assign("assignFieldsetTelefonesPescador", TRUE);
-
-//       $this->modelPescador->update($this->_getAllParams('id'));
-//        $this->_redirect('pescador/index');
-    }
-
+    /*
+     *
+     */
     public function relatorioAction() {
 
         $this->_helper->viewRenderer->setNoRender();
