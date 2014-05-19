@@ -66,6 +66,10 @@ class FichaDiariaController extends Zend_Controller_Action
         $usuario = $this->modelEstagiario->select();
         
         $this->view->assign("users", $usuario);
+        //--------------------------------------------
+        $id = $this->modelFichaDiaria->select(null, 'fd_id DESC', '1');
+        
+        $this->view->assign("id", $id);
         
     }
     
@@ -74,9 +78,10 @@ class FichaDiariaController extends Zend_Controller_Action
      */
     public function criarAction()
     {
+        $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         $this->modelFichaDiaria->insert($this->_getAllParams());
 
-        $this->_redirect('ficha-diaria/index');
+        $this->redirect(null);
     }
     
     /*

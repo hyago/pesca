@@ -23,7 +23,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputArte[]" " value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
                 linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputArteID[]" " value="' + frm.SelectArtePesca.value + '">');
                 
-                linhaArte = linhaArte.concat('<a 
+                //linhaArte = linhaArte.concat('<a 
                 
                 linhaArte = linhaArte.concat('<br></p></div>');
 
@@ -46,7 +46,13 @@ $this->headScript()->appendFile('/js/mascaras.js');
       <div id="esquerda">
        <div id="form-esq">
          <label for="id">ID:</label>
-         <input type="text" name="id_fichaDiaria" placeholder="Id" id="id_ficha" /><br />
+         <?php
+                    foreach ($this->id as $key => $id):
+               ?>
+         <input type="text" name="id_fichaDiaria" placeholder="Id" id="id_ficha" value="<?=$id['fd_id']+1?>" /><br />
+       <?php
+                endforeach;
+              ?>
        </div>
        
        <div id="form-esq">
