@@ -22,13 +22,14 @@ class FichaDiariaController extends Zend_Controller_Action
         $this->modelPorto = new Application_Model_Porto();
         $this->modelTempo = new Application_Model_Tempo();
         $this->modelVento = new Application_Model_Vento();
+        $this->modelArtePesca = new Application_Model_ArtePesca();
     }
 
     /*
      * Lista todas as artes de pesca
      */
     public function indexAction()
-    {        
+    {  
         $dados = $this->modelFichaDiaria->select();
       
         $this->view->assign("dados", $dados);
@@ -55,6 +56,10 @@ class FichaDiariaController extends Zend_Controller_Action
         $vento = $this->modelVento->select();
         
         $this->view->assign("dados_vento", $vento);
+        
+        $artePesca = $this->modelArtePesca->select();
+        
+        $this->view->assign("artesPesca", $artePesca);
     }
     
     /*
