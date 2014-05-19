@@ -31,12 +31,17 @@ class Application_Model_FichaDiaria
         $this->dbTableEstagiario = new Application_Model_Usuario();
         $this->dbTableMonitor = new Application_Model_Usuario();
         
+        
         $dadosFichaDiaria = array(
             
             't_estagiario_tu_id' => $request['select_nome_estagiario'],
-            'ESP_Descritor' => $request['descritor_especie'],
-            'ESP_Nome_Comum' => $request['nome_comum'], 
-            'GEN_ID' => $request['select_genero_especie']
+            't_monitor_tu_id1' => $request['select_nome_monitor'],
+            'fd_data' => $request['data_ficha'], 
+            'fd_turno' => $request['select_turno'],
+            'obs' => $request['observacao'],
+            'pto_id' => $request['select_nome_porto'],
+            'tmp_id' => $request['select_tempo'],
+            'vnt_id' => $request['select_vento']
         );
         
         $this->dbTableFichaDiaria->insert($dadosFichaDiaria);
