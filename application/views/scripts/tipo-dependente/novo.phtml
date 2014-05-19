@@ -1,24 +1,26 @@
-
-
 <div id="tipoDependnete">
-    <h2>Perfil Social->Tipo Dependente</h2>
+    <h2>Perfil Social -> Tipo Dependente</h2>
     <h3>Novo</h3>
 </div>
 
-<form action="<?=$this->url(array("controller"=>"tipo-dependente","action"=>"criar"),null,true)?>" method="post">
-   <input type="hidden" name="idTipoDependente" placeholder="ID" />
-   <fieldset id="TipoDependente">
-      <div id="esquerda">
-      
-        <div id="form-esq"> 
-            <label>Tipo Dependente: </label>
-            <input type="text" name="tipoDependente" placeholder="TipoDependente"/> <br />
-        </div>
+<form action="<?= $this->url(array("controller" => "tipo-dependente", "action" => "criar"), null, true) ?>" method="post">
+    <fieldset id="Social" name="novoTipoDependente"">
+        <div id="esquerda">
 
-          <div id="Submit">
-            <a href="<?=$this->url(array("controller"=>"tipo-dependente","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
-            <input type="submit" value="Cadastrar" />
-        </div>
-      </div>   
+            <div id="form-esq"> 
+                <label>Código: </label>
+                <input type="text" readonly="" size="5" name="idTipoDependente" placeholder="Código Dependente (Automático)"/>
+            </div>
+
+            <div id="form-esq"> 
+                <label>Dependente: </label>
+                <input type="text" required="" size="30" name="tipoDependente" placeholder="Tipo Dependente"/> <br />
+            </div>
+
+            <div id="Submit">
+                <a href="<?= $this->url(array("controller" => "tipo-dependente", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
+                <input type="submit" value="Cadastrar" />
+            </div>
+        </div>   
     </fieldset>
 </form>

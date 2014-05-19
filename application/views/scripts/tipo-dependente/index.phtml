@@ -1,9 +1,24 @@
 <?php
-//$this->HeadScript()->appendFile('/js/funcoes.js','text/javascript');
-$this->headScript()->appendFile('/js/funcoes.js');
-//$this->view->headScript()->appendFile('/js/funcoes.js');
 ?>
-
+<html dir="ltr">
+    <head>
+        <script type="text/javascript">
+            function beforeDelete( id )
+            {
+                var tmpString = document.URL;
+                tmpString = tmpString.slice(7, tmpString.length);
+                tmpString = tmpString.split("/");
+                tmpString = tmpString[0];
+                var delString = "http://";
+                delString = delString.concat(tmpString, id)
+                
+                if ( confirm("Realmente deseja excluir este item?") ) {
+                    location.replace( delString );
+//                    location.href( delString ); Não funcionou para este caso!!!
+                }
+            }
+        </script>
+    </head>
 <h2>Perfil Social->Tipo Dependente</h2>
 
 <a href="<?=$this->url(array("controller"=>"tipo-dependente","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
@@ -27,25 +42,16 @@ $this->headScript()->appendFile('/js/funcoes.js');
             </a>
         </td>
         
-        <td class="td-botao">
+<!--        <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"tipo-dependente","action"=>"excluir", "id" => $dadosTipoDependente['ttd_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>
             </a>
-        </td>
-        
+        </td>-->
         
         <td class="td-botao">
-            <a href="javascript:teste();">testando
-            <!--<a href="<?=$this->headScript();?>">
-                <?=$this->headScript();?> -->
-            
-                
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
-                </ul>
-            </a>
+            <input type="button" value="Excluir" onclick="beforeDelete('<?=$this->url(array("controller"=>"tipo-dependente","action"=>"excluir", "id" => $dadosTipoDependente['ttd_id']),null,true)?>')">
         </td>
 
     </tr>
