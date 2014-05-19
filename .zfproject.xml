@@ -119,6 +119,9 @@
         <controllerFile controllerName="TipoTelefone">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="TipoRenda">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -374,6 +377,15 @@
             <viewScriptFile forActionName="editar"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TipoTelefone">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoRenda">
+            <viewScriptFile forActionName="novo"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoRenda">
+            <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TipoRenda">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

@@ -86,8 +86,6 @@ class PescadorController extends Zend_Controller_Action {
         $tipoTelefones = $modelTipoTelefone->select();
         $this->view->assign("assignTipoTelefones", $tipoTelefones);
 
-        $this->view->assign("assignFieldsetTelefonesPescador", FALSE);
-        
         $modelEscolaridade= new Application_Model_Escolaridade();
         $escolaridade = $modelEscolaridade->select();
         $this->view->assign("assignEscolaridades", $escolaridade);

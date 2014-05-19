@@ -114,16 +114,33 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 jQuery('#itemColoniaRows' + localRowNumColonia).remove();
             }  
             
+//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ AreaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/
+            var rowNumArea = 0;
+            function addRowAreaPesca(frm) {
+                rowNumArea++;
+
+                var linhaArea = '<div class="noEditable"><p id="linhaAreaPescaRows' + rowNumArea + '">';
+                linhaArea = linhaArea.concat('<input type="button" value="Remove" onclick="removeRowAreaPesca(' + rowNumArea + ');">');
+
+                linhaArea = linhaArea.concat('<input type="text" readonly size="10" name="inputArea[]" value="' + frm.selectAreaPesca[frm.selectAreaPesca.selectedIndex].text + '">');
+                linhaArea = linhaArea.concat('<input type="text" readonly size="2" name="inputAreaID[]" value="' + frm.selectAreaPesca.value + '">');
+
+                linhaArea = linhaArea.concat('<br></p></div>');
+
+                jQuery('#itemAreaPescaRows').append(linhaArea);
+            }
+
+            function removeRowAreaPesca(localRowNumArea) {
+                jQuery('#linhaAreaPescaRows' + localRowNumArea).remove();
+            }  
+   
 //            /_/_/_/_/_/_/_/_/_/_/_/_/_/ ArtePesca /_/_/_/_/_/_/_/_/_/_/_/_/_/
             var rowNumArte = 0;
             function addRowArte(frm) {
                 rowNumArte++;
 
-                var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumArte + '">';
+                var linhaArte = '<div class="noEditable"><p id="linhaArteTipoRows' + rowNumArte + '">';
                 linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumArte(' + rowNumArte + ');">');
-
-                linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputArea[]" value="' + frm.selectAreaPesca[frm.selectAreaPesca.selectedIndex].text + '">');
-                linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputAreaID[]" value="' + frm.selectAreaPesca.value + '">');
 
                 linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputTipo[]" " value="' + frm.selectTipocapturada[frm.selectTipocapturada.selectedIndex].text + '">');
                 linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputTipoID[]" " value="' + frm.selectTipocapturada.value + '">');
@@ -137,7 +154,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
             }
 
             function removeRowNumArte(localRowNumArte) {
-                jQuery('#itemArteTipoRows' + localRowNumArte).remove();
+                jQuery('#linhaArteTipoRows' + localRowNumArte).remove();
             }  
    
 
@@ -231,7 +248,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 <div id="form-dir">
                     <label for="dataNasc">Data Nascimento</label>
-                    <input type="text" name="dataNasc" id="data_Nasc" placeholder="Data Nascimento" />
+                    <input type="date" name="dataNasc" placeholder="Data Nascimento" />
                 </div>
 
                 <div id="form-dir">
@@ -405,7 +422,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 <div id="base">
                     <input onclick="addRowColonia(this.form);" type="button" value="Add row" />
-                    <input type="text" name="inputDataInscricaoColonia" id="data_Insc" placeholder="Data Inscrição na Colonia" size="20"  />
+                    <input type="date" name="inputDataInscricaoColonia" id="data_Insc" placeholder="Data Inscrição na Colonia" size="20"  />
 
                     <select name="SelectColonia" id="colonia">
                         <?php foreach ($this->colonias as $key => $colonia): ?>
@@ -422,6 +439,27 @@ $this->headScript()->appendFile('/js/mascaras.js');
             </fieldset>
         </fieldset>
         <br>
+<!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
+        <fieldset class="noEditable"><legend>Area de Pesca:</legend>
+            <fieldset class="noEditable"><legend>Adicionar Area de Pesca:</legend>
+
+                <div id="base">
+                    <input onclick="addRowAreaPesca(this.form);" type="button" value="Add row" />
+
+                    <select name="selectAreaPesca" id="areaPesca">
+                        <?php foreach ($this->areasPesca as $key => $areaPesca): ?>
+                            <option value="<?= $areaPesca['tareap_id']; ?>"><?= $areaPesca['tareap_areapesca']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset class="noEditable" id="itemAreaPescaRows"><legend>Area de Pesca listadas:</legend>
+                <!--Area para inserir os itens-->
+            </fieldset>
+        </fieldset>
+        <br>
+        
         
 <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Arte de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
         <fieldset class="noEditable"><legend>Artes de Pesca e Tipos de Capturas:</legend>
@@ -429,12 +467,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 <div id="base">
                     <input onclick="addRowArte(this.form);" type="button" value="Add row" />
-
-                    <select name="selectAreaPesca" id="areaPesca">
-                        <?php foreach ($this->areasPesca as $key => $areaPesca): ?>
-                            <option value="<?= $areaPesca['tareap_id']; ?>"><?= $areaPesca['tareap_areapesca']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
 
                     <select name="selectTipocapturada" id="tipocapturada">
                         <?php foreach ($this->tipoCapturadas as $key => $tipoCapturadas): ?>

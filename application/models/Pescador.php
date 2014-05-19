@@ -157,7 +157,22 @@ class Application_Model_Pescador {
 		}
 	}
 
-//          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area - Arte - Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
+//          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area /_/_/_/_/_/_/_/_/_/_/_/_/_/
+        $dbTable_PescadorHasAreaPesca = new Application_Model_DbTable_PescadorHasAreaPesca();
+
+	if(!empty($_POST['inputArteID'])) {
+		foreach($_POST['inputAreaID'] as $cnt => $localInputArea) {
+                    
+                    $dadosPescadorHasAreaPesca = array(
+                        'tp_id' => $idPescador,
+                        'tareap_id' => $_POST['inputAreaID'][$cnt],
+                );
+                $dbTable_PescadorHasAreaPesca->insert($dadosPescadorHasAreaPesca);
+                        
+		}
+	}
+        
+//          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Arte - Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasArtePesca = new Application_Model_DbTable_PescadorHasArtePesca();
 
 	if(!empty($_POST['inputArteID'])) {
@@ -166,7 +181,7 @@ class Application_Model_Pescador {
                     $dadosPescadorHasArtePesca = array(
                         'tp_id' => $idPescador,
                         'tap_id' => $_POST['inputArteID'][$cnt],
-                        'tareap_id' => $_POST['inputAreaID'][$cnt],
+//                        'tareap_id' => $_POST['inputAreaID'][$cnt],
                         'itc_id' => $_POST['inputTipoID'][$cnt]
                 );
                 $dbTable_PescadorHasArtePesca->insert($dadosPescadorHasArtePesca);
@@ -312,6 +327,7 @@ class Application_Model_Pescador {
                         
 		}
 	}
+        
 
 //          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area - Arte - Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasArtePesca = new Application_Model_DbTable_PescadorHasArtePesca();
