@@ -415,7 +415,13 @@ CREATE TABLE IF NOT EXISTS T_HistoricoRecadastramento (
     REFERENCES T_Usuario (TU_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
+-- -----------------------------------------------------
+-- Table T_TipoCapturada
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_TipoCapturada (
+  ITC_ID serial,
+  ITC_Tipo VARCHAR(30) NULL,
+  PRIMARY KEY (ITC_ID));
 
 
 -- -----------------------------------------------------
@@ -448,13 +454,7 @@ CONSTRAINT fk_T_Pescador_has_T_tipocapturada
 
 
 
--- -----------------------------------------------------
--- Table T_TipoCapturada
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TipoCapturada (
-  ITC_ID serial,
-  ITC_Tipo VARCHAR(30) NULL,
-  PRIMARY KEY (ITC_ID));
+
 
 
 
@@ -1239,17 +1239,6 @@ select pt.tpt_tp_id, pt.tpt_ttel_id, pt.tpt_telefone, tt.ttel_desc
 from t_pescador_has_telefone as PT, t_tipotel as TT
 where pt.tpt_ttel_id = tt.ttel_id;
 
-CREATE VIEW V_PESCADORHASDEPENDENTE AS
-SELECT
-PD.TP_ID, PD.TTD_ID, PD.TPTD_QUANTIDADE,
-TD.TTD_TIPODEPENDENTE
-FROM 
-T_PESCADOR_HAS_T_TIPODEPENDENTE AS PD,
-T_TIPODEPENDENTE AS TD
-WHERE
-PD.TTD_ID = TD.TTD_ID;
-
-
 CREATE TABLE t_pescador_has_t_tipodependente
 (
   tp_id integer NOT NULL,
@@ -1262,6 +1251,19 @@ CREATE TABLE t_pescador_has_t_tipodependente
 
 INSERT INTO t_pescador_has_t_tipodependente (tp_id, ttd_id, tptd_quantidade)
 SELECT tp_id, t_tipodependente_ttd_id, tp_td_quantidade FROM t_pescador_has_tt_dependente ;
+
+CREATE VIEW V_PESCADORHASDEPENDENTE AS
+SELECT
+PD.TP_ID, PD.TTD_ID, PD.TPTD_QUANTIDADE,
+TD.TTD_TIPODEPENDENTE
+FROM 
+T_PESCADOR_HAS_T_TIPODEPENDENTE AS PD,
+T_TIPODEPENDENTE AS TD
+WHERE
+PD.TTD_ID = TD.TTD_ID;
+
+
+
 
 
 CREATE TABLE t_tiporenda (

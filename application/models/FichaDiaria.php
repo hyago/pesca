@@ -33,7 +33,7 @@ class Application_Model_FichaDiaria
         
         $dadosFichaDiaria = array(
             
-            'FD_Nome' => $request['nome_especie'],
+            't_estagiario_tu_id' => $request['select_nome_estagiario'],
             'ESP_Descritor' => $request['descritor_especie'],
             'ESP_Nome_Comum' => $request['nome_comum'], 
             'GEN_ID' => $request['select_genero_especie']
