@@ -10,25 +10,24 @@
 <head>
     <script type="text/javascript">
         var rowNumArte = 0;
+        var Entrevista;
         function addRowArte(frm) {
             rowNumArte++;
-
+            
             var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumArte + '">';
+            linhaArte = linhaArte.concat('<input type="button" value="Entrevista">');
             linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumArte(' + rowNumArte + ');">');
 
-            linhaArte = linhaArte.concat('<input type="text" readonly size="12" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
-            linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputEmbarcacaoValue[]" value="' + frm.SelectEmbarcacao.value + '">');
+            linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
+                
+            linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputMonitorada[]"  value="' + frm.SelectMonitorada[frm.SelectMonitorada.selectedIndex].text + '">');
+            
+            linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputQuantidade[]"  value="' + frm.QuantidadeEmbarcacoes.value + '">');
 
-            linhaArte = linhaArte.concat('<input type="text" readonly size="12" name="inputMonitorada[]" " value="' + frm.SelectMonitorada[frm.SelectMonitorada.selectedIndex].text + '">');
-            linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputMonitoradaValue[]" " value="' + frm.SelectMonitorada.value + '">');
-
-            linhaArte = linhaArte.concat('<input type="text" readonly size="12" name="inputQuantidade[]" " value="' + frm.QuantidadeEmbarcacoes.value + '">');
-
-            linhaArte = linhaArte.concat('<input type="text" readonly size=15 name="inputArte[]" " value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
-            linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputArteID[]" " value="' + frm.SelectArtePesca.value + '">');
-
-            //linhaArte = linhaArte.concat('<a href='+ frmSelectArtePesca.
-
+            linhaArte = linhaArte.concat('<input type="text" readonly size=13 name="inputArte[]"  value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
+            linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputArteID[]"  value="' + frm.SelectArtePesca.value + '">');
+            
+            
             linhaArte = linhaArte.concat('<br></p></div>');
 
             jQuery('#itemArteTipoRows').append(linhaArte);
@@ -39,7 +38,6 @@
         }
     </script>
 </head>
-<form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
     <fieldset id="Desembarque">
         <div id="esquerda">
             <div id="form-esq">
@@ -146,11 +144,11 @@
 
         <br/>
         <br/>
-
+<form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
     </fieldset>
     <fieldset class="noEditable"><legend>Monitoramento:</legend>
         <fieldset class="noEditable"><legend>Artes de Pesca e quantidade de embarcacoes:</legend>
-
+            
             <div id="base">
                 <input onclick="addRowArte(this.form);" type="button" value="Add row" />
                 <select id="tam_medio" name="SelectEmbarcacao"style="float:left">
@@ -176,10 +174,7 @@
         <fieldset class="noEditable" id="itemArteTipoRows"><legend>Artes de Pesca e quantidade de embarcacoes listados:</legend>
             <!--Area para inserir os itens-->
         </fieldset>
-        <div id="Submit">
-            <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "insert-monitoramento"), null, true) ?>" id="botao-ancora">Cadastrar Monitoramentos</a>
-
-        </div>
+        
     </fieldset>
 
 </form>

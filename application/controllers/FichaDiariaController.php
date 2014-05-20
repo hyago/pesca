@@ -127,9 +127,7 @@ class FichaDiariaController extends Zend_Controller_Action
      */
     public function atualizarAction()
     {
-        $this->modelFichaDiaria->update($this->_getAllParams());
-
-        $this->_redirect('ficha-diaria/index');
+      
     }
  
     /*
