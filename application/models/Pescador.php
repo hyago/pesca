@@ -11,8 +11,6 @@
  *
  */
 
-
-
 class Application_Model_Pescador {
 
     public function select($where = null, $order = null, $limit = null) {
@@ -33,14 +31,17 @@ class Application_Model_Pescador {
         return $arr[0];
     }
 
+//
+//    Inserir
+//
     public function insert(array $request) {
-    
+
         $dataCEP = $request['cep'];
         $dataCEP = trim($dataCEP,"_-");
-        
+
         if (!$dataCEP)
             $dataCEP = NULL;
-        
+
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         $dadosEndereco = array(
             'te_logradouro' => $request['logradouro'],
@@ -98,86 +99,90 @@ class Application_Model_Pescador {
 
 	if(!empty($_POST['inputTipoDependenteID'])) {
 		foreach($_POST['inputTipoDependenteID'] as $cnt => $localInputTipoDependente) {
-                    
+
                     $dadosPescadorHasDependente = array(
                         'tp_id' => $idPescador,
                         'ttd_id' => $_POST['inputTipoDependenteID'][$cnt],
                         'tptd_quantidade' => $_POST['inputQuantidadeDependente'][$cnt]
                 );
                 $dbTable_PescadorHasDependente->insert($dadosPescadorHasDependente);
-                        
+
 		}
 	}
-        
+
 //          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasRenda = new Application_Model_DbTable_PescadorHasRenda();
 
 	if(!empty($_POST['inputRendaID'])) {
 		foreach($_POST['inputRendaID'] as $cnt => $localInputPescadorHasRenda) {
-                    
+
                     $dadosPescadorHasRenda = array(
                         'tp_id' => $idPescador,
                         'ren_id' => $_POST['inputRendaID'][$cnt],
                         'ttr_id' => $_POST['inputTipoRendaID'][$cnt]
                 );
                 $dbTable_PescadorHasRenda->insert($dadosPescadorHasRenda);
-                        
+
 		}
 	}
-        
+
 //            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTablePescadorHasTelefone = new Application_Model_DbTable_PescadorHasTelefone();
 
 	if(!empty($_POST['inputTelefone'])) {
 		foreach($_POST['inputTelefone'] as $cnt => $inputTelefone) {
-                    
+
                     $dadosPescadorHasTelefone = array(
                     'tpt_tp_id' => $idPescador,
                     'tpt_ttel_id' => $_POST['inputTipoID'][$cnt],
                     'tpt_telefone' => $inputTelefone
                 );
                 $dbTablePescadorHasTelefone->insert($dadosPescadorHasTelefone);
-                        
+
 		}
 	}
 
 //          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Colonia /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasColonia = new Application_Model_DbTable_PescadorHasColonia();
 
-	if(!empty($_POST['inputColoniaID'])) {
-		foreach($_POST['inputColoniaID'] as $cnt => $localInputColonia) {
-                    
-                    $dadosPescadorHasColonia = array(
-                        'tp_id' => $idPescador,
-                        'tc_id' => $_POST['inputColoniaID'][$cnt],
-                        'tptc_datainsccolonia' => $_POST['inputDataInscricaoColonia'][$cnt]
+        if (!empty($_POST['inputColoniaID'])) {
+            foreach ($_POST['inputColoniaID'] as $cnt => $localInputColonia) {
+
+                $dataInscricao = $localInputColonia['inputDataInscricaoColonia'];
+                if (!$dataInscricao) {
+                    $dataInscricao = NULL;
+                }
+
+                $dadosPescadorHasColonia = array(
+                    'tp_id' => $idPescador,
+                    'tc_id' => $_POST['inputColoniaID'][$cnt],
+                    'tptc_datainsccolonia' => $dataInscricao
                 );
                 $dbTable_PescadorHasColonia->insert($dadosPescadorHasColonia);
-                        
-		}
-	}
+            }
+        }
 
 //          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasAreaPesca = new Application_Model_DbTable_PescadorHasAreaPesca();
 
 	if(!empty($_POST['inputArteID'])) {
 		foreach($_POST['inputAreaID'] as $cnt => $localInputArea) {
-                    
+
                     $dadosPescadorHasAreaPesca = array(
                         'tp_id' => $idPescador,
                         'tareap_id' => $_POST['inputAreaID'][$cnt],
                 );
                 $dbTable_PescadorHasAreaPesca->insert($dadosPescadorHasAreaPesca);
-                        
+
 		}
 	}
-        
+
 //          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Arte - Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasArtePesca = new Application_Model_DbTable_PescadorHasArtePesca();
 
 	if(!empty($_POST['inputArteID'])) {
 		foreach($_POST['inputArteID'] as $cnt => $localInputArte) {
-                    
+
                     $dadosPescadorHasArtePesca = array(
                         'tp_id' => $idPescador,
                         'tap_id' => $_POST['inputArteID'][$cnt],
@@ -185,16 +190,16 @@ class Application_Model_Pescador {
                         'itc_id' => $_POST['inputTipoID'][$cnt]
                 );
                 $dbTable_PescadorHasArtePesca->insert($dadosPescadorHasArtePesca);
-                        
+
 		}
 	}
-	
+
 //            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTablePescadorHasEmbarcacao = new Application_Model_DbTable_PescadorHasEmbarcacao();
 
 	if(!empty($_POST['inputPorteID'])) {
 		foreach($_POST['inputPorteID'] as $cnt => $localInputBarco) {
-                    
+
                     $dadosPescadorHasEmbarcacao = array(
                         'tp_id' => $idPescador,
                         'tte_id' => $_POST['inputBarcoID'][$cnt],
@@ -202,20 +207,20 @@ class Application_Model_Pescador {
                         'tpe_id' => $_POST['inputPorteID'][$cnt]
                 );
                 $dbTablePescadorHasEmbarcacao->insert($dadosPescadorHasEmbarcacao);
-                        
+
 		}
 	}
-        
+
         return;
     }
 
     public function update(array $request) {
         $dataCEP = $request['cep'];
         $dataCEP = trim($dataCEP,"_-");
-        
+
         if (!$dataCEP)
             $dataCEP = NULL;
-        
+
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         $dadosEndereco = array(
             'te_logradouro' => $request['logradouro'],
@@ -269,46 +274,46 @@ class Application_Model_Pescador {
 
 	if(!empty($_POST['inputTipoDependenteID'])) {
 		foreach($_POST['inputTipoDependenteID'] as $cnt => $localInputTipoDependente) {
-                    
+
                     $dadosPescadorHasDependente = array(
                         'tp_id' => $idPescador,
                         'ttd_id' => $_POST['inputTipoDependenteID'][$cnt],
                         'tptd_quantidade' => $_POST['inputQuantidadeDependente'][$cnt]
                 );
                 $dbTable_PescadorHasDependente->insert($dadosPescadorHasDependente);
-                        
+
 		}
 	}
-        
+
 //          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasRenda = new Application_Model_DbTable_PescadorHasRenda();
 
 	if(!empty($_POST['inputRendaID'])) {
 		foreach($_POST['inputRendaID'] as $cnt => $localInputPescadorHasRenda) {
-                    
+
                     $dadosPescadorHasRenda = array(
                         'tp_id' => $idPescador,
                         'ren_id' => $_POST['inputRendaID'][$cnt],
                         'ttr_id' => $_POST['inputTipoRendaID'][$cnt]
                 );
                 $dbTable_PescadorHasRenda->insert($dadosPescadorHasRenda);
-                        
+
 		}
 	}
-        
+
 //            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTablePescadorHasTelefone = new Application_Model_DbTable_PescadorHasTelefone();
 
 	if(!empty($_POST['inputTelefone'])) {
 		foreach($_POST['inputTelefone'] as $cnt => $inputTelefone) {
-                    
+
                     $dadosPescadorHasTelefone = array(
                     'tpt_tp_id' => $idPescador,
                     'tpt_ttel_id' => $_POST['inputTipoID'][$cnt],
                     'tpt_telefone' => $inputTelefone
                 );
                 $dbTablePescadorHasTelefone->insert($dadosPescadorHasTelefone);
-                        
+
 		}
 	}
 
@@ -317,24 +322,24 @@ class Application_Model_Pescador {
 
 	if(!empty($_POST['inputColoniaID'])) {
 		foreach($_POST['inputColoniaID'] as $cnt => $localInputColonia) {
-                    
+
                     $dadosPescadorHasColonia = array(
                         'tp_id' => $idPescador,
                         'tc_id' => $_POST['inputColoniaID'][$cnt],
                         'tptc_datainsccolonia' => $_POST['inputDataInscricaoColonia'][$cnt]
                 );
                 $dbTable_PescadorHasColonia->insert($dadosPescadorHasColonia);
-                        
+
 		}
 	}
-        
+
 
 //          /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area - Arte - Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTable_PescadorHasArtePesca = new Application_Model_DbTable_PescadorHasArtePesca();
 
 	if(!empty($_POST['inputArteID'])) {
 		foreach($_POST['inputArteID'] as $cnt => $localInputArte) {
-                    
+
                     $dadosPescadorHasArtePesca = array(
                         'tp_id' => $idPescador,
                         'tap_id' => $_POST['inputArteID'][$cnt],
@@ -342,16 +347,16 @@ class Application_Model_Pescador {
                         'itc_id' => $_POST['inputTipoID'][$cnt]
                 );
                 $dbTable_PescadorHasArtePesca->insert($dadosPescadorHasArtePesca);
-                        
+
 		}
 	}
-	
+
 //            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $dbTablePescadorHasEmbarcacao = new Application_Model_DbTable_PescadorHasEmbarcacao();
 
 	if(!empty($_POST['inputPorteID'])) {
 		foreach($_POST['inputPorteID'] as $cnt => $localInputBarco) {
-                    
+
                     $dadosPescadorHasEmbarcacao = array(
                         'tp_id' => $idPescador,
                         'tte_id' => $_POST['inputBarcoID'][$cnt],
@@ -359,10 +364,25 @@ class Application_Model_Pescador {
                         'tpe_id' => $_POST['inputPorteID'][$cnt]
                 );
                 $dbTablePescadorHasEmbarcacao->insert($dadosPescadorHasEmbarcacao);
-                        
+
 		}
 	}
-        
+
+        return;
+    }
+
+//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Teste de Cadastro de itens /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function updateNovo($idPescador, $idTipoDependente, $qtde) {
+        $dbTable_PescadorHasDependente = new Application_Model_DbTable_PescadorHasDependente();
+
+
+        $dadosPescadorHasDependente = array(
+            'tp_id' => $idPescador,
+            'ttd_id' => $idTipoDependente,
+            'tptd_quantidade' => $qtde
+        );
+        $dbTable_PescadorHasDependente->insert($dadosPescadorHasDependente);
+
         return;
     }
 
