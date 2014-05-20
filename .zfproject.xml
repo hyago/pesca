@@ -50,9 +50,6 @@
         <controllerFile controllerName="Municipio">
           <actionMethod actionName="index"/>
         </controllerFile>
-        <controllerFile controllerName="Pescador">
-          <actionMethod actionName="index"/>
-        </controllerFile>
         <controllerFile controllerName="Mare">
           <actionMethod actionName="index"/>
         </controllerFile>
