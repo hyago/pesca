@@ -8,14 +8,16 @@
  * @version 0.1
  * @access public
  *
+ *
  */
-require_once "../library/fpdf/fpdf.php";
 
-class PescadorController extends Zend_Controller_Action {
+class PescadorController extends Zend_Controller_Action
+{
 
-    private $modelPescador;
+    private $modelPescador = null;
 
-    public function init() {
+    public function init()
+    {
 
         if (!Zend_Auth::getInstance()->hasIdentity()) {
             $this->_redirect('index');
@@ -29,16 +31,15 @@ class PescadorController extends Zend_Controller_Action {
         $this->modelPescador = new Application_Model_Pescador();
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         $dados = $this->modelPescador->select();
 
         $this->view->assign("dados", $dados);
     }
 
-    /*
-     * Consulta um pescador
-     */
-    public function visualizarAction() {
+    public function visualizarAction()
+    {
         $idPescador = $this->_getParam('id');
 
         $usuario = $this->modelPescador->find($idPescador);
@@ -46,10 +47,8 @@ class PescadorController extends Zend_Controller_Action {
         $this->view->assign("pescador", $usuario);
     }
 
-    /*
-     * Exibe formulário para cadastro de um pescador
-     */
-    public function novoAction() {
+    public function novoAction()
+    {
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select();
         $this->view->assign("municipios", $municipios);
@@ -89,34 +88,29 @@ class PescadorController extends Zend_Controller_Action {
         $modelEscolaridade= new Application_Model_Escolaridade();
         $escolaridade = $modelEscolaridade->select();
         $this->view->assign("assignEscolaridades", $escolaridade);
-        
+
         $modelTipoDependente = new Application_Model_TipoDependente();
         $tipoDependentes = $modelTipoDependente->select();
         $this->view->assign("assignTipoDependentes", $tipoDependentes);
-        
+
         $modelRenda = new Application_Model_Renda();
         $rendas = $modelRenda->select();
         $this->view->assign("assignRendas", $rendas);
-        
+
         $modelTipoRenda = new Application_Model_TipoRenda();
         $tipoRendas = $modelTipoRenda->select();
         $this->view->assign("assignTipoRendas", $tipoRendas);
     }
 
-    /*
-     * Cadastra um pescador
-     */
-    public function criarAction() {
+    public function criarAction()
+    {
         $this->modelPescador->insert( $this->_getAllParams() );
 
         $this->_redirect('pescador/index');
     }
 
-    /*
-     * Preenche um formulario com as informações de um pescador
-     */
-
-    public function editarAction() {
+    public function editarAction()
+    {
          $pescador = $this->modelPescador->find($this->_getParam('id'));
         $this->view->assign("pescador", $pescador);
 
@@ -159,67 +153,79 @@ class PescadorController extends Zend_Controller_Action {
         $modelEscolaridade= new Application_Model_Escolaridade();
         $escolaridade = $modelEscolaridade->select();
         $this->view->assign("assignEscolaridades", $escolaridade);
-        
+
         $modelTipoDependente = new Application_Model_TipoDependente();
         $tipoDependentes = $modelTipoDependente->select();
         $this->view->assign("assignTipoDependentes", $tipoDependentes);
-        
+
         $modelRenda = new Application_Model_Renda();
         $rendas = $modelRenda->select();
         $this->view->assign("assignRendas", $rendas);
-        
+
         $modelTipoRenda = new Application_Model_TipoRenda();
         $tipoRendas = $modelTipoRenda->select();
         $this->view->assign("assignTipoRendas", $tipoRendas);
-        
+
 //     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
         $vPescadorHasDependente = $model_VPescadorHasDependente->select("tp_id=" . $pescador['tp_id'], "ttd_tipodependente", null);
         $this->view->assign("assign_vPescadorDependente", $vPescadorHasDependente);
-        
+
         $model_VPescadorHasRenda = new Application_Model_VPescadorHasRenda();
         $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $pescador['tp_id'], "ttr_descricao", null);
         $this->view->assign("assign_vPescadorRenda", $vPescadorHasRenda);
-        
+
         $model_VPescadorHasTelefone = new Application_Model_VPescadorHasTelefone();
         $vPescadorHasTelefone = $model_VPescadorHasTelefone->select("tpt_tp_id=" . $pescador['tp_id'], "ttel_desc", null);
         $this->view->assign("assign_vPescadorHasTelefone", $vPescadorHasTelefone);
-        
+
         $model_VPescadorHasColonia = new Application_Model_VPescadorHasColonia();
         $vPescadorHasColonia = $model_VPescadorHasColonia->select("tp_id=" . $pescador['tp_id'], "tc_nome", null);
-        $this->view->assign("assign_vPescadorColonia", $vPescadorHasColonia);        
-        
+        $this->view->assign("assign_vPescadorColonia", $vPescadorHasColonia);
+
         $model_VPescadorHasArteTipoArea = new Application_Model_VPescadorHasArteTipoArea();
         $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $pescador['tp_id'], "tap_artepesca", null);
-        $this->view->assign("assign_vPescadorArteTipoArea", $vPescadorHasArteTipoArea);   
-        
+        $this->view->assign("assign_vPescadorArteTipoArea", $vPescadorHasArteTipoArea);
+
         $model_VPescadorHasEmbarcacao = new Application_Model_VPescadorHasEmbarcacao();
         $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $pescador['tp_id'], "tte_tipoembarcacao", null);
-        $this->view->assign("assign_vPescadorEmbarcacao", $vPescadorHasEmbarcacao);         
+        $this->view->assign("assign_vPescadorEmbarcacao", $vPescadorHasEmbarcacao);
     }
 
-    /*
-     * Atualiza os dados do pescador
-     */
-    public function atualizarAction() {
-        $this->modelPescador->update($this->_getAllParams());
+    public function atualizarAction()
+    {
+        $this->modelPescador->updateNovo($this->_getAllParams());
 
         $this->_redirect('pescador/index');
     }
 
-    /*
-     *
-     */
-    public function excluirAction() {
+    public function excluirAction()
+    {
         $this->modelPescador->delete($this->_getParam('id'));
 
         $this->_redirect('pescador/index');
     }
 
-    /*
-     *
-     */
-    public function relatorioAction() {
+     public function testeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $tmpVar = explode(",", $idPescador = $this->_getParam("idPescador"));
+
+        $idPescador = $tmpVar[0];
+
+        $idTipoDependente = $tmpVar[2];
+
+        $tptd_quantidade = $tmpVar[4];
+
+        $this->modelPescador->updateNovo($idPescador, $idTipoDependente, $tptd_quantidade);
+
+        $this->redirect("http://localhost/pescador/novo");
+        return;
+    }
+
+    public function relatorioAction()
+    {
 
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
@@ -296,4 +302,8 @@ class PescadorController extends Zend_Controller_Action {
         $pdf->Output("cadastroPdf.pdf", 'I');
     }
 
+
+
+
 }
+
