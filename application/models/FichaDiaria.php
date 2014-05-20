@@ -53,15 +53,20 @@ class Application_Model_FichaDiaria
         $this->dbTableFichaDiaria = new Application_Model_DbTable_FichaDiaria();
         
         $dadosFichaDiaria = array(
-            'ESP_Nome' => $request['nome_especie'],
-            'ESP_Descritor' => $request['descritor_especie'],
-            'ESP_Nome_Comum' => $request['nome_comum'], 
-            'GEN_ID' => $request['select_genero_especie']
+            
+            't_estagiario_tu_id' => $request['select_nome_estagiario'],
+            't_monitor_tu_id1' => $request['select_nome_monitor'],
+            'fd_data' => $request['data_ficha'], 
+            'fd_turno' => $request['select_turno'],
+            'obs' => $request['observacao'],
+            'pto_id' => $request['select_nome_porto'],
+            'tmp_id' => $request['select_tempo'],
+            'vnt_id' => $request['select_vento']
         );
  
         
         $whereFichaDiaria= $this->dbTableFichaDiaria->getAdapter()
-                ->quoteInto('"ESP_ID" = ?', $request['id_especie']);
+                ->quoteInto('"fd_id" = ?', $request[0]);
         
         
         $this->dbTableFichaDiaria->update($dadosFichaDiaria, $whereFichaDiaria);
@@ -76,7 +81,14 @@ class Application_Model_FichaDiaria
         
         $this->dbTableFichaDiaria->delete($whereFichaDiaria);
     }
-
+    public function selectId(){
+        $this->dbTableFichaDiaria = new Application_Model_DbTable_FichaDiaria();
+        
+        $select = $this->dbTableFichaDiaria->select()
+                ->from($this->dbTableFichaDiaria, 'fd_id')->order('fd_id DESC')->limit('1');
+        
+        return $this->dbTableFichaDiaria->fetchAll($select)->toArray();
+    }
 
 }
 

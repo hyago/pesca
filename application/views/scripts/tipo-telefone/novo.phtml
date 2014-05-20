@@ -1,17 +1,20 @@
-
 <div id="tipoDependnete">
     <h2>Perfil Social->Tipo Telefone</h2>
     <h3>Novo</h3>
 </div>
 
 <form action="<?= $this->url(array("controller" => "tipo-telefone", "action" => "criar"), null, true) ?>" method="post">
-    <input type="hidden" name="idTipoDependente" placeholder="ID" />
-    <fieldset id="TipoDependente">
+    <fieldset id="Social" name="novoTipoTelefone">
         <div id="esquerda">
+
+            <div id="form-esq"> 
+                <label>Código: </label>
+                <input type="text" readonly="" size="5" name="idTipoTelefone" placeholder="Código Telefone (Automático)"/>
+            </div>
 
             <div id="form-esq">
                 <label>Tipo Telefone: </label>
-                <input type="text" name="tipoTelefone" placeholder="TipoDependente"/> <br />
+                <input type="text" required="" size="30" name="tipoTelefone" placeholder="Tipo Telefone"/> <br />
             </div>
 
             <div id="Submit">

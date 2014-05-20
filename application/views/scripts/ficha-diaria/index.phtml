@@ -17,21 +17,21 @@
     foreach ($this->dados as $key => $fichadiaria):
     ?>
     <tr>
-        <td><?= $fichadiaria['TE_ID'] ?></td>
-        <td><?= $fichadiaria['T_Estagiario_TU_ID'] ?></td>
-        <td><?= $fichadiaria['T_Monitor_TU_ID'] ?></td>
-        <td><?= $fichadiaria['FD_Data'] ?></td>
-        <td><?= $fichadiaria['FD_Turno'] ?></td>
-        <td><?= $fichadiaria['PTO_ID'] ?></td>
+        <td><?= $fichadiaria['fd_id'] ?></td>
+        <td><?= $fichadiaria['t_estagiario_tu_id'] ?></td>
+        <td><?= $fichadiaria['t_monitor_tu_id1'] ?></td>
+        <td><?= $fichadiaria['fd_data'] ?></td>
+        <td><?= $fichadiaria['fd_turno'] ?></td>
+        <td><?= $fichadiaria['pto_id'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"editar", "id" => $fichadiaria['FD_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"editar", "id" => $fichadiaria['fd_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $fichadiaria['FD_ID']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $fichadiaria['fd_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>
