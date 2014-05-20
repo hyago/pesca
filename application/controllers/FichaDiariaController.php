@@ -1,11 +1,12 @@
 <?php
 
 
-require_once "../library/fpdf/fpdf.php";
+
 class FichaDiariaController extends Zend_Controller_Action
 {
 
    private $modelFichaDiaria;
+   
 
     public function init()
     {
@@ -24,6 +25,7 @@ class FichaDiariaController extends Zend_Controller_Action
         $this->modelVento = new Application_Model_Vento();
         $this->modelArtePesca = new Application_Model_ArtePesca();
         $this->modelEstagiario = new Application_Model_Usuario();
+        
     }
 
     /*
@@ -67,9 +69,7 @@ class FichaDiariaController extends Zend_Controller_Action
         
         $this->view->assign("users", $usuario);
         //--------------------------------------------
-        $id = $this->modelFichaDiaria->select(null, 'fd_id DESC', '1');
         
-        $this->view->assign("id", $id);
         
     }
     
@@ -77,11 +77,18 @@ class FichaDiariaController extends Zend_Controller_Action
      * Cadastra uma Arte de Pesca
      */
     public function criarAction()
-    {
-        $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+    {   
+        
         $this->modelFichaDiaria->insert($this->_getAllParams());
-
-        $this->redirect(null);
+        $id = $this->modelFichaDiaria->selectId();
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        
+        $value = array_shift( $id );
+        $this->_redirector->gotoSimple('editar',
+                                       'ficha-diaria',
+                                       null,
+                                       array ('id' =>$value)
+                                       );
     }
     
     /*
@@ -89,13 +96,30 @@ class FichaDiariaController extends Zend_Controller_Action
      */
     public function editarAction()
     {
-        $dados = $this->modelFichaDiaria->select();
-      
-        $this->view->assign("dados", $dados);
-        
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         
-        $this->view->assign("ficha-diaria", $fichadiaria);
+        $this->view->assign("fichadiaria", $fichadiaria);
+        //--------------------------------------
+        $porto = $this->modelPorto->select();
+        
+        $this->view->assign("dados_porto", $porto);
+        //----------------------------------------
+        $tempo = $this->modelTempo->select();
+        
+        $this->view->assign("dados_tempo", $tempo);
+        //-------------------------------------------
+        $vento = $this->modelVento->select();
+        
+        $this->view->assign("dados_vento", $vento);
+        //-------------------------------------------
+        $artePesca = $this->modelArtePesca->select();
+        
+        $this->view->assign("artesPesca", $artePesca);
+        //---------------------------------------------
+        $usuario = $this->modelEstagiario->select();
+        
+        $this->view->assign("users", $usuario);
+        //--------------------------------------------
     }
    
     /*

@@ -1,7 +1,7 @@
 <?php
 
 
-require_once "../library/fpdf/fpdf.php";
+
 class FamiliaController extends Zend_Controller_Action
 {
     private $modelFamilia;
