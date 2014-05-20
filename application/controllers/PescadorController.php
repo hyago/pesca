@@ -218,6 +218,13 @@ class PescadorController extends Zend_Controller_Action
 
         $tptd_quantidade = $tmpVar[4];
 
+//        
+//         $idPescador = $this->_getParam("idPescador");
+//         
+//         $idTipoDependente = $this->_getParam("idTipoDependente");
+//         
+//         $tptd_quantidade = $this->_getParam("tptd_quantidade");
+
         $this->modelPescador->updateNovo($idPescador, $idTipoDependente, $tptd_quantidade);
 
         $this->redirect("http://localhost/pescador/novo");
