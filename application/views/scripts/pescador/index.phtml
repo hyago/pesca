@@ -1,59 +1,48 @@
-<html>
-<head>
-<script>
+<html dir="ltr">
+    <head>
+        <script src="/js/funcoesJquery.js"></script>
+    </head>
 
-    function msgTeste(){
-    $decisao = confirm("Deseja continuar");
-    if(($decisao)){
-        location.href=' http://localhost/projeto/public/nomeController/NomeAction ';
-    }
-}
+    <h2>Perfil Social->Pescador</h2>
 
-</script>
-</head>
+    <a href="<?= $this->url(array("controller" => "pescador", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
+    <fieldset id="Social"></fieldset>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Matricula</th>
+        </tr>
 
-<h2>Perfil Social->Pescador</h2>
+        <?php foreach ($this->dados as $key => $pescador): ?>
+            <tr>
+                <td><?= $pescador['tp_id'] ?></td>
+                <td><?= $pescador['tp_nome'] ?></td>
+                <td><?= $pescador['tp_matricula'] ?></td>
 
+                <td class="td-botao">
+                    <a href="<?= $this->url(array("controller" => "pescador", "action" => "visualizar", "id" => $pescador['tp_id']), null, true) ?>">
+                        <ul id="icons" class="ui-widget ui-helper-clearfix">
+                            <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
+                        </ul>
+                    </a>
+                </td>
 
-<a href="<?=$this->url(array("controller"=>"pescador","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
-<fieldset id="Social"></fieldset>
-<table>
-    <tr>
-    <th>ID</th>
-        <th>Nome</th>
-        <th>Matricula</th>
-    </tr>
-    
-    <?php
-    foreach ($this->dados as $key => $pescador):
-    ?>
-    <tr>
-    <td><?= $pescador['tp_id'] ?></td>
-        <td><?= $pescador['tp_nome'] ?></td>
-        <td><?= $pescador['tp_matricula'] ?></td>
-        <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"visualizar", "id" => $pescador['tp_id']),null,true)?>">
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
-                </ul>
-            </a>
-        </td>
-        <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"editar", "id" => $pescador['tp_id']),null,true)?>">
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
-                </ul>
-            </a>
-        </td>
-        <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pescador","action"=>"excluir", "id" => $pescador['tp_id']),null,true)?>">
-            <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
-                </ul>
-            </a>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</table>
-<br/><br/>
-<a href="<?=$this->url(array("controller"=>"pescador","action"=>"relatorio"),null,true)?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+                <td class="td-botao">
+                    <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">
+                        <ul id="icons" class="ui-widget ui-helper-clearfix">
+                            <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                        </ul>
+                    </a>
+                </td>
+
+                <td class="td-botao">
+                    <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
+                </td>
+
+            </tr>
+        <?php endforeach; ?>
+    </table>
+    <br/><br/>
+    <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+   
