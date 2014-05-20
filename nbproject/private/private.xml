@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ficha-diaria/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ficha-diaria/novo.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/FichaDiariaController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/FichaDiaria.php</file>
+            <file>file:/srv/www/pesca/.zfproject.xml</file>
+            <file>file:/srv/www/pesca/application/views/scripts/pescador/novo.phtml</file>
+            <file>file:/srv/www/pesca/public/js/funcoesJquery.js</file>
+            <file>file:/srv/www/pesca/bd/01_criacaoTabelasBD.sql</file>
+            <file>file:/srv/www/pesca/application/models/Pescador.php</file>
+            <file>file:/srv/www/pesca/application/controllers/PescadorController.php</file>
+            <file>file:/srv/www/pesca/application/views/scripts/pescador/index.phtml</file>
+            <file>file:/srv/www/pesca/application/views/scripts/pescador/editar.phtml</file>
         </group>
     </open-files>
 </project-private>
+

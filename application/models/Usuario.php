@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
  * Model Usuario
  * 
  * @package Pesca
@@ -10,113 +10,115 @@
  * @access public
  *
  */
+class Application_Model_Usuario {
 
-class Application_Model_Usuario
-{
-    
-    public function select($where = null, $order = null, $limit = null)
-    {
+    public function select($where = null, $order = null, $limit = null) {
         $dao = new Application_Model_DbTable_Usuario();
         $select = $dao->select()->from($dao)->order($order)->limit($limit);
 
-        if(!is_null($where)){
+        if (!is_null($where)) {
             $select->where($where);
         }
 
         return $dao->fetchAll($select)->toArray();
     }
-    
-    public function find($id)
-    {
+
+    public function find($id) {
         $dao = new Application_Model_DbTable_VUsuario();
         $arr = $dao->find($id)->toArray();
         return $arr[0];
     }
-    
-    public function insert(array $request)
-    {
-        $dbTableUsuario = new Application_Model_DbTable_Usuario();
-        $dbTableLogin = new Application_Model_DbTable_Login();
+
+    public function insert(array $request) {
+        
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
-        
+
+        $dataCEP = $request['cep'];
+        $dataCEP = trim($dataCEP, "_-");
+
+        if (!$dataCEP)
+            $dataCEP = NULL;
+
         $dadosEndereco = array(
-            'te_logradouro'  => $request['logradouro'],
-            'te_numero'      => $request['numero'],
-            'te_bairro'      => $request['bairro'],
-            'te_cep'         => $request['cep'],
-            'te_comp'        => $request['complemento'],
-            'tmun_id'        => $request['municipio']
+            'te_logradouro' => $request['logradouro'],
+            'te_numero' => $request['numero'],
+            'te_bairro' => $request['bairro'],
+            'te_cep' => $dataCEP,
+            'te_comp' => $request['complemento'],
+            'tmun_id' => $request['municipio']
         );
-        
+
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
-        
+
+        $dbTableLogin = new Application_Model_DbTable_Login();
         $dadosLogin = array(
-            'tl_login'     => $request['login'],
+            'tl_login' => $request['login'],
             'tl_hashsenha' => sha1($request['login'])
         );
-        
+
         $idLogin = $dbTableLogin->insert($dadosLogin);
-        
+
+        $dbTableUsuario = new Application_Model_DbTable_Usuario();
+
         $dadosUsuario = array(
-            'tp_id'       => $request['perfil'],
-            'te_id'       => $idEndereco,
-            'tl_id'       => $idLogin,
-            'tu_nome'     => $request['nome'],
-            'tu_sexo'     => $request['sexo'],
-            'tu_rg'       => $request['rg'],
-            'tu_cpf'      => $request['cpf'],
-            'tu_email'    => $request['email'],
-            'tu_telres'    => $request['telefoneResidencial'],
-            'tu_telcel'    => $request['telefoneCelular']
+            'tp_id' => $request['perfil'],
+            'te_id' => $idEndereco,
+            'tl_id' => $idLogin,
+            'tu_nome' => $request['nome'],
+            'tu_sexo' => $request['sexo'],
+            'tu_rg' => $request['rg'],
+            'tu_cpf' => $request['cpf'],
+            'tu_email' => $request['email'],
+            'tu_telres' => $request['telefoneResidencial'],
+            'tu_telcel' => $request['telefoneCelular']
         );
-        
+
         $dbTableUsuario->insert($dadosUsuario);
 
         return;
     }
-    
-    public function update(array $request)
-    {
+
+    public function update(array $request) {
         $dbTableUsuario = new Application_Model_DbTable_Usuario();
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
-        
+
         $dadosEndereco = array(
-            'te_logradouro'  => $request['logradouro'],
-            'te_numero'      => $request['numero'],
-            'te_bairro'      => $request['bairro'],
-            'te_cep'         => $request['cep'],
-            'te_comp'        => $request['complemento'],
-            'tmun_id'        => $request['municipio']
+            'te_logradouro' => $request['logradouro'],
+            'te_numero' => $request['numero'],
+            'te_bairro' => $request['bairro'],
+            'te_cep' => $request['cep'],
+            'te_comp' => $request['complemento'],
+            'tmun_id' => $request['municipio']
         );
-        
+
         $dadosUsuario = array(
-            'tp_id'       => $request['perfil'],
-            'tu_nome'     => $request['nome'],
-            'tu_sexo'     => $request['sexo'],
-            'tu_rg'       => $request['rg'],
-            'tu_cpf'      => $request['cpf'],
-            'tu_email'    => $request['email'],
-            'tu_telres'    => $request['telefoneResidencial'],
-            'tu_telcel'    => $request['telefoneCelular']
+            'tp_id' => $request['perfil'],
+            'tu_nome' => $request['nome'],
+            'tu_sexo' => $request['sexo'],
+            'tu_rg' => $request['rg'],
+            'tu_cpf' => $request['cpf'],
+            'tu_email' => $request['email'],
+            'tu_telres' => $request['telefoneResidencial'],
+            'tu_telcel' => $request['telefoneCelular']
         );
-        
-        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"tu_id" = ?', $request['idUsuario']);
-        $whereEndereco= $dbTableEndereco->getAdapter()->quoteInto('"te_id" = ?', $request['idEndereco']);
-        
+
+        $whereUsuario = $dbTableUsuario->getAdapter()->quoteInto('"tu_id" = ?', $request['idUsuario']);
+        $whereEndereco = $dbTableEndereco->getAdapter()->quoteInto('"te_id" = ?', $request['idEndereco']);
+
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
     }
-    
-    public function delete($idUsuario)
-    {
-        $dbTableUsuario = new Application_Model_DbTable_Usuario();        
-                
+
+    public function delete($idUsuario) {
+        $dbTableUsuario = new Application_Model_DbTable_Usuario();
+
         $dadosUsuario = array(
             'tu_usuariodeletado' => TRUE
         );
-        
-        $whereUsuario= $dbTableUsuario->getAdapter()->quoteInto('"tu_id" = ?', $idUsuario);
-        
+
+        $whereUsuario = $dbTableUsuario->getAdapter()->quoteInto('"tu_id" = ?', $idUsuario);
+
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
     }
+
 }
