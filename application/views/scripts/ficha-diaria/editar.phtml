@@ -14,8 +14,49 @@
         function addRowArte(frm) {
             rowNumArte++;
             
+            if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Arrasto de Fundo'){
+                Entrevista = 'arrasto-fundo';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Calão'){
+                Entrevista = 'calao';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Espinhel/Grosseira'){
+                Entrevista = 'grosseira';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Pesca de Linha'){
+                Entrevista = 'linha';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Rede de Emalhar'){
+                Entrevista = 'emalhe';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Tarrafa'){
+                Entrevista = 'tarrafa';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Vara de Pesca'){
+                Entrevista = 'vara-pesca';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Jereré'){
+                Entrevista = 'jerere';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Manzuá'){
+                Entrevista = 'manzua';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Ratoeira'){
+                Entrevista = 'ratoeira';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Catagem'){
+                Entrevista = 'coleta-manual';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Mergulho'){
+                Entrevista = 'mergulho';
+            }
+            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Linha de Fundo'){
+                Entrevista = 'linha-fundo';
+            }
+            
+            
             var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumArte + '">';
-            linhaArte = linhaArte.concat('<input type="button" value="Entrevista">');
+            //linhaArte = linhaArte.concat('<input type="button" value="Entrevista" onclick="teste("<?= $this->url(array("controller" => ''.Entrevista.'', "action" => "teste", "idPescador" => "10089,idTipoDependente,3,tptd_quantidade,5"), null, true) ?>")">');
             linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumArte(' + rowNumArte + ');">');
 
             linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
