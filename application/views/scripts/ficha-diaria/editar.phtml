@@ -9,10 +9,10 @@
 </div>
 <head>
     <script type="text/javascript">
-        var rowNumArte = 0;
+        var rowNumMnt = 0;
         var Entrevista;
-        function addRowArte(frm) {
-            rowNumArte++;
+        function addRowMonitoramento(frm) {
+            rowNumMnt++;
 
             if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Arrasto de Fundo') {
                 Entrevista = 'arrasto-fundo';
@@ -61,11 +61,11 @@
             a = a.concat("/"+Entrevista+"/");
             a = a.concat("index");
 
-            var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumArte + '">';
+            var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumMnt + '">';
             linhaArte = linhaArte.concat('<a href="' + a + '" id="botao-ancora" target="_blank">Entrevista</a>');
-            linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumArte(' + rowNumArte + ');">');
+            linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumMonitoramento(' + rowNumMnt + ');">');
 
-            linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
+            //linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
 
             linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputMonitorada[]"  value="' + frm.SelectMonitorada[frm.SelectMonitorada.selectedIndex].text + '">');
 
@@ -80,9 +80,19 @@
             jQuery('#itemArteTipoRows').append(linhaArte);
         }
 
-        function removeRowNumArte(localRowNumArte) {
-            jQuery('#itemArteTipoRows' + localRowNumArte).remove();
+        function removeRowNumMonitoramento(localRowNumMnt){
+            jQuery('#itemArteTipoRows' + localRowNumMnt).remove();
         }
+        function jsInsertPescadorHasDependente( frm, pag )
+        {
+            if (frm.inputQuantidade.value) {
+            var TmpUrl = (+frm.id_fichadiaria.value + '#base');
+
+            var tmpUpdate = (pag + '/idDependente/' + frm.SelectEmbarcacao.value + '/quant/' + frm.inputQuantidadeDependente.value + '/back_url/' + TmpUrl +'/id/' + frm.id_.value +);
+ 
+            location.replace( tmpUpdate );
+    }
+}
     </script>
 </head>
 <fieldset id="Desembarque">
@@ -191,20 +201,18 @@
 
     <br/>
     <br/>
-    <form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
+    
 </fieldset>
+<form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
 <fieldset class="noEditable"><legend>Monitoramento:</legend>
     <fieldset class="noEditable"><legend>Artes de Pesca e quantidade de embarcacoes:</legend>
 
         <div id="base">
-            <input onclick="addRowArte(this.form);" type="button" value="Add row" />
-            <select id="tam_medio" name="SelectEmbarcacao"style="float:left">
-                <option   value="1" selected="selected">Embarcada</option>
-                <option   value="0">Não Embarcada</option>
-            </select>
+            <input onclick="addRowMonitoramento(this.form);" type="button" value="Add row" />
+            
             <select id="tam_medio" name="SelectMonitorada"style="float:left">
-                <option   value="1" selected="selected">Monitorada</option>
-                <option   value="0">Não Monitorada</option>
+                <option   value="TRUE" selected="selected">Monitorada</option>
+                <option   value="FALSE">Não Monitorada</option>
             </select>
             <input type="text"name="QuantidadeEmbarcacoes" placeholder="Quantidade" size="10px">
 
@@ -213,7 +221,7 @@
                     <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
                 <?php endforeach; ?>
             </select>
-
+            <input type="hidden" name="id_fichaDiaria" disabled="true" value="<?= $this->fichadiaria['fd_id'] ?>"/><br />
         </div>
 
     </fieldset>

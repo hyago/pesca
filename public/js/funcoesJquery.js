@@ -95,14 +95,6 @@ $(document).ready(function() {
     });
     //funcoes para menu
 
-    //Entrevistas
-    $(function() {
-        $("#accordion").accordion({
-            heightStyle: "content"
-        });
-        $("#active").accordion("disabled");
-    });
-    //Entrevistas
 
 
 
@@ -132,7 +124,6 @@ function jsInsertPescadorHasDependente( frm, pag )
 {
     if (frm.inputQuantidadeDependente.value) {
         var TmpUrl = (+frm.idPescador.value + '#dependentes');
-
         var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idDependente/' + frm.SelectDependente.value + '/quant/' + frm.inputQuantidadeDependente.value + '/back_url/' + TmpUrl);
  
         location.replace( tmpUpdate );
