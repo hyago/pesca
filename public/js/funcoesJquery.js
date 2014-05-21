@@ -139,16 +139,16 @@ function jsInsertPescadorHasDependente( frm, pag )
     }
 }
 
-function jsDeletePescadorHasDependente( frm, pag )
+function jsDeletePescadorHasDependente(idDep, frm, pag)
 {
-    var TmpUrl = (+frm.idPescador.value+'#dependentes');
-    
-    var tmpUpdate = (pag+'/id/'+frm.idPescador.value +'/idDependente/'+frm.SelectDependente.value+'/quant/'+frm.inputQuantidadeDependente.value+'/back_url/'+TmpUrl);
+    var TmpUrl = (+frm.idPescador.value + '#dependentes');
 
-    confirm( tmpUpdate );
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idDependente/' + idDep+'/back_url/' + TmpUrl);
 
-    
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
     }
+}
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ MENSAGEM DE CONFIRMAÇÃO /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function beforeDelete(id)

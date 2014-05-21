@@ -1207,7 +1207,7 @@ CREATE TABLE t_pescador_has_telefone
 (
   tpt_tp_id integer not null,
   tpt_ttel_id integer not null,
-  tpt_telefone numeric(14,0) not null,
+  tpt_telefone VARCHAR(20) not null,
   CONSTRAINT t_pescadorcontato_pkey PRIMARY KEY (tpt_tp_id, tpt_ttel_id),
   CONSTRAINT fk_tpt_tp FOREIGN KEY (tpt_tp_id) REFERENCES t_pescador (tp_id),
   CONSTRAINT fk_tpt_ttel FOREIGN KEY (tpt_ttel_id) REFERENCES t_tipotel (ttel_id)
