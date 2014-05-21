@@ -1,4 +1,7 @@
-
+<?php
+$this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
+$this->headScript()->appendFile('/js/mascaras.js');
+?>
 
 <html dir="ltr">
     <head>
@@ -181,9 +184,18 @@
 
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="itemDependenteRows"><legend>Dependentes listados:</legend>
-                <!--Area para inserir os itens-->
-            </fieldset>
+            <table id="tblDependentes">
+                    <tr>
+                        <th>ID</th>
+                        <th width="65%">Dependente</th>
+                        <th>Quantidade</th>
+                        <th width="5%"></th>
+                    </tr>
+                </table>
+<!--            <fieldset class="noEditable" id="itemDependenteRows"><legend>Dependentes listados:</legend>
+                
+                Area para inserir os itens
+            </fieldset>-->
         </fieldset>
         <br>
         <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -209,9 +221,15 @@
 
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="itemRendaRows"><legend>Dependentes listados:</legend>
-                <!--Area para inserir os itens-->
-            </fieldset>
+            <table id="tblRenda">
+                <tr>
+                    <th width="10%">ID </th>
+                    <th width="40%">Renda</th>
+                    <th width="10%">ID </th>
+                    <th width="35%">Descrição</th>
+                    <th width="5%"></th>
+                </tr>
+            </table>
         </fieldset>
         <br>
 
@@ -229,9 +247,16 @@
                 </div>
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="rowNumTelefone"><legend>Telefone listados:</legend>
+            <table id="tblTelefones">
+                <tr>
+                    <th width="15%">ID </th>
+                    <th width="40%">Telefones</th>
+                    <th width="40%">Nº Telefone</th>
+                    <th width="5%"></th>
+                </tr>
 
-            </fieldset>
+            </table>
+
         </fieldset>
         <br>
         <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Colonias /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -252,9 +277,15 @@
 
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="itemColoniaRows"><legend>Artes de Pesca e Tipos de Capturas listados:</legend>
-                <!--Area para inserir os itens-->
-            </fieldset>
+            <table id="tblColonias">
+                <tr>
+                    <th width="15%">ID </th>
+                    <th width="65%">Colonia</th>
+                    <th>Data inscrição</th>
+                    <th width="5%"></th>
+                </tr>
+
+            </table>
         </fieldset>
         <br>
         <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -272,9 +303,14 @@
                 </div>
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="itemAreaPescaRows"><legend>Area de Pesca listadas:</legend>
-                <!--Area para inserir os itens-->
-            </fieldset>
+            <table id="tblAreaPesca">
+                <tr>
+                    <th width="15%">ID </th>
+                    <th width="65%">Área de Pesca</th>
+                    <th width="5%"></th>
+                </tr>
+
+            </table>
         </fieldset>
         <br>
 
@@ -300,9 +336,16 @@
 
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="itemArteTipoRows"><legend>Artes de Pesca e Tipos de Capturas listados:</legend>
-                <!--Area para inserir os itens-->
-            </fieldset>
+            <table id="tblArteTipoPescas">
+                <tr>
+                    <th width="10%">ID </th>
+                    <th width="40%">Arte de Pesca</th>
+                    <th width="10%">ID</th>
+                    <th width="35%">Tipo de Pesca</th>
+                    <th width="5%"></th>
+                </tr>
+
+            </table>
         </fieldset>
         <br>
 
@@ -333,9 +376,18 @@
 
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="itemEmbarcacoesRows"><legend>Embarcações listadas:</legend>
-                <!--Area para inserir os itens-->
-            </fieldset>
+            <table id="tblEmbarcacoes">
+                <tr>
+                    <th width="5%">ID </th>
+                    <th width="30%">Embarcação</th>
+                    <th width="5%">ID</th>
+                    <th width="30%">Porte da Embarcação</th>
+                    <th width="5%">ID</th>
+                    <th width="20%">Motor</th>
+                    <th width="5%"></th>
+                </tr>
+
+            </table>
         </fieldset>
         <br>
         <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_//_/_/_/_/_/_/_/_/_/_/_/_/_/-->

@@ -178,6 +178,7 @@
           <dbTableFile dbTableName="VPescadorHasColonia"/>
           <dbTableFile dbTableName="VPescadorHasEmbarcacao"/>
           <dbTableFile dbTableName="VPescadorHasArteTipoArea"/>
+          <dbTableFile dbTableName="VPescadorHasAreaPesca"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -215,6 +216,7 @@
         <modelFile modelName="VPescadorHasColonia"/>
         <modelFile modelName="VPescadorHasEmbarcacao"/>
         <modelFile modelName="VPescadorHasArteTipoArea"/>
+        <modelFile modelName="VPescadorHasAreaPesca"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

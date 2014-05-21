@@ -37,8 +37,10 @@
                 </td>
 
                 <td class="td-botao">
-                    <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
+                    <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
                 </td>
+                
+            </a>
 
             </tr>
         <?php endforeach; ?>

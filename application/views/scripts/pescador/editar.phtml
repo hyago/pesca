@@ -17,7 +17,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
         <form action="<?= $this->url(array("controller" => "pescador", "action" => "atualizar"), null, true) ?>" method="post">
 
             <fieldset id="Social">
-                <input type="hidden" name="idPescador" value="<?= $this->pescador['tp_id'] ?>" />
                 <input type="hidden" name="idEndereco" value="<?= $this->pescador['te_id'] ?>" />
                 <div id="esquerda">
                     <div id="form-dir">
@@ -173,44 +172,39 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
             <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
             <fieldset class="noEditable"><legend>Dependentes:</legend>
-                <fieldset class="noEditable"><legend>Adicionar Dependentes:</legend>
+                <a id="dependentes">
+                    <fieldset class="noEditable"><legend>Adicionar Dependentes:</legend>
+                        <div id="base">
+                            <input type="button" value="Add" onclick="jsInsertPescadorHasDependente( this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertpescadorhasdependente"), null, true) ?>')">
 
-                    <div id="base">
-                        <input onclick="addRowDependente(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "teste"), null, true) ?>');" type="button" value="Add row" />
+                            <input type="number" min="1" name="inputQuantidadeDependente" placeholder="Número de dependentes" size="20"  />
 
-<!--                        /_/_/_/_/_/_/_/_/_/_/_/_/_/ Teste de Cadastro de itens /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-<!--                        <td class="td-botao">
-                            <input type="button" value="Excluir" onclick="teste( '<?= $this->url(array("controller" => "pescador", "action" => "teste", "idPescador"=>"10091",  "idTipoDependente"=>"1", "tptd_quantidade"=>"5"), null, true) ?>')">
-                            <input type="button" value="teste Cad Itens" onclick="teste( '<?= $this->url(array("controller" => "pescador", "action" => "teste", "idPescador" => "10089,idTipoDependente,3,tptd_quantidade,5"), null, true) ?>')">
-                        </td>-->
-
-                        <input type="number" min="1" name="inputQuantidadeDependente" placeholder="Número de dependentes" size="20"  />
-
-                        <select name="SelectDependente" id="Dependente">
-                            <?php foreach ($this->assignTipoDependentes as $key => $localTipoDependente): ?>
-                                <option value="<?= $localTipoDependente['ttd_id']; ?>">
-                                    <?= $localTipoDependente['ttd_tipodependente']; ?></option><?php endforeach; ?>
-                        </select>
-
-                    </div>
-
-                </fieldset>
-                <br>
-                <fieldset class="noEditable" id="itemDependenteRows"><legend>Dependentes listados:</legend>
-                    <?php foreach ($this->assign_vPescadorDependente as $key => $vPescadorHasDependente): ?>
-                        <div class="noEditable"><p id="rowNumDependente<?= $key ?>">
-
-                                <input type="button" value="Remove" onclick="removeRowNumDependente(<?= $key ?>);">
-
-                                <input type="text" readonly size="15" name="inputQuantidadeDependente[]" value="<?= $vPescadorHasDependente['tptd_quantidade'] ?>">
-
-                                <input type="text" readonly size="10" name="inputTipoDependente[]" " value="<?= $vPescadorHasDependente['ttd_tipodependente'] ?>">
-                                <input type="text" readonly size="2" name="inputTipoDependenteID[]" " value="<?= $vPescadorHasDependente['ttd_id'] ?>">
-
-                                <br>
-                            </p></div>
-                    <?php endforeach; ?>
-                </fieldset>
+                            <select name="SelectDependente" id="Dependente">
+                                <?php foreach ($this->assignTipoDependentes as $key => $localTipoDependente): ?>
+                                    <option value="<?= $localTipoDependente['ttd_id']; ?>">
+                                        <?= $localTipoDependente['ttd_tipodependente']; ?></option><?php endforeach; ?>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <br>
+                    
+                    <table id="tblDependentes">
+                        <tr>
+                            <th width="15%">ID </th>
+                            <th width="65%">Dependente</th>
+                            <th>Familiares</th>
+                            <th width="5%"></th>
+                        </tr>
+                        <?php foreach ($this->assign_vPescadorDependente as $key => $vPescadorHasDependente): ?>
+                            <tr id="rowNumDependente<?= $key ?>">
+                                <td name="inputTipoDependenteID[]"> <?= $vPescadorHasDependente['ttd_id'] ?> </td>
+                                <td name="inputTipoDependente[]" > <?= $vPescadorHasDependente['ttd_tipodependente'] ?> </td>
+                                <td name="inputQuantidadeDependente[]" > <?= $vPescadorHasDependente['tptd_quantidade'] ?> </td>
+                                <td><input type="button" class="button-del" width="5%" onclick="removeRowNumDependente(<?= $key ?>);"> </td>
+                                <td><input type="button" value="Add" onclick="jsDeletePescadorHasDependente( <?= $vPescadorHasDependente['ttd_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhasdependente"), null, true) ?>')"></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
             </fieldset>
             <br>
             <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -236,22 +230,24 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 </fieldset>
                 <br>
-                <fieldset class="noEditable" id="itemRendaRows"><legend>Rendas listadas:</legend>
+                <table id="tblRenda">
+                    <tr>
+                        <th width="10%">ID </th>
+                        <th width="40%">Renda</th>
+                        <th width="10%">ID </th>
+                        <th width="35%">Descrição</th>
+                        <th width="5%"></th>
+                    </tr>
                     <?php foreach ($this->assign_vPescadorRenda as $key => $vPescadorHasRenda): ?>
-                        <div class="noEditable"><p id="rowRenda<?= $key ?>">
-
-                                <input type="button" value="Remove" onclick="removeRowRenda(<?= $key ?>);">
-
-                                <input type="text" readonly size="15" name="inputRenda[]" value="<?= $vPescadorHasRenda['ren_renda'] ?>">
-                                <input type="text" readonly size="8" name="inputRendaID[]" value="<?= $vPescadorHasRenda['ren_id'] ?>">
-
-                                <input type="text" readonly size="15" name="inputTipoRenda[]" value="<?= $vPescadorHasRenda['ttr_descricao'] ?>">
-                                <input type="text" readonly size="8" name="inputTipoRendaID[]" value="<?= $vPescadorHasRenda['ttr_id'] ?>">
-
-                                <br>
-                            </p></div>
+                        <tr id="rowRenda<?= $key ?>">
+                            <td name="inputRendaID[]"> <?= $vPescadorHasRenda['ttr_id'] ?> </td>
+                            <td name="inputRendaID[]" > <?= $vPescadorHasRenda['ttr_descricao'] ?> </td>
+                            <td name="inputTipoRendaID[]" > <?= $vPescadorHasRenda['ttr_id'] ?> </td>
+                            <td name="inputRenda[]" > <?= $vPescadorHasRenda['ren_renda'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="removeRowRenda(<?= $key ?>);"> </td>
+                        </tr>
                     <?php endforeach; ?>
-                </fieldset>
+                </table>
             </fieldset>
             <br>
 
@@ -269,24 +265,28 @@ $this->headScript()->appendFile('/js/mascaras.js');
                     </div>
                 </fieldset>
                 <br>
-                <fieldset class="noEditable" id="rowNumTelefone"><legend>Telefone listados:</legend>
+                <table id="tblTelefones">
+                    <tr>
+                        <th width="15%">ID </th>
+                        <th width="40%">Telefones</th>
+                        <th width="40%">Nº Telefone</th>
+                        <th width="5%"></th>
+                    </tr>
                     <?php foreach ($this->assign_vPescadorHasTelefone as $key => $vPescadorHasTelefone): ?>
-                        <div class="noEditable"><p id="rowNumTelefone<?= $key ?>">
-                                <input type="button" value="Remove" onclick="removeRowNumTelefone(<?= $key ?>);">
-                                <input type="text" readonly size="15" name="inputTelefone[]" class="telefone" value="<?= $vPescadorHasTelefone['tpt_telefone'] ?>">
-                                <input type="text" readonly size="15" name="inputTipo[]" value="<?= $vPescadorHasTelefone['ttel_desc'] ?>">
-                                <input type="text" readonly size="8" name="inputTipoID[]" value="<?= $vPescadorHasTelefone['tpt_ttel_id'] ?><?= $key ?>">
-                                <br>
-                            </p></div>
+                        <tr id="rowNumTelefone<?= $key ?>">
+                            <td name="inputTipoID[]"> <?= $vPescadorHasTelefone['tpt_ttel_id'] ?> </td>
+                            <td name="inputTipo[]" > <?= $vPescadorHasTelefone['ttel_desc'] ?> </td>
+                            <td name="inputTelefone[]" chass="telefone" > <?= $vPescadorHasTelefone['tpt_telefone'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="removeRowNumTelefone(<?= $key ?>);"> </td>
+                        </tr>
                     <?php endforeach; ?>
+                </table>
 
-                </fieldset>
             </fieldset>
             <br>
             <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Colonias /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
             <fieldset class="noEditable"><legend>Colonias:</legend>
                 <fieldset class="noEditable"><legend>Adicionar Colonias:</legend>
-
                     <div id="base">
                         <input onclick="addRowColonia(this.form);" type="button" value="Add row" />
                         <input type="date" name="inputDataInscricaoColonia" placeholder="Data Inscrição na Colonia" size="20"  />
@@ -298,24 +298,25 @@ $this->headScript()->appendFile('/js/mascaras.js');
                         </select>
 
                     </div>
-
                 </fieldset>
                 <br>
-                <fieldset class="noEditable" id="itemColoniaRows"><legend>Colonias listadas:</legend>
+                <table id="tblColonias">
+                    <tr>
+                        <th width="15%">ID </th>
+                        <th width="65%">Colonia</th>
+                        <th>Data inscrição</th>
+                        <th width="5%"></th>
+                    </tr>
                     <?php foreach ($this->assign_vPescadorColonia as $key => $vPescadorHasColonia): ?>
-
-                        <div class="noEditable"><p id="itemColoniaRows<?= $key ?>">
-                                <input type="button" value="Remove" onclick="removeRowNumColonia(<?= $key ?>);">
-
-                                <input type="date" readonly size="15" name="inputDataInscricaoColonia[]" value="<?= $vPescadorHasColonia['tptc_datainsccolonia'] ?>">
-
-
-                                <input type="text" readonly size="15" name="inputColonia[]" " value="<?= $vPescadorHasColonia['tc_nome'] ?>">
-
-                                <br></p></div>
+                        <tr id="rowNumColonias<?= $key ?>">
+                            <td name="inputColoniaID[]"> <?= $vPescadorHasColonia['tc_id'] ?> </td>
+                            <td name="inputColonia[]" > <?= $vPescadorHasColonia['tc_nome'] ?> </td>
+                            <td name="inputDataInscricaoColonia[]" > <?= $vPescadorHasColonia['tptc_datainsccolonia'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="removeRowNumColonia(<?= $key ?>);"> </td>
+                        </tr>
                     <?php endforeach; ?>
+                </table>
 
-                </fieldset>
             </fieldset>
             <br>
             <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -324,7 +325,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                     <div id="base">
                         <input onclick="addRowAreaPesca(this.form);" type="button" value="Add row" />
-
                         <select name="selectAreaPesca" id="areaPesca">
                             <?php foreach ($this->areasPesca as $key => $areaPesca): ?>
                                 <option value="<?= $areaPesca['tareap_id']; ?>"><?= $areaPesca['tareap_areapesca']; ?></option>
@@ -333,9 +333,22 @@ $this->headScript()->appendFile('/js/mascaras.js');
                     </div>
                 </fieldset>
                 <br>
-                <fieldset class="noEditable" id="itemAreaPescaRows"><legend>Area de Pesca listadas:</legend>
-                    <!--Area para inserir os itens-->
-                </fieldset>
+
+                <table id="tblAreaPesca">
+                    <tr>
+                        <th width="15%">ID </th>
+                        <th width="65%">Área de Pesca</th>
+                        <th width="5%"></th>
+                    </tr>
+                    <?php foreach ($this->assign_vPescadorAreaPesca as $key => $vPescadorHasAreaPesca): ?>
+                        <tr id="linhaAreaPescaRows<?= $key ?>">
+                            <td name="inputAreaID[]"> <?= $vPescadorHasAreaPesca['tareap_id'] ?> </td>
+                            <td name="inputArea[]" > <?= $vPescadorHasAreaPesca['tareap_areapesca'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="removeRowAreaPesca(<?= $key ?>);"> </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+
             </fieldset>
             <br>
 
@@ -361,22 +374,25 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 </fieldset>
                 <br>
-                <fieldset class="noEditable" id="itemArteTipoRows"><legend>Artes de Pesca e Tipos de Capturas listados:</legend>
-
+                <table id="tblArteTipoPescas">
+                    <tr>
+                        <th width="10%">ID </th>
+                        <th width="40%">Arte de Pesca</th>
+                        <th width="10%">ID</th>
+                        <th width="35%">Tipo de Pesca</th>
+                        <th width="5%"></th>
+                    </tr>
                     <?php foreach ($this->assign_vPescadorArteTipoArea as $key => $vPescadorHasArteTipoArea): ?>
-                        <div class="noEditable"><p id="itemArteTipoRows<?= $key ?>">
-
-                                <input type="button" value="Remove" onclick="removeRowNumArte(<?= $key ?>);">
-
-                                <input type="text" readonly size="10" name="inputTipo[]" " value="<?= $vPescadorHasArteTipoArea['itc_tipo'] ?>">
-                                <input type="text" readonly size="2" name="inputTipoID[]" " value="<?= $vPescadorHasArteTipoArea['itc_id'] ?>">
-
-                                <input type="text" readonly size="15" name="inputArte[]" " value="<?= $vPescadorHasArteTipoArea['tareap_areapesca'] ?>">
-                                <input type="text" readonly size="2" name="inputArteID[]" " value="<?= $vPescadorHasArteTipoArea['tareap_id'] ?>">
-
-                                <br></p></div>
+                        <tr id="linhaArteTipoRows<?= $key ?>">
+                            <td name="inputArteID[]"> <?= $vPescadorHasArteTipoArea['tap_id'] ?> </td>
+                            <td name="inputArte[]" > <?= $vPescadorHasArteTipoArea['tap_artepesca'] ?> </td>
+                            <td name="inputTipoID[]"> <?= $vPescadorHasArteTipoArea['itc_id'] ?> </td>
+                            <td name="inputTipo[]" > <?= $vPescadorHasArteTipoArea['itc_tipo'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="removeRowNumArte(<?= $key ?>);"> </td>
+                        </tr>
                     <?php endforeach; ?>
-                </fieldset>
+                </table>
+
             </fieldset>
             <br>
 
@@ -407,25 +423,29 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 </fieldset>
                 <br>
-                <fieldset class="noEditable" id="itemEmbarcacoesRows"><legend>Embarcações listadas:</legend>
+                <table id="tblEmbarcacoes">
+                    <tr>
+                        <th width="5%">ID </th>
+                        <th width="30%">Embarcação</th>
+                        <th width="5%">ID</th>
+                        <th width="30%">Porte da Embarcação</th>
+                        <th width="5%">ID</th>
+                        <th width="20%">Motor</th>
+                        <th width="5%"></th>
+                    </tr>
                     <?php foreach ($this->assign_vPescadorEmbarcacao as $key => $vPescadorHasEmbarcacao): ?>
-
-                        <div class="noEditable"><p id="itemEmbarcacoesRows<?= $key ?>">
-                                <input type="button" value="Remove" onclick="removeRowNumEmbarcacao(<?= $key ?>);">
-
-                                <input type="text" readonly size="10" name="inputMotor[]" value="<?= ( $vPescadorHasEmbarcacao['tpte_motor'] == 0 ) ? 'Sem motor' : 'Com motor' ?>">
-                                <input type="text" readonly size="2" name="inputMotorID[]" value="<?= $vPescadorHasEmbarcacao['tpte_motor'] ?>">
-
-                                <input type="text" readonly size="10" name="inputPorte[]" " value="<?= $vPescadorHasEmbarcacao['tpe_porte'] ?>">
-                                <input type="text" readonly size="2" name="inputPorteID[]" " value="<?= $vPescadorHasEmbarcacao['tpe_id'] ?>">
-
-                                <input type="text" readonly size="10" name="inputBarco[]" " value="<?= $vPescadorHasEmbarcacao['tte_tipoembarcacao'] ?>">
-                                <input type="text" readonly size="2" name="inputBarcoID[]" " value="<?= $vPescadorHasEmbarcacao['tte_id'] ?>">
-
-                                <br></p></div>
-
+                        <tr id="itemEmbarcacoesRows<?= $key ?>">
+                            <td name="inputBarcoID[]"> <?= $vPescadorHasEmbarcacao['tte_id'] ?> </td>
+                            <td name="inputBarco[]" > <?= $vPescadorHasEmbarcacao['tte_tipoembarcacao'] ?> </td>
+                            <td name="inputPorteID[]"> <?= $vPescadorHasEmbarcacao['tpe_id'] ?> </td>
+                            <td name="inputPorte[]" > <?= $vPescadorHasEmbarcacao['tpe_porte'] ?> </td>
+                            <td name="inputMotorID[]"> <?= $vPescadorHasEmbarcacao['tpte_motor'] ?> </td>
+                            <td name="inputMotor[]" > <?= ( $vPescadorHasEmbarcacao['tpte_motor'] == 0 ) ? 'Sem motor' : 'Com motor' ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="removeRowNumEmbarcacao(<?= $key ?>);"> </td>
+                        </tr>
                     <?php endforeach; ?>
-                </fieldset>
+                </table>
+
             </fieldset>
             <br>
             <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_//_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -434,8 +454,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
                 <input type="submit" value="Atualizar" />
             </div>
-
-
 
         </form>
     </body>
