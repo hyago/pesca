@@ -200,7 +200,8 @@ class PescadorController extends Zend_Controller_Action {
 
         $this->_redirect('pescador/index');
     }
-
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasdependenteAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -237,6 +238,234 @@ class PescadorController extends Zend_Controller_Action {
         return;
     }
 
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhasrendaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idTipoRenda = $this->_getParam("idTipoRenda");
+
+        $idRenda = $this->_getParam("idRenda");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasRenda($idPescador, $idTipoRenda, $idRenda);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhasrendaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idTipoRenda = $this->_getParam("idTipoRenda");
+
+        $idRenda = $this->_getParam("idRenda");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasRenda($idPescador, $idTipoRenda, $idRenda);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhastelefoneAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idTelenone = $this->_getParam("idTelenone");
+
+        $nTelefone = $this->_getParam("nTelefone");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasTelefone($idPescador, $idTelenone, $nTelefone);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhastelefoneAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idTelenone = $this->_getParam("idTelenone");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasTelefone($idPescador, $idTelenone );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Colonia /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhascoloniaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idColonia = $this->_getParam("idColonia");
+
+        $dtaColonia = $this->_getParam("dtaColonia");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasColonia($idPescador, $idColonia, $dtaColonia);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhascoloniaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idColonia = $this->_getParam("idColonia");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasColonia($idPescador, $idColonia );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Area /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhasareaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idArea = $this->_getParam("idArea");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasArea( $idPescador, $idArea );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhasareaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idArea = $this->_getParam("idArea");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasArea( $idPescador, $idArea );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Arte /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhasartetipoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idArte = $this->_getParam("idArte");
+
+        $idTipo = $this->_getParam("idTipo");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasArteTipo( $idPescador, $idArte, $idTipo );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhasartetipoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idArte = $this->_getParam("idArte");
+
+        $idTipo = $this->_getParam("idTipo");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasArteTipo( $idPescador, $idArte, $idTipo );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhasembarcacoesAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idEmbarcacao = $this->_getParam("idEmbarcacao");
+
+        $idPorte = $this->_getParam("idPorte");
+        
+        $isMotor = $this->_getParam("isMotor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte, $isMotor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhasembarcacoesAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idEmbarcacao = $this->_getParam("idEmbarcacao");
+
+        $idPorte = $this->_getParam("idPorte");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }    
+   
     public function relatorioAction() {
 
         $this->_helper->viewRenderer->setNoRender();

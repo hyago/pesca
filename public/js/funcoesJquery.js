@@ -95,6 +95,14 @@ $(document).ready(function() {
     });
     //funcoes para menu
 
+    //Entrevistas
+    $(function() {
+        $("#accordion").accordion({
+            heightStyle: "content"
+        });
+        $("#active").accordion("disabled");
+    });
+    //Entrevistas
 
 
 
@@ -119,11 +127,25 @@ $(function() {
     });
 });
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Teste de Cadastro de itens /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function scrollTo(hash) {
+//    var urllocation = location.href;
+    location.hash = "#" + hash;
+    location.hash = '';
+//    location.href = urllocation;
+}
+function load(hash) {
+	var urllocation = location.href; //find url parameter
+	if(urllocation.indexOf("#") == -1 || urllocation.indexOf("#"+hash) > -1){
+		window.location.hash=hash; 
+	}
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsInsertPescadorHasDependente( frm, pag )
 {
     if (frm.inputQuantidadeDependente.value) {
-        var TmpUrl = (+frm.idPescador.value + '#dependentes');
+        var TmpUrl = (+frm.idPescador.value + '#ancora_dependentes');
+
         var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idDependente/' + frm.SelectDependente.value + '/quant/' + frm.inputQuantidadeDependente.value + '/back_url/' + TmpUrl);
  
         location.replace( tmpUpdate );
@@ -132,7 +154,7 @@ function jsInsertPescadorHasDependente( frm, pag )
 
 function jsDeletePescadorHasDependente(idDep, frm, pag)
 {
-    var TmpUrl = (+frm.idPescador.value + '#dependentes');
+    var TmpUrl = (+frm.idPescador.value + '#ancora_dependentes');
 
     var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idDependente/' + idDep+'/back_url/' + TmpUrl);
 
@@ -140,6 +162,133 @@ function jsDeletePescadorHasDependente(idDep, frm, pag)
         location.replace(tmpUpdate);
     }
 }
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasRenda( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_rendas');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idTipoRenda/' + frm.SelectTipoRenda.value + '/idRenda/' + frm.SelectRenda.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasRenda(idTipoRenda, idRenda, frm, pag)
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_rendas');
+
+    var tmpUpdate = (pag + '/id/'+frm.idPescador.value+'/idTipoRenda/'+idTipoRenda+'/idRenda/'+ idRenda+'/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasTelefone( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_telefones');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idTelenone/' + frm.selectTipoTelefone.value + '/nTelefone/' + frm.inputTelefone.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasTelefone(idTeleone, frm, pag)
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_telefones');
+
+    var tmpUpdate = (pag + '/id/'+frm.idPescador.value+'/idTelenone/'+idTeleone+'/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Colonia /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasColonia( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_colonias');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idColonia/' + frm.SelectColonia.value + '/dtaColonia/' + frm.inputDataInscricaoColonia.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasColonia( idColonia, frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_colonias');
+
+    var tmpUpdate = (pag + '/id/'+frm.idPescador.value+'/idColonia/'+idColonia+'/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Area /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasArea( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_areas');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idArea/' + frm.selectAreaPesca.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasArea( idArea, frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_areas');
+
+    var tmpUpdate = (pag + '/id/'+frm.idPescador.value+'/idArea/'+idArea+'/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Arte/Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasArteTipo( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_artetipos');
+
+   var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idArte/' + frm.SelectArtePesca.value + '/idTipo/' + frm.selectTipocapturada.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasArteTipo( idArte, idTipo, frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_artetipos');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idArte/' + idArte + '/idTipo/' + idTipo + '/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasEmbarcacoes( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_embarcacoes');
+
+   var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idEmbarcacao/' + frm.selectTipoEmbarcacao.value + '/idPorte/' + frm.selectPorteEmbarcacao.value + '/isMotor/' + frm.selectMotorEmbarcacao.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasEmbarcacoes( idEmbarcacao, idPorte, frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_embarcacoes');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idEmbarcacao/' + idEmbarcacao + '/idPorte/' + idPorte + '/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ MENSAGEM DE CONFIRMAÇÃO /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function beforeDelete(id)
