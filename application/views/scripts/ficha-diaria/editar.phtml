@@ -66,15 +66,15 @@
             linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumMonitoramento(' + rowNumMnt + ');">');
 
             //linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
+            
+            linhaArte = linhaArte.concat('<input type="text" readonly size=13 name="inputArte[]"  value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
+            linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputArteID[]"  value="' + frm.SelectArtePesca.value + '">');
 
             linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputMonitorada[]"  value="' + frm.SelectMonitorada[frm.SelectMonitorada.selectedIndex].text + '">');
 
             linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputQuantidade[]"  value="' + frm.QuantidadeEmbarcacoes.value + '">');
 
-            linhaArte = linhaArte.concat('<input type="text" readonly size=13 name="inputArte[]"  value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
-            linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputArteID[]"  value="' + frm.SelectArtePesca.value + '">');
-
-
+            
             linhaArte = linhaArte.concat('<br></p></div>');
 
             jQuery('#itemArteTipoRows').append(linhaArte);
@@ -83,12 +83,12 @@
         function removeRowNumMonitoramento(localRowNumMnt){
             jQuery('#itemArteTipoRows' + localRowNumMnt).remove();
         }
-        function jsInsertPescadorHasDependente( frm, pag )
+        function jsInsertMonitoramento( frm, pag )
         {
             if (frm.inputQuantidade.value) {
             var TmpUrl = (+frm.id_fichadiaria.value + '#base');
 
-            var tmpUpdate = (pag + '/idDependente/' + frm.SelectEmbarcacao.value + '/quant/' + frm.inputQuantidadeDependente.value + '/back_url/' + TmpUrl +'/id/' + frm.id_.value +);
+            var tmpUpdate = (pag + '/inputArte/' + frm.InputArtID.value + '/inputMonitorada/' + frm.inputMonitorada.value + '/back_url/' + TmpUrl +'/id_fichadiaria/' + frm.id_fichadiaria.value +);
  
             location.replace( tmpUpdate );
     }
@@ -208,7 +208,7 @@
     <fieldset class="noEditable"><legend>Artes de Pesca e quantidade de embarcacoes:</legend>
 
         <div id="base">
-            <input onclick="addRowMonitoramento(this.form);" type="button" value="Add row" />
+            <input onclick="jsInsertMonitoramento(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "editar"), null, true) ?>')" type="button" value="Add row" />
             
             <select id="tam_medio" name="SelectMonitorada"style="float:left">
                 <option   value="TRUE" selected="selected">Monitorada</option>
