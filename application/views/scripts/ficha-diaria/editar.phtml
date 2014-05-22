@@ -1,4 +1,4 @@
-<?php   
+<?php
 //$this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
 //$this->headScript()->appendFile('/js/mascaras.js');
 ?>
@@ -9,213 +9,227 @@
 </div>
 <head>
     <script type="text/javascript">
-        var rowNumArte = 0;
+        var rowNumMnt = 0;
         var Entrevista;
-        function addRowArte(frm) {
-            rowNumArte++;
-            
-            if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Arrasto de Fundo'){
+        function addRowMonitoramento(frm) {
+            rowNumMnt++;
+
+            if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Arrasto de Fundo') {
                 Entrevista = 'arrasto-fundo';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Calão'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Calão') {
                 Entrevista = 'calao';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Espinhel/Grosseira'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Espinhel/Grosseira') {
                 Entrevista = 'grosseira';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Pesca de Linha'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Pesca de Linha') {
                 Entrevista = 'linha';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Rede de Emalhar'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Rede de Emalhar') {
                 Entrevista = 'emalhe';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Tarrafa'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Tarrafa') {
                 Entrevista = 'tarrafa';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Vara de Pesca'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Vara de Pesca') {
                 Entrevista = 'vara-pesca';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Jereré'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Jereré') {
                 Entrevista = 'jerere';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Manzuá'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Manzuá') {
                 Entrevista = 'manzua';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Ratoeira'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Ratoeira') {
                 Entrevista = 'ratoeira';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Catagem'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Catagem') {
                 Entrevista = 'coleta-manual';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Mergulho'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Mergulho') {
                 Entrevista = 'mergulho';
             }
-            else if( frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Linha de Fundo'){
+            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Linha de Fundo') {
                 Entrevista = 'linha-fundo';
             }
+            else if(frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Siripóia'){
+                Entrevista = 'siripoia';
+            }
             
-            
-            var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumArte + '">';
-            //linhaArte = linhaArte.concat('<input type="button" value="Entrevista" onclick="teste("<?= $this->url(array("controller" => ''.Entrevista.'', "action" => "teste", "idPescador" => "10089,idTipoDependente,3,tptd_quantidade,5"), null, true) ?>")">');
-            linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumArte(' + rowNumArte + ');">');
+            var a = '';
+            a = a.concat("/"+Entrevista+"/");
+            a = a.concat("index");
 
-            linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
-                
+            var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumMnt + '">';
+            linhaArte = linhaArte.concat('<a href="' + a + '" id="botao-ancora" target="_blank">Entrevista</a>');
+            linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumMonitoramento(' + rowNumMnt + ');">');
+
+            //linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
+
             linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputMonitorada[]"  value="' + frm.SelectMonitorada[frm.SelectMonitorada.selectedIndex].text + '">');
-            
+
             linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputQuantidade[]"  value="' + frm.QuantidadeEmbarcacoes.value + '">');
 
             linhaArte = linhaArte.concat('<input type="text" readonly size=13 name="inputArte[]"  value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
             linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputArteID[]"  value="' + frm.SelectArtePesca.value + '">');
-            
-            
+
+
             linhaArte = linhaArte.concat('<br></p></div>');
 
             jQuery('#itemArteTipoRows').append(linhaArte);
         }
 
-        function removeRowNumArte(localRowNumArte) {
-            jQuery('#itemArteTipoRows' + localRowNumArte).remove();
+        function removeRowNumMonitoramento(localRowNumMnt){
+            jQuery('#itemArteTipoRows' + localRowNumMnt).remove();
         }
+        function jsInsertPescadorHasDependente( frm, pag )
+        {
+            if (frm.inputQuantidade.value) {
+            var TmpUrl = (+frm.id_fichadiaria.value + '#base');
+
+            var tmpUpdate = (pag + '/idDependente/' + frm.SelectEmbarcacao.value + '/quant/' + frm.inputQuantidadeDependente.value + '/back_url/' + TmpUrl +'/id/' + frm.id_.value +);
+ 
+            location.replace( tmpUpdate );
+    }
+}
     </script>
 </head>
-    <fieldset id="Desembarque">
-        <div id="esquerda">
-            <div id="form-esq">
-                <label for="id">ID:</label>
-                <input type="text" name="id_fichaDiaria" disabled="true" value="<?= $this->fichadiaria['fd_id'] ?>"/><br />
-            </div>
+<fieldset id="Desembarque">
+    <div id="esquerda">
+        <div id="form-esq">
+            <label for="id">ID:</label>
+            <input type="text" name="id_fichaDiaria" disabled="true" value="<?= $this->fichadiaria['fd_id'] ?>"/><br />
+        </div>
 
-            <div id="form-esq">
-                <label for="tipo">Estagiário:</label>
-                <select name="select_nome_estagiario" disabled="true">
-                    <?php
-                    foreach ($this->users as $key => $estagiario):
-                        ?>
-
-                        <option nome="nome_estagiario" value="<?= $estagiario['tu_id']; ?>"<?= ($estagiario['tu_id'] == $this->fichadiaria['t_estagiario_tu_id']) ? 'selected="selected"' : '' ?>><?= $estagiario['tu_nome'] ?></option>
-
-                        <?php
-                    endforeach;
+        <div id="form-esq">
+            <label for="tipo">Estagiário:</label>
+            <select name="select_nome_estagiario" disabled="true">
+                <?php
+                foreach ($this->users as $key => $estagiario):
                     ?>
 
-                </select></br>
-            </div>
+                    <option nome="nome_estagiario" value="<?= $estagiario['tu_id']; ?>"<?= ($estagiario['tu_id'] == $this->fichadiaria['t_estagiario_tu_id']) ? 'selected="selected"' : '' ?>><?= $estagiario['tu_nome'] ?></option>
 
-            <div id="form-esq">
-                <label for="tipo">Monitor:</label>
-                <select name="select_nome_monitor" disabled="true">
                     <?php
-                    foreach ($this->users as $key => $monitor):
-                        ?>
+                endforeach;
+                ?>
 
-                        <option nome="nome_monitor" value="<?= $monitor['tu_id']; ?>"<?= ($monitor['tu_id'] == $this->fichadiaria['t_monitor_tu_id1']) ? 'selected="selected"' : '' ?>><?= $monitor['tu_nome'] ?></option>
+            </select></br>
+        </div>
 
-                        <?php
-                    endforeach;
-                    ?>
-                </select></br>
-            </div>
-
-            <div id="form-esq">
-                <label for="tipo">Data:</label>
-                <input type="date" id="data_Viagem" placeholder="Data" name="data_ficha" disabled="true"value="<?= $this->fichadiaria['fd_data'] ?>"/><br />
-            </div>
-
-            <div id="form-esq">
-                <label for="tipo">Turno:</label>
-                <input disabled="true" nome="turno" <?= ('Matutino' == $this->fichadiaria['fd_turno']) ? 'value = "Matutino"' : 'value="Vespertino"' ?> >
-
-            </div>
-
-
-            <div id="form-esq">
-                <label for="tipo">Porto:</label>
-                <select name="select_nome_porto" disabled="true">
-                    <?php
-                    foreach ($this->dados_porto as $key => $porto):
-                        ?>
-
-                        <option nome="nome_porto" value="<?= $porto['pto_id'] ?>"<?= ($porto['pto_id'] == $this->fichadiaria['pto_id']) ? 'selected ="selected"' : '' ?> ><?= $porto['pto_nome'] ?></option>
-
-                        <?php
-                    endforeach;
-                    ?>
-                </select></br>
-            </div>
-
-            <div id="form-esq">
-                <label for="tipo">Tempo: </label>
-                <select name="select_tempo" disabled="true">
-                    <?php
-                    foreach ($this->dados_tempo as $key => $tempo):
-                        ?>
-
-                        <option nome="tempo" value="<?= $tempo['tmp_id'] ?>"<?= ($tempo['tmp_id'] == $this->fichadiaria['tmp_id']) ? 'selected ="selected"' : '' ?> ><?= $tempo['tmp_estado'] ?></option>
-
-                        <?php
-                    endforeach;
-                    ?>
-                </select><br/>
-            </div>
-
-            <div id="form-esq">
-                <label>Vento:</label>
-                <select name="select_vento" disabled="true">
-                    <?php
-                    foreach ($this->dados_vento as $key => $vento):
-                        ?>
-
-                        <option nome="tempo" value="<?= $vento['vnt_id'] ?>"<?= ($vento['vnt_id'] == $this->fichadiaria['vnt_id']) ? 'selected ="selected"' : '' ?> ><?= $vento['vnt_forca'] ?></option>
-
-                        <?php
-                    endforeach;
+        <div id="form-esq">
+            <label for="tipo">Monitor:</label>
+            <select name="select_nome_monitor" disabled="true">
+                <?php
+                foreach ($this->users as $key => $monitor):
                     ?>
 
-                </select><br/><br/>
-            </div>
+                    <option nome="nome_monitor" value="<?= $monitor['tu_id']; ?>"<?= ($monitor['tu_id'] == $this->fichadiaria['t_monitor_tu_id1']) ? 'selected="selected"' : '' ?>><?= $monitor['tu_nome'] ?></option>
 
-            <div id="form-esq">
-                <label for="tipo">Observação:</label>
-                <input type="text" id="obs" name="obs" disabled="true" value="<?= $this->fichadiaria['obs'] ?>"/><br />
-                <br/>
-            </div>
+                    <?php
+                endforeach;
+                ?>
+            </select></br>
+        </div>
+
+        <div id="form-esq">
+            <label for="tipo">Data:</label>
+            <input type="date" id="data_Viagem" placeholder="Data" name="data_ficha" disabled="true"value="<?= $this->fichadiaria['fd_data'] ?>"/><br />
+        </div>
+
+        <div id="form-esq">
+            <label for="tipo">Turno:</label>
+            <input disabled="true" nome="turno" <?= ('Matutino' == $this->fichadiaria['fd_turno']) ? 'value = "Matutino"' : 'value="Vespertino"' ?> >
 
         </div>
 
-        <br/>
-        <br/>
+
+        <div id="form-esq">
+            <label for="tipo">Porto:</label>
+            <select name="select_nome_porto" disabled="true">
+                <?php
+                foreach ($this->dados_porto as $key => $porto):
+                    ?>
+
+                    <option nome="nome_porto" value="<?= $porto['pto_id'] ?>"<?= ($porto['pto_id'] == $this->fichadiaria['pto_id']) ? 'selected ="selected"' : '' ?> ><?= $porto['pto_nome'] ?></option>
+
+                    <?php
+                endforeach;
+                ?>
+            </select></br>
+        </div>
+
+        <div id="form-esq">
+            <label for="tipo">Tempo: </label>
+            <select name="select_tempo" disabled="true">
+                <?php
+                foreach ($this->dados_tempo as $key => $tempo):
+                    ?>
+
+                    <option nome="tempo" value="<?= $tempo['tmp_id'] ?>"<?= ($tempo['tmp_id'] == $this->fichadiaria['tmp_id']) ? 'selected ="selected"' : '' ?> ><?= $tempo['tmp_estado'] ?></option>
+
+                    <?php
+                endforeach;
+                ?>
+            </select><br/>
+        </div>
+
+        <div id="form-esq">
+            <label>Vento:</label>
+            <select name="select_vento" disabled="true">
+                <?php
+                foreach ($this->dados_vento as $key => $vento):
+                    ?>
+
+                    <option nome="tempo" value="<?= $vento['vnt_id'] ?>"<?= ($vento['vnt_id'] == $this->fichadiaria['vnt_id']) ? 'selected ="selected"' : '' ?> ><?= $vento['vnt_forca'] ?></option>
+
+                    <?php
+                endforeach;
+                ?>
+
+            </select><br/><br/>
+        </div>
+
+        <div id="form-esq">
+            <label for="tipo">Observação:</label>
+            <input type="text" id="obs" name="obs" disabled="true" value="<?= $this->fichadiaria['obs'] ?>"/><br />
+            <br/>
+        </div>
+
+    </div>
+
+    <br/>
+    <br/>
+    
+</fieldset>
 <form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
-    </fieldset>
-    <fieldset class="noEditable"><legend>Monitoramento:</legend>
-        <fieldset class="noEditable"><legend>Artes de Pesca e quantidade de embarcacoes:</legend>
+<fieldset class="noEditable"><legend>Monitoramento:</legend>
+    <fieldset class="noEditable"><legend>Artes de Pesca e quantidade de embarcacoes:</legend>
+
+        <div id="base">
+            <input onclick="addRowMonitoramento(this.form);" type="button" value="Add row" />
             
-            <div id="base">
-                <input onclick="addRowArte(this.form);" type="button" value="Add row" />
-                <select id="tam_medio" name="SelectEmbarcacao"style="float:left">
-                    <option   value="1" selected="selected">Embarcada</option>
-                    <option   value="0">Não Embarcada</option>
-                </select>
-                <select id="tam_medio" name="SelectMonitorada"style="float:left">
-                    <option   value="1" selected="selected">Monitorada</option>
-                    <option   value="0">Não Monitorada</option>
-                </select>
-                <input type="text"name="QuantidadeEmbarcacoes" placeholder="Quantidade" size="10px">
+            <select id="tam_medio" name="SelectMonitorada"style="float:left">
+                <option   value="TRUE" selected="selected">Monitorada</option>
+                <option   value="FALSE">Não Monitorada</option>
+            </select>
+            <input type="text"name="QuantidadeEmbarcacoes" placeholder="Quantidade" size="10px">
 
-                <select name="SelectArtePesca" id="artePesca">
-                    <?php foreach ($this->artesPesca as $key => $artePesca): ?>
-                        <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
-                    <?php endforeach; ?>
-                </select>
+            <select name="SelectArtePesca" id="artePesca">
+                <?php foreach ($this->artesPesca as $key => $artePesca): ?>
+                    <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <input type="hidden" name="id_fichaDiaria" disabled="true" value="<?= $this->fichadiaria['fd_id'] ?>"/><br />
+        </div>
 
-            </div>
-
-        </fieldset>
-        <br>
-        <fieldset class="noEditable" id="itemArteTipoRows"><legend>Artes de Pesca e quantidade de embarcacoes listados:</legend>
-            <!--Area para inserir os itens-->
-        </fieldset>
-        
     </fieldset>
+    <br>
+    <fieldset class="noEditable" id="itemArteTipoRows"><legend>Artes de Pesca e quantidade de embarcacoes listados:</legend>
+        <!--Area para inserir os itens-->
+    </fieldset>
+
+</fieldset>
 
 </form>
