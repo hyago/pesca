@@ -11,6 +11,7 @@
     <script type="text/javascript">
         var rowNumMnt = 0;
         var Entrevista;
+        
         function addRowMonitoramento(frm) {
             rowNumMnt++;
 
@@ -78,21 +79,33 @@
             linhaArte = linhaArte.concat('<br></p></div>');
 
             jQuery('#itemArteTipoRows').append(linhaArte);
-        }
+            if (frm.inputQuantidadeDependente.value) {
+            var linhaDependente = '<tr id="rowNumDependente' + rowNumMnt + '">';
+            linhaDependente = linhaDependente.concat('<td> <input type="text" readonly size=2 name="inputTipoDependenteID[]" value="' + frm.SelectArtePesca.value +'"/></td>');
+            linhaDependente = linhaDependente.concat('<td name="inputTipoDependente[]" >' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '</td>');
+            linhaDependente = linhaDependente.concat('<td> <input type="text" readonly name="inputQuantidadeDependente[]" value="' + frm.QuantidadeEmbarcacoes.value + '"/></td>');
+            //linhaDependente = linhaDependente.concat('<td><input type="button" class="button-del" width="5%" onclick="removeRowNumDependente(' + rowNumDependente + ');"></td>');
+            linhaDependente = linhaDependente.concat('</tr>');
 
-        function removeRowNumMonitoramento(localRowNumMnt){
-            jQuery('#itemArteTipoRows' + localRowNumMnt).remove();
-        }
-        function jsInsertMonitoramento( frm, pag )
-        {
-            if (frm.inputQuantidade.value) {
-            var TmpUrl = (+frm.id_fichadiaria.value + '#base');
-
-            var tmpUpdate = (pag + '/inputArte/' + frm.InputArtID.value + '/inputMonitorada/' + frm.inputMonitorada.value + '/back_url/' + TmpUrl +'/id_fichadiaria/' + frm.id_fichadiaria.value +);
- 
-            location.replace( tmpUpdate );
+        jQuery('#tblDependentes').append(linhaDependente);
     }
-}
+        };
+
+        /*function removeRowNumMonitoramento(localRowNumMnt){
+            jQuery('#itemArteTipoRows' + localRowNumMnt).remove();
+        };*/
+
+        
+        function jsInsertMonitoramento(frm, pag)
+        {
+            if (frm.QuantidadeEmbarcacoes.value) {
+                var TmpUrl = (+frm.id_fichaDiaria.value + '#base');
+
+                var tmpUpdate = (pag + '/SelectArtePesca/' + frm.SelectArtePesca.value +'/SelectMonitorada/' + frm.SelectMonitorada.value + '/QuantidadeEmbarcacoes/'+ frm.QuantidadeEmbarcacoes.value+'/id_fichaDiaria/' + frm.id_fichaDiaria.value +'/back_url/' + TmpUrl);
+ 
+                location.replace(tmpUpdate);
+            }
+        }
     </script>
 </head>
 <fieldset id="Desembarque">
@@ -208,26 +221,46 @@
     <fieldset class="noEditable"><legend>Artes de Pesca e quantidade de embarcacoes:</legend>
 
         <div id="base">
-            <input onclick="jsInsertMonitoramento(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "editar"), null, true) ?>')" type="button" value="Add row" />
             
-            <select id="tam_medio" name="SelectMonitorada"style="float:left">
+            <input onclick="jsInsertMonitoramento(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "insertmonitoramento"), null, true) ?>')" type="button" value="Add row" />
+            
+            <select id="tam_medio" name="SelectMonitorada" style="float:left">
                 <option   value="TRUE" selected="selected">Monitorada</option>
                 <option   value="FALSE">Não Monitorada</option>
             </select>
-            <input type="text"name="QuantidadeEmbarcacoes" placeholder="Quantidade" size="10px">
+            
+            <input type="number" name="QuantidadeEmbarcacoes" placeholder="Quantidade" size="10px">
 
+            <input type="hidden" name="id_fichaDiaria"  value="<?= $this->fichadiaria['fd_id']?>"/>
             <select name="SelectArtePesca" id="artePesca">
                 <?php foreach ($this->artesPesca as $key => $artePesca): ?>
                     <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
                 <?php endforeach; ?>
             </select>
-            <input type="hidden" name="id_fichaDiaria" disabled="true" value="<?= $this->fichadiaria['fd_id'] ?>"/><br />
         </div>
 
     </fieldset>
     <br>
-    <fieldset class="noEditable" id="itemArteTipoRows"><legend>Artes de Pesca e quantidade de embarcacoes listados:</legend>
-        <!--Area para inserir os itens-->
+    <fieldset class="noEditable" id="itemArteTipoRows"><legend>Monitoramentos:</legend>
+        <table id="monitoramento">
+                    <tr>
+                        <th width="5%">Id_Monitoramento</th>
+                        <th width="30%">Monitorada?</th>
+                        <th width="20%">Arte de Pesca</th>
+                        <th width="30%">Quantidade</th>
+                        <th width="5%">Id_Ficha</th>
+                    </tr>
+                    <?php foreach ($this->assign_vPescadorEmbarcacao as $key => $vPescadorHasEmbarcacao): ?>
+                        <tr id="itemEmbarcacoesRows<?= $key ?>">
+                            <td name="inputIdMonitoramento"> <?= $vPescadorHasEmbarcacao['tte_id'] ?> </td>
+                            <td name="inputMonitorada" > <?= $vPescadorHasEmbarcacao['tte_tipoembarcacao'] ?> </td>
+                            <td name="inputArtedePesca"> <?= $vPescadorHasEmbarcacao['tpe_id'] ?> </td>
+                            <td name="inputQuantidade" > <?= $vPescadorHasEmbarcacao['tpe_porte'] ?> </td>
+                            <td name="inputIdFicha"> <?= $vPescadorHasEmbarcacao['tpte_motor'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeletePescadorHasEmbarcacoes(<?= $vPescadorHasEmbarcacao['tte_id'] ?>, <?= $vPescadorHasEmbarcacao['tpe_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhasembarcacoes"), null, true) ?>')"></td> </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
     </fieldset>
 
 </fieldset>
