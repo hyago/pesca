@@ -106,6 +106,15 @@ CREATE TABLE IF NOT EXISTS T_ENDERECO (
 );
 
 -- -----------------------------------------------------
+-- TABLE T_ESCOLARIDADE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ESCOLARIDADE (
+ ESC_ID SERIAL,
+ ESC_NIVEL VARCHAR(25) NULL,
+ PRIMARY KEY (ESC_ID)
+);
+
+-- -----------------------------------------------------
 -- TABLE T_PESCADOR
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_PESCADOR (
@@ -134,15 +143,6 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR (
  CONSTRAINT FK_T_PESCADOR_T_MUNICIPIO1 FOREIGN KEY (TMUN_ID_NATURAL) REFERENCES T_MUNICIPIO (TMUN_ID),
  CONSTRAINT FK_T_PESCADOR_T_ENDERECO1 FOREIGN KEY (TE_ID) REFERENCES T_ENDERECO (TE_ID), 
  CONSTRAINT FK_PESCADOR_ESC_ID FOREIGN KEY (ESC_ID) REFERENCES T_ESCOLARIDADE(ESC_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_ESCOLARIDADE
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ESCOLARIDADE (
- ESC_ID SERIAL,
- ESC_NIVEL VARCHAR(25) NULL,
- PRIMARY KEY (ESC_ID)
 );
 
 -- -----------------------------------------------------
