@@ -127,6 +127,33 @@ $(function() {
     });
 });
 
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsBuscaPescadorId( frm, pag )
+{
+    if ( frm.inputId.value ) {
+        var tmpUpdate = (pag + '/index/tp_id/' + frm.inputId.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsBuscaPescadorNome( frm, pag )
+{
+    if ( frm.inputNome.value ) {
+        var tmpUpdate = (pag + '/index/tp_nome/' + frm.inputNome.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsClearBuscaPescador( pag )
+{
+        location.hash = '';
+        location.replace( pag );
+}
+
 function scrollTo(hash) {
     location.hash = "#" + hash;
     location.hash = '';
@@ -155,8 +182,46 @@ function jsInsertPescadorEndereco( frm, pag )
             '/tp_cir_cap_porto/' + frm.cir_cap_porto.value +
             '/tp_datanasc/' + frm.dataNasc.value +
             '/tmun_id_natural/' + frm.municipioNat.value +
-            '/esc_id/' + frm.selectEscolaridade.value +
+            '/esc_id/' + frm.selectEscolaridadeId.value +
  
+            '/te_logradouro/' + frm.logradouro.value +
+            '/te_numero/' + frm.numero.value +
+            '/te_bairro/' + frm.bairro.value +
+            '/te_cep/' + frm.cep.value +
+            '/te_comp/' + frm.complemento.value +
+            '/tmun_id/' + frm.municipio.value +
+ 
+            '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsAtualizarPescadorEndereco( frm, pag )
+{
+    var TmpUrl = ('#top');
+
+    var tmpUpdate = (pag +
+            '/tp_id/' + frm.idPescador.value +
+            '/tp_nome/' + frm.nome.value +
+            '/tp_sexo/' + frm.sexo.value +
+            '/tp_rg/' + frm.rg.value +
+            '/tp_cpf/' + frm.cpf.value +
+            '/tp_apelido/' + frm.apelido.value +
+            '/tp_matricula/' + frm.matricula.value +
+            '/tp_filiacaopai/' + frm.filiacaoPai.value +
+            '/tp_filiacaomae/' + frm.filiacaoMae.value +
+            '/tp_ctps/' + frm.ctps.value +
+            '/tp_pis/' + frm.pis.value +
+            '/tp_inss/' + frm.inss.value +
+            '/tp_nit_cei/' + frm.nit_cei.value +
+            '/tp_cma/' + frm.cma.value +
+            '/tp_rgb_maa_ibama/' + frm.rgb_maa_ibama.value +
+            '/tp_cir_cap_porto/' + frm.cir_cap_porto.value +
+            '/tp_datanasc/' + frm.dataNasc.value +
+            '/tmun_id_natural/' + frm.municipioNat.value +
+            '/esc_id/' + frm.selectEscolaridadeId.value +
+ 
+            '/te_id/' + frm.idEndereco.value +
             '/te_logradouro/' + frm.logradouro.value +
             '/te_numero/' + frm.numero.value +
             '/te_bairro/' + frm.bairro.value +

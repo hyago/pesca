@@ -154,7 +154,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 <!--/_/_/_/_/_/_/_/_/_/_/_/_/_/ Escolaridade /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <div id="form-dir">
-                    <label for="escolaridade" id="pure-checkbox">Escolaridade</label>
+                    <label for="selectEscolaridade">Escolaridade</label>
                     <select name="selectEscolaridade" id="selectEscolaridadeId">
                         <?php foreach ($this->assignEscolaridades as $key => $localEscolaridade): ?>
                             <option value="<?= $localEscolaridade['esc_id']; ?>"><?= $localEscolaridade['esc_nivel']; ?></option>
@@ -168,9 +168,11 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
         <fieldset class="noBorder">
             <div id="Submit">
-                <a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
-                <input type="submit" value="Cadastrar" />
-                <input type="button" class="button-confirm" onclick="jsInsertPescadorEndereco(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertpescadorendereco"), null, true) ?>')">
+                <table>
+                    <td><a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a></td>
+                    <td><input type="submit" value="Cadastrar" /></td>
+                    <td><input type="button" size="50" value="Salvar e Continuar" class="button-confirmText" onclick="jsInsertPescadorEndereco(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertpescadorendereco"), null, true) ?>')"></td>
+                </table>
             </div>
         </fieldset>
     </form>

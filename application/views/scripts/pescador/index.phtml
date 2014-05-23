@@ -3,48 +3,73 @@
         <script src="/js/funcoesJquery.js"></script>
     </head>
 
-    <h2>Perfil Social->Pescador</h2>
+    <form name="indexPescador" method="post">
 
-    <a href="<?= $this->url(array("controller" => "pescador", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
-    <fieldset id="Social"></fieldset>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Matricula</th>
-        </tr>
+        <h2>Perfil Social->Pescador (lista limitada em 20)</h2>
 
-        <?php foreach ($this->dados as $key => $pescador): ?>
+        <table>
             <tr>
-                <td><?= $pescador['tp_id'] ?></td>
-                <td><?= $pescador['tp_nome'] ?></td>
-                <td><?= $pescador['tp_matricula'] ?></td>
-
-                <td class="td-botao">
-                    <a href="<?= $this->url(array("controller" => "pescador", "action" => "visualizar", "id" => $pescador['tp_id']), null, true) ?>">
-                        <ul id="icons" class="ui-widget ui-helper-clearfix">
-                            <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
-                        </ul>
-                    </a>
+                <td>
+                    <a href="<?= $this->url(array("controller" => "pescador", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
                 </td>
-
-                <td class="td-botao">
-                    <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">
-                        <ul id="icons" class="ui-widget ui-helper-clearfix">
-                            <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
-                        </ul>
-                    </a>
+                <td>
+                    <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaPescador('<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
                 </td>
-
-                <td class="td-botao">
-                    <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
-                </td>
-                
-            </a>
-
             </tr>
-        <?php endforeach; ?>
-    </table>
-    <br/><br/>
-    <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
-   
+            <tr>
+                <td>
+                    <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaPescadorId(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
+                    <input type="number" min="0" name="inputId" placeholder="Busca por ID" />
+                </td>
+
+                <td>
+                    <input type="button" size="50" value="Busca por nome" class="button-confirmText" onclick="jsBuscaPescadorNome(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
+                    <input type="text" name="inputNome" placeholder="Busca por Nome" />
+                </td>
+            </tr>
+        </table>
+
+
+        <fieldset id="Social"></fieldset>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Matricula</th>
+            </tr>
+
+            <?php foreach ($this->dados as $key => $pescador): ?>
+                <tr>
+                    <td><?= $pescador['tp_id'] ?></td>
+                    <td><?= $pescador['tp_nome'] ?></td>
+                    <td><?= $pescador['tp_matricula'] ?></td>
+
+                    <td class="td-botao">
+                        <a href="<?= $this->url(array("controller" => "pescador", "action" => "visualizar", "id" => $pescador['tp_id']), null, true) ?>">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
+                            </ul>
+                        </a>
+                    </td>
+
+                    <td class="td-botao">
+                        <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                            </ul>
+                        </a>
+                    </td>
+
+                    <td class="td-botao">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
+                    </td>
+
+                    </a>
+
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <br/><br/>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+    </form>
+</html>

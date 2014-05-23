@@ -10,9 +10,9 @@
  * @access public
  *
  */
-
 class Application_Model_Pescador {
 
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/    
     public function select($where = null, $order = null, $limit = null) {
         $dao = new Application_Model_DbTable_Pescador();
         $select = $dao->select()->from($dao)->order($order)->limit($limit);
@@ -24,21 +24,32 @@ class Application_Model_Pescador {
         return $dao->fetchAll($select)->toArray();
     }
 
-//     /_/_/_/_/_/_/_/_/_/_/_/_/_/ FIND - UTILIZA VIEW /_/_/_/_/_/_/_/_/_/_/_/_/_/
+      public function select_id( $id ) {
+        $dao = new Application_Model_DbTable_Pescador();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+        
+        $where = 'tp_id >= ' . $id;
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }  
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ FIND - UTILIZA VIEW /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function find($id) {
         $dao = new Application_Model_DbTable_VPescador();
         $arr = $dao->find($id)->toArray();
-        
+
         return $arr[0];
     }
 
-//
-//    Inserir
-//
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ INSERT /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insert(array $request) {
 
-        $dataCEP = $request['cep'];
-        $dataCEP = trim($dataCEP,"_-");
+        $dataCEP = explode("-", $request['cep']);
+        $dataCEP = $dataCEP[0] . $dataCEP[1];
 
         if (!$dataCEP)
             $dataCEP = NULL;
@@ -87,13 +98,15 @@ class Application_Model_Pescador {
         return;
     }
 
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ UPDATE /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function update(array $request) {
-        $dataCEP = $request['cep'];
-        $dataCEP = trim($dataCEP,"_-");
 
+        $dataCEP = explode("-", $request['cep']);
+        $dataCEP = $dataCEP[0] . $dataCEP[1];
+        
         if (!$dataCEP)
             $dataCEP = NULL;
-
+        
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         $dadosEndereco = array(
             'te_logradouro' => $request['logradouro'],
@@ -103,9 +116,9 @@ class Application_Model_Pescador {
             'te_comp' => $request['complemento'],
             'tmun_id' => $request['municipio']
         );
+        $whereEndereco = "te_id = " . $request['idEndereco'];
 
-        $idEndereco = $dbTableEndereco->insert($dadosEndereco);
-
+        $dbTableEndereco->update($dadosEndereco, $whereEndereco);
 
         $dbTablePescador = new Application_Model_DbTable_Pescador();
         $dadosPescador = array(
@@ -124,186 +137,79 @@ class Application_Model_Pescador {
             'tp_cma' => $request['cma'],
             'tp_rgb_maa_ibama' => $request['rgb_maa_ibama'],
             'tp_cir_cap_porto' => $request['cir_cap_porto'],
-            'tp_datanasc' => $request['dataNasc'],
+            'tp_datanasc' => date("Y-m-d", strtotime($request['dataNasc'])),
             'tmun_id_natural' => $request['municipioNat'],
-            'te_id' => $idEndereco,
             'esc_id' => $request['selectEscolaridade']
         );
+        $whereEndereco = "tp_id = " . $request['idPescador'];
 
-        $idPescador = $dbTablePescador->insert($dadosPescador);
-
-//          $dbTable_EspecieCapturada = new Application_Model_DbTable_EspecieCapturada();
-
-//        $dadosPescadorHasEspecieCapturada = array(
-//            't_tipocapturada_itc_id' => $request['tipocapturada'],
-//            'tp_id' => $idPescador
-//        );
-//
-//        $dbTablePescadorHasEspecieCapturada->insert($dadosPescadorHasEspecieCapturada);
-
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
-        $dbTable_PescadorHasDependente = new Application_Model_DbTable_PescadorHasDependente();
-
-	if(!empty($_POST['inputTipoDependenteID'])) {
-		foreach($_POST['inputTipoDependenteID'] as $cnt => $localInputTipoDependente) {
-
-                    $dadosPescadorHasDependente = array(
-                        'tp_id' => $idPescador,
-                        'ttd_id' => $_POST['inputTipoDependenteID'][$cnt],
-                        'tptd_quantidade' => $_POST['inputQuantidadeDependente'][$cnt]
-                );
-                $dbTable_PescadorHasDependente->insert($dadosPescadorHasDependente);
-
-		}
-	}
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/
-        $dbTable_PescadorHasRenda = new Application_Model_DbTable_PescadorHasRenda();
-
-	if(!empty($_POST['inputRendaID'])) {
-		foreach($_POST['inputRendaID'] as $cnt => $localInputPescadorHasRenda) {
-
-                    $dadosPescadorHasRenda = array(
-                        'tp_id' => $idPescador,
-                        'ren_id' => $_POST['inputRendaID'][$cnt],
-                        'ttr_id' => $_POST['inputTipoRendaID'][$cnt]
-                );
-                $dbTable_PescadorHasRenda->insert($dadosPescadorHasRenda);
-
-		}
-	}
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/
-        $dbTablePescadorHasTelefone = new Application_Model_DbTable_PescadorHasTelefone();
-
-	if(!empty($_POST['inputTelefone'])) {
-		foreach($_POST['inputTelefone'] as $cnt => $inputTelefone) {
-
-                    $dadosPescadorHasTelefone = array(
-                    'tpt_tp_id' => $idPescador,
-                    'tpt_ttel_id' => $_POST['inputTipoID'][$cnt],
-                    'tpt_telefone' => $inputTelefone
-                );
-                $dbTablePescadorHasTelefone->insert($dadosPescadorHasTelefone);
-
-		}
-	}
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Colonia /_/_/_/_/_/_/_/_/_/_/_/_/_/
-        $dbTable_PescadorHasColonia = new Application_Model_DbTable_PescadorHasColonia();
-
-	if(!empty($_POST['inputColoniaID'])) {
-		foreach($_POST['inputColoniaID'] as $cnt => $localInputColonia) {
-
-                    $dadosPescadorHasColonia = array(
-                        'tp_id' => $idPescador,
-                        'tc_id' => $_POST['inputColoniaID'][$cnt],
-                        'tptc_datainsccolonia' => $_POST['inputDataInscricaoColonia'][$cnt]
-                );
-                $dbTable_PescadorHasColonia->insert($dadosPescadorHasColonia);
-
-		}
-	}
-
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Area - Arte - Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
-        $dbTable_PescadorHasArtePesca = new Application_Model_DbTable_PescadorHasArtePesca();
-
-	if(!empty($_POST['inputArteID'])) {
-		foreach($_POST['inputArteID'] as $cnt => $localInputArte) {
-
-                    $dadosPescadorHasArtePesca = array(
-                        'tp_id' => $idPescador,
-                        'tap_id' => $_POST['inputArteID'][$cnt],
-                        'tareap_id' => $_POST['inputAreaID'][$cnt],
-                        'itc_id' => $_POST['inputTipoID'][$cnt]
-                );
-                $dbTable_PescadorHasArtePesca->insert($dadosPescadorHasArtePesca);
-
-		}
-	}
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/
-        $dbTablePescadorHasEmbarcacao = new Application_Model_DbTable_PescadorHasEmbarcacao();
-
-	if(!empty($_POST['inputPorteID'])) {
-		foreach($_POST['inputPorteID'] as $cnt => $localInputBarco) {
-
-                    $dadosPescadorHasEmbarcacao = array(
-                        'tp_id' => $idPescador,
-                        'tte_id' => $_POST['inputBarcoID'][$cnt],
-                        'tpte_motor' => $_POST['inputMotorID'][$cnt],
-                        'tpe_id' => $_POST['inputPorteID'][$cnt]
-                );
-                $dbTablePescadorHasEmbarcacao->insert($dadosPescadorHasEmbarcacao);
-
-		}
-	}
-
+        $dbTablePescador->update($dadosPescador, $whereEndereco);
         return;
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-public function modelInsertPescadorHasEndereco( 
-        $te_logradouro,
-                $te_numero,
-                $te_bairro,
-                $te_cep,
-                $te_comp,                
-                $tmun_id 
-        ) {
+    public function modelInsertPescadorHasEndereco(
+    $te_logradouro, $te_numero, $te_bairro, $te_cep, $te_comp, $tmun_id
+    ) {
 
-    $dataCEP = $request['cep'];
-    $dataCEP = trim($dataCEP, "_-");
+        $dataCEP = explode("-", $te_cep);
+        $dataCEP = $dataCEP[0] . $dataCEP[1];
+        
+        if (!$dataCEP)
+            $dataCEP = NULL;
+        
+        $dbTableEndereco = new Application_Model_DbTable_Endereco();
+        $dadosEndereco = array(
+            'te_logradouro' => $te_logradouro,
+            'te_numero' => $te_numero,
+            'te_bairro' => $te_bairro,
+            'te_cep' => $dataCEP,
+            'te_comp' => $te_comp,
+            'tmun_id' => $tmun_id
+        );
 
-    if (!$dataCEP) {
-        $dataCEP = $localNull;
+        $idEndereco = $dbTableEndereco->insert($dadosEndereco);
+
+        return $idEndereco;
     }
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Atualiza Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelUpdatePescadorHasEndereco(
+    $te_id, $te_logradouro, $te_numero, $te_bairro, $te_cep, $te_comp, $tmun_id
+    ) {
 
-    $dbTableEndereco = new Application_Model_DbTable_Endereco();
-    $dadosEndereco = array(
-        'te_logradouro' =>$te_logradouro,
-        'te_numero' =>  $te_numero,
-        'te_bairro' => $te_bairro,
-        'te_cep' => $dataCEP,
-        'te_comp' => $te_comp,
-        'tmun_id' => $tmun_id
-    );
+        $dataCEP = explode("-", $te_cep);
+        $dataCEP = $dataCEP[0] . $dataCEP[1];
 
-    $idEndereco = $dbTableEndereco->insert($dadosEndereco);
+        if (!$dataCEP)
+            $dataCEP = NULL;
+        
+        $dbTableEndereco = new Application_Model_DbTable_Endereco();
+        $dadosEndereco = array(
+            'te_logradouro' => $te_logradouro,
+            'te_numero' => $te_numero,
+            'te_bairro' => $te_bairro,
+            'te_cep' => $dataCEP,
+            'te_comp' => $te_comp,
+            'tmun_id' => $tmun_id
+        );
 
-    return $idEndereco;
-}
+        $where = "te_id = " . $te_id;
+
+        $idEndereco = $dbTableEndereco->update($dadosEndereco, $where);
+
+        return $idEndereco;
+    }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function modelInsertPescador(
-                $tp_nome, 
-                $tp_sexo,
-                $tp_rg,
-                $tp_cpf,
-                $tp_apelido,
-                $tp_matricula,
-                $tp_filiacaopai,
-                $tp_filiacaomae,
-                $tp_ctps,
-                $tp_pis,
-                $tp_inss,
-                $tp_nit_cei,
-                $tp_cma,
-                $tp_rgb_maa_ibama,
-                $tp_cir_cap_porto, 
-                $tp_datanasc, 
-                $tmun_id_natural,
-                $idEndereco,
-                $esc_id) {
+    $tp_nome, $tp_sexo, $tp_rg, $tp_cpf, $tp_apelido, $tp_matricula, $tp_filiacaopai, $tp_filiacaomae, $tp_ctps, $tp_pis, $tp_inss, $tp_nit_cei, $tp_cma, $tp_rgb_maa_ibama, $tp_cir_cap_porto, $tp_datanasc, $tmun_id_natural, $idEndereco, $esc_id) {
 
         $dbTablePescador = new Application_Model_DbTable_Pescador();
         $dadosPescador = array(
             'tp_nome' => $tp_nome,
             'tp_sexo' => $tp_sexo,
             'tp_rg' => $tp_rg,
-            'tp_cpf' =>$tp_cpf,
+            'tp_cpf' => $tp_cpf,
             'tp_apelido' => $tp_apelido,
             'tp_matricula' => $tp_matricula,
             'tp_filiacaopai' => $tp_filiacaopai,
@@ -320,8 +226,41 @@ public function modelInsertPescadorHasEndereco(
             'te_id' => $idEndereco,
             'esc_id' => $esc_id
         );
-
+        
         $idPescador = $dbTablePescador->insert($dadosPescador);
+
+        return $idPescador;
+    }
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Atualiza Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelUpdatePescador(
+    $tp_id, $tp_nome, $tp_sexo, $tp_rg, $tp_cpf, $tp_apelido, $tp_matricula, $tp_filiacaopai, $tp_filiacaomae, $tp_ctps, $tp_pis, $tp_inss, $tp_nit_cei, $tp_cma, $tp_rgb_maa_ibama, $tp_cir_cap_porto, $tp_datanasc, $tmun_id_natural, $idEndereco, $esc_id) {
+
+        $dbTablePescador = new Application_Model_DbTable_Pescador();
+        $dadosPescador = array(
+            'tp_nome' => $tp_nome,
+            'tp_sexo' => $tp_sexo,
+            'tp_rg' => $tp_rg,
+            'tp_cpf' => $tp_cpf,
+            'tp_apelido' => $tp_apelido,
+            'tp_matricula' => $tp_matricula,
+            'tp_filiacaopai' => $tp_filiacaopai,
+            'tp_filiacaomae' => $tp_filiacaomae,
+            'tp_ctps' => $tp_ctps,
+            'tp_pis' => $tp_pis,
+            'tp_inss' => $tp_inss,
+            'tp_nit_cei' => $tp_nit_cei,
+            'tp_cma' => $tp_cma,
+            'tp_rgb_maa_ibama' => $tp_rgb_maa_ibama,
+            'tp_cir_cap_porto' => $tp_cir_cap_porto,
+            'tp_datanasc' => date("Y-m-d", strtotime($tp_datanasc)),
+            'tmun_id_natural' => $tmun_id_natural,
+            'te_id' => $idEndereco,
+            'esc_id' => $esc_id
+        );
+        
+        $where = "tp_id = " . $tp_id;
+
+        $idPescador = $dbTablePescador->update($dadosPescador, $where);
 
         return $idPescador;
     }
@@ -396,7 +335,7 @@ public function modelInsertPescadorHasEndereco(
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Telefones vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelDeletePescadorHasTelefone($idPescador, $idTelenone ) {
+    public function modelDeletePescadorHasTelefone($idPescador, $idTelenone) {
         $dbTable_PescadorHasTelefone = new Application_Model_DbTable_PescadorHasTelefone();
 
         $dadosPescadorHasTelefone = array(
@@ -409,10 +348,10 @@ public function modelInsertPescadorHasEndereco(
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Colonia vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelInsertPescadorHasColonia( $idPescador, $idColonia, $dtaColonia ) {
+    public function modelInsertPescadorHasColonia($idPescador, $idColonia, $dtaColonia) {
         $dbTable_PescadorHasColonia = new Application_Model_DbTable_PescadorHasColonia();
 
-        if ( $dtaColonia == 0 ) {
+        if ($dtaColonia == 0) {
             $dtaColonia = new Zend_Db_Expr("NULL");
         }
 
@@ -427,7 +366,7 @@ public function modelInsertPescadorHasEndereco(
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Colonia vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelDeletePescadorHasColonia( $idPescador, $idColonia ) {
+    public function modelDeletePescadorHasColonia($idPescador, $idColonia) {
         $dbTable_PescadorHasColonia = new Application_Model_DbTable_PescadorHasColonia();
 
         $dadosPescadorHasColonia = array(
@@ -440,10 +379,10 @@ public function modelInsertPescadorHasEndereco(
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Area Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelInsertPescadorHasArea( $idPescador, $idArea  ) {
+    public function modelInsertPescadorHasArea($idPescador, $idArea) {
         $dbTable_PescadorHasArea = new Application_Model_DbTable_PescadorHasAreaPesca();
 
-       $dadosPescadorHasArea = array(
+        $dadosPescadorHasArea = array(
             'tp_id' => $idPescador,
             'tareap_id' => $idArea
         );
@@ -453,7 +392,7 @@ public function modelInsertPescadorHasEndereco(
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Area Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelDeletePescadorHasArea( $idPescador, $idArea ) {
+    public function modelDeletePescadorHasArea($idPescador, $idArea) {
         $dbTable_PescadorHasArea = new Application_Model_DbTable_PescadorHasAreaPesca();
 
         $dadosPescadorHasArea = array(
@@ -466,13 +405,13 @@ public function modelInsertPescadorHasEndereco(
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Area/Tipo Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelInsertPescadorHasArteTipo( $idPescador, $idArte, $idTipo ) {
+    public function modelInsertPescadorHasArteTipo($idPescador, $idArte, $idTipo) {
         $dbTable_PescadorHasArteTipo = new Application_Model_DbTable_PescadorHasArtePesca();
 
-       $dadosPescadorHasArteTipo = array(
+        $dadosPescadorHasArteTipo = array(
             'tp_id' => $idPescador,
             'tap_id' => $idArte,
-           'itc_id' => $idTipo,
+            'itc_id' => $idTipo,
         );
         $dbTable_PescadorHasArteTipo->insert($dadosPescadorHasArteTipo);
 
@@ -480,7 +419,7 @@ public function modelInsertPescadorHasEndereco(
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Area/Tipo Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelDeletePescadorHasArteTipo( $idPescador, $idArte, $idTipo ) {
+    public function modelDeletePescadorHasArteTipo($idPescador, $idArte, $idTipo) {
         $dbTable_PescadorHasArteTipo = new Application_Model_DbTable_PescadorHasArtePesca();
 
         $dadosPescadorHasArteTipo = array(
@@ -522,8 +461,7 @@ public function modelInsertPescadorHasEndereco(
         return;
     }
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Fim - Delete Dependentes vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ INSERT /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function delete($idPescador) {
         $dbTablePescador = new Application_Model_DbTable_Pescador();
 
@@ -536,6 +474,7 @@ public function modelInsertPescadorHasEndereco(
         $dbTablePescador->update($dadosPescador, $wherePescador);
     }
 
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/    
     public function select_Pescador_By_Municipio($where = null, $order = null, $limit = null) {
         $dao = new Application_Model_DbTable_VPescadorByMunicipio();
         $select = $dao->select()->from($dao)->order($order)->limit($limit);
@@ -546,4 +485,5 @@ public function modelInsertPescadorHasEndereco(
 
         return $dao->fetchAll($select)->toArray();
     }
+
 }
