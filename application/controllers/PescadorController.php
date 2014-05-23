@@ -13,7 +13,7 @@
  */
 class PescadorController extends Zend_Controller_Action {
 
-    private $modelPescador = null;
+    private $modelPescador;
 
     public function init() {
 
@@ -30,7 +30,16 @@ class PescadorController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        $dados = $this->modelPescador->select();
+        $tp_id = $this->_getParam("tp_id");
+        $tp_nome = $this->_getParam("tp_nome");
+        
+        if ( $tp_id > 0 ) {
+            $dados = $this->modelPescador->select("tp_id>=". $tp_id, array('tp_nome', 'tp_id'), 20);
+        } elseif ( $tp_nome ) {
+            $dados = $this->modelPescador->select("tp_nome LIKE '". $tp_nome."%'", array('tp_nome', 'tp_id'), 20);            
+        } else {
+            $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'), 20);
+        }
 
         $this->view->assign("dados", $dados);
     }
@@ -98,14 +107,17 @@ class PescadorController extends Zend_Controller_Action {
     }
 
     public function criarAction() {
-        $this->modelPescador->insert($this->_getAllParams());
+        $this->modelPescador->insert( $this->_getAllParams() );
 
         $this->_redirect('pescador/index');
     }
 
     public function editarAction() {
-        $pescador = $this->modelPescador->find($this->_getParam('id'));
+        $idPescador = $this->_getParam('id');
+        
+        $pescador = $this->modelPescador->find( $idPescador );
         $this->view->assign("pescador", $pescador);
+        
 
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select();
@@ -158,39 +170,45 @@ class PescadorController extends Zend_Controller_Action {
         $modelTipoRenda = new Application_Model_TipoRenda();
         $tipoRendas = $modelTipoRenda->select();
         $this->view->assign("assignTipoRendas", $tipoRendas);
-
+        
 //     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
-        $vPescadorHasDependente = $model_VPescadorHasDependente->select("tp_id=" . $pescador['tp_id'], "ttd_tipodependente", null);
+        $vPescadorHasDependente = $model_VPescadorHasDependente->selectDependentes("tp_id=". $idPescador, "ttd_tipodependente", null);
         $this->view->assign("assign_vPescadorDependente", $vPescadorHasDependente);
 
         $model_VPescadorHasRenda = new Application_Model_VPescadorHasRenda();
-        $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $pescador['tp_id'], "ttr_descricao", null);
+        $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $idPescador, "ttr_descricao", null);
         $this->view->assign("assign_vPescadorRenda", $vPescadorHasRenda);
 
         $model_VPescadorHasTelefone = new Application_Model_VPescadorHasTelefone();
-        $vPescadorHasTelefone = $model_VPescadorHasTelefone->select("tpt_tp_id=" . $pescador['tp_id'], "ttel_desc", null);
+        $vPescadorHasTelefone = $model_VPescadorHasTelefone->select("tpt_tp_id=" . $idPescador, "ttel_desc", null);
         $this->view->assign("assign_vPescadorHasTelefone", $vPescadorHasTelefone);
 
         $model_VPescadorHasColonia = new Application_Model_VPescadorHasColonia();
-        $vPescadorHasColonia = $model_VPescadorHasColonia->select("tp_id=" . $pescador['tp_id'], "tc_nome", null);
+        $vPescadorHasColonia = $model_VPescadorHasColonia->select("tp_id=" . $idPescador, "tc_nome", null);
         $this->view->assign("assign_vPescadorColonia", $vPescadorHasColonia);
 
         $model_VPescadorHasAreaPesca = new Application_Model_VPescadorHasAreaPesca();
-        $vPescadorHasAreaPesca = $model_VPescadorHasAreaPesca->select("tp_id=" . $pescador['tp_id'], "tareap_areapesca", null);
+        $vPescadorHasAreaPesca = $model_VPescadorHasAreaPesca->select("tp_id=" . $idPescador, "tareap_areapesca", null);
         $this->view->assign("assign_vPescadorAreaPesca", $vPescadorHasAreaPesca);
 
         $model_VPescadorHasArteTipoArea = new Application_Model_VPescadorHasArteTipoArea();
-        $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $pescador['tp_id'], "tap_artepesca", null);
+        $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $idPescador, "tap_artepesca", null);
         $this->view->assign("assign_vPescadorArteTipoArea", $vPescadorHasArteTipoArea);
 
         $model_VPescadorHasEmbarcacao = new Application_Model_VPescadorHasEmbarcacao();
-        $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $pescador['tp_id'], "tte_tipoembarcacao", null);
+        $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $idPescador, "tte_tipoembarcacao", null);
         $this->view->assign("assign_vPescadorEmbarcacao", $vPescadorHasEmbarcacao);
     }
 
+    public function atualizarsemreloadAction() {
+        $this->modelPescador->update($this->_getAllParams());
+
+//        $this->_redirect('pescador/index');
+    }
+    
     public function atualizarAction() {
-        $this->modelPescador->updateNovo($this->_getAllParams());
+        $this->modelPescador->update($this->_getAllParams());
 
         $this->_redirect('pescador/index');
     }
@@ -201,6 +219,158 @@ class PescadorController extends Zend_Controller_Action {
         $this->_redirect('pescador/index');
     }
     
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function filteridAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $tp_id = $this->_getParam("id");
+        
+        $dados = $this->modelPescador->select("tp_id>=". $tp_id, array('tp_nome', 'tp_id'), null);
+        
+        $this->view->assign("dados", $dados);
+        
+        $this->_redirect('pescador/index');
+    }
+        
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function atualizarpescadorenderecoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $tp_id = $this->_getParam("tp_id");
+        $tp_nome = $this->_getParam("tp_nome");
+        $tp_sexo = $this->_getParam("tp_sexo");
+        $tp_rg = $this->_getParam("tp_rg");
+        $tp_cpf = $this->_getParam("tp_cpf");
+        $tp_apelido = $this->_getParam("tp_apelido");
+        $tp_matricula = $this->_getParam("tp_matricula");
+        $tp_filiacaopai = $this->_getParam("tp_filiacaopai");
+        $tp_filiacaomae = $this->_getParam("tp_filiacaomae");
+        $tp_ctps = $this->_getParam("tp_ctps");
+        $tp_pis = $this->_getParam("tp_pis");
+        $tp_inss = $this->_getParam("tp_inss");
+        $tp_nit_cei = $this->_getParam("tp_nit_cei");
+        $tp_cma = $this->_getParam("tp_cma");
+        $tp_rgb_maa_ibama = $this->_getParam("tp_rgb_maa_ibama");
+        $tp_cir_cap_porto = $this->_getParam("tp_cir_cap_porto");
+        $tp_datanasc = $this->_getParam("tp_datanasc");
+        $tmun_id_natural = $this->_getParam("tmun_id_natural");
+        $esc_id = $this->_getParam("esc_id");
+        
+        $te_id = $this->_getParam("te_id");
+        $te_logradouro = $this->_getParam("te_logradouro");
+        $te_numero = $this->_getParam("te_numero");
+        $te_bairro = $this->_getParam("te_bairro");
+        $te_cep = $this->_getParam("te_cep");
+        $te_comp = $this->_getParam("te_comp");
+        $tmun_id = $this->_getParam("tmun_id");
+        
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelPescador->modelUpdatePescadorHasEndereco(
+                $te_id,
+                $te_logradouro,
+                $te_numero,
+                $te_bairro,
+                $te_cep,
+                $te_comp,                
+                $tmun_id);
+        
+        $this->modelPescador->modelUpdatePescador(
+                $tp_id,
+                $tp_nome, 
+                $tp_sexo,
+                $tp_rg,
+                $tp_cpf,
+                $tp_apelido,
+                $tp_matricula,
+                $tp_filiacaopai,
+                $tp_filiacaomae,
+                $tp_ctps,
+                $tp_pis,
+                $tp_inss,
+                $tp_nit_cei,
+                $tp_cma,
+                $tp_rgb_maa_ibama,
+                $tp_cir_cap_porto, 
+                $tp_datanasc, 
+                $tmun_id_natural,
+                $te_id,
+                $esc_id);
+
+        $this->_redirect("/pescador/editar/id/" . $tp_id);
+
+        return;
+    }
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function insertpescadorenderecoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $tp_nome = $this->_getParam("tp_nome");
+        $tp_sexo = $this->_getParam("tp_sexo");
+        $tp_rg = $this->_getParam("tp_rg");
+        $tp_cpf = $this->_getParam("tp_cpf");
+        $tp_apelido = $this->_getParam("tp_apelido");
+        $tp_matricula = $this->_getParam("tp_matricula");
+        $tp_filiacaopai = $this->_getParam("tp_filiacaopai");
+        $tp_filiacaomae = $this->_getParam("tp_filiacaomae");
+        $tp_ctps = $this->_getParam("tp_ctps");
+        $tp_pis = $this->_getParam("tp_pis");
+        $tp_inss = $this->_getParam("tp_inss");
+        $tp_nit_cei = $this->_getParam("tp_nit_cei");
+        $tp_cma = $this->_getParam("tp_cma");
+        $tp_rgb_maa_ibama = $this->_getParam("tp_rgb_maa_ibama");
+        $tp_cir_cap_porto = $this->_getParam("tp_cir_cap_porto");
+        $tp_datanasc = $this->_getParam("tp_datanasc");
+        $tmun_id_natural = $this->_getParam("tmun_id_natural");
+        $esc_id = $this->_getParam("esc_id");
+        
+        $te_logradouro = $this->_getParam("te_logradouro");
+        $te_numero = $this->_getParam("te_numero");
+        $te_bairro = $this->_getParam("te_bairro");
+        $te_cep = $this->_getParam("te_cep");
+        $te_comp = $this->_getParam("te_comp");
+        $tmun_id = $this->_getParam("tmun_id");
+        
+        $backUrl = $this->_getParam("back_url");
+        
+        $idEndereco = $this->modelPescador->modelInsertPescadorHasEndereco(
+                $te_logradouro,
+                $te_numero,
+                $te_bairro,
+                $te_cep,
+                $te_comp,                
+                $tmun_id);
+        
+        $idPescador = $this->modelPescador->modelInsertPescador(
+                $tp_nome, 
+                $tp_sexo,
+                $tp_rg,
+                $tp_cpf,
+                $tp_apelido,
+                $tp_matricula,
+                $tp_filiacaopai,
+                $tp_filiacaomae,
+                $tp_ctps,
+                $tp_pis,
+                $tp_inss,
+                $tp_nit_cei,
+                $tp_cma,
+                $tp_rgb_maa_ibama,
+                $tp_cir_cap_porto, 
+                $tp_datanasc, 
+                $tmun_id_natural,
+                $idEndereco,
+                $esc_id);
+
+        $this->_redirect("/pescador/editar/id/" . $idPescador);
+
+        return;
+    }
+ 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasdependenteAction() {
         $this->_helper->layout->disableLayout();

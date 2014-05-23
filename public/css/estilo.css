@@ -14,7 +14,7 @@
 
 #menu
 {
-        font-size: 13px;
+        font-size: 12px;
 	float: left;
 	width: 900px;
 	background: #8B8386;
@@ -133,7 +133,7 @@
 }
 
 #menu-lateral ul {
-	margin: 25px 0; 
+	margin: 20px 0; 
 	padding: 0;
 }
 

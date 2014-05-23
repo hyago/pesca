@@ -16,7 +16,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
     <form  id="cadastro-usuario" action="<?= $this->url(array("controller" => "pescador", "action" => "criar"), null, true) ?>" method="post">
         <fieldset id="Social" >
 
-            <input type="hidden" name="idPescador" value="<?= $this->pescador['tp_id'] ?>" />
             <input type="hidden" name="idEndereco" value="<?= $this->pescador['te_id'] ?>" />
 
             <div id="esquerda">
@@ -27,7 +26,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 <div id="form-dir">
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" placeholder="Nome" required="" value="<?= $this->pescador['tp_nome'] ?>"/><br/>
+                    <input type="text" name="nome" id="nome" placeholder="Nome" required="" /><br/>
                 </div>
                 <div id="form-dir">
                     <label for="sexo">Sexo</label>
@@ -155,7 +154,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                 <!--/_/_/_/_/_/_/_/_/_/_/_/_/_/ Escolaridade /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <div id="form-dir">
-                    <label for="escolaridade" id="pure-checkbox">Escolaridade</label>
+                    <label for="selectEscolaridade">Escolaridade</label>
                     <select name="selectEscolaridade" id="selectEscolaridadeId">
                         <?php foreach ($this->assignEscolaridades as $key => $localEscolaridade): ?>
                             <option value="<?= $localEscolaridade['esc_id']; ?>"><?= $localEscolaridade['esc_nivel']; ?></option>
@@ -166,236 +165,15 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
         </fieldset>
 
-        <!--///_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-        <fieldset class="noEditable"><legend>Dependentes:</legend>
-            <fieldset class="noEditable"><legend>Adicionar Dependentes:</legend>
 
-                <div id="base">
-                    <input onclick="addRowDependente(this.form);" type="button" value="Add row" />
-                    <input type="number" min="1" name="inputQuantidadeDependente" placeholder="Número de dependentes" size="20"  />
-
-                    <select name="SelectDependente" id="Dependente">
-                        <?php foreach ($this->assignTipoDependentes as $key => $localTipoDependente): ?>
-                            <option value="<?= $localTipoDependente['ttd_id']; ?>">
-                                <?= $localTipoDependente['ttd_tipodependente']; ?></option><?php endforeach; ?>
-                    </select>
-
-                </div>
-
-            </fieldset>
-            <br>
-            <table id="tblDependentes">
-                    <tr>
-                        <th>ID</th>
-                        <th width="65%">Dependente</th>
-                        <th>Quantidade</th>
-                        <th width="5%"></th>
-                    </tr>
+        <fieldset class="noBorder">
+            <div id="Submit">
+                <table>
+                    <td><a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a></td>
+                    <td><input type="submit" value="Cadastrar" /></td>
+                    <td><input type="button" size="50" value="Salvar e Continuar" class="button-confirmText" onclick="jsInsertPescadorEndereco(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertpescadorendereco"), null, true) ?>')"></td>
                 </table>
-<!--            <fieldset class="noEditable" id="itemDependenteRows"><legend>Dependentes listados:</legend>
-                
-                Area para inserir os itens
-            </fieldset>-->
+            </div>
         </fieldset>
-        <br>
-        <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-        <fieldset class="noEditable"><legend>Renda:</legend>
-            <fieldset class="noEditable"><legend>Adicionar Renda:</legend>
-
-                <div id="base">
-                    <input onclick="addRowRenda(this.form);" type="button" value="Add row" />
-
-                    <select name="SelectRenda" id="Renda">
-                        <?php foreach ($this->assignRendas as $key => $localRenda): ?>
-                            <option value="<?= $localRenda['ren_id']; ?>">
-                                <?= $localRenda['ren_renda']; ?></option><?php endforeach; ?>
-                    </select>
-
-                    <select name="SelectTipoRenda" id="TipoRenda">
-                        <?php foreach ($this->assignTipoRendas as $key => $localTipoRenda): ?>
-                            <option value="<?= $localTipoRenda['ttr_id']; ?>">
-                                <?= $localTipoRenda['ttr_descricao']; ?></option><?php endforeach; ?>
-                    </select>
-
-                </div>
-
-            </fieldset>
-            <br>
-            <table id="tblRenda">
-                <tr>
-                    <th width="10%">ID </th>
-                    <th width="40%">Renda</th>
-                    <th width="10%">ID </th>
-                    <th width="35%">Descrição</th>
-                    <th width="5%"></th>
-                </tr>
-            </table>
-        </fieldset>
-        <br>
-
-        <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-        <fieldset class="noEditable"><legend>Telefones:</legend>
-
-            <fieldset class="noEditable"><legend>Adicionar Telefone:</legend>
-
-                <div id="base">
-                    <input onclick="addRowPhone(this.form);" type="button" value="Add row" />
-                    <input type="text" name="inputTelefone" size="20" class="telefone" />
-                    <select name="selectTipoTelefone" id="selectTipoTelefone" >
-                        <?php foreach ($this->assignTipoTelefones as $key => $tipoTelefones): ?><option value="<?= $tipoTelefones['ttel_id']; ?>"><?= $tipoTelefones['ttel_desc']; ?></option><?php endforeach; ?>
-                    </select>
-                </div>
-            </fieldset>
-            <br>
-            <table id="tblTelefones">
-                <tr>
-                    <th width="15%">ID </th>
-                    <th width="40%">Telefones</th>
-                    <th width="40%">Nº Telefone</th>
-                    <th width="5%"></th>
-                </tr>
-
-            </table>
-
-        </fieldset>
-        <br>
-        <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Colonias /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-        <fieldset class="noEditable"><legend>Colonias:</legend>
-            <fieldset class="noEditable"><legend>Adicionar Colonias:</legend>
-
-                <div id="base">
-                    <input onclick="addRowColonia(this.form);" type="button" value="Add row" />
-                    <input type="date" name="inputDataInscricaoColonia" id="data_Insc" placeholder="Data Inscrição na Colonia" size="20"  />
-
-                    <select name="SelectColonia" id="colonia">
-                        <?php foreach ($this->colonias as $key => $colonia): ?>
-                            <option value="<?= $colonia['tc_id']; ?>">
-                                <?= $colonia['tc_nome']; ?></option><?php endforeach; ?>
-                    </select>
-
-                </div>
-
-            </fieldset>
-            <br>
-            <table id="tblColonias">
-                <tr>
-                    <th width="15%">ID </th>
-                    <th width="65%">Colonia</th>
-                    <th>Data inscrição</th>
-                    <th width="5%"></th>
-                </tr>
-
-            </table>
-        </fieldset>
-        <br>
-        <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Area de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-        <fieldset class="noEditable"><legend>Area de Pesca:</legend>
-            <fieldset class="noEditable"><legend>Adicionar Area de Pesca:</legend>
-
-                <div id="base">
-                    <input onclick="addRowAreaPesca(this.form);" type="button" value="Add row" />
-
-                    <select name="selectAreaPesca" id="areaPesca">
-                        <?php foreach ($this->areasPesca as $key => $areaPesca): ?>
-                            <option value="<?= $areaPesca['tareap_id']; ?>"><?= $areaPesca['tareap_areapesca']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </fieldset>
-            <br>
-            <table id="tblAreaPesca">
-                <tr>
-                    <th width="15%">ID </th>
-                    <th width="65%">Área de Pesca</th>
-                    <th width="5%"></th>
-                </tr>
-
-            </table>
-        </fieldset>
-        <br>
-
-
-        <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Arte de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-        <fieldset class="noEditable"><legend>Artes de Pesca e Tipos de Capturas:</legend>
-            <fieldset class="noEditable"><legend>Adicionar Artes de Pesca e Tipos de Capturas:</legend>
-
-                <div id="base">
-                    <input onclick="addRowArte(this.form);" type="button" value="Add row" />
-
-                    <select name="selectTipocapturada" id="tipocapturada">
-                        <?php foreach ($this->tipoCapturadas as $key => $tipoCapturadas): ?>
-                            <option value="<?= $tipoCapturadas['itc_id']; ?>"><?= $tipoCapturadas['itc_tipo']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <select name="SelectArtePesca" id="artePesca">
-                        <?php foreach ($this->artesPesca as $key => $artePesca): ?>
-                            <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-            </fieldset>
-            <br>
-            <table id="tblArteTipoPescas">
-                <tr>
-                    <th width="10%">ID </th>
-                    <th width="40%">Arte de Pesca</th>
-                    <th width="10%">ID</th>
-                    <th width="35%">Tipo de Pesca</th>
-                    <th width="5%"></th>
-                </tr>
-
-            </table>
-        </fieldset>
-        <br>
-
-        <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-        <fieldset class="noEditable"><legend>Embarcações e Porte das Embarcações:</legend>
-            <fieldset class="noEditable"><legend>Adicionar Embarcações:</legend>
-
-                <div id="base">
-                    <input onclick="addRowEmbarcacao(this.form);" type="button" value="Adicionar" />
-
-                    <select name="selectMotorEmbarcacao" id="motorEmbarcacao">
-                        <option value="0" >Sem motor</option>
-                        <option value="1" >Com motor</option>
-                    </select>
-
-                    <select name="selectPorteEmbarcacao" id="porteEmbarcacao">
-                        <?php foreach ($this->portesEmbarcacao as $key => $porteEmbarcacao): ?>
-                            <option value="<?= $porteEmbarcacao['tpe_id']; ?>"><?= $porteEmbarcacao['tpe_porte']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-
-                    <select name="selectTipoEmbarcacao" id="tipoEmbarcacao">
-                        <?php foreach ($this->tiposEmbarcacao as $key => $tipoEmbarcacao): ?>
-                            <option value="<?= $tipoEmbarcacao['tte_id']; ?>"><?= $tipoEmbarcacao['tte_tipoembarcacao']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-            </fieldset>
-            <br>
-            <table id="tblEmbarcacoes">
-                <tr>
-                    <th width="5%">ID </th>
-                    <th width="30%">Embarcação</th>
-                    <th width="5%">ID</th>
-                    <th width="30%">Porte da Embarcação</th>
-                    <th width="5%">ID</th>
-                    <th width="20%">Motor</th>
-                    <th width="5%"></th>
-                </tr>
-
-            </table>
-        </fieldset>
-        <br>
-        <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_//_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-
-
-        <div id="Submit">
-            <a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
-            <input type="submit" value="Cadastrar" />
-        </div>
     </form>
 </html>

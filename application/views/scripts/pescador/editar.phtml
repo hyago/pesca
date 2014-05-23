@@ -72,7 +72,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
                     <div id="form-dir">
                         <label for="dataNasc">Data Nascimento</label>
-                        <input type="date" name="dataNasc" placeholder="Data Nascimento" value="<?= $this->pescador['tp_datanasc'] ?>"/>
+                        <input type="date" name="dataNasc" placeholder="Data Nascimento" min="1910-01-01" value="<?= $this->pescador['tp_datanasc'] ?>"/>
                     </div>
 
                     <div id="form-dir">
@@ -170,6 +170,17 @@ $this->headScript()->appendFile('/js/mascaras.js');
                         </select>
                     </div>
 
+                </div>
+            </fieldset>
+
+            <!--/_/_/_/_/_/_/_/_/_/_/_/_/_/ BOTÕES /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
+            <fieldset class="noBorder">
+                <div id="Submit">
+                    <table>
+                        <td><a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a></td>
+                        <td><input type="submit" value="Atualizar" /></td>
+                        <td><input type="button" size="50" value="Salvar e Continuar" class="button-confirmText" onclick="jsAtualizarPescadorEndereco(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "atualizarpescadorendereco"), null, true) ?>')"></td>
+                    </table>
                 </div>
             </fieldset>
 
@@ -431,7 +442,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    
+
                 </fieldset>
                 <br>
                 <table id="tblEmbarcacoes">
@@ -462,12 +473,6 @@ $this->headScript()->appendFile('/js/mascaras.js');
             </fieldset>
 
             <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_//_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-
-            <div id="Submit">
-                <a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
-                <input type="submit" value="Atualizar" />
-            </div>
-
         </form>
     </body>
 </html>
