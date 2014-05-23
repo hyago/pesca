@@ -3,1184 +3,861 @@
 --SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 
--- Alterado: T_Especie_Capturada SPC_Peso(kg) -> SPC_Peso_kg
+-- ALTERADO: T_ESPECIE_CAPTURADA SPC_PESO(KG) -> SPC_PESO_KG
 
-drop table  t_alteracaosenha cascade;
-drop table  t_areapesca cascade;
-drop table  t_areapesca_has_t_pescador  cascade;
-drop table  t_artepesca cascade;
-drop table  t_colonia  cascade;
-drop table  t_comunidade cascade;
-drop table  t_dados_calao  cascade;
-drop table  t_dados_emalhe  cascade;
-drop table  t_dados_tarrafa cascade;
-drop table  t_endereco  cascade;
-drop table  t_entrevista_pescador  cascade;
-drop table  t_escolaridade  cascade;
-drop table  t_especie  cascade;
-drop table  t_familia  cascade;
-drop table  t_ficha_diaria  cascade;
-drop table  t_genero cascade;
-drop table  t_grupo cascade;
-drop table  t_historicorecadastramento  cascade;
-drop table  t_isca  cascade;
-drop table  t_login cascade;
-drop table  t_mare  cascade;
-drop table  t_monitoramento cascade;
-drop table  t_municipio cascade;
-drop table  t_ordem cascade;
-drop table  t_perfil cascade;
-drop table  t_pescador  cascade;
-drop table  t_pescador_has_t_colonia cascade;
-drop table  t_pescador_has_t_comunidade cascade;
-drop table  t_pescador_has_t_embarcacao cascade;
-drop table  t_pescador_has_t_endereco  cascade;
-drop table  t_pescador_has_t_escolaridade  cascade;
-drop table  t_pescador_has_t_especiecapturadas  cascade;
-drop table  t_pescador_has_t_programasocial cascade;
-drop table  t_pescador_has_t_renda  cascade;
-drop table  t_pescador_has_t_telefonecontato cascade;
-drop table  t_pescador_has_t_tipoartepesca  cascade;
-drop table  t_pescador_has_tt_dependente cascade;
-drop table  t_porteembarcacao  cascade;
-drop table  t_porto cascade;
-drop table  t_programasocial cascade;
-drop table  t_renda cascade;
-drop table  t_situacao  cascade;
-drop table  t_subamostra cascade;
-drop table  t_telefonecontato  cascade;
-drop table  t_tempo cascade;
-drop table  t_tipocapturada cascade;
-drop table  t_tipodependente cascade;
-drop table  t_tipoembarcacao cascade;
-drop table  t_tipotel  cascade;
-drop table  t_uf cascade;
-drop table  t_usuario  cascade;
-drop table  t_usuario_has_t_telefonecontato cascade;
-drop table  t_vento cascade;
-
+DROP TABLE T_ALTERACAOSENHA CASCADE;
+DROP TABLE T_AREAPESCA CASCADE;
+DROP TABLE T_AREAPESCA_HAS_T_PESCADOR CASCADE;
+DROP TABLE T_ARTEPESCA CASCADE;
+DROP TABLE T_COLONIA CASCADE;
+DROP TABLE T_COMUNIDADE CASCADE;
+DROP TABLE T_DADOS_CALAO CASCADE;
+DROP TABLE T_DADOS_EMALHE CASCADE;
+DROP TABLE T_DADOS_TARRAFA CASCADE;
+DROP TABLE T_ENDERECO CASCADE;
+DROP TABLE T_ENTREVISTA_PESCADOR CASCADE;
+DROP TABLE T_ESCOLARIDADE CASCADE;
+DROP TABLE T_ESPECIE CASCADE;
+DROP TABLE T_FAMILIA CASCADE;
+DROP TABLE T_FICHA_DIARIA CASCADE;
+DROP TABLE T_GENERO CASCADE;
+DROP TABLE T_GRUPO CASCADE;
+DROP TABLE T_HISTORICORECADASTRAMENTO CASCADE;
+DROP TABLE T_ISCA CASCADE;
+DROP TABLE T_LOGIN CASCADE;
+DROP TABLE T_MARE CASCADE;
+DROP TABLE T_MONITORAMENTO CASCADE;
+DROP TABLE T_MUNICIPIO CASCADE;
+DROP TABLE T_ORDEM CASCADE;
+DROP TABLE T_PERFIL CASCADE;
+DROP TABLE T_PESCADOR CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_COLONIA CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_COMUNIDADE CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_EMBARCACAO CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_ENDERECO CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_ESCOLARIDADE CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_ESPECIECAPTURADAS CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_PROGRAMASOCIAL CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_RENDA CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_TELEFONECONTATO CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_TIPOARTEPESCA CASCADE;
+DROP TABLE T_PESCADOR_HAS_TT_DEPENDENTE CASCADE;
+DROP TABLE T_PORTEEMBARCACAO CASCADE;
+DROP TABLE T_PORTO CASCADE;
+DROP TABLE T_PROGRAMASOCIAL CASCADE;
+DROP TABLE T_RENDA CASCADE;
+DROP TABLE T_SITUACAO CASCADE;
+DROP TABLE T_SUBAMOSTRA CASCADE;
+DROP TABLE T_TELEFONECONTATO CASCADE;
+DROP TABLE T_TEMPO CASCADE;
+DROP TABLE T_TIPOCAPTURADA CASCADE;
+DROP TABLE T_TIPODEPENDENTE CASCADE;
+DROP TABLE T_TIPOEMBARCACAO CASCADE;
+DROP TABLE T_TIPOTEL CASCADE;
+DROP TABLE T_UF CASCADE;
+DROP TABLE T_USUARIO CASCADE;
+DROP TABLE T_USUARIO_HAS_T_TELEFONECONTATO CASCADE;
+DROP TABLE T_VENTO CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_AREAPESCA CASCADE;
+DROP TABLE T_TIPORENDA CASCADE;
+DROP TABLE T_PESCADOR_HAS_T_TIPODEPENDENTE CASCADE;
+DROP TABLE T_ESP_ARTE_PESCA CASCADE;
+DROP TABLE T_ARRASTOFUNDO CASCADE;
+DROP TABLE T_PESQUEIRO_AF CASCADE;
+DROP TABLE T_REDE CASCADE;
+DROP TABLE T_PESCALINHA CASCADE;
+DROP TABLE T_MARISCAGEM CASCADE;
+DROP TABLE T_ESPECIE_CAPTURADA CASCADE;
+DROP TABLE T_PESCADOR_HAS_TELEFONE CASCADE;
 
 -- -----------------------------------------------------
--- Table T_UF
+-- TABLE T_UF
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_UF (
-  TUF_Sigla VARCHAR(2) NOT NULL,
-  TUF_Nome VARCHAR(25) NOT NULL,
-  PRIMARY KEY (TUF_Sigla)
-  );
-
-
--- -----------------------------------------------------
--- Table T_Municipio
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Municipio (
-  TMun_ID serial,
-  TMun_Municipio VARCHAR(50) NOT NULL,
-  TUF_Sigla VARCHAR(2) NOT NULL,
-  PRIMARY KEY (TMun_ID),
-  CONSTRAINT fk_T_Municipio_T_UF
-    FOREIGN KEY (TUF_Sigla)
-    REFERENCES T_UF (TUF_Sigla)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+ TUF_SIGLA VARCHAR(2) NOT NULL,
+ TUF_NOME VARCHAR(25) NOT NULL,
+ PRIMARY KEY (TUF_SIGLA)
+ );
 
 -- -----------------------------------------------------
--- Table T_Endereco
+-- TABLE T_MUNICIPIO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Endereco (
-  TE_ID serial,
-  TE_Logradouro VARCHAR(100) NULL,
-  TE_Numero VARCHAR(45) NULL,
-  TE_Bairro VARCHAR(50) NULL,
-  TE_CEP DECIMAL(8) NULL,
-  TE_Comp VARCHAR(50) NULL,
-  TMun_ID INT NOT NULL,
-  PRIMARY KEY (TE_ID),
-  CONSTRAINT fk_T_Endereco_T_Municipio1
-    FOREIGN KEY (TMun_ID)
-    REFERENCES T_Municipio (TMun_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
--- -----------------------------------------------------
--- Table T_Pescador
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador (
-  TP_ID serial,
-  TP_Nome VARCHAR(45) NOT NULL,
-  TP_Sexo VARCHAR(1) NOT NULL,
-  TP_Matricula VARCHAR(45) NULL,
-  TP_Apelido VARCHAR(45) NULL,
-  TP_FiliacaoPai VARCHAR(45) NULL,
-  TP_FiliacaoMae VARCHAR(45) NULL,
-  TP_CTPS VARCHAR(45) NULL,
-  TP_PIS VARCHAR(45) NULL,
-  TP_INSS VARCHAR(45) NULL,
-  TP_NIT_CEI VARCHAR(45) NULL,
-  TP_RG VARCHAR(45) NULL,
-  TP_CMA VARCHAR(45) NULL,
-  TP_RGB_MAA_IBAMA VARCHAR(45) NULL,
-  TP_CIR_Cap_Porto VARCHAR(45) NULL,
-  TP_CPF VARCHAR(14) NULL,
-  TP_DataNasc DATE NULL,
-  TMun_ID_Natural INT NULL,
-  TE_ID INT NULL,
-  TP_Especificidade varchar(200) NULL,
-  ESC_ID INT NULL,
-  PRIMARY KEY (TP_ID),
-  CONSTRAINT fk_T_Pescador_T_Municipio1
-    FOREIGN KEY (TMun_ID_Natural)
-    REFERENCES T_Municipio (TMun_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_T_Endereco1
-    FOREIGN KEY (TE_ID)
-    REFERENCES T_Endereco (TE_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- -----------------------------------------------------
--- Table T_Escolaridade
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Escolaridade (
-  ESC_ID serial,
-  ESC_Nivel VARCHAR(25) NULL,
-  PRIMARY KEY (ESC_ID));
-
--- -----------------------------------------------------
--- Table T_Pescador_has_T_Escolaridade
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Escolaridade (
-  ESC_ID INT NOT NULL,
-  TP_ID INT NOT NULL,
-  PRIMARY KEY (ESC_ID),
-  CONSTRAINT fk_T_Pescador_has_T_Escolaridade_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_Escolaridade_T_Escolaridade1
-    FOREIGN KEY (ESC_ID)
-    REFERENCES T_Escolaridade (ESC_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- -----------------------------------------------------
--- Table T_Renda
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Renda (
-  REN_ID serial,
-  REN_Renda VARCHAR(25) NULL,
-  PRIMARY KEY (REN_ID));
-
--- -----------------------------------------------------
--- Table T_ProgramaSocial
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ProgramaSocial (
-  PRS_ID serial NOT NULL,
-  PRS_Programa VARCHAR(30) NULL,
-  PRIMARY KEY (PRS_ID));
-
--- -----------------------------------------------------
--- Table T_Pescador_has_T_ProgramaSocial
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_ProgramaSocial (
-  TP_ID INT NOT NULL,
-  PRS_ID INT NOT NULL,
-  PRIMARY KEY (TP_ID, PRS_ID),
-  CONSTRAINT fk_T_Pescador_has_T_ProgramaSocial_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_ProgramaSocial_T_ProgramaSocial1
-    FOREIGN KEY (PRS_ID)
-    REFERENCES T_ProgramaSocial (PRS_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- -----------------------------------------------------
--- Table T_Pescador_has_T_Endereco
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Endereco (
-  TP_ID INT NOT NULL,
-  TE_ID INT NOT NULL,
-  PRIMARY KEY (TE_ID),
-  CONSTRAINT fk_T_Pescador_has_T_Endereco_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_Endereco_T_Endereco1
-    FOREIGN KEY (TE_ID)
-    REFERENCES T_Endereco (TE_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- -----------------------------------------------------
--- Table T_Comunidade
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Comunidade (
-  TCOM_ID serial,
-  TCOM_Nome VARCHAR(50) NOT NULL,
-  PRIMARY KEY (TCOM_ID),
-  UNIQUE (TCOM_Nome));
-
-
-
--- -----------------------------------------------------
--- Table T_Colonia
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_COLONIA (
-  TC_ID SERIAL,
-  TC_NOME VARCHAR(50) NOT NULL,
-  TC_Especificidade character varying(50),
-  TCOM_ID integer NULL,
-  TE_ID integer NULL,
-  PRIMARY KEY (TC_ID),
-  UNIQUE (TC_NOME));
-
-
-
-
--- -----------------------------------------------------
--- Table T_ArtePesca
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ArtePesca (
-  TAP_ID serial,
-  TAP_ArtePesca VARCHAR(50) NOT NULL,
-  PRIMARY KEY (TAP_ID),
-  UNIQUE (TAP_ArtePesca));
-
-
-
--- -----------------------------------------------------
--- Table T_TipoEmbarcacao
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TipoEmbarcacao (
-  TTE_ID serial,
-  TTE_TipoEmbarcacao VARCHAR(50) NOT NULL,
-  PRIMARY KEY (TTE_ID),
-  UNIQUE (TTE_TipoEmbarcacao));
-
-
-
--- -----------------------------------------------------
--- Table T_TipoDependente
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TipoDependente (
-  TTD_ID serial,
-  TTD_TipoDependente VARCHAR(30) NOT NULL,
-  PRIMARY KEY (TTD_ID));
-
-
-
--- -----------------------------------------------------
--- Table T_AreaPesca
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_AreaPesca (
-  TAreaP_ID serial,
-  TAreaP_AreaPesca VARCHAR(50) NOT NULL,
-  PRIMARY KEY (TAreaP_ID),
-  UNIQUE (TAreaP_AreaPesca));
-
-
-
--- -----------------------------------------------------
--- Table T_Situacao
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Situacao (
-  TS_ID serial,
-  TS_Situacao boolean DEFAULT TRUE NULL,
-  TS_Motivo VARCHAR(45) NULL,
-  PRIMARY KEY (TS_ID));
-
-
-
--- -----------------------------------------------------
--- Table T_TipoTel
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TipoTel (
-  TTEL_ID serial,
-  TTEL_Desc VARCHAR(50) NOT NULL,
-  PRIMARY KEY (TTEL_ID));
-
-
-
--- -----------------------------------------------------
--- Table T_TelefoneContato
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TelefoneContato (
-  TTCont_ID serial,
-  TTCont_DDD DECIMAL(2) NOT NULL,
-  TTCont_Telefone DECIMAL(10) NOT NULL,
-  TTEL_ID INT NOT NULL,
-  PRIMARY KEY (TTCont_ID),
-  CONSTRAINT fk_T_TelefoneContato_T_TipoTel1
-    FOREIGN KEY (TTEL_ID)
-    REFERENCES T_TipoTel (TTEL_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
--- -----------------------------------------------------
--- Table T_Login
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Login (
-  TL_ID serial,
-  TL_Login VARCHAR(12) NOT NULL,
-  TL_HashSenha CHAR(40) NOT NULL,
-  TL_UltimoAcesso TIMESTAMP NULL,
-  PRIMARY KEY (TL_ID),
-  UNIQUE (TL_Login));
-
-
-
--- -----------------------------------------------------
--- Table T_Perfil
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Perfil (
-  TP_ID serial,
-  TP_Perfil VARCHAR(14) NOT NULL,
-  PRIMARY KEY (TP_ID));
-
-
-
--- -----------------------------------------------------
--- Table T_Usuario
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Usuario (
-  TU_ID serial,
-  TU_Nome VARCHAR(45) NOT NULL,
-  TU_Sexo VARCHAR(1) NOT NULL,
-  TU_CPF VARCHAR(14) NOT NULL,
-  TU_RG VARCHAR(11) NOT NULL,
-  TU_Email VARCHAR(30) NOT NULL,
-    TU_TELRES NUMERIC (14,0),
-  TU_TELCEL NUMERIC (14,0),
-  TU_UsuarioDeletado boolean DEFAULT false NOT NULL,
-  TL_ID INT NOT NULL,
-  TP_ID INT NOT NULL,
-  TE_ID INT NOT NULL,
-  PRIMARY KEY (TU_ID),
-  CONSTRAINT fk_T_Usuario_T_Login1
-    FOREIGN KEY (TL_ID)
-    REFERENCES T_Login (TL_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Usuario_T_Perfil1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Perfil (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Usuario_T_Endereco1
-    FOREIGN KEY (TE_ID)
-    REFERENCES T_Endereco (TE_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
--- -----------------------------------------------------
--- Table T_HistoricoRecadastramento
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_HistoricoRecadastramento (
-  THR_Data date NOT NULL,
-  TP_ID INT NULL,
-  TS_ID INT NULL,
-  THR_Descricao VARCHAR(45) NULL,
-  TU_ID_Resp_Coleta INT NULL,
-  TU_ID_Resp_Digita INT NULL,
-  PRIMARY KEY (THR_Data, TP_ID, TS_ID),
-  CONSTRAINT fk_T_DataRecadastramento_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_HistooRecadastramento_T_SituacaoAtual1
-    FOREIGN KEY (TS_ID)
-    REFERENCES T_Situacao (TS_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_HistooRecadastramento_T_Usuario1
-    FOREIGN KEY (TU_ID_Resp_Coleta)
-    REFERENCES T_Usuario (TU_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_HistooRecadastramento_T_Usuario2
-    FOREIGN KEY (TU_ID_Resp_Digita)
-    REFERENCES T_Usuario (TU_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
--- -----------------------------------------------------
--- Table T_TipoCapturada
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TipoCapturada (
-  ITC_ID serial,
-  ITC_Tipo VARCHAR(30) NULL,
-  PRIMARY KEY (ITC_ID));
-
-
--- -----------------------------------------------------
--- Table T_Pescador_has_T_TipoArtePesca
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_TipoArtePesca (
-    TP_ID INT NOT NULL,
-    TAP_ID INT NOT NULL,
-    itc_id int null,
-  PRIMARY KEY (TP_ID, TAP_ID),
-  CONSTRAINT fk_T_Pescador_has_T_TipoArtePesca_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_TipoArtePesca_T_TipoArtePesca1
-    FOREIGN KEY (TAP_ID)
-    REFERENCES T_ArtePesca (TAP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-CONSTRAINT fk_T_Pescador_has_T_areapesca
-    FOREIGN KEY (tareap_id)
-    REFERENCES t_areapesca (tareap_id),
-CONSTRAINT fk_T_Pescador_has_T_tipocapturada
-    FOREIGN KEY (itc_id)
-    REFERENCES t_tipocapturada (itc_id)
+CREATE TABLE IF NOT EXISTS T_MUNICIPIO (
+ TMUN_ID SERIAL,
+ TMUN_MUNICIPIO VARCHAR(50) NOT NULL,
+ TUF_SIGLA VARCHAR(2) NOT NULL,
+ PRIMARY KEY (TMUN_ID),
+ CONSTRAINT FK_T_MUNICIPIO_T_UF FOREIGN KEY (TUF_SIGLA) REFERENCES T_UF (TUF_SIGLA)
 );
 
-
-
-
-
-
+-- -----------------------------------------------------
+-- TABLE T_ENDERECO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ENDERECO (
+ TE_ID SERIAL,
+ TE_LOGRADOURO VARCHAR(100) NULL,
+ TE_NUMERO VARCHAR(45) NULL,
+ TE_BAIRRO VARCHAR(50) NULL,
+ TE_CEP DECIMAL(8) NULL,
+ TE_COMP VARCHAR(50) NULL,
+ TMUN_ID INT NOT NULL,
+ PRIMARY KEY (TE_ID),
+ CONSTRAINT FK_T_ENDERECO_T_MUNICIPIO1 FOREIGN KEY (TMUN_ID) REFERENCES T_MUNICIPIO (TMUN_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_PESCADOR
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESCADOR (
+ TP_ID SERIAL,
+ TP_NOME VARCHAR(45) NOT NULL,
+ TP_SEXO VARCHAR(1) NOT NULL,
+ TP_MATRICULA VARCHAR(45) NULL,
+ TP_APELIDO VARCHAR(45) NULL,
+ TP_FILIACAOPAI VARCHAR(45) NULL,
+ TP_FILIACAOMAE VARCHAR(45) NULL,
+ TP_CTPS VARCHAR(45) NULL,
+ TP_PIS VARCHAR(45) NULL,
+ TP_INSS VARCHAR(45) NULL,
+ TP_NIT_CEI VARCHAR(45) NULL,
+ TP_RG VARCHAR(45) NULL,
+ TP_CMA VARCHAR(45) NULL,
+ TP_RGB_MAA_IBAMA VARCHAR(45) NULL,
+ TP_CIR_CAP_PORTO VARCHAR(45) NULL,
+ TP_CPF VARCHAR(14) NULL,
+ TP_DATANASC DATE NULL,
+ TMUN_ID_NATURAL INT NULL,
+ TE_ID INT NULL,
+ TP_ESPECIFICIDADE VARCHAR(200) NULL,
+ ESC_ID INT NULL,
+ PRIMARY KEY (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_T_MUNICIPIO1 FOREIGN KEY (TMUN_ID_NATURAL) REFERENCES T_MUNICIPIO (TMUN_ID),
+ CONSTRAINT FK_T_PESCADOR_T_ENDERECO1 FOREIGN KEY (TE_ID) REFERENCES T_ENDERECO (TE_ID), 
+ CONSTRAINT FK_PESCADOR_ESC_ID FOREIGN KEY (ESC_ID) REFERENCES T_ESCOLARIDADE(ESC_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_ESCOLARIDADE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ESCOLARIDADE (
+ ESC_ID SERIAL,
+ ESC_NIVEL VARCHAR(25) NULL,
+ PRIMARY KEY (ESC_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_PESCADOR_HAS_T_ESCOLARIDADE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ESCOLARIDADE (
+ ESC_ID INT NOT NULL,
+ TP_ID INT NOT NULL,
+ PRIMARY KEY (ESC_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_ESCOLARIDADE_T_PESCADOR1
+ FOREIGN KEY (TP_ID)
+ REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_ESCOLARIDADE_T_ESCOLARIDADE1 FOREIGN KEY (ESC_ID) REFERENCES T_ESCOLARIDADE (ESC_ID)
+ );
+
+-- -----------------------------------------------------
+-- TABLE T_RENDA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_RENDA (
+ REN_ID SERIAL,
+ REN_RENDA VARCHAR(25) NULL,
+ REN_FATOR NUMERIC(4,2) NULL,
+ PRIMARY KEY (REN_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_PROGRAMASOCIAL
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PROGRAMASOCIAL (
+ PRS_ID SERIAL NOT NULL,
+ PRS_PROGRAMA VARCHAR(30) NULL,
+ PRIMARY KEY (PRS_ID)
+);
 
+-- -----------------------------------------------------
+-- TABLE T_PESCADOR_HAS_T_PROGRAMASOCIAL
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_PROGRAMASOCIAL (
+ TP_ID INT NOT NULL,
+ PRS_ID INT NOT NULL,
+ PRIMARY KEY (TP_ID, PRS_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PESCADOR1
+ FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PROGRAMASOCIAL1 FOREIGN KEY (PRS_ID) REFERENCES T_PROGRAMASOCIAL (PRS_ID)
+);
 
 -- -----------------------------------------------------
--- Table T_Pescador_has_T_EspecieCapturadas
+-- TABLE T_PESCADOR_HAS_T_ENDERECO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_EspecieCapturadas (
-  TP_ID INT NOT NULL,
-  T_TipoCapturada_ITC_ID INT NOT NULL,
-  PRIMARY KEY (TP_ID),
-  CONSTRAINT fk_T_Pescador_has_T_EspecieCapturadas_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_EspecieCapturadas_T_TipoCapturada1
-    FOREIGN KEY (T_TipoCapturada_ITC_ID)
-    REFERENCES T_TipoCapturada (ITC_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ENDERECO (
+ TP_ID INT NOT NULL,
+ TE_ID INT NOT NULL,
+ PRIMARY KEY (TE_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_ENDERECO_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_ENDERECO_T_ENDERECO1 FOREIGN KEY (TE_ID) REFERENCES T_ENDERECO (TE_ID)
+);
 
-
-
 -- -----------------------------------------------------
--- Table T_PorteEmbarcacao
+-- TABLE T_COMUNIDADE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PorteEmbarcacao (
-  TPE_ID serial,
-  TPE_Porte VARCHAR(30) NOT NULL,
-  PRIMARY KEY (TPE_ID));
-
-
+CREATE TABLE IF NOT EXISTS T_COMUNIDADE (
+ TCOM_ID SERIAL,
+ TCOM_NOME VARCHAR(50) NOT NULL,
+ PRIMARY KEY (TCOM_ID),
+ UNIQUE (TCOM_NOME)
+);
 
 -- -----------------------------------------------------
--- Table T_Pescador_has_T_Embarcacao
+-- TABLE T_COLONIA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Embarcacao (
-  TTE_ID INT NOT NULL,
-  TP_ID INT NOT NULL,
-  TPTE_Motor boolean NOT NULL,
-  TPE_ID INT NOT NULL,
-  PRIMARY KEY (TTE_ID, TP_ID),
-  CONSTRAINT fk_T_Pescador_has_T_Embarcacao_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_Embarcacao_T_Embarcacao1
-    FOREIGN KEY (TTE_ID)
-    REFERENCES T_TipoEmbarcacao (TTE_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_Embarcacao_T_PorteEmbarcacao1
-    FOREIGN KEY (TPE_ID)
-    REFERENCES T_PorteEmbarcacao (TPE_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE IF NOT EXISTS T_COLONIA (
+ TC_ID SERIAL,
+ TC_NOME VARCHAR(50) NOT NULL,
+ TC_ESPECIFICIDADE CHARACTER VARYING(50),
+ TCOM_ID INTEGER NULL,
+ TE_ID INTEGER NULL,
+ PRIMARY KEY (TC_ID),
+ UNIQUE (TC_NOME)
+);
 
-
-
 -- -----------------------------------------------------
--- Table T_Pescador_has_T_Colonia
+-- TABLE T_ARTEPESCA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Colonia (
-  TP_ID INT NOT NULL,
-  TC_ID INT NOT NULL,
-  TPTC_DataInscColonia DATE NULL,
-  PRIMARY KEY (TP_ID, TC_ID),
-  CONSTRAINT fk_T_Pescador_has_T_Colonia_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_Colonia_T_Colonia1
-    FOREIGN KEY (TC_ID)
-    REFERENCES T_Colonia (TC_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
+CREATE TABLE IF NOT EXISTS T_ARTEPESCA (
+ TAP_ID SERIAL,
+ TAP_ARTEPESCA VARCHAR(50) NOT NULL,
+ PRIMARY KEY (TAP_ID),
+ UNIQUE (TAP_ARTEPESCA)
+);
 
 -- -----------------------------------------------------
--- Table T_AlteracaoSenha
+-- TABLE T_TIPOEMBARCACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_AlteracaoSenha (
-  TAS_Token CHAR(40) NOT NULL,
-  TAS_DataSolicitacao TIMESTAMP NOT NULL,
-  TAS_DataAlteracao TIMESTAMP NULL,
-  TU_ID INT NOT NULL,
-  PRIMARY KEY (TAS_Token),
-  CONSTRAINT fk_T_AlteracaoSenha_T_Usuario1
-    FOREIGN KEY (TU_ID)
-    REFERENCES T_Usuario (TU_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE IF NOT EXISTS T_TIPOEMBARCACAO (
+ TTE_ID SERIAL,
+ TTE_TIPOEMBARCACAO VARCHAR(50) NOT NULL,
+ PRIMARY KEY (TTE_ID),
+ UNIQUE (TTE_TIPOEMBARCACAO)
+);
 
-
-
 -- -----------------------------------------------------
--- Table T_Usuario_has_T_TelefoneContato
+-- TABLE T_TIPODEPENDENTE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Usuario_has_T_TelefoneContato (
-  TU_ID INT NOT NULL,
-  TTCont_ID INT NOT NULL,
-  PRIMARY KEY (TU_ID, TTCont_ID),
-  CONSTRAINT fk_T_Usuario_has_T_TelefoneContato_T_Usuario1
-    FOREIGN KEY (TU_ID)
-    REFERENCES T_Usuario (TU_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Usuario_has_T_TelefoneContato_T_TelefoneContato1
-    FOREIGN KEY (TTCont_ID)
-    REFERENCES T_TelefoneContato (TTCont_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
+CREATE TABLE IF NOT EXISTS T_TIPODEPENDENTE (
+ TTD_ID SERIAL,
+ TTD_TIPODEPENDENTE VARCHAR(30) NOT NULL,
+ PRIMARY KEY (TTD_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_AREAPESCA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_AREAPESCA (
+ TAREAP_ID SERIAL,
+ TAREAP_AREAPESCA VARCHAR(50) NOT NULL,
+ PRIMARY KEY (TAREAP_ID),
+ UNIQUE (TAREAP_AREAPESCA)
+);
 
 -- -----------------------------------------------------
--- Table T_Pescador_has_T_TelefoneContato
+-- TABLE T_SITUACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_TelefoneContato (
-  TP_ID INT NOT NULL,
-  TTCont_ID INT NOT NULL,
-  PRIMARY KEY (TP_ID, TTCont_ID),
-  CONSTRAINT fk_T_Pescador_has_T_TelefoneContato_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_TelefoneContato_T_TelefoneContato1
-    FOREIGN KEY (TTCont_ID)
-    REFERENCES T_TelefoneContato (TTCont_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
+CREATE TABLE IF NOT EXISTS T_SITUACAO (
+ TS_ID SERIAL,
+ TS_SITUACAO BOOLEAN DEFAULT TRUE NULL,
+ TS_MOTIVO VARCHAR(45) NULL,
+ PRIMARY KEY (TS_ID)
+);
 
 -- -----------------------------------------------------
--- Table T_Grupo
+-- TABLE T_TIPOTEL
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Grupo (
-  GRP_ID serial,
-  GRP_Nome VARCHAR(45) NULL,
-  PRIMARY KEY (GRP_ID));
+CREATE TABLE IF NOT EXISTS T_TIPOTEL (
+ TTEL_ID SERIAL,
+ TTEL_DESC VARCHAR(50) NOT NULL,
+ PRIMARY KEY (TTEL_ID)
+);
 
-
-
 -- -----------------------------------------------------
--- Table T_Ordem
+-- TABLE T_TELEFONECONTATO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Ordem (
-  ORD_ID serial,
-  ORD_Nome VARCHAR(30) NULL,
-  ORD_Caracteristica VARCHAR(45) NULL,
-  GRP_ID INT NOT NULL,
-  PRIMARY KEY (ORD_ID),
-  CONSTRAINT fk_DSBQ_Ordem_DSBQ_Grupo
-    FOREIGN KEY (GRP_ID)
-    REFERENCES T_Grupo (GRP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
+CREATE TABLE IF NOT EXISTS T_TELEFONECONTATO (
+ TTCONT_ID SERIAL,
+ TTCONT_DDD DECIMAL(2) NOT NULL,
+ TTCONT_TELEFONE DECIMAL(10) NOT NULL,
+ TTEL_ID INT NOT NULL,
+ PRIMARY KEY (TTCONT_ID),
+ CONSTRAINT FK_T_TELEFONECONTATO_T_TIPOTEL1 FOREIGN KEY (TTEL_ID) REFERENCES T_TIPOTEL (TTEL_ID)
+);
 
 -- -----------------------------------------------------
--- Table T_Familia
+-- TABLE T_LOGIN
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Familia (
-  FAM_ID serial,
-  FAM_Nome VARCHAR(45) NULL,
-  FAM_Ordem_Filogenetica INT NULL,
-  FAM_Tipo VARCHAR(45) NULL,
-  FAM_Caracteristica VARCHAR(255) NULL,
-  ORD_ID INT NOT NULL,
-  PRIMARY KEY (FAM_ID),
-  CONSTRAINT fk_DSBQ_Familia_DSBQ_Ordem1
-    FOREIGN KEY (ORD_ID)
-    REFERENCES T_Ordem (ORD_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE IF NOT EXISTS T_LOGIN (
+ TL_ID SERIAL,
+ TL_LOGIN VARCHAR(12) NOT NULL,
+ TL_HASHSENHA CHAR(40) NOT NULL,
+ TL_ULTIMOACESSO TIMESTAMP NULL,
+ PRIMARY KEY (TL_ID),
+ UNIQUE (TL_LOGIN)
+);
 
-
-
 -- -----------------------------------------------------
--- Table T_Genero
+-- TABLE T_PERFIL
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Genero (
-  GEN_ID serial,
-  GEN_Nome VARCHAR(45) NULL,
-  FAM_ID INT NOT NULL,
-  PRIMARY KEY (GEN_ID),
-  CONSTRAINT fk_DSBQ_Genero_DSBQ_Familia1
-    FOREIGN KEY (FAM_ID)
-    REFERENCES T_Familia (FAM_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
+CREATE TABLE IF NOT EXISTS T_PERFIL (
+ TP_ID SERIAL,
+ TP_PERFIL VARCHAR(14) NOT NULL,
+ PRIMARY KEY (TP_ID)
+);
 
 -- -----------------------------------------------------
--- Table T_Especie
+-- TABLE T_USUARIO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Especie (
-  ESP_ID serial,
-  ESP_Nome VARCHAR(45) NULL,
-  ESP_Descritor VARCHAR(45) NULL,
-  ESP_Nome_Comum VARCHAR(45) NULL,
-  GEN_ID INT NOT NULL,
-  PRIMARY KEY (ESP_ID),
-  CONSTRAINT fk_DSBQ_Espécie_DSBQ_Genero1
-    FOREIGN KEY (GEN_ID)
-    REFERENCES T_Genero (GEN_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE IF NOT EXISTS T_USUARIO (
+ TU_ID SERIAL,
+ TU_NOME VARCHAR(45) NOT NULL,
+ TU_SEXO VARCHAR(1) NOT NULL,
+ TU_CPF VARCHAR(14) NOT NULL,
+ TU_RG VARCHAR(11) NOT NULL,
+ TU_EMAIL VARCHAR(30) NOT NULL,
+ TU_TELRES NUMERIC (14,0),
+ TU_TELCEL NUMERIC (14,0),
+ TU_USUARIODELETADO BOOLEAN DEFAULT FALSE NOT NULL,
+ TL_ID INT NOT NULL,
+ TP_ID INT NOT NULL,
+ TE_ID INT NOT NULL,
+ PRIMARY KEY (TU_ID),
+ CONSTRAINT FK_T_USUARIO_T_LOGIN1 FOREIGN KEY (TL_ID) REFERENCES T_LOGIN (TL_ID),
+ CONSTRAINT FK_T_USUARIO_T_PERFIL1 FOREIGN KEY (TP_ID) REFERENCES T_PERFIL (TP_ID),
+ CONSTRAINT FK_T_USUARIO_T_ENDERECO1 FOREIGN KEY (TE_ID) REFERENCES T_ENDERECO (TE_ID)
+ );
 
-
-
 -- -----------------------------------------------------
--- Table T_Subamostra
+-- TABLE T_HISTORICORECADASTRAMENTO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Subamostra (
-  SA_ID serial,
-  SA_Subamostra BOOLEAN NULL,
-  PRIMARY KEY (SA_ID));
-
+CREATE TABLE IF NOT EXISTS T_HISTORICORECADASTRAMENTO (
+ THR_DATA DATE NOT NULL,
+ TP_ID INT NULL,
+ TS_ID INT NULL,
+ THR_DESCRICAO VARCHAR(45) NULL,
+ TU_ID_RESP_COLETA INT NULL,
+ TU_ID_RESP_DIGITA INT NULL,
+ PRIMARY KEY (THR_DATA, TP_ID, TS_ID),
+ CONSTRAINT FK_T_DATARECADASTRAMENTO_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_HISTOORECADASTRAMENTO_T_SITUACAOATUAL1 FOREIGN KEY (TS_ID) REFERENCES T_SITUACAO (TS_ID),
+ CONSTRAINT FK_T_HISTOORECADASTRAMENTO_T_USUARIO1 FOREIGN KEY (TU_ID_RESP_COLETA) REFERENCES T_USUARIO (TU_ID),
+ CONSTRAINT FK_T_HISTOORECADASTRAMENTO_T_USUARIO2 FOREIGN KEY (TU_ID_RESP_DIGITA) REFERENCES T_USUARIO (TU_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Porto
+-- TABLE T_TIPOCAPTURADA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Porto (
-  PTO_ID serial,
-  PTO_Nome VARCHAR(45) NULL,
-  PTO_Local VARCHAR(45) NULL,
-  TMun_ID INT NOT NULL,
-  PRIMARY KEY (PTO_ID),
-  CONSTRAINT fk_DSBQ_Porto_T_Municipio1
-    FOREIGN KEY (TMun_ID)
-    REFERENCES T_Municipio (TMun_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+CREATE TABLE IF NOT EXISTS T_TIPOCAPTURADA (
+ ITC_ID SERIAL,
+ ITC_TIPO VARCHAR(30) NULL,
+ PRIMARY KEY (ITC_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Tempo
+-- TABLE T_PESCADOR_HAS_T_TIPOARTEPESCA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Tempo (
-  TMP_ID serial,
-  TMP_Estado VARCHAR(45) NULL,
-  PRIMARY KEY (TMP_ID));
-
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TIPOARTEPESCA (
+ TP_ID INT NOT NULL,
+ TAP_ID INT NOT NULL,
+ ITC_ID INT NULL,
+ PRIMARY KEY (TP_ID, TAP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_TIPOARTEPESCA_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_TIPOARTEPESCA_T_TIPOARTEPESCA1 FOREIGN KEY (TAP_ID) REFERENCES T_ARTEPESCA (TAP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_TIPOCAPTURADA FOREIGN KEY (ITC_ID) REFERENCES T_TIPOCAPTURADA (ITC_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Vento
+-- TABLE T_PESCADOR_HAS_T_ESPECIECAPTURADAS
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Vento (
-  VNT_ID serial,
-  VNT_Forca VARCHAR(20) NULL,
-  PRIMARY KEY (VNT_ID));
-
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ESPECIECAPTURADAS (
+ TP_ID INT NOT NULL,
+ T_TIPOCAPTURADA_ITC_ID INT NOT NULL,
+ PRIMARY KEY (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_ESPECIECAPTURADAS_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_ESPECIECAPTURADAS_T_TIPOCAPTURADA1 FOREIGN KEY (T_TIPOCAPTURADA_ITC_ID) REFERENCES T_TIPOCAPTURADA (ITC_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Ficha_Diaria
+-- TABLE T_PORTEEMBARCACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Ficha_Diaria (
-  FD_ID serial,
-  T_Estagiario_TU_ID INT NOT NULL,
-  T_Monitor_TU_ID1 INT NOT NULL,
-  FD_Data DATE NULL,
-  FD_Hora_Inicio TIME NULL,
-  FD_Hora_Termino TIME NULL,
-  OBS VARCHAR(100) NULL,
-  PTO_ID INT NOT NULL,
-  TMP_ID INT NOT NULL,
-  VNT_ID INT NOT NULL,
-  PRIMARY KEY (FD_ID),
-  CONSTRAINT fk_DSBQ_Ficha_Diaria_DSBQ_Porto1
-    FOREIGN KEY (PTO_ID)
-    REFERENCES T_Porto (PTO_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Ficha_Diaria_T_Usuario1
-    FOREIGN KEY (T_Estagiario_TU_ID)
-    REFERENCES T_Usuario (TU_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Ficha_Diaria_T_Usuario2
-    FOREIGN KEY (T_Monitor_TU_ID1)
-    REFERENCES T_Usuario (TU_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Ficha_Diaria_DSBQ_Tempo1
-    FOREIGN KEY (TMP_ID)
-    REFERENCES T_Tempo (TMP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Ficha_Diaria_DSBQ_Vento1
-    FOREIGN KEY (VNT_ID)
-    REFERENCES T_Vento (VNT_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+CREATE TABLE IF NOT EXISTS T_PORTEEMBARCACAO (
+ TPE_ID SERIAL,
+ TPE_PORTE VARCHAR(30) NOT NULL,
+ PRIMARY KEY (TPE_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Monitoramento
+-- TABLE T_PESCADOR_HAS_T_EMBARCACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Monitoramento (
-  MNT_ID serial,
-  MNT_Arte INT NULL,
-  MNT_Quantidade INT NULL,
-  MNT_Monitorado BOOLEAN NULL,
-  MNT_Embarcado BOOLEAN NULL,
-  FD_ID INT NOT NULL,
-  PRIMARY KEY (MNT_ID),
-  CONSTRAINT fk_DSBQ_Monitoramento_DSBQ_Ficha_Diaria1
-    FOREIGN KEY (FD_ID)
-    REFERENCES T_Ficha_Diaria (FD_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_EMBARCACAO (
+ TTE_ID INT NOT NULL,
+ TP_ID INT NOT NULL,
+ TPTE_MOTOR BOOLEAN NOT NULL,
+ TPE_ID INT NOT NULL,
+ PRIMARY KEY (TTE_ID, TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_EMBARCACAO_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_EMBARCACAO_T_EMBARCACAO1 FOREIGN KEY (TTE_ID) REFERENCES T_TIPOEMBARCACAO (TTE_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_EMBARCACAO_T_PORTEEMBARCACAO1 FOREIGN KEY (TPE_ID) REFERENCES T_PORTEEMBARCACAO (TPE_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Entrevista_Pescador
+-- TABLE T_PESCADOR_HAS_T_COLONIA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Entrevista_Pescador (
-  EP_ID serial,
-  EP_CodParaDesembarque INT NULL,
-  EP_NumPescadores INT NULL,
-  EP_DataEHoraSaida TIMESTAMP NULL,
-  EP_DataHoraChegada TIMESTAMP NULL,
-  SA_ID INT NOT NULL,
-  EP_DestinoDoPescado VARCHAR(45) NULL,
-  MNT_ID INT NOT NULL,
-  PRIMARY KEY (EP_ID),
-  CONSTRAINT fk_DSBQ_Entrevista_Pescador_DSBQ_Subamostra1
-    FOREIGN KEY (SA_ID)
-    REFERENCES T_Subamostra (SA_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Entrevista_Pescador_DSBQ_Monitoramento1
-    FOREIGN KEY (MNT_ID)
-    REFERENCES T_Monitoramento (MNT_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_COLONIA (
+ TP_ID INT NOT NULL,
+ TC_ID INT NOT NULL,
+ TPTC_DATAINSCCOLONIA DATE NULL,
+ PRIMARY KEY (TP_ID, TC_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_COLONIA_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_COLONIA_T_COLONIA1 FOREIGN KEY (TC_ID) REFERENCES T_COLONIA (TC_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Esp_Arte_Pesca
+-- TABLE T_ALTERACAOSENHA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Esp_Arte_Pesca (
-  EAP_ID serial,
-  EAP_Especializacao VARCHAR(45) NULL,
-  TAP_ID INT NOT NULL,
-  EP_ID INT NOT NULL,
-  PRIMARY KEY (EAP_ID),
-  CONSTRAINT fk_DSBQ_Esp_Arte_Pesca_DSBQ_Entrevista_Pescador1
-    FOREIGN KEY (EP_ID)
-    REFERENCES T_Entrevista_Pescador (EP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Esp_Arte_Pesca_T_ArtePesca1
-    FOREIGN KEY (TAP_ID)
-    REFERENCES T_ArtePesca (TAP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+CREATE TABLE IF NOT EXISTS T_ALTERACAOSENHA (
+ TAS_TOKEN CHAR(40) NOT NULL,
+ TAS_DATASOLICITACAO TIMESTAMP NOT NULL,
+ TAS_DATAALTERACAO TIMESTAMP NULL,
+ TU_ID INT NOT NULL,
+ PRIMARY KEY (TAS_TOKEN),
+ CONSTRAINT FK_T_ALTERACAOSENHA_T_USUARIO1 FOREIGN KEY (TU_ID) REFERENCES T_USUARIO (TU_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_ArrastoFundo
+-- TABLE T_USUARIO_HAS_T_TELEFONECONTATO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ArrastoFundo (
-  AF_ID serial,
-  AF_TempoAPesqueiro TIME NULL,
-  EAP_ID INT NOT NULL,
-  AF_Observacao VARCHAR(100) NULL,
-  AF_Avistamento VARCHAR(45) NULL,
-  AF_Prc_Gelo FLOAT NULL,
-  AF_Prc_Alimento FLOAT NULL,
-  AF_Lts_Oleo FLOAT NULL,
-  AF_Lts_Diesel VARCHAR(45) NULL,
-  PRIMARY KEY (AF_ID),
-  CONSTRAINT fk_DSBQ_ArrastoFundo_DSBQ_Esp_Arte_Pesca1
-    FOREIGN KEY (EAP_ID)
-    REFERENCES T_Esp_Arte_Pesca (EAP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+CREATE TABLE IF NOT EXISTS T_USUARIO_HAS_T_TELEFONECONTATO (
+ TU_ID INT NOT NULL,
+ TTCONT_ID INT NOT NULL,
+ PRIMARY KEY (TU_ID, TTCONT_ID),
+ CONSTRAINT FK_T_USUARIO_HAS_T_TELEFONECONTATO_T_USUARIO1 FOREIGN KEY (TU_ID) REFERENCES T_USUARIO (TU_ID),
+ CONSTRAINT FK_T_USUARIO_HAS_T_TELEFONECONTATO_T_TELEFONECONTATO1 FOREIGN KEY (TTCONT_ID) REFERENCES T_TELEFONECONTATO (TTCONT_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Pesqueiro_AF
+-- TABLE T_PESCADOR_HAS_T_TELEFONECONTATO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pesqueiro_AF (
-  PAF_ID serial,
-  PAF_Pesqueiro VARCHAR(45) NULL,
-  PAF_DuracaoArrasto TIME NULL,
-  AF_ID INT NOT NULL,
-  PRIMARY KEY (PAF_ID),
-  CONSTRAINT fk_DSBQ_Pesqueiro_AF_DSBQ_ArrastoFundo1
-    FOREIGN KEY (AF_ID)
-    REFERENCES T_ArrastoFundo (AF_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TELEFONECONTATO (
+ TP_ID INT NOT NULL,
+ TTCONT_ID INT NOT NULL,
+ PRIMARY KEY (TP_ID, TTCONT_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_TELEFONECONTATO_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_TELEFONECONTATO_T_TELEFONECONTATO1 FOREIGN KEY (TTCONT_ID) REFERENCES T_TELEFONECONTATO (TTCONT_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Dados_Emalhe
+-- TABLE T_GRUPO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Dados_Emalhe (
-  DEM_ID serial,
-  DEM_Dt_Lancamento TIMESTAMP NULL,
-  DEM_Dt_Recolhimento TIMESTAMP NULL,
-  DEM_Tamanho FLOAT NULL,
-  DEM_Altura FLOAT NULL,
-  DEM_Qtd_Panos INT NULL,
-  DEM_Malha INT NULL,
-  PRIMARY KEY (DEM_ID));
-
+CREATE TABLE IF NOT EXISTS T_GRUPO (
+ GRP_ID SERIAL,
+ GRP_NOME VARCHAR(45) NULL,
+ PRIMARY KEY (GRP_ID)
+);
 
-
 -- -----------------------------------------------------
--- Table T_Dados_Calao
+-- TABLE T_ORDEM
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Dados_Calao (
-  DCA_ID serial,
-  DCA_Tempo_Gasto TIME NULL,
-  DCA_Qtd_Lances INT NULL,
-  DCA_Tamanho FLOAT NULL,
-  DCA_Altura FLOAT NULL,
-  DCA_Malha INT NULL,
-  PRIMARY KEY (DCA_ID));
-
+CREATE TABLE IF NOT EXISTS T_ORDEM (
+ ORD_ID SERIAL,
+ ORD_NOME VARCHAR(30) NULL,
+ ORD_CARACTERISTICA VARCHAR(45) NULL,
+ GRP_ID INT NOT NULL,
+ PRIMARY KEY (ORD_ID),
+ CONSTRAINT FK_DSBQ_ORDEM_DSBQ_GRUPO FOREIGN KEY (GRP_ID) REFERENCES T_GRUPO (GRP_ID)
+);
 
-
+-- -----------------------------------------------------
+-- TABLE T_FAMILIA
 -- -----------------------------------------------------
--- Table T_Dados_Tarrafa
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Dados_Tarrafa (
-  DTA_ID serial,
-  DTA_Tempo_Gasto TIME NULL,
-  DTA_Altura FLOAT NULL,
-  DTA_Roda FLOAT NULL,
-  DTA_Malha INT NULL,
-  PRIMARY KEY (DTA_ID));
+CREATE TABLE IF NOT EXISTS T_FAMILIA (
+ FAM_ID SERIAL,
+ FAM_NOME VARCHAR(45) NULL,
+ FAM_ORDEM_FILOGENETICA INT NULL,
+ FAM_TIPO VARCHAR(45) NULL,
+ FAM_CARACTERISTICA VARCHAR(255) NULL,
+ ORD_ID INT NOT NULL,
+ PRIMARY KEY (FAM_ID),
+ CONSTRAINT FK_DSBQ_FAMILIA_DSBQ_ORDEM1 FOREIGN KEY (ORD_ID) REFERENCES T_ORDEM (ORD_ID)
+);
 
+-- -----------------------------------------------------
+-- TABLE T_GENERO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_GENERO (
+ GEN_ID SERIAL,
+ GEN_NOME VARCHAR(45) NULL,
+ FAM_ID INT NOT NULL,
+ PRIMARY KEY (GEN_ID),
+ CONSTRAINT FK_DSBQ_GENERO_DSBQ_FAMILIA1 FOREIGN KEY (FAM_ID) REFERENCES T_FAMILIA (FAM_ID)
+);
 
+-- -----------------------------------------------------
+-- TABLE T_ESPECIE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ESPECIE (
+ ESP_ID SERIAL,
+ ESP_NOME VARCHAR(45) NULL,
+ ESP_DESCRITOR VARCHAR(45) NULL,
+ ESP_NOME_COMUM VARCHAR(45) NULL,
+ GEN_ID INT NOT NULL,
+ PRIMARY KEY (ESP_ID),
+ CONSTRAINT FK_DSBQ_ESPÉCIE_DSBQ_GENERO1 FOREIGN KEY (GEN_ID) REFERENCES T_GENERO (GEN_ID)
+);
 
 -- -----------------------------------------------------
--- Table T_Rede
+-- TABLE T_SUBAMOSTRA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_SUBAMOSTRA (
+ SA_ID SERIAL,
+ SA_SUBAMOSTRA BOOLEAN NULL,
+ PRIMARY KEY (SA_ID)
+);
+
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Rede (
-  RD_ID serial,
-  RD_Num_Panos INT NULL,
-  RD_ComprimentoPano FLOAT NULL,
-  RD_AlturaPano FLOAT NULL,
-  RD_TamanhoMalha FLOAT NULL,
-  DEM_ID INT NULL,
-  DCA_ID INT NULL,
-  DTA_ID INT NULL,
-  PAF_ID INT NOT NULL,
-  EAP_ID INT NOT NULL,
-  RD_Observacao VARCHAR(100) NULL,
-  RD_Avistamento VARCHAR(45) NULL,
-  RD_Prc_Gelo FLOAT NULL,
-  RD_Prc_Alimento FLOAT NULL,
-  RD_Ltd_Oleo FLOAT NULL,
-  RD_Ltd_Diesel FLOAT NULL,
-  PRIMARY KEY (RD_ID),
-  CONSTRAINT fk_DSBQ_Rede_DSBQ_Pesqueiro_AF1
-    FOREIGN KEY (PAF_ID)
-    REFERENCES T_Pesqueiro_AF (PAF_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Rede_DSBQ_Esp_Arte_Pesca1
-    FOREIGN KEY (EAP_ID)
-    REFERENCES T_Esp_Arte_Pesca (EAP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Rede_DSBQ_Dados_Emalhe1
-    FOREIGN KEY (DEM_ID)
-    REFERENCES T_Dados_Emalhe (DEM_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Rede_DSBQ_Dados_Calao1
-    FOREIGN KEY (DCA_ID)
-    REFERENCES T_Dados_Calao (DCA_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Rede_DSBQ_Dados_Tarrafa1
-    FOREIGN KEY (DTA_ID)
-    REFERENCES T_Dados_Tarrafa (DTA_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
+-- TABLE T_PORTO
 -- -----------------------------------------------------
--- Table T_Isca
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Isca (
-  IS_ID serial,
-  IS_Tipo VARCHAR(45) NULL,
-  PRIMARY KEY (IS_ID));
-
-
-
--- -----------------------------------------------------
--- Table T_PescaLinha
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PescaLinha (
-  PL_ID serial,
-  PL_Pesqueiro VARCHAR(45) NULL,
-  PL_TempoAoPesqueiro TIME NULL,
-  PL_Num_Linhas INT NULL,
-  PL_Num_Anzois INT NULL,
-  PL_Observacao VARCHAR(100) NULL,
-  PL_Avistamento VARCHAR(60) NULL,
-  PL_Prc_Gelo FLOAT NULL,
-  PL_Prc_Alimento FLOAT NULL,
-  PL_Lts_Oleo FLOAT NULL,
-  PL_Lts_Diesel FLOAT NULL,
-  PAF_ID INT NOT NULL,
-  EAP_ID INT NOT NULL,
-  IS_ID INT NOT NULL,
-  PRIMARY KEY (PL_ID),
---  INDEX fk_DSBQ_PescaLinha_DSBQ_Pesqueiro_AF1_idx (PAF_ID ASC),
---  INDEX fk_DSBQ_PescaLinha_DSBQ_Esp_Arte_Pesca1_idx (EAP_ID ASC),
---  INDEX fk_DSBQ_PescaLinha_DSBQ_Isca1_idx (IS_ID ASC),
-  CONSTRAINT fk_DSBQ_PescaLinha_DSBQ_Pesqueiro_AF1
-    FOREIGN KEY (PAF_ID)
-    REFERENCES T_Pesqueiro_AF (PAF_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_PescaLinha_DSBQ_Esp_Arte_Pesca1
-    FOREIGN KEY (EAP_ID)
-    REFERENCES T_Esp_Arte_Pesca (EAP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_PescaLinha_DSBQ_Isca1
-    FOREIGN KEY (IS_ID)
-    REFERENCES T_Isca (IS_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
--- -----------------------------------------------------
--- Table T_Mare
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Mare (
-  MR_ID serial,
-  MR_Tipo VARCHAR(20) NULL,
-  PRIMARY KEY (MR_ID));
-
-
-
--- -----------------------------------------------------
--- Table T_Mariscagem
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Mariscagem (
-  MRG_ID serial,
-  MRG_TempoAPesqueiro TIME NULL,
-  MRG_TempoMariscagem TIME NULL,
-  MRG_DistanciaMarisco FLOAT NULL,
-  MRG_Num_Armadilha INT NULL,
-  MRG_Diesel INT NULL,
-  MRG_Obs VARCHAR(200) NULL,
-  AF_PAF_ID INT NOT NULL,
-  EAP_ID INT NOT NULL,
-  MR_ID INT NOT NULL,
-  PRIMARY KEY (MRG_ID),
---  INDEX fk_DSBQ_Mariscagem_DSBQ_Pesqueiro_AF1_idx (AF_PAF_ID ASC),
---  INDEX fk_DSBQ_Mariscagem_DSBQ_Esp_Arte_Pesca1_idx (EAP_ID ASC),
---  INDEX fk_DSBQ_Mariscagem_DSBQ_Mare1_idx (MR_ID ASC),
---  INDEX fk_DSBQ_Mariscagem_T_ArtePesca1_idx (TAP_ID_TipoMariscagem ASC),
-  CONSTRAINT fk_DSBQ_Mariscagem_DSBQ_Pesqueiro_AF1
-    FOREIGN KEY (AF_PAF_ID)
-    REFERENCES T_Pesqueiro_AF (PAF_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Mariscagem_DSBQ_Esp_Arte_Pesca1
-    FOREIGN KEY (EAP_ID)
-    REFERENCES T_Esp_Arte_Pesca (EAP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Mariscagem_DSBQ_Mare1
-    FOREIGN KEY (MR_ID)
-    REFERENCES T_Mare (MR_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
--- -----------------------------------------------------
--- Table T_Especie_Capturada
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Especie_Capturada (
-  SPC_ID serial,
-  SPC_Nome VARCHAR(45) NULL,
-  SPC_Quantidade INT NULL,
-  SPC_Peso_kg INT NULL,
-  SPC_Preco DECIMAL(5) NULL,
-  ESP_ID INT NOT NULL,
-  RD_ID INT NULL,
-  PL_ID INT NULL,
-  MRG_ID INT NULL,
-  AF_ID INT NULL,
-  PRIMARY KEY (SPC_ID),
---  INDEX fk_DSBQ_Especie_Capturada_DSBQ_Especie1_idx (ESP_ID ASC),
---  INDEX fk_DSBQ_Especie_Capturada_DSBQ_Rede1_idx (RD_ID ASC),
---  INDEX fk_DSBQ_Especie_Capturada_DSBQ_PescaLinha1_idx (PL_ID ASC),
---  INDEX fk_DSBQ_Especie_Capturada_DSBQ_Mariscagem1_idx (MRG_ID ASC),
---  INDEX fk_DSBQ_Especie_Capturada_DSBQ_ArrastoFundo1_idx (AF_ID ASC),
-  CONSTRAINT fk_DSBQ_Especie_Capturada_DSBQ_Especie1
-    FOREIGN KEY (ESP_ID)
-    REFERENCES T_Especie (ESP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Especie_Capturada_DSBQ_Rede1
-    FOREIGN KEY (RD_ID)
-    REFERENCES T_Rede (RD_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Especie_Capturada_DSBQ_PescaLinha1
-    FOREIGN KEY (PL_ID)
-    REFERENCES T_PescaLinha (PL_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Especie_Capturada_DSBQ_Mariscagem1
-    FOREIGN KEY (MRG_ID)
-    REFERENCES T_Mariscagem (MRG_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_DSBQ_Especie_Capturada_DSBQ_ArrastoFundo1
-    FOREIGN KEY (AF_ID)
-    REFERENCES T_ArrastoFundo (AF_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
--- -----------------------------------------------------
--- Table T_Pescador_has_TT_Dependente
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_TT_Dependente (
-  Tptd_id serial,
-  TP_ID INT NOT NULL,
-  T_TipoDependente_TTD_ID INT NOT NULL,
-  tp_td_quantidade integer,
-  Primary Key (tptd_id),
---  INDEX fk_T_Pescador_has_TT_Dependente_T_Pescador1_idx (TP_ID ASC),
---  INDEX fk_T_Pescador_has_TT_Dependente_T_TipoDependente1_idx (T_TipoDependente_TTD_ID ASC),
-  CONSTRAINT fk_T_Pescador_has_TT_Dependente_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_TT_Dependente_T_TipoDependente1
-    FOREIGN KEY (T_TipoDependente_TTD_ID)
-    REFERENCES T_TipoDependente (TTD_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
--- -----------------------------------------------------
--- Table T_Pescador_has_T_Comunidade
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_Pescador_has_T_Comunidade (
-  TP_ID INT NOT NULL,
-  TCOM_ID INT NOT NULL,
---  INDEX fk_T_Pescador_has_T_Comunidade_T_Pescador1_idx (T_Pescador_TP_ID ASC),
---  INDEX fk_T_Pescador_has_T_Comunidade_T_Comunidade1_idx (T_Comunidade_TCOM_ID ASC),
-  PRIMARY KEY (TCOM_ID),
-  CONSTRAINT fk_T_Pescador_has_T_Comunidade_T_Pescador1
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_Pescador (TP_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_T_Pescador_has_T_Comunidade_T_Comunidade1
-    FOREIGN KEY (TCOM_ID)
-    REFERENCES T_Comunidade (TCOM_ID)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE IF NOT EXISTS T_PORTO (
+ PTO_ID SERIAL,
+ PTO_NOME VARCHAR(45) NULL,
+ PTO_LOCAL VARCHAR(45) NULL,
+ TMUN_ID INT NOT NULL,
+ PRIMARY KEY (PTO_ID),
+ CONSTRAINT FK_DSBQ_PORTO_T_MUNICIPIO1 FOREIGN KEY (TMUN_ID) REFERENCES T_MUNICIPIO (TMUN_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_TEMPO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_TEMPO (
+ TMP_ID SERIAL,
+ TMP_ESTADO VARCHAR(45) NULL,
+ PRIMARY KEY (TMP_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_VENTO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_VENTO (
+ VNT_ID SERIAL,
+ VNT_FORCA VARCHAR(20) NULL,
+ PRIMARY KEY (VNT_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_FICHA_DIARIA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_FICHA_DIARIA (
+ FD_ID SERIAL,
+ T_ESTAGIARIO_TU_ID INT NOT NULL,
+ T_MONITOR_TU_ID1 INT NOT NULL,
+ FD_DATA DATE NULL,
+ FD_HORA_INICIO TIME NULL,
+ FD_HORA_TERMINO TIME NULL,
+ OBS VARCHAR(100) NULL,
+ PTO_ID INT NOT NULL,
+ TMP_ID INT NOT NULL,
+ VNT_ID INT NOT NULL,
+ PRIMARY KEY (FD_ID),
+ CONSTRAINT FK_DSBQ_FICHA_DIARIA_DSBQ_PORTO1 FOREIGN KEY (PTO_ID) REFERENCES T_PORTO (PTO_ID),
+ CONSTRAINT FK_DSBQ_FICHA_DIARIA_T_USUARIO1 FOREIGN KEY (T_ESTAGIARIO_TU_ID) REFERENCES T_USUARIO (TU_ID),
+ CONSTRAINT FK_DSBQ_FICHA_DIARIA_T_USUARIO2 FOREIGN KEY (T_MONITOR_TU_ID1) REFERENCES T_USUARIO (TU_ID),
+ CONSTRAINT FK_DSBQ_FICHA_DIARIA_DSBQ_TEMPO1 FOREIGN KEY (TMP_ID) REFERENCES T_TEMPO (TMP_ID),
+ CONSTRAINT FK_DSBQ_FICHA_DIARIA_DSBQ_VENTO1 FOREIGN KEY (VNT_ID)REFERENCES T_VENTO (VNT_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_MONITORAMENTO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_MONITORAMENTO (
+ MNT_ID SERIAL,
+ MNT_ARTE INT NULL,
+ MNT_QUANTIDADE INT NULL,
+ MNT_MONITORADO BOOLEAN NULL,
+ MNT_EMBARCADO BOOLEAN NULL,
+ FD_ID INT NOT NULL,
+ PRIMARY KEY (MNT_ID),
+ CONSTRAINT FK_DSBQ_MONITORAMENTO_DSBQ_FICHA_DIARIA1 FOREIGN KEY (FD_ID) REFERENCES T_FICHA_DIARIA (FD_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_ENTREVISTA_PESCADOR
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ENTREVISTA_PESCADOR (
+ EP_ID SERIAL,
+ EP_CODPARADESEMBARQUE INT NULL,
+ EP_NUMPESCADORES INT NULL,
+ EP_DATAEHORASAIDA TIMESTAMP NULL,
+ EP_DATAHORACHEGADA TIMESTAMP NULL,
+ SA_ID INT NOT NULL,
+ EP_DESTINODOPESCADO VARCHAR(45) NULL,
+ MNT_ID INT NOT NULL,
+ PRIMARY KEY (EP_ID),
+ CONSTRAINT FK_DSBQ_ENTREVISTA_PESCADOR_DSBQ_SUBAMOSTRA1 FOREIGN KEY (SA_ID) REFERENCES T_SUBAMOSTRA (SA_ID),
+ CONSTRAINT FK_DSBQ_ENTREVISTA_PESCADOR_DSBQ_MONITORAMENTO1 FOREIGN KEY (MNT_ID) REFERENCES T_MONITORAMENTO (MNT_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_ESP_ARTE_PESCA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ESP_ARTE_PESCA (
+ EAP_ID SERIAL,
+ EAP_ESPECIALIZACAO VARCHAR(45) NULL,
+ TAP_ID INT NOT NULL,
+ EP_ID INT NOT NULL,
+ PRIMARY KEY (EAP_ID),
+ CONSTRAINT FK_DSBQ_ESP_ARTE_PESCA_DSBQ_ENTREVISTA_PESCADOR1 FOREIGN KEY (EP_ID) REFERENCES T_ENTREVISTA_PESCADOR (EP_ID),
+ CONSTRAINT FK_DSBQ_ESP_ARTE_PESCA_T_ARTEPESCA1 FOREIGN KEY (TAP_ID) REFERENCES T_ARTEPESCA (TAP_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_ARRASTOFUNDO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ARRASTOFUNDO (
+ AF_ID SERIAL,
+ AF_TEMPOAPESQUEIRO TIME NULL,
+ EAP_ID INT NOT NULL,
+ AF_OBSERVACAO VARCHAR(100) NULL,
+ AF_AVISTAMENTO VARCHAR(45) NULL,
+ AF_PRC_GELO FLOAT NULL,
+ AF_PRC_ALIMENTO FLOAT NULL,
+ AF_LTS_OLEO FLOAT NULL,
+ AF_LTS_DIESEL VARCHAR(45) NULL,
+ PRIMARY KEY (AF_ID),
+ CONSTRAINT FK_DSBQ_ARRASTOFUNDO_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_PESQUEIRO_AF
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESQUEIRO_AF (
+ PAF_ID SERIAL,
+ PAF_PESQUEIRO VARCHAR(45) NULL,
+ PAF_DURACAOARRASTO TIME NULL,
+ AF_ID INT NOT NULL,
+ PRIMARY KEY (PAF_ID),
+ CONSTRAINT FK_DSBQ_PESQUEIRO_AF_DSBQ_ARRASTOFUNDO1 FOREIGN KEY (AF_ID) REFERENCES T_ARRASTOFUNDO (AF_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_DADOS_EMALHE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_DADOS_EMALHE (
+ DEM_ID SERIAL,
+ DEM_DT_LANCAMENTO TIMESTAMP NULL,
+ DEM_DT_RECOLHIMENTO TIMESTAMP NULL,
+ DEM_TAMANHO FLOAT NULL,
+ DEM_ALTURA FLOAT NULL,
+ DEM_QTD_PANOS INT NULL,
+ DEM_MALHA INT NULL,
+ PRIMARY KEY (DEM_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_DADOS_CALAO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_DADOS_CALAO (
+ DCA_ID SERIAL,
+ DCA_TEMPO_GASTO TIME NULL,
+ DCA_QTD_LANCES INT NULL,
+ DCA_TAMANHO FLOAT NULL,
+ DCA_ALTURA FLOAT NULL,
+ DCA_MALHA INT NULL,
+ PRIMARY KEY (DCA_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_DADOS_TARRAFA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_DADOS_TARRAFA (
+ DTA_ID SERIAL,
+ DTA_TEMPO_GASTO TIME NULL,
+ DTA_ALTURA FLOAT NULL,
+ DTA_RODA FLOAT NULL,
+ DTA_MALHA INT NULL,
+ PRIMARY KEY (DTA_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_REDE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_REDE (
+ RD_ID SERIAL,
+ RD_NUM_PANOS INT NULL,
+ RD_COMPRIMENTOPANO FLOAT NULL,
+ RD_ALTURAPANO FLOAT NULL,
+ RD_TAMANHOMALHA FLOAT NULL,
+ DEM_ID INT NULL,
+ DCA_ID INT NULL,
+ DTA_ID INT NULL,
+ PAF_ID INT NOT NULL,
+ EAP_ID INT NOT NULL,
+ RD_OBSERVACAO VARCHAR(100) NULL,
+ RD_AVISTAMENTO VARCHAR(45) NULL,
+ RD_PRC_GELO FLOAT NULL,
+ RD_PRC_ALIMENTO FLOAT NULL,
+ RD_LTD_OLEO FLOAT NULL,
+ RD_LTD_DIESEL FLOAT NULL,
+ PRIMARY KEY (RD_ID),
+ CONSTRAINT FK_DSBQ_REDE_DSBQ_PESQUEIRO_AF1 FOREIGN KEY (PAF_ID) REFERENCES T_PESQUEIRO_AF (PAF_ID),
+ CONSTRAINT FK_DSBQ_REDE_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID),
+ CONSTRAINT FK_DSBQ_REDE_DSBQ_DADOS_EMALHE1 FOREIGN KEY (DEM_ID) REFERENCES T_DADOS_EMALHE (DEM_ID),
+ CONSTRAINT FK_DSBQ_REDE_DSBQ_DADOS_CALAO1 FOREIGN KEY (DCA_ID) REFERENCES T_DADOS_CALAO (DCA_ID),
+ CONSTRAINT FK_DSBQ_REDE_DSBQ_DADOS_TARRAFA1 FOREIGN KEY (DTA_ID) REFERENCES T_DADOS_TARRAFA (DTA_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_ISCA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ISCA (
+ IS_ID SERIAL,
+ IS_TIPO VARCHAR(45) NULL,
+ PRIMARY KEY (IS_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_PESCALINHA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESCALINHA (
+ PL_ID SERIAL,
+ PL_PESQUEIRO VARCHAR(45) NULL,
+ PL_TEMPOAOPESQUEIRO TIME NULL,
+ PL_NUM_LINHAS INT NULL,
+ PL_NUM_ANZOIS INT NULL,
+ PL_OBSERVACAO VARCHAR(100) NULL,
+ PL_AVISTAMENTO VARCHAR(60) NULL,
+ PL_PRC_GELO FLOAT NULL,
+ PL_PRC_ALIMENTO FLOAT NULL,
+ PL_LTS_OLEO FLOAT NULL,
+ PL_LTS_DIESEL FLOAT NULL,
+ PAF_ID INT NOT NULL,
+ EAP_ID INT NOT NULL,
+ IS_ID INT NOT NULL,
+ PRIMARY KEY (PL_ID),
+ CONSTRAINT FK_DSBQ_PESCALINHA_DSBQ_PESQUEIRO_AF1 FOREIGN KEY (PAF_ID) REFERENCES T_PESQUEIRO_AF (PAF_ID),
+ CONSTRAINT FK_DSBQ_PESCALINHA_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID),
+ CONSTRAINT FK_DSBQ_PESCALINHA_DSBQ_ISCA1 FOREIGN KEY (IS_ID) REFERENCES T_ISCA (IS_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_MARE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_MARE (
+ MR_ID SERIAL,
+ MR_TIPO VARCHAR(20) NULL,
+ PRIMARY KEY (MR_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_MARISCAGEM
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_MARISCAGEM (
+ MRG_ID SERIAL,
+ MRG_TEMPOAPESQUEIRO TIME NULL,
+ MRG_TEMPOMARISCAGEM TIME NULL,
+ MRG_DISTANCIAMARISCO FLOAT NULL,
+ MRG_NUM_ARMADILHA INT NULL,
+ MRG_DIESEL INT NULL,
+ MRG_OBS VARCHAR(200) NULL,
+ AF_PAF_ID INT NOT NULL,
+ EAP_ID INT NOT NULL,
+ MR_ID INT NOT NULL,
+ PRIMARY KEY (MRG_ID),
+ CONSTRAINT FK_DSBQ_MARISCAGEM_DSBQ_PESQUEIRO_AF1 FOREIGN KEY (AF_PAF_ID) REFERENCES T_PESQUEIRO_AF (PAF_ID),
+ CONSTRAINT FK_DSBQ_MARISCAGEM_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID),
+ CONSTRAINT FK_DSBQ_MARISCAGEM_DSBQ_MARE1 FOREIGN KEY (MR_ID) REFERENCES T_MARE (MR_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_ESPECIE_CAPTURADA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_ESPECIE_CAPTURADA (
+ SPC_ID SERIAL,
+ SPC_NOME VARCHAR(45) NULL,
+ SPC_QUANTIDADE INT NULL,
+ SPC_PESO_KG INT NULL,
+ SPC_PRECO DECIMAL(5) NULL,
+ ESP_ID INT NOT NULL,
+ RD_ID INT NULL,
+ PL_ID INT NULL,
+ MRG_ID INT NULL,
+ AF_ID INT NULL,
+ PRIMARY KEY (SPC_ID),
+ CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_ESPECIE1 FOREIGN KEY (ESP_ID) REFERENCES T_ESPECIE (ESP_ID),
+ CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_REDE1 FOREIGN KEY (RD_ID) REFERENCES T_REDE (RD_ID),
+ CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_PESCALINHA1 FOREIGN KEY (PL_ID) REFERENCES T_PESCALINHA (PL_ID),
+ CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_MARISCAGEM1 FOREIGN KEY (MRG_ID) REFERENCES T_MARISCAGEM (MRG_ID),
+ CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_ARRASTOFUNDO1 FOREIGN KEY (AF_ID) REFERENCES T_ARRASTOFUNDO (AF_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_PESCADOR_HAS_TT_DEPENDENTE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_TT_DEPENDENTE (
+ TPTD_ID SERIAL,
+ TP_ID INT NOT NULL,
+ T_TIPODEPENDENTE_TTD_ID INT NOT NULL,
+ TP_TD_QUANTIDADE INTEGER,
+ PRIMARY KEY (TPTD_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_TT_DEPENDENTE_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_TT_DEPENDENTE_T_TIPODEPENDENTE1 FOREIGN KEY (T_TIPODEPENDENTE_TTD_ID) REFERENCES T_TIPODEPENDENTE (TTD_ID)
+);
+
+-- -----------------------------------------------------
+-- TABLE T_PESCADOR_HAS_T_COMUNIDADE
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_COMUNIDADE (
+ TP_ID INT NOT NULL,
+ TCOM_ID INT NOT NULL,
+ PRIMARY KEY (TCOM_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_COMUNIDADE_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_COMUNIDADE_T_COMUNIDADE1 FOREIGN KEY (TCOM_ID) REFERENCES T_COMUNIDADE (TCOM_ID)
+);
 
 -- -----------------------------------------------------
 -- VIEW USUARIO
 -- -----------------------------------------------------
 CREATE VIEW V_USUARIO AS
-    SELECT T_USUARIO.TU_ID,
-    T_USUARIO.TU_NOME, T_USUARIO.TU_SEXO,
-    T_USUARIO.TU_CPF, T_USUARIO.TU_RG,
-    T_USUARIO.TU_EMAIL, T_USUARIO.TU_USUARIODELETADO,
-    T_USUARIO.TU_TELRES, T_USUARIO.TU_TELCEL,
-    T_USUARIO.TL_ID,
-    T_USUARIO.TP_ID, T_PERFIL.TP_PERFIL,
-    T_USUARIO.TE_ID,
-    T_LOGIN.TL_LOGIN,
-    T_ENDERECO.TE_LOGRADOURO, T_ENDERECO.TE_NUMERO, T_ENDERECO.TE_COMP, T_ENDERECO.TE_BAIRRO, T_ENDERECO.TE_CEP,
-    T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
-    FROM T_USUARIO, T_LOGIN, T_ENDERECO, T_MUNICIPIO, T_PERFIL
-    WHERE T_USUARIO.TL_ID = T_LOGIN.TL_ID AND
-    T_USUARIO.TE_ID = T_ENDERECO.TE_ID AND
-    T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID AND
-    T_USUARIO.TP_ID = T_PERFIL.TP_ID;
+ SELECT T_USUARIO.TU_ID,
+ T_USUARIO.TU_NOME, T_USUARIO.TU_SEXO,
+ T_USUARIO.TU_CPF, T_USUARIO.TU_RG,
+ T_USUARIO.TU_EMAIL, T_USUARIO.TU_USUARIODELETADO,
+ T_USUARIO.TU_TELRES, T_USUARIO.TU_TELCEL,
+ T_USUARIO.TL_ID,
+ T_USUARIO.TP_ID, T_PERFIL.TP_PERFIL,
+ T_USUARIO.TE_ID,
+ T_LOGIN.TL_LOGIN,
+ T_ENDERECO.TE_LOGRADOURO, T_ENDERECO.TE_NUMERO, T_ENDERECO.TE_COMP, T_ENDERECO.TE_BAIRRO, T_ENDERECO.TE_CEP,
+ T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
+ FROM T_USUARIO, T_LOGIN, T_ENDERECO, T_MUNICIPIO, T_PERFIL
+ WHERE T_USUARIO.TL_ID = T_LOGIN.TL_ID AND
+ T_USUARIO.TE_ID = T_ENDERECO.TE_ID AND
+ T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID AND
+ T_USUARIO.TP_ID = T_PERFIL.TP_ID;
 
-
+-- -----------------------------------------------------
+-- VIEW COLONIA
+-- -----------------------------------------------------
 CREATE VIEW V_COLONIA AS
-   SELECT T_COLONIA.TC_ID, T_COLONIA.TC_NOME, T_COLONIA.TC_ESPECIFICIDADE, T_COLONIA.TCOM_ID,
-   T_COLONIA.TE_ID, T_ENDERECO.TE_LOGRADOURO, T_ENDERECO.TE_NUMERO, T_ENDERECO.TE_COMP, T_ENDERECO.TE_BAIRRO, T_ENDERECO.TE_CEP,
-   T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
-   FROM T_COLONIA, T_ENDERECO, T_MUNICIPIO
-   WHERE T_COLONIA.TE_ID = T_ENDERECO.TE_ID AND
-   T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID;
+ SELECT T_COLONIA.TC_ID, T_COLONIA.TC_NOME, T_COLONIA.TC_ESPECIFICIDADE, T_COLONIA.TCOM_ID,
+ T_COLONIA.TE_ID, T_ENDERECO.TE_LOGRADOURO, T_ENDERECO.TE_NUMERO, T_ENDERECO.TE_COMP, T_ENDERECO.TE_BAIRRO, T_ENDERECO.TE_CEP,
+ T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
+ FROM T_COLONIA, T_ENDERECO, T_MUNICIPIO
+ WHERE T_COLONIA.TE_ID = T_ENDERECO.TE_ID AND
+ T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID;
 
-
-
-
--- DROP VIEW V_PESCADOR;
-
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
 CREATE VIEW V_PESCADOR AS
 SELECT
 TP.TP_ID, TP.TP_NOME,
@@ -1192,90 +869,101 @@ TP.TP_NIT_CEI, TP.TP_RG,
 TP.TP_CMA, TP.TP_RGB_MAA_IBAMA,
 TP.TP_CIR_CAP_PORTO, TP.TP_CPF,
 TP.TP_DATANASC,
-TP.tp_especificidade, TP.esc_id,
+TP.TP_ESPECIFICIDADE, TP.ESC_ID,
 TP.TMUN_ID_NATURAL, TM.TMUN_MUNICIPIO "MUNNAT", TM.TUF_SIGLA "SIGNAT",
 TP.TE_ID, TE.TE_LOGRADOURO, TE.TE_NUMERO,
 TE.TE_COMP, TE.TE_BAIRRO, TE.TE_CEP,
 TE.TMUN_ID, TM.TMUN_MUNICIPIO, TM.TUF_SIGLA
 FROM
-T_PESCADOR AS TP,  T_ENDERECO AS TE, T_MUNICIPIO AS TM
+T_PESCADOR AS TP, T_ENDERECO AS TE, T_MUNICIPIO AS TM
 WHERE
 TP.TMUN_ID_NATURAL = TM.TMUN_ID AND
 TP.TE_ID = TE.TE_ID;
 
-CREATE TABLE t_pescador_has_telefone
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
+CREATE TABLE T_PESCADOR_HAS_TELEFONE
 (
-  tpt_tp_id integer not null,
-  tpt_ttel_id integer not null,
-  tpt_telefone VARCHAR(20) not null,
-  CONSTRAINT t_pescadorcontato_pkey PRIMARY KEY (tpt_tp_id, tpt_ttel_id),
-  CONSTRAINT fk_tpt_tp FOREIGN KEY (tpt_tp_id) REFERENCES t_pescador (tp_id),
-  CONSTRAINT fk_tpt_ttel FOREIGN KEY (tpt_ttel_id) REFERENCES t_tipotel (ttel_id)
-)
-
-CREATE VIEW V_PescadorHasTelefone AS
-select pt.tpt_tp_id, pt.tpt_ttel_id, pt.tpt_telefone, tt.ttel_desc
-from t_pescador_has_telefone as PT, t_tipotel as TT
-where pt.tpt_ttel_id = tt.ttel_id;
-
-CREATE TABLE t_pescador_has_t_tipodependente
-(
-  tp_id integer NOT NULL,
-  ttd_id integer NOT NULL,
-  tptd_quantidade integer,
-  CONSTRAINT t_pescador_has_t_tipodependente_pkey PRIMARY KEY (tp_id, ttd_id),
-  CONSTRAINT fk_t_pescador_has_t_tipodependente_tp_id FOREIGN KEY (tp_id) REFERENCES t_pescador (tp_id),
-  CONSTRAINT fk_t_pescador_has_t_tipodependente_ttd_id FOREIGN KEY (ttd_id) REFERENCES t_tipodependente (ttd_id)
+ TPT_TP_ID INTEGER NOT NULL,
+ TPT_TTEL_ID INTEGER NOT NULL,
+ TPT_TELEFONE VARCHAR(20) NOT NULL,
+ CONSTRAINT T_PESCADORCONTATO_PKEY PRIMARY KEY (TPT_TP_ID, TPT_TTEL_ID),
+ CONSTRAINT FK_TPT_TP FOREIGN KEY (TPT_TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_TPT_TTEL FOREIGN KEY (TPT_TTEL_ID) REFERENCES T_TIPOTEL (TTEL_ID)
 );
 
-INSERT INTO t_pescador_has_t_tipodependente (tp_id, ttd_id, tptd_quantidade)
-SELECT tp_id, t_tipodependente_ttd_id, tp_td_quantidade FROM t_pescador_has_tt_dependente ;
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
+CREATE VIEW V_PESCADORHASTELEFONE AS
+SELECT PT.TPT_TP_ID, PT.TPT_TTEL_ID, PT.TPT_TELEFONE, TT.TTEL_DESC
+FROM T_PESCADOR_HAS_TELEFONE AS PT, T_TIPOTEL AS TT
+WHERE PT.TPT_TTEL_ID = TT.TTEL_ID;
 
+CREATE TABLE T_PESCADOR_HAS_T_TIPODEPENDENTE
+(
+ TP_ID INTEGER NOT NULL,
+ TTD_ID INTEGER NOT NULL,
+ TPTD_QUANTIDADE INTEGER,
+ CONSTRAINT T_PESCADOR_HAS_T_TIPODEPENDENTE_PKEY PRIMARY KEY (TP_ID, TTD_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_TIPODEPENDENTE_TP_ID FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_TIPODEPENDENTE_TTD_ID FOREIGN KEY (TTD_ID) REFERENCES T_TIPODEPENDENTE (TTD_ID)
+);
+
+INSERT INTO T_PESCADOR_HAS_T_TIPODEPENDENTE (TP_ID, TTD_ID, TPTD_QUANTIDADE)
+SELECT TP_ID, T_TIPODEPENDENTE_TTD_ID, TP_TD_QUANTIDADE FROM T_PESCADOR_HAS_TT_DEPENDENTE ;
+
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
 CREATE VIEW V_PESCADORHASDEPENDENTE AS
 SELECT
 PD.TP_ID, PD.TTD_ID, PD.TPTD_QUANTIDADE,
 TD.TTD_TIPODEPENDENTE
-FROM 
+FROM
 T_PESCADOR_HAS_T_TIPODEPENDENTE AS PD,
 T_TIPODEPENDENTE AS TD
 WHERE
 PD.TTD_ID = TD.TTD_ID;
 
-
-
-
-
-CREATE TABLE t_tiporenda (
-ttr_id serial,
-ttr_descricao  VARCHAR(45) not null,
-CONSTRAINT t_tiporenda_pkey PRIMARY KEY (ttr_id)
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
+CREATE TABLE T_TIPORENDA (
+TTR_ID SERIAL,
+TTR_DESCRICAO VARCHAR(45) NOT NULL,
+CONSTRAINT T_TIPORENDA_TTR_ID_PKEY PRIMARY KEY (TTR_ID)
 );
 
-insert into t_tiporenda values (1, 'Pesca');
-insert into t_tiporenda values (2, 'Outra renda');
+INSERT INTO T_TIPORENDA VALUES (1, 'PESCA');
+INSERT INTO T_TIPORENDA VALUES (2, 'OUTRA RENDA');
 
 
---DROP TABLE t_pescador_has_t_renda;
-
-CREATE TABLE t_pescador_has_t_renda
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
+--DROP TABLE T_PESCADOR_HAS_T_RENDA;
+CREATE TABLE T_PESCADOR_HAS_T_RENDA
 (
-  tp_id integer NOT NULL,
-  ren_id integer NOT NULL,
-  ttr_id integer NOT NULL,
-  CONSTRAINT t_pescador_has_t_renda_pkey PRIMARY KEY (tp_id, ren_id, ttr_id),
-  CONSTRAINT fk_t_pescador_has_t_renda_tp_id FOREIGN KEY (tp_id) REFERENCES t_pescador (tp_id),
-  CONSTRAINT fk_t_pescador_has_t_renda FOREIGN KEY (ren_id) REFERENCES t_renda (ren_id),
-CONSTRAINT fk_t_pescador_has_t_renda_ttr_id FOREIGN KEY (ttr_id) REFERENCES t_tiporenda (ttr_id)
+ TP_ID INTEGER NOT NULL,
+ REN_ID INTEGER NOT NULL,
+ TTR_ID INTEGER NOT NULL,
+ CONSTRAINT T_PESCADOR_HAS_T_RENDA_PKEY PRIMARY KEY (TP_ID, REN_ID, TTR_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_RENDA_TP_ID FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_RENDA FOREIGN KEY (REN_ID) REFERENCES T_RENDA (REN_ID),
+CONSTRAINT FK_T_PESCADOR_HAS_T_RENDA_TTR_ID FOREIGN KEY (TTR_ID) REFERENCES T_TIPORENDA (TTR_ID)
 );
 
-alter table t_pescador ADD CONSTRAINT fk_pescador_esc_id FOREIGN KEY (esc_id) REFERENCES t_escolaridade(esc_id);
-
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
 CREATE VIEW V_PESCADORHASRENDA AS
 SELECT
-PHR.TP_ID, 
+PHR.TP_ID,
 PHR.REN_ID, TR.REN_RENDA,
 PHR.TTR_ID, TTR.TTR_DESCRICAO
-FROM 
+FROM
 T_PESCADOR_HAS_T_RENDA AS PHR,
 T_RENDA AS TR,
 T_TIPORENDA AS TTR
@@ -1283,25 +971,30 @@ WHERE
 PHR.REN_ID = TR.REN_ID AND
 PHR.TTR_ID = TTR.TTR_ID;
 
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
 CREATE VIEW V_PESCADORHASCOLONIA AS
 SELECT
-PHC.TP_ID, 
+PHC.TP_ID,
 PHC.TC_ID, TC.TC_NOME,
 PHC.TPTC_DATAINSCCOLONIA
-FROM 
+FROM
 T_PESCADOR_HAS_T_COLONIA AS PHC,
 T_COLONIA AS TC
 WHERE
 PHC.TC_ID = TC.TC_ID;
 
---V_PESCADORHASEMBARCACAO
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
 CREATE VIEW V_PESCADORHASEMBARCACAO AS
 SELECT
 PHE.TP_ID,
 PHE.TTE_ID, TTE.TTE_TIPOEMBARCACAO,
 PHE.TPTE_MOTOR,
-PHE.TPE_ID,  TPE.TPE_PORTE
-FROM 
+PHE.TPE_ID, TPE.TPE_PORTE
+FROM
 T_PESCADOR_HAS_T_EMBARCACAO AS PHE,
 T_TIPOEMBARCACAO AS TTE,
 T_PORTEEMBARCACAO AS TPE
@@ -1309,48 +1002,43 @@ WHERE
 PHE.TTE_ID = TTE.TTE_ID AND
 PHE.TPE_ID = TPE.TPE_ID;
 
---V_PESCADORHASARTETIPOAREA
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
 CREATE VIEW V_PESCADORHASARTETIPOAREA AS
 SELECT
 PATA.TP_ID,
 PATA.TAP_ID, ARTE.TAP_ARTEPESCA,
-PATA.ITC_ID,  TIPO.ITC_TIPO
-FROM 
+PATA.ITC_ID, TIPO.ITC_TIPO
+FROM
 T_PESCADOR_HAS_T_TIPOARTEPESCA AS PATA,
 T_TIPOCAPTURADA AS TIPO,
 T_ARTEPESCA AS ARTE
 WHERE
-PATA.TAP_ID = ARTE.TAP_ID AND 
+PATA.TAP_ID = ARTE.TAP_ID AND
 PATA.ITC_ID = TIPO.ITC_ID;
 
-
 -- -----------------------------------------------------
--- Table T_AreaPesca_has_T_Pescador
+-- TABLE T_AREAPESCA_HAS_T_PESCADOR
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_AREAPESCA (
-TP_ID INT NOT NULL,  
+TP_ID INT NOT NULL,
 TAREAP_ID INT NOT NULL,
-  PRIMARY KEY (TP_ID, TAREAP_ID),
-  CONSTRAINT FK_T_PESCADOR_HAS_T_AREAPESCA_TP_ID
-    FOREIGN KEY (TP_ID)
-    REFERENCES T_PESCADOR (TP_ID),
-  CONSTRAINT FK_T_PESCADOR_HAS_T_AREAPESCA_TAREAP_ID
-    FOREIGN KEY (TAREAP_ID)
-    REFERENCES T_AREAPESCA (TAREAP_ID)
+ PRIMARY KEY (TP_ID, TAREAP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_AREAPESCA_TP_ID FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_AREAPESCA_TAREAP_ID FOREIGN KEY (TAREAP_ID) REFERENCES T_AREAPESCA (TAREAP_ID)
 );
 
-INSERT INTO T_PESCADOR_HAS_T_AREAPESCA (TP_ID, TAREAP_ID)
-SELECT TP_ID, TAREAP_ID FROM T_AREAPESCA_HAS_T_PESCADOR;
+--INSERT INTO T_PESCADOR_HAS_T_AREAPESCA (TP_ID, TAREAP_ID)
+--SELECT TP_ID, TAREAP_ID FROM T_AREAPESCA_HAS_T_PESCADOR;
 
-drop table T_AREAPESCA_HAS_T_PESCADOR;
+---DROP TABLE T_AREAPESCA_HAS_T_PESCADOR;
 
+-- -----------------------------------------------------
+-- VIEW Pescador
+-- -----------------------------------------------------
 CREATE VIEW V_PESCADOR_HAS_T_AREAPESCA AS
-SELECT
-PA.TP_ID,
-PA.TAREAP_ID, AREA.TAREAP_AREAPESCA
-FROM 
-T_PESCADOR_HAS_T_AREAPESCA AS PA,
-T_AREAPESCA AS AREA
-WHERE
-PA.TAREAP_ID = AREA.TAREAP_ID;
+SELECT PA.TP_ID, PA.TAREAP_ID, AREA.TAREAP_AREAPESCA
+FROM T_PESCADOR_HAS_T_AREAPESCA AS PA, T_AREAPESCA AS AREA
+WHERE PA.TAREAP_ID = AREA.TAREAP_ID;
 
