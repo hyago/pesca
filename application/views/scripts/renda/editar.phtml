@@ -3,21 +3,34 @@
     <h3>Editar</h3>
 </div>
 
-<form action="<?=$this->url(array("controller"=>"Renda","action"=>"atualizar"),null,true)?>" method="post">
-   <input type="hidden" name="idRenda" value="<?= $this->rendas['ren_id'] ?>" />
-   <fieldset id="Renda">
-     <div id="esquerda">   
+<form action="<?= $this->url(array("controller" => "Renda", "action" => "atualizar"), null, true) ?>" method="post">
+    <fieldset id="Social">
+        <div id="esquerda">
+            <div id="form-esq">
+                <label>Código: </label>
+                <input type="text" readonly="" size="5" name="idRenda" value="<?= $this->rendas['ren_id'] ?>" />
+            </div>
 
-     <div id="form-esq"> 
-            <label>Renda: </label>
-            <input type="text" name="renRenda" value="<?= $this->rendas['ren_renda'] ?>"/> <br />
+            <div id="form-esq">
+                <label>Renda: </label>
+                <input type="text" name="renRenda" value="<?= $this->rendas['ren_renda'] ?>"/> <br />
+            </div>
+
+            <div id="form-esq">
+                <label>Fator Mínimo: </label>
+                <input type="number" min="0.0"  step="0.5" name="renFatorMin" value="<?= $this->rendas['ren_fatormin'] ?>"/> <br />
+            </div>
+
+            <div id="form-esq">
+                <label>Fator Máximo: </label>
+                <input type="number" min="0.0"  step="0.5" name="renFatorMax" value="<?= $this->rendas['ren_fatormax'] ?>"/> <br />
+            </div>
+
+
+            <div id="Submit">
+                <a href="<?= $this->url(array("controller" => "Renda", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
+                <input type="submit" value="Atualizar" />
+            </div>
         </div>
-        
-        
-         <div id="Submit">
-            <a href="<?=$this->url(array("controller"=>"Renda","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
-            <input type="submit" value="Atualizar" />
-        </div>
-      </div> 
     </fieldset>
 </form>
