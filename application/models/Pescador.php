@@ -204,6 +204,13 @@ class Application_Model_Pescador {
     public function modelInsertPescador(
     $tp_nome, $tp_sexo, $tp_rg, $tp_cpf, $tp_apelido, $tp_matricula, $tp_filiacaopai, $tp_filiacaomae, $tp_ctps, $tp_pis, $tp_inss, $tp_nit_cei, $tp_cma, $tp_rgb_maa_ibama, $tp_cir_cap_porto, $tp_datanasc, $tmun_id_natural, $idEndereco, $esc_id) {
 
+        $dataNasc = $tp_datanasc;
+        if (!$dataNasc) {
+            $dataNasc = NULL;
+        } else {
+            $dataNasc = date("Y-m-d", strtotime($tp_datanasc));
+        }
+        
         $dbTablePescador = new Application_Model_DbTable_Pescador();
         $dadosPescador = array(
             'tp_nome' => $tp_nome,
@@ -221,7 +228,7 @@ class Application_Model_Pescador {
             'tp_cma' => $tp_cma,
             'tp_rgb_maa_ibama' => $tp_rgb_maa_ibama,
             'tp_cir_cap_porto' => $tp_cir_cap_porto,
-            'tp_datanasc' => date("Y-m-d", strtotime($tp_datanasc)),
+            'tp_datanasc' => $dataNasc,
             'tmun_id_natural' => $tmun_id_natural,
             'te_id' => $idEndereco,
             'esc_id' => $esc_id
@@ -235,6 +242,13 @@ class Application_Model_Pescador {
     public function modelUpdatePescador(
     $tp_id, $tp_nome, $tp_sexo, $tp_rg, $tp_cpf, $tp_apelido, $tp_matricula, $tp_filiacaopai, $tp_filiacaomae, $tp_ctps, $tp_pis, $tp_inss, $tp_nit_cei, $tp_cma, $tp_rgb_maa_ibama, $tp_cir_cap_porto, $tp_datanasc, $tmun_id_natural, $idEndereco, $esc_id) {
 
+        $dataNasc = $tp_datanasc;
+        if (!$dataNasc) {
+            $dataNasc = NULL;
+        } else {
+            $dataNasc = date("Y-m-d", strtotime($tp_datanasc));
+        }
+        
         $dbTablePescador = new Application_Model_DbTable_Pescador();
         $dadosPescador = array(
             'tp_nome' => $tp_nome,
@@ -252,7 +266,7 @@ class Application_Model_Pescador {
             'tp_cma' => $tp_cma,
             'tp_rgb_maa_ibama' => $tp_rgb_maa_ibama,
             'tp_cir_cap_porto' => $tp_cir_cap_porto,
-            'tp_datanasc' => date("Y-m-d", strtotime($tp_datanasc)),
+            'tp_datanasc' => $dataNasc,
             'tmun_id_natural' => $tmun_id_natural,
             'te_id' => $idEndereco,
             'esc_id' => $esc_id
