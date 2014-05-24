@@ -21,7 +21,7 @@ class RendaController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $renda = $this->modelRenda->select();
+        $renda = $this->modelRenda->select(null, 'ren_id', null);
       
         $this->view->assign("rendas", $renda);
     }

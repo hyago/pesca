@@ -34,7 +34,7 @@ class TipoEmbarcacaoController extends Zend_Controller_Action
      */
     public function indexAction()
     {        
-        $dados = $this->modelTipoEmbarcacao->select();
+        $dados = $this->modelTipoEmbarcacao->select( NULL, 'tte_tipoembarcacao', NULL );
       
         $this->view->assign("dados", $dados);
     }

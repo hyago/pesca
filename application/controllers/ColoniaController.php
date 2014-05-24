@@ -36,7 +36,7 @@ class ColoniaController extends Zend_Controller_Action
     public function indexAction()
     {   
         
-        $dados = $this->modelColonia->select();
+        $dados = $this->modelColonia->select( NULL, 'tc_nome', NULL );
         
         
         

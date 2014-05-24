@@ -34,7 +34,7 @@ class MunicipioController extends Zend_Controller_Action
      */
     public function indexAction()
     {        
-        $dados = $this->modelMunicipio->select();
+        $dados = $this->modelMunicipio->select( NULL, array('tuf_sigla','tmun_municipio'), NULL );
       
         $this->view->assign("dados", $dados);
     }

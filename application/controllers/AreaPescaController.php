@@ -34,7 +34,7 @@ class AreaPescaController extends Zend_Controller_Action
      */
     public function indexAction()
     {        
-        $dados = $this->modelAreaPesca->select();
+        $dados = $this->modelAreaPesca->select( NULL, 'tareap_areapesca', NULL );
       
         $this->view->assign("dados", $dados);
     }
