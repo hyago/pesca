@@ -1043,3 +1043,53 @@ SELECT PA.TP_ID, PA.TAREAP_ID, AREA.TAREAP_AREAPESCA
 FROM T_PESCADOR_HAS_T_AREAPESCA AS PA, T_AREAPESCA AS AREA
 WHERE PA.TAREAP_ID = AREA.TAREAP_ID;
 
+-- 
+-- --- Tem que ser no final do arquivo
+-- select relname from pg_class where relkind='S' order by relname;
+--
+SELECT pg_catalog.setval(' t_areapesca_tareap_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_arrastofundo_af_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_artepesca_tap_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_colonia_tc_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_comunidade_tcom_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_dados_calao_dca_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_dados_emalhe_dem_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_dados_tarrafa_dta_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_endereco_te_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_entrevista_pescador_ep_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_escolaridade_esc_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_esp_arte_pesca_eap_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_especie_capturada_spc_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_especie_esp_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_familia_fam_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_ficha_diaria_fd_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_genero_gen_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_grupo_grp_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_isca_is_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_login_tl_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_mare_mr_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_mariscagem_mrg_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_monitoramento_mnt_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_municipio_tmun_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_ordem_ord_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_perfil_tp_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_pescador_has_tt_dependente_tptd_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_pescador_tp_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_pescalinha_pl_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_pesqueiro_af_paf_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_porteembarcacao_tpe_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_porto_pto_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_programasocial_prs_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_rede_rd_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_renda_ren_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_situacao_ts_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_subamostra_sa_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_telefonecontato_ttcont_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_tempo_tmp_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_tipocapturada_itc_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_tipodependente_ttd_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_tipoembarcacao_tte_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_tiporenda_ttr_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_tipotel_ttel_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_usuario_tu_id_seq', 11000, true);
+SELECT pg_catalog.setval(' t_vento_vnt_id_seq', 11000, true);
