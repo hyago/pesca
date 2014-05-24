@@ -24,19 +24,6 @@ class Application_Model_Pescador {
         return $dao->fetchAll($select)->toArray();
     }
 
-      public function select_id( $id ) {
-        $dao = new Application_Model_DbTable_Pescador();
-        $select = $dao->select()->from($dao)->order($order)->limit($limit);
-        
-        $where = 'tp_id >= ' . $id;
-
-        if (!is_null($where)) {
-            $select->where($where);
-        }
-
-        return $dao->fetchAll($select)->toArray();
-    }  
-    
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ FIND - UTILIZA VIEW /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function find($id) {
         $dao = new Application_Model_DbTable_VPescador();
@@ -44,17 +31,17 @@ class Application_Model_Pescador {
 
         return $arr[0];
     }
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ INSERT /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function insert(array $request) {
-
+    
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SETUP DADOS ENDEREÇO /_/_/_/_/_/_/_/_/_/_/_/_/_/     
+    private function setupDadosEndereco( array $request ) {
+        
         $dataCEP = explode("-", $request['cep']);
         $dataCEP = $dataCEP[0] . $dataCEP[1];
 
-        if (!$dataCEP)
-            $dataCEP = NULL;
-
-        $dbTableEndereco = new Application_Model_DbTable_Endereco();
+        if ( !$dataCEP ) {
+            $dataCEP = NULL;            
+        }
+        
         $dadosEndereco = array(
             'te_logradouro' => $request['logradouro'],
             'te_numero' => $request['numero'],
@@ -63,15 +50,18 @@ class Application_Model_Pescador {
             'te_comp' => $request['complemento'],
             'tmun_id' => $request['municipio']
         );
-
-        $idEndereco = $dbTableEndereco->insert($dadosEndereco);
-
+        
+        return $dadosEndereco;
+    }
+    
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SETUP DADOS PESCADOR /_/_/_/_/_/_/_/_/_/_/_/_/_/   
+    private function setupDadosPescador( array $request ) {
+        
         $dataNasc = $request['dataNasc'];
         if (!$dataNasc) {
             $dataNasc = NULL;
         }
 
-        $dbTablePescador = new Application_Model_DbTable_Pescador();
         $dadosPescador = array(
             'tp_nome' => $request['nome'],
             'tp_sexo' => $request['sexo'],
@@ -90,192 +80,41 @@ class Application_Model_Pescador {
             'tp_cir_cap_porto' => $request['cir_cap_porto'],
             'tp_datanasc' => $dataNasc,
             'tmun_id_natural' => $request['municipioNat'],
-            'te_id' => $idEndereco,
             'esc_id' => $request['selectEscolaridade']
         );
+        
+        return $dadosPescador;
+    }
 
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ INSERT /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function insert(array $request) {
+
+        $dbTableEndereco = new Application_Model_DbTable_Endereco();
+        $dadosEndereco = $this->setupDadosEndereco( $request );
+        $idEndereco = $dbTableEndereco->insert($dadosEndereco);
+        
+        $dbTablePescador = new Application_Model_DbTable_Pescador();
+        $dadosPescador = $this->setupDadosPescador( $request );
+        $dadosPescador['te_id']=$idEndereco;
         $idPescador = $dbTablePescador->insert($dadosPescador);
-        return;
+        
+        return $idPescador;
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ UPDATE /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function update(array $request) {
 
-        $dataCEP = explode("-", $request['cep']);
-        $dataCEP = $dataCEP[0] . $dataCEP[1];
-        
-        if (!$dataCEP)
-            $dataCEP = NULL;
-        
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
-        $dadosEndereco = array(
-            'te_logradouro' => $request['logradouro'],
-            'te_numero' => $request['numero'],
-            'te_bairro' => $request['bairro'],
-            'te_cep' => $dataCEP,
-            'te_comp' => $request['complemento'],
-            'tmun_id' => $request['municipio']
-        );
+        $dadosEndereco = $this->setupDadosEndereco( $request );
         $whereEndereco = "te_id = " . $request['idEndereco'];
-
         $dbTableEndereco->update($dadosEndereco, $whereEndereco);
 
         $dbTablePescador = new Application_Model_DbTable_Pescador();
-        $dadosPescador = array(
-            'tp_nome' => $request['nome'],
-            'tp_sexo' => $request['sexo'],
-            'tp_rg' => $request['rg'],
-            'tp_cpf' => $request['cpf'],
-            'tp_apelido' => $request['apelido'],
-            'tp_matricula' => $request['matricula'],
-            'tp_filiacaopai' => $request['filiacaoPai'],
-            'tp_filiacaomae' => $request['filiacaoMae'],
-            'tp_ctps' => $request['ctps'],
-            'tp_pis' => $request['pis'],
-            'tp_inss' => $request['inss'],
-            'tp_nit_cei' => $request['nit_cei'],
-            'tp_cma' => $request['cma'],
-            'tp_rgb_maa_ibama' => $request['rgb_maa_ibama'],
-            'tp_cir_cap_porto' => $request['cir_cap_porto'],
-            'tp_datanasc' => date("Y-m-d", strtotime($request['dataNasc'])),
-            'tmun_id_natural' => $request['municipioNat'],
-            'esc_id' => $request['selectEscolaridade']
-        );
-        $whereEndereco = "tp_id = " . $request['idPescador'];
-
-        $dbTablePescador->update($dadosPescador, $whereEndereco);
-        return;
-    }
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelInsertPescadorHasEndereco(
-    $te_logradouro, $te_numero, $te_bairro, $te_cep, $te_comp, $tmun_id
-    ) {
-
-        $dataCEP = explode("-", $te_cep);
-        $dataCEP = $dataCEP[0] . $dataCEP[1];
+        $dadosPescador = $this->setupDadosPescador( $request );
+        $dadosPescador['te_id'] = $request['idEndereco'];
+        $wherePescador = "tp_id = " . $request['idPescador'];
+        $idPescador = $dbTablePescador->update($dadosPescador, $wherePescador);
         
-        if (!$dataCEP)
-            $dataCEP = NULL;
-        
-        $dbTableEndereco = new Application_Model_DbTable_Endereco();
-        $dadosEndereco = array(
-            'te_logradouro' => $te_logradouro,
-            'te_numero' => $te_numero,
-            'te_bairro' => $te_bairro,
-            'te_cep' => $dataCEP,
-            'te_comp' => $te_comp,
-            'tmun_id' => $tmun_id
-        );
-
-        $idEndereco = $dbTableEndereco->insert($dadosEndereco);
-
-        return $idEndereco;
-    }
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Atualiza Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelUpdatePescadorHasEndereco(
-    $te_id, $te_logradouro, $te_numero, $te_bairro, $te_cep, $te_comp, $tmun_id
-    ) {
-
-        $dataCEP = explode("-", $te_cep);
-        $dataCEP = $dataCEP[0] . $dataCEP[1];
-
-        if (!$dataCEP)
-            $dataCEP = NULL;
-        
-        $dbTableEndereco = new Application_Model_DbTable_Endereco();
-        $dadosEndereco = array(
-            'te_logradouro' => $te_logradouro,
-            'te_numero' => $te_numero,
-            'te_bairro' => $te_bairro,
-            'te_cep' => $dataCEP,
-            'te_comp' => $te_comp,
-            'tmun_id' => $tmun_id
-        );
-
-        $where = "te_id = " . $te_id;
-
-        $idEndereco = $dbTableEndereco->update($dadosEndereco, $where);
-
-        return $idEndereco;
-    }
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelInsertPescador(
-    $tp_nome, $tp_sexo, $tp_rg, $tp_cpf, $tp_apelido, $tp_matricula, $tp_filiacaopai, $tp_filiacaomae, $tp_ctps, $tp_pis, $tp_inss, $tp_nit_cei, $tp_cma, $tp_rgb_maa_ibama, $tp_cir_cap_porto, $tp_datanasc, $tmun_id_natural, $idEndereco, $esc_id) {
-
-        $dataNasc = $tp_datanasc;
-        if (!$dataNasc) {
-            $dataNasc = NULL;
-        } else {
-            $dataNasc = date("Y-m-d", strtotime($tp_datanasc));
-        }
-        
-        $dbTablePescador = new Application_Model_DbTable_Pescador();
-        $dadosPescador = array(
-            'tp_nome' => $tp_nome,
-            'tp_sexo' => $tp_sexo,
-            'tp_rg' => $tp_rg,
-            'tp_cpf' => $tp_cpf,
-            'tp_apelido' => $tp_apelido,
-            'tp_matricula' => $tp_matricula,
-            'tp_filiacaopai' => $tp_filiacaopai,
-            'tp_filiacaomae' => $tp_filiacaomae,
-            'tp_ctps' => $tp_ctps,
-            'tp_pis' => $tp_pis,
-            'tp_inss' => $tp_inss,
-            'tp_nit_cei' => $tp_nit_cei,
-            'tp_cma' => $tp_cma,
-            'tp_rgb_maa_ibama' => $tp_rgb_maa_ibama,
-            'tp_cir_cap_porto' => $tp_cir_cap_porto,
-            'tp_datanasc' => $dataNasc,
-            'tmun_id_natural' => $tmun_id_natural,
-            'te_id' => $idEndereco,
-            'esc_id' => $esc_id
-        );
-        
-        $idPescador = $dbTablePescador->insert($dadosPescador);
-
-        return $idPescador;
-    }
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Atualiza Endereco vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelUpdatePescador(
-    $tp_id, $tp_nome, $tp_sexo, $tp_rg, $tp_cpf, $tp_apelido, $tp_matricula, $tp_filiacaopai, $tp_filiacaomae, $tp_ctps, $tp_pis, $tp_inss, $tp_nit_cei, $tp_cma, $tp_rgb_maa_ibama, $tp_cir_cap_porto, $tp_datanasc, $tmun_id_natural, $idEndereco, $esc_id) {
-
-        $dataNasc = $tp_datanasc;
-        if (!$dataNasc) {
-            $dataNasc = NULL;
-        } else {
-            $dataNasc = date("Y-m-d", strtotime($tp_datanasc));
-        }
-        
-        $dbTablePescador = new Application_Model_DbTable_Pescador();
-        $dadosPescador = array(
-            'tp_nome' => $tp_nome,
-            'tp_sexo' => $tp_sexo,
-            'tp_rg' => $tp_rg,
-            'tp_cpf' => $tp_cpf,
-            'tp_apelido' => $tp_apelido,
-            'tp_matricula' => $tp_matricula,
-            'tp_filiacaopai' => $tp_filiacaopai,
-            'tp_filiacaomae' => $tp_filiacaomae,
-            'tp_ctps' => $tp_ctps,
-            'tp_pis' => $tp_pis,
-            'tp_inss' => $tp_inss,
-            'tp_nit_cei' => $tp_nit_cei,
-            'tp_cma' => $tp_cma,
-            'tp_rgb_maa_ibama' => $tp_rgb_maa_ibama,
-            'tp_cir_cap_porto' => $tp_cir_cap_porto,
-            'tp_datanasc' => $dataNasc,
-            'tmun_id_natural' => $tmun_id_natural,
-            'te_id' => $idEndereco,
-            'esc_id' => $esc_id
-        );
-        
-        $where = "tp_id = " . $tp_id;
-
-        $idPescador = $dbTablePescador->update($dadosPescador, $where);
-
         return $idPescador;
     }
 

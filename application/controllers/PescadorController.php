@@ -237,69 +237,43 @@ class PescadorController extends Zend_Controller_Action {
     public function atualizarpescadorenderecoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-
-        $tp_id = $this->_getParam("tp_id");
-        $tp_nome = $this->_getParam("tp_nome");
-        $tp_sexo = $this->_getParam("tp_sexo");
-        $tp_rg = $this->_getParam("tp_rg");
-        $tp_cpf = $this->_getParam("tp_cpf");
-        $tp_apelido = $this->_getParam("tp_apelido");
-        $tp_matricula = $this->_getParam("tp_matricula");
-        $tp_filiacaopai = $this->_getParam("tp_filiacaopai");
-        $tp_filiacaomae = $this->_getParam("tp_filiacaomae");
-        $tp_ctps = $this->_getParam("tp_ctps");
-        $tp_pis = $this->_getParam("tp_pis");
-        $tp_inss = $this->_getParam("tp_inss");
-        $tp_nit_cei = $this->_getParam("tp_nit_cei");
-        $tp_cma = $this->_getParam("tp_cma");
-        $tp_rgb_maa_ibama = $this->_getParam("tp_rgb_maa_ibama");
-        $tp_cir_cap_porto = $this->_getParam("tp_cir_cap_porto");
-        $tp_datanasc = $this->_getParam("tp_datanasc");
-        $tmun_id_natural = $this->_getParam("tmun_id_natural");
-        $esc_id = $this->_getParam("esc_id");
-        
-        $te_id = $this->_getParam("te_id");
-        $te_logradouro = $this->_getParam("te_logradouro");
-        $te_numero = $this->_getParam("te_numero");
-        $te_bairro = $this->_getParam("te_bairro");
-        $te_cep = $this->_getParam("te_cep");
-        $te_comp = $this->_getParam("te_comp");
-        $tmun_id = $this->_getParam("tmun_id");
-        
+   
         $backUrl = $this->_getParam("back_url");
         
-        $this->modelPescador->modelUpdatePescadorHasEndereco(
-                $te_id,
-                $te_logradouro,
-                $te_numero,
-                $te_bairro,
-                $te_cep,
-                $te_comp,                
-                $tmun_id);
+        $setupDados = array(
+            "idEndereco" => $this->_getParam("te_id"),
+            'logradouro' => $this->_getParam("te_logradouro"),
+            'numero' => $this->_getParam("te_numero"),
+            'bairro' => $this->_getParam("te_bairro"),
+            'cep' => $this->_getParam("te_cep"),
+            'complemento' => $this->_getParam("te_comp"),
+            'municipio' => $this->_getParam("tmun_id"),
+            'idPescador' => $this->_getParam("tp_id"),
+            'nome' => $this->_getParam("tp_nome"),
+            'sexo' => $this->_getParam("tp_sexo"),
+            'rg' => $this->_getParam("tp_rg"),
+            'cpf' => $this->_getParam("tp_cpf"),
+            'apelido' => $this->_getParam("tp_apelido"),
+            'matricula' => $this->_getParam("tp_matricula"),
+            'filiacaoPai' => $this->_getParam("tp_filiacaopai"),
+            'filiacaoMae' => $this->_getParam("tp_filiacaomae"),
+            'ctps' => $this->_getParam("tp_ctps"),
+            'pis' => $this->_getParam("tp_pis"),
+            'inss' => $this->_getParam("tp_inss"),
+            'nit_cei' => $this->_getParam("tp_nit_cei"),
+            'cma' => $this->_getParam("tp_cma"),
+            'rgb_maa_ibama' => $this->_getParam("tp_rgb_maa_ibama"),
+            'cir_cap_porto' => $this->_getParam("tp_cir_cap_porto"),
+            'dataNasc' => $this->_getParam("tp_datanasc"),
+            'municipioNat' => $this->_getParam("tmun_id_natural"),
+            'selectEscolaridade' => $this->_getParam("esc_id")
+        );
         
-        $this->modelPescador->modelUpdatePescador(
-                $tp_id,
-                $tp_nome, 
-                $tp_sexo,
-                $tp_rg,
-                $tp_cpf,
-                $tp_apelido,
-                $tp_matricula,
-                $tp_filiacaopai,
-                $tp_filiacaomae,
-                $tp_ctps,
-                $tp_pis,
-                $tp_inss,
-                $tp_nit_cei,
-                $tp_cma,
-                $tp_rgb_maa_ibama,
-                $tp_cir_cap_porto, 
-                $tp_datanasc, 
-                $tmun_id_natural,
-                $te_id,
-                $esc_id);
+        $idPescador = $this->_getParam("tp_id");
+        
+        $this->modelPescador->update($setupDados);
 
-        $this->_redirect("/pescador/editar/id/" . $tp_id);
+        $this->_redirect("/pescador/editar/id/" . $idPescador);
 
         return;
     }
@@ -308,63 +282,37 @@ class PescadorController extends Zend_Controller_Action {
     public function insertpescadorenderecoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-
-        $tp_nome = $this->_getParam("tp_nome");
-        $tp_sexo = $this->_getParam("tp_sexo");
-        $tp_rg = $this->_getParam("tp_rg");
-        $tp_cpf = $this->_getParam("tp_cpf");
-        $tp_apelido = $this->_getParam("tp_apelido");
-        $tp_matricula = $this->_getParam("tp_matricula");
-        $tp_filiacaopai = $this->_getParam("tp_filiacaopai");
-        $tp_filiacaomae = $this->_getParam("tp_filiacaomae");
-        $tp_ctps = $this->_getParam("tp_ctps");
-        $tp_pis = $this->_getParam("tp_pis");
-        $tp_inss = $this->_getParam("tp_inss");
-        $tp_nit_cei = $this->_getParam("tp_nit_cei");
-        $tp_cma = $this->_getParam("tp_cma");
-        $tp_rgb_maa_ibama = $this->_getParam("tp_rgb_maa_ibama");
-        $tp_cir_cap_porto = $this->_getParam("tp_cir_cap_porto");
-        $tp_datanasc = $this->_getParam("tp_datanasc");
-        $tmun_id_natural = $this->_getParam("tmun_id_natural");
-        $esc_id = $this->_getParam("esc_id");
-        
-        $te_logradouro = $this->_getParam("te_logradouro");
-        $te_numero = $this->_getParam("te_numero");
-        $te_bairro = $this->_getParam("te_bairro");
-        $te_cep = $this->_getParam("te_cep");
-        $te_comp = $this->_getParam("te_comp");
-        $tmun_id = $this->_getParam("tmun_id");
         
         $backUrl = $this->_getParam("back_url");
         
-        $idEndereco = $this->modelPescador->modelInsertPescadorHasEndereco(
-                $te_logradouro,
-                $te_numero,
-                $te_bairro,
-                $te_cep,
-                $te_comp,                
-                $tmun_id);
-        
-        $idPescador = $this->modelPescador->modelInsertPescador(
-                $tp_nome, 
-                $tp_sexo,
-                $tp_rg,
-                $tp_cpf,
-                $tp_apelido,
-                $tp_matricula,
-                $tp_filiacaopai,
-                $tp_filiacaomae,
-                $tp_ctps,
-                $tp_pis,
-                $tp_inss,
-                $tp_nit_cei,
-                $tp_cma,
-                $tp_rgb_maa_ibama,
-                $tp_cir_cap_porto, 
-                $tp_datanasc, 
-                $tmun_id_natural,
-                $idEndereco,
-                $esc_id);
+        $setupDados = array(
+            'logradouro' => $this->_getParam("te_logradouro"),
+            'numero' => $this->_getParam("te_numero"),
+            'bairro' => $this->_getParam("te_bairro"),
+            'cep' => $this->_getParam("te_cep"),
+            'complemento' => $this->_getParam("te_comp"),
+            'municipio' => $this->_getParam("tmun_id"),
+            'nome' => $this->_getParam("tp_nome"),
+            'sexo' => $this->_getParam("tp_sexo"),
+            'rg' => $this->_getParam("tp_rg"),
+            'cpf' => $this->_getParam("tp_cpf"),
+            'apelido' => $this->_getParam("tp_apelido"),
+            'matricula' => $this->_getParam("tp_matricula"),
+            'filiacaoPai' => $this->_getParam("tp_filiacaopai"),
+            'filiacaoMae' => $this->_getParam("tp_filiacaomae"),
+            'ctps' => $this->_getParam("tp_ctps"),
+            'pis' => $this->_getParam("tp_pis"),
+            'inss' => $this->_getParam("tp_inss"),
+            'nit_cei' => $this->_getParam("tp_nit_cei"),
+            'cma' => $this->_getParam("tp_cma"),
+            'rgb_maa_ibama' => $this->_getParam("tp_rgb_maa_ibama"),
+            'cir_cap_porto' => $this->_getParam("tp_cir_cap_porto"),
+            'dataNasc' => $this->_getParam("tp_datanasc"),
+            'municipioNat' => $this->_getParam("tmun_id_natural"),
+            'selectEscolaridade' => $this->_getParam("esc_id")
+        );
+
+        $idPescador = $this->modelPescador->insert($setupDados);
 
         $this->_redirect("/pescador/editar/id/" . $idPescador);
 
