@@ -1065,8 +1065,7 @@ CREATE OR REPLACE VIEW v_monitoramentobyficha AS
     t_ficha_diaria.fd_id, t_artepesca.tap_artepesca
    FROM t_monitoramento, t_ficha_diaria, t_artepesca
   WHERE t_monitoramento.fd_id = t_ficha_diaria.fd_id AND t_monitoramento.mnt_arte = t_artepesca.tap_id;
-=======
->>>>>>> a4f4c0cb8dc811bc6680f506a936c0da0b09dc97
+
 
 -- 
 -- --- Tem que ser no final do arquivo
