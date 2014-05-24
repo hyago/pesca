@@ -69,6 +69,8 @@ DROP TABLE T_PESCALINHA CASCADE;
 DROP TABLE T_MARISCAGEM CASCADE;
 DROP TABLE T_ESPECIE_CAPTURADA CASCADE;
 DROP TABLE T_PESCADOR_HAS_TELEFONE CASCADE;
+DROP VIEW v_monitoramentobyficha;
+
 
 -- -----------------------------------------------------
 -- TABLE T_UF
@@ -1041,4 +1043,17 @@ CREATE VIEW V_PESCADOR_HAS_T_AREAPESCA AS
 SELECT PA.TP_ID, PA.TAREAP_ID, AREA.TAREAP_AREAPESCA
 FROM T_PESCADOR_HAS_T_AREAPESCA AS PA, T_AREAPESCA AS AREA
 WHERE PA.TAREAP_ID = AREA.TAREAP_ID;
+
+
+-- -----------------------------------------------------
+-- VIEW MONITORAMENTO BY FICHA DIARIA
+-- -----------------------------------------------------
+-- 
+
+CREATE OR REPLACE VIEW v_monitoramentobyficha AS 
+ SELECT t_monitoramento.mnt_id, t_monitoramento.mnt_arte, 
+    t_monitoramento.mnt_quantidade, t_monitoramento.mnt_monitorado, 
+    t_ficha_diaria.fd_id, t_artepesca.tap_artepesca
+   FROM t_monitoramento, t_ficha_diaria, t_artepesca
+  WHERE t_monitoramento.fd_id = t_ficha_diaria.fd_id AND t_monitoramento.mnt_arte = t_artepesca.tap_id;
 

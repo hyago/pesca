@@ -6,7 +6,7 @@ class Application_Model_Monitoramento
 
     public function select($where = null, $order = null, $limit = null)
     {
-        $this->dbTableMonitoramento = new Application_Model_DbTable_Monitoramento();
+        $this->dbTableMonitoramento = new Application_Model_DbTable_VMonitoramentobyFicha();
         $select = $this->dbTableMonitoramento->select()
                 ->from($this->dbTableMonitoramento)->order($order)->limit($limit);
 
@@ -69,7 +69,7 @@ class Application_Model_Monitoramento
         $this->dbTableMonitoramento = new Application_Model_DbTable_Monitoramento();       
                 
         $whereMonitoramento= $this->dbTableMonitoramento->getAdapter()
-                ->quoteInto('"ESP_ID" = ?', $idMonitoramento);
+                ->quoteInto('"mnt_id" = ?', $idMonitoramento);
         
         $this->dbTableMonitoramento->delete($whereMonitoramento);
     }

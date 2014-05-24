@@ -9,92 +9,65 @@
 </div>
 <head>
     <script type="text/javascript">
-        var rowNumMnt = 0;
-        var Entrevista;
-        
-        function addRowMonitoramento(frm) {
-            rowNumMnt++;
-
-            if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Arrasto de Fundo') {
-                Entrevista = 'arrasto-fundo';
+        function jsEntrevista(nomeArtePesca, idMonitoramento, idFichaDiaria) {
+            var Entrevista;
+            if (nomeArtePesca.toLowerCase() === "Arrasto de Fundo".toLowerCase()) {
+                Entrevista = "arrasto-fundo";
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Calão') {
+            else if (nomeArtePesca == 'Calão') {
                 Entrevista = 'calao';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Espinhel/Grosseira') {
+            else if (nomeArtePesca == 'Espinhel/Grosseira') {
                 Entrevista = 'grosseira';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Pesca de Linha') {
+            else if (nomeArtePesca == 'Pesca de Linha') {
                 Entrevista = 'linha';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Rede de Emalhar') {
+            else if (nomeArtePesca == 'Rede de Emalhar') {
                 Entrevista = 'emalhe';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Tarrafa') {
+            else if (nomeArtePesca == 'Tarrafa') {
                 Entrevista = 'tarrafa';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Vara de Pesca') {
+            else if (nomeArtePesca == 'Vara de Pesca') {
                 Entrevista = 'vara-pesca';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Jereré') {
+            else if (nomeArtePesca == 'Jereré') {
                 Entrevista = 'jerere';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Manzuá') {
+            else if (nomeArtePesca == 'Manzuá') {
                 Entrevista = 'manzua';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Ratoeira') {
+            else if (nomeArtePesca == 'Ratoeira') {
                 Entrevista = 'ratoeira';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Catagem') {
+            else if (nomeArtePesca == 'Catagem') {
                 Entrevista = 'coleta-manual';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Mergulho') {
+            else if (nomeArtePesca == 'Mergulho') {
                 Entrevista = 'mergulho';
             }
-            else if (frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Linha de Fundo') {
+            else if (nomeArtePesca == 'Linha de Fundo') {
                 Entrevista = 'linha-fundo';
             }
-            else if(frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text == 'Siripóia'){
+            else if(nomeArtePesca == 'Siripóia'){
                 Entrevista = 'siripoia';
             }
-            
-            var a = '';
-            a = a.concat("/"+Entrevista+"/");
-            a = a.concat("index");
+            else
+                Entrevista = 'error';
+            var pag = (Entrevista + '/index'); 
+            var tmpUpdate = (pag + '/id/' + idFichaDiaria +'/idMonitoramento/' + idMonitoramento);
+            location.replace(tmpUpdate);
+        }
+        function jsDeleteMonitoramento(idMnt, frm, pag, fichaId){
+            var TmpUrl = (+fichaId + '#base');
 
-            var linhaArte = '<div class="noEditable"><p id="itemArteTipoRows' + rowNumMnt + '">';
-            linhaArte = linhaArte.concat('<a href="' + a + '" id="botao-ancora" target="_blank">Entrevista</a>');
-            linhaArte = linhaArte.concat('<input type="button" value="Remove" onclick="removeRowNumMonitoramento(' + rowNumMnt + ');">');
+            var tmpUpdate = (pag + '/id/' + idMnt+'/back_url/' + TmpUrl);
 
-            //linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputEmbarcacao[]" value="' + frm.SelectEmbarcacao[frm.SelectEmbarcacao.selectedIndex].text + '">');
-            
-            linhaArte = linhaArte.concat('<input type="text" readonly size=13 name="inputArte[]"  value="' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '">');
-            linhaArte = linhaArte.concat('<input type="text" readonly size="2" name="inputArteID[]"  value="' + frm.SelectArtePesca.value + '">');
-
-            linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputMonitorada[]"  value="' + frm.SelectMonitorada[frm.SelectMonitorada.selectedIndex].text + '">');
-
-            linhaArte = linhaArte.concat('<input type="text" readonly size="10" name="inputQuantidade[]"  value="' + frm.QuantidadeEmbarcacoes.value + '">');
-
-            
-            linhaArte = linhaArte.concat('<br></p></div>');
-
-            jQuery('#itemArteTipoRows').append(linhaArte);
-            if (frm.inputQuantidadeDependente.value) {
-            var linhaDependente = '<tr id="rowNumDependente' + rowNumMnt + '">';
-            linhaDependente = linhaDependente.concat('<td> <input type="text" readonly size=2 name="inputTipoDependenteID[]" value="' + frm.SelectArtePesca.value +'"/></td>');
-            linhaDependente = linhaDependente.concat('<td name="inputTipoDependente[]" >' + frm.SelectArtePesca[frm.SelectArtePesca.selectedIndex].text + '</td>');
-            linhaDependente = linhaDependente.concat('<td> <input type="text" readonly name="inputQuantidadeDependente[]" value="' + frm.QuantidadeEmbarcacoes.value + '"/></td>');
-            //linhaDependente = linhaDependente.concat('<td><input type="button" class="button-del" width="5%" onclick="removeRowNumDependente(' + rowNumDependente + ');"></td>');
-            linhaDependente = linhaDependente.concat('</tr>');
-
-        jQuery('#tblDependentes').append(linhaDependente);
-    }
-        };
-
-        /*function removeRowNumMonitoramento(localRowNumMnt){
-            jQuery('#itemArteTipoRows' + localRowNumMnt).remove();
-        };*/
-
+            if (confirm("Realmente deseja excluir este item?")) {
+            location.replace(tmpUpdate);
+            }
+        }
         
         function jsInsertMonitoramento(frm, pag)
         {
@@ -103,7 +76,7 @@
 
                 var tmpUpdate = (pag + '/SelectArtePesca/' + frm.SelectArtePesca.value +'/SelectMonitorada/' + frm.SelectMonitorada.value + '/QuantidadeEmbarcacoes/'+ frm.QuantidadeEmbarcacoes.value+'/id_fichaDiaria/' + frm.id_fichaDiaria.value +'/back_url/' + TmpUrl);
  
-                location.replace(tmpUpdate);
+                window.location.replace(tmpUpdate);
             }
         }
     </script>
@@ -250,14 +223,22 @@
                         <th width="30%">Quantidade</th>
                         <th width="5%">Id_Ficha</th>
                     </tr>
-                    <?php foreach ($this->assign_vPescadorEmbarcacao as $key => $vPescadorHasEmbarcacao): ?>
-                        <tr id="itemEmbarcacoesRows<?= $key ?>">
-                            <td name="inputIdMonitoramento"> <?= $vPescadorHasEmbarcacao['tte_id'] ?> </td>
-                            <td name="inputMonitorada" > <?= $vPescadorHasEmbarcacao['tte_tipoembarcacao'] ?> </td>
-                            <td name="inputArtedePesca"> <?= $vPescadorHasEmbarcacao['tpe_id'] ?> </td>
-                            <td name="inputQuantidade" > <?= $vPescadorHasEmbarcacao['tpe_porte'] ?> </td>
-                            <td name="inputIdFicha"> <?= $vPescadorHasEmbarcacao['tpte_motor'] ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeletePescadorHasEmbarcacoes(<?= $vPescadorHasEmbarcacao['tte_id'] ?>, <?= $vPescadorHasEmbarcacao['tpe_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhasembarcacoes"), null, true) ?>')"></td> </td>
+                    <?php foreach ($this->vMonitoramento as $key => $vMonitoramento): 
+                        if($vMonitoramento['mnt_monitorado'] == 1) {
+                            $vMonitoramento['mnt_monitorado'] = "Sim";
+                        } else {
+                            $vMonitoramento['mnt_monitorado'] = "Não";
+                            }
+                        ?>
+                            <tr id="itemEmbarcacoesRows<?= $key ?>">
+                            <td name="inputIdMonitoramento"> <?= $vMonitoramento['mnt_id'] ?> </td>
+                            <td name="inputMonitorada" > <?= $vMonitoramento['mnt_monitorado']?> </td>
+                            <td name="inputArtedePesca"> <?= $vMonitoramento['tap_artepesca'] ?> </td>
+                            <td name="inputQuantidade" > <?= $vMonitoramento['mnt_quantidade'] ?> </td>
+                            <td name="inputIdFicha"> <?= $vMonitoramento['fd_id'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteMonitoramento(<?= $vMonitoramento['mnt_id'] ?>, this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "deletmonitoramento"), null, true) ?>', <?= $vMonitoramento['fd_id']?>)"></td>
+                            <td><input type="button" width="10%" target="_blank" value ="Nova Entrevista" onclick="jsEntrevista('<?= $vMonitoramento['tap_artepesca'] ?>', <?= $vMonitoramento['mnt_id'] ?>, <?= $vMonitoramento['fd_id']?>)"></td>
+                            
                         </tr>
                     <?php endforeach; ?>
                 </table>

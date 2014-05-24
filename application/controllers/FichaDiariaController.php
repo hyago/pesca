@@ -110,6 +110,13 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("users", $usuario);
         //--------------------------------------------
+        
+        $idFicha = $this->_getParam('id');
+        
+        $modelMonitoramentoByFichaDiaria = new Application_Model_Monitoramento();
+        $vMonitoramento = $modelMonitoramentoByFichaDiaria->select("fd_id=". $idFicha, "mnt_id", null);
+        $this->view->assign("vMonitoramento", $vMonitoramento);
+        
     }
 
     /*
@@ -141,6 +148,18 @@ class FichaDiariaController extends Zend_Controller_Action {
         $this->redirect("/ficha-diaria/editar/id/" . $backUrl);
 
         return;
+    }
+    public function deletmonitoramentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idMonitoramento = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelMonitoramento->delete($idMonitoramento);
+
+        $this->redirect("/ficha-diaria/editar/id/" . $backUrl);
     }
     /*
      * 
