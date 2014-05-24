@@ -5,12 +5,11 @@
         <group>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/ficha-diaria/editar.phtml</file>
             <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/pescador/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/Monitoramento.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescador.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
             <file>file:/srv/www/htdocs/pesca/application/models/Monitoramento.php</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/FichaDiariaController.php</file>
             <file>file:/srv/www/htdocs/pesca/application/models/Pescador.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/FichaDiaria.php</file>
         </group>
     </open-files>
 </project-private>

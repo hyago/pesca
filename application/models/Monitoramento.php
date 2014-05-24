@@ -6,7 +6,7 @@ class Application_Model_Monitoramento
 
     public function select($where = null, $order = null, $limit = null)
     {
-        $this->dbTableMonitoramento = new Application_Model_DbTable_Monitoramento();
+        $this->dbTableMonitoramento = new Application_Model_DbTable_VMonitoramentobyFicha();
         $select = $this->dbTableMonitoramento->select()
                 ->from($this->dbTableMonitoramento)->order($order)->limit($limit);
 
@@ -24,24 +24,16 @@ class Application_Model_Monitoramento
         return $arr[0];
     }
     
-    public function insert(array $request)
+    public function insert($idFicha, $idArtePesca, $mnt_quantidade, $Monitorada)
     {
         $this->dbTableMonitoramento = new Application_Model_DbTable_Monitoramento();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
         
         
         $dadosMonitoramento = array(
-            
-            't_estagiario_tu_id' => $request['select_nome_estagiario'],
-            't_monitor_tu_id1' => $request['select_nome_monitor'],
-            'fd_data' => $request['data_ficha'], 
-            'fd_turno' => $request['select_turno'],
-            'obs' => $request['observacao'],
-            'pto_id' => $request['select_nome_porto'],
-            'tmp_id' => $request['select_tempo'],
-            'vnt_id' => $request['select_vento']
+            'mnt_monitorado' => $Monitorada,
+            'mnt_arte' => $idArtePesca,
+            'mnt_quantidade' => $mnt_quantidade,
+            'fd_id' => $idFicha
         );
         
         $this->dbTableMonitoramento->insert($dadosMonitoramento);
@@ -77,7 +69,7 @@ class Application_Model_Monitoramento
         $this->dbTableMonitoramento = new Application_Model_DbTable_Monitoramento();       
                 
         $whereMonitoramento= $this->dbTableMonitoramento->getAdapter()
-                ->quoteInto('"ESP_ID" = ?', $idMonitoramento);
+                ->quoteInto('"mnt_id" = ?', $idMonitoramento);
         
         $this->dbTableMonitoramento->delete($whereMonitoramento);
     }

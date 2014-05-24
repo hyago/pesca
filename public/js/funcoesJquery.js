@@ -372,7 +372,7 @@ function jsInsertPescadorHasEmbarcacoes( frm, pag )
     location.replace(tmpUpdate);
 }
 
-function jsDeletePescadorHasEmbarcacoes( idEmbarcacao, idPorte, frm, pag )
+function jsDeletePescadorHasEmbarcacoes(idEmbarcacao, idPorte, frm, pag )
 {
     var TmpUrl = (+frm.idPescador.value + '#ancora_embarcacoes');
 

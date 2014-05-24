@@ -69,6 +69,11 @@ DROP TABLE T_PESCALINHA CASCADE;
 DROP TABLE T_MARISCAGEM CASCADE;
 DROP TABLE T_ESPECIE_CAPTURADA CASCADE;
 DROP TABLE T_PESCADOR_HAS_TELEFONE CASCADE;
+<<<<<<< HEAD
+DROP VIEW v_monitoramentobyficha;
+
+=======
+>>>>>>> a4f4c0cb8dc811bc6680f506a936c0da0b09dc97
 
 -- -----------------------------------------------------
 -- TABLE T_UF
@@ -164,8 +169,12 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ESCOLARIDADE (
 CREATE TABLE IF NOT EXISTS T_RENDA (
  REN_ID SERIAL,
  REN_RENDA VARCHAR(25) NULL,
+<<<<<<< HEAD
+ REN_FATOR NUMERIC(4,2) NULL,
+=======
  REN_FATORMIN NUMERIC(4,2) NULL,
  REN_FATORMAX NUMERIC(4,2) NULL,
+>>>>>>> a4f4c0cb8dc811bc6680f506a936c0da0b09dc97
  PRIMARY KEY (REN_ID)
 );
 
@@ -1042,6 +1051,22 @@ CREATE VIEW V_PESCADOR_HAS_T_AREAPESCA AS
 SELECT PA.TP_ID, PA.TAREAP_ID, AREA.TAREAP_AREAPESCA
 FROM T_PESCADOR_HAS_T_AREAPESCA AS PA, T_AREAPESCA AS AREA
 WHERE PA.TAREAP_ID = AREA.TAREAP_ID;
+<<<<<<< HEAD
+
+
+-- -----------------------------------------------------
+-- VIEW MONITORAMENTO BY FICHA DIARIA
+-- -----------------------------------------------------
+-- 
+
+CREATE OR REPLACE VIEW v_monitoramentobyficha AS 
+ SELECT t_monitoramento.mnt_id, t_monitoramento.mnt_arte, 
+    t_monitoramento.mnt_quantidade, t_monitoramento.mnt_monitorado, 
+    t_ficha_diaria.fd_id, t_artepesca.tap_artepesca
+   FROM t_monitoramento, t_ficha_diaria, t_artepesca
+  WHERE t_monitoramento.fd_id = t_ficha_diaria.fd_id AND t_monitoramento.mnt_arte = t_artepesca.tap_id;
+=======
+>>>>>>> a4f4c0cb8dc811bc6680f506a936c0da0b09dc97
 
 -- 
 -- --- Tem que ser no final do arquivo

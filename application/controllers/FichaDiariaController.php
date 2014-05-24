@@ -13,7 +13,8 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuarioLogado = $this->usuarioLogado;
-
+        
+        $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
         $this->modelPorto = new Application_Model_Porto();
         $this->modelTempo = new Application_Model_Tempo();
@@ -109,6 +110,13 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("users", $usuario);
         //--------------------------------------------
+        
+        $idFicha = $this->_getParam('id');
+        
+        $modelMonitoramentoByFichaDiaria = new Application_Model_Monitoramento();
+        $vMonitoramento = $modelMonitoramentoByFichaDiaria->select("fd_id=". $idFicha, "mnt_id", null);
+        $this->view->assign("vMonitoramento", $vMonitoramento);
+        
     }
 
     /*
@@ -118,7 +126,41 @@ class FichaDiariaController extends Zend_Controller_Action {
     public function atualizarAction() {
         
     }
+    
+    public function insertmonitoramentoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        
+        $Monitorada = $this->_getParam("SelectMonitorada");
+        
+        $idArtePesca = $this->_getParam("SelectArtePesca"); 
+
+        $mnt_quantidade = $this->_getParam("QuantidadeEmbarcacoes");
+        
+        $idFicha = $this->_getParam("id_fichaDiaria");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelMonitoramento->insert($idFicha, $idArtePesca, $mnt_quantidade, $Monitorada);
+
+        $this->redirect("/ficha-diaria/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deletmonitoramentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idMonitoramento = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelMonitoramento->delete($idMonitoramento);
+
+        $this->redirect("/ficha-diaria/editar/id/" . $backUrl);
+    }
     /*
      * 
      */
