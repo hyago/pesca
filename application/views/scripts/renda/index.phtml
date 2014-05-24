@@ -11,12 +11,16 @@
         <tr>
             <th>ID</th>
             <th>Renda</th>
+            <th>Fator Mínimo</th>
+            <th>Fator Máximo</th>
         </tr>
 
         <?php foreach ($this->rendas as $key => $renda): ?>
             <tr>
                 <td><?= $renda['ren_id'] ?></td>
                 <td><?= $renda['ren_renda'] ?></td>
+                <td><?= $renda['ren_fatormin'] ?></td>
+                <td><?= $renda['ren_fatormax'] ?></td>
 
                 <td class="td-botao">
                     <a href="<?= $this->url(array("controller" => "renda", "action" => "editar", "id" => $renda['ren_id']), null, true) ?>">
