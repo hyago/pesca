@@ -23,7 +23,7 @@ class TipoDependenteController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $tipoDependente = $this->modeloTipoDependente->select();
+        $tipoDependente = $this->modeloTipoDependente->select(NULL,'ttd_tipodependente',NULL);
       
         $this->view->assign("assignTipoDependente", $tipoDependente);
     }

@@ -34,7 +34,7 @@ class ArtePescaController extends Zend_Controller_Action
      */
     public function indexAction()
     {        
-        $dados = $this->modelArtePesca->select();
+        $dados = $this->modelArtePesca->select( NULL, 'tap_artepesca', NULL );
       
         $this->view->assign("dados", $dados);
     }

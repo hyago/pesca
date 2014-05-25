@@ -21,7 +21,7 @@ class TipoCapturadaController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $tipoCapturada = $this->modelTipoCapturada->select();
+        $tipoCapturada = $this->modelTipoCapturada->select( NULL, 'itc_tipo', NULL );
       
         $this->view->assign("tipoCapturada", $tipoCapturada);
     }

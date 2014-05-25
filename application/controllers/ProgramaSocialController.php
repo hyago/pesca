@@ -21,7 +21,7 @@ class ProgramaSocialController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $programaSocial = $this->modelProgramaSocial->select();
+        $programaSocial = $this->modelProgramaSocial->select( NULL, 'prs_programa', NULL );
       
         $this->view->assign("programasSocial", $programaSocial);
     }

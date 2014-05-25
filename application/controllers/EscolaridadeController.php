@@ -21,7 +21,7 @@ class EscolaridadeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $escolaridade = $this->modelEscolaridade->select();
+        $escolaridade = $this->modelEscolaridade->select( NULL, 'esc_nivel', NULL );
       
         $this->view->assign("escolaridades", $escolaridade);
     }

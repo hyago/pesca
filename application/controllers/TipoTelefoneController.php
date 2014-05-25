@@ -24,7 +24,7 @@ class TipoTelefoneController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $tipoTelefone = $this->modeloTipoTelefone->select();
+        $tipoTelefone = $this->modeloTipoTelefone->select(NULL, 'ttel_desc', NULL);
       
         $this->view->assign("assignTipoTelefone", $tipoTelefone);
     }

@@ -22,7 +22,7 @@ class TipoRendaController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $tipoRenda = $this->ModeloTipoRenda->select();
+        $tipoRenda = $this->ModeloTipoRenda->select( NULL, 'ttr_descricao', NULL );
       
         $this->view->assign("assignTipoRenda", $tipoRenda);
     }

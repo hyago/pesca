@@ -21,17 +21,16 @@ class Application_Model_Renda {
         $arr = $this->dbTableRenda->find($id)->toArray();
         return $arr[0];
     }
-
-    public function insert(array $request) {
-        $this->dbTableRenda = new Application_Model_DbTable_RendaDbtable();
+    
+    private function setupData( array $request ) {
         
         $dadosMin = NULL;
-        if ( $request['renFatorMax'] >= '0' ) {
-            $dadosMin = $request['renFatorMax'];
+        if ($request['renFatorMin'] > '0') {
+            $dadosMin = $request['renFatorMin'];
         }
-        
+
         $dadosMax = NULL;
-        if ( $request['renFatorMax'] >= '0' ) {
+        if ($request['renFatorMax'] > '0') {
             $dadosMax = $request['renFatorMax'];
         }
 
@@ -40,6 +39,14 @@ class Application_Model_Renda {
             'ren_fatormin' => $dadosMin,
             'ren_fatormax' => $dadosMax
         );
+
+        return $dadosRenda;
+    }
+
+    public function insert(array $request) {
+        $this->dbTableRenda = new Application_Model_DbTable_RendaDbtable();
+        
+        $dadosRenda = $this->setupData($request);
 
         $this->dbTableRenda->insert($dadosRenda);
 
@@ -49,21 +56,7 @@ class Application_Model_Renda {
     public function update(array $request) {
         $this->dbTableRenda = new Application_Model_DbTable_RendaDbtable();
         
-        $dadosMin = NULL;
-        if ( $request['renFatorMax'] >= '0' ) {
-            $dadosMin = $request['renFatorMax'];
-        }
-        
-        $dadosMax = NULL;
-        if ( $request['renFatorMax'] >= '0' ) {
-            $dadosMax = $request['renFatorMax'];
-        }
-
-        $dadosRenda = array(
-            'ren_renda' => $request['renRenda'],
-            'ren_fatormin' => $dadosMin,
-            'ren_fatormax' => $dadosMax
-        );
+        $dadosRenda = $this->setupData($request);
 
         $whereRenda = $this->dbTableRenda->getAdapter()->quoteInto('"ren_id" = ?', $request['idRenda']);
 

@@ -34,7 +34,7 @@ class ComunidadeController extends Zend_Controller_Action
      */
     public function indexAction()
     {        
-        $dados = $this->modelComunidade->select();
+        $dados = $this->modelComunidade->select( NULL, 'tcom_nome', NULL );
       
         $this->view->assign("dados", $dados);
     }
