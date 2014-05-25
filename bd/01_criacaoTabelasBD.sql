@@ -69,11 +69,7 @@ DROP TABLE T_PESCALINHA CASCADE;
 DROP TABLE T_MARISCAGEM CASCADE;
 DROP TABLE T_ESPECIE_CAPTURADA CASCADE;
 DROP TABLE T_PESCADOR_HAS_TELEFONE CASCADE;
-<<<<<<< HEAD
-DROP VIEW v_monitoramentobyficha;
-
-=======
->>>>>>> a4f4c0cb8dc811bc6680f506a936c0da0b09dc97
+DROP VIEW v_monitoramentobyficha CASCADE;
 
 -- -----------------------------------------------------
 -- TABLE T_UF
@@ -169,12 +165,9 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ESCOLARIDADE (
 CREATE TABLE IF NOT EXISTS T_RENDA (
  REN_ID SERIAL,
  REN_RENDA VARCHAR(25) NULL,
-<<<<<<< HEAD
  REN_FATOR NUMERIC(4,2) NULL,
-=======
  REN_FATORMIN NUMERIC(4,2) NULL,
  REN_FATORMAX NUMERIC(4,2) NULL,
->>>>>>> a4f4c0cb8dc811bc6680f506a936c0da0b09dc97
  PRIMARY KEY (REN_ID)
 );
 
@@ -196,7 +189,8 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_PROGRAMASOCIAL (
  PRIMARY KEY (TP_ID, PRS_ID),
  CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PESCADOR1
  FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
- CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PROGRAMASOCIAL1 FOREIGN KEY (PRS_ID) REFERENCES T_PROGRAMASOCIAL (PRS_ID)
+ CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PROGRAMASOCIAL1 
+FOREIGN KEY (PRS_ID) REFERENCES T_PROGRAMASOCIAL (PRS_ID)
 );
 
 -- -----------------------------------------------------
@@ -529,7 +523,7 @@ CREATE TABLE IF NOT EXISTS T_ESPECIE (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS T_SUBAMOSTRA (
  SA_ID SERIAL,
- SA_SUBAMOSTRA BOOLEAN NULL,
+ SA_SUBAMOSTRA VARCHAR(100) NULL,
  PRIMARY KEY (SA_ID)
 );
 
@@ -593,58 +587,12 @@ CREATE TABLE IF NOT EXISTS T_MONITORAMENTO (
  MNT_ARTE INT NULL,
  MNT_QUANTIDADE INT NULL,
  MNT_MONITORADO BOOLEAN NULL,
- MNT_EMBARCADO BOOLEAN NULL,
  FD_ID INT NOT NULL,
  PRIMARY KEY (MNT_ID),
  CONSTRAINT FK_DSBQ_MONITORAMENTO_DSBQ_FICHA_DIARIA1 FOREIGN KEY (FD_ID) REFERENCES T_FICHA_DIARIA (FD_ID)
 );
 
--- -----------------------------------------------------
--- TABLE T_ENTREVISTA_PESCADOR
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ENTREVISTA_PESCADOR (
- EP_ID SERIAL,
- EP_CODPARADESEMBARQUE INT NULL,
- EP_NUMPESCADORES INT NULL,
- EP_DATAEHORASAIDA TIMESTAMP NULL,
- EP_DATAHORACHEGADA TIMESTAMP NULL,
- SA_ID INT NOT NULL,
- EP_DESTINODOPESCADO VARCHAR(45) NULL,
- MNT_ID INT NOT NULL,
- PRIMARY KEY (EP_ID),
- CONSTRAINT FK_DSBQ_ENTREVISTA_PESCADOR_DSBQ_SUBAMOSTRA1 FOREIGN KEY (SA_ID) REFERENCES T_SUBAMOSTRA (SA_ID),
- CONSTRAINT FK_DSBQ_ENTREVISTA_PESCADOR_DSBQ_MONITORAMENTO1 FOREIGN KEY (MNT_ID) REFERENCES T_MONITORAMENTO (MNT_ID)
-);
 
--- -----------------------------------------------------
--- TABLE T_ESP_ARTE_PESCA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ESP_ARTE_PESCA (
- EAP_ID SERIAL,
- EAP_ESPECIALIZACAO VARCHAR(45) NULL,
- TAP_ID INT NOT NULL,
- EP_ID INT NOT NULL,
- PRIMARY KEY (EAP_ID),
- CONSTRAINT FK_DSBQ_ESP_ARTE_PESCA_DSBQ_ENTREVISTA_PESCADOR1 FOREIGN KEY (EP_ID) REFERENCES T_ENTREVISTA_PESCADOR (EP_ID),
- CONSTRAINT FK_DSBQ_ESP_ARTE_PESCA_T_ARTEPESCA1 FOREIGN KEY (TAP_ID) REFERENCES T_ARTEPESCA (TAP_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_ARRASTOFUNDO
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ARRASTOFUNDO (
- AF_ID SERIAL,
- AF_TEMPOAPESQUEIRO TIME NULL,
- EAP_ID INT NOT NULL,
- AF_OBSERVACAO VARCHAR(100) NULL,
- AF_AVISTAMENTO VARCHAR(45) NULL,
- AF_PRC_GELO FLOAT NULL,
- AF_PRC_ALIMENTO FLOAT NULL,
- AF_LTS_OLEO FLOAT NULL,
- AF_LTS_DIESEL VARCHAR(45) NULL,
- PRIMARY KEY (AF_ID),
- CONSTRAINT FK_DSBQ_ARRASTOFUNDO_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID)
-);
 
 -- -----------------------------------------------------
 -- TABLE T_PESQUEIRO_AF
@@ -652,162 +600,9 @@ CREATE TABLE IF NOT EXISTS T_ARRASTOFUNDO (
 CREATE TABLE IF NOT EXISTS T_PESQUEIRO_AF (
  PAF_ID SERIAL,
  PAF_PESQUEIRO VARCHAR(45) NULL,
- PAF_DURACAOARRASTO TIME NULL,
- AF_ID INT NOT NULL,
  PRIMARY KEY (PAF_ID),
- CONSTRAINT FK_DSBQ_PESQUEIRO_AF_DSBQ_ARRASTOFUNDO1 FOREIGN KEY (AF_ID) REFERENCES T_ARRASTOFUNDO (AF_ID)
 );
 
--- -----------------------------------------------------
--- TABLE T_DADOS_EMALHE
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_DADOS_EMALHE (
- DEM_ID SERIAL,
- DEM_DT_LANCAMENTO TIMESTAMP NULL,
- DEM_DT_RECOLHIMENTO TIMESTAMP NULL,
- DEM_TAMANHO FLOAT NULL,
- DEM_ALTURA FLOAT NULL,
- DEM_QTD_PANOS INT NULL,
- DEM_MALHA INT NULL,
- PRIMARY KEY (DEM_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_DADOS_CALAO
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_DADOS_CALAO (
- DCA_ID SERIAL,
- DCA_TEMPO_GASTO TIME NULL,
- DCA_QTD_LANCES INT NULL,
- DCA_TAMANHO FLOAT NULL,
- DCA_ALTURA FLOAT NULL,
- DCA_MALHA INT NULL,
- PRIMARY KEY (DCA_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_DADOS_TARRAFA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_DADOS_TARRAFA (
- DTA_ID SERIAL,
- DTA_TEMPO_GASTO TIME NULL,
- DTA_ALTURA FLOAT NULL,
- DTA_RODA FLOAT NULL,
- DTA_MALHA INT NULL,
- PRIMARY KEY (DTA_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_REDE
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_REDE (
- RD_ID SERIAL,
- RD_NUM_PANOS INT NULL,
- RD_COMPRIMENTOPANO FLOAT NULL,
- RD_ALTURAPANO FLOAT NULL,
- RD_TAMANHOMALHA FLOAT NULL,
- DEM_ID INT NULL,
- DCA_ID INT NULL,
- DTA_ID INT NULL,
- PAF_ID INT NOT NULL,
- EAP_ID INT NOT NULL,
- RD_OBSERVACAO VARCHAR(100) NULL,
- RD_AVISTAMENTO VARCHAR(45) NULL,
- RD_PRC_GELO FLOAT NULL,
- RD_PRC_ALIMENTO FLOAT NULL,
- RD_LTD_OLEO FLOAT NULL,
- RD_LTD_DIESEL FLOAT NULL,
- PRIMARY KEY (RD_ID),
- CONSTRAINT FK_DSBQ_REDE_DSBQ_PESQUEIRO_AF1 FOREIGN KEY (PAF_ID) REFERENCES T_PESQUEIRO_AF (PAF_ID),
- CONSTRAINT FK_DSBQ_REDE_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID),
- CONSTRAINT FK_DSBQ_REDE_DSBQ_DADOS_EMALHE1 FOREIGN KEY (DEM_ID) REFERENCES T_DADOS_EMALHE (DEM_ID),
- CONSTRAINT FK_DSBQ_REDE_DSBQ_DADOS_CALAO1 FOREIGN KEY (DCA_ID) REFERENCES T_DADOS_CALAO (DCA_ID),
- CONSTRAINT FK_DSBQ_REDE_DSBQ_DADOS_TARRAFA1 FOREIGN KEY (DTA_ID) REFERENCES T_DADOS_TARRAFA (DTA_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_ISCA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ISCA (
- IS_ID SERIAL,
- IS_TIPO VARCHAR(45) NULL,
- PRIMARY KEY (IS_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_PESCALINHA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCALINHA (
- PL_ID SERIAL,
- PL_PESQUEIRO VARCHAR(45) NULL,
- PL_TEMPOAOPESQUEIRO TIME NULL,
- PL_NUM_LINHAS INT NULL,
- PL_NUM_ANZOIS INT NULL,
- PL_OBSERVACAO VARCHAR(100) NULL,
- PL_AVISTAMENTO VARCHAR(60) NULL,
- PL_PRC_GELO FLOAT NULL,
- PL_PRC_ALIMENTO FLOAT NULL,
- PL_LTS_OLEO FLOAT NULL,
- PL_LTS_DIESEL FLOAT NULL,
- PAF_ID INT NOT NULL,
- EAP_ID INT NOT NULL,
- IS_ID INT NOT NULL,
- PRIMARY KEY (PL_ID),
- CONSTRAINT FK_DSBQ_PESCALINHA_DSBQ_PESQUEIRO_AF1 FOREIGN KEY (PAF_ID) REFERENCES T_PESQUEIRO_AF (PAF_ID),
- CONSTRAINT FK_DSBQ_PESCALINHA_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID),
- CONSTRAINT FK_DSBQ_PESCALINHA_DSBQ_ISCA1 FOREIGN KEY (IS_ID) REFERENCES T_ISCA (IS_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_MARE
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_MARE (
- MR_ID SERIAL,
- MR_TIPO VARCHAR(20) NULL,
- PRIMARY KEY (MR_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_MARISCAGEM
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_MARISCAGEM (
- MRG_ID SERIAL,
- MRG_TEMPOAPESQUEIRO TIME NULL,
- MRG_TEMPOMARISCAGEM TIME NULL,
- MRG_DISTANCIAMARISCO FLOAT NULL,
- MRG_NUM_ARMADILHA INT NULL,
- MRG_DIESEL INT NULL,
- MRG_OBS VARCHAR(200) NULL,
- AF_PAF_ID INT NOT NULL,
- EAP_ID INT NOT NULL,
- MR_ID INT NOT NULL,
- PRIMARY KEY (MRG_ID),
- CONSTRAINT FK_DSBQ_MARISCAGEM_DSBQ_PESQUEIRO_AF1 FOREIGN KEY (AF_PAF_ID) REFERENCES T_PESQUEIRO_AF (PAF_ID),
- CONSTRAINT FK_DSBQ_MARISCAGEM_DSBQ_ESP_ARTE_PESCA1 FOREIGN KEY (EAP_ID) REFERENCES T_ESP_ARTE_PESCA (EAP_ID),
- CONSTRAINT FK_DSBQ_MARISCAGEM_DSBQ_MARE1 FOREIGN KEY (MR_ID) REFERENCES T_MARE (MR_ID)
-);
-
--- -----------------------------------------------------
--- TABLE T_ESPECIE_CAPTURADA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ESPECIE_CAPTURADA (
- SPC_ID SERIAL,
- SPC_NOME VARCHAR(45) NULL,
- SPC_QUANTIDADE INT NULL,
- SPC_PESO_KG INT NULL,
- SPC_PRECO DECIMAL(5) NULL,
- ESP_ID INT NOT NULL,
- RD_ID INT NULL,
- PL_ID INT NULL,
- MRG_ID INT NULL,
- AF_ID INT NULL,
- PRIMARY KEY (SPC_ID),
- CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_ESPECIE1 FOREIGN KEY (ESP_ID) REFERENCES T_ESPECIE (ESP_ID),
- CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_REDE1 FOREIGN KEY (RD_ID) REFERENCES T_REDE (RD_ID),
- CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_PESCALINHA1 FOREIGN KEY (PL_ID) REFERENCES T_PESCALINHA (PL_ID),
- CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_MARISCAGEM1 FOREIGN KEY (MRG_ID) REFERENCES T_MARISCAGEM (MRG_ID),
- CONSTRAINT FK_DSBQ_ESPECIE_CAPTURADA_DSBQ_ARRASTOFUNDO1 FOREIGN KEY (AF_ID) REFERENCES T_ARRASTOFUNDO (AF_ID)
-);
 
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_TT_DEPENDENTE
@@ -1072,39 +867,27 @@ CREATE OR REPLACE VIEW v_monitoramentobyficha AS
 -- select relname from pg_class where relkind='S' order by relname;
 --
 SELECT pg_catalog.setval(' t_areapesca_tareap_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_arrastofundo_af_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_artepesca_tap_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_colonia_tc_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_comunidade_tcom_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_dados_calao_dca_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_dados_emalhe_dem_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_dados_tarrafa_dta_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_endereco_te_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_entrevista_pescador_ep_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_escolaridade_esc_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_esp_arte_pesca_eap_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_especie_capturada_spc_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_especie_esp_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_familia_fam_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_ficha_diaria_fd_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_genero_gen_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_grupo_grp_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_isca_is_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_login_tl_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_mare_mr_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_mariscagem_mrg_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_monitoramento_mnt_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_municipio_tmun_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_ordem_ord_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_perfil_tp_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_pescador_has_tt_dependente_tptd_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_pescador_tp_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_pescalinha_pl_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_pesqueiro_af_paf_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_porteembarcacao_tpe_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_porto_pto_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_programasocial_prs_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_rede_rd_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_renda_ren_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_situacao_ts_id_seq', 11000, true);
 SELECT pg_catalog.setval(' t_subamostra_sa_id_seq', 11000, true);

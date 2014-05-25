@@ -248,7 +248,7 @@ tbody tr:nth-child(odd) {
 #esquerda-entrevista{
     float: left;
     padding: 0;
-    width: 660px;
+    width: 680px;
     height: auto;
 }
 
@@ -257,7 +257,7 @@ tbody tr:nth-child(odd) {
     margin-left: 30px;
     width: 330px;
     height: auto;
-    margin-top: -65px;
+    margin-top: -62px;
 }
 
 #Submit{

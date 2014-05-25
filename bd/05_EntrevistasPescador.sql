@@ -1,3 +1,55 @@
+DROP TABLE t_arrastofundo Cascade;
+DROP TABLE t_arrastofundo_has_t_especie_capturada Cascade;
+DROP TABLE t_arrastofundo_has_t_pesqueiro Cascade;
+DROP TABLE t_barco Cascade;
+DROP TABLE t_calao Cascade;
+DROP TABLE t_calao_has_t_especie_capturada Cascade;
+DROP TABLE t_calao_has_t_pesqueiro Cascade;
+DROP TABLE t_coletamanual Cascade;
+DROP TABLE t_coletamanual_has_t_especie_capturada Cascade;
+DROP TABLE t_coletamanual_has_t_pesqueiro Cascade;
+DROP TABLE t_emalhe Cascade;
+DROP TABLE t_emalhe_has_t_especie_capturada Cascade;
+DROP TABLE t_emalhe_has_t_pesqueiro Cascade;
+DROP TABLE t_grosseira Cascade;
+DROP TABLE t_grosseira_has_t_especie_capturada Cascade;
+DROP TABLE t_grosseira_has_t_pesqueiro Cascade;
+DROP TABLE t_isca Cascade;
+DROP TABLE t_jerere Cascade;
+DROP TABLE t_jerere_has_t_especie_capturada Cascade;
+DROP TABLE t_jerere_has_t_pesqueiro Cascade;
+DROP TABLE t_linha Cascade;
+DROP TABLE t_linha_has_t_especie_capturada Cascade;
+DROP TABLE t_linha_has_t_pesqueiro Cascade;
+DROP TABLE t_linhafundo Cascade;
+DROP TABLE t_linhafundo_has_t_especie_capturada Cascade;
+DROP TABLE t_linhafundo_has_t_pesqueiro Cascade;
+DROP TABLE t_manzua Cascade;
+DROP TABLE t_manzua_has_t_especie_capturada Cascade;
+DROP TABLE t_manzua_has_t_pesqueiro Cascade;
+DROP TABLE t_mare Cascade;
+DROP TABLE t_mergulho Cascade;
+DROP TABLE t_mergulho_has_t_especie_capturada Cascade;
+DROP TABLE t_mergulho_has_t_pesqueiro Cascade;
+DROP TABLE t_monitoramento Cascade;
+DROP TABLE t_ratoeira Cascade;
+DROP TABLE t_ratoeira_has_t_especie_capturada Cascade;
+DROP TABLE t_ratoeira_has_t_pesqueiro Cascade;
+DROP TABLE t_siripoia Cascade;
+DROP TABLE t_siripoia_has_t_especie_capturada Cascade;
+DROP TABLE t_siripoia_has_t_pesqueiro Cascade;
+DROP TABLE t_tarrafa Cascade;
+DROP TABLE t_tarrafa_has_t_especie_capturada Cascade;
+DROP TABLE t_tarrafa_has_t_pesqueiro Cascade;
+DROP TABLE t_tipomare Cascade;
+DROP TABLE t_varapesca Cascade;
+DROP TABLE t_varapesca_has_t_especie_capturada Cascade;
+DROP TABLE t_varapesca_has_t_pesqueiro Cascade;
+
+
+
+
+
 -- -----------------------------------------------------
 -- Table T_Isca
 -- -----------------------------------------------------
@@ -96,7 +148,7 @@ CREATE TABLE IF NOT EXISTS T_ArrastoFundo (
   AF_Gelo FLOAT NULL,
   AF_Avistou VARCHAR(100) NULL,
   AF_Subamostra boolean NULL,
-  AF_SubID INT NULL,
+  SA_ID INT NULL,
   AF_OBS VARCHAR(100) NULL,
   MNT_ENT_ID INT NOT NULL,
   MNT_ID INT NOT NULL,
@@ -104,6 +156,11 @@ CREATE TABLE IF NOT EXISTS T_ArrastoFundo (
   CONSTRAINT fk_T_ArrastoFundo_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_ArrastoFundo_T_Subamostra1
+    FOREIGN KEY (SA_ID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_ArrastoFundo_T_TipoEmbarcacao1
@@ -166,7 +223,7 @@ CREATE TABLE IF NOT EXISTS T_Emalhe (
   EM_Gelo FLOAT NULL,
   EM_Avistou VARCHAR(100) NULL,
   EM_Subamostra boolean NULL,
-  EM_SubID INT NULL,
+  SA_SubID INT NULL,
   EM_Tamanho FLOAT NULL,
   EM_Altura FLOAT NULL,
   EM_NumPanos INT NULL,
@@ -178,6 +235,11 @@ CREATE TABLE IF NOT EXISTS T_Emalhe (
   CONSTRAINT fk_T_Emalhe_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Emalhe_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Emalhe_T_TipoEmbarcacao1
@@ -257,7 +319,7 @@ CREATE TABLE IF NOT EXISTS T_Calao (
   CAL_TempoGasto TIME NULL,
   CAL_Avistou VARCHAR(100) NULL,
   CAL_Subamostra boolean NULL,
-  CAL_SubId INT NULL,
+  SA_SubId INT NULL,
   CAL_Tamanho FLOAT NULL,
   CAL_Altura FLOAT NULL,
   CAL_Malha FLOAT NULL,
@@ -269,6 +331,11 @@ CREATE TABLE IF NOT EXISTS T_Calao (
   CONSTRAINT fk_T_Calao_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Calao_T_Subamostra1
+    FOREIGN KEY (SA_SubId)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Calao_T_TipoEmbarcacao1
@@ -326,7 +393,7 @@ CREATE TABLE IF NOT EXISTS T_Tarrafa (
   TAR_TempoGasto TIME NULL,
   TAR_Avistou VARCHAR(100) NULL,
   TAR_Subamostra boolean NULL,
-  TAR_SubID INT NULL,
+  SA_SubID INT NULL,
   TAR_Roda FLOAT NULL,
   TAR_Altura FLOAT NULL,
   TAR_Malha FLOAT NULL,
@@ -336,6 +403,11 @@ CREATE TABLE IF NOT EXISTS T_Tarrafa (
   CONSTRAINT fk_T_Tarrafa_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Tarrafa_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Tarrafa_T_TipoEmbarcacao1
@@ -440,10 +512,6 @@ CREATE TABLE IF NOT EXISTS T_Tarrafa_Has_T_Pesqueiro (
 
 
 
-
-
-
-
 -- -----------------------------------------------------
 -- Table T_Linha
 -- -----------------------------------------------------
@@ -462,7 +530,7 @@ CREATE TABLE IF NOT EXISTS T_Linha (
   LIN_Gelo FLOAT NULL,
   LIN_Avistou VARCHAR(100) NULL,
   LIN_Subamostra boolean NULL,
-  LIN_SubID INT NULL,
+  SA_SubID INT NULL,
   LIN_NumLinhas INT NULL,
   LIN_NumAnzoisPLinha INT NULL,
   ISC_ID INT NOT NULL,
@@ -471,6 +539,11 @@ CREATE TABLE IF NOT EXISTS T_Linha (
   CONSTRAINT fk_T_Linha_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Linha_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Linha_T_TipoEmbarcacao1
@@ -560,6 +633,8 @@ CREATE TABLE IF NOT EXISTS T_Grosseira (
   GRS_Avistou VARCHAR(100) NULL,
   GRS_NumLinhas INT NULL,
   GRS_NumAnzoisPLinha INT NULL,
+  GRS_Subamostra boolean NULL,
+  SA_SubID INT NULL,
   ISC_ID INT NOT NULL,
   GRS_OBS VARCHAR(100) NULL,
   MNT_ID INT NOT NULL,
@@ -567,6 +642,11 @@ CREATE TABLE IF NOT EXISTS T_Grosseira (
   CONSTRAINT fk_T_Grosseira_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Grosseira_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Grosseira_T_TipoEmbarcacao1
@@ -652,7 +732,7 @@ CREATE TABLE IF NOT EXISTS T_Mergulho (
   MER_TempoGasto TIME NULL,
   MER_Avistou VARCHAR(100) NULL,
   MER_Subamostra boolean NULL,
-  MER_SubID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NOT NULL,
   MNT_ID INT NOT NULL,
   MER_OBS VARCHAR(100) NULL,
@@ -660,6 +740,11 @@ CREATE TABLE IF NOT EXISTS T_Mergulho (
   CONSTRAINT fk_T_Mergulho_T_TipoEmbarcacao1
     FOREIGN KEY (TTE_ID)
     REFERENCES T_TipoEmbarcacao (TTE_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Mergulho_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Mergulho_T_Barco1
@@ -746,7 +831,7 @@ CREATE TABLE IF NOT EXISTS T_ColetaManual (
   CML_TempoGasto TIME NULL,
   CML_Avistamento VARCHAR(100) NULL,
   CML_Subamostra boolean NULL,
-  CML_SubID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NOT NULL,
   CML_Obs VARCHAR(100) NULL,
   MNT_ID INT NOT NULL,
@@ -754,6 +839,11 @@ CREATE TABLE IF NOT EXISTS T_ColetaManual (
   CONSTRAINT fk_T_ColetaManual_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_ColetaManual_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_ColetaManual_T_TipoEmbarcacao1
@@ -843,7 +933,7 @@ CREATE TABLE IF NOT EXISTS T_VaraPesca (
   VP_Gelo FLOAT NULL,
   VP_Avistamento VARCHAR(100) NULL,
   VP_Subamostra boolean NULL,
-  VP_SubID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NULL,
   VP_NumAnzoisPLinha INT NULL,
   VP_NumLinhas INT NULL,
@@ -854,6 +944,11 @@ CREATE TABLE IF NOT EXISTS T_VaraPesca (
   CONSTRAINT fk_T_VaraPesca_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_VaraPesca_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_VaraPesca_T_TipoEmbarcacao1
@@ -936,9 +1031,9 @@ CREATE TABLE IF NOT EXISTS T_VaraPesca_has_T_Pesqueiro (
 CREATE TABLE IF NOT EXISTS T_LinhaFundo (
   LF_ID serial,
   LF_Embarcada boolean NULL,
-  T_Barco_BAR_ID INT NULL,
-  T_TipoEmbarcacao_TTE_ID INT NULL,
-  T_Pescador_TP_ID INT NOT NULL,
+  BAR_ID INT NULL,
+  TTE_ID INT NULL,
+  TP_ID INT NOT NULL,
   LF_QuantPescadores INT NULL,
   LF_DHSaida TIMESTAMP NULL,
   LF_DHVolta TIMESTAMP NULL,
@@ -949,7 +1044,7 @@ CREATE TABLE IF NOT EXISTS T_LinhaFundo (
   LF_Gelo FLOAT NULL,
   LF_Avistamento VARCHAR(100) NULL,
   LF_Subamostra boolean NULL,
-  LF_SubamostraID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NULL,
   LF_NumLinhas INT NULL,
   LF_NumAnzoisPLinha INT NULL,
@@ -958,17 +1053,22 @@ CREATE TABLE IF NOT EXISTS T_LinhaFundo (
   MNT_ID INT NOT NULL,
   PRIMARY KEY (LF_ID),
   CONSTRAINT fk_T_LinhaFundo_T_Barco1
-    FOREIGN KEY (T_Barco_BAR_ID)
+    FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_LinhaFundo_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT fk_T_LinhaFundo_T_TipoEmbarcacao1
-    FOREIGN KEY (T_TipoEmbarcacao_TTE_ID)
+    FOREIGN KEY (TTE_ID)
     REFERENCES T_TipoEmbarcacao (TTE_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_LinhaFundo_T_Pescador1
-    FOREIGN KEY (T_Pescador_TP_ID)
+    FOREIGN KEY (TP_ID)
     REFERENCES T_Pescador (TP_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -1050,7 +1150,7 @@ CREATE TABLE IF NOT EXISTS T_Jerere (
   JRE_TempoGasto TIME NULL,
   JRE_Avistamento VARCHAR(100) NULL,
   JRE_Subamostra boolean NULL,
-  JRE_SubID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NOT NULL,
   JRE_NumArmadilhas INT NULL,
   JRE_Obs VARCHAR(100) NULL,
@@ -1059,6 +1159,11 @@ CREATE TABLE IF NOT EXISTS T_Jerere (
   CONSTRAINT fk_T_Jerere_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT fk_T_Jerere_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Jerere_T_TipoEmbarcacao1
@@ -1142,7 +1247,7 @@ CREATE TABLE IF NOT EXISTS T_Siripoia (
   SIR_TempoGasto TIME NULL,
   SIR_Avistamento VARCHAR(100) NULL,
   SIR_Subamostra boolean NULL,
-  SIR_SubID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NOT NULL,
   SIR_NumArmadilhas INT NULL,
   SIR_Obs VARCHAR(100) NULL,
@@ -1151,6 +1256,11 @@ CREATE TABLE IF NOT EXISTS T_Siripoia (
   CONSTRAINT fk_T_Siripoia_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Siripoia_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Siripoia_T_TipoEmbarcacao1
@@ -1232,7 +1342,7 @@ CREATE TABLE IF NOT EXISTS T_Manzua (
   MAN_TempoGasto TIME NULL,
   MAN_Avistamento VARCHAR(100) NULL,
   MAN_Subamostra boolean NULL,
-  MAN_SubID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NOT NULL,
   MAN_NumArmadilhas INT NULL,
   MAN_Obs VARCHAR(100) NULL,
@@ -1241,6 +1351,11 @@ CREATE TABLE IF NOT EXISTS T_Manzua (
   CONSTRAINT fk_T_Manzua_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Manzua_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Manzua_T_TipoEmbarcacao1
@@ -1323,7 +1438,7 @@ CREATE TABLE IF NOT EXISTS T_Ratoeira (
   RAT_TempoGasto TIME NULL,
   RAT_Avistamento VARCHAR(100) NULL,
   RAT_Subamostra boolean NULL,
-  RAT_SubID INT NULL,
+  SA_SubID INT NULL,
   MR_ID INT NOT NULL,
   RAT_NumArmadilhas INT NULL,
   RAT_Obs VARCHAR(100) NULL,
@@ -1332,6 +1447,11 @@ CREATE TABLE IF NOT EXISTS T_Ratoeira (
   CONSTRAINT fk_T_Ratoeira_T_Barco1
     FOREIGN KEY (BAR_ID)
     REFERENCES T_Barco (BAR_ID)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_T_Ratoeira_T_Subamostra1
+    FOREIGN KEY (SA_SubID)
+    REFERENCES T_Subamostra (SA_ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_T_Ratoeira_T_TipoEmbarcacao1
