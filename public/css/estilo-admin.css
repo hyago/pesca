@@ -294,6 +294,10 @@ input {
     float: right;
     height: 22px;
     border-radius: 3px;
+    border-color:#8b8386;
+}
+input:focus{
+    border-color: #af3333;
 }
 tr td input{
 	float: right;
