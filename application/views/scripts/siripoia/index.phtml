@@ -1,4 +1,147 @@
-Siripóia<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Siripoia</b> and script/action name <b>index</b></p>
+<div id="titulos">
+    <h2>Desembarque->Pesca de Siripóia</h2>
+    <h3>Entrevista</h3>
 </div>
+
+<div id="esquerda-entrevista">
+    <form>
+        <fieldset id="Desembarque">
+            <div id="esquerda">
+                <div id="form-esq">
+                    <label>ID da ficha diária:</label>
+                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" /><br />
+                </div>
+                <div id="form-esq">
+                    <label for="tipo">ID Entrevista:</label>
+                    <input type="text" placeholder = "ID" name="id_entrevista" disabled="true"/><br />
+                </div>
+            </div>
+            <br/>
+            <div id="esquerda">
+                <legend><h4>Embarcação:</h4></legend>
+                <div id="form-esq">
+                    <label>Utilizou Barco?</label>
+                    <input type="checkbox"  name="barco" checked="true"/><br />
+                </div>
+                <div id="form-esq">
+                    <label>Barco:</label>
+                    <select name="nomeBarco" placeholder="Nome do Barco" />
+                    <?php
+                    foreach ($this->barcos as $key => $barco):
+                        ?>
+                        <option value="<?= $barco['bar_id'] ?>"><?= $barco['bar_nome'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                    <br />
+                </div>
+                <div id="form-esq">
+                    <label>Tipo de Barco:</label>
+                    <select name="tipoBarco" />
+                    <?php
+                    foreach ($this->tipoEmbarcacoes as $key => $tipoEmbarcacao):
+                        ?>
+                        <option value="<?= $tipoEmbarcacao['tte_id'] ?>"><?= $tipoEmbarcacao['tte_tipoembarcacao'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                    <br />
+                </div>
+
+            </div>
+            <div id="direita-entrevista">
+                <div id="form-esq">    
+                    <label>Pescador Entrevistado:</label>
+                    <select name="PescadorEntrevistado" />
+                    <?php
+                    foreach ($this->pescadores as $key => $pescador):
+                        ?>
+                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                    <br />
+                </div>
+                <div id="form-esq">
+                    <label>Qtd de Pescadores:</label>
+                    <input type="number" name="numPescadores" placeholder="QuantidadePescadores"/><br />
+                </div>
+            </div>
+            <div id="esquerda">
+                <legend><h4>Saída e Volta:</h4></legend>
+                <div id="form-esq">
+
+                    <label>Data:</label>
+                    <input type="date" name="dataSaida" placeholder="Data da Saída"/>
+                </div>
+                <div id="form-esq">
+                    <label>Horas:</label>
+                    <input type="time" name="horaSaida" placeholder="Hora da Saída"/>
+                </div>
+            </div>
+            <div id="direita-entrevista">
+                <div id="form-esq">
+                    <label>Data:</label>
+                    <input type="date" name="dataVolta" placeholder="Data da Volta"/>
+                </div>
+                <div id="form-esq">
+                    <label>Horas:</label>
+                    <input type="time" name="horaVolta" placeholder="Hora da Volta"/>
+                </div>
+            </div>
+            <div id="esquerda">
+                <div id="form-esq">
+                    <legend><h4>Gastos:</h4></legend>
+                    <label>Diesel(L):</label>
+                    <input type="text"  name="diesel" placeholder="Diesel"/>
+                </div>
+                <div id="form-dir">    
+                    <label>Óleo(L):</label>
+                    <input type="text"  name="oleo" placeholder="Óleo"/><br />
+                </div>
+            </div>
+            <div id="direita-entrevista">
+                <div id="form-dir">    
+                    <label>Alimento($):</label>
+                    <input type="text"  name="alimento" placeholder="Alimento"/><br />
+                </div>
+                <div id="form-dir">    
+                    <label>Gelo($):</label>
+                    <input type="text"  name="gelo" placeholder="Gelo"/><br />
+                </div>
+            </div>
+            <br/>
+            <div id="esquerda">
+                <div id="form-esq">
+                    <legend><h4>Esforço:</h4></legend>
+                    <label>Número de Armadilhas:</label>
+                    <input type="text" name="numArmadilhas" placeholder="Armadilhas"/>
+                </div>
+            </div>
+            <div id="esquerda">
+                <legend><h4>Outros dados:</h4></legend>
+                <div id="form-esq">    
+                    <label>Avistou:</label>
+                    <input type="text" name="avistamento" placeholder="avistamento"/><br />
+                </div>
+                <div id="form-esq">
+                    <label for="tipo">Subamostra?:</label>
+                    <input type="checkbox" name="subamostra" /><br />
+                </div>
+                <div id="form-esq">
+                    <label for="tipo">Observacao:</label>
+                    <input type="text" name="observacao" placeholder="Observacao" /><br />
+                </div>
+                <div id="Submit">
+                    <input type="submit" value="Salvar Entrevista"/>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>        
+</div>      
+
+

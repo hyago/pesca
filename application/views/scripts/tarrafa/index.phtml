@@ -7,152 +7,178 @@
     <form>
         <fieldset id="Desembarque">
             <div id="esquerda">
-            <div id="form-esq">
-                <label>ID da ficha diária:</label>
-                <input type="text" name="id_fichaDiaria" placeholder="ID" id="id_fichaDiaria" /><br />
-            </div>
-            <div id="form-esq">
-                <label for="tipo">ID Entrevista:</label>
-                <input type="text" id="id_entrevista" placeholder = "ID" name="id_entrevista"/><br />
-            </div>
+                <div id="form-esq">
+                    <label>ID da ficha diária:</label>
+                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" /><br />
+                </div>
+                <div id="form-esq">
+                    <label for="tipo">ID Entrevista:</label>
+                    <input type="text" placeholder = "ID" name="id_entrevista" disabled="true"/><br />
+                </div>
             </div>
             <br/>
             <div id="esquerda">
-		<legend><h4>Embarcação:</h4></legend>
-                    <div id="form-esq">
-                        <label>Utilizou Barco?</label>
-                        <input type="checkbox" id="nome" name="barco" checked="true"/><br />
-                    </div>
-                    <div id="form-esq">
-                        <label>Barco:</label>
-                        <input type="text" id="nome" name="barco" placeholder="Nome do Barco" /><br />
-                    </div>
-                    <div id="form-esq">
-                        <label>Tipo de Barco:</label>
-                        <input type="text" id="nome" name="tipo_barco" placeholder="Tipo de Barco"/><br />
-                    </div>
-                    
+                <legend><h4>Embarcação:</h4></legend>
+                <div id="form-esq">
+                    <label>Utilizou Barco?</label>
+                    <input type="checkbox" id="nome" name="barco" checked="true"/><br />
+                </div>
+                <div id="form-esq">
+                    <label>Barco:</label>
+                    <select name="nomeBarco" placeholder="Nome do Barco" />
+                    <?php
+                    foreach ($this->barcos as $key => $barco):
+                        ?>
+                        <option value="<?= $barco['bar_id'] ?>"><?= $barco['bar_nome'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+
+                </div>
+                <div id="form-esq">
+                    <label>Tipo de Barco:</label>
+                    <select name="tipoBarco" />
+                    <?php
+                    foreach ($this->tipoEmbarcacoes as $key => $tipoEmbarcacao):
+                        ?>
+                        <option value="<?= $tipoEmbarcacao['tte_id'] ?>"><?= $tipoEmbarcacao['tte_tipoembarcacao'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+
+                </div>
+
             </div>
             <div id="direita-entrevista">
-                    <div id="form-esq">    
-                        <label>Pescador Entrevistado:</label>
-                        <input type="text" id="nome" name="mestre" placeholder="Entrevistado"/><br />
-                    </div>
-                    <div id="form-esq">
-                        <label>Qtd de Pescadores:</label>
-                        <input type="text" id="numeric" name="num_pescadores" placeholder="Num"/><br />
-                    </div>
+                <div id="form-esq">    
+                    <label>Pescador Entrevistado:</label>
+                    <select name="PescadorEntrevistado" />
+                    <?php
+                    foreach ($this->pescadores as $key => $pescador):
+                        ?>
+                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select><br />
+                </div>
+                <div id="form-esq">
+                    <label>Qtd de Pescadores:</label>
+                    <input type="text"  name="NumPescadores" placeholder="Quantidade de Pescadores "/><br />
+                </div>
             </div>
             <div id="esquerda">
-                <legend><h4>Tempo</h4></legend>
+                <legend><h4>Tempo:</h4></legend>
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="text" name="num_pescadores" placeholder="Data da Saída"/>
+                    <input type="date" name="data"/>
                 </div>
                 <div id="form-esq">
                     <label>Tempo Gasto:</label>
-                    <input type="text" name="num_pescadores" placeholder="Data da Saída"/>
+                    <input type="time" name="tempo"/>
                 </div>
             </div>
             <br/>
             <div id="esquerda">
                 <div id="form-esq">
                     <legend><h4>Esforço:</h4></legend>
-                    <label>Roda:</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Diesel"/>
+                    <label>Roda(m):</label>
+                    <input type="text"  name="tamanho" placeholder="Tamanho"/>
                 </div>
                 <div id="form-dir">    
                     <label>Altura(m):</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Óleo"/><br />
+                    <input type="text"  name="altura" placeholder="Altura"/><br />
                 </div>
             </div>
             <div id="direita-entrevista">
                 <div id="form-dir">    
                     <label>Número de Lances:</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Alimento"/><br />
+                    <input type="text"  name="numLances" placeholder="Lances"/><br />
                 </div>
                 <div id="form-dir">    
                     <label>Malha:</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Gelo"/><br />
+                    <input type="text"  name="malha" placeholder="malha"/><br />
                 </div>
             </div><br/>
             <div id="esquerda">
                 <legend><h4>Outros dados:</h4></legend>
                 <div id="form-esq">    
                     <label>Avistou:</label>
-                    <input type="text" name="num_pescadores" placeholder="Num"/><br />
+                    <input type="text" name="avistamento" placeholder="Avistamento"/><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
-                    <input type="checkbox" id="subamostra" name="subamostra" /><br />
+                    <input type="checkbox" name="subamostra" /><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Observacao:</label>
-                    <input type="text" id="obs" name="subamostra" placeholder="Observacao" /><br />
+                    <input type="text" name="observacao" placeholder="Observação" /><br />
                 </div>
             </div>
-         <br/>
-         <br/>
-         <br/>
-         <div id="esquerda-entrevista">
-         <fieldset id="Pesqueiros">
-            <td>Quais Pesqueiros e Quanto tempo em cada:</td>
-               <table style="border:none">
-               <tr class="linhas">
-               <br/>
-               <td>
-                   <select name="Pesqueiro[]" style="float:left">
-                    <option value="" selected="selected">Pesqueiro</option>
-                   </select>
-               </td>
-               <td>
-                   <label>Tempo</label>
-                   <input type="text" name="qtd_peixes[]" id="numeric"/>
-               </td>
-               <td>
-                   <a  class="removerCampo" title="Remover linha">Remove Campo</a>
-               </td>
-                            
-              </tr>
-              </table>
-                      
-            <a href="#rodape" class="adicionarCampo" title="Adicionar item">Add Campo</a>
-         </fieldset>
-         </div>
-         <div id="esquerda-entrevista">
-         <fieldset id="ArtePesca">
-          <td><label for="tipo">Quantidade de Peixes Capturadas:</label></td>
-              <table style="border:none">
-              <tr class="linhas">
-              <br/>
-              <td>
-                  <select name="Especie[]" id="Especie">
-                      <option value="" selected="selected">Espécie</option>
-                  </select>
-	      </td>
-              <td>
-                  <label>Quantidade</label>
-                  <input type="text" name="qtd_peixes[]" id="numeric"/>
-              </td>
-              <td>
-                  <label for="tipo">Peso (Kg):</label>
-                  <input type="text" id="numeric" name="peso_pescaLinha"/>           
-              </td>
-              <td>
-                  <label for="tipo">Preço por Kg:</label>
-                  <input type="text" id="numeric" name="preco_pescaLinha"/>           
-              </td>
-              <td>
-                  <a class="removerCampo" title="Remover linha">Remove Campo</a>
-              </td>
-	      </tr>
-              </table>
-              <br/>
-              <a  class="adicionarCampo" title="Adicionar item">Add Campo</a>
-       </fieldset>       
-         </div>
+            <br/>
+            <br/>
+            <div id="esquerda-entrevista">
+                <fieldset id="Pesqueiros">
+                    <td>Quais Pesqueiros e Quanto tempo em cada:</td>
+                    <table style="border:none">
+                        <tr class="linhas">
+                        <br/>
+                        <td>
+                            <select name="Pesqueiro[]" style="float:left">
+                                <option value="" selected="selected">Pesqueiro</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label>Tempo</label>
+                            <input type="text" name="qtd_peixes[]" id="numeric"/>
+                        </td>
+                        <td>
+                            <a  class="removerCampo" title="Remover linha">Remove Campo</a>
+                        </td>
+
+                        </tr>
+                    </table>
+
+                    <a href="#rodape" class="adicionarCampo" title="Adicionar item">Add Campo</a>
+                </fieldset>
+            </div>
+            <div id="esquerda-entrevista">
+                <fieldset id="ArtePesca">
+                    <td><label for="tipo">Quantidade de Peixes Capturadas:</label></td>
+                    <table style="border:none">
+                        <tr class="linhas">
+                        <br/>
+                        <td>
+                            <select name="Especie[]" id="Especie">
+                                <option value="" selected="selected">Espécie</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label>Quantidade</label>
+                            <input type="text" name="qtd_peixes[]" id="numeric"/>
+                        </td>
+                        <td>
+                            <label for="tipo">Peso (Kg):</label>
+                            <input type="text" id="numeric" name="peso_pescaLinha"/>           
+                        </td>
+                        <td>
+                            <label for="tipo">Preço por Kg:</label>
+                            <input type="text" id="numeric" name="preco_pescaLinha"/>           
+                        </td>
+                        <td>
+                            <a class="removerCampo" title="Remover linha">Remove Campo</a>
+                        </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <a  class="adicionarCampo" title="Adicionar item">Add Campo</a>
+                </fieldset>       
+            </div>
         </fieldset>
         <div id="Submit">
             <input type="submit" value="Enviar"/>
         </div>
-    </form>
+</form>
+</div>

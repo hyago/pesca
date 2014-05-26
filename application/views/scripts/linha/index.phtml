@@ -7,133 +7,149 @@
     <form>
         <fieldset id="Desembarque">
             <div id="esquerda">
-            <div id="form-esq">
-                <label>ID da ficha diária:</label>
-                <input type="text" name="id_fichaDiaria" placeholder="ID" id="id_fichaDiaria" /><br />
-            </div>
-            <div id="form-esq">
-                <label for="tipo">ID Entrevista:</label>
-                <input type="text" id="id_entrevista" placeholder = "ID" name="id_entrevista"/><br />
-            </div>
+                <div id="form-esq">
+                    <label>ID da ficha diária:</label>
+                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" /><br />
+                </div>
+                <div id="form-esq">
+                    <label for="tipo">ID Entrevista:</label>
+                    <input type="text" placeholder = "ID" name="id_entrevista" disabled="true"/><br />
+                </div>
             </div>
             <br/>
             <div id="esquerda">
-		<legend><h4>Embarcação:</h4></legend>
-                    <div id="form-esq">
-                        <label>Utilizou Barco?</label>
-                        <input type="checkbox" id="nome" name="barco" checked="true"/><br />
-                    </div>
-                    <div id="form-esq">
-                        <label>Barco:</label>
-                        <input type="text" id="nome" name="barco" placeholder="Nome do Barco" /><br />
-                    </div>
-                    <div id="form-esq">
-                        <label>Tipo de Barco:</label>
-                        <input type="text" id="nome" name="tipo_barco" placeholder="Tipo de Barco"/><br />
-                    </div>
-                    
+                <legend><h4>Embarcação:</h4></legend>
+                <div id="form-esq">
+                    <label>Utilizou Barco?</label>
+                    <input type="checkbox"  name="barco" checked="true"/><br />
+                </div>
+                <div id="form-esq">
+                    <label>Barco:</label>
+                    <select name="nomeBarco" placeholder="Nome do Barco" />
+                    <?php
+                    foreach ($this->barcos as $key => $barco):
+                        ?>
+                        <option value="<?= $barco['bar_id'] ?>"><?= $barco['bar_nome'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                    <br />
+                </div>
+                <div id="form-esq">
+                    <label>Tipo de Barco:</label>
+                    <select name="tipoBarco" />
+                    <?php
+                    foreach ($this->tipoEmbarcacoes as $key => $tipoEmbarcacao):
+                        ?>
+                        <option value="<?= $tipoEmbarcacao['tte_id'] ?>"><?= $tipoEmbarcacao['tte_tipoembarcacao'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                    <br />
+                </div>
+
             </div>
             <div id="direita-entrevista">
-                    <div id="form-esq">    
-                        <label>Pescador Entrevistado:</label>
-                        <input type="text" id="nome" name="mestre" placeholder="Entrevistado"/><br />
-                    </div>
-                    <div id="form-esq">
-                        <label>Qtd de Pescadores:</label>
-                        <input type="text" id="numeric" name="num_pescadores" placeholder="Num"/><br />
-                    </div>
-            </div>
-            <div id="direita-entrevista">
-                    <div id="form-esq">    
-                        <label>Pescador Entrevistado:</label>
-                        <input type="text" id="nome" name="mestre" placeholder="Entrevistado"/><br />
-                    </div>
-                    <div id="form-esq">
-                        <label>Qtd de Pescadores:</label>
-                        <input type="text" id="numeric" name="num_pescadores" placeholder="Num"/><br />
-                    </div>
+                <div id="form-esq">    
+                    <label>Pescador Entrevistado:</label>
+                    <select name="PescadorEntrevistado" />
+                    <?php
+                    foreach ($this->pescadores as $key => $pescador):
+                        ?>
+                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                    <br />
+                </div>
+                <div id="form-esq">
+                    <label>Qtd de Pescadores:</label>
+                    <input type="number" name="numPescadores" placeholder="QuantidadePescadores"/><br />
+                </div>
             </div>
             <div id="esquerda">
                 <legend><h4>Saída e Volta:</h4></legend>
                 <div id="form-esq">
-                    
+
                     <label>Data:</label>
-                    <input type="text" name="num_pescadores" placeholder="Data da Saída"/>
+                    <input type="date" name="dataSaida" placeholder="Data da Saída"/>
                 </div>
                 <div id="form-esq">
                     <label>Horas:</label>
-                    <input type="text" name="num_pescadores" placeholder="Hora da Saída"/>
+                    <input type="time" name="horaSaida" placeholder="Hora da Saída"/>
                 </div>
             </div>
-           <div id="direita-entrevista">
+            <div id="direita-entrevista">
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="text" name="num_pescadores" placeholder="Data da Volta"/>
+                    <input type="date" name="dataVolta" placeholder="Data da Volta"/>
                 </div>
-               <div id="form-esq">
+                <div id="form-esq">
                     <label>Horas:</label>
-                    <input type="text" name="num_pescadores" placeholder="Hora da Volta"/>
+                    <input type="time" name="horaVolta" placeholder="Hora da Volta"/>
                 </div>
-           </div>
+            </div>
             <div id="esquerda">
                 <div id="form-esq">
                     <legend><h4>Gastos:</h4></legend>
                     <label>Diesel(L):</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Diesel"/>
+                    <input type="text"  name="diesel" placeholder="Diesel"/>
                 </div>
                 <div id="form-dir">    
                     <label>Óleo(L):</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Óleo"/><br />
+                    <input type="text"  name="oleo" placeholder="Óleo"/><br />
                 </div>
             </div>
             <div id="direita-entrevista">
                 <div id="form-dir">    
                     <label>Alimento($):</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Alimento"/><br />
+                    <input type="text"  name="alimento" placeholder="Alimento"/><br />
                 </div>
                 <div id="form-dir">    
                     <label>Gelo($):</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Gelo"/><br />
+                    <input type="text"  name="gelo" placeholder="Gelo"/><br />
                 </div>
             </div>
             <br/>
+            
             <div id="esquerda">
                 <div id="form-esq">
                     <legend><h4>Esforço:</h4></legend>
                     <label>Número de Linhas:</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Diesel"/>
+                    <input type="text" name="numLinhas" placeholder="Linhas"/>
                 </div>
                 <div id="form-dir">    
-                    <label>Número de Anzóis Por Linha:</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Óleo"/><br />
+                    <label> Anzóis p/ Linha:</label>
+                    <input type="text" name="numAnzois" placeholder="Anzóis P/ Linha"/><br />
                 </div>
             </div>
             <div id="direita-entrevista">
                 <div id="form-dir">    
                     <label>Isca:</label>
-                    <input type="text" id="numeric" name="num_pescadores" placeholder="Alimento"/><br />
+                    <input type="text" name="isca" placeholder="Isca"/><br />
                 </div>
             </div><br/>
             <div id="esquerda">
                 <legend><h4>Outros dados:</h4></legend>
                 <div id="form-esq">    
                     <label>Avistou:</label>
-                    <input type="text" name="num_pescadores" placeholder="Num"/><br />
+                    <input type="text" name="avistamento" placeholder="Avistamento"/><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
-                    <input type="checkbox" id="subamostra" name="subamostra" /><br />
+                    <input type="checkbox" name="subamostra" /><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Observacao:</label>
-                    <input type="text" id="obs" name="subamostra" placeholder="Observacao" /><br />
+                    <input type="text" name="observacao" placeholder="Observacao" /><br />
                 </div>
-                <div id="form-esq">
-                    <label for="tipo">Tempo até o Pesqueiro:</label>
-                    <input type="text" id="obs" name="subamostra" placeholder="Observacao" /><br />
+                <div id="Submit">
+                    <input type="submit" value="Salvar Entrevista"/>
                 </div>
             </div>
-         <br/>
          <br/>
          <br/>
          <div id="esquerda-entrevista">
@@ -198,3 +214,4 @@
             <input type="submit" value="Enviar"/>
         </div>
     </form>
+</div>
