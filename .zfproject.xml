@@ -119,6 +119,9 @@
         <controllerFile controllerName="TipoRenda">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Perfil">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -385,6 +388,9 @@
             <viewScriptFile forActionName="editar"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TipoRenda">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

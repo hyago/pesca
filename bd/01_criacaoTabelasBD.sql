@@ -5,6 +5,7 @@
 
 -- ALTERADO: T_ESPECIE_CAPTURADA SPC_PESO(KG) -> SPC_PESO_KG
 
+-- select tablename, 'T' from pg_tables;
 DROP TABLE T_ALTERACAOSENHA CASCADE;
 DROP TABLE T_AREAPESCA CASCADE;
 DROP TABLE T_AREAPESCA_HAS_T_PESCADOR CASCADE;
@@ -328,8 +329,8 @@ CREATE TABLE IF NOT EXISTS T_USUARIO (
  TU_CPF VARCHAR(14) NOT NULL,
  TU_RG VARCHAR(11) NOT NULL,
  TU_EMAIL VARCHAR(30) NOT NULL,
- TU_TELRES NUMERIC (14,0),
- TU_TELCEL NUMERIC (14,0),
+ TU_TELRES VARCHAR (20),
+ TU_TELCEL VARCHAR (20),
  TU_USUARIODELETADO BOOLEAN DEFAULT FALSE NOT NULL,
  TL_ID INT NOT NULL,
  TP_ID INT NOT NULL,
@@ -859,41 +860,3 @@ CREATE OR REPLACE VIEW v_monitoramentobyficha AS
    FROM t_monitoramento, t_ficha_diaria, t_artepesca
   WHERE t_monitoramento.fd_id = t_ficha_diaria.fd_id AND t_monitoramento.mnt_arte = t_artepesca.tap_id;
 
--- 
--- --- Tem que ser no final do arquivo
--- select relname from pg_class where relkind='S' order by relname;
---
-SELECT pg_catalog.setval(' t_areapesca_tareap_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_artepesca_tap_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_colonia_tc_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_comunidade_tcom_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_endereco_te_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_escolaridade_esc_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_especie_esp_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_familia_fam_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_ficha_diaria_fd_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_genero_gen_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_grupo_grp_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_login_tl_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_monitoramento_mnt_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_municipio_tmun_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_ordem_ord_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_perfil_tp_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_pescador_has_tt_dependente_tptd_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_pescador_tp_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_pesqueiro_af_paf_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_porteembarcacao_tpe_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_porto_pto_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_programasocial_prs_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_renda_ren_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_situacao_ts_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_subamostra_sa_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_telefonecontato_ttcont_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_tempo_tmp_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_tipocapturada_itc_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_tipodependente_ttd_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_tipoembarcacao_tte_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_tiporenda_ttr_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_tipotel_ttel_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_usuario_tu_id_seq', 11000, true);
-SELECT pg_catalog.setval(' t_vento_vnt_id_seq', 11000, true);
