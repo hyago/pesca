@@ -233,6 +233,48 @@ function jsAtualizarPescadorEndereco( frm, pag )
 
     location.replace(tmpUpdate);
 }
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Perfil /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPerfil( frm, pag )
+{
+    if (frm.inputTP_ID.value) {
+
+        var tmpUpdate = ( '/perfil/update' + '/tp_id/' + frm.inputTP_ID.value + '/tp_perfil/' + frm.inputTP_Perfil.value);
+
+        location.replace(tmpUpdate);
+        
+        return;
+    }
+    if (frm.inputTP_Perfil.value) {
+
+        var tmpUpdate = (pag + '/tp_perfil/' + frm.inputTP_Perfil.value);
+
+        location.replace(tmpUpdate);
+    }
+}
+
+function jsDeletePerfil( idPerfil, pag )
+{
+    if (confirm("Realmente deseja excluir este item?")) {
+        
+        var tmpUpdate = (pag + '/tp_id/' + idPerfil);
+        
+        location.replace(tmpUpdate);
+    }
+}
+
+function jsUpdatePerfil( tp_id, tp_perfil, frm )
+{
+    if ( confirm("Realmente deseja EDITAR este item?") ) {
+        frm.inputTP_Perfil.value = tp_perfil;
+        frm.inputTP_ID.value = tp_id;
+    }
+}
+
+function jsReloadPerfil( frm ){
+    if ( frm.inputTP_ID.value || frm.inputTP_Perfil.value) {
+        location.replace('/perfil');
+    }
+}
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsInsertPescadorHasDependente( frm, pag )
