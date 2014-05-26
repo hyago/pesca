@@ -4,7 +4,6 @@
 </div>
 
 <div id="esquerda-entrevista">
-    <form>
         <fieldset id="Desembarque">
             <div id="esquerda">
                 <div id="form-esq">
@@ -132,7 +131,8 @@
                     <input type="submit" value="Salvar Entrevista"/>
                 </div>
             </div>
-
+      <form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
+      
         </fieldset>
         <fieldset class="noEditable"><legend>Pesqueiro:</legend>
             <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
