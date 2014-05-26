@@ -13,6 +13,13 @@ class VaraPescaController extends Zend_Controller_Action
         
         $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuarioLogado = $this->usuarioLogado;
+        
+        
+        $this->modelPescador = new Application_Model_Pescador();
+        $this->modelBarcos = new Application_Model_Barcos();
+        $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
+        $this->modelPesqueiro = new Application_Model_Pesqueiro();
+        $this->modelEspecie = new Application_Model_Especie();
     }
 
     public function indexAction()

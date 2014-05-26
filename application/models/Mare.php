@@ -1,19 +1,8 @@
 <?php
 
-/** 
- * Model Municipio
- * 
- * @package Pesca
- * @subpackage Models
- * @author Elenildo João <elenildo.joao@gmail.com>
- * @version 0.1
- * @access public
- *
- */
-
-class Application_Model_Municipio
+class Application_Model_Mare
 {
-    private $dbTableMunicipio;
+private $dbTableMunicipio;
     public function select()
     {
         $dao = new Application_Model_DbTable_Municipio();
@@ -67,4 +56,6 @@ class Application_Model_Municipio
         
         $this->dbTableMunicipio->delete($whereMunicipio);
     }
+
 }
+
