@@ -38,8 +38,6 @@ class ArrastoFundoController extends Zend_Controller_Action
 
     public function visualizarAction(){
         
-        
-        
     }
     
     public function editarAction(){
@@ -55,6 +53,15 @@ class ArrastoFundoController extends Zend_Controller_Action
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
         
+    }
+    
+    public function criarAction(){
+        $this->modelArrastoFundo->insert($this->_getAllParams());
+        $id = $this->modelArrasto->selectId();
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+
+        $value = array_shift($id);
+        $this->_redirector->gotoSimple('editar', 'arrasto-fundo', null, array('id' => $value));
     }
 }
 
