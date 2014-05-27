@@ -119,6 +119,9 @@
         <controllerFile controllerName="TipoRenda">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Barcos">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -179,6 +182,11 @@
           <dbTableFile dbTableName="VPescadorHasEmbarcacao"/>
           <dbTableFile dbTableName="VPescadorHasArteTipoArea"/>
           <dbTableFile dbTableName="VPescadorHasAreaPesca"/>
+          <dbTableFile dbTableName="Monitoramento"/>
+          <dbTableFile dbTableName="VMonitoramentobyFicha"/>
+          <dbTableFile dbTableName="Barcos"/>
+          <dbTableFile dbTableName="Pesqueiro"/>
+          <dbTableFile dbTableName="Mare"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -217,6 +225,10 @@
         <modelFile modelName="VPescadorHasEmbarcacao"/>
         <modelFile modelName="VPescadorHasArteTipoArea"/>
         <modelFile modelName="VPescadorHasAreaPesca"/>
+        <modelFile modelName="Monitoramento"/>
+        <modelFile modelName="Barcos"/>
+        <modelFile modelName="Pesqueiro"/>
+        <modelFile modelName="Mare"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -385,6 +397,9 @@
             <viewScriptFile forActionName="editar"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TipoRenda">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Barcos">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
