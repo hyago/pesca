@@ -119,7 +119,11 @@
         <controllerFile controllerName="TipoRenda">
           <actionMethod actionName="index"/>
         </controllerFile>
+<<<<<<< HEAD
         <controllerFile controllerName="Barcos">
+=======
+        <controllerFile controllerName="Perfil">
+>>>>>>> b45a5aa578aaabfb344cdccc784cb5a3abc82924
           <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
@@ -399,7 +403,11 @@
           <viewControllerScriptsDirectory forControllerName="TipoRenda">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
+<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Barcos">
+=======
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+>>>>>>> b45a5aa578aaabfb344cdccc784cb5a3abc82924
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
