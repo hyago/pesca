@@ -45,8 +45,8 @@ class CalaoController extends Zend_Controller_Action
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
+        $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
+        $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
