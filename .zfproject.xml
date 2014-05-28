@@ -119,11 +119,13 @@
         <controllerFile controllerName="TipoRenda">
           <actionMethod actionName="index"/>
         </controllerFile>
-<<<<<<< HEAD
         <controllerFile controllerName="Barcos">
-=======
+          <actionMethod actionName="index"/>
+        </controllerFile>
         <controllerFile controllerName="Perfil">
->>>>>>> b45a5aa578aaabfb344cdccc784cb5a3abc82924
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Isca">
           <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
@@ -191,6 +193,21 @@
           <dbTableFile dbTableName="Barcos"/>
           <dbTableFile dbTableName="Pesqueiro"/>
           <dbTableFile dbTableName="Mare"/>
+          <dbTableFile dbTableName="ArrastoFundo"/>
+          <dbTableFile dbTableName="Calao"/>
+          <dbTableFile dbTableName="Emalhe"/>
+          <dbTableFile dbTableName="Grosseira"/>
+          <dbTableFile dbTableName="Isca"/>
+          <dbTableFile dbTableName="Jerere"/>
+          <dbTableFile dbTableName="Linha"/>
+          <dbTableFile dbTableName="LinhaFundo"/>
+          <dbTableFile dbTableName="Manzua"/>
+          <dbTableFile dbTableName="Mergulho"/>
+          <dbTableFile dbTableName="Ratoeira"/>
+          <dbTableFile dbTableName="Siripoia"/>
+          <dbTableFile dbTableName="Tarrafa"/>
+          <dbTableFile dbTableName="VaraPesca"/>
+          <dbTableFile dbTableName="Subamostra"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -233,6 +250,20 @@
         <modelFile modelName="Barcos"/>
         <modelFile modelName="Pesqueiro"/>
         <modelFile modelName="Mare"/>
+        <modelFile modelName="ArrastoFundo"/>
+        <modelFile modelName="VaraPesca"/>
+        <modelFile modelName="Tarrafa"/>
+        <modelFile modelName="Siripoia"/>
+        <modelFile modelName="Ratoeira"/>
+        <modelFile modelName="Mergulho"/>
+        <modelFile modelName="Manzua"/>
+        <modelFile modelName="LinhaFundo"/>
+        <modelFile modelName="Linha"/>
+        <modelFile modelName="Jerere"/>
+        <modelFile modelName="Emalhe"/>
+        <modelFile modelName="Calao"/>
+        <modelFile modelName="Grosseira"/>
+        <modelFile modelName="Isca"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -403,11 +434,13 @@
           <viewControllerScriptsDirectory forControllerName="TipoRenda">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Barcos">
-=======
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Perfil">
->>>>>>> b45a5aa578aaabfb344cdccc784cb5a3abc82924
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Isca">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
