@@ -6,7 +6,7 @@
     <h2>Desembarque->Tipos de Maré</h2>
 
     <a href="<?= $this->url(array("controller" => "mare", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
-    <fieldset id="Social"></fieldset>
+    <fieldset id="Desembarque"></fieldset>
     <table>
         <tr>
             <th>ID</th>
@@ -14,7 +14,7 @@
         </tr>
 
         <?php
-        foreach ($this->mares as $key => $mare):
+        foreach ($this->dados as $key => $mare):
             ?>
             <tr>
                 <td><?= $mare['mre_id'] ?></td>

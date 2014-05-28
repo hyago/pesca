@@ -2,10 +2,10 @@
 
 class Application_Model_Mare
 {
-private $dbTableMunicipio;
+private $dbTableMare;
     public function select()
     {
-        $dao = new Application_Model_DbTable_Municipio();
+        $dao = new Application_Model_DbTable_Mare();
         $select = $dao->select()->from($dao);
 
         return $dao->fetchAll($select)->toArray();
@@ -13,48 +13,46 @@ private $dbTableMunicipio;
     
     public function find($id)
     {
-        $this->dbTableMunicipio = new Application_Model_DbTable_Municipio();
-        $arr = $this->dbTableMunicipio->find($id)->toArray();
+        $this->dbTableMare = new Application_Model_DbTable_Mare();
+        $arr = $this->dbTableMare->find($id)->toArray();
         return $arr[0];
     }
     
     public function insert(array $request)
     {
-        $this->dbTableMunicipio = new Application_Model_DbTable_Municipio();
+        $this->dbTableMare = new Application_Model_DbTable_Mare();
         
-        $dadosMunicipio = array(
-            'tmun_municipio' => $request['municipio'],
-            'tuf_sigla'      => $request['estado']
+        $dadosMare = array(
+            'mre_tipo' => $request['mare'],
         );
         
-        $this->dbTableMunicipio->insert($dadosMunicipio);
+        $this->dbTableMare->insert($dadosMare);
 
         return;
     }
     
     public function update(array $request)
     {
-        $this->dbTableMunicipio = new Application_Model_DbTable_Municipio();
+        $this->dbTableMare = new Application_Model_DbTable_Mare();
         
-        $dadosMunicipio = array(
-            'tmun_municipio' => $request['municipio'],
-            'tuf_sigla'      => $request['estado']
+        $dadosMare = array(
+            'mre_tipo' => $request['mare'],
         );
         
-        $whereMunicipio= $this->dbTableMunicipio->getAdapter()
-                ->quoteInto('"tmun_id" = ?', $request['idMunicipio']);
+        $whereMare= $this->dbTableMare->getAdapter()
+                ->quoteInto('"mre_id" = ?', $request['idMare']);
         
-        $this->dbTableMunicipio->update($dadosMunicipio, $whereMunicipio);
+        $this->dbTableMare->update($dadosMare, $whereMare);
     }
     
-    public function delete($idMunicipio)
+    public function delete($idMare)
     {
-        $this->dbTableMunicipio = new Application_Model_DbTable_Municipio();       
+        $this->dbTableMare = new Application_Model_DbTable_Mare();       
                 
-        $whereMunicipio= $this->dbTableMunicipio->getAdapter()
-                ->quoteInto('"tmun_id" = ?', $idMunicipio);
+        $whereMare= $this->dbTableMare->getAdapter()
+                ->quoteInto('"mre_id" = ?', $idMare);
         
-        $this->dbTableMunicipio->delete($whereMunicipio);
+        $this->dbTableMare->delete($whereMare);
     }
 
 }
