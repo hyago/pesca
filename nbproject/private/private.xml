@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/BarcosController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/layouts/scripts/admin.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/arte-pesca/novo.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/barcos/novo.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/AreaPescaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/EmalheController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Emalhe.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/emalhe/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/Grosseira.php</file>
         </group>
     </open-files>
 </project-private>
