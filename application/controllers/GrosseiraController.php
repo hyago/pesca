@@ -5,7 +5,7 @@ class GrosseiraController extends Zend_Controller_Action
 
     public function init()
     {
-        if(!Zend_Auth::getInstance()->hasIdentity()){
+       if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
         
@@ -14,21 +14,33 @@ class GrosseiraController extends Zend_Controller_Action
         $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuarioLogado = $this->usuarioLogado;
         
+        $this->modelMonitoramento = new Application_Model_Monitoramento();
+        $this->modelFichaDiaria = new Application_Model_FichaDiaria();
+        $this->modelGrosseira = new Application_Model_Grosseira();
         $this->modelPescador = new Application_Model_Pescador();
         $this->modelBarcos = new Application_Model_Barcos();
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
+        $this->modelIsca = new Application_Model_Isca();
     }
 
     public function indexAction()
     {
+       
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select();
         $especies = $this->modelEspecie->select();
+        $iscas = $this->modelIsca->select();
         
+        $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        
+        $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        $this->view->assign('fichaDiaria', $fichadiaria);
+        $this->view->assign('monitoramento', $monitoramento);
+        $this->view->assign('iscas', $iscas);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -45,15 +57,24 @@ class GrosseiraController extends Zend_Controller_Action
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
+        $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
+        $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
+       
     }
+    public function criarAction(){
+        $this->modelGrosseira->insert($this->_getAllParams());
+        $id = $this->modelGrosseira->selectId();
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+
+        $value = array_shift($id);
+        $this->_redirector->gotoSimple('editar', 'grosseira', null, array('id' => $value));
+    }
+    
 }
 

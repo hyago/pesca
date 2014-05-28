@@ -77,8 +77,7 @@ class FichaDiariaController extends Zend_Controller_Action {
         $this->_redirector = $this->_helper->getHelper('Redirector');
 
         $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'ficha-diaria', null, array('id' => $value)
-        );
+        $this->_redirector->gotoSimple('editar', 'ficha-diaria', null, array('id' => $value));
     }
 
     /*

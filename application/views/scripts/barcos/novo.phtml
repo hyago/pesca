@@ -1,0 +1,21 @@
+<div id="titulos">
+    <h2>Desembarque->Embarcações</h2>
+    <h3>Novo</h3>
+</div>
+
+
+<form action="<?=$this->url(array("controller"=>"barcos","action"=>"criar"),null,true)?>" method="post">
+    <fieldset id="Desembarque">
+    <div id="esquerda">
+        <div id="form-esq">
+
+            <label>Embarcação:</label> 
+            <input type="text" name="nomeBarco" placeholder="Embarcação"/> <br />
+        </div>
+        <div id="Submit">
+            <a href="<?=$this->url(array("controller"=>"arte-pesca","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
+            <input type="submit" value="Cadastrar" />
+        </div> 
+    </div>
+    </fieldset>
+</form>
