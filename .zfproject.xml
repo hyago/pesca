@@ -123,9 +123,12 @@
           <actionMethod actionName="index"/>
         </controllerFile>
         <controllerFile controllerName="Perfil">
+<<<<<<< HEAD
           <actionMethod actionName="index"/>
         </controllerFile>
         <controllerFile controllerName="Isca">
+=======
+>>>>>>> 9f4df20704ec6d93bd24d15a9c80a3216b4638f5
           <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
@@ -193,6 +196,7 @@
           <dbTableFile dbTableName="Barcos"/>
           <dbTableFile dbTableName="Pesqueiro"/>
           <dbTableFile dbTableName="Mare"/>
+<<<<<<< HEAD
           <dbTableFile dbTableName="ArrastoFundo"/>
           <dbTableFile dbTableName="Calao"/>
           <dbTableFile dbTableName="Emalhe"/>
@@ -208,6 +212,9 @@
           <dbTableFile dbTableName="Tarrafa"/>
           <dbTableFile dbTableName="VaraPesca"/>
           <dbTableFile dbTableName="Subamostra"/>
+=======
+          <dbTableFile dbTableName="ColetaManual"/>
+>>>>>>> 9f4df20704ec6d93bd24d15a9c80a3216b4638f5
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -250,6 +257,7 @@
         <modelFile modelName="Barcos"/>
         <modelFile modelName="Pesqueiro"/>
         <modelFile modelName="Mare"/>
+<<<<<<< HEAD
         <modelFile modelName="ArrastoFundo"/>
         <modelFile modelName="VaraPesca"/>
         <modelFile modelName="Tarrafa"/>
@@ -264,6 +272,9 @@
         <modelFile modelName="Calao"/>
         <modelFile modelName="Grosseira"/>
         <modelFile modelName="Isca"/>
+=======
+        <modelFile modelName="ColetaManual"/>
+>>>>>>> 9f4df20704ec6d93bd24d15a9c80a3216b4638f5
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -438,9 +449,12 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Perfil">
+<<<<<<< HEAD
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Isca">
+=======
+>>>>>>> 9f4df20704ec6d93bd24d15a9c80a3216b4638f5
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
