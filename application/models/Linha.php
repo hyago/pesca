@@ -2,6 +2,129 @@
 
 class Application_Model_Linha
 {
+private $dbTableLinha;
+
+    public function select($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableLinha = new Application_Model_DbTable_Linha();
+        $select = $this->dbTableLinha->select()
+                ->from($this->dbTableLinha)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableLinha->fetchAll($select)->toArray();
+    }
+    
+    public function find($id)
+    {
+        $this->dbTableLinha = new Application_Model_DbTable_Linha();
+        $arr = $this->dbTableLinha->find($id)->toArray();
+        return $arr[0];
+    }
+    
+    public function insert(array $request)
+    {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
+        $this->dbTableLinha = new Application_Model_DbTable_Linha();
+        $this->dbTablePorto = new Application_Model_DbTable_Porto();
+        $this->dbTableEstagiario = new Application_Model_Usuario();
+        $this->dbTableMonitor = new Application_Model_Usuario();
+        
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['data']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        
+         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        
+        $dadosLinha = array(
+            'lin_embarcada' => $request['embarcada'],
+            'bar_id' => $request['nomeBarco'],
+            'tte_id' => $request['tipoBarco'],
+            'tp_id_entrevistado' => $request['pescadorEntrevistado'],
+            'lin_numpescadores' => $request['numPescadores'],
+            'lin_dhsaida' => $timestampSaida,
+            'lin_dhvolta' => $timestampVolta,
+            'lin_diesel' => $request['diesel'], 
+            'lin_oleo' => $request['oleo'],
+            'lin_alimento' => $request['alimento'],
+            'lin_gelo' => $request['gelo'],
+            'lin_numlinhas' => $request['numLinhas'],
+            'lin_avistou' => $request['avistamento'],
+            'lin_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
+            'lin_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento'],
+            'isc_id' => $request['isca'],
+            'lin_numanzoisplinha' => $request['numAnzois'],
+            'lin_tempoatepesqueiro' => $request['tempoaPesqueiro']
+        );
+        
+        $this->dbTableLinha->insert($dadosLinha);
+        return;
+    }
+    
+    public function update(array $request)
+    {
+        $this->dbTableLinha = new Application_Model_DbTable_Linha();
+        
+        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        
+        
+        $dadosLinha = array(
+            'lin_embarcado' => $request['embarcada'],
+            'bar_id' => $request['nomeBarco'],
+            'tte_id' => $request['tipoBarco'],
+            'tp_id_entrevistado' => $request['pescadorEntrevistado'],
+            'lin_quantpescadores' => $request['numPescadores'],
+            'lin_dhvolta' => $timestampVolta,
+            'lin_dhsaida' => $timestampSaida, 
+            'lin_diesel' => $request['diesel'],
+            'lin_oleo' => $request['oleo'],
+            'lin_alimento' => $request['alimento'],
+            'lin_gelo' => $request['gelo'],
+            'lin_avistou' => $request['avistamento'],
+            'lin_subamostra' => $request['subamostra'],
+            'lin_obs' => $request['observacao'],
+        );
+ 
+        
+        $whereLinha= $this->dbTableLinha->getAdapter()
+                ->quoteInto('"lin_id" = ?', $request[0]);
+        
+        
+        $this->dbTableLinha->update($dadosLinha, $whereLinha);
+    }
+    
+    public function delete($idLinha)
+    {
+        $this->dbTableLinha = new Application_Model_DbTable_Linha();       
+                
+        $whereLinha= $this->dbTableLinha->getAdapter()
+                ->quoteInto('"lin_id" = ?', $idLinha);
+        
+        $this->dbTableLinha->delete($whereLinha);
+    }
+    public function selectId(){
+        $this->dbTableLinha = new Application_Model_DbTable_Linha();
+        
+        $select = $this->dbTableLinha->select()
+                ->from($this->dbTableLinha, 'lin_id')->order('lin_id DESC')->limit('1');
+        
+        return $this->dbTableLinha->fetchAll($select)->toArray();
+    }
+
 
 
 }
