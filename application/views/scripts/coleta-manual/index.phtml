@@ -9,7 +9,11 @@
             <div id="esquerda">
                 <div id="form-esq">
                     <label>ID da ficha diária:</label>
-                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" /><br />
+                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" value="<?= $this->fichaDiaria['fd_id'] ?>" /><br />
+                </div>
+                <div id="form-esq">
+                    <label>ID monitoramento:</label>
+                    <input type="text" name="id_monitoramento" placeholder="ID"  value="<?= $this->monitoramento['mnt_id'] ?>" /><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">ID Entrevista:</label>
@@ -21,7 +25,7 @@
                 <legend><h4>Embarcação:</h4></legend>
                 <div id="form-esq">
                     <label>Utilizou Barco?</label>
-                    <input type="checkbox"  name="barco" checked="true"/><br />
+                    <input type="checkbox"  name="embarcada" checked="true"/><br />
                 </div>
                 <div id="form-esq">
                     <label>Barco:</label>
@@ -54,7 +58,7 @@
             <div id="direita-entrevista">
                 <div id="form-esq">    
                     <label>Pescador Entrevistado:</label>
-                    <select name="PescadorEntrevistado" />
+                    <select name="pescadorEntrevistado" />
                     <?php
                     foreach ($this->pescadores as $key => $pescador):
                         ?>
