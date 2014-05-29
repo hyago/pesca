@@ -60,6 +60,10 @@ class PescadorController extends Zend_Controller_Action {
         $modelEscolaridade = new Application_Model_Escolaridade();
         $escolaridade = $modelEscolaridade->select();
         $this->view->assign("assignEscolaridades", $escolaridade);
+        
+        $modelUser = new Application_Model_Usuario();
+        $tipoUser = $modelUser->select();
+        $this->view->assign("assignUser", $tipoUser);
     }
 
     public function criarAction() {
@@ -138,6 +142,10 @@ class PescadorController extends Zend_Controller_Action {
         $modelPorto = new Application_Model_Porto();
         $tipoPorto = $modelPorto->select();
         $this->view->assign("assignPorto", $tipoPorto);
+        
+        $modelUser = new Application_Model_Usuario();
+        $tipoUser = $modelUser->select();
+        $this->view->assign("assignUser", $tipoUser);
         
 //     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
@@ -250,7 +258,10 @@ class PescadorController extends Zend_Controller_Action {
             'cir_cap_porto' => $this->_getParam("tp_cir_cap_porto"),
             'dataNasc' => $this->_getParam("tp_datanasc"),
             'municipioNat' => $this->_getParam("tmun_id_natural"),
-            'selectEscolaridade' => $this->_getParam("esc_id")
+            'selectEscolaridade' => $this->_getParam("esc_id"),
+            'respLancamento'  => $this->_getParam("tp_resp_lan"),
+            'respCadastro'  => $this->_getParam("tp_resp_cad"),
+            'obs' => $this->_getParam("tp_obs")
         );
         
         $idPescador = $this->_getParam("tp_id");
@@ -293,7 +304,10 @@ class PescadorController extends Zend_Controller_Action {
             'cir_cap_porto' => $this->_getParam("tp_cir_cap_porto"),
             'dataNasc' => $this->_getParam("tp_datanasc"),
             'municipioNat' => $this->_getParam("tmun_id_natural"),
-            'selectEscolaridade' => $this->_getParam("esc_id")
+            'selectEscolaridade' => $this->_getParam("esc_id"),
+            'respLancamento'  => $this->_getParam("tp_resp_lan"),
+            'respCadastro'  => $this->_getParam("tp_resp_cad"),
+            'obs' => $this->_getParam("tp_obs")
         );
 
         $idPescador = $this->modelPescador->insert($setupDados);

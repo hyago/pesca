@@ -183,7 +183,10 @@ function jsInsertPescadorEndereco( frm, pag )
             '/tp_datanasc/' + frm.dataNasc.value +
             '/tmun_id_natural/' + frm.municipioNat.value +
             '/esc_id/' + frm.selectEscolaridadeId.value +
- 
+            '/tp_resp_lan/' + frm.respLancamento.value +
+            '/tp_resp_cad/' + frm.respCadastro.value +
+            '/tp_obs/' + frm.obs.value +
+            
             '/te_logradouro/' + frm.logradouro.value +
             '/te_numero/' + frm.numero.value +
             '/te_bairro/' + frm.bairro.value +
@@ -220,6 +223,9 @@ function jsAtualizarPescadorEndereco( frm, pag )
             '/tp_datanasc/' + frm.dataNasc.value +
             '/tmun_id_natural/' + frm.municipioNat.value +
             '/esc_id/' + frm.selectEscolaridadeId.value +
+            '/tp_resp_lan/' + frm.respLancamento.value +
+            '/tp_resp_cad/' + frm.respCadastro.value +
+            '/tp_obs/' + frm.obs.value +
  
             '/te_id/' + frm.idEndereco.value +
             '/te_logradouro/' + frm.logradouro.value +

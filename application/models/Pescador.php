@@ -80,7 +80,11 @@ class Application_Model_Pescador {
             'tp_cir_cap_porto' => $request['cir_cap_porto'],
             'tp_datanasc' => $dataNasc,
             'tmun_id_natural' => $request['municipioNat'],
-            'esc_id' => $request['selectEscolaridade']
+            'esc_id' => $request['selectEscolaridade'],
+            'tp_resp_lan'  => $request['respLancamento'],
+            'tp_resp_cad'  => $request['respCadastro'],
+            'tp_dta_cad'  => date('d-m-y'),
+            'tp_obs' => $request['obs']
         );
         
         return $dadosPescador;

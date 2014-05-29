@@ -119,11 +119,10 @@
         <controllerFile controllerName="TipoRenda">
           <actionMethod actionName="index"/>
         </controllerFile>
-<<<<<<< HEAD
         <controllerFile controllerName="Barcos">
-=======
+          <actionMethod actionName="index"/>
+        </controllerFile>
         <controllerFile controllerName="Perfil">
->>>>>>> b45a5aa578aaabfb344cdccc784cb5a3abc82924
           <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
@@ -191,6 +190,13 @@
           <dbTableFile dbTableName="Barcos"/>
           <dbTableFile dbTableName="Pesqueiro"/>
           <dbTableFile dbTableName="Mare"/>
+          <dbTableFile dbTableName="VPescadorHasTipoCapturada"/>
+          <dbTableFile dbTableName="VPescadorHasProgramaSocial"/>
+          <dbTableFile dbTableName="PescadorHasProgramaSocial"/>
+          <dbTableFile dbTableName="PescadorHasComunidade"/>
+          <dbTableFile dbTableName="VPescadorHasComunidade"/>
+          <dbTableFile dbTableName="VPescadorHasPorto"/>
+          <dbTableFile dbTableName="PescadorHasPorto"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -233,6 +239,10 @@
         <modelFile modelName="Barcos"/>
         <modelFile modelName="Pesqueiro"/>
         <modelFile modelName="Mare"/>
+        <modelFile modelName="VPescadorHasTipoCapturada"/>
+        <modelFile modelName="VPescadorHasProgramaSocial"/>
+        <modelFile modelName="VPescadorHasComunidade"/>
+        <modelFile modelName="VPescadorHasPorto"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -403,11 +413,10 @@
           <viewControllerScriptsDirectory forControllerName="TipoRenda">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Barcos">
-=======
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Perfil">
->>>>>>> b45a5aa578aaabfb344cdccc784cb5a3abc82924
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
