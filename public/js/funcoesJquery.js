@@ -319,7 +319,68 @@ function jsDeletePescadorHasRenda(idTipoRenda, idRenda, frm, pag)
         location.replace(tmpUpdate);
     }
 }
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Comunidade /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasComunidade( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_comunidade');
 
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idComunidade/' + frm.selectComunidade.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasComunidade( idComunidade, frm, pag)
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_comunidade');
+
+    var tmpUpdate = (pag + '/id/'+frm.idPescador.value+'/idComunidade/'+idComunidade+'/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Porto /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasPorto( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_porto');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idPorto/' + frm.selectPorto.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasPorto( idPorto, frm, pag)
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_porto');
+
+    var tmpUpdate = (pag + '/id/'+frm.idPescador.value+'/idPorto/'+idPorto+'/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_ProgramaSocial /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasProgramaSocial( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_programasocial');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idProgramaSocial/' + frm.selectProgramaSocial.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasProgramaSocial( idProgramaSocial, frm, pag)
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_programasocial');
+
+    var tmpUpdate = (pag + '/id/'+frm.idPescador.value+'/idProgramaSocial/'+idProgramaSocial+'/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsInsertPescadorHasTelefone( frm, pag )
 {
@@ -383,21 +444,41 @@ function jsDeletePescadorHasArea( idArea, frm, pag )
     }
 }
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Arte/Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Arte /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsInsertPescadorHasArteTipo( frm, pag )
 {
-    var TmpUrl = (+frm.idPescador.value + '#ancora_artetipos');
+    var TmpUrl = (+frm.idPescador.value + '#ancora_arte');
 
-   var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idArte/' + frm.SelectArtePesca.value + '/idTipo/' + frm.selectTipocapturada.value + '/back_url/' + TmpUrl);
+   var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idArte/' + frm.SelectArtePesca.value + '/back_url/' + TmpUrl);
 
     location.replace(tmpUpdate);
 }
 
-function jsDeletePescadorHasArteTipo( idArte, idTipo, frm, pag )
+function jsDeletePescadorHasArteTipo( idArte, frm, pag )
 {
-    var TmpUrl = (+frm.idPescador.value + '#ancora_artetipos');
+    var TmpUrl = (+frm.idPescador.value + '#ancora_arte');
 
-    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idArte/' + idArte + '/idTipo/' + idTipo + '/back_url/' + TmpUrl);
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idArte/' + idArte +  '/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Tipo /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertPescadorHasTipoCapturada( frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_tipos');
+
+   var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idTipo/' + frm.selectTipoCapturada.value + '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
+
+function jsDeletePescadorHasTipoCapturada( idTipo, frm, pag )
+{
+    var TmpUrl = (+frm.idPescador.value + '#ancora_tipos');
+
+    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idTipo/' + idTipo +  '/back_url/' + TmpUrl);
 
     if (confirm("Realmente deseja excluir este item?")) {
         location.replace(tmpUpdate);
@@ -409,7 +490,7 @@ function jsInsertPescadorHasEmbarcacoes( frm, pag )
 {
     var TmpUrl = (+frm.idPescador.value + '#ancora_embarcacoes');
 
-   var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idEmbarcacao/' + frm.selectTipoEmbarcacao.value + '/idPorte/' + frm.selectPorteEmbarcacao.value + '/isMotor/' + frm.selectMotorEmbarcacao.value + '/back_url/' + TmpUrl);
+   var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idDono/' + frm.selectDonoEmbarcacao.value + '/idEmbarcacao/' + frm.selectTipoEmbarcacao.value + '/idPorte/' + frm.selectPorteEmbarcacao.value + '/isMotor/' + frm.selectMotorEmbarcacao.value + '/back_url/' + TmpUrl);
 
     location.replace(tmpUpdate);
 }

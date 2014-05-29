@@ -34,7 +34,7 @@ class PescadorController extends Zend_Controller_Action {
         $tp_nome = $this->_getParam("tp_nome");
         
         if ( $tp_id > 0 ) {
-            $dados = $this->modelPescador->select("tp_id>=". $tp_id, array('tp_nome', 'tp_id'), 20);
+            $dados = $this->modelPescador->select("tp_id>=". $tp_id, array('tp_id'), 20);
         } elseif ( $tp_nome ) {
             $dados = $this->modelPescador->select("tp_nome LIKE '". $tp_nome."%'", array('tp_nome', 'tp_id'), 20);            
         } else {
@@ -57,53 +57,9 @@ class PescadorController extends Zend_Controller_Action {
         $municipios = $modelMunicipio->select();
         $this->view->assign("municipios", $municipios);
 
-        $modelArtePesca = new Application_Model_ArtePesca();
-        $artesPesca = $modelArtePesca->select();
-        $this->view->assign("artesPesca", $artesPesca);
-
-        $modelAreaPesca = new Application_Model_AreaPesca();
-        $areasPesca = $modelAreaPesca->select();
-        $this->view->assign("areasPesca", $areasPesca);
-
-        $modelColonia = new Application_Model_Colonia();
-        $colonias = $modelColonia->select();
-        $this->view->assign("colonias", $colonias);
-
-        $modelEspecie = new Application_Model_Especie();
-        $especies = $modelEspecie->select();
-        $this->view->assign("especies", $especies);
-
-        $modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
-        $tiposEmbarcacao = $modelTipoEmbarcacao->select();
-        $this->view->assign("tiposEmbarcacao", $tiposEmbarcacao);
-
-        $modelPorteEmbarcacao = new Application_Model_PorteEmbarcacao();
-        $portesEmbarcacao = $modelPorteEmbarcacao->select();
-        $this->view->assign("portesEmbarcacao", $portesEmbarcacao);
-
-        $modelTipoCapturada = new Application_Model_TipoCapturadaModel();
-        $tipoCapturadas = $modelTipoCapturada->select();
-        $this->view->assign("tipoCapturadas", $tipoCapturadas);
-
-        $modelTipoTelefone = new Application_Model_TipoTelefone();
-        $tipoTelefones = $modelTipoTelefone->select();
-        $this->view->assign("assignTipoTelefones", $tipoTelefones);
-
         $modelEscolaridade = new Application_Model_Escolaridade();
         $escolaridade = $modelEscolaridade->select();
         $this->view->assign("assignEscolaridades", $escolaridade);
-
-        $modelTipoDependente = new Application_Model_TipoDependente();
-        $tipoDependentes = $modelTipoDependente->select();
-        $this->view->assign("assignTipoDependentes", $tipoDependentes);
-
-        $modelRenda = new Application_Model_Renda();
-        $rendas = $modelRenda->select();
-        $this->view->assign("assignRendas", $rendas);
-
-        $modelTipoRenda = new Application_Model_TipoRenda();
-        $tipoRendas = $modelTipoRenda->select();
-        $this->view->assign("assignTipoRendas", $tipoRendas);
     }
 
     public function criarAction() {
@@ -130,7 +86,7 @@ class PescadorController extends Zend_Controller_Action {
         $modelAreaPesca = new Application_Model_AreaPesca();
         $areasPesca = $modelAreaPesca->select();
         $this->view->assign("areasPesca", $areasPesca);
-
+        
         $modelColonia = new Application_Model_Colonia();
         $colonias = $modelColonia->select();
         $this->view->assign("colonias", $colonias);
@@ -171,6 +127,18 @@ class PescadorController extends Zend_Controller_Action {
         $tipoRendas = $modelTipoRenda->select();
         $this->view->assign("assignTipoRendas", $tipoRendas);
         
+        $modelProgramaSocial = new Application_Model_ProgramaSocial();
+        $tipoProgramaSocial = $modelProgramaSocial->select();
+        $this->view->assign("assignProgramaSocial", $tipoProgramaSocial);
+        
+        $modelComunidade = new Application_Model_Comunidade();
+        $tipoComunidade = $modelComunidade->select();
+        $this->view->assign("assignComunidade", $tipoComunidade);
+        
+        $modelPorto = new Application_Model_Porto();
+        $tipoPorto = $modelPorto->select();
+        $this->view->assign("assignPorto", $tipoPorto);
+        
 //     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
         $vPescadorHasDependente = $model_VPescadorHasDependente->selectDependentes("tp_id=". $idPescador, "ttd_tipodependente", null);
@@ -179,6 +147,14 @@ class PescadorController extends Zend_Controller_Action {
         $model_VPescadorHasRenda = new Application_Model_VPescadorHasRenda();
         $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $idPescador, "ttr_descricao", null);
         $this->view->assign("assign_vPescadorRenda", $vPescadorHasRenda);
+        
+        $model_VPescadorHasComunidade = new Application_Model_VPescadorHasComunidade();
+        $vPescadorHasComunidade = $model_VPescadorHasComunidade->select("tp_id=" . $idPescador, "tcom_nome", null);
+        $this->view->assign("assign_vPescadorComunidade", $vPescadorHasComunidade);
+        
+        $model_VPescadorHasProgramaSocial = new Application_Model_VPescadorHasProgramaSocial();
+        $vPescadorHasProgramaSocial = $model_VPescadorHasProgramaSocial->select("tp_id=" . $idPescador, "prs_programa", null);
+        $this->view->assign("assign_vPescadorProgramaSocial", $vPescadorHasProgramaSocial);
 
         $model_VPescadorHasTelefone = new Application_Model_VPescadorHasTelefone();
         $vPescadorHasTelefone = $model_VPescadorHasTelefone->select("tpt_tp_id=" . $idPescador, "ttel_desc", null);
@@ -191,14 +167,22 @@ class PescadorController extends Zend_Controller_Action {
         $model_VPescadorHasAreaPesca = new Application_Model_VPescadorHasAreaPesca();
         $vPescadorHasAreaPesca = $model_VPescadorHasAreaPesca->select("tp_id=" . $idPescador, "tareap_areapesca", null);
         $this->view->assign("assign_vPescadorAreaPesca", $vPescadorHasAreaPesca);
-
+        
         $model_VPescadorHasArteTipoArea = new Application_Model_VPescadorHasArteTipoArea();
         $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $idPescador, "tap_artepesca", null);
         $this->view->assign("assign_vPescadorArteTipoArea", $vPescadorHasArteTipoArea);
 
+        $VPescadorHasTipoCapturada = new Application_Model_VPescadorHasTipoCapturada();
+        $vPescadorHasTipoCapturada = $VPescadorHasTipoCapturada->select("tp_id=" . $idPescador, "itc_tipo", null);
+        $this->view->assign("assign_vPescadorTipoCapturada", $vPescadorHasTipoCapturada);
+
         $model_VPescadorHasEmbarcacao = new Application_Model_VPescadorHasEmbarcacao();
         $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $idPescador, "tte_tipoembarcacao", null);
         $this->view->assign("assign_vPescadorEmbarcacao", $vPescadorHasEmbarcacao);
+        
+        $model_VPescadorHasPorto = new Application_Model_VPescadorHasPorto();
+        $vPescadorHasPorto = $model_VPescadorHasPorto->select("tp_id=" . $idPescador, "pto_nome", null);
+        $this->view->assign("assign_vPescadorPorto", $vPescadorHasPorto);
     }
 
     public function atualizarsemreloadAction() {
@@ -394,7 +378,112 @@ class PescadorController extends Zend_Controller_Action {
 
         return;
     }
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_ProgramaSocial /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhascomunidadeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        $idPescador = $this->_getParam("id");
+
+        $idComunidade = $this->_getParam("idComunidade");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasComunidade($idPescador, $idComunidade );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhascomunidadeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idComunidade = $this->_getParam("idComunidade");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasComunidade($idPescador, $idComunidade );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Porto /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhasportoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idPorto = $this->_getParam("idPorto");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasPorto($idPescador, $idPorto );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhasportoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idPorto = $this->_getParam("idPorto");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasPorto($idPescador, $idPorto );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_ProgramaSocial /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhasprogramasocialAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idProgramaSocial = $this->_getParam("idProgramaSocial");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasProgramaSocial($idPescador, $idProgramaSocial );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhasprogramasocialAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idProgramaSocial = $this->_getParam("idProgramaSocial");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasProgramaSocial($idPescador, $idProgramaSocial );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/    
     public function insertpescadorhastelefoneAction() {
         $this->_helper->layout->disableLayout();
@@ -513,11 +602,9 @@ class PescadorController extends Zend_Controller_Action {
 
         $idArte = $this->_getParam("idArte");
 
-        $idTipo = $this->_getParam("idTipo");
-
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelPescador->modelInsertPescadorHasArteTipo( $idPescador, $idArte, $idTipo );
+        $this->modelPescador->modelInsertPescadorHasArteTipo( $idPescador, $idArte );
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 
@@ -532,17 +619,50 @@ class PescadorController extends Zend_Controller_Action {
 
         $idArte = $this->_getParam("idArte");
 
-        $idTipo = $this->_getParam("idTipo");
-
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelPescador->modelDeletePescadorHasArteTipo( $idPescador, $idArte, $idTipo );
+        $this->modelPescador->modelDeletePescadorHasArteTipo( $idPescador, $idArte );
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 
         return;
     }
     
+    
+     ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_TipoCapturada /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+    public function insertpescadorhastipoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idTipo = $this->_getParam("idTipo");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelInsertPescadorHasTipo( $idPescador, $idTipo );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+    public function deletepescadorhastipoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $idTipo = $this->_getParam("idTipo");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescador->modelDeletePescadorHasTipo( $idPescador, $idTipo );
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/    
     public function insertpescadorhasembarcacoesAction() {
         $this->_helper->layout->disableLayout();
@@ -550,6 +670,8 @@ class PescadorController extends Zend_Controller_Action {
 
         $idPescador = $this->_getParam("id");
 
+        $idDono = $this->_getParam("idDono");
+        
         $idEmbarcacao = $this->_getParam("idEmbarcacao");
 
         $idPorte = $this->_getParam("idPorte");
@@ -558,7 +680,7 @@ class PescadorController extends Zend_Controller_Action {
 
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelPescador->modelInsertPescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte, $isMotor);
+        $this->modelPescador->modelInsertPescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte, $isMotor, $idDono);
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 

@@ -238,6 +238,17 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_PROGRAMASOCIAL (
 FOREIGN KEY (PRS_ID) REFERENCES T_PROGRAMASOCIAL (PRS_ID)
 );
 
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+CREATE VIEW V_PESCADORHASPROGRAMASOCIAL AS
+SELECT
+PS.TP_ID, PS.PRS_ID, TBS.PRS_PROGRAMA
+FROM
+T_PESCADOR_HAS_T_PROGRAMASOCIAL AS PS,
+T_PROGRAMASOCIAL AS TBS
+WHERE
+PS.PRS_ID = TBS.PRS_ID;
+
 -- -- -----------------------------------------------------
 -- -- TABLE T_PESCADOR_HAS_T_ENDERECO
 -- -- -----------------------------------------------------
@@ -610,6 +621,24 @@ CREATE TABLE IF NOT EXISTS T_PORTO (
  CONSTRAINT FK_DSBQ_PORTO_T_MUNICIPIO1 FOREIGN KEY (TMUN_ID) REFERENCES T_MUNICIPIO (TMUN_ID)
 );
 
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_PORTO (
+ TP_ID INT NOT NULL,
+ PTO_ID INT NOT NULL,
+ PRIMARY KEY (TP_ID,  PTO_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_PORTO_TP_ID FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
+ CONSTRAINT FK_T_PESCADOR_HAS_T_PORTO_PTO_ID FOREIGN KEY (PTO_ID) REFERENCES T_PORTO (PTO_ID)
+);
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+CREATE VIEW V_PESCADORHASPORTO AS
+ SELECT PP.TP_ID, PP.PTO_ID, PTO.PTO_NOME, PTO.PTO_LOCAL
+ FROM T_PESCADOR_HAS_T_PORTO AS PP, T_PORTO AS PTO
+ WHERE PP.PTO_ID=PTO.PTO_ID;
+
 -- -----------------------------------------------------
 -- TABLE T_TEMPO
 -- -----------------------------------------------------
@@ -697,6 +726,14 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_COMUNIDADE (
  CONSTRAINT FK_T_PESCADOR_HAS_T_COMUNIDADE_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
  CONSTRAINT FK_T_PESCADOR_HAS_T_COMUNIDADE_T_COMUNIDADE1 FOREIGN KEY (TCOM_ID) REFERENCES T_COMUNIDADE (TCOM_ID)
 );
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+CREATE VIEW V_PESCADORHASCOMUNIDADE AS
+ SELECT PC.TP_ID, PC.TCOM_ID, COM.TCOM_NOME
+ FROM T_PESCADOR_HAS_T_COMUNIDADE AS PC, T_COMUNIDADE AS COM
+ WHERE PC.TCOM_ID=COM.TCOM_ID;
+
 
 -- -----------------------------------------------------
 -- VIEW USUARIO
@@ -802,8 +839,15 @@ T_TIPODEPENDENTE AS TD
 WHERE
 PD.TTD_ID = TD.TTD_ID;
 
+
 -- -----------------------------------------------------
--- VIEW Pescador
+-- -----------------------------------------------------
+CREATE TABLE T_TIPORENDA (
+TTR_ID SERIAL,
+TTR_DESCRICAO VARCHAR(45) NOT NULL,
+CONSTRAINT T_TIPORENDA_TTR_ID_PKEY PRIMARY KEY (TTR_ID)
+);
+-- -----------------------------------------------------
 -- -----------------------------------------------------
 CREATE TABLE T_TIPORENDA (
 TTR_ID SERIAL,

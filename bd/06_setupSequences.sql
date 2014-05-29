@@ -536,3 +536,11 @@ select codigo, cast(comunidade as int8) from access.pescador where comunidade no
 
 
 
+select codigo, comunidade from access.pescador where comunidade notnull;
+select * from t_pescador_has_t_comunidade;
+
+insert into t_pescador_has_t_comunidade (tp_id, tcom_id)
+select codigo, cast(comunidade as int8) from access.pescador where comunidade notnull;
+
+insert into T_PESCADOR_HAS_T_PORTO (TP_ID, PTO_ID)
+select codigo, cod_pdesemb from access.pescador where cod_pdesemb notnull;
