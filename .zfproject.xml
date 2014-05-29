@@ -125,6 +125,9 @@
         <controllerFile controllerName="Perfil">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Isca">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -197,6 +200,22 @@
           <dbTableFile dbTableName="VPescadorHasComunidade"/>
           <dbTableFile dbTableName="VPescadorHasPorto"/>
           <dbTableFile dbTableName="PescadorHasPorto"/>
+          <dbTableFile dbTableName="ArrastoFundo"/>
+          <dbTableFile dbTableName="Calao"/>
+          <dbTableFile dbTableName="Emalhe"/>
+          <dbTableFile dbTableName="Grosseira"/>
+          <dbTableFile dbTableName="Isca"/>
+          <dbTableFile dbTableName="Jerere"/>
+          <dbTableFile dbTableName="Linha"/>
+          <dbTableFile dbTableName="LinhaFundo"/>
+          <dbTableFile dbTableName="Manzua"/>
+          <dbTableFile dbTableName="Mergulho"/>
+          <dbTableFile dbTableName="Ratoeira"/>
+          <dbTableFile dbTableName="Siripoia"/>
+          <dbTableFile dbTableName="Tarrafa"/>
+          <dbTableFile dbTableName="VaraPesca"/>
+          <dbTableFile dbTableName="Subamostra"/>
+          <dbTableFile dbTableName="ColetaManual"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -243,6 +262,21 @@
         <modelFile modelName="VPescadorHasProgramaSocial"/>
         <modelFile modelName="VPescadorHasComunidade"/>
         <modelFile modelName="VPescadorHasPorto"/>
+        <modelFile modelName="ArrastoFundo"/>
+        <modelFile modelName="VaraPesca"/>
+        <modelFile modelName="Tarrafa"/>
+        <modelFile modelName="Siripoia"/>
+        <modelFile modelName="Ratoeira"/>
+        <modelFile modelName="Mergulho"/>
+        <modelFile modelName="Manzua"/>
+        <modelFile modelName="LinhaFundo"/>
+        <modelFile modelName="Linha"/>
+        <modelFile modelName="Jerere"/>
+        <modelFile modelName="Emalhe"/>
+        <modelFile modelName="Calao"/>
+        <modelFile modelName="Grosseira"/>
+        <modelFile modelName="Isca"/>
+        <modelFile modelName="ColetaManual"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -417,6 +451,9 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Isca">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

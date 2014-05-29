@@ -4,12 +4,16 @@
 </div>
 
 <div id="esquerda-entrevista">
-    <form>
+    <form action="<?= $this->url(array("controller" => "linha", "action" => "criar"), null, true) ?>">
         <fieldset id="Desembarque">
             <div id="esquerda">
                 <div id="form-esq">
                     <label>ID da ficha diária:</label>
-                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" /><br />
+                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" value="<?= $this->fichaDiaria['fd_id'] ?>" /><br />
+                </div>
+                <div id="form-esq">
+                    <label>ID monitoramento:</label>
+                    <input type="text" name="id_monitoramento" placeholder="ID"  value="<?= $this->monitoramento['mnt_id'] ?>" /><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">ID Entrevista:</label>
@@ -21,7 +25,7 @@
                 <legend><h4>Embarcação:</h4></legend>
                 <div id="form-esq">
                     <label>Utilizou Barco?</label>
-                    <input type="checkbox"  name="barco" checked="true"/><br />
+                    <input type="checkbox"  name="embarcada" checked="true"/><br />
                 </div>
                 <div id="form-esq">
                     <label>Barco:</label>
@@ -54,7 +58,7 @@
             <div id="direita-entrevista">
                 <div id="form-esq">    
                     <label>Pescador Entrevistado:</label>
-                    <select name="PescadorEntrevistado" />
+                    <select name="pescadorEntrevistado" />
                     <?php
                     foreach ($this->pescadores as $key => $pescador):
                         ?>
@@ -127,9 +131,18 @@
                 </div>
             </div>
             <div id="direita-entrevista">
-                <div id="form-dir">    
+                    <div id="form-dir">    
                     <label>Isca:</label>
-                    <input type="text" name="isca" placeholder="Isca"/><br />
+                    <select name="isca" />
+                    <?php
+                    foreach ($this->iscas as $key => $isca):
+                        ?>
+                        <option value="<?= $isca['isc_id'] ?>"><?= $isca['isc_tipo'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                    <br />
                 </div>
             </div><br/>
             <div id="esquerda">
@@ -146,72 +159,12 @@
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observacao" /><br />
                 </div>
+                <div id="form-esq">
+                    <label for="tipo">Tempo Ao Pesqueiro:</label>
+                    <input type="time" name="tempoaPesqueiro" /><br />
+                </div>
                 <div id="Submit">
                     <input type="submit" value="Salvar Entrevista"/>
                 </div>
             </div>
-         <br/>
-         <br/>
-         <div id="esquerda-entrevista">
-         <fieldset id="Pesqueiros">
-            <td>Quais Pesqueiros e Quanto tempo em cada:</td>
-               <table style="border:none">
-               <tr class="linhas">
-               <br/>
-               <td>
-                   <select name="Pesqueiro[]" style="float:left">
-                    <option value="" selected="selected">Pesqueiro</option>
-                   </select>
-               </td>
-               <td>
-                   <label>Tempo</label>
-                   <input type="text" name="qtd_peixes[]" id="numeric"/>
-               </td>
-               <td>
-                   <a  class="removerCampo" title="Remover linha">Remove Campo</a>
-               </td>
-                            
-              </tr>
-              </table>
-                      
-            <a href="#rodape" class="adicionarCampo" title="Adicionar item">Add Campo</a>
-         </fieldset>
-         </div>
-         <div id="esquerda-entrevista">
-         <fieldset id="ArtePesca">
-          <td><label for="tipo">Quantidade de Peixes Capturadas:</label></td>
-              <table style="border:none">
-              <tr class="linhas">
-              <br/>
-              <td>
-                  <select name="Especie[]" id="Especie">
-                      <option value="" selected="selected">Espécie</option>
-                  </select>
-	      </td>
-              <td>
-                  <label>Quantidade</label>
-                  <input type="text" name="qtd_peixes[]" id="numeric"/>
-              </td>
-              <td>
-                  <label for="tipo">Peso (Kg):</label>
-                  <input type="text" id="numeric" name="peso_pescaLinha"/>           
-              </td>
-              <td>
-                  <label for="tipo">Preço por Kg:</label>
-                  <input type="text" id="numeric" name="preco_pescaLinha"/>           
-              </td>
-              <td>
-                  <a class="removerCampo" title="Remover linha">Remove Campo</a>
-              </td>
-	      </tr>
-              </table>
-              <br/>
-              <a  class="adicionarCampo" title="Adicionar item">Add Campo</a>
-       </fieldset>       
-         </div>
-        </fieldset>
-        <div id="Submit">
-            <input type="submit" value="Enviar"/>
-        </div>
-    </form>
 </div>
