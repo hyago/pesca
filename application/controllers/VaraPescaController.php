@@ -13,13 +13,17 @@ class VaraPescaController extends Zend_Controller_Action
         
         $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuarioLogado = $this->usuarioLogado;
-        
-        
+        $this->modelVaraPesca = new Application_Model_VaraPesca();
+        $this->modelMonitoramento = new Application_Model_Monitoramento();
+        $this->modelFichaDiaria = new Application_Model_FichaDiaria();
+        $this->modelColetaManual = new Application_Model_ColetaManual();
         $this->modelPescador = new Application_Model_Pescador();
         $this->modelBarcos = new Application_Model_Barcos();
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
+        $this->modelMare = new Application_Model_Mare();
+        $this->modelIsca = new Application_Model_Isca();
     }
 
     public function indexAction()
@@ -29,12 +33,21 @@ class VaraPescaController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select();
         $especies = $this->modelEspecie->select();
+        $mare = $this->modelMare->select();
+        $isca = $this->modelIsca->select();
         
+        $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        
+        $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        $this->view->assign('fichaDiaria', $fichadiaria);
+        $this->view->assign('monitoramento', $monitoramento);
+        $this->view->assign('mare', $mare);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+        $this->view->assign('iscas', $isca);
     
     }
 
@@ -56,7 +69,14 @@ class VaraPescaController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
         
     }
+    public function criarAction(){
+        $this->modelVaraPesca->insert($this->_getAllParams());
+        $id = $this->modelVaraPesca->selectId();
+        $this->_redirector = $this->_helper->getHelper('Redirector');
 
-
+        $value = array_shift($id);
+        $this->_redirector->gotoSimple('editar', 'vara-pesca', null, array('id' => $value));
+    }
+    
 }
 

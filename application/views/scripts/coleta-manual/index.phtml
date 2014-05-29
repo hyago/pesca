@@ -4,7 +4,7 @@
 </div>
 
 <div id="esquerda-entrevista">
-    <form>
+    <form action="<?= $this->url(array("controller" => "coleta-manual", "action" => "criar"), null, true) ?>">
         <fieldset id="Desembarque">
             <div id="esquerda">
                 <div id="form-esq">
@@ -70,7 +70,7 @@
                 </div>
                 <div id="form-esq">
                     <label>Qtd de Pescadores:</label>
-                    <input type="text"  name="NumPescadores" placeholder="Quantidade de Pescadores "/><br />
+                    <input type="text"  name="numPescadores" placeholder="Quantidade de Pescadores "/><br />
                 </div>
             </div>
             <div id="esquerda">
@@ -117,20 +117,17 @@
                     endforeach;
                     ?>
                     </select>
-                </div>
-                <div id="form-dir">    
-                    <label>Maré:</label>
-                    <select name="mareviva">
-                        <option value="TRUE"> Viva</option>
-                        <option value="FALSE"> Morta</option>
-                    </select>    
-                </div>
+                </div>   
+                    <div id="form-dir">    
+                    <label>Maré Viva?</label>
+                    <input type="checkbox" name="mareviva">
+                </div>   
             </div><br/>
             <div id="esquerda">
                 <legend><h4>Outros dados:</h4></legend>
                 <div id="form-esq">    
                     <label>Avistou:</label>
-                    <input type="text" name="avistamento" placeholder="Num"/><br />
+                    <input type="text" name="avistamento" placeholder="Avistamento"/><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
@@ -142,11 +139,11 @@
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Tempo até o Pesqueiro:</label>
-                    <input type="text" name="tempoAPesqueiro" placeholder="Tempo até o Pesqueiro" /><br />
+                    <input type="time" name="tempoPesqueiro" placeholder="Tempo até o Pesqueiro" /><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Distância até Pesqueiro:</label>
-                    <input type="text" name="distanciaAPesqueiro" placeholder="Distância até o Pesqueiro" /><br />
+                    <input type="text" name="distanciaPesqueiro" placeholder="Distância até o Pesqueiro" /><br />
                 </div>
                 <div id="Submit">
                     <input type="submit" value="Enviar"/>

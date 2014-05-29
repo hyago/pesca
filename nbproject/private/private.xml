@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/pesca/application/models/Grosseira.php</file>
-            <file>file:/C:/xampp/htdocs/pesca/application/models/ColetaManual.php</file>
-            <file>file:/C:/xampp/htdocs/pesca/application/views/scripts/coleta-manual/index.phtml</file>
-            <file>file:/C:/xampp/htdocs/pesca/application/views/scripts/grosseira/index.phtml</file>
-            <file>file:/C:/xampp/htdocs/pesca/application/controllers/ColetaManualController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Ratoeira.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/manzua/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/RatoeiraController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ManzuaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Jerere.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Manzua.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ratoeira/index.phtml</file>
         </group>
     </open-files>
 </project-private>

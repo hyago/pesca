@@ -91,7 +91,8 @@ class Application_Model_ArrastoFundo
             'af_gelo' => $request['gelo'],
             'af_avistou' => $request['avistamento'],
             'af_subamostra' => $request['subamostra'],
-            'af_obs' => $request['observacao'],
+            'af_obs' => $request['observacao']
+            
         );
  
         

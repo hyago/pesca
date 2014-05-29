@@ -4,12 +4,16 @@
 </div>
 
 <div id="esquerda-entrevista">
-    <form>
+    <form action="<?= $this->url(array("controller" => "manzua", "action" => "criar"), null, true) ?>">
         <fieldset id="Desembarque">
             <div id="esquerda">
                 <div id="form-esq">
                     <label>ID da ficha diária:</label>
-                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" /><br />
+                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" value="<?= $this->fichaDiaria['fd_id'] ?>" /><br />
+                </div>
+                <div id="form-esq">
+                    <label>ID monitoramento:</label>
+                    <input type="text" name="id_monitoramento" placeholder="ID"  value="<?= $this->monitoramento['mnt_id'] ?>" /><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">ID Entrevista:</label>
@@ -21,7 +25,7 @@
                 <legend><h4>Embarcação:</h4></legend>
                 <div id="form-esq">
                     <label>Utilizou Barco?</label>
-                    <input type="checkbox"  name="barco" checked="true"/><br />
+                    <input type="checkbox"  name="embarcada" checked="true"/><br />
                 </div>
                 <div id="form-esq">
                     <label>Barco:</label>
@@ -54,7 +58,7 @@
             <div id="direita-entrevista">
                 <div id="form-esq">    
                     <label>Pescador Entrevistado:</label>
-                    <select name="PescadorEntrevistado" />
+                    <select name="pescadorEntrevistado" />
                     <?php
                     foreach ($this->pescadores as $key => $pescador):
                         ?>
@@ -67,7 +71,7 @@
                 </div>
                 <div id="form-esq">
                     <label>Qtd de Pescadores:</label>
-                    <input type="number" name="numPescadores" placeholder="QuantidadePescadores"/><br />
+                    <input type="number" name="numPescadores" placeholder="Quantidade Pescadores"/><br />
                 </div>
             </div>
             <div id="esquerda">
@@ -94,26 +98,29 @@
             </div>
             <div id="esquerda">
                 <div id="form-esq">
-                    <legend><h4>Gastos:</h4></legend>
-                    <label>Diesel(L):</label>
-                    <input type="text"  name="diesel" placeholder="Diesel"/>
-                </div>
-                <div id="form-dir">    
-                    <label>Óleo(L):</label>
-                    <input type="text"  name="oleo" placeholder="Óleo"/><br />
+                    <label>Tempo Gasto:</label>
+                    <input type="time" name="tempoGasto" placeholder="Data da Saída"/>
                 </div>
             </div>
-            <div id="direita-entrevista">
-                <div id="form-dir">    
-                    <label>Alimento($):</label>
-                    <input type="text"  name="alimento" placeholder="Alimento"/><br />
+            <div id="esquerda">
+                <div id="form-esq">
+                    <legend><h4>Maré:</h4></legend>
+                    <label>Tipo:</label>
+                    <select name="mare" >
+                        <?php
+                        foreach ($this->mare as $key => $mare):
+                            ?>
+                            <option value="<?= $mare['mre_id'] ?>"><?= $mare['mre_tipo'] ?></option>
+                            <?php
+                        endforeach;
+                        ?>
+                    </select>
                 </div>
                 <div id="form-dir">    
-                    <label>Gelo($):</label>
-                    <input type="text"  name="gelo" placeholder="Gelo"/><br />
+                    <label>Maré Viva?</label>
+                    <input type="checkbox" name="mareviva"> 
                 </div>
-            </div>
-            <br/>
+            </div><br/>
             <div id="esquerda">
                 <div id="form-esq">
                     <legend><h4>Esforço:</h4></legend>
@@ -125,7 +132,7 @@
                 <legend><h4>Outros dados:</h4></legend>
                 <div id="form-esq">    
                     <label>Avistou:</label>
-                    <input type="text" name="avistamento" placeholder="avistamento"/><br />
+                    <input type="text" name="avistamento" placeholder="Avistamento"/><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
@@ -142,6 +149,4 @@
 
         </fieldset>
     </form>        
-</div>      
-
-
+</div> 

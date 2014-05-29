@@ -73,7 +73,7 @@ class ColetaManualController extends Zend_Controller_Action
         $this->_redirector = $this->_helper->getHelper('Redirector');
 
         $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'grosseira', null, array('id' => $value));
+        $this->_redirector->gotoSimple('editar', 'coleta-manual', null, array('id' => $value));
     }
 }
 

@@ -28,10 +28,7 @@ private $dbTableColetaManual;
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableColetaManual = new Application_Model_DbTable_ColetaManual();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
-        
+        $this->dbTableMare = new Application_Model_DbTable_Mare();
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
@@ -44,7 +41,7 @@ private $dbTableColetaManual;
             $idSubamostra = null;
         }
         
-         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
         $dadosColetaManual = array(
@@ -52,23 +49,19 @@ private $dbTableColetaManual;
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
-            'cml_numpescadores' => $request['numPescadores'],
+            'cml_quantpescadores' => $request['numPescadores'],
             'cml_dhsaida' => $timestampSaida,
             'cml_dhvolta' => $timestampVolta,
             'cml_tempogasto' => $request['tempoGasto'],
-            'cml_diesel' => $request['diesel'], 
-            'cml_oleo' => $request['oleo'],
-            'cml_alimento' => $request['alimento'],
-            'cml_gelo' => $request['gelo'],
-            'cml_numlinhas' => $request['numLinhas'],
-            'cml_avistou' => $request['avistamento'],
+            'cml_avistamento' => $request['avistamento'],
             'cml_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'cml_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
-            'isc_id' => $request['isca'],
-            'cml_numanzoisplinha' => $request['numAnzois'],
-            'cml_tempoatepesqueiro' => $request['tempoaPesqueiro']
+            'cml_distatepesqueiro' => $request['distanciaPesqueiro'],
+            'cml_tempoatepesqueiro' => $request['tempoPesqueiro'],
+            'mre_id' => $request['mare'],
+            'cml_mreviva' => $request['mareviva']
         );
         
         $this->dbTableColetaManual->insert($dadosColetaManual);
@@ -83,21 +76,25 @@ private $dbTableColetaManual;
         $timestampVolta = $request['dataVolta']+$request['horaVolta'];
         
         
+        
         $dadosColetaManual = array(
-            'cml_embarcado' => $request['embarcada'],
+            'cml_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'cml_quantpescadores' => $request['numPescadores'],
+            'cml_dhsaida' => $timestampSaida,
             'cml_dhvolta' => $timestampVolta,
-            'cml_dhsaida' => $timestampSaida, 
-            'cml_diesel' => $request['diesel'],
-            'cml_oleo' => $request['oleo'],
-            'cml_alimento' => $request['alimento'],
-            'cml_gelo' => $request['gelo'],
-            'cml_avistou' => $request['avistamento'],
+            'cml_tempogasto' => $request['tempoGasto'],
+            'cml_avistamento' => $request['avistamento'],
             'cml_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'cml_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento'],
+            'cml_distatepesqueiro' => $request['distanciaPesqueiro'],
+            'cml_tempoatepesqueiro' => $request['tempoPesqueiro'],
+            'mre_id' => $request['mare'],
+            'cml_mreviva' => $request['mareviva']
         );
  
         
