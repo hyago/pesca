@@ -80,7 +80,11 @@ class Application_Model_Pescador {
             'tp_cir_cap_porto' => $request['cir_cap_porto'],
             'tp_datanasc' => $dataNasc,
             'tmun_id_natural' => $request['municipioNat'],
-            'esc_id' => $request['selectEscolaridade']
+            'esc_id' => $request['selectEscolaridade'],
+            'tp_resp_lan'  => $request['respLancamento'],
+            'tp_resp_cad'  => $request['respCadastro'],
+            'tp_dta_cad'  => date('d-m-y'),
+            'tp_obs' => $request['obs']
         );
         
         return $dadosPescador;
@@ -172,7 +176,84 @@ class Application_Model_Pescador {
 
         return;
     }
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Comunidade vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelInsertPescadorHasComunidade($idPescador, $idComunidade ) {
+        $dbTable_PescadorHasComunidade = new Application_Model_DbTable_PescadorHasComunidade();
 
+        $dadosPescadorHasComunidade = array(
+            'tp_id' => $idPescador,
+            'tcom_id' => $idComunidade
+        );
+        $dbTable_PescadorHasComunidade->insert($dadosPescadorHasComunidade);
+
+        return;
+    }
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Comunidade vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelDeletePescadorHasComunidade($idPescador, $idComunidade ) {
+        $dbTable_PescadorHasComunidade = new Application_Model_DbTable_PescadorHasComunidade();
+
+        $dadosPescadorHasComunidade = array(
+            'tp_id = ?' => $idPescador,
+            'tcom_id  = ?' => $idComunidade
+        );
+        $dbTable_PescadorHasComunidade->delete($dadosPescadorHasComunidade);
+
+        return;
+    }
+    
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Porto vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelInsertPescadorHasPorto($idPescador, $idPorto ) {
+        $dbTable_PescadorHasPorto = new Application_Model_DbTable_PescadorHasPorto();
+
+        $dadosPescadorHasPorto = array(
+            'tp_id' => $idPescador,
+            'pto_id' => $idPorto
+        );
+        $dbTable_PescadorHasPorto->insert($dadosPescadorHasPorto);
+
+        return;
+    }
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Porto vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelDeletePescadorHasPorto($idPescador, $idPorto ) {
+        $dbTable_PescadorHasPorto = new Application_Model_DbTable_PescadorHasPorto();
+
+        $dadosPescadorHasPorto = array(
+            'tp_id = ?' => $idPescador,
+            'pto_id  = ?' => $idPorto
+        );
+        $dbTable_PescadorHasPorto->delete($dadosPescadorHasPorto);
+
+        return;
+    }
+    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert ProgramaSocial vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelInsertPescadorHasProgramaSocial($idPescador, $idProgramaSocial ) {
+        $dbTable_PescadorHasProgramaSocial = new Application_Model_DbTable_PescadorHasProgramaSocial();
+
+        $dadosPescadorHasProgramaSocial = array(
+            'tp_id' => $idPescador,
+            'prs_id' => $idProgramaSocial
+        );
+        $dbTable_PescadorHasProgramaSocial->insert($dadosPescadorHasProgramaSocial);
+
+        return;
+    }
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete ProgramaSocial vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelDeletePescadorHasProgramaSocial($idPescador, $idProgramaSocial ) {
+        $dbTable_PescadorHasProgramaSocial = new Application_Model_DbTable_PescadorHasProgramaSocial();
+
+        $dadosPescadorHasProgramaSocial = array(
+            'tp_id = ?' => $idPescador,
+            'prs_id  = ?' => $idProgramaSocial
+        );
+        $dbTable_PescadorHasProgramaSocial->delete($dadosPescadorHasProgramaSocial);
+
+        return;
+    }
+    
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Telefones vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function modelInsertPescadorHasTelefone($idPescador, $idTelenone, $nTelefone) {
         $dbTable_PescadorHasTelefone = new Application_Model_DbTable_PescadorHasTelefone();
@@ -258,13 +339,12 @@ class Application_Model_Pescador {
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Area/Tipo Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelInsertPescadorHasArteTipo($idPescador, $idArte, $idTipo) {
+    public function modelInsertPescadorHasArteTipo($idPescador, $idArte ) {
         $dbTable_PescadorHasArteTipo = new Application_Model_DbTable_PescadorHasArtePesca();
 
         $dadosPescadorHasArteTipo = array(
             'tp_id' => $idPescador,
             'tap_id' => $idArte,
-            'itc_id' => $idTipo,
         );
         $dbTable_PescadorHasArteTipo->insert($dadosPescadorHasArteTipo);
 
@@ -272,28 +352,53 @@ class Application_Model_Pescador {
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Area/Tipo Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelDeletePescadorHasArteTipo($idPescador, $idArte, $idTipo) {
+    public function modelDeletePescadorHasArteTipo($idPescador, $idArte ) {
         $dbTable_PescadorHasArteTipo = new Application_Model_DbTable_PescadorHasArtePesca();
 
         $dadosPescadorHasArteTipo = array(
             'tp_id = ?' => $idPescador,
             'tap_id  = ?' => $idArte,
-            'itc_id  = ?' => $idTipo
         );
         $dbTable_PescadorHasArteTipo->delete($dadosPescadorHasArteTipo);
 
         return;
     }
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Tipo Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelInsertPescadorHasTipo($idPescador, $idTipo ) {
+        $dbTable_PescadorHasTipo = new Application_Model_DbTable_PescadorHasEspecieCapturada();
+
+        $dadosPescadorHasTipo = array(
+            'tp_id' => $idPescador,
+            'itc_id' => $idTipo,
+        );
+        $dbTable_PescadorHasTipo->insert($dadosPescadorHasTipo);
+
+        return;
+    }
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Tipo Pesca vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
+    public function modelDeletePescadorHasTipo($idPescador, $idTipo ) {
+        $dbTable_PescadorHasTipo = new Application_Model_DbTable_PescadorHasEspecieCapturada();
+
+        $dadosPescadorHasTipo = array(
+            'tp_id = ?' => $idPescador,
+            'itc_id  = ?' => $idTipo,
+        );
+        $dbTable_PescadorHasTipo->delete($dadosPescadorHasTipo);
+
+        return;
+    }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Embarcações vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelInsertPescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte, $isMotor) {
+    public function modelInsertPescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte, $isMotor, $idDono) {
         $dbTable_PescadorHasEmbarcacoes = new Application_Model_DbTable_PescadorHasEmbarcacao();
 
         $dadosPescadorHasEmbarcacoes = array(
             'tp_id' => $idPescador,
             'tte_id' => $idEmbarcacao,
             'tpe_id' => $idPorte,
-            'tpte_motor' => $isMotor
+            'tpte_motor' => $isMotor,
+            'tpte_dono' => $idDono
         );
         $dbTable_PescadorHasEmbarcacoes->insert($dadosPescadorHasEmbarcacoes);
 

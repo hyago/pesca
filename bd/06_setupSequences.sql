@@ -536,3 +536,153 @@ select codigo, cast(comunidade as int8) from access.pescador where comunidade no
 
 
 
+select codigo, comunidade from access.pescador where comunidade notnull;
+select * from t_pescador_has_t_comunidade;
+
+insert into t_pescador_has_t_comunidade (tp_id, tcom_id)
+select codigo, cast(comunidade as int8) from access.pescador where comunidade notnull;
+
+insert into T_PESCADOR_HAS_T_PORTO (TP_ID, PTO_ID)
+select codigo, cod_pdesemb from access.pescador where cod_pdesemb notnull;
+
+--Avistamento
+
+select count(*), avist from access.entrev_pesca group by avist;
+
+update access.entrev_pesca set avist='Tartaruga' where avist='Tartaruga.' or avist='Tartaruga (grande)' or avist='tartaruga' or avist='Tartaruga grande'
+or avist='TARTARUGA' or avist='Tartaruga (cor amarelada)' or avist='tartaruga grande';
+
+update access.entrev_pesca set avist='Tartaruga de Pente' where avist='Tartaruga de Pente.' or avist='tartaruga de pente' or avist='tartaruga pente' 
+or avist='tartaruga pente (2 filhotes e 1 adulto)' or avist='Tartaruga de pente' or avist='três tartarugas de pente';
+
+update access.entrev_pesca set avist='Baleia Jubarte' where avist='baleia jubarte' or avist='Balei Jubarte' or avist='baleia jubarte/ cacalote';
+
+update access.entrev_pesca set avist='Baleia' where avist='BALEIA' or avist='baleia';
+
+update access.entrev_pesca set avist='Golfinho' where avist='4 golfinhos' or avist='GOLFINHO' or avist='Golfinhos' or avist='golfinho'
+or avist='Golfinho.' or avist='Golfinho - Boto' or avist=' Golfinho - Boto';
+
+update access.entrev_pesca set avist='Tubarão' where avist='tubarão';
+
+update access.entrev_pesca set avist='Boto Cinza' where avist='Boto cinza';
+
+update access.entrev_pesca set avist='Tartaruga;Golfinho' where avist='Golfinho e Tartaruga.' or avist='Tartaruga e Golfinho (boto)'
+or avist='Tartaruga e Golfinho.' or avist='Tartaruga e golfinho.' or avist='Tartarua e golfinho' or avist='golfinho e tartarugas'
+or avist='Tartarura e golfinho' or avist='artaruga, golfinho' or avist='Tartaruga e Golfinho' or avist='Tartaruga, Golfinho'
+or avist='tartarugas e golfinho' or avist='Tartaruga e golfinho' or avist='tartaruga e golfinho' or avist='Tartaruga, golfinho'
+or avist=' Tartaruga e Golfinho' or avist='tartaruga, golfinho' or avist='Tartaruga e  Golfinho';
+
+update access.entrev_pesca set avist='Tartaruga;Baleia' where avist='Tartaruga e baleia'or avist='Tartaruga e Baleia';
+
+update access.entrev_pesca set avist='Golfinho;Baleia' where avist='baleia e golfinho'or avist='Baleia e Golfinho'or avist='golfinho e baleia'
+or avist='Golfinho e Baleia';
+
+update access.entrev_pesca set avist='Golfinho;Baleia Jubarte' where avist='Golfinho e Baleia Jubarte';
+
+update access.entrev_pesca set avist='Golfinho;Tartaruga de Pente' where avist='tartaruga pente e golfinho';
+
+update access.entrev_pesca set avist='Tartaruga;Golfinho;Baleia Cachalote' where avist='tartaruga, golfinho, baleia cachalote';
+
+update access.entrev_pesca set avist='Tartaruga;Golfinho;Baleia' where avist='Tartaruga, golfinho e baleia';
+
+update access.entrev_pesca set avist='Golfinho;Baleia Jubarte' where avist='Golfinho e Baleia Jubarte' or avist='Golfinho e Baleia Jubarte';
+
+update access.entrev_pesca set avist='Golfinho;Baleia' where avist='Golfinho e Baleia' or avist='Golfinho e Baleia';
+
+update access.entrev_pesca set avist='Tartaruga;Baleia Jubarte' where avist='Tartaruga e Baleia Jubarte' or avist='Tartaruga e Baleia (Jubarte)';
+
+update access.entrev_pesca set avist='Boto Preto' where avist='8 individuos de boto preto';
+
+update access.entrev_pesca set avist='Tartaruga de Pente;Baleia Jubarte' where avist='Jubart, tartaruga de pente';
+
+update access.entrev_pesca set avist='Golfinho Nariz de Garrafa' where avist='Golfinho nariz de garrafa';
+
+update access.entrev_pesca set avist='Tartaruga do Casco Mole' where avist='Tartaruga do casco mole';
+
+update access.entrev_pesca set avist='Tartaruga - Ninho' where avist='Ninho de tartaruga';
+
+update access.entrev_pesca set avist='Tartaruga - Morta' where avist='Tartaruga (morta)';
+
+update access.entrev_pesca set avist='Baleia Jubarte - Morta' where avist='Jubarte morta em Barra Grande';
+
+update access.entrev_pesca set avist='Peixe Lua;Baleia Jubarte' where avist='Peixe lua, Baleia Jubarte';
+
+update access.entrev_pesca set avist='Peixe Lua;Baleia Jubarte' where avist='Peixe lua, Baleia Jubarte';
+
+update access.entrev_pesca set avist=NULL where avist='';
+
+
+select cod_fichadiaria, avist, obs from access.entrev_pesca where avist='Uma rede de mais de 1000 metros com peixes mortos.';
+update access.entrev_pesca set obs=avist where cod_fichadiaria=2440;
+update access.entrev_pesca set avist='' where cod_fichadiaria=2440;
+
+select cod_fichadiaria, avist, obs from access.entrev_pesca where avist='Também utilizou rede de emalhar';
+update access.entrev_pesca set obs=avist where cod_fichadiaria=494;
+update access.entrev_pesca set avist='' where cod_fichadiaria=494;
+
+select cod_fichadiaria, avist, obs from access.entrev_pesca where avist='atravessadores' or avist='Atravessadores' or avist='Atravessador';
+update access.entrev_pesca set obs=avist where cod_fichadiaria=1768;
+update access.entrev_pesca set avist='' where cod_fichadiaria=1768;
+
+update access.entrev_pesca set obs=avist where cod_fichadiaria=1155;
+update access.entrev_pesca set avist='' where cod_fichadiaria=1155;
+
+update access.entrev_pesca set obs=avist where cod_fichadiaria=1550;
+update access.entrev_pesca set avist='' where cod_fichadiaria=1550;
+
+select cod_fichadiaria, avist, obs from access.entrev_pesca where avist='Sem captura';
+update access.entrev_pesca set obs=avist where cod_fichadiaria=1061;
+update access.entrev_pesca set avist='' where cod_fichadiaria=1061;
+
+select cod_fichadiaria, avist, obs from access.entrev_pesca where avist='Vender na banca mais próxima';
+update access.entrev_pesca set obs=avist where cod_fichadiaria=582;
+update access.entrev_pesca set avist='' where cod_fichadiaria=582;
+
+select cod_fichadiaria, avist, obs from access.entrev_pesca where avist='Entrega na peixaria';
+update access.entrev_pesca set obs=avist where cod_fichadiaria=1462;
+update access.entrev_pesca set avist='' where cod_fichadiaria=1462;
+
+CREATE TABLE T_AVISTAMENTO (
+TA_ID SERIAL,
+TA_DESCRICAO VARCHAR(50) NOT NULL,
+CONSTRAINT T_TAVISTAMENTO_TA_ID_PKEY PRIMARY KEY (TA_ID)
+);
+
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 1, 'Baleia');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 2, 'Baleia Jubarte');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 3, 'Baleia Jubarte - Morta');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 4, 'Baleia Cachalote');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 5, 'Bijupirá 50kg');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 6, 'Boto');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 7, 'Boto Cinza');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 8, 'Boto Preto');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 9, 'Cardume de Tuninha');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 10, 'Golfinho');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 11, 'Golfinho Nariz de Garrafa');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 12, 'Lontras');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 13, 'Peixe Lua');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 14, 'Tartaruga');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 15, 'Tartaruga de Pente');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 16, 'Tartaruga do Casco Mole');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 17, 'Tartaruga - Morta');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 18, 'Tartaruga - Ninho');
+INSERT INTO T_AVISTAMENTO (TA_ID, TA_DESCRICAO) VALUES ( 19, 'Tubarão');
+
+CREATE TABLE T_ENTREVISTA_HAS_T_AVISTAMENTO (
+TE_ID INTEGER,
+FD_ID INTEGER, 
+TA_ID INTEGER, 
+CONSTRAINT T_T_ENTREVISTA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (TE_ID,  FD_ID,  TA_ID)
+);
+
+
+
+INSERT INTO T_ENTREVISTA_HAS_T_AVISTAMENTO (TE_ID,  FD_ID,  TA_ID)
+SELECT PESC.CODIGO, PESC.COD_FICHADIARIA, AV.TA_ID
+FROM ACCESS.ENTREV_PESCA AS PESC 
+    INNER JOIN T_AVISTAMENTO AS AV ON(';' || PESC.AVIST || ';' LIKE '%;' || AV.TA_DESCRICAO || ';%')
+ORDER BY PESC.COD_FICHADIARIA, AV.TA_ID, AV.TA_DESCRICAO;
+
+
+
+
