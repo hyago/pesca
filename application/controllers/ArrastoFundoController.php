@@ -48,12 +48,17 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
     
     public function editarAction(){
+        
+        $entrevista = $this->modelArrastoFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
+        
+        $this->view->assign("entrevista", $entrevista);
+        $idEntrevista = $this->_getParam('id');
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);

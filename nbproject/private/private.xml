@@ -3,17 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/srv/www/htdocs/pesca/application/models/Ratoeira.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/manzua/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/RatoeiraController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/ManzuaController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/Jerere.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/Manzua.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ratoeira/index.phtml</file>
-=======
-            <file>file:/srv/www/pesca/bd/06_setupSequences.sql</file>
->>>>>>> bc4f3f7e56f1db91d86d75f250604d5fd27a3438
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ArrastoFundoController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ficha-diaria/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/arrasto-fundo/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/FichaDiariaController.php</file>
         </group>
     </open-files>
 </project-private>

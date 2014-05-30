@@ -521,6 +521,24 @@ function beforeDelete(id)
     }
 }
 
+function jsDeleteMonitoramento(idMnt, frm, pag, fichaId) {
+    var TmpUrl = (+fichaId + '#base');
+
+    var tmpUpdate = (pag + '/id/' + idMnt + '/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+function jsInsertPesqueiro(frm, pag) {
+
+        var TmpUrl = (+frm.id_fichaDiaria.value + '#base');
+
+        var tmpUpdate = (pag + '/SelectArtePesca/' + frm.SelectArtePesca.value + '/SelectMonitorada/' + frm.SelectMonitorada.value + '/QuantidadeEmbarcacoes/' + frm.QuantidadeEmbarcacoes.value + '/id_fichaDiaria/' + frm.id_fichaDiaria.value + '/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+}
+
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
 //function addRowDependente(frm) {
