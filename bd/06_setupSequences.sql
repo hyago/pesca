@@ -685,4 +685,71 @@ ORDER BY PESC.COD_FICHADIARIA, AV.TA_ID, AV.TA_DESCRICAO;
 
 
 
+select count(*), arte from access.entrev_pesca group by arte;
+select * from t_artepesca;
+update access.entrev_pesca set arte='15' where arte='Mariscagem' or arte='MARISCAGEM';
+update access.entrev_pesca set arte='5' where arte='REDE';
+update access.entrev_pesca set arte='4' where arte='Pesca DE LINHA' or arte='PESCA DE LINHA';
+update access.entrev_pesca set arte='1' where arte='ARRASTO DE FUNDO';
 
+
+
+insert into t_tipoembarcacao(tte_id,tte_tipoembarcacao) values(0,'Sem Embarcação');
+
+select count(*), tp_barco from access.entrev_pesca group by tp_barco;
+update access.entrev_pesca set tp_barco='3' where tp_barco='Canoa';
+update access.entrev_pesca set tp_barco='4' where tp_barco='Jangada';
+update access.entrev_pesca set tp_barco='6' where tp_barco='Batera';
+update access.entrev_pesca set tp_barco='0' where tp_barco='Sem barco' or tp_barco='sem barco';
+update access.entrev_pesca set tp_barco='1;Motor1' where tp_barco='Barco a motor';
+
+
+
+select count(*), tp_pesca from access.entrev_pesca group by tp_pesca;
+select * from t_artepesca;
+update access.entrev_pesca set tp_pesca='4' where tp_pesca='Linha de mão';
+update access.entrev_pesca set tp_pesca='3' where tp_pesca='Grosseira';
+
+select count(*), tp_rede from access.entrev_pesca group by tp_rede;
+select * from t_artepesca;
+update access.entrev_pesca set tp_rede='2' where tp_rede='Calão';
+update access.entrev_pesca set tp_rede='5' where tp_rede='Emalhe' or tp_rede='3 malhos';
+update access.entrev_pesca set tp_rede='7' where tp_rede='Tarrafa';
+update access.entrev_pesca set tp_rede='5' where tp_rede='6';
+
+-- Precisa terminar
+select count(*), mare from access.entrev_pesca group by mare;
+update access.entrev_pesca set mare='Viva' where mare='viva';
+update access.entrev_pesca set mare='Morta' where mare='morta';
+
+-- Precisa terminar
+select count(*), tipomariscagem from access.entrev_pesca group by tipomariscagem;
+update access.entrev_pesca set tipomariscagem='11' where tipomariscagem='Manzuá';
+update access.entrev_pesca set tipomariscagem='5' where tipomariscagem='Emalhe' or tipomariscagem='3 malhos';
+
+
+select count(*), tempo from access.ficha_diaria group by tempo;
+update access.ficha_diaria set tempo='1' where tempo='chuva' or tempo='Chuva';
+update access.ficha_diaria set tempo='2' where tempo='Nublado';
+update access.ficha_diaria set tempo='3' where tempo='Sol' or tempo='SOL' or tempo='sol';
+
+select count(*), vento from access.ficha_diaria group by vento;
+update access.ficha_diaria set vento='1' where vento='Forte';
+update access.ficha_diaria set vento='2' where vento='Fraco';
+update access.ficha_diaria set vento='3' where vento='Moderado';
+
+CREATE TABLE IF NOT EXISTS t_turno (
+TURNO_ID VARCHAR NOT NULL,
+TURNO_NOME VARCHAR(30) NOT NULL,
+PRIMARY KEY (TURNO_ID)
+);
+
+insert into t_turno(TURNO_ID, TURNO_NOME) values ('M','Matutino');
+insert into t_turno(TURNO_ID, TURNO_NOME) values ('V','Vespertino');
+insert into t_turno(TURNO_ID, TURNO_NOME) values ('N','Noturno');
+insert into t_turno(TURNO_ID, TURNO_NOME) values ('I','Integral');
+
+-- Precisa terminar
+update access.ficha_diaria set turno='1' where turno='Forte';
+update access.ficha_diaria set turno='2' where turno='Fraco';
+update access.ficha_diaria set turno='3' where turno='Moderado';
