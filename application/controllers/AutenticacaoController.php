@@ -1,8 +1,8 @@
 <?php
 
-/** 
+/**
  * Controller de autenticação
- * 
+ *
  * @package Pesca
  * @subpackage Controllers
  * @author Elenildo João <elenildo.joao@gmail.com>
@@ -10,31 +10,26 @@
  * @access public
  *
  */
+class AutenticacaoController extends Zend_Controller_Action {
 
-class AutenticacaoController extends Zend_Controller_Action
-{
-
-    public function init()
-    {
+    public function init() {
         
     }
 
-    public function indexAction()
-    {
+    public function indexAction() {
         
     }
 
     /*
      * Login de usuários
      */
-    public function loginAction()
-    {
+    public function loginAction() {
         $login = $this->_getParam('login');
         $senha = $this->_getParam('senha');
-        
-        if (empty($login) || empty($senha)){
+
+        if (empty($login) || empty($senha)) {
             $this->view->mensagem = "Preencha o formulário corretamente.";
-        }else{                
+        } else {
             $this->_helper->viewRenderer->setNoRender();
 
             $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
@@ -46,27 +41,25 @@ class AutenticacaoController extends Zend_Controller_Action
 
             $result = $authAdapter->authenticate();
 
-            if($result->isValid()){        
+            if ($result->isValid()) {
                 $usuario = $authAdapter->getResultRowObject();
 
                 $storage = Zend_Auth::getInstance()->getStorage();
                 $storage->write($usuario);
                 $this->_redirect('index');
-            }else{
-                $this->_redirect('autenticacao/falha');
+            } else {
+                $this->_redirect('autenticacao/logout');
             }
         }
     }
-    
+
     /*
      * Logout de usuários
      */
-    public function logoutAction()
-    {
+    public function logoutAction() {
         Zend_Auth::getInstance()->clearIdentity();
-        
+
         $this->_redirect('index');
     }
 
 }
-
