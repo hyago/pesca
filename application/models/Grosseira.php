@@ -123,6 +123,43 @@ private $dbTableGrosseira;
         
         return $this->dbTableGrosseira->fetchAll($select)->toArray();
     }
+    
+    public function selectGrosseiraHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableGrosseiraHasPesqueiro = new Application_Model_DbTable_VGrosseiraHasPesqueiro();
+        $select = $this->dbTableGrosseiraHasPesqueiro->select()
+                ->from($this->dbTableGrosseiraHasPesqueiro)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableGrosseiraHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro)
+    {
+        $this->dbTableTGrosseiraHasPesqueiro = new Application_Model_DbTable_GrosseiraHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'grs_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro
+        );
+        
+        $this->dbTableTGrosseiraHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTGrosseiraHasPesqueiro = new Application_Model_DbTable_GrosseiraHasPesqueiro();       
+                
+        $whereGrosseiraHasPesqueiro = $this->dbTableTGrosseiraHasPesqueiro->getAdapter()
+                ->quoteInto('"grs_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTGrosseiraHasPesqueiro->delete($whereGrosseiraHasPesqueiro);
+        
+    }
+
 
 }
 

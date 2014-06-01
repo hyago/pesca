@@ -127,5 +127,43 @@ private $dbTableMergulho;
         
         return $this->dbTableMergulho->fetchAll($select)->toArray();
     }
+    
+    
+    public function selectMergulhoHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableMergulhoHasPesqueiro = new Application_Model_DbTable_VMergulhoHasPesqueiro();
+        $select = $this->dbTableMergulhoHasPesqueiro->select()
+                ->from($this->dbTableMergulhoHasPesqueiro)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableMergulhoHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
+    {
+        $this->dbTableTMergulhoHasPesqueiro = new Application_Model_DbTable_MergulhoHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'mer_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro,
+            't_distapesqueiro' => $distAPesqueiro
+        );
+        
+        $this->dbTableTMergulhoHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTMergulhoHasPesqueiro = new Application_Model_DbTable_MergulhoHasPesqueiro();       
+                
+        $whereMergulhoHasPesqueiro = $this->dbTableTMergulhoHasPesqueiro->getAdapter()
+                ->quoteInto('"mer_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTMergulhoHasPesqueiro->delete($whereMergulhoHasPesqueiro);
+        
+    }
 
 }

@@ -52,12 +52,21 @@ public function init()
     }
     
     public function editarAction(){
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_MergulhoHasPesqueiro();
+        $entrevista = $this->modelMergulho->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
+        $idEntrevista = $this->_getParam('id');
+        
+        $vMergulho = $this->modelMergulho->selectMergulhoHasPesqueiro('mer_id='.$idEntrevista);
+        
+        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
+        $this->view->assign('vMergulho', $vMergulho);
+        $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -74,5 +83,39 @@ public function init()
         $value = array_shift($id);
         $this->_redirector->gotoSimple('editar', 'mergulho', null, array('id' => $value));
     }
+    
+    public function insertpesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $pesqueiro = $this->_getParam("nomePesqueiro");
+        
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
+        
+        $distanciapesqueiro = $this->_getParam("distAPesqueiro");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelMergulho->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
+
+        $this->redirect("/mergulho/editar/id/" . $backUrl);
+    }
+    public function deletepesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasPesqueiro = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelMergulho->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/mergulho/editar/id/" . $backUrl);
+    }
+    
 }
 

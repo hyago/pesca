@@ -131,7 +131,42 @@ class Application_Model_LinhaFundo
         
         return $this->dbTableLinhaFundo->fetchAll($select)->toArray();
     }
+    public function selectLinhaFundoHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableLinhaFundoHasPesqueiro = new Application_Model_DbTable_VLinhaFundoHasPesqueiro();
+        $select = $this->dbTableLinhaFundoHasPesqueiro->select()
+                ->from($this->dbTableLinhaFundoHasPesqueiro)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableLinhaFundoHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
+    {
+        $this->dbTableTLinhaFundoHasPesqueiro = new Application_Model_DbTable_LinhaFundoHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'lf_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro,
+            't_distapesqueiro' => $distAPesqueiro
+        );
+        
+        $this->dbTableTLinhaFundoHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTLinhaFundoHasPesqueiro = new Application_Model_DbTable_LinhaFundoHasPesqueiro();       
+                
+        $whereLinhaFundoHasPesqueiro = $this->dbTableTLinhaFundoHasPesqueiro->getAdapter()
+                ->quoteInto('"lf_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTLinhaFundoHasPesqueiro->delete($whereLinhaFundoHasPesqueiro);
+        
+    }
 
 
 }

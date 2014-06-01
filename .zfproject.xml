@@ -271,6 +271,7 @@
           <dbTableFile dbTableName="SiripoiaHasEspecieCapturada"/>
           <dbTableFile dbTableName="TarrafaHasEspecieCapturada"/>
           <dbTableFile dbTableName="VaraPescaHasEspecieCapturada"/>
+          <dbTableFile dbTableName="VLinhaHasPesqueiro"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>

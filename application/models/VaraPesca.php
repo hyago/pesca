@@ -132,9 +132,41 @@ class Application_Model_VaraPesca
         
         return $this->dbTableVaraPesca->fetchAll($select)->toArray();
     }
+    public function selectVaraPescaHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableVaraPescaHasPesqueiro = new Application_Model_DbTable_VVaraPescaHasPesqueiro();
+        $select = $this->dbTableVaraPescaHasPesqueiro->select()
+                ->from($this->dbTableVaraPescaHasPesqueiro)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
 
-
-
+        return $this->dbTableVaraPescaHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
+    {
+        $this->dbTableTVaraPescaHasPesqueiro = new Application_Model_DbTable_VaraPescaHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'vp_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro,
+            't_distapesqueiro' => $distAPesqueiro
+        );
+        
+        $this->dbTableTVaraPescaHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTVaraPescaHasPesqueiro = new Application_Model_DbTable_VaraPescaHasPesqueiro();       
+                
+        $whereVaraPescaHasPesqueiro = $this->dbTableTVaraPescaHasPesqueiro->getAdapter()
+                ->quoteInto('"vp_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTVaraPescaHasPesqueiro->delete($whereVaraPescaHasPesqueiro);
+        
+    }
 }
 

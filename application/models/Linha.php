@@ -123,7 +123,42 @@ private $dbTableLinha;
         
         return $this->dbTableLinha->fetchAll($select)->toArray();
     }
+    
+    public function selectLinhaHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableLinhaHasPesqueiro = new Application_Model_DbTable_VLinhaHasPesqueiro();
+        $select = $this->dbTableLinhaHasPesqueiro->select()
+                ->from($this->dbTableLinhaHasPesqueiro)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableLinhaHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro)
+    {
+        $this->dbTableTLinhaHasPesqueiro = new Application_Model_DbTable_LinhaHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'lin_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro
+        );
+        
+        $this->dbTableTLinhaHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTLinhaHasPesqueiro = new Application_Model_DbTable_LinhaHasPesqueiro();       
+                
+        $whereLinhaHasPesqueiro = $this->dbTableTLinhaHasPesqueiro->getAdapter()
+                ->quoteInto('"lin_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTLinhaHasPesqueiro->delete($whereLinhaHasPesqueiro);
+        
+    }
 
 
 }

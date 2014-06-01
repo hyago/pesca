@@ -120,6 +120,42 @@ private $dbTableColetaManual;
         
         return $this->dbTableColetaManual->fetchAll($select)->toArray();
     }
+    public function selectColetaManualHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableColetaManualHasPesqueiro = new Application_Model_DbTable_VColetaManualHasPesqueiro();
+        $select = $this->dbTableColetaManualHasPesqueiro->select()
+                ->from($this->dbTableColetaManualHasPesqueiro)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableColetaManualHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
+    {
+        $this->dbTableTColetaManualHasPesqueiro = new Application_Model_DbTable_ColetaManualHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'cml_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro,
+            't_distapesqueiro' => $distAPesqueiro
+        );
+        
+        $this->dbTableTColetaManualHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTColetaManualHasPesqueiro = new Application_Model_DbTable_ColetaManualHasPesqueiro();       
+                
+        $whereColetaManualHasPesqueiro = $this->dbTableTColetaManualHasPesqueiro->getAdapter()
+                ->quoteInto('"cml_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTColetaManualHasPesqueiro->delete($whereColetaManualHasPesqueiro);
+        
+    }
 
 }
 

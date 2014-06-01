@@ -451,6 +451,8 @@ function beforeDelete(id)
     }
 }
 
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Entrevista_has_Pesqueiro /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsDeletePesqueiro(fichaId,pag, idEntHasPesqueiro) {
     var TmpUrl = (+fichaId + '#base');
 
@@ -478,11 +480,21 @@ function jsInsertPesqueiroWithoutTime(frm, pag, entrevista) {
         location.replace(tmpUpdate);
 }
 
+
+function jsInsertPesqueiroWithTime(frm, pag, entrevista) {
+
+        var TmpUrl = (entrevista + '#base');
+
+        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+}
+
 function jsInsertPesqueiroWithTimeAndRange(frm, pag, entrevista) {
 
         var TmpUrl = (entrevista + '#base');
 
-        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/DistAPesqueiro/'+ frm.distAPesqueiro + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
+        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/distAPesqueiro/'+ frm.distAPesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
 
         location.replace(tmpUpdate);
 }

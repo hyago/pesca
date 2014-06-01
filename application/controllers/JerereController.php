@@ -51,15 +51,24 @@ class JerereController extends Zend_Controller_Action
 
     public function visualizarAction(){
         
-    }
+        }
     
     public function editarAction(){
+     $entrevistaHasPesqueiro = new Application_Model_DbTable_JerereHasPesqueiro();
+        $entrevista = $this->modelJerere->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
+        $idEntrevista = $this->_getParam('id');
+        
+        $vJerere = $this->modelJerere->selectJerereHasPesqueiro('jre_id='.$idEntrevista);
+        
+        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
+        $this->view->assign('vJerere', $vJerere);
+        $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -75,5 +84,39 @@ class JerereController extends Zend_Controller_Action
         $value = array_shift($id);
         $this->_redirector->gotoSimple('editar', 'jerere', null, array('id' => $value));
     }
+     public function insertpesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $pesqueiro = $this->_getParam("nomePesqueiro");
+        
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
+        
+        $distanciapesqueiro = $this->_getParam("distAPesqueiro");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelJerere->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
+    public function deletepesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasPesqueiro = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelJerere->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
 }
+
+
 

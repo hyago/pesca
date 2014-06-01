@@ -125,6 +125,42 @@ class Application_Model_Jerere
         
         return $this->dbTableJerere->fetchAll($select)->toArray();
     }
+    public function selectJerereHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableJerereHasPesqueiro = new Application_Model_DbTable_VJerereHasPesqueiro();
+        $select = $this->dbTableJerereHasPesqueiro->select()
+                ->from($this->dbTableJerereHasPesqueiro)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableJerereHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
+    {
+        $this->dbTableTJerereHasPesqueiro = new Application_Model_DbTable_JerereHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'jre_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro,
+            't_distapesqueiro' => $distAPesqueiro
+        );
+        
+        $this->dbTableTJerereHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTJerereHasPesqueiro = new Application_Model_DbTable_JerereHasPesqueiro();       
+                
+        $whereJerereHasPesqueiro = $this->dbTableTJerereHasPesqueiro->getAdapter()
+                ->quoteInto('"jre_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTJerereHasPesqueiro->delete($whereJerereHasPesqueiro);
+        
+    }
 
 
 

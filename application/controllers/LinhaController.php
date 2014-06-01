@@ -53,13 +53,23 @@ class LinhaController extends Zend_Controller_Action
         
     }
     
+     
     public function editarAction(){
-       $pescadores = $this->modelPescador->select(null, 'tp_nome');
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_LinhaHasPesqueiro();
+        $entrevista = $this->modelLinha->find($this->_getParam('id'));
+        $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
+        $idEntrevista = $this->_getParam('id');
+        
+        $vLinha = $this->modelLinha->selectLinhaHasPesqueiro('lin_id='.$idEntrevista);
+        
+        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
+        $this->view->assign('vLinha', $vLinha);
+        $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -67,13 +77,46 @@ class LinhaController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
         
     }
-     public function criarAction(){
+    
+    public function criarAction(){
+        
         $this->modelLinha->insert($this->_getAllParams());
         $id = $this->modelLinha->selectId();
         $this->_redirector = $this->_helper->getHelper('Redirector');
 
         $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'grosseira', null, array('id' => $value));
+        $this->_redirector->gotoSimple('editar', 'linha', null, array('id' => $value));
+    }
+    
+    public function insertpesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $pesqueiro = $this->_getParam("nomePesqueiro");
+        
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelLinha->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro);
+
+        $this->redirect("/linha/editar/id/" . $backUrl);
+    }
+    public function deletepesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasPesqueiro = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelLinha->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/linha/editar/id/" . $backUrl);
     }
 
 }
