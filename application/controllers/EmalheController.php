@@ -29,8 +29,6 @@ class EmalheController extends Zend_Controller_Action
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
@@ -40,8 +38,6 @@ class EmalheController extends Zend_Controller_Action
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
-        $this->view->assign('pesqueiros',$pesqueiros);
-        $this->view->assign('especies',$especies);
 
     
     }
@@ -51,18 +47,26 @@ class EmalheController extends Zend_Controller_Action
     }
     
     public function editarAction(){
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_EmalheHasPesqueiro();
+        $entrevista = $this->modelEmalhe->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
+        $idEntrevista = $this->_getParam('id');
+        
+        $vEmalhe = $this->modelEmalhe->selectEmalheHasPesqueiro('em_id='.$idEntrevista);
+        
+        $this->view->assign('entrevistaHasPesqueiro', $entrevistaHasPesqueiro);
+        $this->view->assign('vEmalhe', $vEmalhe);
+        $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
     public function criarAction(){
         $this->modelEmalhe->insert($this->_getAllParams());
@@ -71,6 +75,34 @@ class EmalheController extends Zend_Controller_Action
 
         $value = array_shift($id);
         $this->_redirector->gotoSimple('editar', 'emalhe', null, array('id' => $value));
+    }
+    public function insertpesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $pesqueiro = $this->_getParam("nomePesqueiro"); 
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelEmalhe->insertPesqueiro($idEntrevista, $pesqueiro);
+
+        $this->redirect("/emalhe/editar/id/" . $backUrl);
+    }
+    public function deletepesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasPesqueiro = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelEmalhe->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
 
 }

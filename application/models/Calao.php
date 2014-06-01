@@ -116,7 +116,40 @@ class Application_Model_Calao
         
         return $this->dbTableCalao->fetchAll($select)->toArray();
     }
+    public function selectCalaoHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableCalao = new Application_Model_DbTable_VCalaoHasPesqueiro();
+        $select = $this->dbTableCalao->select()
+                ->from($this->dbTableCalao)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableCalao->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro)
+    {
+        $this->dbTableTCalao = new Application_Model_DbTable_CalaoHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'cal_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+        );
+        
+        $this->dbTableTCalao->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTCalao = new Application_Model_DbTable_CalaoHasPesqueiro();       
+                
+        $whereCalaoHasPesqueiro = $this->dbTableTCalao->getAdapter()
+                ->quoteInto('"cal_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTCalao->delete($whereCalaoHasPesqueiro);
+        
+    }
 
 
 }

@@ -29,8 +29,7 @@ class CalaoController extends Zend_Controller_Action
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
+        
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
@@ -50,12 +49,21 @@ class CalaoController extends Zend_Controller_Action
     }
     
     public function editarAction(){
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_CalaoHasPesqueiro();
+        $entrevista = $this->modelCalao->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
+        $idEntrevista = $this->_getParam('id');
+        
+        $vCalao = $this->modelCalao->selectCalaoHasPesqueiro('cal_id='.$idEntrevista);
+        
+        $this->view->assign('entrevistaHasPesqueiro', $entrevistaHasPesqueiro);
+        $this->view->assign('vCalao', $vCalao);
+        $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -70,6 +78,34 @@ class CalaoController extends Zend_Controller_Action
 
         $value = array_shift($id);
         $this->_redirector->gotoSimple('editar', 'calao', null, array('id' => $value));
+    }
+    public function insertpesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $pesqueiro = $this->_getParam("nomePesqueiro"); 
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelCalao->insertPesqueiro($idEntrevista, $pesqueiro);
+
+        $this->redirect("/calao/editar/id/" . $backUrl);
+    }
+    public function deletepesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasPesqueiro = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelCalao->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/calao/editar/id/" . $backUrl);
     }
 }
 

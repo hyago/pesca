@@ -469,6 +469,24 @@ function jsInsertPesqueiro(frm, pag, entrevista) {
         location.replace(tmpUpdate);
 }
 
+function jsInsertPesqueiroWithoutTime(frm, pag, entrevista) {
+
+        var TmpUrl = (entrevista + '#base');
+
+        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+}
+
+function jsInsertPesqueiroWithTimeAndRange(frm, pag, entrevista) {
+
+        var TmpUrl = (entrevista + '#base');
+
+        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/DistAPesqueiro/'+ frm.distAPesqueiro + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+}
+
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
 //function addRowDependente(frm) {

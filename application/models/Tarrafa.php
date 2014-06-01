@@ -116,6 +116,40 @@ class Application_Model_Tarrafa
         
         return $this->dbTableTarrafa->fetchAll($select)->toArray();
     }
+    public function selectTarrafaHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableTarrafa = new Application_Model_DbTable_VTarrafaHasPesqueiro();
+        $select = $this->dbTableTarrafa->select()
+                ->from($this->dbTableTarrafa)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableTarrafa->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro)
+    {
+        $this->dbTableTTarrafa = new Application_Model_DbTable_TarrafaHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'tar_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+        );
+        
+        $this->dbTableTTarrafa->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTTarrafa = new Application_Model_DbTable_TarrafaHasPesqueiro();       
+                
+        $whereTarrafaHasPesqueiro = $this->dbTableTTarrafa->getAdapter()
+                ->quoteInto('"tar_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTTarrafa->delete($whereTarrafaHasPesqueiro);
+        
+    }
 
 
 

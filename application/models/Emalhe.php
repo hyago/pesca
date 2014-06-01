@@ -124,7 +124,40 @@ class Application_Model_Emalhe
         
         return $this->dbTableEmalhe->fetchAll($select)->toArray();
     }
+    public function selectEmalheHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableEmalhe = new Application_Model_DbTable_VEmalheHasPesqueiro();
+        $select = $this->dbTableEmalhe->select()
+                ->from($this->dbTableEmalhe)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableEmalhe->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro)
+    {
+        $this->dbTableTEmalhe = new Application_Model_DbTable_EmalheHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'em_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+        );
+        
+        $this->dbTableTEmalhe->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTEmalhe = new Application_Model_DbTable_EmalheHasPesqueiro();       
+                
+        $whereEmalheHasPesqueiro = $this->dbTableTEmalhe->getAdapter()
+                ->quoteInto('"em_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTEmalhe->delete($whereEmalheHasPesqueiro);
+        
+    }
 
 
 
