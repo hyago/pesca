@@ -48,7 +48,7 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_ArrastoHasPesqueiro();
         $entrevista = $this->modelArrastoFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -56,9 +56,13 @@ class ArrastoFundoController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         
-        
-        $this->view->assign("entrevista", $entrevista);
         $idEntrevista = $this->_getParam('id');
+        
+        $vArrastoFundo = $this->modelArrastoFundo->selectArrastoHasPesqueiro('af_id='.$idEntrevista);
+        
+        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
+        $this->view->assign('vArrastoFundo', $vArrastoFundo);
+        $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -68,6 +72,7 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
     
     public function criarAction(){
+        
         $this->modelArrastoFundo->insert($this->_getAllParams());
         $id = $this->modelArrastoFundo->selectId();
         $this->_redirector = $this->_helper->getHelper('Redirector');
@@ -75,5 +80,37 @@ class ArrastoFundoController extends Zend_Controller_Action
         $value = array_shift($id);
         $this->_redirector->gotoSimple('editar', 'arrasto-fundo', null, array('id' => $value));
     }
+    
+    public function insertpesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $pesqueiro = $this->_getParam("nomePesqueiro");
+        
+        $tempopesqueiro = $this->_getParam("tempoPesqueiro"); 
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelArrastoFundo->insertPesqueiro($idEntrevista, $pesqueiro, $tempopesqueiro);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+    public function deletepesqueiroAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasPesqueiro = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelArrastoFundo->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+    
 }
 

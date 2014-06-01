@@ -3,7 +3,7 @@
 class Application_Model_ArrastoFundo
 {
     private $dbTableArrastoFundo;
-
+    private $dbTableArrastoHasPesqueiro;
     public function select($where = null, $order = null, $limit = null)
     {
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
@@ -120,7 +120,41 @@ class Application_Model_ArrastoFundo
         
         return $this->dbTableArrastoFundo->fetchAll($select)->toArray();
     }
+    public function selectArrastoHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableArrastoHasPesqueiro = new Application_Model_DbTable_VArrastoFundoHasPesqueiro();
+        $select = $this->dbTableArrastoHasPesqueiro->select()
+                ->from($this->dbTableArrastoHasPesqueiro)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
 
+        return $this->dbTableArrastoHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempopesqueiro)
+    {
+        $this->dbTableTArrastoHasPesqueiro = new Application_Model_DbTable_ArrastoHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'af_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempopesqueiro' => $tempopesqueiro
+        );
+        
+        $this->dbTableTArrastoHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTArrastoHasPesqueiro = new Application_Model_DbTable_ArrastoHasPesqueiro();       
+                
+        $whereArrastoHasPesqueiro = $this->dbTableTArrastoHasPesqueiro->getAdapter()
+                ->quoteInto('"af_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTArrastoHasPesqueiro->delete($whereArrastoHasPesqueiro);
+        
+    }
+    
 }
 

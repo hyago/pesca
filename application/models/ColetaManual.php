@@ -58,8 +58,6 @@ private $dbTableColetaManual;
             'sa_id' => $idSubamostra,
             'cml_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
-            'cml_distatepesqueiro' => $request['distanciaPesqueiro'],
-            'cml_tempoatepesqueiro' => $request['tempoPesqueiro'],
             'mre_id' => $request['mare'],
             'cml_mreviva' => $request['mareviva']
         );

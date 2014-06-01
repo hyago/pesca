@@ -1,64 +1,4 @@
 $(document).ready(function() {
-    //funcoes para formulários
-
-    $('input[id*=id_]').attr("disabled", true);
-    $('input[id*=id_]').css("background-color", "#cccccc");
-    $('input[id*=id_]').attr("size", "3px");
-
-
-    $('input[id*=numeric]').attr("size", "3px");
-
-
-    function removeCampo() {
-        $(".removerCampo").unbind("click");
-        $(".removerCampo").bind("click", function() {
-            if ($("tr.linhas").length > 1) {
-                $(this).parent().parent().remove();
-            }
-        });
-    }
-    function removeCampo1() {
-        $(".removerCampo1").unbind("click");
-        $(".removerCampo1").bind("click", function() {
-            if ($("tr.linhas1").length > 1) {
-                $(this).parent().parent().remove();
-            }
-        });
-    }
-    $(".adicionarCampo").click(function() {
-        novoCampo = $("tr.linhas:first").clone();
-        novoCampo.find("input").val("");
-        novoCampo.insertAfter("tr.linhas:last");
-        removeCampo();
-    });
-    $(".adicionarCampo1").click(function() {
-        novoCampo1 = $("tr.linhas1:first").clone();
-        novoCampo1.find("input").val("");
-        novoCampo1.insertAfter("tr.linhas1:last");
-        removeCampo1();
-    });
-
-    //funcoes para formularios
-
-
-    //funcoes para entrevistas
-
-    if ($('select.option').attr("value", "Pesca de Linha")) {
-        $('#novaEntrevista').attr("href", "EntrevistaPescaLinha.html");
-    }
-    else if ($('select.option').attr("value", "Arrasto de Fundo")) {
-        $('#novaEntrevista').attr("href", "EntrevistaArrastoFundo.html");
-    }
-    else if ($('select.option').attr("value", "Pesca de Rede")) {
-        $('#novaEntrevista').attr("href", "EntrevistaPescaRede.html");
-    }
-    else if ($('select.option').attr("value", "Mariscagem")) {
-        $('#novaEntrevista').attr("href", "EntrevistaMariscagem.html");
-    }
-
-    //funcoes para entrevistas
-
-
     //funções para menu-lateral
     if ($("fieldset").attr('id') == "Social") {
         $("#Social").show();
@@ -82,8 +22,6 @@ $(document).ready(function() {
         $("#Social").hide();
     }
 
-
-
     $("#for-Social").click(function() {
         $("#Social").slideToggle();
     });
@@ -95,14 +33,6 @@ $(document).ready(function() {
     });
     //funcoes para menu
 
-    //Entrevistas
-    $(function() {
-        $("#accordion").accordion({
-            heightStyle: "content"
-        });
-        $("#active").accordion("disabled");
-    });
-    //Entrevistas
 
 
 
@@ -521,20 +451,20 @@ function beforeDelete(id)
     }
 }
 
-function jsDeleteMonitoramento(idMnt, frm, pag, fichaId) {
+function jsDeletePesqueiro(fichaId,pag, idEntHasPesqueiro) {
     var TmpUrl = (+fichaId + '#base');
 
-    var tmpUpdate = (pag + '/id/' + idMnt + '/back_url/' + TmpUrl);
+    var tmpUpdate = (pag + '/id/' + idEntHasPesqueiro + '/back_url/' + TmpUrl);
 
     if (confirm("Realmente deseja excluir este item?")) {
         location.replace(tmpUpdate);
     }
 }
-function jsInsertPesqueiro(frm, pag) {
+function jsInsertPesqueiro(frm, pag, entrevista) {
 
-        var TmpUrl = (+frm.id_fichaDiaria.value + '#base');
+        var TmpUrl = (entrevista + '#base');
 
-        var tmpUpdate = (pag + '/SelectArtePesca/' + frm.SelectArtePesca.value + '/SelectMonitorada/' + frm.SelectMonitorada.value + '/QuantidadeEmbarcacoes/' + frm.QuantidadeEmbarcacoes.value + '/id_fichaDiaria/' + frm.id_fichaDiaria.value + '/back_url/' + TmpUrl);
+        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoPesqueiro/' + frm.tempoPesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
 
         location.replace(tmpUpdate);
 }

@@ -66,8 +66,7 @@ private $dbTableGrosseira;
             'grs_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
             'isc_id' => $request['isca'],
-            'grs_numanzoisplinha' => $request['numAnzois'],
-            'grs_tempoatepesqueiro' => $request['tempoaPesqueiro']
+            'grs_numanzoisplinha' => $request['numAnzois']
         );
         
         $this->dbTableGrosseira->insert($dadosGrosseira);

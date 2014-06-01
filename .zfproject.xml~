@@ -120,12 +120,9 @@
           <actionMethod actionName="index"/>
         </controllerFile>
         <controllerFile controllerName="Barcos">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Perfil">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Isca">
+	   <actionMethod actionName="index"/>
+	</controllerFile>        
+	<controllerFile controllerName="Perfil">
           <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
@@ -193,84 +190,6 @@
           <dbTableFile dbTableName="Barcos"/>
           <dbTableFile dbTableName="Pesqueiro"/>
           <dbTableFile dbTableName="Mare"/>
-          <dbTableFile dbTableName="VPescadorHasTipoCapturada"/>
-          <dbTableFile dbTableName="VPescadorHasProgramaSocial"/>
-          <dbTableFile dbTableName="PescadorHasProgramaSocial"/>
-          <dbTableFile dbTableName="PescadorHasComunidade"/>
-          <dbTableFile dbTableName="VPescadorHasComunidade"/>
-          <dbTableFile dbTableName="VPescadorHasPorto"/>
-          <dbTableFile dbTableName="PescadorHasPorto"/>
-          <dbTableFile dbTableName="ArrastoFundo"/>
-          <dbTableFile dbTableName="Calao"/>
-          <dbTableFile dbTableName="Emalhe"/>
-          <dbTableFile dbTableName="Grosseira"/>
-          <dbTableFile dbTableName="Isca"/>
-          <dbTableFile dbTableName="Jerere"/>
-          <dbTableFile dbTableName="Linha"/>
-          <dbTableFile dbTableName="LinhaFundo"/>
-          <dbTableFile dbTableName="Manzua"/>
-          <dbTableFile dbTableName="Mergulho"/>
-          <dbTableFile dbTableName="Ratoeira"/>
-          <dbTableFile dbTableName="Siripoia"/>
-          <dbTableFile dbTableName="Tarrafa"/>
-          <dbTableFile dbTableName="VaraPesca"/>
-          <dbTableFile dbTableName="Subamostra"/>
-          <dbTableFile dbTableName="ColetaManual"/>
-          <dbTableFile dbTableName="VArrastoFundoHasPesqueiro"/>
-          <dbTableFile dbTableName="VCalaoHasPesqueiro"/>
-          <dbTableFile dbTableName="VEmalheHasPesqueiro"/>
-          <dbTableFile dbTableName="VTarrafaHasPesqueiro"/>
-          <dbTableFile dbTableName="VGrosseiraHasPesqueiro"/>
-          <dbTableFile dbTableName="VMergulhoHasPesqueiro"/>
-          <dbTableFile dbTableName="VColetaManualHasPesqueiro"/>
-          <dbTableFile dbTableName="VVaraPescaHasPesqueiro"/>
-          <dbTableFile dbTableName="VLinhaFundoHasPesqueiro"/>
-          <dbTableFile dbTableName="VJerereHasPesqueiro"/>
-          <dbTableFile dbTableName="VSiripoiaHasPesqueiro"/>
-          <dbTableFile dbTableName="VRatoeiraHasPesqueiro"/>
-          <dbTableFile dbTableName="VArrastoFundoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VCalaoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VEmalheHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VTarrafaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VLinhaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VGrosseiraHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VMergulhoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VColetaManualHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VVaraPescaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VLinhaFundoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VJerereHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VSiripoiaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VManzuaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VRatoeiraHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VManzuaHasPesqueiro"/>
-          <dbTableFile dbTableName="ArrastoHasPesqueiro"/>
-          <dbTableFile dbTableName="CalaoHasPesqueiro"/>
-          <dbTableFile dbTableName="ColetaManualHasPesqueiro"/>
-          <dbTableFile dbTableName="EmalheHasPesqueiro"/>
-          <dbTableFile dbTableName="GrosseiraHasPesqueiro"/>
-          <dbTableFile dbTableName="JerereHasPesqueiro"/>
-          <dbTableFile dbTableName="LinhaHasPesqueiro"/>
-          <dbTableFile dbTableName="LinhaFundoHasPesqueiro"/>
-          <dbTableFile dbTableName="ManzuaHasPesqueiro"/>
-          <dbTableFile dbTableName="MergulhoHasPesqueiro"/>
-          <dbTableFile dbTableName="RatoeiraHasPesqueiro"/>
-          <dbTableFile dbTableName="SiripoiaHasPesqueiro"/>
-          <dbTableFile dbTableName="TarrafaHasPesqueiro"/>
-          <dbTableFile dbTableName="VaraPescaHasPesqueiro"/>
-          <dbTableFile dbTableName="ArrastoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="CalaoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="ColetaManualHasEspecieCapturada"/>
-          <dbTableFile dbTableName="EmalheHasEspecieCapturada"/>
-          <dbTableFile dbTableName="GrosseiraHasEspecieCapturada"/>
-          <dbTableFile dbTableName="JerereHasEspecieCapturada"/>
-          <dbTableFile dbTableName="LinhaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="LinhaFundoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="ManzuaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="MergulhoHasEspecieCapturada"/>
-          <dbTableFile dbTableName="RatoeiraHasEspecieCapturada"/>
-          <dbTableFile dbTableName="SiripoiaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="TarrafaHasEspecieCapturada"/>
-          <dbTableFile dbTableName="VaraPescaHasEspecieCapturada"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -313,25 +232,6 @@
         <modelFile modelName="Barcos"/>
         <modelFile modelName="Pesqueiro"/>
         <modelFile modelName="Mare"/>
-        <modelFile modelName="VPescadorHasTipoCapturada"/>
-        <modelFile modelName="VPescadorHasProgramaSocial"/>
-        <modelFile modelName="VPescadorHasComunidade"/>
-        <modelFile modelName="VPescadorHasPorto"/>
-        <modelFile modelName="ArrastoFundo"/>
-        <modelFile modelName="VaraPesca"/>
-        <modelFile modelName="Tarrafa"/>
-        <modelFile modelName="Siripoia"/>
-        <modelFile modelName="Ratoeira"/>
-        <modelFile modelName="Mergulho"/>
-        <modelFile modelName="Manzua"/>
-        <modelFile modelName="LinhaFundo"/>
-        <modelFile modelName="Linha"/>
-        <modelFile modelName="Jerere"/>
-        <modelFile modelName="Emalhe"/>
-        <modelFile modelName="Calao"/>
-        <modelFile modelName="Grosseira"/>
-        <modelFile modelName="Isca"/>
-        <modelFile modelName="ColetaManual"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -503,12 +403,9 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Barcos">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
+		<viewScriptFile forActionName="index"/>
+	  </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Perfil">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Isca">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

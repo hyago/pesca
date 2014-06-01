@@ -66,8 +66,7 @@ private $dbTableLinha;
             'lin_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
             'isc_id' => $request['isca'],
-            'lin_numanzoisplinha' => $request['numAnzois'],
-            'lin_tempoatepesqueiro' => $request['tempoaPesqueiro']
+            'lin_numanzoisplinha' => $request['numAnzois']
         );
         
         $this->dbTableLinha->insert($dadosLinha);
