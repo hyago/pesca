@@ -35,7 +35,14 @@ class SiripoiaController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select();
         $especies = $this->modelEspecie->select();
+        $mare = $this->modelMare->select();
         
+        $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        
+        $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        $this->view->assign('fichaDiaria', $fichadiaria);
+        $this->view->assign('monitoramento', $monitoramento);
+        $this->view->assign('mare', $mare);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -59,7 +66,7 @@ class SiripoiaController extends Zend_Controller_Action
         
         $idEntrevista = $this->_getParam('id');
         
-        $vSiripoia = $this->modelSiripoia->selectSiripoiaHasPesqueiro('jre_id='.$idEntrevista);
+        $vSiripoia = $this->modelSiripoia->selectSiripoiaHasPesqueiro('sir_id='.$idEntrevista);
         
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vSiripoia', $vSiripoia);

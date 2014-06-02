@@ -120,7 +120,42 @@ class Application_Model_Ratoeira
         
         return $this->dbTableRatoeira->fetchAll($select)->toArray();
     }
+    public function selectRatoeiraHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableRatoeiraHasPesqueiro = new Application_Model_DbTable_VRatoeiraHasPesqueiro();
+        $select = $this->dbTableRatoeiraHasPesqueiro->select()
+                ->from($this->dbTableRatoeiraHasPesqueiro)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableRatoeiraHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
+    {
+        $this->dbTableTRatoeiraHasPesqueiro = new Application_Model_DbTable_RatoeiraHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'rat_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro,
+            't_distapesqueiro' => $distAPesqueiro
+        );
+        
+        $this->dbTableTRatoeiraHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTRatoeiraHasPesqueiro = new Application_Model_DbTable_RatoeiraHasPesqueiro();       
+                
+        $whereRatoeiraHasPesqueiro = $this->dbTableTRatoeiraHasPesqueiro->getAdapter()
+                ->quoteInto('"rat_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTRatoeiraHasPesqueiro->delete($whereRatoeiraHasPesqueiro);
+        
+    }
 
 
 }

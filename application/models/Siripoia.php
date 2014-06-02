@@ -56,7 +56,7 @@ class Application_Model_Siripoia
             'sir_avistamento' => $request['avistamento'],
             'sir_subamostra' => $request['subamostra'],
             'sir_obs' => $request['observacao'],
-            'sa_id' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'sir_numarmadilhas' => $request['numArmadilhas'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],

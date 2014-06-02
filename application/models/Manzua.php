@@ -120,6 +120,42 @@ class Application_Model_Manzua
         
         return $this->dbTableManzua->fetchAll($select)->toArray();
     }
+    public function selectManzuaHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableManzuaHasPesqueiro = new Application_Model_DbTable_VManzuaHasPesqueiro();
+        $select = $this->dbTableManzuaHasPesqueiro->select()
+                ->from($this->dbTableManzuaHasPesqueiro)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableManzuaHasPesqueiro->fetchAll($select)->toArray();
+    }
+    public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
+    {
+        $this->dbTableTManzuaHasPesqueiro = new Application_Model_DbTable_ManzuaHasPesqueiro();
+        
+        
+        $dadosPesqueiro = array(
+            'man_id' => $idEntrevista,
+            'paf_id' => $pesqueiro,
+            't_tempoapesqueiro' => $tempoAPesqueiro,
+            't_distapesqueiro' => $distAPesqueiro
+        );
+        
+        $this->dbTableTManzuaHasPesqueiro->insert($dadosPesqueiro);
+        return;
+    }
+    public function deletePesqueiro($idPesqueiro){
+        $this->dbTableTManzuaHasPesqueiro = new Application_Model_DbTable_ManzuaHasPesqueiro();       
+                
+        $whereManzuaHasPesqueiro = $this->dbTableTManzuaHasPesqueiro->getAdapter()
+                ->quoteInto('"man_paf_id" = ?', $idPesqueiro);
+        
+        $this->dbTableTManzuaHasPesqueiro->delete($whereManzuaHasPesqueiro);
+        
+    }
 
 
 
