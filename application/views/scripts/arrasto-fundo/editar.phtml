@@ -149,7 +149,7 @@
 
     <fieldset class="noEditable"><legend>Pesqueiro:</legend>
         <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
-            <div id="base">
+            <div id="base_espc">
                 <input onclick="jsInsertPesqueiro(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
                 <select style="float:left;" name="nomePesqueiro">
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
@@ -186,7 +186,7 @@
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
             <div id="base">
-                <input onclick="jsInsertMonitoramento(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "insertmonitoramento"), null, true) ?>')" type="button" value="Add row" />
+                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
                 <select style="float:left;" name="SelectEspecie">
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
@@ -196,39 +196,36 @@
                 <input style="float:left;" type="text" name="peso" placeholder="Peso" size="10px">
                 <input style="float:left;" type="text" name="precokg" placeholder="Preço" size="10px">
 
-                <input type="hidden" name="id_entrevista"  value="<?= a//$this->fichadiaria['fd_id']   ?>"/>
+                <input type="hidden" name="id_entrevista"  value="<?= $this->entrevista['af_id'] ?>"/>
 
             </div>
 
         </fieldset>
         <br>
-        <fieldset class="noEditable" id="itemArteTipoRows"><legend>Monitoramentos:</legend>
-            <table id="especiesCapturadas">
-                <tr>
-                    <th width="20%">Id Entrevista</th>
-                    <th width="30%">Espécie Capturada</th>
-                    <th width="20%">Quantidade</th>
-                    <th width="20%">Peso (kg)</th>
-                    <th width="20%">Preço por kg</th>
-                </tr>
-                <?php
-                foreach ($this->vMonitoramento as $key => $vMonitoramento):
-                    if ($vMonitoramento['mnt_monitorado'] == 1) {
-                        $vMonitoramento['mnt_monitorado'] = "Sim";
-                    } else {
-                        $vMonitoramento['mnt_monitorado'] = "Não";
-                    }
-                    ?>
-                    <tr id="itemEmbarcacoesRows<?= $key ?>">
-                        <td name="inputIdMonitoramento"> <?= $vMonitoramento['mnt_id'] ?> </td>
-                        <td name="inputMonitorada" > <?= $vMonitoramento['mnt_monitorado'] ?> </td>
-                        <td name="inputArtedePesca"> <?= $vMonitoramento['tap_artepesca'] ?> </td>>
-                        <td><input type="button" class="button-del" width="5%" onclick="jsDeleteMonitoramento(<?= $vMonitoramento['mnt_id'] ?>, this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "deletmonitoramento"), null, true) ?>', <?= $vMonitoramento['fd_id'] ?>)"></td>
-                        <td><input type="button" width="10%" target="_blank" value ="Nova Entrevista" onclick="jsEntrevista('<?= $vMonitoramento['tap_artepesca'] ?>', <?= $vMonitoramento['mnt_id'] ?>, <?= $vMonitoramento['fd_id'] ?>)"></td>
+         <fieldset class="noEditable" id="itemArteTipoRows"><legend>Espécies Capturadas:</legend>
+                <table id="especiesCapturadas">
+                    <tr>
+                        <th width="20%">Id Entrevista</th>
+                        <th width="30%">Espécie Capturada</th>
+                        <th width="20%">Quantidade</th>
+                        <th width="20%">Peso (kg)</th>
+                        <th width="20%">Preço por kg</th>
                     </tr>
-                <?php endforeach; ?>
-            </table>
-        </fieldset>
+                    <?php
+                    foreach ($this->vEspecieCapturadas as $key => $vEspecieCapturada):
+                        ?>
+                        <tr id="itemEmbarcacoesRows">
+                            <td name="inputEntrevista"> <?= $vEspecieCapturada['af_id'] ?> </td>
+                            <td name="inputEspecie" > <?= $vEspecieCapturada['esp_nome_comum'] ?> </td>
+                            <td name="inputQuantidade"> <?= $vEspecieCapturada['spc_quantidade'] ?> </td>
+                            <td name="inputPeso"> <?= $vEspecieCapturada['spc_peso_kg'] ?> </td>
+                            <td name="inputPreco"> <?= $vEspecieCapturada['spc_preco'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteEspecie(<?= $vEspecieCapturada['spc_id'] ?>, this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['af_id'] ?>)"></td>
+                            
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </fieldset>
     </fieldset>
 </form>        
 </div>      

@@ -4,6 +4,7 @@ class Application_Model_ArrastoFundo
 {
     private $dbTableArrastoFundo;
     private $dbTableArrastoHasPesqueiro;
+    private $dbTableArrastoHasEspCapturada;
     public function select($where = null, $order = null, $limit = null)
     {
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
@@ -155,6 +156,41 @@ class Application_Model_ArrastoFundo
         $this->dbTableTArrastoHasPesqueiro->delete($whereArrastoHasPesqueiro);
         
     }
-    
+    public function selectArrastoHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableArrastoHasEspCapturada = new Application_Model_DbTable_VArrastoFundoHasEspecieCapturada();
+        
+        $select = $this->dbTableArrastoHasEspCapturada->select()
+                ->from($this->dbTableArrastoHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableArrastoHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTArrastoHasEspCapturada = new Application_Model_DbTable_ArrastoHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'af_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTArrastoHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTArrastoHasEspCapturada = new Application_Model_DbTable_ArrastoHasEspecieCapturada();       
+                
+        $whereArrastoHasEspCapturada = $this->dbTableTArrastoHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTArrastoHasEspCapturada->delete($whereArrastoHasEspCapturada);
+    }
 }
 

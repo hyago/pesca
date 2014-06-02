@@ -499,6 +499,16 @@ function jsInsertPesqueiroWithTimeAndRange(frm, pag, entrevista) {
         location.replace(tmpUpdate);
 }
 
+function jsInsertEspecieCapturada(frm, pag, entrevista){
+    
+    var TmpUrl  = (entrevista+ '#base_espc');
+    
+    var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
 //function addRowDependente(frm) {

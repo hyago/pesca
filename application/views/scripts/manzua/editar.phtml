@@ -193,7 +193,7 @@
         <fieldset class="noEditable"><legend>Espécies Capturadas:</legend>
             <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
-                <div id="base">
+                <div id="base_espc">
                     <input onclick="jsInsertMonitoramento(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "insertmonitoramento"), null, true) ?>')" type="button" value="Add row" />
                     <select style="float:left;" name="SelectEspecie">
                         <?php foreach ($this->especies as $key => $especie): ?>
@@ -210,7 +210,7 @@
 
             </fieldset>
             <br>
-            <fieldset class="noEditable" id="itemArteTipoRows"><legend>Monitoramentos:</legend>
+            <fieldset class="noEditable" id="itemArteTipoRows"><legend>Espécies Capturadas:</legend>
                 <table id="especiesCapturadas">
                     <tr>
                         <th width="20%">Id Entrevista</th>
@@ -220,19 +220,16 @@
                         <th width="20%">Preço por kg</th>
                     </tr>
                     <?php
-                    foreach ($this->vMonitoramento as $key => $vMonitoramento):
-                        if ($vMonitoramento['mnt_monitorado'] == 1) {
-                            $vMonitoramento['mnt_monitorado'] = "Sim";
-                        } else {
-                            $vMonitoramento['mnt_monitorado'] = "Não";
-                        }
+                    foreach ($this->vEspecieCapturadas as $key => $vEspecieCapturada):
                         ?>
-                        <tr id="itemEmbarcacoesRows<?= $key ?>">
-                            <td name="inputIdMonitoramento"> <?= $vMonitoramento['mnt_id'] ?> </td>
-                            <td name="inputMonitorada" > <?= $vMonitoramento['mnt_monitorado'] ?> </td>
-                            <td name="inputArtedePesca"> <?= $vMonitoramento['tap_artepesca'] ?> </td>>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteMonitoramento(<?= $vMonitoramento['mnt_id'] ?>, this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "deletmonitoramento"), null, true) ?>', <?= $vMonitoramento['fd_id'] ?>)"></td>
-                            <td><input type="button" width="10%" target="_blank" value ="Nova Entrevista" onclick="jsEntrevista('<?= $vMonitoramento['tap_artepesca'] ?>', <?= $vMonitoramento['mnt_id'] ?>, <?= $vMonitoramento['fd_id'] ?>)"></td>
+                        <tr id="itemEmbarcacoesRows">
+                            <td name="inputEntrevista"> <?= $vEspecieCapturada['af_id'] ?> </td>
+                            <td name="inputEspecie" > <?= $vEspecieCapturada['esp_nome_comum'] ?> </td>
+                            <td name="inputQuantidade"> <?= $vEspecieCapturada['spc_quantidade'] ?> </td>
+                            <td name="inputPeso"> <?= $vEspecieCapturada['spc_peso_kg'] ?> </td>
+                            <td name="inputPreco"> <?= $vEspecieCapturada['spc_preco'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteEspecie(<?= $vEspecieCapturada['spc_id'] ?>, this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['af_id'] ?>)"></td>
+                            
                         </tr>
                     <?php endforeach; ?>
                 </table>

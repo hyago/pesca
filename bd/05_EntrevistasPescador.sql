@@ -1,3 +1,17 @@
+Drop view v_arrasto;
+Drop view v_varapesca;
+Drop view v_tarrafa;
+Drop view v_siripoia;
+Drop view v_ratoeira;
+Drop view v_mergulho;
+Drop view v_manzua;
+Drop view v_linhafundo;
+Drop view v_linha;
+Drop view v_jerere;
+Drop view v_grosseira;
+Drop view v_coletamanual;
+Drop view v_emalhe;
+Drop view v_calao;
 
 Drop view v_arrasto_has_t_pesqueiro;
 Drop view v_varapesca_has_t_pesqueiro;
@@ -28,6 +42,36 @@ Drop Table t_siripoia_has_t_pesqueiro;
 Drop Table t_tarrafa_has_t_pesqueiro;
 Drop Table t_varapesca_has_t_pesqueiro;
 Drop Table t_arrastofundo_has_t_pesqueiro;
+
+Drop view v_arrastofundo_has_t_especie_capturada;
+Drop view v_varapesca_has_t_especie_capturada;
+Drop view v_tarrafa_has_t_especie_capturada;
+Drop view v_siripoia_has_t_especie_capturada;
+Drop view v_ratoeira_has_t_especie_capturada;
+Drop view v_mergulho_has_t_especie_capturada;
+Drop view v_manzua_has_t_especie_capturada;
+Drop view v_linhafundo_has_t_especie_capturada;
+Drop view v_linha_has_t_especie_capturada;
+Drop view v_jerere_has_t_especie_capturada;
+Drop view v_grosseira_has_t_especie_capturada;
+Drop view v_coletamanual_has_t_especie_capturada;
+Drop view v_emalhe_has_t_especie_capturada;
+Drop view v_calao_has_t_especie_capturada;
+
+Drop Table t_calao_has_t_especie_capturada;
+Drop Table t_emalhe_has_t_especie_capturada;
+Drop Table t_coletamanual_has_t_especie_capturada;
+Drop Table t_grosseira_has_t_especie_capturada;
+Drop Table t_jerere_has_t_especie_capturada;
+Drop Table t_linha_has_t_especie_capturada;
+Drop Table t_linhafundo_has_t_especie_capturada;
+Drop Table t_manzua_has_t_especie_capturada;
+Drop Table t_mergulho_has_t_especie_capturada;
+Drop Table t_ratoeira_has_t_especie_capturada;
+Drop Table t_siripoia_has_t_especie_capturada;
+Drop Table t_tarrafa_has_t_especie_capturada;
+Drop Table t_varapesca_has_t_especie_capturada;
+Drop Table t_arrastofundo_has_t_especie_capturada;
 
 -- Table: t_barco
 
@@ -127,29 +171,6 @@ CREATE TABLE t_arrastofundo
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_arrastofundo_has_t_especie_capturada
-
-DROP TABLE t_arrastofundo_has_t_especie_capturada;
-
-CREATE TABLE t_arrastofundo_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  af_id integer NOT NULL,
-  CONSTRAINT t_arrastofundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_arrastofundo1 FOREIGN KEY (af_id)
-      REFERENCES t_arrastofundo (af_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
-
 
 -- Table: t_calao
 
@@ -191,29 +212,7 @@ CREATE TABLE t_calao
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_calao_has_t_especie_capturada
 
-DROP TABLE t_calao_has_t_especie_capturada;
-
-CREATE TABLE t_calao_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  cal_id integer NOT NULL,
-  CONSTRAINT t_calao_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_calao1 FOREIGN KEY (cal_id)
-      REFERENCES t_calao (cal_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
--- Table: t_coletamanual
 
 DROP TABLE t_coletamanual;
 
@@ -259,25 +258,9 @@ CREATE TABLE t_coletamanual
 );
 -- Table: t_coletamanual_has_t_especie_capturada
 
-DROP TABLE t_coletamanual_has_t_especie_capturada;
 
-CREATE TABLE t_coletamanual_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  cml_id integer NOT NULL,
-  CONSTRAINT t_coletamanual_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_coletamanual1 FOREIGN KEY (cml_id)
-      REFERENCES t_coletamanual (cml_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
+
+
 
 -- Table: t_emalhe
 
@@ -325,25 +308,6 @@ CREATE TABLE t_emalhe
 );
 -- Table: t_emalhe_has_t_especie_capturada
 
-DROP TABLE t_emalhe_has_t_especie_capturada;
-
-CREATE TABLE t_emalhe_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  em_id integer NOT NULL,
-  CONSTRAINT t_emalhe_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_emalhe1 FOREIGN KEY (em_id)
-      REFERENCES t_emalhe (em_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
 
 -- Table: t_grosseira
 
@@ -394,25 +358,6 @@ CREATE TABLE t_grosseira
 );
 -- Table: t_grosseira_has_t_especie_capturada
 
-DROP TABLE t_grosseira_has_t_especie_capturada;
-
-CREATE TABLE t_grosseira_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  grs_id integer NOT NULL,
-  CONSTRAINT t_grosseira_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_grosseira1 FOREIGN KEY (grs_id)
-      REFERENCES t_grosseira (grs_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
 
 -- Table: t_jerere
 
@@ -459,25 +404,7 @@ CREATE TABLE t_jerere
 );
 -- Table: t_jerere_has_t_especie_capturada
 
-DROP TABLE t_jerere_has_t_especie_capturada;
 
-CREATE TABLE t_jerere_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  jre_id integer NOT NULL,
-  CONSTRAINT t_jerere_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_jerere1 FOREIGN KEY (jre_id)
-      REFERENCES t_jerere (jre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
 
 -- Table: t_linha
 
@@ -526,25 +453,7 @@ CREATE TABLE t_linha
 );
 -- Table: t_linha_has_t_especie_capturada
 
-DROP TABLE t_linha_has_t_especie_capturada;
 
-CREATE TABLE t_linha_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  lin_id integer NOT NULL,
-  CONSTRAINT t_linha_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_calao1 FOREIGN KEY (lin_id)
-      REFERENCES t_linha (lin_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
 
 -- Table: t_linhafundo
 
@@ -598,31 +507,6 @@ CREATE TABLE t_linhafundo
       REFERENCES t_mare (mre_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_linhafundo_has_t_especie_capturada
-
-DROP TABLE t_linhafundo_has_t_especie_capturada;
-
-CREATE TABLE t_linhafundo_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  lf_id integer NOT NULL,
-  CONSTRAINT t_linhafundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_linhafundo1 FOREIGN KEY (lf_id)
-      REFERENCES t_linhafundo (lf_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
--- Table: t_manzua
-
-DROP TABLE t_manzua;
 
 CREATE TABLE t_manzua
 (
@@ -663,31 +547,7 @@ CREATE TABLE t_manzua
       REFERENCES t_mare (mre_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_manzua_has_t_especie_capturada
 
-DROP TABLE t_manzua_has_t_especie_capturada;
-
-CREATE TABLE t_manzua_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  man_id integer NOT NULL,
-  CONSTRAINT t_manzua_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_manzua1 FOREIGN KEY (man_id)
-      REFERENCES t_manzua (man_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
--- Table: t_mergulho
-
-DROP TABLE t_mergulho;
 
 CREATE TABLE t_mergulho
 (
@@ -729,31 +589,7 @@ CREATE TABLE t_mergulho
       REFERENCES t_mare (mre_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_mergulho_has_t_especie_capturada
 
-DROP TABLE t_mergulho_has_t_especie_capturada;
-
-CREATE TABLE t_mergulho_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  mer_id integer NOT NULL,
-  CONSTRAINT t_mergulho_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_mergulho1 FOREIGN KEY (mer_id)
-      REFERENCES t_mergulho (mer_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
--- Table: t_ratoeira
-
-DROP TABLE t_ratoeira;
 
 CREATE TABLE t_ratoeira
 (
@@ -794,30 +630,7 @@ CREATE TABLE t_ratoeira
       REFERENCES t_mare (mre_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_ratoeira_has_t_especie_capturada
 
-DROP TABLE t_ratoeira_has_t_especie_capturada;
-
-CREATE TABLE t_ratoeira_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  rat_id integer NOT NULL,
-  CONSTRAINT t_ratoeira_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_ratoeira1 FOREIGN KEY (rat_id)
-      REFERENCES t_ratoeira (rat_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
--- Table: t_siripoia
-
-DROP TABLE t_siripoia;
 
 CREATE TABLE t_siripoia
 (
@@ -858,30 +671,7 @@ CREATE TABLE t_siripoia
       REFERENCES t_mare (mre_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_siripoia_has_t_especie_capturada
 
-DROP TABLE t_siripoia_has_t_especie_capturada;
-
-CREATE TABLE t_siripoia_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  sir_id integer NOT NULL,
-  CONSTRAINT t_siripoia_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_siripoia1 FOREIGN KEY (sir_id)
-      REFERENCES t_siripoia (sir_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
--- Table: t_tarrafa
-
-DROP TABLE t_tarrafa;
 
 CREATE TABLE t_tarrafa
 (
@@ -919,31 +709,7 @@ CREATE TABLE t_tarrafa
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_tarrafa_has_t_especie_capturada
 
-DROP TABLE t_tarrafa_has_t_especie_capturada;
-
-CREATE TABLE t_tarrafa_has_t_especie_capturada
-(
-  spc_id serial NOT NULL,
-  spc_nome character varying(45),
-  spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
-  esp_id integer NOT NULL,
-  tar_id integer NOT NULL,
-  CONSTRAINT t_tarrafa_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
-  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_especie_capturada_t_calao1 FOREIGN KEY (tar_id)
-      REFERENCES t_tarrafa (tar_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
--- Table: t_varapesca
-
-DROP TABLE t_varapesca;
 
 CREATE TABLE t_varapesca
 (
@@ -993,17 +759,252 @@ CREATE TABLE t_varapesca
       REFERENCES t_mare (mre_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
--- Table: t_varapesca_has_t_especie_capturada
 
-DROP TABLE t_varapesca_has_t_especie_capturada;
+
+
+CREATE TABLE t_arrastofundo_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  af_id integer NOT NULL,
+  CONSTRAINT t_arrastofundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_arrastofundo1 FOREIGN KEY (af_id)
+      REFERENCES t_arrastofundo (af_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_calao_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  cal_id integer NOT NULL,
+  CONSTRAINT t_calao_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_calao1 FOREIGN KEY (cal_id)
+      REFERENCES t_calao (cal_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_coletamanual_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  cml_id integer NOT NULL,
+  CONSTRAINT t_coletamanual_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_coletamanual1 FOREIGN KEY (cml_id)
+      REFERENCES t_coletamanual (cml_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+
+CREATE TABLE t_emalhe_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  em_id integer NOT NULL,
+  CONSTRAINT t_emalhe_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_emalhe1 FOREIGN KEY (em_id)
+      REFERENCES t_emalhe (em_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_grosseira_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  grs_id integer NOT NULL,
+  CONSTRAINT t_grosseira_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_grosseira1 FOREIGN KEY (grs_id)
+      REFERENCES t_grosseira (grs_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+
+CREATE TABLE t_jerere_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  jre_id integer NOT NULL,
+  CONSTRAINT t_jerere_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_jerere1 FOREIGN KEY (jre_id)
+      REFERENCES t_jerere (jre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_linha_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  lin_id integer NOT NULL,
+  CONSTRAINT t_linha_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_calao1 FOREIGN KEY (lin_id)
+      REFERENCES t_linha (lin_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_linhafundo_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  lf_id integer NOT NULL,
+  CONSTRAINT t_linhafundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_linhafundo1 FOREIGN KEY (lf_id)
+      REFERENCES t_linhafundo (lf_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_manzua_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  man_id integer NOT NULL,
+  CONSTRAINT t_manzua_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_manzua1 FOREIGN KEY (man_id)
+      REFERENCES t_manzua (man_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_mergulho_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  mer_id integer NOT NULL,
+  CONSTRAINT t_mergulho_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_mergulho1 FOREIGN KEY (mer_id)
+      REFERENCES t_mergulho (mer_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_ratoeira_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  rat_id integer NOT NULL,
+  CONSTRAINT t_ratoeira_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_ratoeira1 FOREIGN KEY (rat_id)
+      REFERENCES t_ratoeira (rat_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_siripoia_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  sir_id integer NOT NULL,
+  CONSTRAINT t_siripoia_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_siripoia1 FOREIGN KEY (sir_id)
+      REFERENCES t_siripoia (sir_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_tarrafa_has_t_especie_capturada
+(
+  spc_id serial NOT NULL,
+  
+  spc_quantidade integer,
+  spc_peso_kg float,
+  spc_preco float,
+  esp_id integer NOT NULL,
+  tar_id integer NOT NULL,
+  CONSTRAINT t_tarrafa_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_especie_capturada_t_calao1 FOREIGN KEY (tar_id)
+      REFERENCES t_tarrafa (tar_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
 
 CREATE TABLE t_varapesca_has_t_especie_capturada
 (
   spc_id serial NOT NULL,
-  spc_nome character varying(45),
+  
   spc_quantidade integer,
-  spc_peso_kg integer,
-  spc_preco numeric(5,0),
+  spc_peso_kg float,
+  spc_preco float,
   esp_id integer NOT NULL,
   vp_id integer NOT NULL,
   CONSTRAINT t_varapesca_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
@@ -1014,7 +1015,6 @@ CREATE TABLE t_varapesca_has_t_especie_capturada
       REFERENCES t_varapesca (vp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-
 
 
 CREATE TABLE t_arrastofundo_has_t_pesqueiro
@@ -1219,6 +1219,9 @@ CREATE TABLE t_varapesca_has_t_pesqueiro
       REFERENCES t_varapesca (vp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+
+
 
 CREATE VIEW V_ARRASTO_HAS_T_PESQUEIRO AS
 SELECT ENTREVISTA.AF_ID, PESQUEIRO.PAF_PESQUEIRO, ENTPESQ.T_TEMPOPESQUEIRO, ENTPESQ.AF_PAF_ID
