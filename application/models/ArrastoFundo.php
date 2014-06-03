@@ -47,8 +47,10 @@ class Application_Model_ArrastoFundo
         else {
             $idSubamostra = null;
         }
+        
         $dadosArrastoFundo = array(
             'af_embarcado' => $request['embarcada'],
+            'af_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -80,6 +82,7 @@ class Application_Model_ArrastoFundo
         
         $dadosArrastoFundo = array(
             'af_embarcado' => $request['embarcada'],
+            'af_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -92,8 +95,9 @@ class Application_Model_ArrastoFundo
             'af_gelo' => $request['gelo'],
             'af_avistou' => $request['avistamento'],
             'af_subamostra' => $request['subamostra'],
-            'af_obs' => $request['observacao']
-            
+            'sa_id' => $idSubamostra,
+            'af_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento']
         );
  
         

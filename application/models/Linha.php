@@ -50,6 +50,7 @@ private $dbTableLinha;
         $dadosLinha = array(
             'lin_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
+            'lin_motor'=> $request['motor'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'lin_numpescadores' => $request['numPescadores'],
@@ -82,20 +83,26 @@ private $dbTableLinha;
         
         
         $dadosLinha = array(
-            'lin_embarcado' => $request['embarcada'],
+            'lin_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
+            'lin_motor'=> $request['motor'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
-            'lin_quantpescadores' => $request['numPescadores'],
+            'lin_numpescadores' => $request['numPescadores'],
+            'lin_dhsaida' => $timestampSaida,
             'lin_dhvolta' => $timestampVolta,
-            'lin_dhsaida' => $timestampSaida, 
-            'lin_diesel' => $request['diesel'],
+            'lin_diesel' => $request['diesel'], 
             'lin_oleo' => $request['oleo'],
             'lin_alimento' => $request['alimento'],
             'lin_gelo' => $request['gelo'],
+            'lin_numlinhas' => $request['numLinhas'],
             'lin_avistou' => $request['avistamento'],
             'lin_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'lin_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento'],
+            'isc_id' => $request['isca'],
+            'lin_numanzoisplinha' => $request['numAnzois']
         );
  
         

@@ -47,6 +47,7 @@ class Application_Model_Manzua
         
         $dadosManzua = array(
             'man_embarcada' => $request['embarcada'],
+            'man_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -78,6 +79,7 @@ class Application_Model_Manzua
         
         $dadosManzua = array(
             'man_embarcada' => $request['embarcada'],
+            'man_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],

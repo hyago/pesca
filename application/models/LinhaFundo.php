@@ -46,6 +46,7 @@ class Application_Model_LinhaFundo
         
         $dadosLinhaFundo = array(
             'lf_embarcada' => $request['embarcada'],
+            'lf_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -83,6 +84,7 @@ class Application_Model_LinhaFundo
         
         $dadosLinhaFundo = array(
             'lf_embarcada' => $request['embarcada'],
+            'lf_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -97,7 +99,7 @@ class Application_Model_LinhaFundo
             'lf_avistamento' => $request['avistamento'],
             'lf_subamostra' => $request['subamostra'],
             'lf_obs' => $request['observacao'],
-            'sa_id' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'lf_numanzoisplinha' => $request['numAnzois'],
             'lf_numlinhas' => $request['numLinhas'],
             'isc_id' => $request['isca'],

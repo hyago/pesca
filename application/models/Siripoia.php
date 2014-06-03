@@ -46,6 +46,7 @@ class Application_Model_Siripoia
         
         $dadosSiripoia = array(
             'sir_embarcada' => $request['embarcada'],
+            'sir_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -77,6 +78,7 @@ class Application_Model_Siripoia
         
         $dadosSiripoia = array(
             'sir_embarcada' => $request['embarcada'],
+            'sir_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -87,7 +89,7 @@ class Application_Model_Siripoia
             'sir_avistamento' => $request['avistamento'],
             'sir_subamostra' => $request['subamostra'],
             'sir_obs' => $request['observacao'],
-            'sa_id' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'sir_numarmadilhas' => $request['numArmadilhas'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],

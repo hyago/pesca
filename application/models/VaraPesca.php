@@ -47,6 +47,7 @@ class Application_Model_VaraPesca
         
         $dadosVaraPesca = array(
             'vp_embarcada' => $request['embarcada'],
+            'vp_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -84,6 +85,7 @@ class Application_Model_VaraPesca
         
         $dadosVaraPesca = array(
             'vp_embarcada' => $request['embarcada'],
+            'vp_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -98,7 +100,7 @@ class Application_Model_VaraPesca
             'vp_avistamento' => $request['avistamento'],
             'vp_subamostra' => $request['subamostra'],
             'vp_obs' => $request['observacao'],
-            'sa_id' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'vp_numanzoisplinha' => $request['numAnzois'],
             'vp_numlinhas' => $request['numLinhas'],
             'isc_id' => $request['isca'],

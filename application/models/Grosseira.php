@@ -50,6 +50,7 @@ private $dbTableGrosseira;
         $dadosGrosseira = array(
             'grs_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
+            'grs_motor'=> $request['motor'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'grs_numpescadores' => $request['numPescadores'],
@@ -82,20 +83,26 @@ private $dbTableGrosseira;
         
         
         $dadosGrosseira = array(
-            'grs_embarcado' => $request['embarcada'],
+            'grs_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
+            'grs_motor'=> $request['motor'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
-            'grs_quantpescadores' => $request['numPescadores'],
+            'grs_numpescadores' => $request['numPescadores'],
+            'grs_dhsaida' => $timestampSaida,
             'grs_dhvolta' => $timestampVolta,
-            'grs_dhsaida' => $timestampSaida, 
-            'grs_diesel' => $request['diesel'],
+            'grs_diesel' => $request['diesel'], 
             'grs_oleo' => $request['oleo'],
             'grs_alimento' => $request['alimento'],
             'grs_gelo' => $request['gelo'],
+            'grs_numlinhas' => $request['numLinhas'],
             'grs_avistou' => $request['avistamento'],
             'grs_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'grs_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento'],
+            'isc_id' => $request['isca'],
+            'grs_numanzoisplinha' => $request['numAnzois']
         );
  
         

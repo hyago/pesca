@@ -45,6 +45,7 @@ class Application_Model_Tarrafa
         }
         $dadosTarrafa = array(
             'tar_embarcado' => $request['embarcada'],
+            'tar_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -76,19 +77,22 @@ class Application_Model_Tarrafa
         
         $dadosTarrafa = array(
             'tar_embarcado' => $request['embarcada'],
+            'tar_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'tar_quantpescadores' => $request['numPescadores'],
-            'tar_dhvolta' => $timestampVolta,
-            'tar_dhsaida' => $timestampSaida, 
-            'tar_diesel' => $request['diesel'],
-            'tar_oleo' => $request['oleo'],
-            'tar_alimento' => $request['alimento'],
-            'tar_gelo' => $request['gelo'],
+            'tar_data' => $request['data'],
+            'tar_tempogasto' => $request['tempoGasto'], 
+            'tar_roda' => $request['roda'],
+            'tar_altura' => $request['altura'],
+            'tar_malha' => $request['malha'],
+            'tar_numlances' => $request['numLances'],
             'tar_avistou' => $request['avistamento'],
             'tar_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'tar_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento']
         );
  
         

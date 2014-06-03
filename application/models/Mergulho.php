@@ -53,6 +53,7 @@ private $dbTableMergulho;
         
         $dadosMergulho = array(
             'mer_embarcada' => $request['embarcada'],
+            'mer_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -85,6 +86,7 @@ private $dbTableMergulho;
         
         $dadosMergulho = array(
             'mer_embarcada' => $request['embarcada'],
+            'mer_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
@@ -97,9 +99,10 @@ private $dbTableMergulho;
             'sa_id' => $idSubamostra,
             'mer_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
-            'mer_distatepesqueiro' => $request['distanciaPesqueiro'],
+            'mer_distapesqueiro' => $request['distanciaPesqueiro'],
             'mer_tempoatepesqueiro' => $request['tempoPesqueiro'],
-            'mre_id' => $idMare
+            'mre_id' => $request['mare'],
+            'mer_mreviva' => $request['mareviva']
         );
  
         

@@ -45,6 +45,7 @@ class Application_Model_Calao
         }
         $dadosCalao = array(
             'cal_embarcada' => $request['embarcada'],
+            'cal_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['PescadorEntrevistado'],
@@ -75,20 +76,23 @@ class Application_Model_Calao
         
         
         $dadosCalao = array(
-            'cal_embarcado' => $request['embarcada'],
+            'cal_embarcada' => $request['embarcada'],
+            'cal_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],
-            'tp_id_entrevistado' => $request['pescadorEntrevistado'],
-            'cal_quantpescadores' => $request['numPescadores'],
-            'cal_dhvolta' => $timestampVolta,
-            'cal_dhsaida' => $timestampSaida, 
-            'cal_diesel' => $request['diesel'],
-            'cal_oleo' => $request['oleo'],
-            'cal_alimento' => $request['alimento'],
-            'cal_gelo' => $request['gelo'],
+            'tp_id_entrevistado' => $request['PescadorEntrevistado'],
+            'cal_quantpescadores' => $request['NumPescadores'],
+            'cal_data' => $request['data'],
+            'cal_tempogasto' => $request['tempoGasto'], 
+            'cal_tamanho' => $request['tamanho'],
+            'cal_altura' => $request['altura'],
+            'cal_malha' => $request['malha'],
+            'cal_numlances' => $request['numLances'],
             'cal_avistou' => $request['avistamento'],
             'cal_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'cal_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento']
         );
  
         

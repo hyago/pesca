@@ -50,6 +50,7 @@ class Application_Model_Emalhe
         $dadosEmalhe = array(
             'em_embarcado' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
+            'em_motor'=> $request['motor'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'em_quantpescadores' => $request['numPescadores'],
@@ -83,20 +84,27 @@ class Application_Model_Emalhe
         
         
         $dadosEmalhe = array(
-            'cal_embarcado' => $request['embarcada'],
+            'em_embarcado' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
+            'em_motor'=> $request['motor'],
             'tte_id' => $request['tipoBarco'],
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
-            'cal_quantpescadores' => $request['numPescadores'],
-            'cal_dhvolta' => $timestampVolta,
-            'cal_dhsaida' => $timestampSaida, 
-            'cal_diesel' => $request['diesel'],
-            'cal_oleo' => $request['oleo'],
-            'cal_alimento' => $request['alimento'],
-            'cal_gelo' => $request['gelo'],
-            'cal_avistou' => $request['avistamento'],
-            'cal_subamostra' => $request['subamostra'],
-            'cal_obs' => $request['observacao'],
+            'em_quantpescadores' => $request['numPescadores'],
+            'em_dhlancamento' => $timestampLancamento, 
+            'em_dhrecolhimento' => $timestampRecolhimento,
+            'em_diesel' => $request['diesel'],
+            'em_oleo' => $request['oleo'],
+            'em_alimento' => $request['alimento'],
+            'em_gelo' => $request['gelo'],
+            'em_avistou' => $request['avistamento'],
+            'em_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
+            'em_tamanho' => $request['tamanho'],
+            'em_altura' => $request['altura'],
+            'em_numpanos' => $request['numPanos'],
+            'em_malha' => $request['malha'],
+            'em_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento']
         );
  
         
