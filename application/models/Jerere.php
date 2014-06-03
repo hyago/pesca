@@ -161,7 +161,43 @@ class Application_Model_Jerere
         $this->dbTableTJerereHasPesqueiro->delete($whereJerereHasPesqueiro);
         
     }
+    public function selectJerereHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableJerereHasEspCapturada = new Application_Model_DbTable_VJerereHasEspecieCapturada();
+        
+        $select = $this->dbTableJerereHasEspCapturada->select()
+                ->from($this->dbTableJerereHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableJerereHasEspCapturada->fetchAll($select)->toArray();
+    }
 
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTJerereHasEspCapturada = new Application_Model_DbTable_JerereHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'jre_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTJerereHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTJerereHasEspCapturada = new Application_Model_DbTable_JerereHasEspecieCapturada();       
+                
+        $whereJerereHasEspCapturada = $this->dbTableTJerereHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTJerereHasEspCapturada->delete($whereJerereHasEspCapturada);
+    }
 
 
 }

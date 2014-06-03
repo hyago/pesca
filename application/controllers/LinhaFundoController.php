@@ -55,7 +55,7 @@ class LinhaFundoController extends Zend_Controller_Action
         
     }
     
-     public function editarAction(){
+    public function editarAction(){
         $entrevistaHasPesqueiro = new Application_Model_DbTable_LinhaFundoHasPesqueiro();
         $entrevista = $this->modelLinhaFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -68,6 +68,9 @@ class LinhaFundoController extends Zend_Controller_Action
         
         $vLinhaFundo = $this->modelLinhaFundo->selectLinhaFundoHasPesqueiro('lf_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vLinhaFundo', $vLinhaFundo);
         $this->view->assign("entrevista", $entrevista);
@@ -76,7 +79,6 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
     public function criarAction(){
         $this->modelLinhaFundo->insert($this->_getAllParams());
@@ -119,5 +121,40 @@ class LinhaFundoController extends Zend_Controller_Action
 
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
+
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelLinhaFundo->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/linha-fundo/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelLinhaFundo->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/linha-fundo/editar/id/" . $backUrl);
+    }    
 }
 

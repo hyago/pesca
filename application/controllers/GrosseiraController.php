@@ -64,8 +64,11 @@ class GrosseiraController extends Zend_Controller_Action
         
         $idEntrevista = $this->_getParam('id');
         
-        $vGrosseira = $this->modelGrosseira->selectGrosseiraHasPesqueiro('mer_id='.$idEntrevista);
+        $vGrosseira = $this->modelGrosseira->selectGrosseiraHasPesqueiro('grs_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelGrosseira->selectGrosseiraHasEspCapturadas('grs_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vGrosseira', $vGrosseira);
         $this->view->assign("entrevista", $entrevista);
@@ -74,7 +77,6 @@ class GrosseiraController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
     public function criarAction(){
         $this->modelGrosseira->insert($this->_getAllParams());
@@ -112,6 +114,40 @@ class GrosseiraController extends Zend_Controller_Action
         $backUrl = $this->_getParam("back_url");
 
         $this->modelGrosseira->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/grosseira/editar/id/" . $backUrl);
+    }
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelGrosseira->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/grosseira/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelGrosseira->deleteEspCapturada($idEntrevistaHasEspecie);
 
         $this->redirect("/grosseira/editar/id/" . $backUrl);
     }

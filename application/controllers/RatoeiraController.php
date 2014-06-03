@@ -54,7 +54,7 @@ class RatoeiraController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-     $entrevistaHasPesqueiro = new Application_Model_DbTable_RatoeiraHasPesqueiro();
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_RatoeiraHasPesqueiro();
         $entrevista = $this->modelRatoeira->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -66,6 +66,9 @@ class RatoeiraController extends Zend_Controller_Action
         
         $vRatoeira = $this->modelRatoeira->selectRatoeiraHasPesqueiro('rat_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelRatoeira->selectRatoeiraHasEspCapturadas('rat_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vRatoeira', $vRatoeira);
         $this->view->assign("entrevista", $entrevista);
@@ -74,7 +77,6 @@ class RatoeiraController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
     public function criarAction(){
         $this->modelRatoeira->insert($this->_getAllParams());
@@ -113,6 +115,40 @@ class RatoeiraController extends Zend_Controller_Action
         $backUrl = $this->_getParam("back_url");
 
         $this->modelRatoeira->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/ratoeira/editar/id/" . $backUrl);
+    }
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelRatoeira->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/ratoeira/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelRatoeira->deleteEspCapturada($idEntrevistaHasEspecie);
 
         $this->redirect("/ratoeira/editar/id/" . $backUrl);
     }

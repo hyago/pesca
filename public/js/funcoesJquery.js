@@ -501,12 +501,22 @@ function jsInsertPesqueiroWithTimeAndRange(frm, pag, entrevista) {
 
 function jsInsertEspecieCapturada(frm, pag, entrevista){
     
-    var TmpUrl  = (entrevista+ '#base_espc');
+    var TmpUrl  = (entrevista+ '#base2');
     
     var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
     
+}
+
+function jsDeleteEspecieCapturada(fichaId, pag, idEntHasEspecie) {
+    var TmpUrl = (+fichaId + '#base');
+
+    var tmpUpdate = (pag + '/id/' + idEntHasEspecie + '/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
 }
 
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/

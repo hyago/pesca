@@ -165,5 +165,40 @@ private $dbTableMergulho;
         $this->dbTableTMergulhoHasPesqueiro->delete($whereMergulhoHasPesqueiro);
         
     }
-
+    public function selectMergulhoHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableMergulhoHasEspCapturada = new Application_Model_DbTable_VMergulhoHasEspecieCapturada();
+        
+        $select = $this->dbTableMergulhoHasEspCapturada->select()
+                ->from($this->dbTableMergulhoHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableMergulhoHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTMergulhoHasEspCapturada = new Application_Model_DbTable_MergulhoHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'mer_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTMergulhoHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTMergulhoHasEspCapturada = new Application_Model_DbTable_MergulhoHasEspecieCapturada();       
+                
+        $whereMergulhoHasEspCapturada = $this->dbTableTMergulhoHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTMergulhoHasEspCapturada->delete($whereMergulhoHasEspCapturada);
+    }
 }

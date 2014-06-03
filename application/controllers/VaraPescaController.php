@@ -68,6 +68,9 @@ class VaraPescaController extends Zend_Controller_Action
         
         $vVaraPesca = $this->modelVaraPesca->selectVaraPescaHasPesqueiro('vp_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelVaraPesca->selectVaraPescaHasEspCapturadas('vp_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vVaraPesca', $vVaraPesca);
         $this->view->assign("entrevista", $entrevista);
@@ -76,7 +79,6 @@ class VaraPescaController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
 
 
@@ -118,6 +120,41 @@ class VaraPescaController extends Zend_Controller_Action
         $backUrl = $this->_getParam("back_url");
 
         $this->modelVaraPesca->deletePesqueiro($idEntrevistaHasPesqueiro);
+
+        $this->redirect("/vara-pesca/editar/id/" . $backUrl);
+    }
+    
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelVaraPesca->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/vara-pesca/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelVaraPesca->deleteEspCapturada($idEntrevistaHasEspecie);
 
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }

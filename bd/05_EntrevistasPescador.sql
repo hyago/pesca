@@ -764,14 +764,14 @@ CREATE TABLE t_varapesca
 
 CREATE TABLE t_arrastofundo_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_af_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   af_id integer NOT NULL,
-  CONSTRAINT t_arrastofundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_arrastofundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_af_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -782,14 +782,14 @@ CREATE TABLE t_arrastofundo_has_t_especie_capturada
 
 CREATE TABLE t_calao_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_cal_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   cal_id integer NOT NULL,
-  CONSTRAINT t_calao_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_calao_has_t_especie_capturada_pkey PRIMARY KEY (spc_cal_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -800,14 +800,14 @@ CREATE TABLE t_calao_has_t_especie_capturada
 
 CREATE TABLE t_coletamanual_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_cml_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   cml_id integer NOT NULL,
-  CONSTRAINT t_coletamanual_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_coletamanual_has_t_especie_capturada_pkey PRIMARY KEY (spc_cml_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -819,14 +819,14 @@ CREATE TABLE t_coletamanual_has_t_especie_capturada
 
 CREATE TABLE t_emalhe_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_em_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   em_id integer NOT NULL,
-  CONSTRAINT t_emalhe_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_emalhe_has_t_especie_capturada_pkey PRIMARY KEY (spc_em_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -837,14 +837,14 @@ CREATE TABLE t_emalhe_has_t_especie_capturada
 
 CREATE TABLE t_grosseira_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_grs_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   grs_id integer NOT NULL,
-  CONSTRAINT t_grosseira_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_grosseira_has_t_especie_capturada_pkey PRIMARY KEY (spc_grs_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -856,14 +856,14 @@ CREATE TABLE t_grosseira_has_t_especie_capturada
 
 CREATE TABLE t_jerere_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_jre_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   jre_id integer NOT NULL,
-  CONSTRAINT t_jerere_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_jerere_has_t_especie_capturada_pkey PRIMARY KEY (spc_jre_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -874,14 +874,14 @@ CREATE TABLE t_jerere_has_t_especie_capturada
 
 CREATE TABLE t_linha_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_lin_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   lin_id integer NOT NULL,
-  CONSTRAINT t_linha_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_linha_has_t_especie_capturada_pkey PRIMARY KEY (spc_lin_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -892,14 +892,14 @@ CREATE TABLE t_linha_has_t_especie_capturada
 
 CREATE TABLE t_linhafundo_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_lf_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   lf_id integer NOT NULL,
-  CONSTRAINT t_linhafundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_linhafundo_has_t_especie_capturada_pkey PRIMARY KEY (spc_lf_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -910,14 +910,14 @@ CREATE TABLE t_linhafundo_has_t_especie_capturada
 
 CREATE TABLE t_manzua_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_man_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   man_id integer NOT NULL,
-  CONSTRAINT t_manzua_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_manzua_has_t_especie_capturada_pkey PRIMARY KEY (spc_man_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -928,14 +928,14 @@ CREATE TABLE t_manzua_has_t_especie_capturada
 
 CREATE TABLE t_mergulho_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_mer_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   mer_id integer NOT NULL,
-  CONSTRAINT t_mergulho_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_mergulho_has_t_especie_capturada_pkey PRIMARY KEY (spc_mer_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -946,14 +946,14 @@ CREATE TABLE t_mergulho_has_t_especie_capturada
 
 CREATE TABLE t_ratoeira_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_rat_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   rat_id integer NOT NULL,
-  CONSTRAINT t_ratoeira_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_ratoeira_has_t_especie_capturada_pkey PRIMARY KEY (spc_rat_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -964,14 +964,14 @@ CREATE TABLE t_ratoeira_has_t_especie_capturada
 
 CREATE TABLE t_siripoia_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_sir_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   sir_id integer NOT NULL,
-  CONSTRAINT t_siripoia_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_siripoia_has_t_especie_capturada_pkey PRIMARY KEY (spc_sir_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -982,14 +982,14 @@ CREATE TABLE t_siripoia_has_t_especie_capturada
 
 CREATE TABLE t_tarrafa_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_tar_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   tar_id integer NOT NULL,
-  CONSTRAINT t_tarrafa_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_tarrafa_has_t_especie_capturada_pkey PRIMARY KEY (spc_tar_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -1000,14 +1000,14 @@ CREATE TABLE t_tarrafa_has_t_especie_capturada
 
 CREATE TABLE t_varapesca_has_t_especie_capturada
 (
-  spc_id serial NOT NULL,
+  spc_vp_id serial NOT NULL,
   
   spc_quantidade integer,
   spc_peso_kg float,
   spc_preco float,
   esp_id integer NOT NULL,
   vp_id integer NOT NULL,
-  CONSTRAINT t_varapesca_has_t_especie_capturada_pkey PRIMARY KEY (spc_id),
+  CONSTRAINT t_varapesca_has_t_especie_capturada_pkey PRIMARY KEY (spc_vp_id),
   CONSTRAINT fk_dsbq_especie_capturada_dsbq_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -1015,6 +1015,10 @@ CREATE TABLE t_varapesca_has_t_especie_capturada
       REFERENCES t_varapesca (vp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+
+-- ENTREVISTAS HAS ESPECIES CAPTURADAS
+
 
 
 CREATE TABLE t_arrastofundo_has_t_pesqueiro
@@ -1302,71 +1306,71 @@ WHERE ENTREVISTA.RAT_ID = ENTPESQ.RAT_ID AND PESQUEIRO.PAF_ID = ENTPESQ.PAF_ID;
 --ESPECIES CAPTURADAS POR ENTREVISTAS (VIEWS)
 
 CREATE VIEW V_ARRASTOFUNDO_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.AF_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.AF_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_AF_ID
 FROM T_ARRASTOFUNDO AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_ARRASTOFUNDO_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.AF_ID = ESPCAPT.AF_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_CALAO_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.CAL_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.CAL_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_CAL_ID
 FROM T_CALAO AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_CALAO_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.CAL_ID = ESPCAPT.CAL_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_EMALHE_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.EM_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.EM_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_EM_ID
 FROM T_EMALHE AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_EMALHE_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.EM_ID = ESPCAPT.EM_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_TARRAFA_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.TAR_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.TAR_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_TAR_ID
 FROM T_TARRAFA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_TARRAFA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.TAR_ID = ESPCAPT.TAR_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_LINHA_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.LIN_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.LIN_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_LIN_ID
 FROM T_LINHA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_LINHA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.LIN_ID = ESPCAPT.LIN_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_GROSSEIRA_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.GRS_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.GRS_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_GRS_ID
 FROM T_GROSSEIRA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_GROSSEIRA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.GRS_ID = ESPCAPT.GRS_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_MERGULHO_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.MER_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.MER_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_MER_ID
 FROM T_MERGULHO AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_MERGULHO_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.MER_ID = ESPCAPT.MER_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_COLETAMANUAL_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.CML_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.CML_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_CML_ID
 FROM T_COLETAMANUAL AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_COLETAMANUAL_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.CML_ID = ESPCAPT.CML_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_VARAPESCA_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.VP_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.VP_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_VP_ID
 FROM T_VARAPESCA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_VARAPESCA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.VP_ID = ESPCAPT.VP_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_LINHAFUNDO_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.LF_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.LF_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_LF_ID
 FROM T_LINHAFUNDO AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_LINHAFUNDO_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.LF_ID = ESPCAPT.LF_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_JERERE_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.JRE_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.JRE_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_JRE_ID
 FROM T_JERERE AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_JERERE_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.JRE_ID = ESPCAPT.JRE_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_SIRIPOIA_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.SIR_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.SIR_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_SIR_ID
 FROM T_SIRIPOIA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_SIRIPOIA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.SIR_ID = ESPCAPT.SIR_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_MANZUA_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.MAN_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.MAN_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_MAN_ID
 FROM T_MANZUA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_MANZUA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.MAN_ID = ESPCAPT.MAN_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 CREATE VIEW V_RATOEIRA_HAS_T_ESPECIE_CAPTURADA AS
-SELECT ENTREVISTA.RAT_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO
+SELECT ENTREVISTA.RAT_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_RAT_ID
 FROM T_RATOEIRA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_RATOEIRA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.RAT_ID = ESPCAPT.RAT_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;

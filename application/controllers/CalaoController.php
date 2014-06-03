@@ -61,7 +61,10 @@ class CalaoController extends Zend_Controller_Action
         
         $vCalao = $this->modelCalao->selectCalaoHasPesqueiro('cal_id='.$idEntrevista);
         
-        $this->view->assign('entrevistaHasPesqueiro', $entrevistaHasPesqueiro);
+        $vEspecieCapturadas = $this->modelCalao->selectCalaoHasEspCapturadas('cal_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
+        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vCalao', $vCalao);
         $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
@@ -107,5 +110,40 @@ class CalaoController extends Zend_Controller_Action
 
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelCalao->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/calao/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelCalao->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/calao/editar/id/" . $backUrl);
+    }
+    
 }
 

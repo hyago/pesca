@@ -158,6 +158,43 @@ class Application_Model_Emalhe
         $this->dbTableTEmalhe->delete($whereEmalheHasPesqueiro);
         
     }
+    public function selectEmalheHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableEmalheHasEspCapturada = new Application_Model_DbTable_VEmalheHasEspecieCapturada();
+        
+        $select = $this->dbTableEmalheHasEspCapturada->select()
+                ->from($this->dbTableEmalheHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableEmalheHasEspCapturada->fetchAll($select)->toArray();
+    }
+
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTEmalheHasEspCapturada = new Application_Model_DbTable_EmalheHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'em_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTEmalheHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTEmalheHasEspCapturada = new Application_Model_DbTable_EmalheHasEspecieCapturada();       
+                
+        $whereEmalheHasEspCapturada = $this->dbTableTEmalheHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTEmalheHasEspCapturada->delete($whereEmalheHasEspCapturada);
+    }
 
 
 

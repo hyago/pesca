@@ -156,6 +156,44 @@ private $dbTableColetaManual;
         $this->dbTableTColetaManualHasPesqueiro->delete($whereColetaManualHasPesqueiro);
         
     }
+    public function selectColetaManualHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableColetaManualHasEspCapturada = new Application_Model_DbTable_VColetaManualHasEspecieCapturada();
+        
+        $select = $this->dbTableColetaManualHasEspCapturada->select()
+                ->from($this->dbTableColetaManualHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableColetaManualHasEspCapturada->fetchAll($select)->toArray();
+    }
+
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTColetaManualHasEspCapturada = new Application_Model_DbTable_ColetaManualHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'cml_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTColetaManualHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTColetaManualHasEspCapturada = new Application_Model_DbTable_ColetaManualHasEspecieCapturada();       
+                
+        $whereColetaManualHasEspCapturada = $this->dbTableTColetaManualHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTColetaManualHasEspCapturada->delete($whereColetaManualHasEspCapturada);
+    }
+
 
 }
 

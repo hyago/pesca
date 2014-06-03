@@ -65,6 +65,9 @@ class ColetaManualController extends Zend_Controller_Action
         
         $vColetaManual = $this->modelColetaManual->selectColetaManualHasPesqueiro('cml_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vColetaManual', $vColetaManual);
         $this->view->assign("entrevista", $entrevista);
@@ -118,5 +121,40 @@ class ColetaManualController extends Zend_Controller_Action
 
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
     }
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelColetaManual->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/coleta-manual/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelColetaManual->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/coleta-manual/editar/id/" . $backUrl);
+    }
+    
 }
 

@@ -159,7 +159,43 @@ private $dbTableLinha;
         $this->dbTableTLinhaHasPesqueiro->delete($whereLinhaHasPesqueiro);
         
     }
+    public function selectLinhaHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableLinhaHasEspCapturada = new Application_Model_DbTable_VLinhaHasEspecieCapturada();
+        
+        $select = $this->dbTableLinhaHasEspCapturada->select()
+                ->from($this->dbTableLinhaHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableLinhaHasEspCapturada->fetchAll($select)->toArray();
+    }
 
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTLinhaHasEspCapturada = new Application_Model_DbTable_LinhaHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'lin_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTLinhaHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTLinhaHasEspCapturada = new Application_Model_DbTable_LinhaHasEspecieCapturada();       
+                
+        $whereLinhaHasEspCapturada = $this->dbTableTLinhaHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTLinhaHasEspCapturada->delete($whereLinhaHasEspCapturada);
+    }
 
 }
 

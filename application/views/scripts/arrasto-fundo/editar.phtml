@@ -185,7 +185,7 @@
     <fieldset class="noEditable"><legend>Espécies Capturadas:</legend>
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
-            <div id="base">
+            <div id="base2">
                 <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
                 <select style="float:left;" name="SelectEspecie">
                     <?php foreach ($this->especies as $key => $especie): ?>
@@ -220,14 +220,11 @@
                             <td name="inputQuantidade"> <?= $vEspecieCapturada['spc_quantidade'] ?> </td>
                             <td name="inputPeso"> <?= $vEspecieCapturada['spc_peso_kg'] ?> </td>
                             <td name="inputPreco"> <?= $vEspecieCapturada['spc_preco'] ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteEspecie(<?= $vEspecieCapturada['spc_id'] ?>, this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['af_id'] ?>)"></td>
-                            
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeletePesqueiro(<?= $this->entrevista['af_id'] ?>, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['spc_id'] ?>)"></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             </fieldset>
     </fieldset>
 </form>        
-</div>      
-</html>
 

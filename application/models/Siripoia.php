@@ -155,7 +155,42 @@ class Application_Model_Siripoia
         $this->dbTableTSiripoiaHasPesqueiro->delete($whereSiripoiaHasPesqueiro);
         
     }
-
+    public function selectSiripoiaHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableSiripoiaHasEspCapturada = new Application_Model_DbTable_VSiripoiaHasEspecieCapturada();
+        
+        $select = $this->dbTableSiripoiaHasEspCapturada->select()
+                ->from($this->dbTableSiripoiaHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableSiripoiaHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTSiripoiaHasEspCapturada = new Application_Model_DbTable_SiripoiaHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'sir_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTSiripoiaHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTSiripoiaHasEspCapturada = new Application_Model_DbTable_SiripoiaHasEspecieCapturada();       
+                
+        $whereSiripoiaHasEspCapturada = $this->dbTableTSiripoiaHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTSiripoiaHasEspCapturada->delete($whereSiripoiaHasEspCapturada);
+    }
 
 
 }

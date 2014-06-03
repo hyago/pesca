@@ -159,7 +159,43 @@ private $dbTableGrosseira;
         $this->dbTableTGrosseiraHasPesqueiro->delete($whereGrosseiraHasPesqueiro);
         
     }
+    public function selectGrosseiraHasEspCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableGrosseiraHasEspCapturada = new Application_Model_DbTable_VGrosseiraHasEspecieCapturada();
+        
+        $select = $this->dbTableGrosseiraHasEspCapturada->select()
+                ->from($this->dbTableGrosseiraHasEspCapturada)->order($order)->limit($limit);
+        
+        if(!is_null($where)){
+            $select->where($where);
+        }
+        
+        return $this->dbTableGrosseiraHasEspCapturada->fetchAll($select)->toArray();
+    }
 
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    {
+        $this->dbTableTGrosseiraHasEspCapturada = new Application_Model_DbTable_GrosseiraHasEspecieCapturada();
+        
+        
+        $dadosEspecie = array(
+            'grs_id' => $idEntrevista,
+            'esp_id' => $especie,
+            'spc_quantidade' => $quantidade,
+            'spc_peso_kg' => $peso,
+            'spc_preco' => $precokg
+        );
+        
+        $this->dbTableTGrosseiraHasEspCapturada->insert($dadosEspecie);
+        return;
+    }
+    public function deleteEspCapturada($idEspecie){
+        $this->dbTableTGrosseiraHasEspCapturada = new Application_Model_DbTable_GrosseiraHasEspecieCapturada();       
+                
+        $whereGrosseiraHasEspCapturada = $this->dbTableTGrosseiraHasEspCapturada->getAdapter()
+                ->quoteInto('"spc_id" = ?', $idEspecie);
+        
+        $this->dbTableTGrosseiraHasEspCapturada->delete($whereGrosseiraHasEspCapturada);
+    }
 
 }
 

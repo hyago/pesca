@@ -53,7 +53,7 @@ class ManzuaController extends Zend_Controller_Action
         
     }
     public function editarAction(){
-     $entrevistaHasPesqueiro = new Application_Model_DbTable_ManzuaHasPesqueiro();
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_ManzuaHasPesqueiro();
         $entrevista = $this->modelManzua->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -65,6 +65,9 @@ class ManzuaController extends Zend_Controller_Action
         
         $vManzua = $this->modelManzua->selectManzuaHasPesqueiro('man_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelManzua->selectManzuaHasEspCapturadas('man_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vManzua', $vManzua);
         $this->view->assign("entrevista", $entrevista);
@@ -73,7 +76,6 @@ class ManzuaController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
     public function criarAction(){
         $this->modelManzua->insert($this->_getAllParams());
@@ -115,7 +117,40 @@ class ManzuaController extends Zend_Controller_Action
 
         $this->redirect("/manzua/editar/id/" . $backUrl);
     }
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelManzua->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/manzua/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelManzua->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/manzua/editar/id/" . $backUrl);
+    }
 
 }
 

@@ -64,6 +64,9 @@ public function init()
         
         $vMergulho = $this->modelMergulho->selectMergulhoHasPesqueiro('mer_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelMergulho->selectMergulhoHasEspCapturadas('mer_id='.$idEntrevista);
+        
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vMergulho', $vMergulho);
         $this->view->assign("entrevista", $entrevista);
@@ -72,7 +75,6 @@ public function init()
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
 
     public function criarAction(){
@@ -116,6 +118,40 @@ public function init()
 
         $this->redirect("/mergulho/editar/id/" . $backUrl);
     }
-    
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelMergulho->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/mergulho/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelMergulho->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/mergulho/editar/id/" . $backUrl);
+    }
+
 }
 

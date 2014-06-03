@@ -137,6 +137,18 @@ class ArrastoFundoController extends Zend_Controller_Action
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelArrastoFundo->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
     
 }
 
