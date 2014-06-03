@@ -188,7 +188,7 @@ class Application_Model_Ratoeira
         $this->dbTableTRatoeiraHasEspCapturada = new Application_Model_DbTable_RatoeiraHasEspecieCapturada();       
                 
         $whereRatoeiraHasEspCapturada = $this->dbTableTRatoeiraHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_rat_id" = ?', $idEspecie);
         
         $this->dbTableTRatoeiraHasEspCapturada->delete($whereRatoeiraHasEspCapturada);
     }

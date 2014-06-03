@@ -200,7 +200,7 @@ class Application_Model_VaraPesca
         $this->dbTableTVaraPescaHasEspCapturada = new Application_Model_DbTable_VaraPescaHasEspecieCapturada();       
                 
         $whereVaraPescaHasEspCapturada = $this->dbTableTVaraPescaHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_vp_id" = ?', $idEspecie);
         
         $this->dbTableTVaraPescaHasEspCapturada->delete($whereVaraPescaHasEspCapturada);
     }

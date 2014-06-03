@@ -4,7 +4,7 @@ class Application_Model_DbTable_VaraPescaHasEspecieCapturada extends Zend_Db_Tab
 {
 
     protected $_name = 't_varapesca_has_t_especie_capturada';
-    protected $_primary = 'spc_id';
+    protected $_primary = 'spc_vp_id';
 
 }
 

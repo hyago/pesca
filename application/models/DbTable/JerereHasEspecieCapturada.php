@@ -4,7 +4,7 @@ class Application_Model_DbTable_JerereHasEspecieCapturada extends Zend_Db_Table_
 {
 
     protected $_name = 't_jerere_has_t_especie_capturada';
-    protected $_primary = 'spc_id';
+    protected $_primary = 'spc_jre_id';
 
 }
 

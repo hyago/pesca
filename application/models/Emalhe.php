@@ -191,7 +191,7 @@ class Application_Model_Emalhe
         $this->dbTableTEmalheHasEspCapturada = new Application_Model_DbTable_EmalheHasEspecieCapturada();       
                 
         $whereEmalheHasEspCapturada = $this->dbTableTEmalheHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_em_id" = ?', $idEspecie);
         
         $this->dbTableTEmalheHasEspCapturada->delete($whereEmalheHasEspCapturada);
     }

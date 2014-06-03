@@ -189,7 +189,7 @@ private $dbTableColetaManual;
         $this->dbTableTColetaManualHasEspCapturada = new Application_Model_DbTable_ColetaManualHasEspecieCapturada();       
                 
         $whereColetaManualHasEspCapturada = $this->dbTableTColetaManualHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_cml_id" = ?', $idEspecie);
         
         $this->dbTableTColetaManualHasEspCapturada->delete($whereColetaManualHasEspCapturada);
     }

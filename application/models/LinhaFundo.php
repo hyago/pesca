@@ -200,7 +200,7 @@ class Application_Model_LinhaFundo
         $this->dbTableTLinhaFundoHasEspCapturada = new Application_Model_DbTable_LinhaFundoHasEspecieCapturada();       
                 
         $whereLinhaFundoHasEspCapturada = $this->dbTableTLinhaFundoHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_lf_id" = ?', $idEspecie);
         
         $this->dbTableTLinhaFundoHasEspCapturada->delete($whereLinhaFundoHasEspCapturada);
     }

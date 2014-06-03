@@ -188,7 +188,7 @@ class Application_Model_ArrastoFundo
         $this->dbTableTArrastoHasEspCapturada = new Application_Model_DbTable_ArrastoHasEspecieCapturada();       
                 
         $whereArrastoHasEspCapturada = $this->dbTableTArrastoHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_af_id" = ?', $idEspecie);
         
         $this->dbTableTArrastoHasEspCapturada->delete($whereArrastoHasEspCapturada);
     }

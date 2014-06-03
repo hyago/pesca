@@ -4,7 +4,7 @@ class Application_Model_DbTable_RatoeiraHasEspecieCapturada extends Zend_Db_Tabl
 {
 
     protected $_name = 't_ratoeira_has_t_especie_capturada';
-    protected $_primary = 'spc_id';
+    protected $_primary = 'spc_rat_id';
 
 }
 

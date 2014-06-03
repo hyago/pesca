@@ -187,7 +187,7 @@ class Application_Model_Siripoia
         $this->dbTableTSiripoiaHasEspCapturada = new Application_Model_DbTable_SiripoiaHasEspecieCapturada();       
                 
         $whereSiripoiaHasEspCapturada = $this->dbTableTSiripoiaHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_sir_id" = ?', $idEspecie);
         
         $this->dbTableTSiripoiaHasEspCapturada->delete($whereSiripoiaHasEspCapturada);
     }

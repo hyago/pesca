@@ -189,7 +189,7 @@ class Application_Model_Manzua
         $this->dbTableTManzuaHasEspCapturada = new Application_Model_DbTable_ManzuaHasEspecieCapturada();       
                 
         $whereManzuaHasEspCapturada = $this->dbTableTManzuaHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_man_id" = ?', $idEspecie);
         
         $this->dbTableTManzuaHasEspCapturada->delete($whereManzuaHasEspCapturada);
     }

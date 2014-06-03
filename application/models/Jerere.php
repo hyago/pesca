@@ -194,7 +194,7 @@ class Application_Model_Jerere
         $this->dbTableTJerereHasEspCapturada = new Application_Model_DbTable_JerereHasEspecieCapturada();       
                 
         $whereJerereHasEspCapturada = $this->dbTableTJerereHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_jre_id" = ?', $idEspecie);
         
         $this->dbTableTJerereHasEspCapturada->delete($whereJerereHasEspCapturada);
     }

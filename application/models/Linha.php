@@ -192,7 +192,7 @@ private $dbTableLinha;
         $this->dbTableTLinhaHasEspCapturada = new Application_Model_DbTable_LinhaHasEspecieCapturada();       
                 
         $whereLinhaHasEspCapturada = $this->dbTableTLinhaHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_lin_id" = ?', $idEspecie);
         
         $this->dbTableTLinhaHasEspCapturada->delete($whereLinhaHasEspCapturada);
     }

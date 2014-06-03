@@ -4,7 +4,7 @@ class Application_Model_DbTable_TarrafaHasEspecieCapturada extends Zend_Db_Table
 {
 
     protected $_name = 't_tarrafa_has_t_especie_capturada';
-    protected $_primary = 'spc_id';
+    protected $_primary = 'spc_tar_id';
 
 }
 

@@ -197,7 +197,7 @@ private $dbTableMergulho;
         $this->dbTableTMergulhoHasEspCapturada = new Application_Model_DbTable_MergulhoHasEspecieCapturada();       
                 
         $whereMergulhoHasEspCapturada = $this->dbTableTMergulhoHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_mer_id" = ?', $idEspecie);
         
         $this->dbTableTMergulhoHasEspCapturada->delete($whereMergulhoHasEspCapturada);
     }

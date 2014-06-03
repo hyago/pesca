@@ -182,7 +182,7 @@ class Application_Model_Calao
         $this->dbTableTCalaoHasEspCapturada = new Application_Model_DbTable_CalaoHasEspecieCapturada();       
                 
         $whereCalaoHasEspCapturada = $this->dbTableTCalaoHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_cal_id" = ?', $idEspecie);
         
         $this->dbTableTCalaoHasEspCapturada->delete($whereCalaoHasEspCapturada);
     }

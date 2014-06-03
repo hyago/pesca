@@ -4,7 +4,7 @@ class Application_Model_DbTable_ManzuaHasEspecieCapturada extends Zend_Db_Table_
 {
 
     protected $_name = 't_manzua_has_t_especie_capturada';
-    protected $_primary = 'spc_id';
+    protected $_primary = 'spc_man_id';
 
 }
 
