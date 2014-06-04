@@ -3,22 +3,16 @@
     <h3>Entrevista</h3>
 </div>
 
-<html dir="ltr">
-    <head>
-        <script src="/js/funcoesJquery.js"></script>
-
-    </head>
-
-    <div id="esquerda-entrevista">
+<div id="esquerda-entrevista">
         <fieldset id="Desembarque">
             <div id="esquerda">
                 <div id="form-esq">
                     <label>ID da ficha diária:</label>
-                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" value="<?= $this->fichaDiaria['fd_id'] ?>" /><br />
+                    <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" value="<?= $this->monitoramento['fd_id'] ?>" /><br />
                 </div>
                 <div id="form-esq">
                     <label>ID monitoramento:</label>
-                    <input type="text" name="id_monitoramento" placeholder="ID"  value="<?= $this->monitoramento['mnt_id'] ?>" /><br />
+                    <input type="text" name="id_monitoramento" placeholder="ID"  value="<?= $this->entrevista['mnt_id'] ?>" /><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">ID Entrevista:</label>
@@ -149,7 +143,7 @@
 
     <fieldset class="noEditable"><legend>Pesqueiro:</legend>
         <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
-            <div id="base_espc">
+            <div id="base">
                 <input onclick="jsInsertPesqueiro(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
                 <select style="float:left;" name="nomePesqueiro">
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
@@ -185,7 +179,7 @@
     <fieldset class="noEditable"><legend>Espécies Capturadas:</legend>
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
-            <div id="base2">
+            <div id="base">
                 <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
                 <select style="float:left;" name="SelectEspecie">
                     <?php foreach ($this->especies as $key => $especie): ?>
@@ -226,5 +220,7 @@
                 </table>
             </fieldset>
     </fieldset>
-</form>        
-
+</form> 
+<br/> <br/>
+<a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "editar","id" => $this->monitoramento['fd_id']), null, true) ?>" id="botao-ancora">Voltar à Ficha-Diária</a>
+    

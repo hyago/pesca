@@ -57,11 +57,14 @@ class TarrafaController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
+        $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
+        
         
         $idEntrevista = $this->_getParam('id');
         
         $vTarrafa = $this->modelTarrafa->selectTarrafaHasPesqueiro('tar_id='.$idEntrevista);
         
+        $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('entrevistaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vTarrafa', $vTarrafa);
         $this->view->assign("entrevista", $entrevista);

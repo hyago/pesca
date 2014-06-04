@@ -59,6 +59,9 @@ public function init()
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
+        $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
+        
+        
         
         $idEntrevista = $this->_getParam('id');
         
@@ -66,6 +69,7 @@ public function init()
         
         $vEspecieCapturadas = $this->modelMergulho->selectMergulhoHasEspCapturadas('mer_id='.$idEntrevista);
         
+        $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vMergulho', $vMergulho);

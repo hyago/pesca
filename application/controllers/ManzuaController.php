@@ -60,6 +60,8 @@ class ManzuaController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
+        $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
+        
         
         $idEntrevista = $this->_getParam('id');
         
@@ -67,6 +69,7 @@ class ManzuaController extends Zend_Controller_Action
         
         $vEspecieCapturadas = $this->modelManzua->selectManzuaHasEspCapturadas('man_id='.$idEntrevista);
         
+        $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vManzua', $vManzua);
