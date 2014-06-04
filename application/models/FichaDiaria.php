@@ -3,6 +3,7 @@
 class Application_Model_FichaDiaria
 {
     private $dbTableFichaDiaria;
+    private $dbTableFichaDiariaView;
 
     public function select($where = null, $order = null, $limit = null)
     {
@@ -15,6 +16,19 @@ class Application_Model_FichaDiaria
         }
 
         return $this->dbTableFichaDiaria->fetchAll($select)->toArray();
+    }
+    
+    public function selectView($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableFichaDiariaView = new Application_Model_DbTable_VFichaDiaria();
+        $select = $this->dbTableFichaDiariaView->select()
+                ->from($this->dbTableFichaDiariaView)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableFichaDiariaView->fetchAll($select)->toArray();
     }
     
     public function find($id)

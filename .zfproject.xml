@@ -272,6 +272,7 @@
           <dbTableFile dbTableName="TarrafaHasEspecieCapturada"/>
           <dbTableFile dbTableName="VaraPescaHasEspecieCapturada"/>
           <dbTableFile dbTableName="VLinhaHasPesqueiro"/>
+          <dbTableFile dbTableName="VFichaDiaria"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
