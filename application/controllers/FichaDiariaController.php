@@ -28,7 +28,7 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function indexAction() {
-        $dados = $this->modelFichaDiaria->select();
+        $dados = $this->modelFichaDiaria->selectView();
 
         $this->view->assign("dados", $dados);
     }
