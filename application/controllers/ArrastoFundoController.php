@@ -55,6 +55,8 @@ class ArrastoFundoController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
+        $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
+        
         
         $idEntrevista = $this->_getParam('id');
         
@@ -62,6 +64,8 @@ class ArrastoFundoController extends Zend_Controller_Action
         
         $vEspecieCapturadas = $this->modelArrastoFundo->selectArrastoHasEspCapturadas('af_id='.$idEntrevista);
         
+        
+        $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vArrastoFundo', $vArrastoFundo);
@@ -71,7 +75,7 @@ class ArrastoFundoController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
+
     }
     
     public function criarAction(){
@@ -79,7 +83,8 @@ class ArrastoFundoController extends Zend_Controller_Action
         $this->modelArrastoFundo->insert($this->_getAllParams());
         $id = $this->modelArrastoFundo->selectId();
         $this->_redirector = $this->_helper->getHelper('Redirector');
-
+        
+        
         $value = array_shift($id);
         $this->_redirector->gotoSimple('editar', 'arrasto-fundo', null, array('id' => $value));
     }

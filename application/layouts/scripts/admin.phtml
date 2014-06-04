@@ -71,7 +71,14 @@
                             <li><a href="<?=$this->url(array("controller"=>"tempo","action"=>"index"),null,true)?>">Tempo</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"barcos","action"=>"index"),null,true)?>">Embarcações</a></li>
                             <li><a href="<?=$this->url(array("controller"=>"mare","action"=>"index"),null,true)?>">Maré</a></li>
-                        
+                            <li><a id="for-Filo">Entrevistas</a></li>
+                            <ul id="Entrevistas">
+                            <li><a href="<?=$this->url(array("controller"=>"grupo","action"=>"index"),null,true)?>">Grupo</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"ordem","action"=>"index"),null,true)?>">Ordem</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"familia","action"=>"index"),null,true)?>">Família</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"genero","action"=>"index"),null,true)?>">Genero</a></li>
+                            <li><a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>">Espécie</a></li>
+                            </ul>
                         </ul>
                         <li><a id="Embarcacoes">Tráfego de Embarcações</a></li>
                         <li><a id="Noticias">Notícias</a></li>
@@ -96,10 +103,11 @@
                 <div id="conteudo">
                     <?php echo $this->layout()->content; ?>
                 </div>
-
+                
                 <div id="rodape">
                     <div id="parceiros">
                         <ul>
+                            <br/><br/><br/>
                             <li><a href="http://nbcgib.uesc.br/nbcgib" target="_blank"><img class="imgparc" src="img/nbcgib.png" alt="NBCGIB" title="NBCGIB" /></a></li>
                             <li><a href="#" target="_blank"><img class="imgparc" src="img/iSus.png" alt="iSUS" title="iSUS" /></a></li>
                             <li><a href="http://www.bamin.com.br/" target="_blank"><img class="imgparc" src="img/bamin.jpg" alt="Bamin" title="Bamin" /></a></li>

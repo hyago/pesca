@@ -152,6 +152,7 @@ body{
 
 #rodape
 {
+    margin-top: 25px;
     clear: both;
     background: #f8f8ff;
     text-align: left;
@@ -160,7 +161,8 @@ body{
 }
 
 #parceiros{
-    margin: 0 0;
+    
+    margin-top: 25px 0;
     width: 800px;
     height: 100px;
 

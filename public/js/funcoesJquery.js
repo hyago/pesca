@@ -501,7 +501,7 @@ function jsInsertPesqueiroWithTimeAndRange(frm, pag, entrevista) {
 
 function jsInsertEspecieCapturada(frm, pag, entrevista){
     
-    var TmpUrl  = (entrevista+ '#base2');
+    var TmpUrl  = (entrevista+ '#base');
     
     var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
     
@@ -518,6 +518,76 @@ function jsDeleteEspecieCapturada(fichaId, pag, idEntHasEspecie) {
         location.replace(tmpUpdate);
     }
 }
+function jsEntrevista(nomeArtePesca, idMonitoramento, idFichaDiaria) {
+            var Entrevista;
+            if (nomeArtePesca.toLowerCase() === "Arrasto de Fundo".toLowerCase()) {
+                Entrevista = "arrasto-fundo";
+            }
+            else if (nomeArtePesca == 'Calão') {
+                Entrevista = 'calao';
+            }
+            else if (nomeArtePesca == 'Espinhel/Grosseira') {
+                Entrevista = 'grosseira';
+            }
+            else if (nomeArtePesca == 'Pesca de Linha') {
+                Entrevista = 'linha';
+            }
+            else if (nomeArtePesca == 'Rede de Emalhar') {
+                Entrevista = 'emalhe';
+            }
+            else if (nomeArtePesca == 'Tarrafa') {
+                Entrevista = 'tarrafa';
+            }
+            else if (nomeArtePesca == 'Vara de Pesca') {
+                Entrevista = 'vara-pesca';
+            }
+            else if (nomeArtePesca == 'Jereré') {
+                Entrevista = 'jerere';
+            }
+            else if (nomeArtePesca == 'Manzuá') {
+                Entrevista = 'manzua';
+            }
+            else if (nomeArtePesca == 'Ratoeira') {
+                Entrevista = 'ratoeira';
+            }
+            else if (nomeArtePesca == 'Coleta-Manual') {
+                Entrevista = 'coleta-manual';
+            }
+            else if (nomeArtePesca == 'Mergulho') {
+                Entrevista = 'mergulho';
+            }
+            else if (nomeArtePesca == 'Linha de Fundo') {
+                Entrevista = 'linha-fundo';
+            }
+            else if (nomeArtePesca == 'Siripóia') {
+                Entrevista = 'siripoia';
+            }
+            else
+                Entrevista = 'error';
+            var pag = (Entrevista + '/index');
+            var tmpUpdate = (pag + '/id/' + idFichaDiaria + '/idMonitoramento/' + idMonitoramento);
+            location.replace(tmpUpdate);
+        }
+        function jsDeleteMonitoramento(idMnt, frm, pag, fichaId) {
+            var TmpUrl = (+fichaId + '#base');
+
+            var tmpUpdate = (pag + '/id/' + idMnt + '/back_url/' + TmpUrl);
+
+            if (confirm("Realmente deseja excluir este item?")) {
+                location.replace(tmpUpdate);
+            }
+        }
+
+        function jsInsertMonitoramento(frm, pag)
+        {
+            if (frm.QuantidadeEmbarcacoes.value) {
+                var TmpUrl = (+frm.id_fichaDiaria.value + '#base');
+
+                var tmpUpdate = (pag + '/SelectArtePesca/' + frm.SelectArtePesca.value + '/SelectMonitorada/' + frm.SelectMonitorada.value + '/QuantidadeEmbarcacoes/' + frm.QuantidadeEmbarcacoes.value + '/id_fichaDiaria/' + frm.id_fichaDiaria.value + '/back_url/' + TmpUrl);
+
+                window.location.replace(tmpUpdate);
+            }
+        }
 
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
