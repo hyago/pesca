@@ -1,9 +1,13 @@
+body{
+    font-family: "Bitstream Charter",sans-serif;
+    background: #f8f8ff;
+}
 #geral
 {
         
 	margin: 0 auto;
 	width: 900px;
-	background: #fff;
+	background: #f8f8ff;
 }
 
 #topo
@@ -177,7 +181,7 @@
     margin: 0 0;
     width: 800px;
     height: 100px;
-
+    background: #f8f8ff;
 }
 
 #parceiros ul{
