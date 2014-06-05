@@ -196,5 +196,18 @@ class Application_Model_ArrastoFundo
         
         $this->dbTableTArrastoHasEspCapturada->delete($whereArrastoHasEspCapturada);
     }
+    
+    public function selectEntrevistaArrasto($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_VEntrevistaArrasto();
+        $select = $this->dbTableArrastoFundo->select()
+                ->from($this->dbTableArrastoFundo)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableArrastoFundo->fetchAll($select)->toArray();
+    }
 }
 

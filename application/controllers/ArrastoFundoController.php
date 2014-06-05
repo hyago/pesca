@@ -44,17 +44,17 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
 
     public function visualizarAction(){
-        $ent_id = $this->_getParam("tp_id");
+        $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         
         if ( $ent_id > 0 ) {
-            $dados = $this->modelArrastoFundo->select("af_id>=". $ent_id, array('af_id'), 20);
+            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("af_id>=". $ent_id, array('af_id'), 20);
         } elseif ( $ent_pescador ) {
-            $dados = $this->modelArrastoFundo->select("tp_id_entrevistado LIKE '". $ent_pescador."%'", array('tp_id_entrevistado', 'af_id'), 20);            
+            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'af_id'), 20);            
         } else {
-            $dados = $this->modelArrastoFundo->select(null, array('tp_id_entrevistado', 'af_id'), 20);
+            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto(null, array( 'fd_id', 'tp_nome'), 20);
         }
-
+        
         $this->view->assign("dados", $dados);
     }
        

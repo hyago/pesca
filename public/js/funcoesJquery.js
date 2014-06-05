@@ -89,6 +89,32 @@ function jsBuscaPescadorNome( frm, pag )
         location.replace( tmpUpdate );
     }
 }
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsBuscaEntrevistaId( frm, pag )
+{
+    if ( frm.inputId.value ) {
+        var tmpUpdate = (pag + '/ent_id/' + frm.inputId.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Entrevistas /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsBuscaPescadorEntrevista( frm, pag )
+{
+    if ( frm.inputPescador.value ) {
+        var tmpUpdate = (pag + '/tp_nome/' + frm.inputPescador.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+function jsClearBuscaEntrevista( pag )
+{
+        location.hash = '';
+        location.replace( pag );
+}
+
+
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsClearBuscaPescador( pag )

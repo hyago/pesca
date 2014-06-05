@@ -273,6 +273,7 @@
           <dbTableFile dbTableName="VaraPescaHasEspecieCapturada"/>
           <dbTableFile dbTableName="VLinhaHasPesqueiro"/>
           <dbTableFile dbTableName="VFichaDiaria"/>
+          <dbTableFile dbTableName="VEntrevistaArrasto"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -513,7 +514,7 @@
           <viewControllerScriptsDirectory forControllerName="Isca">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-          </viewScriptsDirectory>
+        </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
       </viewsDirectory>
