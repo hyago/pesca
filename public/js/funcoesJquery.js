@@ -18,7 +18,7 @@ $(document).ready(function() {
         $("#Social").hide();
         $("#Entrevista").hide();
     }
-    else if ($("fieldset").attr('id') == "Entrevistas"){
+    else if ($("fieldset").attr('id') == "Entrevista"){
         $("#Dsbq").show();
         $("#Entrevista").show();
         $("#Filo").hide();
@@ -85,6 +85,15 @@ function jsBuscaPescadorNome( frm, pag )
 {
     if ( frm.inputNome.value ) {
         var tmpUpdate = (pag + '/index/tp_nome/' + frm.inputNome.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+
+function jsBuscaBarcoEntrevista( frm, pag )
+{
+    if ( frm.inputBarco.value ) {
+        var tmpUpdate = (pag + '/bar_nome/' + frm.inputBarco.value  );
         
         location.replace( tmpUpdate );
     }

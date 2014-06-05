@@ -681,12 +681,13 @@ CREATE TABLE IF NOT EXISTS T_ESPECIE (
 -- -----------------------------------------------------
 -- TABLE T_SUBAMOSTRA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_SUBAMOSTRA (
- SA_ID SERIAL,
- SA_SUBAMOSTRA VARCHAR(100) NULL,
- PRIMARY KEY (SA_ID)
-);
-
+CREATE TABLE t_subamostra
+(
+  sa_id serial NOT NULL,
+  sa_pescador text,
+  sa_datachegada date,
+  CONSTRAINT t_subamostra_pkey PRIMARY KEY (sa_id)
+)
 -- -----------------------------------------------------
 -- TABLE T_PORTO
 -- -----------------------------------------------------
