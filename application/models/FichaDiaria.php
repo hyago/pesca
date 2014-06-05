@@ -58,8 +58,8 @@ class Application_Model_FichaDiaria
             'vnt_id' => $request['select_vento']
         );
         
-        $this->dbTableFichaDiaria->insert($dadosFichaDiaria);
-        return;
+        $idFicha = $this->dbTableFichaDiaria->insert($dadosFichaDiaria);
+        return $idFicha;
     }
     
     public function update(array $request)

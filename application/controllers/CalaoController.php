@@ -75,12 +75,10 @@ class CalaoController extends Zend_Controller_Action
         
     }
     public function criarAction(){
-        $this->modelCalao->insert($this->_getAllParams());
-        $id = $this->modelCalao->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'calao', null, array('id' => $value));
+        $idCalao = $this->modelCalao->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('calao/editar/id/'.$idCalao);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

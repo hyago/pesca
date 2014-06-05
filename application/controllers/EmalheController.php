@@ -74,12 +74,10 @@ class EmalheController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
-        $this->modelEmalhe->insert($this->_getAllParams());
-        $id = $this->modelEmalhe->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'emalhe', null, array('id' => $value));
+        $idEmalhe = $this->modelEmalhe->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('emalhe/editar/id/'.$idEmalhe);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

@@ -68,8 +68,8 @@ class Application_Model_ArrastoFundo
             'mnt_id' => $request['id_monitoramento']
         );
         
-        $this->dbTableArrastoFundo->insert($dadosArrastoFundo);
-        return;
+        $insertEntrevista = $this->dbTableArrastoFundo->insert($dadosArrastoFundo);
+        return $insertEntrevista;
     }
     
     public function update(array $request)

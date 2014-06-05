@@ -63,8 +63,8 @@ class Application_Model_Calao
             'mnt_id' => $request['id_monitoramento']
         );
         
-        $this->dbTableCalao->insert($dadosCalao);
-        return;
+        $insertEntrevista = $this->dbTableCalao->insert($dadosCalao);
+        return $insertEntrevista;
     }
     
     public function update(array $request)

@@ -63,8 +63,8 @@ class Application_Model_Tarrafa
             'mnt_id' => $request['id_monitoramento']
         );
         
-        $this->dbTableTarrafa->insert($dadosTarrafa);
-        return;
+        $insertArrasto = $this->dbTableTarrafa->insert($dadosTarrafa);
+        return $insertArrasto;
     }
     
     public function update(array $request)

@@ -64,8 +64,8 @@ class Application_Model_Siripoia
             'sir_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableSiripoia->insert($dadosSiripoia);
-        return;
+        $insertArrasto = $this->dbTableSiripoia->insert($dadosSiripoia);
+        return $insertArrasto;
     }
     
     public function update(array $request)

@@ -72,8 +72,8 @@ private $dbTableMergulho;
             'mer_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableMergulho->insert($dadosMergulho);
-        return;
+        $insertArrasto = $this->dbTableMergulho->insert($dadosMergulho);
+        return $insertArrasto;
     }
     
     public function update(array $request)

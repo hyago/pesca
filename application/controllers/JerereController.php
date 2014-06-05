@@ -83,12 +83,10 @@ class JerereController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
-        $this->modelJerere->insert($this->_getAllParams());
-        $id = $this->modelJerere->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'jerere', null, array('id' => $value));
+        $idJerere = $this->modelJerere->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('jerere/editar/id/'.$idJerere);
     }
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

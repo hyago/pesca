@@ -86,12 +86,10 @@ class VaraPescaController extends Zend_Controller_Action
 
 
     public function criarAction(){
-        $this->modelVaraPesca->insert($this->_getAllParams());
-        $id = $this->modelVaraPesca->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'vara-pesca', null, array('id' => $value));
+        $idVaraPesca = $this->modelVaraPesca->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
     }
     
     public function insertpesqueiroAction(){

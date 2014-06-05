@@ -72,12 +72,10 @@ class FichaDiariaController extends Zend_Controller_Action {
 
     public function criarAction() {
 
-        $this->modelFichaDiaria->insert($this->_getAllParams());
-        $id = $this->modelFichaDiaria->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'ficha-diaria', null, array('id' => $value));
+        $idFichaDiaria = $this->modelFichaDiaria->insert($this->_getAllParams());
+        
+        
+        $this->_redirect("/ficha-diaria/editar/id/" . $idFichaDiaria);
     }
 
     /*

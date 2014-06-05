@@ -84,12 +84,10 @@ class ColetaManualController extends Zend_Controller_Action
 
 
     public function criarAction(){
-        $this->modelColetaManual->insert($this->_getAllParams());
-        $id = $this->modelColetaManual->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'coleta-manual', null, array('id' => $value));
+        $idColetaManual = $this->modelColetaManual->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
     }
     
     public function insertpesqueiroAction(){

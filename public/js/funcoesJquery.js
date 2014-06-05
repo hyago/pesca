@@ -4,19 +4,29 @@ $(document).ready(function() {
         $("#Social").show();
         $("#Filo").hide();
         $("#Dsbq").hide();
+        $("#Entrevista").hide();
     }
     else if ($("fieldset").attr('id') == "Desembarque") {
         $("#Dsbq").show();
         $("#Filo").hide();
         $("#Social").hide();
+        $("#Entrevista").hide();
     }
     else if ($("fieldset").attr('id') == "Filogenia") {
         $("#Dsbq").show();
         $("#Filo").show();
         $("#Social").hide();
-
+        $("#Entrevista").hide();
     }
+    else if ($("fieldset").attr('id') == "Entrevistas"){
+        $("#Dsbq").show();
+        $("#Entrevista").show();
+        $("#Filo").hide();
+        $("#Social").hide();
+    }
+    
     else {
+        $("#Entrevista").hide();
         $("#Dsbq").hide();
         $("#Filo").hide();
         $("#Social").hide();
@@ -31,6 +41,9 @@ $(document).ready(function() {
     $("#for-Filo").click(function() {
         $("#Filo").slideToggle();
     });
+    $("#for-Entrevista").click(function(){
+        $("#Entrevista").slideToggle();
+    })
     //funcoes para menu
 
 

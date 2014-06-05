@@ -81,12 +81,10 @@ class ManzuaController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
-        $this->modelManzua->insert($this->_getAllParams());
-        $id = $this->modelManzua->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'manzua', null, array('id' => $value));
+        $idManzua = $this->modelManzua->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('manzua/editar/id/'.$idManzua);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

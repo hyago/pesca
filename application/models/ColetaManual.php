@@ -63,8 +63,8 @@ private $dbTableColetaManual;
             'cml_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableColetaManual->insert($dadosColetaManual);
-        return;
+        $insertArrasto =$this->dbTableColetaManual->insert($dadosColetaManual);
+        return $insertArrasto;
     }
     
     public function update(array $request)

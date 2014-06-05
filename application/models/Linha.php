@@ -70,8 +70,8 @@ private $dbTableLinha;
             'lin_numanzoisplinha' => $request['numAnzois']
         );
         
-        $this->dbTableLinha->insert($dadosLinha);
-        return;
+        $insertArrasto = $this->dbTableLinha->insert($dadosLinha);
+        return $insertArrasto;
     }
     
     public function update(array $request)

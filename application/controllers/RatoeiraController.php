@@ -82,12 +82,10 @@ class RatoeiraController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
-        $this->modelRatoeira->insert($this->_getAllParams());
-        $id = $this->modelRatoeira->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'ratoeira', null, array('id' => $value));
+        $idRatoeira = $this->modelRatoeira->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('ratoeira/editar/id/'.$idRatoeira);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

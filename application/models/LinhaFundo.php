@@ -70,8 +70,8 @@ class Application_Model_LinhaFundo
             'lf_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableLinhaFundo->insert($dadosLinhaFundo);
-        return;
+        $insertArrasto = $this->dbTableLinhaFundo->insert($dadosLinhaFundo);
+        return $insertArrasto;
     }
     
     public function update(array $request)

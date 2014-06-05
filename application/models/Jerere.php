@@ -63,8 +63,8 @@ class Application_Model_Jerere
             'jre_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableJerere->insert($dadosJerere);
-        return;
+        $insertArrasto = $this->dbTableJerere->insert($dadosJerere);
+        return $insertArrasto;
     }
     
     public function update(array $request)

@@ -60,13 +60,10 @@ class LinhaController extends Zend_Controller_Action
     }
     
     public function criarAction(){
+        $idLinha = $this->modelLinha->insert($this->_getAllParams());
         
-        $this->modelLinha->insert($this->_getAllParams());
-        $id = $this->modelLinha->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'linha', null, array('id' => $value));
+        
+        $this->_redirect('linha/editar/id/'.$idLinha);
     }
     
     public function insertpesqueiroAction(){

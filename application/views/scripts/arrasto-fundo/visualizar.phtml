@@ -1,26 +1,25 @@
-<fieldset id="Social"></fieldset>
-    <form name="indexPescador" method="post">
+<fieldset id="Entrevista"></fieldset>
+    <form name="arrasto-fundo" method="post">
 
-        <h2>Perfil Social->Pescador (lista limitada em 20)</h2>
+        <h2>Perfil Social->Arrasto de Fundo (lista limitada em 20)</h2>
 
         <table>
             <tr>
+                
                 <td>
-                    <a href="<?= $this->url(array("controller" => "pescador", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
-                </td>
-                <td>
-                    <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaPescador('<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
+                    <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>')">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaPescadorId(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
+                    <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaEntrevistaId(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>')">
                     <input type="number" min="0" name="inputId" placeholder="Busca por ID" />
                 </td>
-
                 <td>
-                    <input type="button" size="50" value="Busca por nome" class="button-confirmText" onclick="jsBuscaPescadorNome(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
-                    <input type="text" name="inputNome" placeholder="Busca por Nome" />
+                    <input type="button" size="50" value="Busca por Pescador" class="button-confirmText" onclick="jsBuscaEntrevistaPescador(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>')">
+                    <input type="number" min="0" name="inputPescador" placeholder="Busca por ID" />
+                </td>
+                <td>
                 </td>
             </tr>
         </table>
@@ -30,15 +29,15 @@
         <table>
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
-                <th>Matricula</th>
+                <th>Pescador</th>
+                <th>Barco</th>
             </tr>
 
-            <?php foreach ($this->dados as $key => $pescador): ?>
+            <?php foreach ($this->dados as $key => $entrevista): ?>
                 <tr>
-                    <td><?= $pescador['tp_id'] ?></td>
-                    <td><?= $pescador['tp_nome'] ?></td>
-                    <td><?= $pescador['tp_matricula'] ?></td>
+                    <td><?= $entrevista['af_id'] ?></td>
+                    <td><?= $entrevista['tp_id_entrevistado'] ?></td>
+                    <td><?= $entrevista['bar_id'] ?></td>
 
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "visualizar", "id" => $pescador['tp_id']), null, true) ?>">

@@ -65,8 +65,8 @@ class Application_Model_Ratoeira
             'rat_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableRatoeira->insert($dadosRatoeira);
-        return;
+        $insertArrasto = $this->dbTableRatoeira->insert($dadosRatoeira);
+        return $insertArrasto;
     }
     
     public function update(array $request)

@@ -85,12 +85,10 @@ class SiripoiaController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
-        $this->modelSiripoia->insert($this->_getAllParams());
-        $id = $this->modelSiripoia->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'siripoia', null, array('id' => $value));
+        $idSiripoia = $this->modelSiripoia->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

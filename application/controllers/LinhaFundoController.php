@@ -84,12 +84,10 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
-        $this->modelLinhaFundo->insert($this->_getAllParams());
-        $id = $this->modelLinhaFundo->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'linha-fundo', null, array('id' => $value));
+        $idLinhaFundo = $this->modelLinhaFundo->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
     }
 
     public function insertpesqueiroAction(){

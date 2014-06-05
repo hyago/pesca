@@ -65,8 +65,8 @@ class Application_Model_Manzua
             'man_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableManzua->insert($dadosManzua);
-        return;
+        $insertArrasto = $this->dbTableManzua->insert($dadosManzua);
+        return $insertArrasto;
     }
     
     public function update(array $request)

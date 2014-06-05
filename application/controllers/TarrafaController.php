@@ -76,12 +76,10 @@ class TarrafaController extends Zend_Controller_Action
         
     }
     public function criarAction(){
-        $this->modelTarrafa->insert($this->_getAllParams());
-        $id = $this->modelTarrafa->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'tarrafa', null, array('id' => $value));
+        $idTarrafa = $this->modelTarrafa->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

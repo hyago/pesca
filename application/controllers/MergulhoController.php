@@ -82,12 +82,10 @@ public function init()
     }
 
     public function criarAction(){
-        $this->modelMergulho->insert($this->_getAllParams());
-        $id = $this->modelMergulho->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'mergulho', null, array('id' => $value));
+        $idMergulho = $this->modelMergulho->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('mergulho/editar/id/'.$idMergulho);
     }
     
     public function insertpesqueiroAction(){

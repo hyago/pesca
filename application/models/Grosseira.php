@@ -70,8 +70,8 @@ private $dbTableGrosseira;
             'grs_numanzoisplinha' => $request['numAnzois']
         );
         
-        $this->dbTableGrosseira->insert($dadosGrosseira);
-        return;
+        $insertArrasto = $this->dbTableGrosseira->insert($dadosGrosseira);
+        return $insertArrasto;
     }
     
     public function update(array $request)

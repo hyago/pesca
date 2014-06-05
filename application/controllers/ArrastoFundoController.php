@@ -44,8 +44,20 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
 
     public function visualizarAction(){
+        $ent_id = $this->_getParam("tp_id");
+        $ent_pescador = $this->_getParam("tp_nome");
         
+        if ( $ent_id > 0 ) {
+            $dados = $this->modelArrastoFundo->select("af_id>=". $ent_id, array('af_id'), 20);
+        } elseif ( $ent_pescador ) {
+            $dados = $this->modelArrastoFundo->select("tp_id_entrevistado LIKE '". $ent_pescador."%'", array('tp_id_entrevistado', 'af_id'), 20);            
+        } else {
+            $dados = $this->modelArrastoFundo->select(null, array('tp_id_entrevistado', 'af_id'), 20);
+        }
+
+        $this->view->assign("dados", $dados);
     }
+       
     
     public function editarAction(){
         $entrevistaHasPesqueiro = new Application_Model_DbTable_ArrastoHasPesqueiro();
@@ -80,13 +92,10 @@ class ArrastoFundoController extends Zend_Controller_Action
     
     public function criarAction(){
         
-        $this->modelArrastoFundo->insert($this->_getAllParams());
-        $id = $this->modelArrastoFundo->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $idArrasto = $this->modelArrastoFundo->insert($this->_getAllParams());
         
         
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'arrasto-fundo', null, array('id' => $value));
+        $this->_redirect('arrasto-fundo/editar/id/'.$idArrasto);
     }
     
     public function insertpesqueiroAction(){
@@ -154,6 +163,8 @@ class ArrastoFundoController extends Zend_Controller_Action
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
+    
+
     
 }
 

@@ -71,8 +71,8 @@ class Application_Model_VaraPesca
             'vp_mreviva' => $request['mareviva']
         );
         
-        $this->dbTableVaraPesca->insert($dadosVaraPesca);
-        return;
+        $insertArrasto = $this->dbTableVaraPesca->insert($dadosVaraPesca);
+        return $insertArrasto;
     }
     
     public function update(array $request)

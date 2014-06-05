@@ -71,8 +71,8 @@ class Application_Model_Emalhe
             'mnt_id' => $request['id_monitoramento']
         );
         
-        $this->dbTableEmalhe->insert($dadosEmalhe);
-        return;
+       $insertArrasto = $this->dbTableEmalhe->insert($dadosEmalhe);
+        return $insertArrasto;
     }
     
     public function update(array $request)
