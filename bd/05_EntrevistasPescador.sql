@@ -1371,3 +1371,11 @@ CREATE VIEW V_RATOEIRA_HAS_T_ESPECIE_CAPTURADA AS
 SELECT ENTREVISTA.RAT_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAPT.SPC_PESO_KG, ESPCAPT.SPC_PRECO, ESPCAPT.SPC_RAT_ID
 FROM T_RATOEIRA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_RATOEIRA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.RAT_ID = ESPCAPT.RAT_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
+
+
+--Visualizações
+
+CREATE OR REPLACE VIEW v_entrevista_arrasto AS 
+ SELECT entrevista.af_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_arrastofundo as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
