@@ -744,7 +744,6 @@ class PescadorController extends Zend_Controller_Action {
             $linha++;
         endforeach;       
         
-
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         ob_end_clean();
 
@@ -755,8 +754,56 @@ class PescadorController extends Zend_Controller_Action {
         ob_end_clean();
         $objWriter->save('php://output');
     }
+    
+    public function relpdfpescadorAction() {
 
-        public function relatorioAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $pdfToClone = new Zend_Pdf();
+        $pdfToClone = Zend_Pdf::load('../library/templateRelatorio.pdf');
+        $pageToClone = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+        $pageToClone = clone $pdfToClone->pages[0];
+        $pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
+        $pageToClone->drawText('Relatório de Pescador', 250, 810);
+        $pdfToClone->pages[0] = $pageToClone;
+
+        $pdf = new Zend_Pdf();
+        $page = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+        $page = clone $pdfToClone->pages[0];
+        $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+        
+        $localModelPescador = new Application_Model_Pescador();
+        $localPescador = $localModelPescador->select(NULL, array('tp_nome', 'tp_id'), NULL);
+
+        $linha = 780;
+        $contPag = 1;
+        foreach ($localPescador as $key => $pescador):
+            $page->drawText($pescador['tp_id'], 30, $linha);
+            $page->drawText($pescador['tp_nome'], 70, $linha);
+            
+            if ($linha <= 40) {
+                $page->drawText( 'Página:' . $contPag, 500, 15);
+                $linha = 780;
+                $contPag++;
+                $pdf->pages[] = $page;
+
+                //$page = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+                $page = clone $pdfToClone->pages[0];
+                $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+            }
+            $linha = $linha - 10;
+        endforeach;
+
+        // Adiciona a ultima página
+        $pdf->pages[] = $page;
+        $page->drawText( 'Página:' . $contPag, 500, 15);
+
+        header("Content-Type: application/pdf;");
+        echo $pdf->render();
+    }
+
+    public function relatorioAction() {
 
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
