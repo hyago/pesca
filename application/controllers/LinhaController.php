@@ -25,6 +25,24 @@ class LinhaController extends Zend_Controller_Action
         $this->modelIsca = new Application_Model_Isca();
         
     }
+    public function indexAction()
+    {
+        $pescadores = $this->modelPescador->select(null, 'tp_nome');
+        $barcos = $this->modelBarcos->select();
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        
+        $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        
+        
+        $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        $this->view->assign('fichaDiaria', $fichadiaria);
+        $this->view->assign('monitoramento', $monitoramento);
+        $this->view->assign('pescadores',$pescadores);
+        $this->view->assign('barcos',$barcos);
+        $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
+        
+    
+    }
 
     public function editarAction(){
         $entrevistaHasPesqueiro = new Application_Model_DbTable_LinhaHasPesqueiro();
