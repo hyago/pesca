@@ -372,21 +372,22 @@ COMMIT;
 -- T_ARTEPESCA
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (2, 'Calão');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (3, 'Espinhel/Groseira');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (4, 'Pesca de Linha');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (6, 'Rede (3 malhos, etc)');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (7, 'Tarrafa');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (9, 'Gereré');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (11, 'Manzuá');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (12, 'Ratoeira');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (13, 'Catagem');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (14, 'Mergulho');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (15, 'Mariscagem');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (1, 'Arrasto de fundo');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (5, 'Rede de emalhar');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (8, 'Vara de pesca');
-INSERT INTO t_artepesca (tap_id, tap_artepesca) VALUES (10, 'Sriripóia');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (2, 'Calão', 'Calão', '');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (3, 'Espinhel/Groseira', 'Espinhel/Groseira');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (4, 'Pesca de Linha', 'Pesca de Linha');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (6, 'Rede (3 malhos, etc)');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (7, 'Tarrafa', 'Tarrafa');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (9, 'Jereré', 'Jereré');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (11, 'Manzuá', 'Manzuá');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (12, 'Ratoeira', 'Ratoeira');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (13, 'Coleta Manual', 'Coleta Manual');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (14, 'Mergulho', 'Mergulho');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (15, 'Mariscagem', '');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (1, 'Arrasto de fundo', 'Arrasto de Fundo');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (5, 'Rede de emalhar', 'Emalhe');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (8, 'Vara de pesca', 'Vara de Pesca');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (10, 'Siripóia', 'Siripóia');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (16, 'Linha de Fundo', 'Linha de Fundo)';
 COMMIT;
 
 -- -----------------------------------------------------
