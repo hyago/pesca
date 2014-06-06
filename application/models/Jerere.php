@@ -198,7 +198,18 @@ class Application_Model_Jerere
         
         $this->dbTableTJerereHasEspCapturada->delete($whereJerereHasEspCapturada);
     }
+    public function selectEntrevistaJerere($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableJerere = new Application_Model_DbTable_VEntrevistaJerere();
+        $select = $this->dbTableJerere->select()
+                ->from($this->dbTableJerere)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableJerere->fetchAll($select)->toArray();
+    }
 
 }
 

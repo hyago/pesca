@@ -193,7 +193,18 @@ class Application_Model_Siripoia
         
         $this->dbTableTSiripoiaHasEspCapturada->delete($whereSiripoiaHasEspCapturada);
     }
+    public function selectEntrevistaSiripoia($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableSiripoia = new Application_Model_DbTable_VEntrevistaSiripoia();
+        $select = $this->dbTableSiripoia->select()
+                ->from($this->dbTableSiripoia)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableSiripoia->fetchAll($select)->toArray();
+    }
 
 }
 

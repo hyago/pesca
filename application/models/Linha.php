@@ -203,6 +203,17 @@ private $dbTableLinha;
         
         $this->dbTableTLinhaHasEspCapturada->delete($whereLinhaHasEspCapturada);
     }
+    public function selectEntrevistaLinha($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableLinha = new Application_Model_DbTable_VEntrevistaLinha();
+        $select = $this->dbTableLinha->select()
+                ->from($this->dbTableLinha)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableLinha->fetchAll($select)->toArray();
+    }
 }
 

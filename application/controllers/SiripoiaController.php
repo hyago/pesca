@@ -52,7 +52,23 @@ class SiripoiaController extends Zend_Controller_Action
     }
 
     public function visualizarAction(){
+        $ent_id = $this->_getParam("ent_id");
+        $ent_pescador = $this->_getParam("tp_nome");
+        $ent_barco = $this->_getParam("bar_nome");
         
+        if ( $ent_id > 0 ) {
+            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("sir_id>=". $ent_id, array('sir_id'), 20);
+        } elseif ( $ent_pescador ) {
+            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'sir_id'), 20);
+         }
+          elseif ($ent_barco){
+              $dados = $this->modelSiripoia->selectEntrevistaSiripoia("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'sir_id'), 20);
+          }
+         else {
+            $dados = $this->modelSiripoia->selectEntrevistaSiripoia(null, array( 'fd_id', 'tp_nome'), 20);
+        }
+        
+        $this->view->assign("dados", $dados);
     }
     
     public function editarAction(){

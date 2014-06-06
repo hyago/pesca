@@ -203,6 +203,17 @@ private $dbTableGrosseira;
         
         $this->dbTableTGrosseiraHasEspCapturada->delete($whereGrosseiraHasEspCapturada);
     }
+    public function selectEntrevistaGrosseira($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableGrosseira = new Application_Model_DbTable_VEntrevistaGrosseira();
+        $select = $this->dbTableGrosseira->select()
+                ->from($this->dbTableGrosseira)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableGrosseira->fetchAll($select)->toArray();
+    }
 }
 

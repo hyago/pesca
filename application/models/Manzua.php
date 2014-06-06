@@ -195,7 +195,18 @@ class Application_Model_Manzua
         
         $this->dbTableTManzuaHasEspCapturada->delete($whereManzuaHasEspCapturada);
     }
+    public function selectEntrevistaManzua($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableManzua = new Application_Model_DbTable_VEntrevistaManzua();
+        $select = $this->dbTableManzua->select()
+                ->from($this->dbTableManzua)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableManzua->fetchAll($select)->toArray();
+    }
 
 
 

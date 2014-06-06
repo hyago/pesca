@@ -206,5 +206,18 @@ class Application_Model_VaraPesca
         
         $this->dbTableTVaraPescaHasEspCapturada->delete($whereVaraPescaHasEspCapturada);
     }
+    
+    public function selectEntrevistaVaraPesca($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableVaraPesca = new Application_Model_DbTable_VEntrevistaVaraPesca();
+        $select = $this->dbTableVaraPesca->select()
+                ->from($this->dbTableVaraPesca)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableVaraPesca->fetchAll($select)->toArray();
+    }
 }
 
