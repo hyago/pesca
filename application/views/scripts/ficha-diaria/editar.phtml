@@ -145,9 +145,11 @@
 
                 <input type="hidden" name="id_fichaDiaria"  value="<?= $this->fichadiaria['fd_id'] ?>"/>
                 <select name="SelectArtePesca" id="artePesca">
-                    <?php foreach ($this->artesPesca as $key => $artePesca): ?>
-                        <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_artepesca']; ?></option>
-                    <?php endforeach; ?>
+                    <?php foreach ($this->artesPesca as $key => $artePesca): 
+                        if($artePesca['tap_arteficha'] != ""){?>
+                       
+                        <option value="<?= $artePesca['tap_id']; ?>"><?= $artePesca['tap_arteficha']; ?></option>
+                        <?php }endforeach; ?>
                 </select>
             </div>
 
