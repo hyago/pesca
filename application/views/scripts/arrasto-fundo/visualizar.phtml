@@ -19,7 +19,10 @@
                     <input type="button" size="50" value="Busca por Pescador" class="button-confirmText" onclick="jsBuscaPescadorEntrevista(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>')">
                     <input type="text" min="0" name="inputPescador" placeholder="Busca por Pescador" />
                 </td>
+                
                 <td>
+                    <input type="button" size="50" value="Busca por Barco" class="button-confirmText" onclick="jsBuscaBarcoEntrevista(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>')">
+                    <input type="text" min="0" name="inputBarco" placeholder="Busca por Pescador" />
                 </td>
             </tr>
         </table>

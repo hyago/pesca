@@ -1,0 +1,66 @@
+<fieldset id="Entrevista"></fieldset>
+    <form name="manzua" method="post">
+
+        <h2>Entrevistas Cadastradas->Pesca de Manzuá (lista limitada em 20)</h2>
+
+        <table>
+            <tr>
+                
+                <td>
+                    <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaEntrevistaId(this.form, '<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
+                    <input type="number" min="0" name="inputId" placeholder="Busca por ID" />
+                </td>
+                <td>
+                    <input type="button" size="50" value="Busca por Pescador" class="button-confirmText" onclick="jsBuscaPescadorEntrevista(this.form, '<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
+                    <input type="text" min="0" name="inputPescador" placeholder="Busca por Pescador" />
+                </td>
+                
+                <td>
+                    <input type="button" size="50" value="Busca por Barco" class="button-confirmText" onclick="jsBuscaBarcoEntrevista(this.form, '<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
+                    <input type="text" min="0" name="inputBarco" placeholder="Busca por Pescador" />
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Ficha Diária</th>
+                <th>Monitoramento</th>
+                <th>Entrevista</th>
+                <th>Pescador</th>
+                <th>Barco</th>
+            </tr>
+
+            <?php foreach ($this->dados as $key => $entrevista): ?>
+                <tr>
+                    <td><?= $entrevista['fd_id']?></td>
+                    <td><?= $entrevista['mnt_id'] ?></td>
+                    <td><?= $entrevista['man_id'] ?></td>
+                    <td><?= $entrevista['tp_nome'] ?></td>
+                    <td><?= $entrevista['bar_nome'] ?></td>
+                    
+                    <td class="td-botao">
+                        <a href="<?= $this->url(array("controller" => "manzua", "action" => "editar", "id" => $entrevista['man_id']), null, true) ?>">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                            </ul>
+                        </a>
+                    </td>
+
+                    <td class="td-botao">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "manzua", "action" => "excluir", "id" => $entrevista['tp_id']), null, true) ?>')">
+                    </td>
+
+                    </a>
+
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <br/><br/>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+    </form>
+</html>

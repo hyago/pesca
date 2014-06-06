@@ -194,6 +194,18 @@ class Application_Model_Ratoeira
         
         $this->dbTableTRatoeiraHasEspCapturada->delete($whereRatoeiraHasEspCapturada);
     }
+    public function selectEntrevistaRatoeira($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableRatoeira = new Application_Model_DbTable_VEntrevistaRatoeira();
+        $select = $this->dbTableRatoeira->select()
+                ->from($this->dbTableRatoeira)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableRatoeira->fetchAll($select)->toArray();
+    }
 
 }
 

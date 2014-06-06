@@ -367,6 +367,7 @@ CREATE TABLE IF NOT EXISTS T_COLONIA (
 CREATE TABLE IF NOT EXISTS T_ARTEPESCA (
  TAP_ID SERIAL,
  TAP_ARTEPESCA VARCHAR(50) NOT NULL,
+ tap_arteficha Varchar(50) null,
  PRIMARY KEY (TAP_ID),
  UNIQUE (TAP_ARTEPESCA)
 );
@@ -681,12 +682,13 @@ CREATE TABLE IF NOT EXISTS T_ESPECIE (
 -- -----------------------------------------------------
 -- TABLE T_SUBAMOSTRA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_SUBAMOSTRA (
- SA_ID SERIAL,
- SA_SUBAMOSTRA VARCHAR(100) NULL,
- PRIMARY KEY (SA_ID)
+CREATE TABLE t_subamostra
+(
+  sa_id serial NOT NULL,
+  sa_pescador text,
+  sa_datachegada date,
+  CONSTRAINT t_subamostra_pkey PRIMARY KEY (sa_id)
 );
-
 -- -----------------------------------------------------
 -- TABLE T_PORTO
 -- -----------------------------------------------------
@@ -1108,81 +1110,6 @@ CREATE OR REPLACE VIEW v_monitoramentobyficha AS
    FROM t_monitoramento, t_ficha_diaria, t_artepesca
   WHERE t_monitoramento.fd_id = t_ficha_diaria.fd_id AND t_monitoramento.mnt_arte = t_artepesca.tap_id;
 
-
-Drop view v_arrasto_has_t_pesqueiro;
-Drop view v_varapesca_has_t_pesqueiro;
-Drop view v_tarrafa_has_t_pesqueiro;
-Drop view v_siripoia_has_t_pesqueiro;
-Drop view v_ratoeira_has_t_pesqueiro;
-Drop view v_mergulho_has_t_pesqueiro;
-Drop view v_manzua_has_t_pesqueiro;
-Drop view v_linhafundo_has_t_pesqueiro;
-Drop view v_linha_has_t_pesqueiro;
-Drop view v_jerere_has_t_pesqueiro;
-Drop view v_grosseira_has_t_pesqueiro;
-Drop view v_coletamanual_has_t_pesqueiro;
-Drop view v_emalhe_has_t_pesqueiro;
-Drop view v_calao_has_t_pesqueiro;
-
-Drop Table t_calao_has_t_pesqueiro;
-Drop Table t_emalhe_has_t_pesqueiro;
-Drop Table t_coletamanual_has_t_pesqueiro;
-Drop Table t_grosseira_has_t_pesqueiro;
-Drop Table t_jerere_has_t_pesqueiro;
-Drop Table t_linha_has_t_pesqueiro;
-Drop Table t_linhafundo_has_t_pesqueiro;
-Drop Table t_manzua_has_t_pesqueiro;
-Drop Table t_mergulho_has_t_pesqueiro;
-Drop Table t_ratoeira_has_t_pesqueiro;
-Drop Table t_siripoia_has_t_pesqueiro;
-Drop Table t_tarrafa_has_t_pesqueiro;
-Drop Table t_varapesca_has_t_pesqueiro;
-Drop Table t_arrastofundo_has_t_pesqueiro;
-
-Drop view v_arrastofundo_has_t_especie_capturada;
-Drop view v_varapesca_has_t_especie_capturada;
-Drop view v_tarrafa_has_t_especie_capturada;
-Drop view v_siripoia_has_t_especie_capturada;
-Drop view v_ratoeira_has_t_especie_capturada;
-Drop view v_mergulho_has_t_especie_capturada;
-Drop view v_manzua_has_t_especie_capturada;
-Drop view v_linhafundo_has_t_especie_capturada;
-Drop view v_linha_has_t_especie_capturada;
-Drop view v_jerere_has_t_especie_capturada;
-Drop view v_grosseira_has_t_especie_capturada;
-Drop view v_coletamanual_has_t_especie_capturada;
-Drop view v_emalhe_has_t_especie_capturada;
-Drop view v_calao_has_t_especie_capturada;
-
-Drop Table t_calao_has_t_especie_capturada;
-Drop Table t_emalhe_has_t_especie_capturada;
-Drop Table t_coletamanual_has_t_especie_capturada;
-Drop Table t_grosseira_has_t_especie_capturada;
-Drop Table t_jerere_has_t_especie_capturada;
-Drop Table t_linha_has_t_especie_capturada;
-Drop Table t_linhafundo_has_t_especie_capturada;
-Drop Table t_manzua_has_t_especie_capturada;
-Drop Table t_mergulho_has_t_especie_capturada;
-Drop Table t_ratoeira_has_t_especie_capturada;
-Drop Table t_siripoia_has_t_especie_capturada;
-Drop Table t_tarrafa_has_t_especie_capturada;
-Drop Table t_varapesca_has_t_especie_capturada;
-Drop Table t_arrastofundo_has_t_especie_capturada;
-
-Drop table t_arrastofundo;
-Drop table t_varapesca;
-Drop table t_tarrafa;
-Drop table t_siripoia;
-Drop table t_ratoeira;
-Drop table t_mergulho;
-Drop table t_manzua;
-Drop table t_linhafundo;
-Drop table t_linha;
-Drop table t_jerere;
-Drop table t_grosseira;
-Drop table t_coletamanual;
-Drop table t_emalhe;
-Drop table t_calao;
 
 -- Table: t_barco
 
@@ -2489,5 +2416,82 @@ CREATE OR REPLACE VIEW v_entrevista_arrasto AS
  SELECT entrevista.af_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
    FROM t_arrastofundo as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
   WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+CREATE OR REPLACE VIEW v_entrevista_calao AS 
+ SELECT entrevista.cal_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_calao as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+CREATE OR REPLACE VIEW v_entrevista_coletamanual AS 
+ SELECT entrevista.cml_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_coletamanual as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+CREATE OR REPLACE VIEW v_entrevista_emalhe AS 
+ SELECT entrevista.em_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_emalhe as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+
+
+CREATE OR REPLACE VIEW v_entrevista_grosseira AS 
+ SELECT entrevista.grs_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_grosseira as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+CREATE OR REPLACE VIEW v_entrevista_jerere AS 
+ SELECT entrevista.jre_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_jerere as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+CREATE OR REPLACE VIEW v_entrevista_linha AS 
+ SELECT entrevista.lin_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_linha as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+CREATE OR REPLACE VIEW v_entrevista_linhafundo AS 
+ SELECT entrevista.lf_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_linhafundo as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+CREATE OR REPLACE VIEW v_entrevista_manzua AS 
+ SELECT entrevista.man_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_manzua as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+CREATE OR REPLACE VIEW v_entrevista_mergulho AS 
+ SELECT entrevista.mer_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_mergulho as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+CREATE OR REPLACE VIEW v_entrevista_ratoeira AS 
+ SELECT entrevista.rat_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_ratoeira as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+CREATE OR REPLACE VIEW v_entrevista_siripoia AS 
+ SELECT entrevista.sir_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_siripoia as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+CREATE OR REPLACE VIEW v_entrevista_varapesca AS 
+ SELECT entrevista.vp_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_varapesca as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+
+
+
+
+
+
+
+
 
 

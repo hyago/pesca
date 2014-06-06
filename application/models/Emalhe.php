@@ -203,7 +203,19 @@ class Application_Model_Emalhe
         
         $this->dbTableTEmalheHasEspCapturada->delete($whereEmalheHasEspCapturada);
     }
+    public function selectEntrevistaEmalhe($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableEmalhe = new Application_Model_DbTable_VEntrevistaEmalhe();
+        $select = $this->dbTableEmalhe->select()
+                ->from($this->dbTableEmalhe)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableEmalhe->fetchAll($select)->toArray();
+    }
+    
 
 
 }

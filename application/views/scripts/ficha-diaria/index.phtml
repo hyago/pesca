@@ -44,33 +44,31 @@
 
     </tr>
 
-    <?php
-    foreach ($this->dados as $key => $fichadiaria):
-        ?>
-        <tr>
-            <td width="10%"><?= $fichadiaria['fd_id'] ?></td>
-            <td width="10%"><?= $fichadiaria['fd_data'] ?></td>
-            <td width="5%"><?= $fichadiaria['fd_turno'] ?></td>
-            <td width="10%"><?= $fichadiaria['pto_nome'] ?></td>
-            <td width="7%"><?= $fichadiaria['tmp_estado'] ?></td>
-            <td width="8%"><?= $fichadiaria['vnt_forca'] ?></td>
-            <td width="20%"><?= $fichadiaria['t_estagiario'] ?></td>
-            <td width="20%"><?= $fichadiaria['t_monitor'] ?></td>
-            <td width="5%" class="td-botao">
-                <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "", "id" => $fichadiaria['fd_id']), null, true) ?>">
-                    <ul id="icons" class="ui-widget ui-helper-clearfix">
-                        <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
-                    </ul>
-                </a>
-            </td>
-            <td width="5%" class="td-botao">
-                <a href="<?= $this->url(array("controller" => "especie", "action" => "excluir", "id" => $fichadiaria['fd_id']), null, true) ?>">
-                    <ul id="icons" class="ui-widget ui-helper-clearfix">
-                        <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
-                    </ul>
-                </a>
-            </td>
-        </tr>
+    <?php foreach ($this->dados as $key => $fichadiaria): ?>
+    <tr>
+        <td width="10%"><?= $fichadiaria['fd_id'] ?></td>
+        <td width="10%"><?= $fichadiaria['fd_data'] ?></td>
+        <td width="5%"><?= $fichadiaria['fd_turno'] ?></td>
+        <td width="10%"><?= $fichadiaria['pto_nome'] ?></td>
+        <td width="7%"><?= $fichadiaria['tmp_estado'] ?></td>
+        <td width="8%"><?= $fichadiaria['vnt_forca'] ?></td>
+        <td width="20%"><?= $fichadiaria['t_estagiario'] ?></td>
+        <td width="20%"><?= $fichadiaria['t_monitor'] ?></td>
+        <td width="5%" class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"editar", "id" => $fichadiaria['fd_id']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                </ul>
+            </a>
+        </td>
+        <td width="5%" class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $fichadiaria['fd_id']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                </ul>
+            </a>
+        </td>
+    </tr>
     <?php endforeach; ?>
 </table>
  </form>

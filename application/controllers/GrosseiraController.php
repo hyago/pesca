@@ -50,7 +50,23 @@ class GrosseiraController extends Zend_Controller_Action
     }
 
     public function visualizarAction(){
+        $ent_id = $this->_getParam("ent_id");
+        $ent_pescador = $this->_getParam("tp_nome");
+        $ent_barco = $this->_getParam("bar_nome");
         
+        if ( $ent_id > 0 ) {
+            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("grs_id>=". $ent_id, array('grs_id'), 20);
+        } elseif ( $ent_pescador ) {
+            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'grs_id'), 20);
+         }
+          elseif ($ent_barco){
+              $dados = $this->modelGrosseira->selectEntrevistaGrosseira("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'grs_id'), 20);
+          }
+         else {
+            $dados = $this->modelGrosseira->selectEntrevistaGrosseira(null, array( 'fd_id', 'tp_nome'), 20);
+        }
+        
+        $this->view->assign("dados", $dados);
     }
     
     public function editarAction(){

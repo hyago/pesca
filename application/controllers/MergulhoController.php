@@ -48,7 +48,23 @@ public function init()
     }
 
     public function visualizarAction(){
+        $ent_id = $this->_getParam("ent_id");
+        $ent_pescador = $this->_getParam("tp_nome");
+        $ent_barco = $this->_getParam("bar_nome");
         
+        if ( $ent_id > 0 ) {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("mer_id>=". $ent_id, array('mer_id'), 20);
+        } elseif ( $ent_pescador ) {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'mer_id'), 20);
+         }
+          elseif ($ent_barco){
+              $dados = $this->modelMergulho->selectEntrevistaMergulho("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'mer_id'), 20);
+          }
+         else {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho(null, array( 'fd_id', 'tp_nome'), 20);
+        }
+        
+        $this->view->assign("dados", $dados);
     }
     
     public function editarAction(){

@@ -1,2 +1,7 @@
 /nbproject/
 /library/
+*~
+*.swp
+
+/application/layouts/**/*
+/public/css/**/*
