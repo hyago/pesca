@@ -128,6 +128,31 @@ function scrollTo(hash) {
     location.hash = '';
 }
 
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsClearBuscaFichaDiaria( pag )
+{
+    location.hash = '';
+    location.replace(pag);
+}
+
+function jsBuscaFichaDiariaId( frm, pag )
+{
+    if ( frm.inputId.value ) {
+        var tmpUpdate = (pag + '/index/fd_id/' + frm.inputId.value  );
+               
+        location.replace( tmpUpdate );
+    }
+}
+
+function jsBuscaFichaDiariaPortoData( frm, pag )
+{
+    if ( frm.selectPortoName.value ) {
+        var tmpUpdate = (pag + '/index/pto_id/' + frm.selectPortoName.value +'/fd_data/'+ frm.inputDate.value );
+        
+        location.replace( tmpUpdate );
+    }
+}
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsInsertPescadorEndereco( frm, pag )
 {

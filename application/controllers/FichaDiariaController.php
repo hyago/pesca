@@ -28,10 +28,40 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function indexAction() {
-        $dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
+        $fd_id = $this->_getParam("fd_id");
+        $pto_id = $this->_getParam("pto_id");
+        $fd_data = $this->_getParam("fd_data");
+        
+        if ( $fd_id > 0 ) {
+            $dados = $this->modelFichaDiaria->selectView("fd_id>=". $fd_id, array('fd_id'), 25);
+            //$dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
+        } elseif ( $pto_id ) {
+            if ( $fd_data ) {
+                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id ." and fd_data = '". $fd_data."'" , NULL, 25);            
+            } else {
+                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id , NULL, 25);            
+            }
+        } else {
+            $dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
+        }
+         
+        $dadosPorto = $this->modelPorto->select();
+        //$dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
 
+        $this->view->assign("assignDadosPorto", $dadosPorto);
         $this->view->assign("dados", $dados);
     }
+    
+//            $tp_id = $this->_getParam("tp_id");
+//        $tp_nome = $this->_getParam("tp_nome");
+//        
+//        if ( $tp_id > 0 ) {
+//            $dados = $this->modelPescador->select("tp_id>=". $tp_id, array('tp_id'), 20);
+//        } elseif ( $tp_nome ) {
+//            $dados = $this->modelPescador->select("tp_nome LIKE '". $tp_nome."%'", array('tp_nome', 'tp_id'), 20);            
+//        } else {
+//            $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'), 20);
+//        }
 
     /*
      * Exibe formulário para cadastro de um usuário

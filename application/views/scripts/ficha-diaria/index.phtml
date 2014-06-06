@@ -1,7 +1,36 @@
 <h2>Desembarque->Ficha Diária</h2>
 
-<a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"novo"),null,true)?>" id="botao-ancora">Novo</a>
 <fieldset id="Desembarque"></fieldset>
+ <form name="indexFichaDiaria" method="post">
+<table>
+    <tr>
+        <td>
+            <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
+        </td>
+        <td>
+            <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaFichaDiaria('<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
+        </td>
+    </tr>
+</table>
+<table
+    <tr>
+        <td>
+            <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaFichaDiariaId(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
+            <input type="number" min="0" name="inputId" placeholder="Busca por ID" />
+        </td>
+        <td>
+            <input type="button" size="50" value="Busca por Porto" class="button-confirmText" onclick="jsBuscaFichaDiariaPortoData(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
+            <input type="date" name="inputDate" placeholder="Busca por Nome" />
+            <div id="form-dir">
+                <select name="selectPortoName" id="selectPortoID">
+                    <?php foreach ($this->assignDadosPorto as $key => $localPorto): ?>
+                        <option value="<?= $localPorto['pto_id']; ?>"><?= $localPorto['pto_nome']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </td>        
+    </tr>
+</table>
 <table>
     <tr>
         <th>ID</th>
@@ -12,35 +41,36 @@
         <th>Vento</th>
         <th>Estagiário</th>
         <th>Monitor</th>
-        
+
     </tr>
-    
+
     <?php
     foreach ($this->dados as $key => $fichadiaria):
-    ?>
-    <tr>
-        <td width="10%"><?= $fichadiaria['fd_id'] ?></td>
-        <td width="10%"><?= $fichadiaria['fd_data'] ?></td>
-        <td width="5%"><?= $fichadiaria['fd_turno'] ?></td>
-        <td width="10%"><?= $fichadiaria['pto_nome'] ?></td>
-        <td width="7%"><?= $fichadiaria['tmp_estado'] ?></td>
-        <td width="8%"><?= $fichadiaria['vnt_forca'] ?></td>
-        <td width="20%"><?= $fichadiaria['t_estagiario'] ?></td>
-        <td width="20%"><?= $fichadiaria['t_monitor'] ?></td>
-        <td width="5%" class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"", "id" => $fichadiaria['fd_id']),null,true)?>">
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
-                </ul>
-            </a>
-        </td>
-        <td width="5%" class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"especie","action"=>"excluir", "id" => $fichadiaria['fd_id']),null,true)?>">
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
-                </ul>
-            </a>
-        </td>
-    </tr>
+        ?>
+        <tr>
+            <td width="10%"><?= $fichadiaria['fd_id'] ?></td>
+            <td width="10%"><?= $fichadiaria['fd_data'] ?></td>
+            <td width="5%"><?= $fichadiaria['fd_turno'] ?></td>
+            <td width="10%"><?= $fichadiaria['pto_nome'] ?></td>
+            <td width="7%"><?= $fichadiaria['tmp_estado'] ?></td>
+            <td width="8%"><?= $fichadiaria['vnt_forca'] ?></td>
+            <td width="20%"><?= $fichadiaria['t_estagiario'] ?></td>
+            <td width="20%"><?= $fichadiaria['t_monitor'] ?></td>
+            <td width="5%" class="td-botao">
+                <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "", "id" => $fichadiaria['fd_id']), null, true) ?>">
+                    <ul id="icons" class="ui-widget ui-helper-clearfix">
+                        <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                    </ul>
+                </a>
+            </td>
+            <td width="5%" class="td-botao">
+                <a href="<?= $this->url(array("controller" => "especie", "action" => "excluir", "id" => $fichadiaria['fd_id']), null, true) ?>">
+                    <ul id="icons" class="ui-widget ui-helper-clearfix">
+                        <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
+                    </ul>
+                </a>
+            </td>
+        </tr>
     <?php endforeach; ?>
 </table>
+ </form>
