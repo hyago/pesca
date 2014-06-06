@@ -687,7 +687,7 @@ CREATE TABLE t_subamostra
   sa_pescador text,
   sa_datachegada date,
   CONSTRAINT t_subamostra_pkey PRIMARY KEY (sa_id)
-)
+);
 -- -----------------------------------------------------
 -- TABLE T_PORTO
 -- -----------------------------------------------------
@@ -1109,81 +1109,6 @@ CREATE OR REPLACE VIEW v_monitoramentobyficha AS
    FROM t_monitoramento, t_ficha_diaria, t_artepesca
   WHERE t_monitoramento.fd_id = t_ficha_diaria.fd_id AND t_monitoramento.mnt_arte = t_artepesca.tap_id;
 
-
-Drop view v_arrasto_has_t_pesqueiro;
-Drop view v_varapesca_has_t_pesqueiro;
-Drop view v_tarrafa_has_t_pesqueiro;
-Drop view v_siripoia_has_t_pesqueiro;
-Drop view v_ratoeira_has_t_pesqueiro;
-Drop view v_mergulho_has_t_pesqueiro;
-Drop view v_manzua_has_t_pesqueiro;
-Drop view v_linhafundo_has_t_pesqueiro;
-Drop view v_linha_has_t_pesqueiro;
-Drop view v_jerere_has_t_pesqueiro;
-Drop view v_grosseira_has_t_pesqueiro;
-Drop view v_coletamanual_has_t_pesqueiro;
-Drop view v_emalhe_has_t_pesqueiro;
-Drop view v_calao_has_t_pesqueiro;
-
-Drop Table t_calao_has_t_pesqueiro;
-Drop Table t_emalhe_has_t_pesqueiro;
-Drop Table t_coletamanual_has_t_pesqueiro;
-Drop Table t_grosseira_has_t_pesqueiro;
-Drop Table t_jerere_has_t_pesqueiro;
-Drop Table t_linha_has_t_pesqueiro;
-Drop Table t_linhafundo_has_t_pesqueiro;
-Drop Table t_manzua_has_t_pesqueiro;
-Drop Table t_mergulho_has_t_pesqueiro;
-Drop Table t_ratoeira_has_t_pesqueiro;
-Drop Table t_siripoia_has_t_pesqueiro;
-Drop Table t_tarrafa_has_t_pesqueiro;
-Drop Table t_varapesca_has_t_pesqueiro;
-Drop Table t_arrastofundo_has_t_pesqueiro;
-
-Drop view v_arrastofundo_has_t_especie_capturada;
-Drop view v_varapesca_has_t_especie_capturada;
-Drop view v_tarrafa_has_t_especie_capturada;
-Drop view v_siripoia_has_t_especie_capturada;
-Drop view v_ratoeira_has_t_especie_capturada;
-Drop view v_mergulho_has_t_especie_capturada;
-Drop view v_manzua_has_t_especie_capturada;
-Drop view v_linhafundo_has_t_especie_capturada;
-Drop view v_linha_has_t_especie_capturada;
-Drop view v_jerere_has_t_especie_capturada;
-Drop view v_grosseira_has_t_especie_capturada;
-Drop view v_coletamanual_has_t_especie_capturada;
-Drop view v_emalhe_has_t_especie_capturada;
-Drop view v_calao_has_t_especie_capturada;
-
-Drop Table t_calao_has_t_especie_capturada;
-Drop Table t_emalhe_has_t_especie_capturada;
-Drop Table t_coletamanual_has_t_especie_capturada;
-Drop Table t_grosseira_has_t_especie_capturada;
-Drop Table t_jerere_has_t_especie_capturada;
-Drop Table t_linha_has_t_especie_capturada;
-Drop Table t_linhafundo_has_t_especie_capturada;
-Drop Table t_manzua_has_t_especie_capturada;
-Drop Table t_mergulho_has_t_especie_capturada;
-Drop Table t_ratoeira_has_t_especie_capturada;
-Drop Table t_siripoia_has_t_especie_capturada;
-Drop Table t_tarrafa_has_t_especie_capturada;
-Drop Table t_varapesca_has_t_especie_capturada;
-Drop Table t_arrastofundo_has_t_especie_capturada;
-
-Drop table t_arrastofundo;
-Drop table t_varapesca;
-Drop table t_tarrafa;
-Drop table t_siripoia;
-Drop table t_ratoeira;
-Drop table t_mergulho;
-Drop table t_manzua;
-Drop table t_linhafundo;
-Drop table t_linha;
-Drop table t_jerere;
-Drop table t_grosseira;
-Drop table t_coletamanual;
-Drop table t_emalhe;
-Drop table t_calao;
 
 -- Table: t_barco
 
