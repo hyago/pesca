@@ -13,17 +13,18 @@
 
 class IndexController extends Zend_Controller_Action
 {
-private $usuario;
+
     public function init()
     {   
         if(Zend_Auth::getInstance()->hasIdentity()){
             $this->_helper->layout->setLayout('admin');
         }      
+        
     }
 
     public function indexAction()
     {
-        
+
     }
 
 

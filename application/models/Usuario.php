@@ -28,6 +28,13 @@ class Application_Model_Usuario {
         $arr = $dao->find($id)->toArray();
         return $arr[0];
     }
+    public function selectLogin($loginId){
+        $usuario = new Application_Model_DbTable_VUsuario();
+        $zendObj = $usuario->select()->from($usuario)->where("tl_id= ".$loginId);
+        
+        $array = $usuario->fetchAll($zendObj)->toArray();
+        return $array[0];
+    }
 
     public function insert(array $request) {
         
@@ -120,5 +127,5 @@ class Application_Model_Usuario {
 
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
     }
-
+   
 }

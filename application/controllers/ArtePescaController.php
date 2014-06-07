@@ -37,11 +37,6 @@ class ArtePescaController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->find($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
-        
-        
-        
-        
         $this->modelArtePesca = new Application_Model_ArtePesca();
     }
 

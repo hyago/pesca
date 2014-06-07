@@ -1,0 +1,27 @@
+<form id="cadastro-usuario" action="<?= $this->url(array("controller" => "usuarios", "action" => "senha"), null, true) ?>" method="post">
+    <fieldset id="Usuarios">
+
+        <div id="esquerda">
+            <div id="form-esq">
+                <label>Usuário: </label>
+                <select name="login"> 
+                <option name="idUsuario" value="<?= $this->usuario['tl_id'] ?>"><?= $this->usuario['tl_login'] ?></option>
+                </select>
+            </div>
+
+            <div id="form-esq">
+                <label for="nome">Senha atual</label>
+                <input type="password" required="true" name="SenhaAntiga" id="nome" placeholder="Senha Anterior"/>
+            </div>
+
+            <div id="form-esq">
+                <label for="login-form">Nova Senha</label>
+                <input type="password" required="true" name="novaSenha" id="login-form" placeholder="Nova Senha"/>
+            </div>
+            <div id="Submit">
+                
+                <input type="submit" value="Alterar Senha"/>
+            </div>
+            
+    </fieldset>
+</form>
