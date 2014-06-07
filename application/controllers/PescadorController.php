@@ -754,6 +754,20 @@ class PescadorController extends Zend_Controller_Action {
         ob_end_clean();
         $objWriter->save('php://output');
     }
+
+    
+        public function getTextWidth($text, Zend_Pdf_Resource_Font $font, $font_size) 
+    {
+        $drawing_text = iconv('', 'UTF-16BE', $text);
+        $characters    = array();
+        for ($i = 0; $i < strlen($drawing_text); $i++) {
+            $characters[] = (ord($drawing_text[$i++]) << 8) | ord ($drawing_text[$i]);
+        }
+        $glyphs        = $font->glyphNumbersForCharacters($characters);
+        $widths        = $font->widthsForGlyphs($glyphs);
+        $text_width   = (array_sum($widths) / $font->getUnitsPerEm()) * $font_size;
+        return $text_width; 
+    }
     
     public function relpdfpescadorAction() {
 
@@ -765,7 +779,13 @@ class PescadorController extends Zend_Controller_Action {
         $pageToClone = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
         $pageToClone = clone $pdfToClone->pages[0];
         $pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
-        $pageToClone->drawText('Relatório de Pescador', 250, 810);
+        //$pageToClone->drawText('Relatório de Pescador', 250, 810);
+        
+        $text = 'Relatório de Pescador';
+        $textWidth = $this->getTextWidth($text, $pageToClone->getFont(),  $pageToClone->getFontSize() );
+        $pageToClone->drawText($text,  ($pageToClone->getWidth()/2) - ($textWidth /2), 820);
+        
+        
         $pdfToClone->pages[0] = $pageToClone;
 
         $pdf = new Zend_Pdf();
@@ -779,11 +799,16 @@ class PescadorController extends Zend_Controller_Action {
         $linha = 780;
         $contPag = 1;
         foreach ($localPescador as $key => $pescador):
-            $page->drawText($pescador['tp_id'], 30, $linha);
+            //$page->drawText($pescador['tp_id'], 30, $linha);
+        
+        $text = $pescador['tp_id'];
+        $textWidth = $this->getTextWidth($text, $page->getFont(),  $page->getFontSize() );
+        $page->drawText($text, 30 + (40 - $textWidth - $page->getFontSize()) , $linha);
+        
             $page->drawText($pescador['tp_nome'], 70, $linha);
             
             if ($linha <= 40) {
-                $page->drawText( 'Página:' . $contPag, 500, 15);
+                $page->drawText( 'Página: ' . $contPag, 500, 15);
                 $linha = 780;
                 $contPag++;
                 $pdf->pages[] = $page;
