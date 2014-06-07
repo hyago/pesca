@@ -92,9 +92,8 @@ $this->headScript()->appendFile('/js/mascaras.js');
                     <div id="form-dir">
                         <label for="respLancamento">Responsável Lançamento</label>
                         <select name="respLancamento" id="respLancamentoID" required="">
-                            <?php foreach ($this->assignUser as $key => $respLanc): ?>
-                                <option value="<?= $respLanc['tu_id']; ?>" <?= ($respLanc['tu_id'] == $this->pescador['tp_resp_lan']) ? 'selected="selected"' : ''; ?>><?= $respLanc['tu_nome']; ?></option>
-                            <?php endforeach; ?>
+                                <option value="<?= $this->usuario['tu_id']; ?>" <?= ($this->usuario['tu_id'] == $this->pescador['tp_resp_lan']) ? 'selected="selected"' : ''; ?>><?= $this->usuario['tu_nome']; ?></option>
+
                         </select>
                     </div>
                     <div id="form-dir">
