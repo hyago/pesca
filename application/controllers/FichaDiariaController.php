@@ -3,16 +3,27 @@
 class FichaDiariaController extends Zend_Controller_Action {
 
     private $modelFichaDiaria;
-
-    public function init() {
-        if (!Zend_Auth::getInstance()->hasIdentity()) {
+    private $usuario;
+    public function init()
+    {   
+        if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-
+        
         $this->_helper->layout->setLayout('admin');
-
-        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
-        $this->view->usuarioLogado = $this->usuarioLogado;
+        
+        
+        $auth = Zend_Auth::getInstance();
+         if ( $auth->hasIdentity() ){
+          $identity = $auth->getIdentity();
+          $identity2 = get_object_vars($identity);
+          
+        }
+        
+        $this->modelUsuario = new Application_Model_Usuario();
+        $this->usuario = $this->modelUsuario->find($identity2['tl_id']);
+        $this->view->assign("usuario",$this->usuario);
+        
         
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -78,6 +89,7 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("artesPesca", $artePesca);
         //---------------------------------------------
+        
         $usuario = $this->modelEstagiario->select();
 
         $this->view->assign("users", $usuario);

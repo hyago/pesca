@@ -287,6 +287,7 @@
           <dbTableFile dbTableName="VEntrevistaSiripoia"/>
           <dbTableFile dbTableName="VEntrevistaTarrafa"/>
           <dbTableFile dbTableName="VEntrevistaVaraPesca"/>
+          <dbTableFile dbTableName="HistoricoLogin"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -348,6 +349,7 @@
         <modelFile modelName="Grosseira"/>
         <modelFile modelName="Isca"/>
         <modelFile modelName="ColetaManual"/>
+        <modelFile modelName="HistoricoLogin"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
