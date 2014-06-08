@@ -1,4 +1,4 @@
--- SET SQL_MODE=@OLD_SQL_MODE;
+﻿-- SET SQL_MODE=@OLD_SQL_MODE;
 -- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 -- SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
@@ -372,10 +372,10 @@ COMMIT;
 -- T_ARTEPESCA
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (2, 'Calão', 'Calão', '');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (2, 'Calão', 'Calão');
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (3, 'Espinhel/Groseira', 'Espinhel/Groseira');
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (4, 'Pesca de Linha', 'Pesca de Linha');
-INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (6, 'Rede (3 malhos, etc)');
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (6, 'Rede (3 malhos, etc)', '');
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (7, 'Tarrafa', 'Tarrafa');
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (9, 'Jereré', 'Jereré');
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (11, 'Manzuá', 'Manzuá');
@@ -387,7 +387,7 @@ INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (1, 'Arras
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (5, 'Rede de emalhar', 'Emalhe');
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (8, 'Vara de pesca', 'Vara de Pesca');
 INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (10, 'Siripóia', 'Siripóia');
-INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (16, 'Linha de Fundo', 'Linha de Fundo)';
+INSERT INTO t_artepesca (tap_id, tap_artepesca, tap_arteficha) VALUES (16, 'Linha de Fundo', 'Linha de Fundo');
 COMMIT;
 
 -- -----------------------------------------------------

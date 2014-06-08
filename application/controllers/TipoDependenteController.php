@@ -23,7 +23,7 @@ class TipoDependenteController extends Zend_Controller_Action
         }
         
         $this->modelUsuario = new Application_Model_Usuario();
-        $this->usuario = $this->modelUsuario->find($identity2['tl_id']);
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
         

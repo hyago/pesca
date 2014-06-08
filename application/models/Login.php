@@ -22,7 +22,7 @@ class Application_Model_Login
             'tl_hashsenha'  => $senha
         );
         
-        $whereLogin = $dbTableLogin->getAdapter()->quoteInto('"tl_login" = ?', $login);
+        $whereLogin = $dbTableLogin->getAdapter()->quoteInto('"tl_id" = ?', $login);
         
         $dbTableLogin->update($dadosLogin, $whereLogin);
     }

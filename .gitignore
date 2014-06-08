@@ -5,3 +5,5 @@
 
 /application/layouts/**/*
 /public/css/**/*
+
+/nbproject/private/private.xml
