@@ -765,78 +765,32 @@ private $usuario;
         $objWriter->save('php://output');
     }
 
-    
-        public function getTextWidth($text, Zend_Pdf_Resource_Font $font, $font_size) 
-    {
-        $drawing_text = iconv('', 'UTF-16BE', $text);
-        $characters    = array();
-        for ($i = 0; $i < strlen($drawing_text); $i++) {
-            $characters[] = (ord($drawing_text[$i++]) << 8) | ord ($drawing_text[$i]);
-        }
-        $glyphs        = $font->glyphNumbersForCharacters($characters);
-        $widths        = $font->widthsForGlyphs($glyphs);
-        $text_width   = (array_sum($widths) / $font->getUnitsPerEm()) * $font_size;
-        return $text_width; 
-    }
-    
-    public function relpdfpescadorAction() {
+	public function relpdfpescadorAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
 
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender(true);
+		$localModelPescador = new Application_Model_Pescador();
+		$localPescador = $localModelPescador->select(NULL, array('tp_nome', 'tp_id'), NULL);
 
-        $pdfToClone = new Zend_Pdf();
-        $pdfToClone = Zend_Pdf::load('../library/templateRelatorio.pdf');
-        $pageToClone = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
-        $pageToClone = clone $pdfToClone->pages[0];
-        $pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
-        //$pageToClone->drawText('Relatório de Pescador', 250, 810);
-        
-        $text = 'Relatório de Pescador';
-        $textWidth = $this->getTextWidth($text, $pageToClone->getFont(),  $pageToClone->getFontSize() );
-        $pageToClone->drawText($text,  ($pageToClone->getWidth()/2) - ($textWidth /2), 820);
-        
-        
-        $pdfToClone->pages[0] = $pageToClone;
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório de Pescador');
 
-        $pdf = new Zend_Pdf();
-        $page = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
-        $page = clone $pdfToClone->pages[0];
-        $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
-        
-        $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->select(NULL, array('tp_nome', 'tp_id'), NULL);
+		$modeloRelatorio->setLegenda(30,  'Código');
+		$modeloRelatorio->setLegenda(70,  'Nome');
+		
+		foreach ($localPescador as $key => $pescador):
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $pescador['tp_id']);
+			$modeloRelatorio->setValue(70,  $pescador['tp_nome']);
+			$modeloRelatorio->setNewLine();
+		endforeach;
 
-        $linha = 780;
-        $contPag = 1;
-        foreach ($localPescador as $key => $pescador):
-            //$page->drawText($pescador['tp_id'], 30, $linha);
-        
-        $text = $pescador['tp_id'];
-        $textWidth = $this->getTextWidth($text, $page->getFont(),  $page->getFontSize() );
-        $page->drawText($text, 30 + (40 - $textWidth - $page->getFontSize()) , $linha);
-        
-            $page->drawText($pescador['tp_nome'], 70, $linha);
-            
-            if ($linha <= 40) {
-                $page->drawText( 'Página: ' . $contPag, 500, 15);
-                $linha = 780;
-                $contPag++;
-                $pdf->pages[] = $page;
+// 		$pdf = new Zend_Pdf();
+		$pdf = $modeloRelatorio->getRelatorio();
 
-                //$page = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
-                $page = clone $pdfToClone->pages[0];
-                $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
-            }
-            $linha = $linha - 10;
-        endforeach;
-
-        // Adiciona a ultima página
-        $pdf->pages[] = $page;
-        $page->drawText( 'Página:' . $contPag, 500, 15);
-
-        header("Content-Type: application/pdf;");
-        echo $pdf->render();
-    }
+		header("Content-Type: application/pdf;");
+		echo $pdf->render();
+	}
 
     public function relatorioAction() {
 
