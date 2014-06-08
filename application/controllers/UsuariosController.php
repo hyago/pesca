@@ -36,7 +36,7 @@ private $usuario;
         }
         
         $this->modelUsuario = new Application_Model_Usuario();
-        $this->usuario = $this->modelUsuario->find($identity2['tl_id']);
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
         
@@ -145,20 +145,31 @@ private $usuario;
 
     public function senhaAction(){
         
+        
+        
+    }
+    public function alterasenhaAction(){
+        $dadosLogin = new Application_Model_Login();
         $usuarioForm = $this->_getAllParams();
         
-        $idUser = $usuarioForm['login'];
+        $idlogin = $usuarioForm['login'];
         $senhaAntiga = $usuarioForm['SenhaAntiga'];
         $senhaNova = $usuarioForm['novaSenha'];
         
-        $user = $this->modelUsuario->find($idUser);
+        $login = $this->modelUsuario->selectSenha($idlogin);
+        print_r($login);
         
+        $senhasha1 = sha1($senhaAntiga);
         
-        
-        $senhaAntiga1 = sha1($senhaAntiga);
-        
-        
-        
+        if($senhasha1 == $login['tl_hashsenha']){
+            $senhaNova = sha1($senhaNova);
+            $dadosLogin->update($senhaNova, $idlogin);
+            $this->_redirect('usuarios/index');
+        }
+        else {
+            print_r("Senha inválida, tente novamente!");
+            
+        }
     }
    
 }

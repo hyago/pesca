@@ -42,5 +42,6 @@
         <?php endforeach; ?>
     </table>
     <br/><br/>
-    <a href="<?= $this->url(array("controller" => "usuario", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
-</html>
+    <a href="<?= $this->url(array("controller" => "usuarios", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+    <a href="<?= $this->url(array("controller" => "usuarios", "action" => "senha", "id" => $this->usuario['tl_id']), null, true) ?>" id="botao-ancora">Alterar Senha</a>
+    

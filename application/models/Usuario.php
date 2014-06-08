@@ -35,7 +35,14 @@ class Application_Model_Usuario {
         $array = $usuario->fetchAll($zendObj)->toArray();
         return $array[0];
     }
-
+    public function selectSenha($loginId){
+        $usuario = new Application_Model_DbTable_Login();
+        $zendObj = $usuario->select()->from($usuario)->where("tl_id= ".$loginId);
+        
+        $array = $usuario->fetchAll($zendObj)->toArray();
+        return $array[0];
+    }
+    
     public function insert(array $request) {
         
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
