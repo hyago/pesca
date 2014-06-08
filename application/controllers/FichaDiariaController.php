@@ -3,16 +3,27 @@
 class FichaDiariaController extends Zend_Controller_Action {
 
     private $modelFichaDiaria;
-
-    public function init() {
-        if (!Zend_Auth::getInstance()->hasIdentity()) {
+    private $usuario;
+    public function init()
+    {   
+        if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-
+        
         $this->_helper->layout->setLayout('admin');
-
-        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
-        $this->view->usuarioLogado = $this->usuarioLogado;
+        
+        
+        $auth = Zend_Auth::getInstance();
+         if ( $auth->hasIdentity() ){
+          $identity = $auth->getIdentity();
+          $identity2 = get_object_vars($identity);
+          
+        }
+        
+        $this->modelUsuario = new Application_Model_Usuario();
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+        $this->view->assign("usuario",$this->usuario);
+        
         
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -28,10 +39,28 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function indexAction() {
-        $dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
+        $fd_id = $this->_getParam("fd_id");
+        $pto_id = $this->_getParam("pto_id");
+        $fd_data = $this->_getParam("fd_data");
+        
+        if ( $fd_id > 0 ) {
+            $dados = $this->modelFichaDiaria->selectView("fd_id>=". $fd_id, array('fd_id'), 25);
+        } elseif ( $pto_id ) {
+            if ( $fd_data ) {
+                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id ." and fd_data = '". $fd_data."'" , NULL, 25);            
+            } else {
+                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id , NULL, 25);            
+            }
+        } else {
+            $dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
+        }
+         
+        $dadosPorto = $this->modelPorto->select();
 
+        $this->view->assign("assignDadosPorto", $dadosPorto);
         $this->view->assign("dados", $dados);
     }
+
 
     /*
      * Exibe formulário para cadastro de um usuário
@@ -60,6 +89,7 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("artesPesca", $artePesca);
         //---------------------------------------------
+        
         $usuario = $this->modelEstagiario->select();
 
         $this->view->assign("users", $usuario);

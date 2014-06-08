@@ -18,7 +18,7 @@ $(document).ready(function() {
         $("#Social").hide();
         $("#Entrevista").hide();
     }
-    else if ($("fieldset").attr('id') == "Entrevistas"){
+    else if ($("fieldset").attr('id') == "Entrevista"){
         $("#Dsbq").show();
         $("#Entrevista").show();
         $("#Filo").hide();
@@ -89,6 +89,15 @@ function jsBuscaPescadorNome( frm, pag )
         location.replace( tmpUpdate );
     }
 }
+
+function jsBuscaBarcoEntrevista( frm, pag )
+{
+    if ( frm.inputBarco.value ) {
+        var tmpUpdate = (pag + '/bar_nome/' + frm.inputBarco.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsBuscaEntrevistaId( frm, pag )
 {
@@ -126,6 +135,31 @@ function jsClearBuscaPescador( pag )
 function scrollTo(hash) {
     location.hash = "#" + hash;
     location.hash = '';
+}
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsClearBuscaFichaDiaria( pag )
+{
+    location.hash = '';
+    location.replace(pag);
+}
+
+function jsBuscaFichaDiariaId( frm, pag )
+{
+    if ( frm.inputId.value ) {
+        var tmpUpdate = (pag + '/index/fd_id/' + frm.inputId.value  );
+               
+        location.replace( tmpUpdate );
+    }
+}
+
+function jsBuscaFichaDiariaPortoData( frm, pag )
+{
+    if ( frm.selectPortoName.value ) {
+        var tmpUpdate = (pag + '/index/pto_id/' + frm.selectPortoName.value +'/fd_data/'+ frm.inputDate.value );
+        
+        location.replace( tmpUpdate );
+    }
 }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -562,43 +596,43 @@ function jsEntrevista(nomeArtePesca, idMonitoramento, idFichaDiaria) {
             if (nomeArtePesca.toLowerCase() === "Arrasto de Fundo".toLowerCase()) {
                 Entrevista = "arrasto-fundo";
             }
-            else if (nomeArtePesca == 'Calão') {
+            else if (nomeArtePesca.toLowerCase() === "Calão".toLowerCase()) {
                 Entrevista = 'calao';
             }
-            else if (nomeArtePesca == 'Espinhel/Grosseira') {
+            else if (nomeArtePesca.toLowerCase() === "Espinhel/Groseira".toLowerCase()) {
                 Entrevista = 'grosseira';
             }
-            else if (nomeArtePesca == 'Pesca de Linha') {
+            else if (nomeArtePesca.toLowerCase() === "Pesca de Linha".toLowerCase()) {
                 Entrevista = 'linha';
             }
-            else if (nomeArtePesca == 'Rede de Emalhar') {
+            else if (nomeArtePesca.toLowerCase() === "Rede de Emalhar".toLowerCase()) {
                 Entrevista = 'emalhe';
             }
-            else if (nomeArtePesca == 'Tarrafa') {
+            else if (nomeArtePesca.toLowerCase() === "Tarrafa".toLowerCase()) {
                 Entrevista = 'tarrafa';
             }
-            else if (nomeArtePesca == 'Vara de Pesca') {
+            else if (nomeArtePesca.toLowerCase() === "Vara de Pesca".toLowerCase()) {
                 Entrevista = 'vara-pesca';
             }
-            else if (nomeArtePesca == 'Jereré') {
+            else if (nomeArtePesca.toLowerCase() === "Jereré".toLowerCase()) {
                 Entrevista = 'jerere';
             }
-            else if (nomeArtePesca == 'Manzuá') {
+            else if (nomeArtePesca.toLowerCase() === "Manzuá".toLowerCase()) {
                 Entrevista = 'manzua';
             }
-            else if (nomeArtePesca == 'Ratoeira') {
+            else if (nomeArtePesca.toLowerCase() === "Ratoeira".toLowerCase()) {
                 Entrevista = 'ratoeira';
             }
-            else if (nomeArtePesca == 'Coleta-Manual') {
+            else if (nomeArtePesca.toLowerCase() === "Coleta Manual".toLowerCase()) {
                 Entrevista = 'coleta-manual';
             }
-            else if (nomeArtePesca == 'Mergulho') {
+            else if (nomeArtePesca.toLowerCase() === "Mergulho".toLowerCase()) {
                 Entrevista = 'mergulho';
             }
-            else if (nomeArtePesca == 'Linha de Fundo') {
+            else if (nomeArtePesca.toLowerCase() === "Linha de Fundo".toLowerCase()) {
                 Entrevista = 'linha-fundo';
             }
-            else if (nomeArtePesca == 'Siripóia') {
+            else if (nomeArtePesca.toLowerCase() === "Siripóia".toLowerCase()) {
                 Entrevista = 'siripoia';
             }
             else

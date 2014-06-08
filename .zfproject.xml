@@ -274,6 +274,20 @@
           <dbTableFile dbTableName="VLinhaHasPesqueiro"/>
           <dbTableFile dbTableName="VFichaDiaria"/>
           <dbTableFile dbTableName="VEntrevistaArrasto"/>
+          <dbTableFile dbTableName="VEntrevistaCalao"/>
+          <dbTableFile dbTableName="VEntrevistaColetaManual"/>
+          <dbTableFile dbTableName="VEntrevistaEmalhe"/>
+          <dbTableFile dbTableName="VEntrevistaGrosseira"/>
+          <dbTableFile dbTableName="VEntrevistaJerere"/>
+          <dbTableFile dbTableName="VEntrevistaLinha"/>
+          <dbTableFile dbTableName="VEntrevistaLinhaFundo"/>
+          <dbTableFile dbTableName="VEntrevistaManzua"/>
+          <dbTableFile dbTableName="VEntrevistaMergulho"/>
+          <dbTableFile dbTableName="VEntrevistaRatoeira"/>
+          <dbTableFile dbTableName="VEntrevistaSiripoia"/>
+          <dbTableFile dbTableName="VEntrevistaTarrafa"/>
+          <dbTableFile dbTableName="VEntrevistaVaraPesca"/>
+          <dbTableFile dbTableName="HistoricoLogin"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -335,6 +349,7 @@
         <modelFile modelName="Grosseira"/>
         <modelFile modelName="Isca"/>
         <modelFile modelName="ColetaManual"/>
+        <modelFile modelName="HistoricoLogin"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

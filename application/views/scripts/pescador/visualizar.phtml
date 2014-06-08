@@ -4,46 +4,26 @@
     <h3>Visualizar</h3>
 </div>
 
-<fieldset id="Social">
+
 <table>
-    <tr>
-        <th>Nome</th>
-        <th>Sexo</th>
-        <th>Matricula</th>
-        <th>Apelido</th>
-        <th>Nome do Pai</th>
-        <th>Nome da Mãe</th>
-        <th>Data de Nascimento</th>
-        <th>RG</th>
-        <th>CPF</th>  
-        <th>Logradouro</th>
-        <th>Número</th>
-        <th>Bairro</th>
-        <th>Cidade</th>
-        <th>Estado</th>
-        <th>CEP</th>
-        <th>Complemento</th> 
-    </tr>
-    <tr>
-        <td><?= $this->pescador['TP_Nome'] ?></td>
-        <td><?= $this->pescador['TP_Sexo'] ?></td>
-        <td><?= $this->pescador['TP_Matricula'] ?></td>
-        <td><?= $this->pescador['TP_Apelido'] ?></td>
-        <td><?= $this->pescador['TP_FiliacaoPai'] ?></td>
-        <td><?= $this->pescador['TP_FiliacaoMae'] ?></td>
-        <td><?= $this->pescador['TP_DataNasc'] ?></td>
-        <td><?= $this->pescador['TP_RG'] ?></td>
-        <td><?= $this->pescador['TP_CPF'] ?></td>
-        <td><?= $this->pescador['TE_Logradouro'] ?></td>
-        <td><?= $this->pescador['TE_Numero'] ?></td>
-        <td><?= $this->pescador['TE_Bairro'] ?></td>
-        <td><?= $this->pescador['TMun_Municipio'] ?></td>
-        <td><?= $this->pescador['TUF_Sigla'] ?></td>
-        <td><?= $this->pescador['TE_CEP'] ?></td>
-        <td><?= $this->pescador['TE_Comp'] ?></td>
-    </tr>
+        <tr><td>Nome </td><td><?= $this->pescador['tp_nome'] ?></td></tr><br/>
+        <tr><td>Sexo </td><td><?= $this->pescador['tp_sexo'] ?></td></tr><br/>
+        <tr><td>Matricula </td><td><?= $this->pescador['tp_matricula'] ?></td></tr><br/>
+        <tr><td>Apelido </td><td><?= $this->pescador['tp_apelido'] ?> </td></tr><br/>
+        <tr><td>Nome do Pai: </td><td><?= $this->pescador['tp_filiacaopai'] ?></td></tr><br/>
+        <tr><td>Nome da Mãe: </td><td><?= $this->pescador['tp_filiacaomae'] ?></td></tr><br/>
+        <tr><td>Data de Nascimento: </td><td><?= $this->pescador['tp_datanasc'] ?></td></tr><br/>
+        <tr><td>RG: </td><td><?= $this->pescador['tp_rg'] ?></td></tr><br/>
+        <tr><td>CPF: </td><td><?= $this->pescador['tp_cpf'] ?></td></tr>  <br/>
+        <tr><td>Logradouro: </td><td><?= $this->pescador['te_logradouro'] ?></td></tr><br/>
+        <tr><td>Número: </td><td><?= $this->pescador['te_numero'] ?></td></tr><br/>
+        <tr><td>Bairro: </td><td><?= $this->pescador['te_bairro'] ?></td></tr><br/>
+        <tr><td>Cidade: </td><td><?= $this->pescador['tmun_municipio'] ?></td></tr><br/>
+        <tr><td>Estado: </td><td><?= $this->pescador['tuf_sigla'] ?></td></tr><br/>
+        <tr><td>CEP: </td><td><?= $this->pescador['te_cep'] ?></td></tr><br/>
+        <tr><td>Complemento: </td><td><?= $this->pescador['te_comp'] ?></td></tr> <br/>
+    
+</table>
     <div id="Submit">
         <a href="<?=$this->url(array("controller"=>"pescador","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
     </div>
-</table>
-</fieldset>

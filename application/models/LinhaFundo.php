@@ -206,7 +206,18 @@ class Application_Model_LinhaFundo
         
         $this->dbTableTLinhaFundoHasEspCapturada->delete($whereLinhaFundoHasEspCapturada);
     }
+    public function selectEntrevistaLinhaFundo($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableLinhaFundo = new Application_Model_DbTable_VEntrevistaLinhaFundo();
+        $select = $this->dbTableLinhaFundo->select()
+                ->from($this->dbTableLinhaFundo)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableLinhaFundo->fetchAll($select)->toArray();
+    }
 
 }
 

@@ -14,17 +14,28 @@ require_once "../library/fpdf/fpdf.php";
 class ArtePescaController extends Zend_Controller_Action
 {
     private $modelArtePesca;
-
+    private $usuario;
     public function init()
-    {
+    {   
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
         
         $this->_helper->layout->setLayout('admin');
         
-        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
-        $this->view->usuarioLogado = $this->usuarioLogado;
+        
+        $auth = Zend_Auth::getInstance();
+         if ( $auth->hasIdentity() ){
+          $identity = $auth->getIdentity();
+          //Converte do objeto para um array (tem que ser feito)
+          $identity2 = get_object_vars($identity);
+          
+        }
+        
+        $this->modelUsuario = new Application_Model_Usuario();
+        //Busca o usuário no banco pelo id do login
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+        $this->view->assign("usuario",$this->usuario);
         
         $this->modelArtePesca = new Application_Model_ArtePesca();
     }
@@ -37,6 +48,7 @@ class ArtePescaController extends Zend_Controller_Action
         $dados = $this->modelArtePesca->select( NULL, 'tap_artepesca', NULL );
       
         $this->view->assign("dados", $dados);
+        
     }
     
     /*
@@ -44,7 +56,10 @@ class ArtePescaController extends Zend_Controller_Action
      */
     public function novoAction()
     {
-        
+        //Verificar se o usuário logado é estagiário
+        if($this->usuario['tp_id']==4){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -61,7 +76,11 @@ class ArtePescaController extends Zend_Controller_Action
      * Preenche um formulario com as informações de um usuário
      */
     public function editarAction()
-    {
+    {   
+        //Verificar se o usuário logado é estagiário
+        if($this->usuario['tp_id']==4){
+            $this->_redirect('index');
+        }
         $artePesca = $this->modelArtePesca->find($this->_getParam('id'));
         
         $this->view->assign("artePesca", $artePesca);

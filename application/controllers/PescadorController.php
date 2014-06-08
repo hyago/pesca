@@ -14,18 +14,28 @@
 class PescadorController extends Zend_Controller_Action {
 
     private $modelPescador;
-
-    public function init() {
-
-        if (!Zend_Auth::getInstance()->hasIdentity()) {
+private $usuario;
+    public function init()
+    {   
+        if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-
+        
         $this->_helper->layout->setLayout('admin');
-
-        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
-        $this->view->usuarioLogado = $this->usuarioLogado;
-
+        
+        
+        $auth = Zend_Auth::getInstance();
+         if ( $auth->hasIdentity() ){
+          $identity = $auth->getIdentity();
+          $identity2 = get_object_vars($identity);
+          
+        }
+        
+        $this->modelUsuario = new Application_Model_Usuario();
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+        $this->view->assign("usuario",$this->usuario);
+        
+        
         $this->modelPescador = new Application_Model_Pescador();
     }
 
@@ -744,7 +754,6 @@ class PescadorController extends Zend_Controller_Action {
             $linha++;
         endforeach;       
         
-
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         ob_end_clean();
 
@@ -756,7 +765,34 @@ class PescadorController extends Zend_Controller_Action {
         $objWriter->save('php://output');
     }
 
-        public function relatorioAction() {
+	public function relpdfpescadorAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelPescador = new Application_Model_Pescador();
+		$localPescador = $localModelPescador->select(NULL, array('tp_nome', 'tp_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório de Pescador');
+
+		$modeloRelatorio->setLegenda(30,  'Código');
+		$modeloRelatorio->setLegenda(70,  'Nome');
+		
+		foreach ($localPescador as $key => $pescador):
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $pescador['tp_id']);
+			$modeloRelatorio->setValue(70,  $pescador['tp_nome']);
+			$modeloRelatorio->setNewLine();
+		endforeach;
+
+// 		$pdf = new Zend_Pdf();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf;");
+		echo $pdf->render();
+	}
+
+    public function relatorioAction() {
 
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();

@@ -193,7 +193,18 @@ private $dbTableColetaManual;
         
         $this->dbTableTColetaManualHasEspCapturada->delete($whereColetaManualHasEspCapturada);
     }
+    public function selectEntrevistaColetaManual($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableColetaManual = new Application_Model_DbTable_VEntrevistaColetaManual();
+        $select = $this->dbTableColetaManual->select()
+                ->from($this->dbTableColetaManual)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableColetaManual->fetchAll($select)->toArray();
+    }
 
 }
 

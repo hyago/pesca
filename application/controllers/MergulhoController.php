@@ -2,16 +2,27 @@
 
 class MergulhoController extends Zend_Controller_Action
 {
-public function init()
-    {
-       if(!Zend_Auth::getInstance()->hasIdentity()){
+    private $usuario;
+    public function init()
+    {   
+        if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
         
         $this->_helper->layout->setLayout('admin');
         
-        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
-        $this->view->usuarioLogado = $this->usuarioLogado;
+        
+        $auth = Zend_Auth::getInstance();
+         if ( $auth->hasIdentity() ){
+          $identity = $auth->getIdentity();
+          $identity2 = get_object_vars($identity);
+          
+        }
+        
+        $this->modelUsuario = new Application_Model_Usuario();
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+        $this->view->assign("usuario",$this->usuario);
+        
         
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -48,7 +59,23 @@ public function init()
     }
 
     public function visualizarAction(){
+        $ent_id = $this->_getParam("ent_id");
+        $ent_pescador = $this->_getParam("tp_nome");
+        $ent_barco = $this->_getParam("bar_nome");
         
+        if ( $ent_id > 0 ) {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("mer_id>=". $ent_id, array('mer_id'), 20);
+        } elseif ( $ent_pescador ) {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'mer_id'), 20);
+         }
+          elseif ($ent_barco){
+              $dados = $this->modelMergulho->selectEntrevistaMergulho("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'mer_id'), 20);
+          }
+         else {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho(null, array( 'fd_id', 'tp_nome'), 20);
+        }
+        
+        $this->view->assign("dados", $dados);
     }
     
     public function editarAction(){

@@ -190,7 +190,18 @@ class Application_Model_Calao
         
         $this->dbTableTCalaoHasEspCapturada->delete($whereCalaoHasEspCapturada);
     }
+    public function selectEntrevistaCalao($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableCalao = new Application_Model_DbTable_VEntrevistaCalao();
+        $select = $this->dbTableCalao->select()
+                ->from($this->dbTableCalao)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableCalao->fetchAll($select)->toArray();
+    }
 
 }
 

@@ -2,17 +2,28 @@
 
 class VaraPescaController extends Zend_Controller_Action
 {
-
+    private $usuario;
     public function init()
-    {
+    {   
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
         
         $this->_helper->layout->setLayout('admin');
         
-        $this->usuarioLogado = Zend_Auth::getInstance()->getIdentity();
-        $this->view->usuarioLogado = $this->usuarioLogado;
+        
+        $auth = Zend_Auth::getInstance();
+         if ( $auth->hasIdentity() ){
+          $identity = $auth->getIdentity();
+          $identity2 = get_object_vars($identity);
+          
+        }
+        
+        $this->modelUsuario = new Application_Model_Usuario();
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+        $this->view->assign("usuario",$this->usuario);
+        
+        
         $this->modelVaraPesca = new Application_Model_VaraPesca();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -52,7 +63,23 @@ class VaraPescaController extends Zend_Controller_Action
     }
 
     public function visualizarAction(){
+        $ent_id = $this->_getParam("ent_id");
+        $ent_pescador = $this->_getParam("tp_nome");
+        $ent_barco = $this->_getParam("bar_nome");
         
+        if ( $ent_id > 0 ) {
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("vp_id>=". $ent_id, array('vp_id'), 20);
+        } elseif ( $ent_pescador ) {
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'vp_id'), 20);
+         }
+          elseif ($ent_barco){
+              $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'vp_id'), 20);
+          }
+         else {
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca(null, array( 'fd_id', 'tp_nome'), 20);
+        }
+        
+        $this->view->assign("dados", $dados);
     }
     
     public function editarAction(){

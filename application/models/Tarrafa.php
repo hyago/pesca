@@ -154,7 +154,18 @@ class Application_Model_Tarrafa
         $this->dbTableTTarrafa->delete($whereTarrafaHasPesqueiro);
         
     }
+    public function selectEntrevistaTarrafa($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableTarrafa = new Application_Model_DbTable_VEntrevistaTarrafa();
+        $select = $this->dbTableTarrafa->select()
+                ->from($this->dbTableTarrafa)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableTarrafa->fetchAll($select)->toArray();
+    }
 
 
 }

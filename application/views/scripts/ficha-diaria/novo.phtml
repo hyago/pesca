@@ -2,7 +2,7 @@
 $this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
 $this->headScript()->appendFile('/js/mascaras.js');
 ?>
-<html dir="ltr">
+
     
 <div id="titulos">
     <h2>Desembarque->Ficha Diária</h2>
@@ -21,15 +21,9 @@ $this->headScript()->appendFile('/js/mascaras.js');
        <div id="form-esq">
          <label for="tipo">Estagiário:</label>
          <select name="select_nome_estagiario" >
-              <?php
-                    foreach ($this->users as $key => $estagiario):
-               ?>
               
-		<option nome="nome_estagiario" value="<?=$estagiario['tu_id']?>"><?= $estagiario['tu_nome']?></option>
+		<option nome="nome_estagiario" value="<?=$this->usuario['tu_id']?>"><?= $this->usuario['tu_nome']?></option>
               
-              <?php
-                endforeach;
-              ?>
                
           </select></br>
         </div>

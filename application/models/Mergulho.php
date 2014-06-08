@@ -204,4 +204,17 @@ private $dbTableMergulho;
         
         $this->dbTableTMergulhoHasEspCapturada->delete($whereMergulhoHasEspCapturada);
     }
+    public function selectEntrevistaMergulho($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableMergulho = new Application_Model_DbTable_VEntrevistaMergulho();
+        $select = $this->dbTableMergulho->select()
+                ->from($this->dbTableMergulho)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableMergulho->fetchAll($select)->toArray();
+    }
+    
 }
