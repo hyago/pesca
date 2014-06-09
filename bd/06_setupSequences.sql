@@ -753,3 +753,196 @@ insert into t_turno(TURNO_ID, TURNO_NOME) values ('I','Integral');
 update access.ficha_diaria set turno='1' where turno='Forte';
 update access.ficha_diaria set turno='2' where turno='Fraco';
 update access.ficha_diaria set turno='3' where turno='Moderado';
+
+
+
+
+
+SELECT P.TP_ID, INITCAP(P.TP_NOME) AS TP_NOME FROM T_PESCADOR AS P;
+
+SELECT P.TP_ID, INITCAP(P.TP_NOME) AS TP_NOME , TE.TMUN_ID,  TM.TMUN_MUNICIPIO
+FROM T_PESCADOR AS P,  T_ENDERECO AS TE,  T_MUNICIPIO AS TM
+WHERE
+P.TE_ID = TE.TE_ID AND
+TE.TMUN_ID = TM.TMUN_ID
+ORDER BY P.TP_NOME;
+q
+
+SELECT TP.TP_ID,  INITCAP(TP.TP_NOME), TE.TE_ID, TE.TMUN_ID,  TM.TMUN_MUNICIPIO
+FROM T_PESCADOR AS TP
+left join T_ENDERECO AS TE on TP.TE_ID = TE.TE_ID
+left join T_MUNICIPIO AS TM on TE.TMUN_ID = TM.TMUN_ID
+ORDER BY TM.TMUN_MUNICIPIO,  TP.TP_NOME;
+
+left join t_escolaridade as esc
+on  p.escolaridade=esc.esc_nivel;
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.Tempomariscando
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.Tp_rede)="tarrafa"))
+
+
+select ep.codigo,  fd.porto_de_desembarque, ep.tp_rede,  ep.tp_rede,  ep.mestre,
+ep.pesqueiro1, ep.n_pesc,  ep.tempomariscando
+from access.entrev_pesca as ep
+left join access.ficha_diaria as fd on ep.cod_fichadiaria = fd.cod_ficha
+where ep.tp_rede = '7'
+order by ep.codigo;
+
+select ep.codigo,  fd.porto_de_desembarque as pto, pt.pto_nome,  ep.tp_rede,  ap.tap_artepesca,  ep.mestre, pe.tp_nome, ep.pesqueiro1, pq.paf_pesqueiro, ep.n_pesc,  ep.tempomariscando
+from access.entrev_pesca as ep
+left join access.ficha_diaria as fd on ep.cod_fichadiaria = fd.cod_ficha
+left join t_porto as pt on fd.porto_de_desembarque = pt.pto_id
+left join t_artepesca as ap on cast(ep.tp_rede as int8) = ap.tap_id
+left join t_pescador as pe on ep.mestre = pe.tp_id
+left join t_pesqueiro_af as pq on cast(ep.pesqueiro1 as int8) = pq.paf_id
+where ep.tp_rede = '7'
+order by ep.codigo;
+
+select * from t_artepesca;
+
+INSERT INTO T_PESQUEIRO_AF (PAF_ID,  PAF_PESQUEIRO)
+SELECT CODIGO,  PESQUEIRO FROM ACCESS.PESQUEIRO;
+
+INSERT INTO T_BARCO (BAR_ID,  BAR_NOME)
+SELECT CODIGO,  EMBARCACAO FROM ACCESS.EMBARCACAO;
+
+select * from (
+	
+
+select barco from access.entrev_pesca;
+
+select * from t_barco;
+
+
+/// //////////////////////////////////////////////////////////////////
+-- ARRASTO FUNDO
+
+
+
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.tempoatepesq,
+ep.avist, 
+ep.subamostra,
+ep.id_subamostra,
+NULL,  -- roda? ? ? 
+ep.alt_pano,
+ep.tam_malha,
+ep.n_lances, 
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_rede = '7'
+order by ep.codigo;
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.Tempomariscando
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.Tp_rede)="tarrafa"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.Tempomariscando;
+
+/// //////////////////////////////////////////////////////////////////
+
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.TipoMariscagem)="vara de pesca"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc;
+/// //////////////////////////////////////////////////////////////////
+
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, [Ficha diária].Data, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.TipoMariscagem)="ciripóia"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, [Ficha diária].Data, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas;
+/// //////////////////////////////////////////////////////////////////
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, [Ficha diária].Data, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.TipoMariscagem)="ratoeira"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, [Ficha diária].Data, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas;
+/// //////////////////////////////////////////////////////////////////
+
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.TipoMariscagem)="mergulho"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas;
+/// //////////////////////////////////////////////////////////////////
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.TipoMariscagem)="manzuá"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas;
+/// //////////////////////////////////////////////////////////////////
+
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_pesca, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.Tp_pesca)="linha de mão"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_pesca, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc;
+/// //////////////////////////////////////////////////////////////////
+
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_pesca, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc, Entrev_Pesca.n_anzois
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha]=Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código=[Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código=Sp_cap.Cod_entrev) ON Espécies.Código=Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.Tp_pesca)="grosseira"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_pesca, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc, Entrev_Pesca.n_anzois;
+/// //////////////////////////////////////////////////////////////////
+
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.TipoMariscagem)="gereré"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas;
+/// //////////////////////////////////////////////////////////////////
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.Tp_rede)="emalhe" Or (Entrev_Pesca.Tp_rede)="3 malhos"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc;
+/// //////////////////////////////////////////////////////////////////
+
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, Entrev_Pesca.n_pesc, [Ficha diária].Data
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.Tp_rede)="calão"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, Entrev_Pesca.n_pesc, [Ficha diária].Data;
+
+
+
+
+
+/// //////////////////////////////////////////////////////////////////
+(select 7,  fd.arrfundo as arrfundo,  fd.cod_ficha,  true
+from access.ficha_diaria as fd
+where fd.arrfundo <> 0
+order by fd.cod_ficha)
+union all
+(select 7,  fd.arrfundonm as arrfundo,  fd.cod_ficha,  false
+from access.ficha_diaria as fd
+where fd.arrfundonm <> 0
+order by fd.cod_ficha);
+
+SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Arte, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.Pesqueiro2, Entrev_Pesca.Pesqueiro3, Entrev_Pesca.Pesqueiro4, Entrev_Pesca.Pesqueiro5, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc
+FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+WHERE (((Entrev_Pesca.Arte)="arrasto de fundo"))
+GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Arte, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.Pesqueiro2, Entrev_Pesca.Pesqueiro3, Entrev_Pesca.Pesqueiro4, Entrev_Pesca.Pesqueiro5, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc;
+/// //////////////////////////////////////////////////////////////////
