@@ -817,9 +817,7 @@ select * from t_barco;
 
 
 /// //////////////////////////////////////////////////////////////////
--- ARRASTO FUNDO
-
-
+-- TARRAFA
 
 select 
 ep.codigo,
@@ -931,15 +929,60 @@ GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_
 
 
 /// //////////////////////////////////////////////////////////////////
-(select 7,  fd.arrfundo as arrfundo,  fd.cod_ficha,  true
+(select 1,  fd.arrfundo as arrfundo,  fd.cod_ficha,  true
 from access.ficha_diaria as fd
 where fd.arrfundo <> 0
 order by fd.cod_ficha)
 union all
-(select 7,  fd.arrfundonm as arrfundo,  fd.cod_ficha,  false
+(select 1,  fd.arrfundonm as arrfundo,  fd.cod_ficha,  false
 from access.ficha_diaria as fd
 where fd.arrfundonm <> 0
 order by fd.cod_ficha);
+
+
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.tempoatepesq,
+ep.avist, 
+ep.subamostra,
+ep.id_subamostra,
+NULL,  -- roda? ? ? 
+ep.alt_pano,
+ep.tam_malha,
+ep.n_lances, 
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_rede = '7'
+order by ep.codigo;
+
+
+af_id serial NOT NULL,
+  af_embarcado boolean,
+  bar_id integer,
+  tte_id integer,
+  tp_id_entrevistado integer NOT NULL,
+  af_quantpescadores integer,
+  af_dhsaida timestamp without time zone,
+  af_dhvolta timestamp without time zone,
+  af_diesel double precision,
+  af_oleo double precision,
+  af_alimento double precision,
+  af_gelo double precision,
+  af_avistou character varying(100),
+  af_subamostra boolean,
+  sa_id integer,
+  af_obs character varying(100),
+  mnt_id integer NOT NULL,
+  af_motor boolean,
+
 
 SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Arte, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.Pesqueiro2, Entrev_Pesca.Pesqueiro3, Entrev_Pesca.Pesqueiro4, Entrev_Pesca.Pesqueiro5, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc
 FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
