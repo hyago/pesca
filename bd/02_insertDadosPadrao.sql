@@ -3511,7 +3511,6 @@ INSERT INTO t_endereco (te_id, te_logradouro, te_numero, te_bairro, te_cep, te_c
 INSERT INTO t_endereco (te_id, te_logradouro, te_numero, te_bairro, te_cep, te_comp, tmun_id) VALUES (3175, NULL, NULL, NULL, NULL, NULL, 7);
 INSERT INTO t_endereco (te_id, te_logradouro, te_numero, te_bairro, te_cep, te_comp, tmun_id) VALUES (2413, 'aa', NULL, NULL, NULL, NULL, NULL);
 COMMIT;
-
 -- -----------------------------------------------------
 -- T_LOGIN
 -- -----------------------------------------------------
@@ -3519,8 +3518,8 @@ START TRANSACTION;
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (1, 'stefano', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (2, 'elenildo', '271ef194466bb4f3e9a962a1e2772c73ab87f8ad', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (3, 'mohonda', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (74, '11', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (75, '12', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (74, 'manuelag.bomfim@gmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (75, 'polibiouesc@gmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (76, '13', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (77, '14', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (78, '15', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
@@ -3559,7 +3558,7 @@ INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (110
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (111, '48', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (112, '49', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (113, '50', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (114, '54', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (114, 'ronney_souza@hotmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (115, '55', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (116, '56', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (117, '57', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
@@ -3567,10 +3566,10 @@ INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (118
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (119, '59', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (120, '60', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (121, '61', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (122, '62', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (123, '63', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (122, 'carlaburda@yahoo.com.br', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (123, 'taissahelena.a@gmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (124, '64', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (125, '65', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (125, 'karlallp@hotmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (126, '66', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (127, '67', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (128, '69', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
@@ -3579,14 +3578,13 @@ INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (130
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (131, '72', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (132, '73', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (133, '74', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (134, '75', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (135, '76', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (134, 'beca_dias@hotmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (135, 'gilvia_scher@hotmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (136, '77', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (137, '78', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (138, '79', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (139, '80', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (139, 'debora.antropica@gmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (140, '81', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-COMMIT;
 
 -- -----------------------------------------------------
 -- T_USUARIO
@@ -3595,8 +3593,8 @@ START TRANSACTION;
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (1, 'Stefano', 'M', '12211221', '122222112', 'stefano@stefano.br', NULL, NULL, false, 1, 1, 10001);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (2, 'Elenildo', 'M', '121.131.242-34', '123456', 'elenildo@uesc.br', NULL, NULL, false, 2, 1, 10002);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (3, 'mohonda', 'M', '3333', '3333', 'mohonda@uesc.br', NULL, NULL, false, 3, 1, 10003);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (11, 'Manuela Gomes Bomfim', 'M', '1', '1', 'r.email', '(73) 8877-4716', '(73) 9113-2521', false, 74, 15, 3109);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (12, 'Poliana Gonçalves Sousa', 'M', '1', '1', 'r.email', '(73) 8859-3096', '(73) 9164-3447', false, 75, 15, 3110);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (11, 'Manuela Gomes Bomfim', 'M', '1', '1', 'manuelag.bomfim@gmail.com', '(73) 8877-4716', '(73) 9113-2521', false, 74, 15, 3109);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (12, 'Poliana Gonçalves Sousa', 'M', '1', '1', 'polibiouesc@gmail.com', '(73) 8859-3096', '(73) 9164-3447', false, 75, 15, 3110);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (13, 'Adriana M. de Lima', 'M', '1', '1', 'r.email', NULL, NULL, false, 76, 17, 3111);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (14, 'Alanderlânia S. de Lima', 'M', '1', '1', 'r.email', NULL, NULL, false, 77, 17, 3112);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (15, 'Alexandro S. de Lima', 'M', '1', '1', 'r.email', NULL, NULL, false, 78, 17, 3113);
@@ -3635,7 +3633,7 @@ INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telr
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (48, 'Uellington T. de Souza', 'M', '1', '1', 'r.email', NULL, NULL, false, 111, 17, 3146);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (49, 'Uilas Tavares', 'M', '1', '1', 'r.email', NULL, NULL, false, 112, 17, 3147);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (50, 'Vanderlei S. Oliveira', 'M', '1', '1', 'r.email', NULL, NULL, false, 113, 17, 3148);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (54, 'Ronney da Silva Souza', 'M', '1', '1', 'r.email', NULL, '(73) 8804-7461', false, 114, 15, 3149);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (54, 'Ronney da Silva Souza', 'M', '1', '1', 'ronney_souza@hotmail.com', NULL, '(73) 8804-7461', false, 114, 15, 3149);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (55, 'Tayná', 'M', '1', '1', 'r.email', NULL, NULL, false, 115, 17, 3150);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (56, 'Camilo', 'M', '1', '1', 'r.email', '(71) 8896-1668', '(73) 9156-3155', false, 116, 19, 3151);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (57, 'Érika', 'M', '1', '1', 'r.email', '(71) 8822-7228', '(73) 9156-3155', false, 117, 19, 3152);
@@ -3643,10 +3641,10 @@ INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telr
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (59, 'Diego Augusto Moraes Silva', 'M', '1', '1', 'r.email', NULL, '(73) 9954-6466', false, 119, 21, 3154);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (60, 'Claudia Andressa Cruz Cardoso', 'M', '1', '1', 'r.email', NULL, '(73) 9986-1269', false, 120, 21, 3155);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (61, 'Valéria Soares Martins', 'M', '1', '1', 'r.email', NULL, '(73) 9991-1622', false, 121, 21, 3156);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (62, 'Carla Luisa Burda', 'M', '1', '1', 'r.email', NULL, '(73) 9974-4054', false, 122, 21, 3157);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (63, 'Taíssa Helena de Araújo Silva', 'M', '1', '1', 'r.email', NULL, '(73) 9109-7836', false, 123, 21, 3158);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (62, 'Carla Luisa Burda', 'M', '1', '1', 'carlaburda@yahoo.com.br', NULL, '(73) 9974-4054', false, 122, 21, 3157);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (63, 'Taíssa Helena de Araújo Silva', 'M', '1', '1', 'taissahelena.a@gmail.com', NULL, '(73) 9109-7836', false, 123, 21, 3158);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (64, 'Marcio Vargas', 'M', '1', '1', 'r.email', NULL, '(73) 9962-8627', false, 124, 21, 3159);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (65, 'Ana Carla da Silva Souza', 'M', '1', '1', 'r.email', NULL, '(73) 8801-8747', false, 125, 21, 3160);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (65, 'Ana Carla da Silva Souza', 'M', '1', '1', 'karlallp@hotmail.com', NULL, '(73) 8801-8747', false, 125, 21, 3160);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (66, 'Marcelo Tiago Nascimento Xavier', 'M', '1', '1', 'r.email', NULL, NULL, false, 126, 17, 3161);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (67, 'Lucas Castelo Jovita', 'M', '1', '1', 'r.email', NULL, NULL, false, 127, 17, 3162);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (69, 'Stefano Azevedo', 'M', '1', '1', 'r.email', NULL, '(73) 9198-3810', false, 128, 15, 3163);
@@ -3655,12 +3653,12 @@ INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telr
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (72, 'Iago M.', 'M', '1', '1', 'r.email', NULL, NULL, false, 131, 17, 3166);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (73, 'Ingrid Souza e Souza', 'M', '1', '1', 'r.email', NULL, NULL, false, 132, 15, 3167);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (74, 'André Nascimento de Souza', 'M', '1', '1', 'r.email', NULL, NULL, false, 133, 15, 3168);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (75, 'Verena Rebeca', 'M', '1', '1', 'r.email', NULL, NULL, false, 134, 15, 3169);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (76, 'Gylvia Silva Souza', 'M', '1', '1', 'r.email', NULL, NULL, false, 135, 21, 3170);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (75, 'Verena Rebeca', 'M', '1', '1', 'beca_dias@hotmail.com', NULL, NULL, false, 134, 15, 3169);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (76, 'Gilvia Silva Souza', 'M', '1', '1', 'gilvia_scher@hotmail.com', NULL, NULL, false, 135, 21, 3170);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (77, 'AÍSSA HELENA', 'M', '1', '1', 'r.email', NULL, NULL, false, 136, 15, 3171);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (78, 'Márcia', 'M', '1', '1', 'r.email', NULL, NULL, false, 137, 15, 3172);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (79, 'Nilson', 'M', '1', '1', 'r.email', NULL, NULL, false, 138, 15, 3173);
-INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (80, 'Débora Bluhu', 'M', '1', '1', 'r.email', NULL, NULL, false, 139, 15, 3174);
+INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (80, 'Débora Bluhu', 'M', '1', '1', 'debora.antropica@gmail.com', NULL, NULL, false, 139, 15, 3174);
 INSERT INTO t_usuario (tu_id, tu_nome, tu_sexo, tu_cpf, tu_rg, tu_email, tu_telres, tu_telcel, tu_usuariodeletado, tl_id, tp_id, te_id) VALUES (81, 'Cristiane de Jesus', 'M', '1', '1', 'r.email', NULL, NULL, false, 140, 15, 3175);
 COMMIT;
 
