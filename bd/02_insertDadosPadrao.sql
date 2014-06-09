@@ -21569,6 +21569,53 @@ INSERT INTO t_ficha_diaria (fd_id, t_estagiario_tu_id, t_monitor_tu_id1, fd_data
 INSERT INTO t_ficha_diaria (fd_id, t_estagiario_tu_id, t_monitor_tu_id1, fd_data, fd_turno, obs, pto_id, tmp_id, vnt_id) VALUES (1288, 12, 38, '2014-01-13', 'V', NULL, 8, 1, 3);
 COMMIT;
 
+
+START TRANSACTION;
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (2, 'Grauça');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (3, 'Camarão');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (4, 'Rapala');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (5, 'Sardinha e camarão');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (6, 'Lula e camarão');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (7, 'Jig');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (8, 'Sardinha');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (9, 'Peixe e lula');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (10, 'Pitintinga e Camarão');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (11, 'Atum pequeno');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (12, 'Minhoca e camarão');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (13, 'Moreia');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (14, 'Xixarro');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (15, 'Caramuru e Xixarro');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (16, 'Artificial');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (17, 'Peixe');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (18, 'Camarão e peixe');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (20, 'Caramuru e voador');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (21, 'Sardinha, Xixarro e voador');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (22, 'Manjuba');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (23, 'Sardinha e voador');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (24, 'Frango');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (25, 'Lula, Camarão e Sardinha');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (26, 'Camarão e Peixe');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (27, 'Vermelho');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (28, 'Voador');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (29, 'Sardinha e voador');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (30, 'Bom nome e sardinha');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (31, 'Gib');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (32, 'Barbudo e camarão');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (33, 'Barbudo');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (34, 'Chotinha');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (35, 'Sardinha e Xixarro');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (36, 'Sardinha e Chatinha');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (37, 'Pescada branca');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (38, 'Navalha');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (39, 'Navalha e Camarão');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (40, 'Cascuda');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (41, 'Voador e Bom nome');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (42, 'Outros');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (43, 'Maromba');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (44, 'Isca Viva');
+INSERT INTO t_isca (isc_id, isc_tipo) VALUES (45, 'Minhoca');
+COMMIT;
+
 -- -----------------------------------------------------
 -- 
 -- -----------------------------------------------------

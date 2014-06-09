@@ -817,9 +817,7 @@ select * from t_barco;
 
 
 /// //////////////////////////////////////////////////////////////////
--- ARRASTO FUNDO
-
-
+-- Tarrafa
 
 select 
 ep.codigo,
@@ -843,6 +841,60 @@ ep.cod_fichadiaria
 from access.entrev_pesca as ep
 where ep.tp_rede = '7'
 order by ep.codigo;
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Vara pesca
+
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.tempoatepesq,
+ep.avist, 
+ep.subamostra,
+ep.id_subamostra,
+NULL,  -- roda? ? ? 
+ep.alt_pano,
+ep.tam_malha,
+ep.n_lances, 
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_rede = '7'
+order by ep.codigo;
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Siripóia
+
+/// //////////////////////////////////////////////////////////////////
+-- Ratoeira
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Mergulho
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Linha de mão
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Groseira
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Vara pesca
+
+
+
+
 
 SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.Tempomariscando
 FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
