@@ -22563,6 +22563,8 @@ INSERT INTO t_mare (mre_tipo) VALUES ('Enchente');
 INSERT INTO t_mare (mre_tipo) VALUES ('Vazante');
 COMMIT;
 
+
+SELECT pg_catalog.setval(' t_isca_isc_id_seq', 1, true);
 START TRANSACTION;
 INSERT INTO t_isca (isc_id, isc_tipo) VALUES (2, 'Grauça');
 INSERT INTO t_isca (isc_id, isc_tipo) VALUES (3, 'Camarão');
