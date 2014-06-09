@@ -1,5 +1,4 @@
-
-    <h2>Perfil Social->Área de Pesca</h2>
+<h2>Perfil Social->Área de Pesca</h2>
 
 <a href="<?= $this->url(array("controller" => "area-pesca", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
     <fieldset id="Social"></fieldset>
@@ -10,7 +9,7 @@
         </tr>
 
         <?php
-        foreach ($this->dados as $key => $areaPesca):
+        foreach ($this->area-pesca as $key => $areaPesca):
             ?>
             <tr>
                 <td><?= $areaPesca['tareap_id'] ?></td>
@@ -32,4 +31,4 @@
         <?php endforeach; ?>
     </table>
     <br/><br/>
-    <a href="<?= $this->url(array("controller" => "area-pesca", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+<a href="<?= $this->url(array("controller" => "area-pesca", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>

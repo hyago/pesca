@@ -24,15 +24,49 @@ class PesqueiroController extends Zend_Controller_Action
         $this->view->assign("usuario",$this->usuario);
         
         
+        $this->modelPesqueiro = new Application_Model_Pesqueiro();
+        
     }
 
     public function indexAction()
     {
-        // action body
+        $fromPesqueiro = $this->modelPesqueiro->select();
+        
+        $this->view->assign('dadosPesqueiros', $fromPesqueiro);
     }
     public function novoAction(){
     
     }
+    
+    public function criarAction(){
+        $this->modelPesqueiro->insert($this->_getAllParams());
 
+        $this->_redirect('pesqueiro/index');
+    }
+    
+    public function editarAction(){
+        
+        $idPesqueiro = $this->_getParam('id');
+        $fromPesqueiro = $this->modelPesqueiro->find($idPesqueiro);
+        
+        $this->view->assign('dadosPesqueiros', $fromPesqueiro);
+    }
+    public function atualizarAction()
+    {
+        $this->modelPesqueiro->update($this->_getAllParams());
+
+        $this->_redirect('pesqueiro/index');
+    }
+    
+    
+    public function excluirAction(){
+        
+        $idPesqueiro = $this->_getParam('id');
+        
+        $this->modelPesqueiro->delete($idPesqueiro);
+        
+        $this->_redirect('pesqueiro/index');
+        
+    }
 }
 

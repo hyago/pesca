@@ -17,6 +17,7 @@ class AreaPescaController extends Zend_Controller_Action
 private $usuario;
     public function init()
     {   
+        $this->modelUsuario = new Application_Model_Usuario();
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
@@ -27,12 +28,12 @@ private $usuario;
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
-          $identity2 = get_object_vars($identity);
+          $ArrayIdentity = get_object_vars($identity);
           
         }
         
-        $this->modelUsuario = new Application_Model_Usuario();
-        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+        
+        $this->usuario = $this->modelUsuario->selectLogin($ArrayIdentity['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
         
@@ -45,9 +46,9 @@ private $usuario;
      */
     public function indexAction()
     {        
-        $dados = $this->modelAreaPesca->select( NULL, 'tareap_areapesca', NULL );
+        $areapesca = $this->modelAreaPesca->select( NULL, 'tareap_areapesca', NULL );
       
-        $this->view->assign("dados", $dados);
+        $this->view->assign("area-pesca", $areapesca);
     }
     
     /*

@@ -6,30 +6,28 @@
     <tr>
         <th>ID</th>
         <th>Nome</th>
-        <th>Municipio</th>
     </tr>
     
-    <?php foreach ($this->dados as $key => $pesqueiro): ?>
+    <?php foreach ($this->dadosPesqueiros as $key => $pesqueiro): ?>
     <tr>
-        <td><?= $pesqueiro['psq_id'] ?></td>
-        <td><?= $pesqueiro['psq_nome'] ?></td>
-        <td><?= $pesqueiro['tmun_id'] ?></td>
+        <td><?= $pesqueiro['paf_id'] ?></td>
+        <td><?= $pesqueiro['paf_pesqueiro'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"visualizar", "id" => $pesqueiro['tp_id']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"visualizar", "id" => $pesqueiro['paf_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"editar", "id" => $pesqueiro['tp_id']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"editar", "id" => $pesqueiro['paf_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                 </ul>
             </a>
         </td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"excluir", "id" => $pesqueiro['tp_id']),null,true)?>">
+            <a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"excluir", "id" => $pesqueiro['paf_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
                 </ul>
