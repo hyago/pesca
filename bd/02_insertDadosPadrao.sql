@@ -721,6 +721,7 @@ Insert Into t_barco (bar_id, bar_nome) VALUES (297,'Fábio III');
 Insert Into t_barco (bar_id, bar_nome) VALUES (298,'Deus é Mais');
 Insert Into t_barco (bar_id, bar_nome) VALUES (299,'Jamilly');
 Insert Into t_barco (bar_id, bar_nome) VALUES (300,'Xanadú');
+Insert Into t_barco (bar_id, bar_nome) VALUES (301,'Sem Nome');
 
 Insert Into t_pesqueiro_af (paf_id, paf_pesqueiro) Values (200,'14 - 49 - 547');
 Insert Into t_pesqueiro_af (paf_id, paf_pesqueiro) Values (183,'14,45 O 39,00');
@@ -3511,11 +3512,12 @@ INSERT INTO t_endereco (te_id, te_logradouro, te_numero, te_bairro, te_cep, te_c
 INSERT INTO t_endereco (te_id, te_logradouro, te_numero, te_bairro, te_cep, te_comp, tmun_id) VALUES (3175, NULL, NULL, NULL, NULL, NULL, 7);
 INSERT INTO t_endereco (te_id, te_logradouro, te_numero, te_bairro, te_cep, te_comp, tmun_id) VALUES (2413, 'aa', NULL, NULL, NULL, NULL, NULL);
 COMMIT;
+
 -- -----------------------------------------------------
 -- T_LOGIN
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (1, 'stefano', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
+INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (1, 'stefano', 'a12b5b0cc575bd9fa7573abf968359899d50e01b', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (2, 'elenildo', '271ef194466bb4f3e9a962a1e2772c73ab87f8ad', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (3, 'mohonda', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (74, 'manuelag.bomfim@gmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
@@ -3585,7 +3587,7 @@ INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (137
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (138, '79', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (139, 'debora.antropica@gmail.com', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
 INSERT INTO t_login (tl_id, tl_login, tl_hashsenha, tl_ultimoacesso) VALUES (140, '81', '80980fcaf2ab3f243874695f57b2ed065d8e67e4', NULL);
-
+-- -----------------------------------------------------
 -- -----------------------------------------------------
 -- T_USUARIO
 -- -----------------------------------------------------
@@ -22981,3 +22983,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 COMMIT;
+
+
+INSERT INTO t_mare (mre_tipo) VALUES ('Enchente');
+INSERT INTO t_mare (mre_tipo) VALUES ('Vazante');

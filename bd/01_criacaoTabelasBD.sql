@@ -619,7 +619,7 @@ CREATE TABLE IF NOT EXISTS T_USUARIO_HAS_T_TELEFONECONTATO (
 --  CONSTRAINT FK_T_PESCADOR_HAS_T_TELEFONECONTATO_T_PESCADOR1 FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
 --  CONSTRAINT FK_T_PESCADOR_HAS_T_TELEFONECONTATO_T_TELEFONECONTATO1 FOREIGN KEY (TTCONT_ID) REFERENCES T_TELEFONECONTATO (TTCONT_ID)
 -- );
-
+\
 -- -----------------------------------------------------
 -- TABLE T_GRUPO
 -- -----------------------------------------------------
@@ -2485,13 +2485,4 @@ CREATE OR REPLACE VIEW v_entrevista_varapesca AS
  SELECT entrevista.vp_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
    FROM t_varapesca as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
   WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
-
-
-
-
-
-
-
-
-
 
