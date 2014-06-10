@@ -816,6 +816,33 @@ select barco from access.entrev_pesca;
 select * from t_barco;
 
 
+//////////////////////////////////////////////////////////////////////
+--Arrasto de fundo
+SELECT 
+ep.codigo, 
+ep.cod_fichadiaria, 
+ep.arte, 
+ep.barco, 
+ep.tp_barco, 
+ep.mestre, 
+ep.n_pesc, 
+ep.datasaida, 
+ep.horasaida, 
+ep.datachegada, 
+ep.horachegada, 
+ep.subamostra, 
+ep.id_subamostra, 
+ep.combustivel, 
+ep."Óleo", 
+ep.alimentos, 
+ep.gelo, 
+ep.avist, 
+ep.obs
+FROM entrev_pesca WHERE ep.arte = 'ARRASTO DE FUNDO';
+
+
+
+
 /// //////////////////////////////////////////////////////////////////
 -- TARRAFA
 
@@ -855,11 +882,267 @@ ep.tp_barco,
 ep.mestre,
 ep.n_pesc,
 ep.datasaida,
+ep.horasaida,
+ep.datachegada,
+ep.horachegada,
+ep.combustivel,
+ep.'Óleo',
+ep.alimentos,
+ep.gelo,
+ep.destino,
+ep.n_linhas,
+ep.n_anzois,
+ep.isca,
+ep.mare,
+ep.avist,
+ep.subamostra,
+ep.id_subamostra,
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_mariscagem = 'Vara de pesca'
+order by ep.codigo;
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Siripóia
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.horasaida,
+ep.datachegada,
+ep.horachegada,
+ep.tempomariscando,
+ep.mare,
+ep.avist,
+ep.n_armadilhas,
+ep.subamostra,
+ep.id_subamostra,
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_mariscagem = 'Ciripóia' --No banco do malta é assim, mas o certo é Siripóia
+order by ep.codigo;
+
+/// //////////////////////////////////////////////////////////////////
+-- Ratoeira
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.horasaida,
+ep.datachegada,
+ep.horachegada,
+ep.destino,
+ep.tempomariscando,
+ep.mare,
+ep.avist,
+ep.n_armadilhas,
+ep.subamostra,
+ep.id_subamostra,
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tipomariscagem = 'Ratoeira'
+order by ep.codigo;
+
+/// //////////////////////////////////////////////////////////////////
+-- Mergulho
+SELECT 
+ep.codigo, 
+ep.cod_fichadiaria, 
+ep.arte, 
+ep.cod_pdesemb, 
+ep.barco, 
+ep.tp_barco, 
+ep.mestre, 
+ep.n_pesc, 
+ep.datasaida, 
+ep.horasaida, 
+ep.datachegada, 
+ep.horachegada, 
+ep.subamostra, 
+ep.id_subamostra, 
+ep.pesqueiro1,  
+ep.mare,
+ep.tempomariscando, 
+ep.distmarisco, 
+ep.avist, 
+ep.obs
+FROM entrev_pesca WHERE ep.tipomariscagem LIKE 'Mergulho';
+order by ep.codigo;
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Linha de mão
+SELECT 
+ep.codigo, 
+ep.cod_fichadiaria,  
+ep.barco, 
+ep.tp_barco, 
+ep.mestre, 
+ep.n_pesc, 
+ep.datasaida, 
+ep.horasaida, 
+ep.datachegada, 
+ep.horachegada, 
+ep.subamostra, 
+ep.id_subamostra, 
+ep.combustivel, 
+ep."Óleo", 
+ep.alimentos, 
+ep.gelo,  
+ep.n_linhas, 
+ep.n_anzois, 
+ep.isca, 
+ep.avist,
+ep.obs
+FROM entrev_pesca WHERE ep.tp_pesca LIKE 'Linha de mão';
+
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Groseira
+SELECT 
+ep.codigo, 
+ep.cod_fichadiaria, 
+ep.barco, 
+ep.tp_barco, 
+ep.mestre, 
+ep.n_pesc, 
+ep.datasaida, 
+ep.horasaida, 
+ep.datachegada, 
+ep.horachegada, 
+ep.subamostra, 
+ep.id_subamostra, 
+ep.combustivel, 
+ep."Óleo", 
+ep.alimentos, 
+ep.gelo,  
+ep.n_linhas, 
+ep.n_anzois, 
+ep.isca, 
+ep.avist,
+ep.obs
+FROM ep.entrev_pesca WHERE ep.tp_pesca LIKE 'Grosseira';
+
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Manzuá
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.horasaida,
+ep.datachegada,
+ep.horachegada,
+ep.tempomariscando,
+ep.mare,
+ep.avist,
+ep.n_armadilhas,
+ep.subamostra,
+ep.id_subamostra,
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_mariscagem = 'Manzuá' --No banco do malta é assim, mas o certo é Jereré
+order by ep.codigo;
+
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Jereré
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.horasaida,
+ep.datachegada,
+ep.horachegada,
+ep.tempomariscando,
+ep.mare,
+ep.avist,
+ep.n_armadilhas,
+ep.subamostra,
+ep.id_subamostra,
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_mariscagem = 'Gereré' --No banco do malta é assim, mas o certo é Jereré
+order by ep.codigo;
+
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Emalhe
+SELECT 
+ep.codigo, 
+ep.cod_fichadiaria, 
+ep.arte, 
+ep.barco, 
+ep.tp_barco, 
+ep.mestre, 
+ep.n_pesc, 
+ep.datasaida, 
+ep.horasaida, 
+ep.datachegada, 
+ep.horachegada, 
+ep.subamostra, 
+ep.id_subamostra, 
+ep.combustivel, 
+ep."Óleo", 
+ep.alimentos, 
+ep.gelo,
+ep.n_panos, 
+ep.comp_pano, 
+ep.alt_pano, 
+ep.tam_malha, 
+ep.avist, 
+ep.obs
+FROM entrev_pesca as ep where ep.tp_rede LIKE 'Emalhe' or ep.tp_rede LIKE '3 malhos';
+
+
+
+
+/// //////////////////////////////////////////////////////////////////
+-- Calão
+
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
 ep.tempoatepesq,
 ep.avist, 
 ep.subamostra,
 ep.id_subamostra,
-NULL,  -- roda? ? ? 
 ep.alt_pano,
 ep.tam_malha,
 ep.n_lances, 
@@ -869,29 +1152,69 @@ where ep.tp_rede = '7'
 order by ep.codigo;
 
 
-/// //////////////////////////////////////////////////////////////////
--- Siripóia
-
-/// //////////////////////////////////////////////////////////////////
--- Ratoeira
 
 
-/// //////////////////////////////////////////////////////////////////
--- Mergulho
+/////////////////////////////////////////////////////////////////////
+--Linha de Fundo
+
+select 
+ep.codigo,
+-- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
+case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
+ep.barco, 
+left(ep.tp_barco,  1) as tp_barco, 
+ep.tp_barco, 
+ep.mestre,
+ep.n_pesc,
+ep.datasaida,
+ep.horasaida,
+ep.datachegada,
+ep.horachegada,
+ep.combustivel,
+ep.'Óleo',
+ep.alimentos,
+ep.gelo,
+ep.n_linhas,
+ep.n_anzois,
+ep.isca,
+ep.mare,
+ep.avist,
+ep.subamostra,
+ep.id_subamostra,
+ep.cod_fichadiaria
+from access.entrev_pesca as ep
+where ep.tp_mariscagem = 'Linha de Fundo'
+order by ep.codigo;
 
 
-/// //////////////////////////////////////////////////////////////////
--- Linha de mão
+//////////////////////////////////////////////////////////////////////
+--Coleta Manual
+SELECT 
+ep.codigo, 
+ep.cod_fichadiaria, 
+ep.arte, 
+ep.cod_pdesemb, 
+ep.barco, 
+ep.tp_barco, 
+ep.mestre, 
+ep.n_pesc, 
+ep.datasaida, 
+ep.horasaida, 
+ep.datachegada, 
+ep.horachegada, 
+ep.subamostra, 
+ep.id_subamostra, 
+ep.pesqueiro1,  
+ep.mare,
+ep.tempomariscando, 
+ep.distmarisco, 
+ep.avist, 
+ep.obs
+FROM entrev_pesca as ep WHERE ep.tipomariscagem LIKE 'Mergulho';
+order by ep.codigo;
 
 
-/// //////////////////////////////////////////////////////////////////
--- Groseira
-
-
-/// //////////////////////////////////////////////////////////////////
--- Vara pesca
-
-
+//////////////////////////////////////////////////////////////////////
 
 
 
