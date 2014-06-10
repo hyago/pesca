@@ -13,10 +13,11 @@ class ModeloRelatorio {
 	private $lastLine = 40;
 	private $columnRodape = 470;
 	private $lineRodape = 15;
-	private $lineLength = 10;
+	private $lineLength = 11;
 	private $countPag = 0;
 	private $linha = 0;
 	private $isFirstPage = true;
+	private $isLegenda = true;
 	
 	public function __construct() {
 		Zend_Loader::loadClass('Zend_Pdf');
@@ -42,6 +43,12 @@ class ModeloRelatorio {
 			$this->pageToClone->getFontSize() );
 			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
 		$this->pageToClone->drawText( $title,  $textColumnposition, $this->titleLine );
+	}
+	
+	public function setLegendaOff() {
+		$this->isLegenda = false;
+		
+		$this->linha = $this->legendLine;
 	}
 	
 	public function setLegenda( $columnPosition, $text ) {
@@ -72,7 +79,11 @@ class ModeloRelatorio {
 	
 	public function setNewLine() {
 		if ( $this->linha <= $this->lastLine ) {
-			$this->linha = $this->firstLine;
+			if ( $this->isLegenda ) {
+				$this->linha = $this->firstLine;
+			} else {
+				$this->linha = $this->legendLine;
+			}
 			$this->setNewPage();
 		} else {
 			$this->linha = $this->linha - $this->lineLength;
@@ -102,7 +113,13 @@ class ModeloRelatorio {
 		$this->pdfToClone->pages[0] = $this->pageToClone;
 		
 		return $this->pdfToClone->pages[0];
-	}	
+	}
+	
+// 	public function getPage() {
+// 		$this->setNewPage()
+// 		
+// 		return $this->page;
+// 	}
 	
 	public function getRelatorio() {
 		$this->pdf->pages[] = $this->page;

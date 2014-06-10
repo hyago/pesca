@@ -23,7 +23,18 @@ class Application_Model_Pescador {
 
         return $dao->fetchAll($select)->toArray();
     }
+    
+    public function selectView($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescador();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
 
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ FIND - UTILIZA VIEW /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function find($id) {
         $dao = new Application_Model_DbTable_VPescador();
