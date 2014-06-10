@@ -43,7 +43,27 @@ class Application_Model_VaraPesca
         else {
             $idSubamostra = null;
         }
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+        $avistou = $request['avistamento'];
         
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
+        if(empty($avistou)){
+            $avistou = NULL;
+        }
         
         $dadosVaraPesca = array(
             'vp_embarcada' => $request['embarcada'],
@@ -55,11 +75,11 @@ class Application_Model_VaraPesca
             'vp_dhvolta' => $timestampVolta,
             'vp_dhsaida' => $timestampSaida, 
             'vp_tempogasto' => $request['tempoGasto'],
-            'vp_diesel' => $request['diesel'],
-            'vp_oleo' => $request['oleo'],
-            'vp_alimento' => $request['alimento'],
-            'vp_gelo' => $request['gelo'],
-            'vp_avistamento' => $request['avistamento'],
+            'vp_diesel' => $diesel,
+            'vp_oleo' => $oleo,
+            'vp_alimento' => $alimento,
+            'vp_gelo' => $gelo,
+            'vp_avistamento' => $avistou,
             'vp_subamostra' => $request['subamostra'],
             'vp_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,

@@ -40,8 +40,50 @@ class Application_Model_Emalhe
         
        $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
         }
+        
         else {
             $idSubamostra = null;
+        }
+        
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+        $avistou = $request['avistamento'];
+        
+        
+        $tamanho = $request['tamanho'];
+        $altura = $request['altura'];
+        $numPanos =$request['numPanos'];
+        $malha = $request['malha'];
+        
+        if(empty($tamanho)){
+            $tamanho = NULL;
+        }
+        if(empty($altura)){
+            $altura = NULL;
+        }
+        if(empty($numPanos)){
+            $numPanos = NULL;
+        }
+        if(empty($malha)){
+            $malha = NULL;
+        }
+        
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
+        if(empty($avistou)){
+            $avistou = NULL;
         }
         
         $timestampLancamento = $request['dataLancamento']." ".$request['horaLancamento'];
@@ -56,17 +98,17 @@ class Application_Model_Emalhe
             'em_quantpescadores' => $request['numPescadores'],
             'em_dhlancamento' => $timestampLancamento, 
             'em_dhrecolhimento' => $timestampRecolhimento,
-            'em_diesel' => $request['diesel'],
-            'em_oleo' => $request['oleo'],
-            'em_alimento' => $request['alimento'],
-            'em_gelo' => $request['gelo'],
-            'em_avistou' => $request['avistamento'],
+            'em_diesel' => $diesel,
+            'em_oleo' => $oleo,
+            'em_alimento' => $alimento,
+            'em_gelo' => $gelo,
+            'em_avistou' => $avistou,
             'em_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
-            'em_tamanho' => $request['tamanho'],
-            'em_altura' => $request['altura'],
-            'em_numpanos' => $request['numPanos'],
-            'em_malha' => $request['malha'],
+            'em_tamanho' => $tamanho,
+            'em_altura' => $altura,
+            'em_numpanos' => $numPanos,
+            'em_malha' => $malha,
             'em_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento']
         );

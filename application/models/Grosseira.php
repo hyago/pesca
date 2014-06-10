@@ -47,6 +47,28 @@ private $dbTableGrosseira;
          $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+        $avistou = $request['avistamento'];
+        
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
+        if(empty($avistou)){
+            $avistou = NULL;
+        }
+        
         $dadosGrosseira = array(
             'grs_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
@@ -56,12 +78,12 @@ private $dbTableGrosseira;
             'grs_numpescadores' => $request['numPescadores'],
             'grs_dhsaida' => $timestampSaida,
             'grs_dhvolta' => $timestampVolta,
-            'grs_diesel' => $request['diesel'], 
-            'grs_oleo' => $request['oleo'],
-            'grs_alimento' => $request['alimento'],
-            'grs_gelo' => $request['gelo'],
+            'grs_diesel' => $diesel, 
+            'grs_oleo' => $oleo,
+            'grs_alimento' => $alimento,
+            'grs_gelo' => $gelo,
             'grs_numlinhas' => $request['numLinhas'],
-            'grs_avistou' => $request['avistamento'],
+            'grs_avistou' => $avistou,
             'grs_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'grs_obs' => $request['observacao'],

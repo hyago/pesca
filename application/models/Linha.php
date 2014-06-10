@@ -47,6 +47,29 @@ private $dbTableLinha;
          $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+        $avistou = $request['avistamento'];
+        
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
+        if(empty($avistou)){
+            $avistou = NULL;
+        }
+        
+        
         $dadosLinha = array(
             'lin_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
@@ -56,12 +79,12 @@ private $dbTableLinha;
             'lin_numpescadores' => $request['numPescadores'],
             'lin_dhsaida' => $timestampSaida,
             'lin_dhvolta' => $timestampVolta,
-            'lin_diesel' => $request['diesel'], 
-            'lin_oleo' => $request['oleo'],
-            'lin_alimento' => $request['alimento'],
-            'lin_gelo' => $request['gelo'],
+            'lin_diesel' => $diesel, 
+            'lin_oleo' => $oleo,
+            'lin_alimento' => $alimento,
+            'lin_gelo' => $gelo,
             'lin_numlinhas' => $request['numLinhas'],
-            'lin_avistou' => $request['avistamento'],
+            'lin_avistou' => $avistou,
             'lin_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'lin_obs' => $request['observacao'],
