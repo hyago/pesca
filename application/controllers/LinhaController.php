@@ -41,11 +41,13 @@ class LinhaController extends Zend_Controller_Action
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        
+        $iscas = $this->modelIsca->select();
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        
+        $this->view->assign('iscas', $iscas);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('pescadores',$pescadores);

@@ -148,7 +148,9 @@ private $dbTableMergulho;
     {
         $this->dbTableTMergulhoHasPesqueiro = new Application_Model_DbTable_MergulhoHasPesqueiro();
         
-        
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         $dadosPesqueiro = array(
             'mer_id' => $idEntrevista,
             'paf_id' => $pesqueiro,
@@ -184,7 +186,15 @@ private $dbTableMergulho;
     {
         $this->dbTableTMergulhoHasEspCapturada = new Application_Model_DbTable_MergulhoHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'mer_id' => $idEntrevista,
             'esp_id' => $especie,

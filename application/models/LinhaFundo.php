@@ -42,7 +42,36 @@ class Application_Model_LinhaFundo
         else {
             $idSubamostra = null;
         }
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+        $avistou = $request['avistamento'];
         
+        $numLinhas = $request['numLinhas'];
+        $numAnzois = $request['numAnzois'];
+        
+        if(empty($numLinhas)){
+            $numLinhas = NULL;
+        }
+        if(empty($numAnzois)){
+            $numAnzois = NULL;
+        }
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
+        if(empty($avistou)){
+            $avistou = NULL;
+        }
         
         $dadosLinhaFundo = array(
             'lf_embarcada' => $request['embarcada'],
@@ -54,16 +83,16 @@ class Application_Model_LinhaFundo
             'lf_dhvolta' => $timestampVolta,
             'lf_dhsaida' => $timestampSaida, 
             'lf_tempogasto' => $request['tempoGasto'],
-            'lf_diesel' => $request['diesel'],
-            'lf_oleo' => $request['oleo'],
-            'lf_alimento' => $request['alimento'],
-            'lf_gelo' => $request['gelo'],
-            'lf_avistamento' => $request['avistamento'],
+            'lf_diesel' => $diesel,
+            'lf_oleo' => $oleo,
+            'lf_alimento' => $alimento,
+            'lf_gelo' => $gelo,
+            'lf_avistamento' => $avistou,
             'lf_subamostra' => $request['subamostra'],
             'lf_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
-            'lf_numanzoisplinha' => $request['numAnzois'],
-            'lf_numlinhas' => $request['numLinhas'],
+            'lf_numanzoisplinha' => $numAnzois,
+            'lf_numlinhas' => $numLinhas,
             'isc_id' => $request['isca'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
@@ -149,6 +178,9 @@ class Application_Model_LinhaFundo
     {
         $this->dbTableTLinhaFundoHasPesqueiro = new Application_Model_DbTable_LinhaFundoHasPesqueiro();
         
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'lf_id' => $idEntrevista,
@@ -186,7 +218,15 @@ class Application_Model_LinhaFundo
     {
         $this->dbTableTLinhaFundoHasEspCapturada = new Application_Model_DbTable_LinhaFundoHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'lf_id' => $idEntrevista,
             'esp_id' => $especie,

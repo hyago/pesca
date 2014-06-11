@@ -43,7 +43,11 @@ class Application_Model_Manzua
         else {
             $idSubamostra = null;
         }
+        $numArmadilhas = $request['numArmadilhas'];
         
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         $dadosManzua = array(
             'man_embarcada' => $request['embarcada'],
@@ -59,7 +63,7 @@ class Application_Model_Manzua
             'man_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
             'man_tempogasto' => $request['tempoGasto'],
-            'man_numarmadilhas' => $request['numArmadilhas'],
+            'man_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'man_mreviva' => $request['mareviva']
@@ -138,7 +142,9 @@ class Application_Model_Manzua
     {
         $this->dbTableTManzuaHasPesqueiro = new Application_Model_DbTable_ManzuaHasPesqueiro();
         
-        
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         $dadosPesqueiro = array(
             'man_id' => $idEntrevista,
             'paf_id' => $pesqueiro,
@@ -175,7 +181,15 @@ class Application_Model_Manzua
     {
         $this->dbTableTManzuaHasEspCapturada = new Application_Model_DbTable_ManzuaHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'man_id' => $idEntrevista,
             'esp_id' => $especie,

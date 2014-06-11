@@ -179,7 +179,7 @@
                         <td name="inputQuantidade" > <?= $vMonitoramento['mnt_quantidade'] ?> </td>
                         <td name="inputIdFicha"> <?= $vMonitoramento['fd_id'] ?> </td>
                         <td><input type="button" class="button-del" width="5%" onclick="jsDeleteMonitoramento(<?= $vMonitoramento['mnt_id'] ?>, this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "deletmonitoramento"), null, true) ?>', <?= $vMonitoramento['fd_id'] ?>)"></td>
-                        <td><input type="button" width="10%" target="_blank" value ="Nova Entrevista" onclick="jsEntrevista('<?= $vMonitoramento['tap_artepesca'] ?>', <?= $vMonitoramento['mnt_id'] ?>, <?= $vMonitoramento['fd_id'] ?>)"></td>
+                        <td><input type="button" width="10%" target="_blank" value ="Nova Entrevista" onclick="jsEntrevista('<?= $vMonitoramento['tap_artepesca'] ?>', <?= $vMonitoramento['mnt_id'] ?>, <?= $vMonitoramento['fd_id'] ?>)" <?php if($vMonitoramento['mnt_monitorado']== 'Não'){ echo "disabled='True'";} ?>/></td>
 
                     </tr>
                 <?php endforeach; ?>

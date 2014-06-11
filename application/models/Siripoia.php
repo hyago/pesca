@@ -42,7 +42,11 @@ class Application_Model_Siripoia
         else {
             $idSubamostra = null;
         }
+        $numArmadilhas = $request['numArmadilhas'];
         
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         $dadosSiripoia = array(
             'sir_embarcada' => $request['embarcada'],
@@ -58,7 +62,7 @@ class Application_Model_Siripoia
             'sir_subamostra' => $request['subamostra'],
             'sir_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
-            'sir_numarmadilhas' => $request['numArmadilhas'],
+            'sir_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'sir_mreviva' => $request['mareviva']
@@ -136,7 +140,9 @@ class Application_Model_Siripoia
     public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
     {
         $this->dbTableTSiripoiaHasPesqueiro = new Application_Model_DbTable_SiripoiaHasPesqueiro();
-        
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'sir_id' => $idEntrevista,
@@ -173,7 +179,15 @@ class Application_Model_Siripoia
     {
         $this->dbTableTSiripoiaHasEspCapturada = new Application_Model_DbTable_SiripoiaHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'sir_id' => $idEntrevista,
             'esp_id' => $especie,

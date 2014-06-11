@@ -1308,40 +1308,6 @@ GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_
 
 
 
-
-insert into t_arrastofundo (af_id, af_embarcado,  bar_id,  tte_id,  tp_id_entrevistado,  af_quantpescadores,  af_dhsaida, 
-  af_dhvolta,  af_diesel,  af_oleo,  af_alimento,  af_gelo,  af_avistou,  af_subamostra,  sa_id,  af_obs,  af_motor,  mnt_id  )
-
-select ep.codigo, case (coalesce(left(tp_barco, 1), 'False')) when 'False' then 'F' else 'T' end,-- af_id -- af_embarcado
-cast(ep.barco as int4), cast(left(ep.tp_barco,  1) as int4) as tp_barco, -- bar_id -- tte_id
-ep.mestre, ep.n_pesc,-- tp_id_entrevistado -- af_quantpescadores
-to_timestamp((EP.DATASAIDA ||' '|| TO_CHAR(EP.HORASAIDA, 'HH24:MI') ),  'dd-mm-yyyy HH24:MI'), -- af_dhsaida
-to_timestamp((ep.datasaida ||' '|| TO_CHAR(ep.horachegada, 'HH24:MI') ),  'dd-mm-yyyy HH24:MI'), -- af_dhvolta
-ep.combustivel,  ep."Óleo" as oleo, ep.alimentos,-- af_diesel -- af_oleo -- af_alimento
-ep.gelo, ep.avist, -- af_gelo -- af_avistou
-case ep.subamostra when 0 then FALSE else TRUE end as subamostra, -- af_subamostra
-NULL as id_subamostra, -- ep.id_subamostra, -- sa_id
-ep.obs, -- af_obs
-case (coalesce(substring(ep.tp_barco,  8, 8), 'False')) when 'False' then 'F' else 'T' end as motor, -- af_motor
-1, -- mnt_id
-ep.cod_fichadiaria, 1 as Arte,  fd.arrfundo as arrfundo,  'true' as Monitorada
-from access.entrev_pesca as ep
-left join access.ficha_diaria as fd on ep.cod_fichadiaria= fd.cod_ficha
-where ep.arte = '1' and fd.arrfundo <> 0
-order by fd.cod_ficha,  ep.codigo;
-
-
-
-
-insert into t_monitoramento (mnt_id,  mnt_arte,  mnt_quantidade,  mnt_monitorado,  fd_id) values (1,1,1,true,100);
-  
-SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Arte, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.Pesqueiro2, Entrev_Pesca.Pesqueiro3, Entrev_Pesca.Pesqueiro4, Entrev_Pesca.Pesqueiro5, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc
-FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
-WHERE (((Entrev_Pesca.Arte)="arrasto de fundo"))
-GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Arte, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.Pesqueiro2, Entrev_Pesca.Pesqueiro3, Entrev_Pesca.Pesqueiro4, Entrev_Pesca.Pesqueiro5, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc;
-/// //////////////////////////////////////////////////////////////////
-
-
 ----> correção da importação da ficha diaria
 insert into t_ficha_diaria (fd_id, t_estagiario_tu_id, t_monitor_tu_id1, fd_data, fd_turno, obs, pto_id, tmp_id, vnt_id)
 select fd.cod_ficha,

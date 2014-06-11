@@ -27,7 +27,6 @@ class VaraPescaController extends Zend_Controller_Action
         $this->modelVaraPesca = new Application_Model_VaraPesca();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
-        $this->modelVaraPesca = new Application_Model_VaraPesca();
         $this->modelPescador = new Application_Model_Pescador();
         $this->modelBarcos = new Application_Model_Barcos();
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();

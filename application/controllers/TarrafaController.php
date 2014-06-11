@@ -91,7 +91,10 @@ private $usuario;
         
         $vTarrafa = $this->modelTarrafa->selectTarrafaHasPesqueiro('tar_id='.$idEntrevista);
         
+        $vEspecieCapturadas = $this->modelTarrafa->selectTarrafaHasEspCapturadas('tar_id='.$idEntrevista);
+        
         $this->view->assign('monitoramento', $monitoramento);
+        $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevistaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vTarrafa', $vTarrafa);
         $this->view->assign("entrevista", $entrevista);
@@ -136,6 +139,41 @@ private $usuario;
 
         $this->redirect("/tarrafa/editar/id/" . $backUrl);
     }
+    public function insertespeciecapturadaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        
+        $especie = $this->_getParam("selectEspecie");
+        
+        $quantidade = $this->_getParam("quantidade"); 
+        
+        $peso = $this->_getParam("peso");
+        
+        $preco = $this->_getParam("precokg");
+        
+        $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $backUrl = $this->_getParam("back_url");
+       
+        
+        $this->modelTarrafa->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+
+        $this->redirect("/tarrafa/editar/id/" . $backUrl);
+    }
+    public function deletespecieAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevistaHasEspecie = $this->_getParam("id");
+        
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelSiripoia->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/tarrafa/editar/id/" . $backUrl);
+    }
+
 }
 
     

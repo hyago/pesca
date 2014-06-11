@@ -43,6 +43,30 @@ class Application_Model_Calao
         else {
             $idSubamostra = null;
         }
+        
+        $tamanho = $request['tamanho'];
+        $altura = $request['altura'];
+        $numLances = $request['numLances'];
+        $malha = $request['malha'];
+        $avistou = $request['avistamento'];
+        
+        if(empty($tamanho)){
+            $tamanho = NULL;
+        }
+        if(empty($altura)){
+            $altura = NULL;
+        }
+        
+        if(empty($numLances)){
+            $numLances = NULL;
+        }
+        if(empty($avistou)){
+            $avistou = NULL;
+        }
+        if(empty($malha)){
+            $malha = NULL;
+        }
+        
         $dadosCalao = array(
             'cal_embarcada' => $request['embarcada'],
             'cal_motor'=> $request['motor'],
@@ -52,10 +76,10 @@ class Application_Model_Calao
             'cal_quantpescadores' => $request['NumPescadores'],
             'cal_data' => $request['data'],
             'cal_tempogasto' => $request['tempoGasto'], 
-            'cal_tamanho' => $request['tamanho'],
-            'cal_altura' => $request['altura'],
-            'cal_malha' => $request['malha'],
-            'cal_numlances' => $request['numLances'],
+            'cal_tamanho' => $tamanho,
+            'cal_altura' => $altura,
+            'cal_malha' => $malha,
+            'cal_numlances' => $numLances,
             'cal_avistou' => $request['avistamento'],
             'cal_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
@@ -170,7 +194,15 @@ class Application_Model_Calao
     {
         $this->dbTableTCalaoHasEspCapturada = new Application_Model_DbTable_CalaoHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'cal_id' => $idEntrevista,
             'esp_id' => $especie,

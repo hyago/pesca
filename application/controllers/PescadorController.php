@@ -77,7 +77,7 @@ private $usuario;
     }
 
     public function criarAction() {
-        $this->modelPescador->insert( $this->_getAllParams() );
+        $this->modelPescador->insert($this->_getAllParams());
 
         $this->_redirect('pescador/index');
     }
