@@ -1,6 +1,6 @@
 <?php
 
-class LinhaFundoFundoController extends Zend_Controller_Action
+class LinhaFundoController extends Zend_Controller_Action
 {
     private $usuario;
     public function init()
@@ -20,14 +20,13 @@ class LinhaFundoFundoController extends Zend_Controller_Action
         }
         
         $this->modelUsuario = new Application_Model_Usuario();
-        $$this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+        $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
         
-        $this->modelLinhaFundoFundo = new Application_Model_LinhaFundoFundo();
+        $this->modelLinhaFundo = new Application_Model_LinhaFundo();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
-        $this->modelFichaDiaria = new Application_Model_FichaDiaria();
-        $this->modelLinhaFundoFundo = new Application_Model_LinhaFundoFundo();
+        $this->modelFichaDiaria = new Application_Model_FichaDiaria();;
         $this->modelPescador = new Application_Model_Pescador();
         $this->modelBarcos = new Application_Model_Barcos();
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
@@ -83,8 +82,8 @@ class LinhaFundoFundoController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_LinhaFundoFundoHasPesqueiro();
-        $entrevista = $this->modelLinhaFundoFundo->find($this->_getParam('id'));
+        $entrevistaHasPesqueiro = new Application_Model_DbTable_LinhaFundoHasPesqueiro();
+        $entrevista = $this->modelLinhaFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
@@ -95,14 +94,14 @@ class LinhaFundoFundoController extends Zend_Controller_Action
         
         $idEntrevista = $this->_getParam('id');
         
-        $vLinhaFundoFundo = $this->modelLinhaFundoFundo->selectLinhaFundoFundoHasPesqueiro('lf_id='.$idEntrevista);
+        $vLinhaFundo = $this->modelLinhaFundo->selectLinhaFundoHasPesqueiro('lf_id='.$idEntrevista);
         
-        $vEspecieCapturadas = $this->modelLinhaFundoFundo->selectLinhaFundoFundoHasEspCapturadas('lf_id='.$idEntrevista);
+        $vEspecieCapturadas = $this->modelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$idEntrevista);
         
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
-        $this->view->assign('vLinhaFundoFundo', $vLinhaFundoFundo);
+        $this->view->assign('vLinhaFundo', $vLinhaFundo);
         $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
@@ -111,10 +110,10 @@ class LinhaFundoFundoController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
-        $idLinhaFundoFundo = $this->modelLinhaFundoFundo->insert($this->_getAllParams());
+        $idLinhaFundo = $this->modelLinhaFundo->insert($this->_getAllParams());
         
         
-        $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundoFundo);
+        $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
     }
 
     public function insertpesqueiroAction(){
@@ -133,7 +132,7 @@ class LinhaFundoFundoController extends Zend_Controller_Action
         $backUrl = $this->_getParam("back_url");
        
         
-        $this->modelLinhaFundoFundo->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
+        $this->modelLinhaFundo->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
 
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
@@ -145,7 +144,7 @@ class LinhaFundoFundoController extends Zend_Controller_Action
         
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelLinhaFundoFundo->deletePesqueiro($idEntrevistaHasPesqueiro);
+        $this->modelLinhaFundo->deletePesqueiro($idEntrevistaHasPesqueiro);
 
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
@@ -168,7 +167,7 @@ class LinhaFundoFundoController extends Zend_Controller_Action
         $backUrl = $this->_getParam("back_url");
        
         
-        $this->modelLinhaFundoFundo->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $this->modelLinhaFundo->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
@@ -180,7 +179,7 @@ class LinhaFundoFundoController extends Zend_Controller_Action
         
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelLinhaFundoFundo->deleteEspCapturada($idEntrevistaHasEspecie);
+        $this->modelLinhaFundo->deleteEspCapturada($idEntrevistaHasEspecie);
 
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }    

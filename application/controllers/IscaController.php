@@ -23,14 +23,21 @@ class IscaController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
+        $this->modelIsca = new Application_Model_Isca();
     }
 
     public function indexAction()
     {
-        // action body
-    }
+        $dadosIsca = $this->modelIsca->select(NULL, 'isc_tipo', NULL);
 
+        $this->view->assign("dadosIscas", $dadosIsca);
+    }
+    public function criarAction(){
+        
+    }
+    public function excluirAction(){
+        
+    }
 
 }
 

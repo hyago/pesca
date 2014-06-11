@@ -591,6 +591,7 @@ function jsDeleteEspecieCapturada(fichaId, pag, idEntHasEspecie) {
         location.replace(tmpUpdate);
     }
 }
+
 function jsEntrevista(nomeArtePesca, idMonitoramento, idFichaDiaria) {
             var Entrevista;
             if (nomeArtePesca.toLowerCase() === "Arrasto de Fundo".toLowerCase()) {
