@@ -53,6 +53,16 @@ private $dbTableLinha;
         $gelo = $request['gelo'];
         $avistou = $request['avistamento'];
         
+        $numLinhas = $request['numLinhas'];
+        $numAnzois = $request['numAnzois'];
+        
+        if(empty($numLinhas)){
+            $numLinhas = NULL;
+        }
+        if(empty($numAnzois)){
+            $numAnzois = NULL;
+        }
+        
         if(empty($diesel)){
             $diesel = NULL;
         }
@@ -70,6 +80,7 @@ private $dbTableLinha;
         }
         
         
+        
         $dadosLinha = array(
             'lin_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
@@ -83,14 +94,15 @@ private $dbTableLinha;
             'lin_oleo' => $oleo,
             'lin_alimento' => $alimento,
             'lin_gelo' => $gelo,
-            'lin_numlinhas' => $request['numLinhas'],
+            'lin_numlinhas' => $numLinhas,
+            'lin_numanzoisplinha' => $numAnzois,
             'lin_avistou' => $avistou,
             'lin_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'lin_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
-            'isc_id' => $request['isca'],
-            'lin_numanzoisplinha' => $request['numAnzois']
+            'isc_id' => $request['isca']
+            
         );
         
         $insertArrasto = $this->dbTableLinha->insert($dadosLinha);
@@ -206,7 +218,15 @@ private $dbTableLinha;
     {
         $this->dbTableTLinhaHasEspCapturada = new Application_Model_DbTable_LinhaHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'lin_id' => $idEntrevista,
             'esp_id' => $especie,

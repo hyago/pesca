@@ -197,7 +197,15 @@ class Application_Model_ArrastoFundo
     {
         $this->dbTableTArrastoHasEspCapturada = new Application_Model_DbTable_ArrastoHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($preco)){
+            $preco = NULL;
+        }
         $dadosEspecie = array(
             'af_id' => $idEntrevista,
             'esp_id' => $especie,

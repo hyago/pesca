@@ -49,6 +49,16 @@ class Application_Model_VaraPesca
         $gelo = $request['gelo'];
         $avistou = $request['avistamento'];
         
+        $numLinhas = $request['numLinhas'];
+        $numAnzois = $request['numAnzois'];
+        
+        if(empty($numLinhas)){
+            $numLinhas = NULL;
+        }
+        if(empty($numAnzois)){
+            $numAnzois = NULL;
+        }
+        
         if(empty($diesel)){
             $diesel = NULL;
         }
@@ -83,8 +93,8 @@ class Application_Model_VaraPesca
             'vp_subamostra' => $request['subamostra'],
             'vp_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
-            'vp_numanzoisplinha' => $request['numAnzois'],
-            'vp_numlinhas' => $request['numLinhas'],
+            'vp_numanzoisplinha' => $numAnzois,
+            'vp_numlinhas' => $numLinhas,
             'isc_id' => $request['isca'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
@@ -170,6 +180,9 @@ class Application_Model_VaraPesca
     {
         $this->dbTableTVaraPescaHasPesqueiro = new Application_Model_DbTable_VaraPescaHasPesqueiro();
         
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'vp_id' => $idEntrevista,
@@ -206,7 +219,15 @@ class Application_Model_VaraPesca
     {
         $this->dbTableTVaraPescaHasEspCapturada = new Application_Model_DbTable_VaraPescaHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'vp_id' => $idEntrevista,
             'esp_id' => $especie,

@@ -133,7 +133,7 @@
 </div>
 <br/>
 <br/>
-<form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
+<form id="formulario" >
 <fieldset class="noEditable"><legend>Pesqueiro:</legend>
     <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
             <div id="base">
@@ -169,7 +169,7 @@
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
             <div id="base">
-                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "vara-pesca", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['vp_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Add row" />
                 <select style="float:left;" name="SelectEspecie">
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
@@ -198,7 +198,7 @@
                     foreach ($this->vEspecieCapturadas as $key => $vEspecieCapturada):
                         ?>
                         <tr id="itemEmbarcacoesRows">
-                            <td name="inputEntrevista"> <?= $vEspecieCapturada['vp_id'] ?> </td>
+                            <td name="inputEntrevista"> <?= $vEspecieCapturada['tar_id'] ?> </td>
                             <td name="inputEspecie" > <?= $vEspecieCapturada['esp_nome_comum'] ?> </td>
                             <td name="inputQuantidade"> <?= $vEspecieCapturada['spc_quantidade'] ?> </td>
                             <td name="inputPeso"> <?= $vEspecieCapturada['spc_peso_kg'] ?> </td>
@@ -213,4 +213,3 @@
     <br/> <br/>
     <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "editar","id" => $this->monitoramento['fd_id']), null, true) ?>" id="botao-ancora">Voltar à Ficha-Diária</a>
     
-</div>

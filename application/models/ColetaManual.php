@@ -135,7 +135,10 @@ private $dbTableColetaManual;
     public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
     {
         $this->dbTableTColetaManualHasPesqueiro = new Application_Model_DbTable_ColetaManualHasPesqueiro();
-        
+         
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'cml_id' => $idEntrevista,
@@ -173,6 +176,15 @@ private $dbTableColetaManual;
     {
         $this->dbTableTColetaManualHasEspCapturada = new Application_Model_DbTable_ColetaManualHasEspecieCapturada();
         
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         
         $dadosEspecie = array(
             'cml_id' => $idEntrevista,

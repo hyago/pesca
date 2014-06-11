@@ -42,6 +42,11 @@ class Application_Model_Jerere
         else {
             $idSubamostra = null;
         }
+        $numArmadilhas = $request['numArmadilhas'];
+        
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         
         $dadosJerere = array(
@@ -57,7 +62,7 @@ class Application_Model_Jerere
             'jre_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
             'jre_tempogasto' => $request['tempoGasto'],
-            'jre_numarmadilhas' => $request['numArmadilhas'],
+            'jre_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'jre_mreviva' => $request['mareviva']
@@ -140,7 +145,9 @@ class Application_Model_Jerere
     public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
     {
         $this->dbTableTJerereHasPesqueiro = new Application_Model_DbTable_JerereHasPesqueiro();
-        
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'jre_id' => $idEntrevista,
@@ -178,7 +185,15 @@ class Application_Model_Jerere
     {
         $this->dbTableTJerereHasEspCapturada = new Application_Model_DbTable_JerereHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'jre_id' => $idEntrevista,
             'esp_id' => $especie,

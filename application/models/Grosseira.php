@@ -53,6 +53,16 @@ private $dbTableGrosseira;
         $gelo = $request['gelo'];
         $avistou = $request['avistamento'];
         
+        $numLinhas = $request['numLinhas'];
+        $numAnzois = $request['numAnzois'];
+        
+        if(empty($numLinhas)){
+            $numLinhas = NULL;
+        }
+        if(empty($numAnzois)){
+            $numAnzois = NULL;
+        }
+        
         if(empty($diesel)){
             $diesel = NULL;
         }
@@ -82,14 +92,15 @@ private $dbTableGrosseira;
             'grs_oleo' => $oleo,
             'grs_alimento' => $alimento,
             'grs_gelo' => $gelo,
-            'grs_numlinhas' => $request['numLinhas'],
+            'grs_numlinhas' => $numLinhas,
+            'grs_numanzoisplinha' => $numAnzois,
             'grs_avistou' => $avistou,
             'grs_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'grs_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
-            'isc_id' => $request['isca'],
-            'grs_numanzoisplinha' => $request['numAnzois']
+            'isc_id' => $request['isca']
+            
         );
         
         $insertArrasto = $this->dbTableGrosseira->insert($dadosGrosseira);
@@ -205,6 +216,15 @@ private $dbTableGrosseira;
     {
         $this->dbTableTGrosseiraHasEspCapturada = new Application_Model_DbTable_GrosseiraHasEspecieCapturada();
         
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         
         $dadosEspecie = array(
             'grs_id' => $idEntrevista,

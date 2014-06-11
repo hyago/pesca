@@ -225,6 +225,15 @@ class Application_Model_Emalhe
     {
         $this->dbTableTEmalheHasEspCapturada = new Application_Model_DbTable_EmalheHasEspecieCapturada();
         
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         
         $dadosEspecie = array(
             'em_id' => $idEntrevista,

@@ -43,7 +43,11 @@ class Application_Model_Ratoeira
         else {
             $idSubamostra = null;
         }
+        $numArmadilhas = $request['numArmadilhas'];
         
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         $dadosRatoeira = array(
             'rat_embarcada' => $request['embarcada'],
@@ -59,7 +63,7 @@ class Application_Model_Ratoeira
             'rat_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
             'rat_tempogasto' => $request['tempoGasto'],
-            'rat_numarmadilhas' => $request['numArmadilhas'],
+            'rat_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'rat_mreviva' => $request['mareviva']
@@ -137,7 +141,9 @@ class Application_Model_Ratoeira
     public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
     {
         $this->dbTableTRatoeiraHasPesqueiro = new Application_Model_DbTable_RatoeiraHasPesqueiro();
-        
+        if(empty($distAPesqueiro)){
+            $distAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'rat_id' => $idEntrevista,
@@ -174,7 +180,15 @@ class Application_Model_Ratoeira
     {
         $this->dbTableTRatoeiraHasEspCapturada = new Application_Model_DbTable_RatoeiraHasEspecieCapturada();
         
-        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
+        if(empty($peso)){
+            $peso = NULL;
+        }
+        if(empty($precokg)){
+            $precokg = NULL;
+        }
         $dadosEspecie = array(
             'rat_id' => $idEntrevista,
             'esp_id' => $especie,
