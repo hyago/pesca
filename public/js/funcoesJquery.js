@@ -663,6 +663,49 @@ function jsEntrevista(nomeArtePesca, idMonitoramento, idFichaDiaria) {
             }
         }
 
+function jsInsertIsca( frm, pag )
+{
+    if (frm.inputIsc_id.value) {
+
+        var tmpUpdate = ( '/perfil/update' + '/tp_id/' + frm.inputIsc_id.value + '/tp_perfil/' + frm.inputIsc_tipo.value);
+
+        location.replace(tmpUpdate);
+        
+        return;
+    }
+    if (frm.inputIsc_tipo.value) {
+
+        var tmpUpdate = (pag + '/tp_perfil/' + frm.inputIsc_tipo.value);
+
+        location.replace(tmpUpdate);
+    }
+}
+
+function jsDeleteIsca( idIsca, pag )
+{
+    if (confirm("Realmente deseja excluir este item?")) {
+        
+        var tmpUpdate = (pag + '/tp_id/' + idIsca);
+        
+        location.replace(tmpUpdate);
+    }
+}
+
+function jsUpdateIsca( isc_id, isc_tipo, frm )
+{
+    if ( confirm("Realmente deseja EDITAR este item?") ) {
+        frm.inputIsc_tipo.value = isc_tipo;
+        frm.inputIsc_id.value = tp_id;
+    }
+}
+
+function jsReloadIsca( frm ){
+    if ( frm.inputIsc_id.value || frm.inputIsc_tipo.value) {
+        location.replace('/perfil');
+    }
+}
+
+
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
 //function addRowDependente(frm) {
