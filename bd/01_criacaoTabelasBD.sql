@@ -1187,7 +1187,7 @@ CREATE TABLE IF NOT EXISTS t_arrastofundo
   af_embarcado boolean,
   bar_id integer,
   tte_id integer,
-  tp_id_entrevistado integer NOT NULL,
+  tp_id_entrevistado integer NULL,
   af_quantpescadores integer,
   af_dhsaida timestamp without time zone,
   af_dhvolta timestamp without time zone,
@@ -2494,3 +2494,34 @@ CREATE OR REPLACE VIEW v_entrevista_varapesca AS
    FROM t_varapesca as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
   WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+CREATE TABLE IF NOT EXISTS T_ARRASTOFUNDO_HAS_T_AVISTAMENTO
+(
+	AF_ID INTEGER, 
+	AVS_ID INTEGER, 	
+  CONSTRAINT T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (AF_ID,  AVS_ID),
+  CONSTRAINT FK_T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_AF_ID FOREIGN KEY (AF_ID) REFERENCES T_ARRASTOFUNDO (AF_ID), 
+  CONSTRAINT FK_T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
