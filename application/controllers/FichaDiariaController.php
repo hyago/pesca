@@ -32,6 +32,23 @@ class FichaDiariaController extends Zend_Controller_Action {
         $this->modelVento = new Application_Model_Vento();
         $this->modelArtePesca = new Application_Model_ArtePesca();
         $this->modelEstagiario = new Application_Model_Usuario();
+        
+        $this->modelArrastoFundo = new Application_Model_ArrastoFundo();
+        $this->modelCalao = new Application_Model_Calao();
+        $this->modelColetaManual = new Application_Model_ColetaManual();
+        $this->modelEmalhe = new Application_Model_Emalhe();
+        $this->modelGrosseira = new Application_Model_Grosseira();
+        $this->modelJerere = new Application_Model_Jerere();
+        $this->modelLinha = new Application_Model_Linha();
+        $this->modelLinhaFundo = new Application_Model_LinhaFundo();
+        $this->modelManzua = new Application_Model_Manzua();
+        $this->modelMergulho = new Application_Model_Mergulho();
+        $this->modelRatoeira = new Application_Model_Ratoeira();
+        $this->modelSiripoia = new Application_Model_Siripoia();
+        $this->modelTarrafa = new Application_Model_Tarrafa();
+        $this->modelVaraPesca = new Application_Model_VaraPesca();
+        
+        
     }
 
     /*
@@ -47,9 +64,9 @@ class FichaDiariaController extends Zend_Controller_Action {
             $dados = $this->modelFichaDiaria->selectView("fd_id>=". $fd_id, array('fd_id'), 25);
         } elseif ( $pto_id ) {
             if ( $fd_data ) {
-                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id ." and fd_data = '". $fd_data."'" , NULL, 25);            
+                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id ." and fd_data = '". $fd_data."'" , NULL);            
             } else {
-                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id , NULL, 25);            
+                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id , NULL);            
             }
         } else {
             $dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
@@ -143,6 +160,48 @@ class FichaDiariaController extends Zend_Controller_Action {
         $modelMonitoramentoByFichaDiaria = new Application_Model_Monitoramento();
         $vMonitoramento = $modelMonitoramentoByFichaDiaria->select("fd_id=". $idFicha, "mnt_id", null);
         $this->view->assign("vMonitoramento", $vMonitoramento);
+        //--------------------------------------------------------------------------------------------
+        $ArrastoFicha = $this->modelArrastoFundo->selectEntrevistaArrasto('fd_id='.$idFicha);
+        $this->view->assign("arrastofundo", $ArrastoFicha);
+        //--------------------------------------------------------------------------------------------
+        $CalaoFicha = $this->modelCalao->selectEntrevistaCalao('fd_id='.$idFicha);
+        $this->view->assign("calao", $CalaoFicha);
+        //--------------------------------------------------------------------------------------------
+        $ColetaManualFicha = $this->modelColetaManual->selectEntrevistaColetaManual('fd_id='.$idFicha);
+        $this->view->assign("coletamanual", $ColetaManualFicha);
+        //--------------------------------------------------------------------------------------------
+        $EmalheFicha = $this->modelEmalhe->selectEntrevistaEmalhe('fd_id='.$idFicha);
+        $this->view->assign("emalhe", $EmalheFicha);
+        //--------------------------------------------------------------------------------------------
+        $GrosseiraFicha = $this->modelGrosseira->selectEntrevistaGrosseira('fd_id='.$idFicha);
+        $this->view->assign("grosseira", $GrosseiraFicha);
+        //--------------------------------------------------------------------------------------------
+        $JerereFicha = $this->modelJerere->selectEntrevistaJerere('fd_id='.$idFicha);
+        $this->view->assign("jerere", $JerereFicha);
+        //--------------------------------------------------------------------------------------------
+        $LinhaFicha = $this->modelLinha->selectEntrevistaLinha('fd_id='.$idFicha);
+        $this->view->assign("linha", $LinhaFicha);
+        //--------------------------------------------------------------------------------------------
+        $LinhaFundoFicha = $this->modelLinhaFundo->selectEntrevistaLinhaFundo('fd_id='.$idFicha);
+        $this->view->assign("linhafundo", $LinhaFundoFicha);
+        
+        $ManzuaFicha = $this->modelManzua->selectEntrevistaManzua('fd_id='.$idFicha);
+        $this->view->assign("manzua", $ManzuaFicha);
+        
+        $MergulhoFicha = $this->modelMergulho->selectEntrevistaMergulho('fd_id='.$idFicha);
+        $this->view->assign("mergulho", $MergulhoFicha);
+        
+        $RatoeiraFicha = $this->modelRatoeira->selectEntrevistaRatoeira('fd_id='.$idFicha);
+        $this->view->assign("ratoeira", $RatoeiraFicha);
+        
+        $SiripoiaFicha = $this->modelSiripoia->selectEntrevistaSiripoia('fd_id='.$idFicha);
+        $this->view->assign("siripoia", $SiripoiaFicha);
+        
+        $TarrafaFicha = $this->modelTarrafa->selectEntrevistaTarrafa('fd_id='.$idFicha);
+        $this->view->assign("tarrafa", $TarrafaFicha);
+        
+        $VaraPescaFicha = $this->modelVaraPesca->selectEntrevistaVaraPesca('fd_id='.$idFicha);
+        $this->view->assign("varapesca", $VaraPescaFicha);
         
     }
 

@@ -2490,6 +2490,14 @@ CREATE OR REPLACE VIEW v_entrevista_siripoia AS
    FROM t_siripoia as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
   WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
 
+CREATE OR REPLACE VIEW v_entrevista_tarrafa AS 
+ SELECT entrevista.tar_id, pescador.tp_nome, barco.bar_nome, 
+    monitoramento.mnt_id, fichadiaria.fd_id
+   FROM t_tarrafa entrevista, t_pescador pescador, t_barco barco, 
+    t_monitoramento monitoramento, t_ficha_diaria fichadiaria
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+  
+  
 CREATE OR REPLACE VIEW v_entrevista_varapesca AS 
  SELECT entrevista.vp_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
    FROM t_varapesca as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 

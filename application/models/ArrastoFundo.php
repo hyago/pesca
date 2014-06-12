@@ -238,5 +238,6 @@ class Application_Model_ArrastoFundo
 
         return $this->dbTableArrastoFundo->fetchAll($select)->toArray();
     }
+    
 }
 
