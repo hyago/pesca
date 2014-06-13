@@ -2422,9 +2422,11 @@ WHERE ENTREVISTA.RAT_ID = ESPCAPT.RAT_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 --Visualizações
 
 CREATE OR REPLACE VIEW v_entrevista_arrasto AS 
- SELECT entrevista.af_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_arrastofundo as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT entrevista.af_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id, entrevista.af_embarcado, entrevista.af_quantpescadores, 
+entrevista.af_dhsaida, entrevista.af_dhvolta, entrevista.af_diesel, entrevista.af_oleo, entrevista.af_alimento, entrevista.af_gelo, entrevista.af_obs, entrevista.af_motor, tte.tte_tipoembarcacao
+   FROM t_arrastofundo as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria,  t_tipoembarcacao as tte
+  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND
+ monitoramento.fd_id = fichadiaria.fd_id and entrevista.tte_id=tte.tte_id;
 
 CREATE OR REPLACE VIEW v_entrevista_calao AS 
  SELECT entrevista.cal_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id

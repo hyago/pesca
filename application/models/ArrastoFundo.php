@@ -5,6 +5,7 @@ class Application_Model_ArrastoFundo
     private $dbTableArrastoFundo;
     private $dbTableArrastoHasPesqueiro;
     private $dbTableArrastoHasEspCapturada;
+    
     public function select($where = null, $order = null, $limit = null)
     {
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
