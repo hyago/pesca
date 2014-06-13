@@ -22818,6 +22818,38 @@ COMMIT;
 -- 
 -- -----------------------------------------------------
 START TRANSACTION;
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (2, '20', '2014-02-19');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (3, '1303', '2013-12-03');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (4, '237', '2013-11-22');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (5, '1', '2013-11-12');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (6, '1', '2013-11-13');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (7, '296', '2013-11-14');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (8, '239', '2013-11-19');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (9, '169', '2013-11-17');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (10, '1281', '2013-12-02');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (11, '668', '2013-12-06');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (12, '63', '2013-12-12');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (13, '72', '2013-12-17');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (14, '866', '2014-01-09');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (15, '1210', '2014-01-04');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (16, '1035', '2014-01-21');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (17, '1303', '2014-01-14');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (18, '1534', '2014-01-30');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (19, '1536', '2014-01-29');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (20, '169', '2014-02-12');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (21, '35', '2014-03-10');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (22, '1978', '2014-03-04');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (23, '668', '2014-03-07');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (24, '83', '2014-03-03');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (25, '1303', '2014-03-07');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (26, '2058', '2014-03-10');
+INSERT INTO t_subamostra (sa_id, sa_pescador, sa_datachegada) VALUES (27, '1210', '2014-03-07');
+COMMIT;
+
+-- -----------------------------------------------------
+-- 
+-- -----------------------------------------------------
+START TRANSACTION;
 INSERT INTO t_monitoramento (mnt_id, mnt_arte, mnt_quantidade, mnt_monitorado, fd_id) VALUES (53, 1, 3, true, 46);
 INSERT INTO t_monitoramento (mnt_id, mnt_arte, mnt_quantidade, mnt_monitorado, fd_id) VALUES (54, 1, 4, true, 47);
 INSERT INTO t_monitoramento (mnt_id, mnt_arte, mnt_quantidade, mnt_monitorado, fd_id) VALUES (55, 1, 8, true, 48);
