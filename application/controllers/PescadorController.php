@@ -940,7 +940,8 @@ private $usuario;
 
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: inline;filename="teste.pdf"');
+                header('Content-Disposition: attachment;filename="rel_pescador.pdf"');
+//		header('Content-Disposition: inline;filename="teste.pdf"');
 		header("Content-type: application/x-pdf"); 
 		echo $pdf->render(); 
 

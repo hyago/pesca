@@ -257,60 +257,108 @@ class FichaDiariaController extends Zend_Controller_Action {
         $this->_redirect('ficha-diaria/index');
     }
 
-    public function relatorioAction() {
-
-        $this->_helper->viewRenderer->setNoRender();
+    public function relpdfichadiariaAction() {
         $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
-        $fichadiaria = $this->modelFichaDiaria->select();
+        $localModelFichaDiaria = new Application_Model_FichaDiaria();
+        $localFichaDiaria = $localModelFichaDiaria->selectView(null, array('fd_data', 'pto_nome'), NULL);
 
-        $this->view->assign("fichasdiarias", $fichadiaria);
+        $localModelMonitoramento = new Application_Model_Monitoramento();
+        $localModelArrastoFundo = new Application_Model_ArrastoFundo();
 
+        require_once "../library/ModeloRelatorio.php";
+        $modeloRelatorio = new ModeloRelatorio();
+        $modeloRelatorio->setTitulo('Relatório de Ficha Diária');
 
-        //Title 
-        $y = 55;
-        $width = 20;
-        $height = 7;
-        $same_line = 0;
-        $next_line = 1;
-        $border_true = 1;
+        $modeloRelatorio->setLegendaOff();
 
+        foreach ($localFichaDiaria as $key => $fd) {
+            $modeloRelatorio->setLegValue(30, 'Ficha: ', $fd['fd_id']);
+            $modeloRelatorio->setLegValue(100, 'Data: ', $fd['fd_data']);
+            $modeloRelatorio->setLegValue(200, 'Porto: ', $fd['pto_nome']);
+            $modeloRelatorio->setLegValue(320, 'Turno: ', $fd['fd_turno']);
+            $modeloRelatorio->setLegValue(380, 'Tempo: ', $fd['tmp_estado']);
+            $modeloRelatorio->setLegValue(480, 'Vento: ', $fd['vnt_forca']);
+            $modeloRelatorio->setNewLine();
+            $modeloRelatorio->setLegValue(30, 'Estagiario: ', $fd['t_estagiario']);
+            $modeloRelatorio->setLegValue(320, 'Monitor: ', $fd['t_monitor']);
+            $modeloRelatorio->setNewLine();
 
-        $pdf = new FPDF("P", "mm", "A4");
-        $pdf->Open();
-        $pdf->SetMargins(10, 20, 5);
-        $pdf->setTitulo("Ficha Diária");
-        $pdf->SetAutoPageBreak(true, 40);
-        $pdf->AddPage();
-        //Title
+            $localMonitoramento = $localModelMonitoramento->select( "fd_id=". $fd['fd_id'], "mnt_id", NULL );
+            foreach ($localMonitoramento as $key_m => $monitoramento) {
+                $modeloRelatorio->setLegValue(60, 'Monitoramento: ', $monitoramento['mnt_id']);
+                $modeloRelatorio->setLegValue(200, 'Arte: ', $monitoramento['tap_artepesca']);
+                $localMon = 'Não';
+                if ($monitoramento['mnt_monitorado']) {
+                    $localMon = 'Sim';
+                }
+                $modeloRelatorio->setLegValue(320, 'Monitorado: ', $localMon);
+                $modeloRelatorio->setLegValue(400, 'Quantidade: ', $monitoramento['mnt_quantidade']);
+                $modeloRelatorio->setNewLine();
+                
+                if ($monitoramento['mnt_arte'] == 1 and $monitoramento['mnt_monitorado'] == TRUE) {
+                    $localArrastoFunco = $localModelArrastoFundo->selectEntrevistaArrasto("mnt_id=" . $monitoramento['mnt_id'], array('af_id'), null);
+                    foreach ($localArrastoFunco as $key_af => $arrastofundo) {
+                        $modeloRelatorio->setLegValue(90, 'Entrevista: ', $arrastofundo['af_id']);
+                        $modeloRelatorio->setLegValue(200, 'Mestre: ', $arrastofundo['tp_nome']);
+                        $modeloRelatorio->setLegValue(400, 'Embarcação: ', $arrastofundo['bar_nome']);
+                        $modeloRelatorio->setNewLine();
+                        $localEmb = 'Não';
+                        if ($arrastofundo['af_embarcado']) {
+                            $localEmb = 'Sim';
+                        }
+                        $modeloRelatorio->setLegValue(90, 'Embarcado: ', $localEmb);
+                        $modeloRelatorio->setLegValue(200, 'Pescadores: ', $arrastofundo['af_quantpescadores']);
+                        $modeloRelatorio->setLegValue(320, 'Tipo barco: ', $arrastofundo['tte_tipoembarcacao']);
+                        $localMotor = 'Não';
+                        if ($arrastofundo['af_motor']) {
+                            $localMotor = 'Sim';
+                        }
+                        $modeloRelatorio->setLegValue(480, 'Motor: ', $localMotor);
+                        $modeloRelatorio->setNewLine();
+                        $modeloRelatorio->setLegValue(90, 'Data/Hora saída: ', $arrastofundo['af_dhsaida']);
+                        $modeloRelatorio->setLegValue(320, 'Data/Hora volta: ', $arrastofundo['af_dhvolta']);
+                        $modeloRelatorio->setNewLine();
+                        $modeloRelatorio->setLegValue(90, 'Alimento: ', $arrastofundo['af_alimento']);
+                        $modeloRelatorio->setLegValue(200, 'Diesel: ', $arrastofundo['af_diesel']);
+                        $modeloRelatorio->setLegValue(320, 'Óleo: ', $arrastofundo['af_oleo']);
+                        $modeloRelatorio->setLegValue(400, 'Gelo: ', $arrastofundo['af_gelo']);
+                        $modeloRelatorio->setNewLine();
+                        $modeloRelatorio->setLegValue(90, 'Observações: ', $arrastofundo['af_obs']);
+                        $modeloRelatorio->setNewLine();
+                        
+                        $localArrastoFundoPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro("af_id=".$arrastofundo['af_id'], null, null);                        
+                        foreach ($localArrastoFundoPesqueiro as $key_p => $pesqueiro) {
+                            $modeloRelatorio->setLegValue(120, 'Tempo no pesqueiro: ', $pesqueiro['t_tempopesqueiro']);
+                            $modeloRelatorio->setLegValue(270, 'Pesqueiro: ', $pesqueiro['paf_pesqueiro']);
+                            $modeloRelatorio->setNewLine();
+                        }
+                        
+                        $localArrastoFundoEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas("af_id=".$arrastofundo['af_id'], null, null);                        
+                        foreach ($localArrastoFundoEspecie as $key_ep => $especie) {
+                            $modeloRelatorio->setLegValue(120, 'Espécie capturada: ', $especie['esp_nome_comum']);
+                            $modeloRelatorio->setLegValue(300, 'Peso: ', $especie['spc_peso_kg']);
+                            $modeloRelatorio->setLegValue(380, 'Quantidade: ', $especie['spc_quantidade']);
+                            $modeloRelatorio->setLegValue(480, 'Preço: ', $especie['spc_preco']);
+                            
+                            $modeloRelatorio->setNewLine();
+                        }
+                        $modeloRelatorio->setNewLine();
+                    }
+                }                    
+            }
 
-        $pdf->SetFont("Arial", "B", 10);
-        $pdf->SetY($y);
-        $pdf->Cell($width / 2, $height, "ID", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Estagiário", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Monitor", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Data", $border_true, $same_line);
-        $pdf->Cell($width, $height, "OBS", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Porto", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Tempo", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Vento", $border_true, $same_line);
-        $pdf->Cell($width + 10, $height, "Turno", $border_true, $next_line);
-
-
-        $pdf->SetFont("Arial", "", 10);
-        sort($fichadiaria);
-        foreach ($fichadiaria as $dados) {
-            $pdf->Cell($width / 2, $height, $dados['FD_ID'], $border_true, $same_line);
-            $pdf->Cell($width, $height, $dados['T_Estagiario_TU_ID'], $border_true, $same_line);
-            $pdf->Cell($width + 10, $height, $dados['T_Monitor_TU_ID1'], $border_true, $same_line);
-            $pdf->Cell($width + 10, $height, $dados['FD_Data'], $border_true, $same_line);
-            $pdf->Cell($width + 10, $height, $dados['OBS'], $border_true, $same_line);
-            $pdf->Cell($width + 10, $height, $dados['PTO_ID'], $border_true, $same_line);
-            $pdf->Cell($width + 10, $height, $dados['TMP_ID'], $border_true, $same_line);
-            $pdf->Cell($width + 10, $height, $dados['VNT_ID'], $border_true, $same_line);
-            $pdf->Cell($width + 10, $height, $dados['FD_Turno'], $border_true, $same_line);
+            $modeloRelatorio->setNewLine();
+            $modeloRelatorio->setNewLine();
         }
-        $pdf->Output("FichaDiaria.pdf", 'I');
+        $pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_ficha_diaria.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+//        header("Content-Type: application/pdf");
+// 	echo $pdf->render();
     }
 
 }
