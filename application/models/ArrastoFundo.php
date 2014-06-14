@@ -240,5 +240,18 @@ class Application_Model_ArrastoFundo
         return $this->dbTableArrastoFundo->fetchAll($select)->toArray();
     }
     
+    public function selectArrastoHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableArrastoFundoAvistamento = new Application_Model_DbTable_VArrastoFundoHasAvistamento();
+        $selectAvist = $this->dbTableArrastoFundoAvistamento->select()
+                ->from($this->dbTableArrastoFundoAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableArrastoFundoAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    
 }
 

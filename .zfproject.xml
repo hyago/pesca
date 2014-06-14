@@ -288,6 +288,7 @@
           <dbTableFile dbTableName="VEntrevistaTarrafa"/>
           <dbTableFile dbTableName="VEntrevistaVaraPesca"/>
           <dbTableFile dbTableName="HistoricoLogin"/>
+          <dbTableFile dbTableName="VArrastoFundoHasAvistamento"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
