@@ -55,7 +55,9 @@ private $usuario;
      */
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -72,7 +74,10 @@ private $usuario;
      * Preenche um formulario com as informações de um usuário
      */
     public function editarAction()
-    {
+    {   
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $comunidade = $this->modelComunidade->find($this->_getParam('id'));
         
         $this->view->assign("comunidade", $comunidade);
@@ -92,9 +97,12 @@ private $usuario;
      * 
      */
     public function excluirAction()
-    {
+    {   if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelComunidade->delete($this->_getParam('id'));
-
+        }
         $this->_redirect('comunidade/index');
     }
     public function relatorioAction(){

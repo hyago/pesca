@@ -194,6 +194,7 @@
     <table>
         <legend> Entrevistas </legend>
             <tr>
+                <th>Arte de pesca</th>
                 <th>Monitoramento</th>
                 <th>Entrevista</th>
                 <th>Pescador</th>
@@ -202,6 +203,7 @@
 
             <?php foreach ($this->arrastofundo as $key => $entrevistaArrasto): ?>
                 <tr>
+                    <td>Arrasto de Fundo</td>
                     <td><?= $entrevistaArrasto['mnt_id'] ?></td>
                     <td><?= $entrevistaArrasto['af_id'] ?></td>
                     <td><?= $entrevistaArrasto['tp_nome'] ?></td>
@@ -225,6 +227,7 @@
             <?php endforeach; ?>
             <?php foreach($this->calao as $key => $entrevistaCalao): ?>
                 <tr>
+                    <td>Calão</td>
                     <td><?= $entrevistaCalao['mnt_id'] ?></td>
                     <td><?= $entrevistaCalao['cal_id'] ?></td>
                     <td><?= $entrevistaCalao['tp_nome'] ?></td>
@@ -248,6 +251,7 @@
             <?php endforeach; ?>
              <?php foreach($this->coletamanual as $key => $entrevistaColetaManual): ?>
                 <tr>
+                    <td>Coleta Manual</td>
                     <td><?= $entrevistaColetaManual['mnt_id'] ?></td>
                     <td><?= $entrevistaColetaManual['cml_id'] ?></td>
                     <td><?= $entrevistaColetaManual['tp_nome'] ?></td>
@@ -271,6 +275,7 @@
             <?php endforeach; ?>
             <?php foreach($this->emalhe as $key => $entrevistaEmalhe): ?>
                 <tr>
+                    <td>Emalhe</td>
                     <td><?= $entrevistaEmalhe['mnt_id'] ?></td>
                     <td><?= $entrevistaEmalhe['em_id'] ?></td>
                     <td><?= $entrevistaEmalhe['tp_nome'] ?></td>
@@ -294,6 +299,7 @@
             <?php endforeach; ?>
             <?php foreach($this->grosseira as $key => $entrevistaGrosseira): ?>
                 <tr>
+                    <td>Groseira/Espinhel</td>
                     <td><?= $entrevistaGrosseira['mnt_id'] ?></td>
                     <td><?= $entrevistaGrosseira['grs_id'] ?></td>
                     <td><?= $entrevistaGrosseira['tp_nome'] ?></td>
@@ -317,6 +323,7 @@
             <?php endforeach; ?>
             <?php foreach($this->jerere as $key => $entrevistaJerere): ?>
                 <tr>
+                    <td>Jereré</td>
                     <td><?= $entrevistaJerere['mnt_id'] ?></td>
                     <td><?= $entrevistaJerere['jre_id'] ?></td>
                     <td><?= $entrevistaJerere['tp_nome'] ?></td>
@@ -340,6 +347,7 @@
             <?php endforeach; ?>
             <?php foreach($this->linha as $key => $entrevistaLinha): ?>
                 <tr>
+                    <td>Pesca de Linha</td>
                     <td><?= $entrevistaLinha['mnt_id'] ?></td>
                     <td><?= $entrevistaLinha['lin_id'] ?></td>
                     <td><?= $entrevistaLinha['tp_nome'] ?></td>
@@ -363,6 +371,7 @@
             <?php endforeach; ?>
             <?php foreach($this->linhafundo as $key => $entrevistaLinhaFundo): ?>
                 <tr>
+                    <td>Linha de Fundo</td>
                     <td><?= $entrevistaLinhaFundo['mnt_id'] ?></td>
                     <td><?= $entrevistaLinhaFundo['lf_id'] ?></td>
                     <td><?= $entrevistaLinhaFundo['tp_nome'] ?></td>
@@ -386,6 +395,7 @@
             <?php endforeach; ?>
             <?php foreach($this->manzua as $key => $entrevistaManzua): ?>
                 <tr>
+                    <td>Manzuá</td>
                     <td><?= $entrevistaManzua['mnt_id'] ?></td>
                     <td><?= $entrevistaManzua['man_id'] ?></td>
                     <td><?= $entrevistaManzua['tp_nome'] ?></td>
@@ -409,6 +419,7 @@
             <?php endforeach; ?>
             <?php foreach($this->mergulho as $key => $entrevistaMergulho): ?>
                 <tr>
+                    <td>Mergulho</td>
                     <td><?= $entrevistaMergulho['mnt_id'] ?></td>
                     <td><?= $entrevistaMergulho['mer_id'] ?></td>
                     <td><?= $entrevistaMergulho['tp_nome'] ?></td>
@@ -432,6 +443,7 @@
             <?php endforeach; ?>
             <?php foreach($this->ratoeira as $key => $entrevistaRatoeira): ?>
                 <tr>
+                    <td>Ratoeira</td>
                     <td><?= $entrevistaRatoeira['mnt_id'] ?></td>
                     <td><?= $entrevistaRatoeira['rat_id'] ?></td>
                     <td><?= $entrevistaRatoeira['tp_nome'] ?></td>
@@ -455,6 +467,7 @@
             <?php endforeach; ?>
             <?php foreach($this->siripoia as $key => $entrevistaSiripoia): ?>
                 <tr>
+                    <td>Siripóia</td>
                     <td><?= $entrevistaSiripoia['mnt_id'] ?></td>
                     <td><?= $entrevistaSiripoia['sir_id'] ?></td>
                     <td><?= $entrevistaSiripoia['tp_nome'] ?></td>
@@ -478,6 +491,7 @@
             <?php endforeach; ?>
             <?php foreach($this->tarrafa as $key => $entrevistaTarrafa): ?>
                 <tr>
+                    <td>Tarrafa</td>
                     <td><?= $entrevistaTarrafa['mnt_id'] ?></td>
                     <td><?= $entrevistaTarrafa['tar_id'] ?></td>
                     <td><?= $entrevistaTarrafa['tp_nome'] ?></td>
@@ -501,6 +515,7 @@
             <?php endforeach; ?>
             <?php foreach($this->varapesca as $key => $entrevistaVaraPesca): ?>
                 <tr>
+                    <td>Vara de Pesca</td>
                     <td><?= $entrevistaVaraPesca['mnt_id'] ?></td>
                     <td><?= $entrevistaVaraPesca['vp_id'] ?></td>
                     <td><?= $entrevistaVaraPesca['tp_nome'] ?></td>

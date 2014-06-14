@@ -36,9 +36,12 @@ class BarcosController extends Zend_Controller_Action
     }
     
     public function novoAction(){
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     public function criarAction(){
+        
         $this->modelBarcos->insert($this->getAllParams());
         
         $this->_redirect("barcos/index");

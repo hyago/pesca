@@ -10,7 +10,7 @@
  * @access public
  *
  */
-require_once "../library/fpdf/fpdf.php";
+
 class ArtePescaController extends Zend_Controller_Action
 {
     private $modelArtePesca;
@@ -57,7 +57,7 @@ class ArtePescaController extends Zend_Controller_Action
     public function novoAction()
     {
         //Verificar se o usuário logado é estagiário
-        if($this->usuario['tp_id']==4){
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
     }
@@ -78,7 +78,7 @@ class ArtePescaController extends Zend_Controller_Action
     public function editarAction()
     {   
         //Verificar se o usuário logado é estagiário
-        if($this->usuario['tp_id']==4){
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
         $artePesca = $this->modelArtePesca->find($this->_getParam('id'));
@@ -101,8 +101,12 @@ class ArtePescaController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelArtePesca->delete($this->_getParam('id'));
-
+        } 
         $this->_redirect('arte-pesca/index');
     }
     public function relatorioAction(){
