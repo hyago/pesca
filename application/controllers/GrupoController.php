@@ -36,6 +36,7 @@ class GrupoController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        
         $dados = $this->modelGrupo->select();
       
         $this->view->assign("dados", $dados);
@@ -43,6 +44,9 @@ class GrupoController extends Zend_Controller_Action
     
     public function novoAction(){
     
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     public function criarAction()
@@ -57,6 +61,9 @@ class GrupoController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $grupo = $this->modelGrupo->find($this->_getParam('id'));
         
         $this->view->assign("grupo", $grupo);
@@ -74,6 +81,9 @@ class GrupoController extends Zend_Controller_Action
     
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $this->modelGrupo->delete($this->_getParam('id'));
 
         $this->_redirect('grupo/index');
