@@ -38,7 +38,9 @@ private $usuario;
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -56,6 +58,9 @@ private $usuario;
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $programaSocial = $this->modelProgramaSocial->find($this->_getParam('id'));
         
         $this->view->assign("programasSocial", $programaSocial);
@@ -76,9 +81,14 @@ private $usuario;
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelProgramaSocial->delete($this->_getParam('id'));
 
         $this->_redirect('programa-social/index');
+        }
     }
 
 

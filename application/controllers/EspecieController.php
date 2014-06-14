@@ -55,6 +55,9 @@ private $usuario;
      */
     public function novoAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $dados = $this->modelGenero->select();
       
         $this->view->assign("dados", $dados);
@@ -75,6 +78,9 @@ private $usuario;
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $dados = $this->modelGenero->select();
       
         $this->view->assign("dados", $dados);
@@ -100,9 +106,14 @@ private $usuario;
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelEspecie->delete($this->_getParam('id'));
 
         $this->_redirect('especie/index');
+        }
     }
     
     public function relatorioAction(){

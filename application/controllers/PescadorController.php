@@ -63,6 +63,7 @@ private $usuario;
     }
 
     public function novoAction() {
+        
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select();
         $this->view->assign("municipios", $municipios);
@@ -216,9 +217,14 @@ private $usuario;
     }
 
     public function excluirAction() {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelPescador->delete($this->_getParam('id'));
 
         $this->_redirect('pescador/index');
+        }
     }
     
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/

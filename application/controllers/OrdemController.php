@@ -40,6 +40,9 @@ class OrdemController extends Zend_Controller_Action
     
     public function novoAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         
         $dados = $this->modelGrupo->select();
       
@@ -58,6 +61,9 @@ class OrdemController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $grupos = $this->modelGrupo->select();
         
         $this->view->assign("grupos", $grupos);
@@ -79,9 +85,14 @@ class OrdemController extends Zend_Controller_Action
     
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelOrdem->delete($this->_getParam('id'));
 
         $this->_redirect('ordem/index');
+        }
     }
     
      public function relatorioAction(){

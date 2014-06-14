@@ -28,12 +28,15 @@ class IscaController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        
         $dadosIsca = $this->modelIsca->select(NULL, 'isc_tipo', NULL);
 
         $this->view->assign("dadosIscas", $dadosIsca);
     }
     public function criarAction(){
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     public function excluirAction(){
         

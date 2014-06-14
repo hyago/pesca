@@ -37,7 +37,9 @@ private $usuario;
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -55,6 +57,9 @@ private $usuario;
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $renda = $this->modelRenda->find($this->_getParam('id'));
         
         $this->view->assign("rendas", $renda);
@@ -75,9 +80,14 @@ private $usuario;
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelRenda->delete($this->_getParam('id'));
 
         $this->_redirect('renda/index');
+        }
     }
 
 

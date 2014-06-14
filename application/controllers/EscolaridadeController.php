@@ -38,14 +38,17 @@ class EscolaridadeController extends Zend_Controller_Action
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
      * Cadastra uma Area de Pesca
      */
     public function criarAction()
-    {
+    {   
+        
         $this->modelEscolaridade->insert($this->_getAllParams());
 
         $this->_redirect('escolaridade/index');
@@ -56,6 +59,9 @@ class EscolaridadeController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $escolaridade = $this->modelEscolaridade->find($this->_getParam('id'));
         
         $this->view->assign("escolaridades", $escolaridade);
@@ -65,7 +71,7 @@ class EscolaridadeController extends Zend_Controller_Action
      * Atualiza os dados do usuário
      */
     public function atualizarAction()
-    {
+    {   
         $this->modelEscolaridade->update($this->_getAllParams());
 
         $this->_redirect('escolaridade/index');
@@ -76,10 +82,16 @@ class EscolaridadeController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelEscolaridade->delete($this->_getParam('id'));
-
+        
         $this->_redirect('escolaridade/index');
-    }
+        }
+        
+   }
 
 
 }

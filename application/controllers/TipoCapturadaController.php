@@ -38,7 +38,9 @@ class TipoCapturadaController extends Zend_Controller_Action
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -56,6 +58,9 @@ class TipoCapturadaController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $tipoCapturada = $this->modelTipoCapturada->find($this->_getParam('id'));
         
         $this->view->assign("tipoCapturada", $tipoCapturada);
@@ -76,9 +81,14 @@ class TipoCapturadaController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelTipoCapturada->delete($this->_getParam('id'));
 
         $this->_redirect('tipo-capturada/index');
+        }
     }
     
 }

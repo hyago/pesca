@@ -61,6 +61,7 @@ private $usuario;
      */
     public function visualizarAction()
     {
+        
         $idUsuario = $this->_getParam('id');
         
         $usuario = $this->modelUsuario->find($idUsuario);
@@ -79,6 +80,9 @@ private $usuario;
      */
     public function novoAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $modelPerfil = new Application_Model_Perfil();
         $perfis = $modelPerfil->select();
         
@@ -106,6 +110,9 @@ private $usuario;
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $modelPerfil = new Application_Model_Perfil();
         $perfis = $modelPerfil->select();
         
@@ -138,9 +145,14 @@ private $usuario;
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelUsuario->delete($this->_getParam('id'));
 
         $this->_redirect('usuarios/index');
+        }
     }
 
     public function senhaAction(){

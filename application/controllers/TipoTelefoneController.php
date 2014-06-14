@@ -41,7 +41,9 @@ class TipoTelefoneController extends Zend_Controller_Action
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -59,6 +61,9 @@ class TipoTelefoneController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $tipoTelefone = $this->modeloTipoTelefone->find($this->_getParam('id'));
         
         $this->view->assign("assignTipoTelefone", $tipoTelefone);
@@ -79,9 +84,14 @@ class TipoTelefoneController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modeloTipoTelefone->delete($this->_getParam('id'));
 
         $this->_redirect('tipo-telefone/index');
+        }
     }
     
     public function beforeExcluirAction()

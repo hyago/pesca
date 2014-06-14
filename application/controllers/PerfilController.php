@@ -29,19 +29,28 @@ class PerfilController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $dadosPerfil = $this->ModeloPerfil->select(NULL, 'tp_perfil', NULL);
 
         $this->view->assign("assignPerfil", $dadosPerfil);
     }
 
     public function deleteAction() {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $this->ModeloPerfil->delete($this->_getParam('tp_id'));
 
         $this->_redirect('perfil/index');
+        }
     }
+    
 
     public function insertAction() {
         $this->_helper->layout->disableLayout();

@@ -66,6 +66,9 @@ class ColoniaController extends Zend_Controller_Action
      */
     public function novoAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $this->view->estados = array("AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO");
     
         $modelMunicipio = new Application_Model_Municipio();
@@ -83,6 +86,7 @@ class ColoniaController extends Zend_Controller_Action
      */
     public function criarAction()
     {
+        
         $this->modelColonia->insert($this->_getAllParams());
 
         $this->_redirect('colonia/index');
@@ -93,6 +97,9 @@ class ColoniaController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $colonia = $this->modelColonia->find($this->_getParam('id'));
         
         $modelMunicipio = new Application_Model_Municipio();
@@ -126,9 +133,14 @@ class ColoniaController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelColonia->delete($this->_getParam('id'));
-
+        
         $this->_redirect('colonia/index');
+        }
     }
     public function relatorioAction(){
         
