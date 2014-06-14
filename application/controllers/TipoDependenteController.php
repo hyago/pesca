@@ -40,7 +40,9 @@ class TipoDependenteController extends Zend_Controller_Action
     
     public function novoAction()
     {
-        
+     if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }   
     }
     
     /*
@@ -58,6 +60,9 @@ class TipoDependenteController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $tipoDependente = $this->modeloTipoDependente->find($this->_getParam('id'));
         
         $this->view->assign("assignTipoDependente", $tipoDependente);
@@ -78,9 +83,14 @@ class TipoDependenteController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modeloTipoDependente->delete($this->_getParam('id'));
 
         $this->_redirect('tipo-dependente/index');
+        }
     }
     
     public function beforeExcluirAction()

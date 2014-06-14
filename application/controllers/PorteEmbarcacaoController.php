@@ -38,7 +38,9 @@ class PorteEmbarcacaoController extends Zend_Controller_Action
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -56,6 +58,9 @@ class PorteEmbarcacaoController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $porteEmb = $this->modelPorteEmbarcacao->find($this->_getParam('id'));
         
         $this->view->assign("porteEmbarcacao", $porteEmb);
@@ -76,9 +81,15 @@ class PorteEmbarcacaoController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelPorteEmbarcacao->delete($this->_getParam('id'));
 
         $this->_redirect('porte-embarcacao/index');
+    
+        }
     }
 
 

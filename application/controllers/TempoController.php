@@ -39,7 +39,9 @@ class TempoController extends Zend_Controller_Action
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     public function criarAction()
@@ -51,6 +53,9 @@ class TempoController extends Zend_Controller_Action
     
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $tempo = $this->modelTempo->find($this->_getParam('id'));
         
         $this->view->assign("tempo", $tempo);
@@ -65,9 +70,14 @@ class TempoController extends Zend_Controller_Action
  
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->modelTempo->delete($this->_getParam('id'));
 
         $this->_redirect('tempo/index');
+        }
     }
     public function relatorioAction(){
         $this->_helper->viewRenderer->setNoRender();

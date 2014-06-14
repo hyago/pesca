@@ -39,7 +39,9 @@ class TipoRendaController extends Zend_Controller_Action
     
     public function novoAction()
     {
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     /*
@@ -57,6 +59,9 @@ class TipoRendaController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $tipoRenda = $this->ModeloTipoRenda->find($this->_getParam('id'));
         
         $this->view->assign("assignTipoRenda", $tipoRenda);
@@ -77,9 +82,14 @@ class TipoRendaController extends Zend_Controller_Action
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
         $this->ModeloTipoRenda->delete($this->_getParam('id'));
 
         $this->_redirect('tipo-renda/index');
+        }
     }
     
     public function beforeExcluirAction()

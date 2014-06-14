@@ -35,7 +35,9 @@ class PesqueiroController extends Zend_Controller_Action
         $this->view->assign('dadosPesqueiros', $fromPesqueiro);
     }
     public function novoAction(){
-    
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
     
     public function criarAction(){
@@ -45,7 +47,9 @@ class PesqueiroController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
         $idPesqueiro = $this->_getParam('id');
         $fromPesqueiro = $this->modelPesqueiro->find($idPesqueiro);
         
@@ -60,13 +64,15 @@ class PesqueiroController extends Zend_Controller_Action
     
     
     public function excluirAction(){
-        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }else{
         $idPesqueiro = $this->_getParam('id');
         
         $this->modelPesqueiro->delete($idPesqueiro);
         
         $this->_redirect('pesqueiro/index');
-        
+        }
     }
 }
 
