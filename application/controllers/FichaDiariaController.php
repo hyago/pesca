@@ -321,7 +321,7 @@ class FichaDiariaController extends Zend_Controller_Action {
                         $modeloRelatorio->setLegValue(320, 'Data/Hora volta: ', $arrastofundo['af_dhvolta']);
                         $modeloRelatorio->setNewLine();
                         $modeloRelatorio->setLegValue(90, 'Alimento: ', $arrastofundo['af_alimento']);
-                        $modeloRelatorio->setLegValue(200, 'Diesel: ', $arrastofundo['af_diesel']);
+                        $modeloRelatorio->setLegValue(200, 'Combustível: ', $arrastofundo['af_diesel']);
                         $modeloRelatorio->setLegValue(320, 'Óleo: ', $arrastofundo['af_oleo']);
                         $modeloRelatorio->setLegValue(400, 'Gelo: ', $arrastofundo['af_gelo']);
                         $modeloRelatorio->setNewLine();
@@ -342,6 +342,12 @@ class FichaDiariaController extends Zend_Controller_Action {
                             $modeloRelatorio->setLegValue(380, 'Quantidade: ', $especie['spc_quantidade']);
                             $modeloRelatorio->setLegValue(480, 'Preço: ', $especie['spc_preco']);
                             
+                            $modeloRelatorio->setNewLine();
+                        }
+                        
+                         $localArrastoFundoAvistamento = $localModelArrastoFundo->selectArrastoHasAvistamento("af_id=".$arrastofundo['af_id'], null, null);                        
+                        foreach ($localArrastoFundoAvistamento as $key_avs => $avistamento) {
+                            $modeloRelatorio->setLegValue(120, 'Avistamento: ', $avistamento['avs_descricao']);
                             $modeloRelatorio->setNewLine();
                         }
                         $modeloRelatorio->setNewLine();
