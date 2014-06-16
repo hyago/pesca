@@ -1285,88 +1285,60 @@ SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, En
 FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
 WHERE (((Entrev_Pesca.TipoMariscagem)="gereré"))
 GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.TipoMariscagem, Entrev_Pesca.Mestre, [Ficha diária].Data, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.n_pesc, Entrev_Pesca.n_armadilhas;
-/// //////////////////////////////////////////////////////////////////
-
-
-SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc
-FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
-WHERE (((Entrev_Pesca.Tp_rede)="emalhe" Or (Entrev_Pesca.Tp_rede)="3 malhos"))
-GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc;
-/// //////////////////////////////////////////////////////////////////
-
-
-select 
-ep.codigo,
--- case cast(left(ep.tp_barco, 1) as int8) when '' then 0 else 1 end as embarcado,
-case ep.tp_barco when '' then 0 else 1 end as embarcado, -- ERRO
-ep.barco, 
-left(ep.tp_barco,  1) as tp_barco, 
-ep.tp_barco, 
-ep.mestre,
-ep.n_pesc,
-ep.datasaida,
-ep.tempoatepesq,
-ep.avist, 
-ep.subamostra,
-ep.id_subamostra,
-ep.alt_pano,
-ep.tam_malha,
-ep.n_lances, 
-ep.cod_fichadiaria
-from access.entrev_pesca as ep
-where ep.tp_rede = '7'
-order by ep.codigo;
 
 
 
-SELECT 
-Entrev_Pesca.Código,
-PortoDesemb.PDesmb,
-Entrev_Pesca.Tp_rede,
-Entrev_Pesca.Mestre,
-Entrev_Pesca.n_pesc,
-[Ficha diária].Data
-FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
-WHERE (((Entrev_Pesca.Tp_rede)="calão"))
-GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, Entrev_Pesca.n_pesc, [Ficha diária].Data;
+//////////////////////////////////////////////////////////////////// EMALHE
+-- SELECT Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, 
+-- Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc
+-- FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+-- WHERE (((Entrev_Pesca.Tp_rede)="emalhe" Or (Entrev_Pesca.Tp_rede)="3 malhos"))
+-- GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Tp_barco, Entrev_Pesca.Barco, 
+-- Entrev_Pesca.Mestre, Entrev_Pesca.Pesqueiro1, Entrev_Pesca.DataChegada, Entrev_Pesca.DataSaída, Entrev_Pesca.n_pesc;
 
-----> Monitoradas/ Não monitoradas
+select * from t_artepesca;
+
+----> Monitoradas
 INSERT INTO T_MONITORAMENTO (MNT_ID,  MNT_ARTE, MNT_QUANTIDADE, MNT_MONITORADO,  FD_ID)
 SELECT NEXTVAL('T_MONITORAMENTO_MNT_ID_SEQ'), CAST(EP.ARTE AS INT4),  FD.RDEMA,  TRUE, FD.COD_FICHA
 FROM ACCESS.FICHA_DIARIA AS FD
 INNER JOIN (
     SELECT DISTINCT ON (EP.COD_FICHADIARIA) COD_FICHADIARIA,  EP.CODIGO, EP.TP_REDE, EP.ARTE
-    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5'
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE = '5' OR EP.TP_REDE = '6' 
     AND EP.COD_FICHADIARIA NOT IN (SELECT DISTINCT ON (FD_ID) FD_ID FROM T_MONITORAMENTO) ORDER BY EP.COD_FICHADIARIA, EP.CODIGO
 ) AS EP ON FD.COD_FICHA = EP.COD_FICHADIARIA
+WHERE FD.RDEMA <> 0
 ORDER BY FD.COD_FICHA;
 
---> Arrasto de Fundo
-INSERT INTO T_CALAO (
-	cal_id, 
-	cal_embarcada,
+--> T_EMALHE
+INSERT INTO T_EMALHE (
+	em_id, 
+	em_embarcado,
 	bar_id, 
 	tte_id, 
 	tp_id_entrevistado, 
-	cal_quantpescadores, 
-	cal_data, 
-	cal_tempogasto, 
+	em_quantpescadores, 
+	em_dhlancamento, 
+	em_dhrecolhimento, 
+	em_diesel, 
+	em_oleo, 
+	em_alimento, 
+	em_gelo, 
 	cal_avistou, 
 	cal_subamostra, 
 	sa_id, 
-	cal_npanos, 
-	cal_tamanho, 
-	cal_altura, 
+	em_tamanho, 
+	em_altura,
+	em_numpanos,
 	cal_malha, 
-	cal_numlances, 
 	cal_obs, 
-	cal_motor, 
+	em_motor, 
 	mnt_id
 ) ( SELECT
 	EP.CODIGO,
 	CASE (COALESCE(LEFT(TP_BARCO, 1), 'FALSE')) WHEN 'FALSE' THEN FALSE ELSE TRUE END,
 	CAST(EP.BARCO AS INT4),
-	CAST(LEFT(EP.TP_BARCO,  1) AS INT4) AS TP_BARCO,
+	case CAST(LEFT(EP.TP_BARCO,  1) AS INT4) when 0 then null else CAST(LEFT(EP.TP_BARCO,  1) AS INT4) end as TP_BARCO,
 	EP.MESTRE,
 	EP.N_PESC,
 	TO_TIMESTAMP((EP.DATASAIDA ||' '|| TO_CHAR(EP.HORASAIDA, 'HH24:MI') ),  'DD-MM-YYYY HH24:MI'),
@@ -1380,15 +1352,13 @@ INSERT INTO T_CALAO (
 	ep.alt_pano, 
 	ep.tam_malha, 
 	ep.n_lances,
--- 	EP.OBS, -- AF_OBS
+	EP.OBS, -- AF_OBS
 	CASE (COALESCE(SUBSTRING(EP.TP_BARCO,  8, 8), 'FALSE')) WHEN 'FALSE' THEN FALSE ELSE TRUE END AS MOTOR, -- AF_MOTOR
 	MNT.MNT_ID
 FROM ACCESS.ENTREV_PESCA AS EP
 INNER JOIN ACCESS.FICHA_DIARIA AS FD ON EP.COD_FICHADIARIA = FD.COD_FICHA
 INNER JOIN T_MONITORAMENTO AS MNT ON EP.COD_FICHADIARIA = MNT.FD_ID
-WHERE EP.TP_REDE='2' AND EP.ARTE='5' and mnt.mnt_arte=5 ORDER BY EP.CODIGO ,  FD.COD_FICHA );
-
-
+WHERE EP.TP_REDE = '5' OR EP.TP_REDE = '6' ORDER BY EP.CODIGO,  FD.COD_FICHA );
 
 
 /// //////////////////////////////////////////////////////////////////
@@ -1410,6 +1380,12 @@ from access.ficha_diaria as fd;
 
 
 /// //////////////////////////////////////////////////////////////////
+pg_dump -U mohonda DB_Pesca --column-inserts --inserts --schema=public -a -t T_SUBAMOSTRA > /tmp/subamostra.sql
+pg_dump -U mohonda DB_Pesca --column-inserts --inserts --schema=public -a -t T_MONITORAMENTO > /tmp/monitoramento.sql
+pg_dump -U mohonda DB_Pesca --column-inserts --inserts --schema=public -a -t T_ARRASTOFUNDO_HAS_T_PESQUEIRO -t T_ARRASTOFUNDO_HAS_T_ESPECIE_CAPTURADA -t  T_ARRASTOFUNDO_HAS_T_AVISTAMENTO -t T_ARRASTOFUNDO > /tmp/arrastofundo.sql
+pg_dump -U mohonda DB_Pesca --column-inserts --inserts --schema=public -a -t T_CALAO_HAS_T_PESQUEIRO -t T_CALAO_HAS_T_ESPECIE_CAPTURADA -t  T_CALAO_HAS_T_AVISTAMENTO -t T_CALAO > /tmp/arrastofundo.sql
+
+
 DELETE FROM T_ARRASTOFUNDO_HAS_T_PESQUEIRO;
 DELETE FROM T_ARRASTOFUNDO_HAS_T_ESPECIE_CAPTURADA;
 DELETE FROM T_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
@@ -1449,7 +1425,7 @@ EP.MESTRE,
 EP.N_PESC,
 TO_TIMESTAMP((EP.DATASAIDA ||' '|| TO_CHAR(EP.HORASAIDA, 'HH24:MI') ),  'DD-MM-YYYY HH24:MI'),
 TO_TIMESTAMP((EP.DATACHEGADA ||' '|| TO_CHAR(EP.HORACHEGADA, 'HH24:MI') ),  'DD-MM-YYYY HH24:MI'),
-EP.COMBUSTIVEL,  EP."ÓLEO" AS OLEO, EP.ALIMENTOS,-- AF_DIESEL -- AF_OLEO -- AF_ALIMENTO
+EP.COMBUSTIVEL,  EP."Óleo" AS OLEO, EP.ALIMENTOS,-- AF_DIESEL -- AF_OLEO -- AF_ALIMENTO
 EP.GELO, EP.AVIST, -- AF_GELO -- AF_AVISTOU
 CASE EP.SUBAMOSTRA WHEN 0 THEN FALSE ELSE TRUE END AS SUBAMOSTRA, -- AF_SUBAMOSTRA
 NULL AS ID_SUBAMOSTRA, -- EP.ID_SUBAMOSTRA, -- SA_ID
@@ -1507,18 +1483,12 @@ WHERE EP.ARTE='1' AND EP.PESQUEIRO5 NOTNULL ORDER BY EP.CODIGO;
 
 ---> Especie Capturada
 INSERT INTO T_ARRASTOFUNDO_HAS_T_ESPECIE_CAPTURADA (SPC_AF_ID,  SPC_QUANTIDADE,  SPC_PESO_KG,  SPC_PRECO,  ESP_ID,  AF_ID)
-SELECT CODIGO, QUANTIDADE,  cast(PESO_KG as float ) ,  cast (VALOR_KG as float ),  COD_SP,  COD_ENTREV  FROM ACCESS.SP_CAP AS SP
+SELECT CODIGO, QUANTIDADE,  CAST(PESO_KG AS FLOAT ) ,  CAST (VALOR_KG AS FLOAT ),  COD_SP,  COD_ENTREV  FROM ACCESS.SP_CAP AS SP
 INNER JOIN (SELECT AF_ID FROM T_ARRASTOFUNDO ORDER BY AF_ID) AS AF ON SP.COD_ENTREV = AF.AF_ID
 ORDER BY SP.COD_ENTREV;
 
 
------> SUBAMPSTRA
-SELECT AF_ID, TP_ID_ENTREVISTADO, AF_DHSAIDA, AF_DHVOLTA, AF_SUBAMOSTRA, SA_ID
-FROM T_ARRASTOFUNDO WHERE AF_SUBAMOSTRA = TRUE AND AF_DHVOLTA NOTNULL
-order by TP_ID_ENTREVISTADO;
-
-
-
+-----> SUBAMOSTRA
 CREATE OR REPLACE FUNCTION IMPORT_ARRASTOFUNDO_SUBAMOSTRA( ) RETURNS INT4 AS $$
 DECLARE R RECORD;
 DECLARE RET INT4;
@@ -1530,8 +1500,7 @@ WHERE AF.AF_SUBAMOSTRA = TRUE AND AF.AF_DHVOLTA NOTNULL
 LOOP
     INSERT INTO T_SUBAMOSTRA (SA_ID,  SA_PESCADOR,  SA_DATACHEGADA )
         VALUES (NEXTVAL('T_SUBAMOSTRA_SA_ID_SEQ'), R.TP_ID_ENTREVISTADO, R.AF_DHSAIDA );
-    
---     UPDATE T_ARRASTOFUNDO SET SA_ID = NULL WHERE AF_ID=R.AF_ID;
+
     UPDATE T_ARRASTOFUNDO SET SA_ID = CURRVAL('T_SUBAMOSTRA_SA_ID_SEQ') WHERE AF_ID=R.AF_ID;
 
 END LOOP;
@@ -1546,4 +1515,176 @@ SELECT AF.AF_ID, AV.AVS_ID
 FROM T_ARRASTOFUNDO AS AF
     INNER JOIN T_AVISTAMENTO AS AV ON(';' || AF.AF_AVISTOU || ';' LIKE '%;' || AV.AVS_DESCRICAO || ';%')
 ORDER BY AF.AF_ID, AV.AVS_ID, AV.AVS_DESCRICAO;
+
+
+///////////////////////////////////////////////////////////////////// CALÃO
+
+
+-- SELECT 
+-- Entrev_Pesca.Código,
+-- PortoDesemb.PDesmb,
+-- Entrev_Pesca.Tp_rede,
+-- Entrev_Pesca.Mestre,
+-- Entrev_Pesca.n_pesc,
+-- [Ficha diária].Data
+-- FROM Espécies INNER JOIN ((PortoDesemb INNER JOIN ([Ficha diária] INNER JOIN Entrev_Pesca ON [Ficha diária].[Cod Ficha] = Entrev_Pesca.Cod_fichadiaria) ON PortoDesemb.Código = [Ficha diária].[Porto de Desembarque]) INNER JOIN Sp_cap ON Entrev_Pesca.Código = Sp_cap.Cod_entrev) ON Espécies.Código = Sp_cap.Cod_sp
+-- WHERE (((Entrev_Pesca.Tp_rede)="calão"))
+-- GROUP BY Entrev_Pesca.Código, PortoDesemb.PDesmb, Entrev_Pesca.Tp_rede, Entrev_Pesca.Mestre, Entrev_Pesca.n_pesc, [Ficha diária].Data;
+
+----> Monitoradas
+INSERT INTO T_MONITORAMENTO (MNT_ID,  MNT_ARTE, MNT_QUANTIDADE, MNT_MONITORADO,  FD_ID)
+SELECT NEXTVAL('T_MONITORAMENTO_MNT_ID_SEQ'), CAST(EP.ARTE AS INT4),  FD.RDEMA,  TRUE, FD.COD_FICHA
+FROM ACCESS.FICHA_DIARIA AS FD
+INNER JOIN (
+    SELECT DISTINCT ON (EP.COD_FICHADIARIA) COD_FICHADIARIA,  EP.CODIGO, EP.TP_REDE, EP.ARTE
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5'
+    AND EP.COD_FICHADIARIA NOT IN (SELECT DISTINCT ON (FD_ID) FD_ID FROM T_MONITORAMENTO) ORDER BY EP.COD_FICHADIARIA, EP.CODIGO
+) AS EP ON FD.COD_FICHA = EP.COD_FICHADIARIA
+ORDER BY FD.COD_FICHA;
+
+--> Arrasto de Fundo
+INSERT INTO T_CALAO (
+	cal_id, 
+	cal_embarcada,
+	bar_id, 
+	tte_id, 
+	tp_id_entrevistado, 
+	cal_quantpescadores, 
+	cal_data, 
+	cal_tempogasto, 
+	cal_avistou, 
+	cal_subamostra, 
+	sa_id, 
+	cal_npanos, 
+	cal_tamanho, 
+	cal_altura, 
+	cal_malha, 
+	cal_numlances, 
+	cal_obs, 
+	cal_motor, 
+	mnt_id
+) ( SELECT
+	EP.CODIGO,
+	CASE (COALESCE(LEFT(TP_BARCO, 1), 'FALSE')) WHEN 'FALSE' THEN FALSE ELSE TRUE END,
+	CAST(EP.BARCO AS INT4),
+	case CAST(LEFT(EP.TP_BARCO,  1) AS INT4) when 0 then null else CAST(LEFT(EP.TP_BARCO,  1) AS INT4) end as TP_BARCO,
+	EP.MESTRE,
+	EP.N_PESC,
+	TO_TIMESTAMP((EP.DATASAIDA ||' '|| TO_CHAR(EP.HORASAIDA, 'HH24:MI') ),  'DD-MM-YYYY HH24:MI'),
+	TO_TIMESTAMP((EP.DATACHEGADA ||' '|| TO_CHAR(EP.HORACHEGADA, 'HH24:MI') ),  'DD-MM-YYYY HH24:MI') -
+	TO_TIMESTAMP((EP.DATASAIDA ||' '|| TO_CHAR(EP.HORASAIDA, 'HH24:MI') ),  'DD-MM-YYYY HH24:MI'),
+	ep.avist, 
+	CASE EP.SUBAMOSTRA WHEN 0 THEN FALSE ELSE TRUE END AS SUBAMOSTRA, -- AF_SUBAMOSTRA
+	NULL AS ID_SUBAMOSTRA, -- EP.ID_SUBAMOSTRA, -- SA_ID
+	ep.n_panos, 
+	ep.comp_pano, 
+	ep.alt_pano, 
+	ep.tam_malha, 
+	ep.n_lances,
+	EP.OBS, -- AF_OBS
+	CASE (COALESCE(SUBSTRING(EP.TP_BARCO,  8, 8), 'FALSE')) WHEN 'FALSE' THEN FALSE ELSE TRUE END AS MOTOR, -- AF_MOTOR
+	MNT.MNT_ID
+FROM ACCESS.ENTREV_PESCA AS EP
+INNER JOIN ACCESS.FICHA_DIARIA AS FD ON EP.COD_FICHADIARIA = FD.COD_FICHA
+INNER JOIN T_MONITORAMENTO AS MNT ON EP.COD_FICHADIARIA = MNT.FD_ID
+WHERE EP.TP_REDE='2' AND EP.ARTE='5' ORDER BY EP.CODIGO,  FD.COD_FICHA );
+
+
+----> Não monitoradas
+INSERT INTO T_MONITORAMENTO (MNT_ID,  MNT_ARTE, MNT_QUANTIDADE, MNT_MONITORADO,  FD_ID)
+SELECT NEXTVAL('T_MONITORAMENTO_MNT_ID_SEQ'), CAST(EP.ARTE AS INT4),  FD.RDEMANM,  FALSE, FD.COD_FICHA
+FROM ACCESS.FICHA_DIARIA AS FD
+INNER JOIN (
+    SELECT DISTINCT ON (EP.COD_FICHADIARIA) COD_FICHADIARIA,  EP.CODIGO, EP.TP_REDE, EP.ARTE
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5'
+--     AND EP.COD_FICHADIARIA NOT IN (SELECT DISTINCT ON (FD_ID) FD_ID FROM T_MONITORAMENTO) ORDER BY EP.COD_FICHADIARIA, EP.CODIGO
+) AS EP ON FD.COD_FICHA = EP.COD_FICHADIARIA
+where FD.RDEMANM <> 0
+ORDER BY FD.COD_FICHA;
+
+
+-----> Pesqueiro
+INSERT INTO t_calao_has_t_pesqueiro (cal_paf_id,  cal_id,  paf_id)
+SELECT nextval('t_arrastofundo_has_t_pesqueiro_af_paf_id_seq'), EP.CODIGO AS CODIGO, CAST(EP.PESQUEIRO1 AS INT8) AS PESQUEIRO
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5' AND EP.PESQUEIRO1 NOTNULL
+UNION
+	SELECT nextval('t_arrastofundo_has_t_pesqueiro_af_paf_id_seq'), EP.CODIGO AS CODIGO, CAST(EP.PESQUEIRO2 AS INT8) AS PESQUEIRO
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5' AND EP.PESQUEIRO2 NOTNULL
+UNION
+    SELECT nextval('t_arrastofundo_has_t_pesqueiro_af_paf_id_seq'), EP.CODIGO AS CODIGO, CAST(EP.PESQUEIRO3 AS INT8) AS PESQUEIRO
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5' AND EP.PESQUEIRO3 NOTNULL
+UNION
+    SELECT nextval('t_arrastofundo_has_t_pesqueiro_af_paf_id_seq'), EP.CODIGO AS CODIGO, CAST(EP.PESQUEIRO4 AS INT8) AS PESQUEIRO
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5' AND EP.PESQUEIRO4 NOTNULL
+UNION
+    SELECT nextval('t_arrastofundo_has_t_pesqueiro_af_paf_id_seq'), EP.CODIGO AS CODIGO, CAST(EP.PESQUEIRO5 AS INT8) AS PESQUEIRO
+    FROM ACCESS.ENTREV_PESCA AS EP WHERE EP.TP_REDE='2' AND EP.ARTE='5' AND EP.PESQUEIRO5 NOTNULL ORDER BY CODIGO;
+
+------> Especie Capturada    
+INSERT INTO T_CALAO_HAS_T_ESPECIE_CAPTURADA (SPC_CAL_ID,  SPC_QUANTIDADE,  SPC_PESO_KG,  SPC_PRECO,  ESP_ID,  CAL_ID)
+SELECT CODIGO, QUANTIDADE,  CAST(PESO_KG AS FLOAT ) ,  CAST (VALOR_KG AS FLOAT ),  COD_SP,  COD_ENTREV  FROM ACCESS.SP_CAP AS SP
+INNER JOIN (SELECT CAL_ID FROM T_CALAO ORDER BY CAL_ID) AS CAL ON SP.COD_ENTREV = CAL.CAL_ID
+ORDER BY SP.COD_ENTREV;
+
+-----> SUBAMOSTRA
+CREATE OR REPLACE FUNCTION IMPORT_CALAO_SUBAMOSTRA() RETURNS INT4 AS $$
+DECLARE R RECORD;
+DECLARE RET INT4;
+BEGIN
+FOR R IN SELECT CAL_ID, TP_ID_ENTREVISTADO,  CAL_DATA,  CAL_SUBAMOSTRA FROM T_CALAO WHERE CAL_SUBAMOSTRA = TRUE
+LOOP
+    INSERT INTO T_SUBAMOSTRA (SA_ID,  SA_PESCADOR,  SA_DATACHEGADA )
+        VALUES (NEXTVAL('T_SUBAMOSTRA_SA_ID_SEQ'), R.TP_ID_ENTREVISTADO, R.CAL_DATA );
+
+    UPDATE T_CALAO SET SA_ID = CURRVAL('T_SUBAMOSTRA_SA_ID_SEQ') WHERE CAL_ID=R.CAL_ID;
+
+END LOOP;
+RETURN RET;
+END;
+$$ LANGUAGE PLPGSQL;
+
+
+----> avistamento
+INSERT INTO T_CALAO_HAS_T_AVISTAMENTO (CAL_ID, AVS_ID)
+SELECT CAL.CAL_ID, AV.AVS_ID
+FROM T_CALAO AS CAL
+    INNER JOIN T_AVISTAMENTO AS AV ON(';' || CAL.CAL_AVISTOU || ';' LIKE '%;' || AV.AVS_DESCRICAO || ';%')
+ORDER BY CAL.CAL_ID, AV.AVS_ID, AV.AVS_DESCRICAO;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> destino do pescado
+select destino from access.entrev_pesca group by destino order by destino;  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
