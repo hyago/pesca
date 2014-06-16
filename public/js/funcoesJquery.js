@@ -582,10 +582,29 @@ function jsInsertEspecieCapturada(frm, pag, entrevista){
     
 }
 
+
 function jsDeleteEspecieCapturada(fichaId, pag, idEntHasEspecie) {
     var TmpUrl = (+fichaId + '#base');
 
     var tmpUpdate = (pag + '/id/' + idEntHasEspecie + '/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+function jsInsertAvistamento(frm, pag, entrevista){
+    
+    var TmpUrl  = (entrevista+ '#base');
+    
+    var tmpUpdate = (pag + '/SelectAvistamento/' + frm.SelectAvistamento.value +'/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+function jsDeleteAvistamento(fichaId, pag, idAvistamento) {
+    var TmpUrl = (+fichaId + '#base');
+
+    var tmpUpdate = (pag + '/id_entrevista/' + fichaId + '/id_avistamento/'+idAvistamento+ '/back_url/' + TmpUrl);
 
     if (confirm("Realmente deseja excluir este item?")) {
         location.replace(tmpUpdate);

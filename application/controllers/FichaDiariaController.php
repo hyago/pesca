@@ -102,12 +102,8 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("dados_vento", $vento);
         //-------------------------------------------
-        $artePesca = $this->modelArtePesca->select();
-
-        $this->view->assign("artesPesca", $artePesca);
-        //---------------------------------------------
         
-        $usuario = $this->modelEstagiario->select();
+        $usuario = $this->modelEstagiario->select(null, 'tu_nome');
 
         $this->view->assign("users", $usuario);
         //--------------------------------------------
@@ -134,7 +130,7 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("fichadiaria", $fichadiaria);
         //--------------------------------------
-        $porto = $this->modelPorto->select();
+        $porto = $this->modelPorto->select(null, 'pto_id');
 
         $this->view->assign("dados_porto", $porto);
         //----------------------------------------
@@ -146,7 +142,7 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("dados_vento", $vento);
         //-------------------------------------------
-        $artePesca = $this->modelArtePesca->select();
+        $artePesca = $this->modelArtePesca->select(null, 'tap_artepesca');
 
         $this->view->assign("artesPesca", $artePesca);
         //---------------------------------------------

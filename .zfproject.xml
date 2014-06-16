@@ -289,6 +289,8 @@
           <dbTableFile dbTableName="VEntrevistaVaraPesca"/>
           <dbTableFile dbTableName="HistoricoLogin"/>
           <dbTableFile dbTableName="VArrastoFundoHasAvistamento"/>
+          <dbTableFile dbTableName="Avistamento"/>
+          <dbTableFile dbTableName="ArrastoHasAvistamento"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -351,6 +353,7 @@
         <modelFile modelName="Isca"/>
         <modelFile modelName="ColetaManual"/>
         <modelFile modelName="HistoricoLogin"/>
+        <modelFile modelName="Avistamento"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

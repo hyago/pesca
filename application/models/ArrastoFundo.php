@@ -52,7 +52,6 @@ class Application_Model_ArrastoFundo
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
         
         if(empty($diesel)){
             $diesel = NULL;
@@ -65,9 +64,6 @@ class Application_Model_ArrastoFundo
         }
         if(empty($gelo)){
             $gelo = NULL;
-        }
-        if(empty($avistou)){
-            $avistou = NULL;
         }
         
         $dadosArrastoFundo = array(
@@ -83,7 +79,6 @@ class Application_Model_ArrastoFundo
             'af_oleo' => $oleo,
             'af_alimento' => $alimento,
             'af_gelo' => $oleo,
-            'af_avistou' => $avistou,
             'af_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'af_obs' => $request['observacao'],
@@ -98,9 +93,25 @@ class Application_Model_ArrastoFundo
     {
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
         
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
         
         $dadosArrastoFundo = array(
             'af_embarcado' => $request['embarcada'],
@@ -111,23 +122,20 @@ class Application_Model_ArrastoFundo
             'af_quantpescadores' => $request['numPescadores'],
             'af_dhvolta' => $timestampVolta,
             'af_dhsaida' => $timestampSaida, 
-            'af_diesel' => $request['diesel'],
-            'af_oleo' => $request['oleo'],
-            'af_alimento' => $request['alimento'],
-            'af_gelo' => $request['gelo'],
-            'af_avistou' => $request['avistamento'],
-            'af_subamostra' => $request['subamostra'],
-            'sa_id' => $idSubamostra,
+            'af_diesel' => $diesel,
+            'af_oleo' => $oleo,
+            'af_alimento' => $alimento,
+            'af_gelo' => $gelo,
             'af_obs' => $request['observacao'],
-            'mnt_id' => $request['id_monitoramento']
         );
  
         
         $whereArrastoFundo= $this->dbTableArrastoFundo->getAdapter()
-                ->quoteInto('"af_id" = ?', $request[0]);
+                ->quoteInto('"af_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableArrastoFundo->update($dadosArrastoFundo, $whereArrastoFundo);
+        
     }
     
     public function delete($idArrastoFundo)
@@ -251,6 +259,29 @@ class Application_Model_ArrastoFundo
         }
 
         return $this->dbTableArrastoFundoAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTArrastoHasAvistamento = new Application_Model_DbTable_ArrastoHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'af_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTArrastoHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTArrastoHasAvistamento = new Application_Model_DbTable_ArrastoHasAvistamento();       
+                
+        $dadosArrastoHasAvistamento = array(
+            'af_id = ?' => $idAvistamento,
+            'avs_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTArrastoHasAvistamento->delete($dadosArrastoHasAvistamento);
     }
     
 }
