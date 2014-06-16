@@ -29,13 +29,14 @@ class ArrastoFundoController extends Zend_Controller_Action
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
+        $this->modelAvistamento = new Application_Model_Avistamento();
     }
 
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
 
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
 
@@ -68,7 +69,7 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
 
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_ArrastoHasPesqueiro();
+        $avistamentoArrasto = new Application_Model_DbTable_VArrastoFundoHasAvistamento();
         $entrevista = $this->modelArrastoFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -76,16 +77,26 @@ class ArrastoFundoController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-
+        $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        
+        
         $idEntrevista = $this->_getParam('id');
-
+        $datahoraSaida[] = split(" ",$entrevista['af_dhsaida']);
+        $datahoraVolta[] = split(" ",$entrevista['af_dhvolta']);
         $vArrastoFundo = $this->modelArrastoFundo->selectArrastoHasPesqueiro('af_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelArrastoFundo->selectArrastoHasEspCapturadas('af_id='.$idEntrevista);
-
+        
+        $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id='.$idEntrevista);
+        
+        $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('dataSaida', $datahoraSaida[0][0]);
+        $this->view->assign('horaSaida', $datahoraSaida[0][1]);
+        $this->view->assign('dataVolta', $datahoraVolta[0][0]);
+        $this->view->assign('horaVolta', $datahoraVolta[0][1]);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vArrastoFundo', $vArrastoFundo);
         $this->view->assign("entrevista", $entrevista);
         $this->view->assign('pescadores',$pescadores);
@@ -94,6 +105,12 @@ class ArrastoFundoController extends Zend_Controller_Action
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
 
+    }
+    public function atualizarAction(){
+        $idArrasto = $this->_getParam('id_entrevista');
+        $this->modelArrastoFundo->update($this->_getAllParams());
+        
+        $this->_redirect('arrasto-fundo/editar/id/'.$idArrasto);
     }
 
     public function criarAction(){
@@ -163,6 +180,35 @@ class ArrastoFundoController extends Zend_Controller_Action
         $backUrl = $this->_getParam("back_url");
 
         $this->modelArrastoFundo->deleteEspCapturada($idEntrevistaHasEspecie);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+    
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelArrastoFundo->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelArrastoFundo->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }

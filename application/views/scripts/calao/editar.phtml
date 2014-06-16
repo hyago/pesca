@@ -4,7 +4,7 @@
 </div>
 
 <div id="esquerda-entrevista">
-    <form action="<?= $this->url(array("controller" => "calao", "action" => "criar"), null, true) ?>">
+    <form action="<?= $this->url(array("controller" => "calao", "action" => "atualizar"), null, true) ?>">
         <fieldset id="Desembarque">
             <div id="esquerda">
                 <div id="form-esq">
@@ -17,7 +17,7 @@
                 </div>
                 <div id="form-esq">
                     <label for="tipo">ID Entrevista:</label>
-                    <input type="text" placeholder = "ID" name="id_entrevista" disabled="true"/><br />
+                    <input type="text" placeholder = "ID" name="id_entrevista" disabled="true" value="<?= $this->entrevista['cal_id'] ?>"/><br />
                 </div>
             </div>
             <br/>
