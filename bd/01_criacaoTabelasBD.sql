@@ -1197,7 +1197,6 @@ CREATE TABLE IF NOT EXISTS t_arrastofundo
   af_oleo double precision NULL,
   af_alimento double precision NULL,
   af_gelo double precision NULL,
-  af_avistou character varying(255) NULL,
   af_subamostra boolean NULL,
   sa_id integer NULL,
   af_obs character varying(255) NULL,
@@ -1234,7 +1233,6 @@ CREATE TABLE IF NOT EXISTS t_calao
   cal_quantpescadores integer NULL,
   cal_data date NULL,
   cal_tempogasto time without time zone NULL,
-  cal_avistou character varying(255) NULL,
   cal_subamostra boolean NULL,
   sa_id integer NULL,
   cal_npanos integer NULL, 
@@ -1276,7 +1274,6 @@ CREATE TABLE IF NOT EXISTS t_coletamanual
   cml_dhsaida timestamp without time zone NULL,
   cml_dhvolta timestamp without time zone NULL,
   cml_tempogasto time without time zone NULL,
-  cml_avistamento character varying(255) NULL,
   cml_subamostra boolean NULL,
   sa_id integer NULL,
   cml_obs character varying(255) NULL,
@@ -1322,7 +1319,6 @@ CREATE TABLE IF NOT EXISTS t_emalhe
   em_oleo double precision NULL,
   em_alimento double precision NULL,
   em_gelo double precision NULL,
-  em_avistou character varying(255) NULL,
   em_subamostra boolean NULL,
   sa_id integer NULL,
   em_tamanho double precision NULL,
@@ -1369,7 +1365,6 @@ CREATE TABLE IF NOT EXISTS t_grosseira
   grs_oleo double precision NULL,
   grs_alimento double precision NULL,
   grs_gelo double precision NULL,
-  grs_avistou character varying(255) NULL,
   grs_numlinhas integer NULL,
   grs_numanzoisplinha integer NULL,
   grs_subamostra boolean NULL,
@@ -1416,7 +1411,6 @@ CREATE TABLE IF NOT EXISTS t_jerere
   jre_dhsaida timestamp without time zone NULL,
   jre_dhvolta timestamp without time zone NULL,
   jre_tempogasto time without time zone NULL,
-  jre_avistamento character varying(255) NULL,
   jre_subamostra boolean NULL,
   sa_id integer NULL,
   jre_numarmadilhas integer NULL,
@@ -1467,7 +1461,6 @@ CREATE TABLE IF NOT EXISTS t_linha
   lin_oleo double precision NULL,
   lin_alimento double precision NULL,
   lin_gelo double precision NULL,
-  lin_avistou character varying(255) NULL,
   lin_subamostra boolean NULL,
   sa_id integer NULL,
   lin_numlinhas integer NULL,
@@ -1519,7 +1512,6 @@ CREATE TABLE IF NOT EXISTS t_linhafundo
   lf_oleo double precision NULL,
   lf_alimento double precision NULL, 
   lf_gelo double precision NULL,
-  lf_avistamento character varying(255) NULL,
   lf_subamostra boolean NULL,
   sa_id integer NULL,
   lf_numlinhas integer NULL,
@@ -1568,7 +1560,6 @@ CREATE TABLE IF NOT EXISTS t_manzua
   man_dhsaida timestamp without time zone NULL,
   man_dhvolta timestamp without time zone NULL,
   man_tempogasto time without time zone NULL,
-  man_avistamento character varying(255) NULL,
   man_subamostra boolean NULL,
   sa_id integer NULL,
   man_numarmadilhas integer NULL,
@@ -1611,7 +1602,6 @@ CREATE TABLE IF NOT EXISTS t_mergulho
   mer_dhsaida timestamp without time zone NULL,
   mer_dhvolta timestamp without time zone NULL,
   mer_tempogasto time without time zone NULL,
-  mer_avistou character varying(255) NULL,
   mer_subamostra boolean NULL,
   sa_id integer NULL,
   mnt_id integer NOT NULL,
@@ -1653,7 +1643,6 @@ CREATE TABLE IF NOT EXISTS t_ratoeira
   rat_dhsaida timestamp without time zone NULL,
   rat_dhvolta timestamp without time zone NULL,
   rat_tempogasto time without time zone NULL,
-  rat_avistamento character varying(255) NULL,
   rat_subamostra boolean NULL,
   sa_id integer NULL,
   rat_numarmadilhas integer NULL,
@@ -1696,7 +1685,6 @@ CREATE TABLE IF NOT EXISTS t_siripoia
   sir_dhsaida timestamp without time zone NULL,
   sir_dhvolta timestamp without time zone NULL,
   sir_tempogasto time without time zone NULL,
-  sir_avistamento character varying(255) NULL,
   sir_subamostra boolean NULL,
   sa_id integer NULL,
   sir_numarmadilhas integer NULL,
@@ -1738,7 +1726,6 @@ CREATE TABLE IF NOT EXISTS t_tarrafa
   tar_quantpescadores integer NULL,
   tar_data date NULL,
   tar_tempogasto time without time zone NULL,
-  tar_avistou character varying(255) NULL,
   tar_subamostra boolean NULL,
   sa_id integer NULL,
   tar_roda double precision NULL,
@@ -1783,7 +1770,6 @@ CREATE TABLE IF NOT EXISTS t_varapesca
   vp_oleo double precision NULL,
   vp_alimento double precision NULL,
   vp_gelo double precision NULL,
-  vp_avistamento character varying(255) NULL,
   vp_subamostra boolean NULL,
   sa_id integer NULL,
   vp_numanzoisplinha integer NULL,
@@ -2073,6 +2059,7 @@ CREATE TABLE IF NOT EXISTS t_varapesca_has_t_especie_capturada
   CONSTRAINT fk_t_especie_capturada_t_varapesca1 FOREIGN KEY (vp_id)
       REFERENCES t_varapesca (vp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
+
 );
 
 
@@ -2528,9 +2515,9 @@ CREATE OR REPLACE VIEW v_entrevista_varapesca AS
   
   
   
-DROP TABLE T_CALAO_HAS_T_AVISTAMENTO;
-drop table T_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
-drop view V_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
+drop table if exists T_CALAO_HAS_T_AVISTAMENTO;
+drop table if exists T_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
+drop view if exists V_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
   
   
   
@@ -2548,6 +2535,7 @@ SELECT AVS.AF_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_ARRASTOFUNDO_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
+drop table if exists  T_emalhe_HAS_T_AVISTAMENTO;  
   
 CREATE TABLE IF NOT EXISTS T_CALAO_HAS_T_AVISTAMENTO
 (
@@ -2558,7 +2546,7 @@ CREATE TABLE IF NOT EXISTS T_CALAO_HAS_T_AVISTAMENTO
 	CONSTRAINT FK_T_CALAO_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
   
-Drop table T_emalhe_HAS_T_AVISTAMENTO;
+drop table if exists T_emalhe_HAS_T_AVISTAMENTO;
 
 CREATE TABLE IF NOT EXISTS T_EMALHE_HAS_T_AVISTAMENTO
 (
@@ -2569,7 +2557,7 @@ CREATE TABLE IF NOT EXISTS T_EMALHE_HAS_T_AVISTAMENTO
 	CONSTRAINT FK_T_EMALHE_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
 
-drop table T_TARRAFA_HAS_T_AVISTAMENTO;
+drop table if exists T_TARRAFA_HAS_T_AVISTAMENTO;
   
  CREATE TABLE IF NOT EXISTS T_TARRAFA_HAS_T_AVISTAMENTO
 (
@@ -2580,6 +2568,109 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
  
+ drop table if exists T_COLETAMANUAL_HAS_T_AVISTAMENTO;
+ CREATE TABLE IF NOT EXISTS T_COLETAMANUAL_HAS_T_AVISTAMENTO
+(
+	CML_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_COLETAMANUAL_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (CML_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (CML_ID) REFERENCES T_COLETAMANUAL (CML_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);  
   
+drop table if exists T_GROSSEIRA_HAS_T_AVISTAMENTO;  
+ CREATE TABLE IF NOT EXISTS T_GROSSEIRA_HAS_T_AVISTAMENTO
+(
+	GRS_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_GROSSEIRA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (GRS_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (GRS_ID) REFERENCES T_GROSSEIRA (GRS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);  
+
+drop table if exists T_JERERE_HAS_T_AVISTAMENTO;
+ CREATE TABLE IF NOT EXISTS T_JERERE_HAS_T_AVISTAMENTO
+(
+	JRE_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_JERERE_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (JRE_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (JRE_ID) REFERENCES T_JERERE (JRE_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);  
+
+  drop table if exists T_LINHA_HAS_T_AVISTAMENTO;
+
+  CREATE TABLE IF NOT EXISTS T_LINHA_HAS_T_AVISTAMENTO
+  (
+	  LIN_ID INTEGER,
+	  AVS_ID INTEGER,
+	  CONSTRAINT T_LINHA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (LIN_ID,  AVS_ID),
+	  CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (LIN_ID) REFERENCES T_LINHA (LIN_ID),
+	  CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+  ); 
   
-  
+  drop table if exists T_LINHAFUNDO_HAS_T_AVISTAMENTO;
+
+ CREATE TABLE IF NOT EXISTS T_LINHAFUNDO_HAS_T_AVISTAMENTO
+(
+	LF_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_LINHAFUNDO_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (LF_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (LF_ID) REFERENCES T_LINHAFUNDO (LF_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+
+drop table if exists T_MANZUA_HAS_T_AVISTAMENTO;
+
+ CREATE TABLE IF NOT EXISTS T_MANZUA_HAS_T_AVISTAMENTO
+(
+	MAN_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_MANZUA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (MAN_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (MAN_ID) REFERENCES T_MANZUA (MAN_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+
+drop table if exists T_MERGULHO_HAS_T_AVISTAMENTO;
+
+ CREATE TABLE IF NOT EXISTS T_MERGULHO_HAS_T_AVISTAMENTO
+(
+	MER_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_MERGULHO_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (MER_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (MER_ID) REFERENCES T_MERGULHO (MER_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+
+drop table if exists T_RATOEIRA_HAS_T_AVISTAMENTO;
+
+ CREATE TABLE IF NOT EXISTS T_RATOEIRA_HAS_T_AVISTAMENTO
+(
+	RAT_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_RATOEIRA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (RAT_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (RAT_ID) REFERENCES T_RATOEIRA (RAT_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+
+drop table if exists T_SIRIPOIA_HAS_T_AVISTAMENTO;
+
+ CREATE TABLE IF NOT EXISTS T_SIRIPOIA_HAS_T_AVISTAMENTO
+(
+	SIR_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_SIRIPOIA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (SIR_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (SIR_ID) REFERENCES T_SIRIPOIA (SIR_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+
+drop table if exists T_VARAPESCA_HAS_T_AVISTAMENTO;
+
+ CREATE TABLE IF NOT EXISTS T_VARAPESCA_HAS_T_AVISTAMENTO
+(
+	VP_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_VARAPESCA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (VP_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (VP_ID) REFERENCES T_VARAPESCA (VP_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
