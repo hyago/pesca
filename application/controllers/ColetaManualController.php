@@ -80,7 +80,7 @@ class ColetaManualController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_ColetaManualHasPesqueiro();
+        //$avistamentoColetaManual = new Application_Model_DbTable_VColetaManualHasAvistamento();
         $entrevista = $this->modelColetaManual->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -88,25 +88,36 @@ class ColetaManualController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        
+        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $mare = $this->modelMare->select();
         
         $idEntrevista = $this->_getParam('id');
+        $datahoraSaida[] = split(" ",$entrevista['cml_dhsaida']);
+        $datahoraVolta[] = split(" ",$entrevista['cml_dhvolta']);
         
         $vColetaManual = $this->modelColetaManual->selectColetaManualHasPesqueiro('cml_id='.$idEntrevista);
-        
+
         $vEspecieCapturadas = $this->modelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$idEntrevista);
         
+        //$vArrastoAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
+        
+        //$this->view->assign('avistamentos', $avistamentos);
+        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vColetaManual', $vColetaManual);
         $this->view->assign("entrevista", $entrevista);
+        $this->view->assign('dataSaida', $datahoraSaida[0][0]);
+        $this->view->assign('horaSaida', $datahoraSaida[0][1]);
+        $this->view->assign('dataVolta', $datahoraVolta[0][0]);
+        $this->view->assign('horaVolta', $datahoraVolta[0][1]);
+        $this->view->assign('mare', $mare);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
+
     }
 
 
