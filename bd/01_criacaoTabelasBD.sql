@@ -1197,12 +1197,13 @@ CREATE TABLE IF NOT EXISTS t_arrastofundo
   af_oleo double precision NULL,
   af_alimento double precision NULL,
   af_gelo double precision NULL,
-  af_avistou character varying(100) NULL,
+  af_avistou character varying(255) NULL,
   af_subamostra boolean NULL,
   sa_id integer NULL,
-  af_obs character varying(100) NULL,
+  af_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   af_motor boolean NULL,
+  af_destino character varying(255), 
   CONSTRAINT t_arrastofundo_pkey PRIMARY KEY (af_id),
   CONSTRAINT fk_t_arrastofundo_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1233,7 +1234,7 @@ CREATE TABLE IF NOT EXISTS t_calao
   cal_quantpescadores integer NULL,
   cal_data date NULL,
   cal_tempogasto time without time zone NULL,
-  cal_avistou character varying(100) NULL,
+  cal_avistou character varying(255) NULL,
   cal_subamostra boolean NULL,
   sa_id integer NULL,
   cal_npanos integer NULL, 
@@ -1241,9 +1242,10 @@ CREATE TABLE IF NOT EXISTS t_calao
   cal_altura double precision NULL,
   cal_malha double precision NULL,
   cal_numlances integer NULL,
-  cal_obs character varying(250) NULL,
+  cal_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   cal_motor boolean,
+  cal_destino character varying(255), 
   CONSTRAINT t_calao_pkey PRIMARY KEY (cal_id),
   CONSTRAINT fk_t_calao_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1274,14 +1276,15 @@ CREATE TABLE IF NOT EXISTS t_coletamanual
   cml_dhsaida timestamp without time zone NULL,
   cml_dhvolta timestamp without time zone NULL,
   cml_tempogasto time without time zone NULL,
-  cml_avistamento character varying(100) NULL,
+  cml_avistamento character varying(255) NULL,
   cml_subamostra boolean NULL,
   sa_id integer NULL,
-  cml_obs character varying(250) NULL,
+  cml_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   mre_id integer NOT NULL,
   cml_mreviva boolean NULL,
   cml_motor boolean NULL,
+  cml_destino character varying(255),
   CONSTRAINT t_coletamanual_pkey PRIMARY KEY (cml_id),
   CONSTRAINT fk_t_coletamanual_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1319,16 +1322,17 @@ CREATE TABLE IF NOT EXISTS t_emalhe
   em_oleo double precision NULL,
   em_alimento double precision NULL,
   em_gelo double precision NULL,
-  em_avistou character varying(100) NULL,
+  em_avistou character varying(255) NULL,
   em_subamostra boolean NULL,
   sa_id integer NULL,
   em_tamanho double precision NULL,
   em_altura double precision NULL,
   em_numpanos integer NULL,
   em_malha integer NULL,
-  em_obs character varying(250) NULL,
+  em_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   em_motor boolean NULL,
+  em_destino character varying(255),
   CONSTRAINT t_emalhe_pkey PRIMARY KEY (em_id),
   CONSTRAINT fk_t_emalhe_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1365,15 +1369,16 @@ CREATE TABLE IF NOT EXISTS t_grosseira
   grs_oleo double precision NULL,
   grs_alimento double precision NULL,
   grs_gelo double precision NULL,
-  grs_avistou character varying(100) NULL,
+  grs_avistou character varying(255) NULL,
   grs_numlinhas integer NULL,
   grs_numanzoisplinha integer NULL,
   grs_subamostra boolean NULL,
   sa_id integer NULL,
   isc_id integer NULL,
-  grs_obs character varying(250) NULL,
+  grs_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   grs_motor boolean NULL,
+  grs_destino character varying(255),
   CONSTRAINT t_grosseira_pkey PRIMARY KEY (grs_id),
   CONSTRAINT fk_t_grosseira_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1411,15 +1416,16 @@ CREATE TABLE IF NOT EXISTS t_jerere
   jre_dhsaida timestamp without time zone NULL,
   jre_dhvolta timestamp without time zone NULL,
   jre_tempogasto time without time zone NULL,
-  jre_avistamento character varying(100) NULL,
+  jre_avistamento character varying(255) NULL,
   jre_subamostra boolean NULL,
   sa_id integer NULL,
   jre_numarmadilhas integer NULL,
-  jre_obs character varying(250) NULL,
+  jre_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   mre_id integer NOT NULL,
   jre_mreviva boolean NULL,
   jre_motor boolean NULL,
+  jre_destino character varying(255),
   CONSTRAINT t_jerere_pkey PRIMARY KEY (jre_id),
   CONSTRAINT fk_t_jerere_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1461,7 +1467,7 @@ CREATE TABLE IF NOT EXISTS t_linha
   lin_oleo double precision NULL,
   lin_alimento double precision NULL,
   lin_gelo double precision NULL,
-  lin_avistou character varying(100) NULL,
+  lin_avistou character varying(255) NULL,
   lin_subamostra boolean NULL,
   sa_id integer NULL,
   lin_numlinhas integer NULL,
@@ -1469,7 +1475,8 @@ CREATE TABLE IF NOT EXISTS t_linha
   isc_id integer NOT NULL,
   mnt_id integer NOT NULL,
   lin_motor boolean NULL,
-  lin_obs character varying(250) NULL,
+  lin_obs character varying(255) NULL,
+  lin_destino character varying(255),
   CONSTRAINT t_linha_pkey PRIMARY KEY (lin_id),
   CONSTRAINT fk_t_linha_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1512,17 +1519,18 @@ CREATE TABLE IF NOT EXISTS t_linhafundo
   lf_oleo double precision NULL,
   lf_alimento double precision NULL, 
   lf_gelo double precision NULL,
-  lf_avistamento character varying(100) NULL,
+  lf_avistamento character varying(255) NULL,
   lf_subamostra boolean NULL,
   sa_id integer NULL,
   lf_numlinhas integer NULL,
   lf_numanzoisplinha integer NULL,
   isc_id integer NULL,
-  lf_obs character varying(250) NULL,
+  lf_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   mre_id integer NOT NULL,
   lf_mreviva boolean NULL,
   lf_motor boolean NULL,
+  lf_destino character varying(255),
   CONSTRAINT t_linhafundo_pkey PRIMARY KEY (lf_id),
   CONSTRAINT fk_t_linhafundo_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1560,15 +1568,16 @@ CREATE TABLE IF NOT EXISTS t_manzua
   man_dhsaida timestamp without time zone NULL,
   man_dhvolta timestamp without time zone NULL,
   man_tempogasto time without time zone NULL,
-  man_avistamento character varying(100) NULL,
+  man_avistamento character varying(255) NULL,
   man_subamostra boolean NULL,
   sa_id integer NULL,
   man_numarmadilhas integer NULL,
-  man_obs character varying(250) NULL,
+  man_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   mre_id integer NOT NULL,
   man_mreviva boolean NULL,
   man_motor boolean NULL,
+  man_destino character varying(255),
   CONSTRAINT t_manzua_pkey PRIMARY KEY (man_id),
   CONSTRAINT fk_t_manzua_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1602,14 +1611,15 @@ CREATE TABLE IF NOT EXISTS t_mergulho
   mer_dhsaida timestamp without time zone NULL,
   mer_dhvolta timestamp without time zone NULL,
   mer_tempogasto time without time zone NULL,
-  mer_avistou character varying(100) NULL,
+  mer_avistou character varying(255) NULL,
   mer_subamostra boolean NULL,
   sa_id integer NULL,
   mnt_id integer NOT NULL,
-  mer_obs character varying(250) NULL,
+  mer_obs character varying(255) NULL,
   mre_id integer NULL,
   mer_mreviva boolean NULL,
   mer_motor boolean NULL,
+  mer_destino character varying(255),
   CONSTRAINT t_mergulho_pkey PRIMARY KEY (mer_id),
   CONSTRAINT fk_t_mergulho_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1643,15 +1653,16 @@ CREATE TABLE IF NOT EXISTS t_ratoeira
   rat_dhsaida timestamp without time zone NULL,
   rat_dhvolta timestamp without time zone NULL,
   rat_tempogasto time without time zone NULL,
-  rat_avistamento character varying(100) NULL,
+  rat_avistamento character varying(255) NULL,
   rat_subamostra boolean NULL,
   sa_id integer NULL,
   rat_numarmadilhas integer NULL,
-  rat_obs character varying(250) NULL,
+  rat_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   mre_id integer NOT NULL,
   rat_mreviva boolean NULL,
   rat_motor boolean NULL,
+  rat_destino character varying(255),
   CONSTRAINT t_ratoeira_pkey PRIMARY KEY (rat_id),
   CONSTRAINT fk_t_ratoeira_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1685,15 +1696,16 @@ CREATE TABLE IF NOT EXISTS t_siripoia
   sir_dhsaida timestamp without time zone NULL,
   sir_dhvolta timestamp without time zone NULL,
   sir_tempogasto time without time zone NULL,
-  sir_avistamento character varying(100) NULL,
+  sir_avistamento character varying(255) NULL,
   sir_subamostra boolean NULL,
   sa_id integer NULL,
   sir_numarmadilhas integer NULL,
-  sir_obs character varying(250) NULL,
+  sir_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   mre_id integer NOT NULL,
   sir_mreviva boolean NULL,
   sir_motor boolean NULL,
+  sir_destino character varying(255),
   CONSTRAINT t_siripoia_pkey PRIMARY KEY (sir_id),
   CONSTRAINT fk_t_siripoia_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1726,7 +1738,7 @@ CREATE TABLE IF NOT EXISTS t_tarrafa
   tar_quantpescadores integer NULL,
   tar_data date NULL,
   tar_tempogasto time without time zone NULL,
-  tar_avistou character varying(100) NULL,
+  tar_avistou character varying(255) NULL,
   tar_subamostra boolean NULL,
   sa_id integer NULL,
   tar_roda double precision NULL,
@@ -1734,8 +1746,9 @@ CREATE TABLE IF NOT EXISTS t_tarrafa
   tar_malha double precision NULL,
   tar_numlances integer NULL,
   mnt_id integer NOT NULL,
-  tar_obs character varying(250) NULL,
+  tar_obs character varying(255) NULL,
   tar_motor boolean NULL,
+  tar_destino character varying(255),
   CONSTRAINT t_tarrafa_pkey PRIMARY KEY (tar_id),
   CONSTRAINT fk_t_tarrafa_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1770,17 +1783,18 @@ CREATE TABLE IF NOT EXISTS t_varapesca
   vp_oleo double precision NULL,
   vp_alimento double precision NULL,
   vp_gelo double precision NULL,
-  vp_avistamento character varying(100) NULL,
+  vp_avistamento character varying(255) NULL,
   vp_subamostra boolean NULL,
   sa_id integer NULL,
   vp_numanzoisplinha integer NULL,
   vp_numlinhas integer NULL,
   isc_id integer NULL,
-  vp_obs character varying(250) NULL,
+  vp_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   mre_id integer NOT NULL,
   vp_mreviva boolean NULL,
   vp_motor boolean NULL,
+  vp_destino character varying(255),
   CONSTRAINT t_varapesca_pkey PRIMARY KEY (vp_id),
   CONSTRAINT fk_t_varapesca_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -2514,6 +2528,9 @@ CREATE OR REPLACE VIEW v_entrevista_varapesca AS
   
   
   
+DROP TABLE T_CALAO_HAS_T_AVISTAMENTO;
+drop table T_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
+drop view V_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
   
   
   
@@ -2531,7 +2548,6 @@ SELECT AVS.AF_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_ARRASTOFUNDO_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-DROP TABLE T_CALAO_HAS_T_AVISTAMENTO;
   
 CREATE TABLE IF NOT EXISTS T_CALAO_HAS_T_AVISTAMENTO
 (
@@ -2542,10 +2558,28 @@ CREATE TABLE IF NOT EXISTS T_CALAO_HAS_T_AVISTAMENTO
 	CONSTRAINT FK_T_CALAO_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
   
+Drop table T_emalhe_HAS_T_AVISTAMENTO;
+
+CREATE TABLE IF NOT EXISTS T_EMALHE_HAS_T_AVISTAMENTO
+(
+	EM_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_EMALHE_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (EM_ID,  AVS_ID),
+	CONSTRAINT FK_T_EMALHE_HAS_T_AVISTAMENTO_CAL_ID FOREIGN KEY (EM_ID) REFERENCES T_EMALHE (EM_ID),
+	CONSTRAINT FK_T_EMALHE_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+
+drop table T_TARRAFA_HAS_T_AVISTAMENTO;
   
-  
-  
-  
+ CREATE TABLE IF NOT EXISTS T_TARRAFA_HAS_T_AVISTAMENTO
+(
+	TAR_ID INTEGER,
+	AVS_ID INTEGER,
+	CONSTRAINT T_TARRAFA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (TAR_ID,  AVS_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (TAR_ID) REFERENCES T_TARRAFA (TAR_ID),
+	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
+);
+ 
   
   
   
