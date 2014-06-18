@@ -49,7 +49,6 @@ class Application_Model_Emalhe
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
         
         
         $tamanho = $request['tamanho'];
@@ -82,9 +81,6 @@ class Application_Model_Emalhe
         if(empty($gelo)){
             $gelo = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
         
         $timestampLancamento = $request['dataLancamento']." ".$request['horaLancamento'];
         $timestampRecolhimento = $request['dataRecolhimento']." ".$request['horaRecolhimento'];
@@ -102,7 +98,6 @@ class Application_Model_Emalhe
             'em_oleo' => $oleo,
             'em_alimento' => $alimento,
             'em_gelo' => $gelo,
-            'em_avistou' => $avistou,
             'em_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'em_tamanho' => $tamanho,

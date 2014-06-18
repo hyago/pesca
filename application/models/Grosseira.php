@@ -51,7 +51,7 @@ private $dbTableGrosseira;
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
+       
         
         $numLinhas = $request['numLinhas'];
         $numAnzois = $request['numAnzois'];
@@ -69,9 +69,7 @@ private $dbTableGrosseira;
         if(empty($oleo)){
             $oleo = NULL;
         }
-        if(empty($alimento)){
-            $alimento = NULL;
-        }
+       
         if(empty($gelo)){
             $gelo = NULL;
         }
@@ -94,7 +92,6 @@ private $dbTableGrosseira;
             'grs_gelo' => $gelo,
             'grs_numlinhas' => $numLinhas,
             'grs_numanzoisplinha' => $numAnzois,
-            'grs_avistou' => $avistou,
             'grs_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'grs_obs' => $request['observacao'],

@@ -74,7 +74,7 @@ class EmalheController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_EmalheHasPesqueiro();
+        //$avistamentoEmalhe = new Application_Model_DbTable_VEmalheHasAvistamento();
         $entrevista = $this->modelEmalhe->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -82,23 +82,36 @@ class EmalheController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
+        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        
         
         $idEntrevista = $this->_getParam('id');
+        $datahoraSaida[] = split(" ",$entrevista['em_dhlancamento']);
+        $datahoraVolta[] = split(" ",$entrevista['em_dhrecolhimento']);
         
         $vEmalhe = $this->modelEmalhe->selectEmalheHasPesqueiro('em_id='.$idEntrevista);
-        
+
         $vEspecieCapturadas = $this->modelEmalhe->selectEmalheHasEspCapturadas('em_id='.$idEntrevista);
         
+        //$vArrastoAvistamento = $this->modelEmalhe->selectEmalheHasAvistamento('em_id='.$idEntrevista);
+        
+        //$this->view->assign('avistamentos', $avistamentos);
+        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vEmalhe', $vEmalhe);
         $this->view->assign("entrevista", $entrevista);
+        $this->view->assign('dataSaida', $datahoraSaida[0][0]);
+        $this->view->assign('horaSaida', $datahoraSaida[0][1]);
+        $this->view->assign('dataVolta', $datahoraVolta[0][0]);
+        $this->view->assign('horaVolta', $datahoraVolta[0][1]);
+        
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+
     }
     public function criarAction(){
         $idEmalhe = $this->modelEmalhe->insert($this->_getAllParams());
