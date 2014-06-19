@@ -46,7 +46,6 @@ class Application_Model_LinhaFundo
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
         
         $numLinhas = $request['numLinhas'];
         $numAnzois = $request['numAnzois'];
@@ -69,9 +68,7 @@ class Application_Model_LinhaFundo
         if(empty($gelo)){
             $gelo = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
+        
         
         $dadosLinhaFundo = array(
             'lf_embarcada' => $request['embarcada'],
@@ -87,7 +84,6 @@ class Application_Model_LinhaFundo
             'lf_oleo' => $oleo,
             'lf_alimento' => $alimento,
             'lf_gelo' => $gelo,
-            'lf_avistamento' => $avistou,
             'lf_subamostra' => $request['subamostra'],
             'lf_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,

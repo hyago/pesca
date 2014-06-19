@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/LinhaFundoController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ManzuaController.php</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/GrosseiraController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/emalhe/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Manzua.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/manzua/editar.phtml</file>
         </group>
     </open-files>
 </project-private>

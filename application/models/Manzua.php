@@ -58,7 +58,7 @@ class Application_Model_Manzua
             'man_quantpescadores' => $request['numPescadores'],
             'man_dhvolta' => $timestampVolta,
             'man_dhsaida' => $timestampSaida, 
-            'man_avistamento' => $request['avistamento'],
+            
             'man_subamostra' => $request['subamostra'],
             'man_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,

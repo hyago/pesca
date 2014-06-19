@@ -51,7 +51,6 @@ private $dbTableLinha;
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
         
         $numLinhas = $request['numLinhas'];
         $numAnzois = $request['numAnzois'];
@@ -75,9 +74,6 @@ private $dbTableLinha;
         if(empty($gelo)){
             $gelo = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
         
         
         
@@ -96,7 +92,6 @@ private $dbTableLinha;
             'lin_gelo' => $gelo,
             'lin_numlinhas' => $numLinhas,
             'lin_numanzoisplinha' => $numAnzois,
-            'lin_avistou' => $avistou,
             'lin_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'lin_obs' => $request['observacao'],
