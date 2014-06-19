@@ -73,7 +73,7 @@
                     </select><br />
                 </div>
                 <div id="form-esq">
-                    <label>Qtd de Pescadores:</label>
+                    <label>Quant. de Pescadores:</label>
                     <input type="text"  name="NumPescadores" placeholder="Quantidade de Pescadores "value="<?=$this->entrevista['cal_quantpescadores']?>"/><br />
                 </div>
             </div>
@@ -116,7 +116,7 @@
                 
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
-                    <input type="checkbox" name="subamostra" /><br />
+                    <input type="checkbox" name="subamostra" <?php if($this->entrevista['cal_subamostra'] === true){ echo 'checked';} else{ echo '';} ?>/><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Observacao:</label>

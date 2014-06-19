@@ -82,7 +82,7 @@ class VaraPescaController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_VaraPescaHasPesqueiro();
+         //$avistamentoVaraPesca = new Application_Model_DbTable_VVaraPescaHasAvistamento();
         $entrevista = $this->modelVaraPesca->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -90,19 +90,31 @@ class VaraPescaController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        
-        
+        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $iscas = $this->modelIsca->select(null, 'isc_tipo');
+        $mare = $this->modelMare->select();
         $idEntrevista = $this->_getParam('id');
+        $datahoraSaida[] = split(" ",$entrevista['vp_dhsaida']);
+        $datahoraVolta[] = split(" ",$entrevista['vp_dhvolta']);
         
         $vVaraPesca = $this->modelVaraPesca->selectVaraPescaHasPesqueiro('vp_id='.$idEntrevista);
-        
+
         $vEspecieCapturadas = $this->modelVaraPesca->selectVaraPescaHasEspCapturadas('vp_id='.$idEntrevista);
         
+        //$vArrastoAvistamento = $this->modelVaraPesca->selectVaraPescaHasAvistamento('vp_id='.$idEntrevista);
+        
+        //$this->view->assign('avistamentos', $avistamentos);
+        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vVaraPesca', $vVaraPesca);
         $this->view->assign("entrevista", $entrevista);
+        $this->view->assign("iscas", $iscas);
+        $this->view->assign("mare", $mare);
+        $this->view->assign('dataSaida', $datahoraSaida[0][0]);
+        $this->view->assign('horaSaida', $datahoraSaida[0][1]);
+        $this->view->assign('dataVolta', $datahoraVolta[0][0]);
+        $this->view->assign('horaVolta', $datahoraVolta[0][1]);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);

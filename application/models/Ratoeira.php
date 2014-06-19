@@ -58,7 +58,6 @@ class Application_Model_Ratoeira
             'rat_quantpescadores' => $request['numPescadores'],
             'rat_dhvolta' => $timestampVolta,
             'rat_dhsaida' => $timestampSaida, 
-            'rat_avistamento' => $request['avistamento'],
             'rat_subamostra' => $request['subamostra'],
             'rat_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,

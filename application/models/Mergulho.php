@@ -61,13 +61,10 @@ private $dbTableMergulho;
             'mer_dhsaida' => $timestampSaida,
             'mer_dhvolta' => $timestampVolta,
             'mer_tempogasto' => $request['tempoGasto'],
-            'mer_avistou' => $request['avistamento'],
             'mer_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'mer_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
-            'mer_distapesqueiro' => $request['distanciaPesqueiro'],
-            'mer_tempoatepesqueiro' => $request['tempoPesqueiro'],
             'mre_id' => $request['mare'],
             'mer_mreviva' => $request['mareviva']
         );
@@ -94,9 +91,7 @@ private $dbTableMergulho;
             'mer_dhsaida' => $timestampSaida,
             'mer_dhvolta' => $timestampVolta,
             'mer_tempogasto' => $request['tempoGasto'],
-            'mer_avistou' => $request['avistamento'],
             'mer_subamostra' => $request['subamostra'],
-            'sa_id' => $idSubamostra,
             'mer_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
             'mer_distapesqueiro' => $request['distanciaPesqueiro'],

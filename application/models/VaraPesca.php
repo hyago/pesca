@@ -47,7 +47,6 @@ class Application_Model_VaraPesca
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
         
         $numLinhas = $request['numLinhas'];
         $numAnzois = $request['numAnzois'];
@@ -71,9 +70,6 @@ class Application_Model_VaraPesca
         if(empty($gelo)){
             $gelo = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
         
         $dadosVaraPesca = array(
             'vp_embarcada' => $request['embarcada'],
@@ -89,7 +85,6 @@ class Application_Model_VaraPesca
             'vp_oleo' => $oleo,
             'vp_alimento' => $alimento,
             'vp_gelo' => $gelo,
-            'vp_avistamento' => $avistou,
             'vp_subamostra' => $request['subamostra'],
             'vp_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,

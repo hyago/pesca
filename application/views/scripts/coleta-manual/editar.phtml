@@ -72,7 +72,7 @@
                     </select><br />
                 </div>
                 <div id="form-esq">
-                    <label>Qtd de Pescadores:</label>
+                    <label>Quant. de Pescadores:</label>
                     <input type="text"  name="numPescadores" placeholder="Quantidade de Pescadores " value="<?=$this->entrevista['cml_quantpescadores']?>"/><br />
                 </div>
             </div>
@@ -126,18 +126,19 @@
                     <input type="checkbox" name="mareviva"  <?php if($this->entrevista['cml_mreviva'] === true){ echo 'checked';} else{ echo '';}?>>
                 </div>   
             </div><br/>
+            
             <div id="esquerda">
                 <legend><h4>Outros dados:</h4></legend>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
-                    <input type="checkbox" name="subamostra" /><br />
+                    <input type="checkbox" name="subamostra" <?php if($this->entrevista['cml_subamostra'] === true){ echo 'checked';} else{ echo '';}?>/><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observação" value="<?=$this->entrevista['cml_obs']?>"/><br />
                 </div>
                 <div id="Submit">
-                    <input type="submit" value="Enviar"/>
+                    <input type="submit" value="Salvar Alterações"/>
                 </div>
             </div>
         </fieldset> 

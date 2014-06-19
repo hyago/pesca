@@ -47,7 +47,6 @@ class Application_Model_Tarrafa
         $altura = $request['altura'];
         $numLances = $request['numLances'];
         $malha = $request['malha'];
-        $avistou = $request['avistamento'];
         
         if(empty($roda)){
             $roda = NULL;
@@ -59,9 +58,7 @@ class Application_Model_Tarrafa
         if(empty($numLances)){
             $numLances = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
+        
         if(empty($malha)){
             $malha = NULL;
         }
@@ -80,7 +77,6 @@ class Application_Model_Tarrafa
             'tar_altura' => $altura,
             'tar_malha' => $malha,
             'tar_numlances' => $numLances,
-            'tar_avistou' => $avistou,
             'tar_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'tar_obs' => $request['observacao'],

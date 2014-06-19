@@ -58,7 +58,6 @@ class Application_Model_Siripoia
             'sir_dhvolta' => $timestampVolta,
             'sir_dhsaida' => $timestampSaida, 
             'sir_tempogasto' => $request['tempoGasto'],
-            'sir_avistamento' => $request['avistamento'],
             'sir_subamostra' => $request['subamostra'],
             'sir_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
