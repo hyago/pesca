@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/VaraPescaController.php</file>
-            <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/VaraPesca.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/LinhaFundoController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/vara-pesca/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/vara-pesca/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha-fundo/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/SiripoiaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Mergulho.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Manzua.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/TarrafaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ratoeira/editar.phtml</file>
         </group>
     </open-files>
 </project-private>

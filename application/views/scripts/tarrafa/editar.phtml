@@ -122,7 +122,10 @@
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observação" value="<?=$this->entrevista['tar_obs']?>"/><br />
                 </div>
-                
+                <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['tar_id'] ?>"/><br />
+                <div id="Submit">
+                    <input type="submit" value="Salvar Alterações"/>
+                </div>
             </div>
         </fieldset>    
     </form>
@@ -130,6 +133,10 @@
 <br/>
 <br/>
 <form id="formulario" >
+    <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['tar_id'] ?>"/><br />
+        <input type="hidden" name="id_monitoramento" placeholder="ID"  value="<?= $this->entrevista['mnt_id'] ?>" /><br />
+        <input type="hidden" name="id_fichaDiaria" placeholder="ID"  value="<?= $this->monitoramento['fd_id'] ?>" /><br />
+       
 <fieldset class="noEditable"><legend>Pesqueiro:</legend>
     <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
             <div id="base">

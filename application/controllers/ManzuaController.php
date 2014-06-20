@@ -123,6 +123,12 @@ class ManzuaController extends Zend_Controller_Action
         
         $this->_redirect('manzua/editar/id/'.$idManzua);
     }
+    public function atualizarAction(){
+        $idManzua = $this->_getParam('id_entrevista');
+        $this->modelManzua->update($this->_getAllParams());
+        
+        $this->_redirect('manzua/editar/id/'.$idManzua);
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

@@ -28,9 +28,6 @@ class Application_Model_Calao
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableCalao = new Application_Model_DbTable_Calao();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
         
         if($request['subamostra']==true){
         $dadosSubamostra = array(
@@ -48,7 +45,7 @@ class Application_Model_Calao
         $altura = $request['altura'];
         $numLances = $request['numLances'];
         $malha = $request['malha'];
-        $avistou = $request['avistamento'];
+       
         
         if(empty($tamanho)){
             $tamanho = NULL;
@@ -60,9 +57,7 @@ class Application_Model_Calao
         if(empty($numLances)){
             $numLances = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
+        
         if(empty($malha)){
             $malha = NULL;
         }
@@ -80,7 +75,6 @@ class Application_Model_Calao
             'cal_altura' => $altura,
             'cal_malha' => $malha,
             'cal_numlances' => $numLances,
-            'cal_avistou' => $request['avistamento'],
             'cal_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'cal_obs' => $request['observacao'],
@@ -93,11 +87,41 @@ class Application_Model_Calao
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableCalao = new Application_Model_DbTable_Calao();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['data']
+        );
         
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        
+        $tamanho = $request['tamanho'];
+        $altura = $request['altura'];
+        $numLances = $request['numLances'];
+        $malha = $request['malha'];
+       
+        
+        if(empty($tamanho)){
+            $tamanho = NULL;
+        }
+        if(empty($altura)){
+            $altura = NULL;
+        }
+        
+        if(empty($numLances)){
+            $numLances = NULL;
+        }
+        
+        if(empty($malha)){
+            $malha = NULL;
+        }
         
         $dadosCalao = array(
             'cal_embarcada' => $request['embarcada'],
@@ -108,20 +132,18 @@ class Application_Model_Calao
             'cal_quantpescadores' => $request['NumPescadores'],
             'cal_data' => $request['data'],
             'cal_tempogasto' => $request['tempoGasto'], 
-            'cal_tamanho' => $request['tamanho'],
-            'cal_altura' => $request['altura'],
-            'cal_malha' => $request['malha'],
-            'cal_numlances' => $request['numLances'],
-            'cal_avistou' => $request['avistamento'],
+            'cal_tamanho' => $tamanho,
+            'cal_altura' => $altura,
+            'cal_malha' => $malha,
+            'cal_numlances' => $numLances,
             'cal_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
-            'cal_obs' => $request['observacao'],
-            'mnt_id' => $request['id_monitoramento']
+            'cal_obs' => $request['observacao']
         );
  
         
         $whereCalao= $this->dbTableCalao->getAdapter()
-                ->quoteInto('"cal_id" = ?', $request[0]);
+                ->quoteInto('"cal_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableCalao->update($dadosCalao, $whereCalao);
@@ -193,7 +215,9 @@ class Application_Model_Calao
     public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
     {
         $this->dbTableTCalaoHasEspCapturada = new Application_Model_DbTable_CalaoHasEspecieCapturada();
-        
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

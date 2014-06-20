@@ -126,6 +126,12 @@ class SiripoiaController extends Zend_Controller_Action
         
         $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
+    public function atualizarAction(){
+        $idSiripoia = $this->_getParam('id_entrevista');
+        $this->modelSiripoia->update($this->_getAllParams());
+        
+        $this->_redirect('siripoia/editar/id/'.$idSiripoia);
+    }
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

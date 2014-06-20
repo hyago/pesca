@@ -121,12 +121,16 @@ private $usuario;
 
     }
     public function criarAction(){
-        $this->modelGrosseira->insert($this->_getAllParams());
-        $id = $this->modelGrosseira->selectId();
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-
-        $value = array_shift($id);
-        $this->_redirector->gotoSimple('editar', 'grosseira', null, array('id' => $value));
+        $idGrosseira = $this->modelGrosseira->insert($this->_getAllParams());
+        
+        
+        $this->_redirect('grosseira/editar/id/'.$idGrosseira);
+    }
+    public function atualizarAction(){
+        $idGrosseira = $this->_getParam('id_entrevista');
+        $this->modelGrosseira->update($this->_getAllParams());
+        
+        $this->_redirect('grosseira/editar/id/'.$idGrosseira);
     }
     
     public function insertpesqueiroAction(){

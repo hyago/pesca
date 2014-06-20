@@ -50,6 +50,9 @@ private $dbTableMergulho;
         
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         
         $dadosMergulho = array(
             'mer_embarcada' => $request['embarcada'],
@@ -75,11 +78,35 @@ private $dbTableMergulho;
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableMergulho = new Application_Model_DbTable_Mergulho();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        if($request['subamostra']==true){
+            $dadosSubamostra = array(
+                'sa_pescador' => $request['pescadorEntrevistado'],
+                'sa_datachegada' => $request['data']
+            );
         
+            $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        
+        $mareViva = $request['mareviva'];
+        if($mareViva=='1'){
+            $mareViva = true;
+        }
+        else {
+            $mareViva = false;
+        }
+        
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         
         $dadosMergulho = array(
             'mer_embarcada' => $request['embarcada'],
@@ -92,17 +119,15 @@ private $dbTableMergulho;
             'mer_dhvolta' => $timestampVolta,
             'mer_tempogasto' => $request['tempoGasto'],
             'mer_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
             'mer_obs' => $request['observacao'],
-            'mnt_id' => $request['id_monitoramento'],
-            'mer_distapesqueiro' => $request['distanciaPesqueiro'],
-            'mer_tempoatepesqueiro' => $request['tempoPesqueiro'],
             'mre_id' => $request['mare'],
             'mer_mreviva' => $request['mareviva']
         );
  
         
         $whereMergulho= $this->dbTableMergulho->getAdapter()
-                ->quoteInto('"mer_id" = ?', $request[0]);
+                ->quoteInto('"mer_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableMergulho->update($dadosMergulho, $whereMergulho);
@@ -146,6 +171,9 @@ private $dbTableMergulho;
         if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
         }
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro = NULL;
+        }
         $dadosPesqueiro = array(
             'mer_id' => $idEntrevista,
             'paf_id' => $pesqueiro,
@@ -181,6 +209,9 @@ private $dbTableMergulho;
     {
         $this->dbTableTMergulhoHasEspCapturada = new Application_Model_DbTable_MergulhoHasEspecieCapturada();
         
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

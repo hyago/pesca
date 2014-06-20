@@ -128,6 +128,12 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
     }
 
+    public function atualizarAction(){
+        $idLinhaFundo = $this->_getParam('id_entrevista');
+        $this->modelLinhaFundo->update($this->_getAllParams());
+        
+        $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

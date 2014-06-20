@@ -129,7 +129,12 @@ class VaraPescaController extends Zend_Controller_Action
         
         $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
     }
-    
+    public function atualizarAction(){
+        $idVaraPesca = $this->_getParam('id_entrevista');
+        $this->modelVaraPesca->update($this->_getAllParams());
+        
+        $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

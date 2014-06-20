@@ -115,6 +115,12 @@ private $usuario;
         
         $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
     }
+    public function atualizarAction(){
+        $idTarrafa = $this->_getParam('id_entrevista');
+        $this->modelTarrafa->update($this->_getAllParams());
+        
+        $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

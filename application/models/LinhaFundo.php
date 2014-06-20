@@ -31,11 +31,15 @@ class Application_Model_LinhaFundo
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
             'sa_datachegada' => $request['dataVolta']
         );
+        
         
        $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
         }
@@ -101,10 +105,53 @@ class Application_Model_LinhaFundo
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableLinhaFundo = new Application_Model_DbTable_LinhaFundo();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+        
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+        
+        $numLinhas = $request['numLinhas'];
+        $numAnzois = $request['numAnzois'];
+        
+        if(empty($numLinhas)){
+            $numLinhas = NULL;
+        }
+        if(empty($numAnzois)){
+            $numAnzois = NULL;
+        }
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
         
         
         $dadosLinhaFundo = array(
@@ -117,25 +164,21 @@ class Application_Model_LinhaFundo
             'lf_dhvolta' => $timestampVolta,
             'lf_dhsaida' => $timestampSaida, 
             'lf_tempogasto' => $request['tempoGasto'],
-            'lf_diesel' => $request['diesel'],
-            'lf_oleo' => $request['oleo'],
-            'lf_alimento' => $request['alimento'],
-            'lf_gelo' => $request['gelo'],
-            'lf_avistamento' => $request['avistamento'],
+            'lf_diesel' => $diesel,
+            'lf_oleo' => $oleo,
+            'lf_alimento' => $alimento,
+            'lf_gelo' => $gelo,
             'lf_subamostra' => $request['subamostra'],
             'lf_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
-            'lf_numanzoisplinha' => $request['numAnzois'],
-            'lf_numlinhas' => $request['numLinhas'],
+            'lf_numanzoisplinha' => $numAnzois,
+            'lf_numlinhas' => $numLinhas,
             'isc_id' => $request['isca'],
-            'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'lf_mreviva' => $request['mareviva']
         );
- 
-        
         $whereLinhaFundo= $this->dbTableLinhaFundo->getAdapter()
-                ->quoteInto('"lf_id" = ?', $request[0]);
+                ->quoteInto('"lf_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableLinhaFundo->update($dadosLinhaFundo, $whereLinhaFundo);
@@ -177,7 +220,9 @@ class Application_Model_LinhaFundo
         if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
         }
-        
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro = NULL;
+        }
         $dadosPesqueiro = array(
             'lf_id' => $idEntrevista,
             'paf_id' => $pesqueiro,
@@ -213,7 +258,9 @@ class Application_Model_LinhaFundo
     public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
     {
         $this->dbTableTLinhaFundoHasEspCapturada = new Application_Model_DbTable_LinhaFundoHasEspecieCapturada();
-        
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

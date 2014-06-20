@@ -31,6 +31,10 @@ class Application_Model_Siripoia
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
+        
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
@@ -73,11 +77,31 @@ class Application_Model_Siripoia
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableSiripoia = new Application_Model_DbTable_Siripoia();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        $numArmadilhas = $request['numArmadilhas'];
+        
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         $dadosSiripoia = array(
             'sir_embarcada' => $request['embarcada'],
@@ -89,19 +113,17 @@ class Application_Model_Siripoia
             'sir_dhvolta' => $timestampVolta,
             'sir_dhsaida' => $timestampSaida, 
             'sir_tempogasto' => $request['tempoGasto'],
-            'sir_avistamento' => $request['avistamento'],
             'sir_subamostra' => $request['subamostra'],
             'sir_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
-            'sir_numarmadilhas' => $request['numArmadilhas'],
-            'mnt_id' => $request['id_monitoramento'],
+            'sir_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'sir_mreviva' => $request['mareviva']
         );
  
         
         $whereSiripoia= $this->dbTableSiripoia->getAdapter()
-                ->quoteInto('"sir_id" = ?', $request[0]);
+                ->quoteInto('"sir_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableSiripoia->update($dadosSiripoia, $whereSiripoia);
@@ -139,8 +161,11 @@ class Application_Model_Siripoia
     public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
     {
         $this->dbTableTSiripoiaHasPesqueiro = new Application_Model_DbTable_SiripoiaHasPesqueiro();
-        if(empty($distAPesqueiro)){
+       if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
+        }
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro = NULL;
         }
         
         $dadosPesqueiro = array(
@@ -178,6 +203,9 @@ class Application_Model_Siripoia
     {
         $this->dbTableTSiripoiaHasEspCapturada = new Application_Model_DbTable_SiripoiaHasEspecieCapturada();
         
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

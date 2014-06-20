@@ -137,14 +137,20 @@
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observação" value="<?=$this->entrevista['cml_obs']?>"/><br />
                 </div>
+                <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['cml_id'] ?>"/><br />
                 <div id="Submit">
                     <input type="submit" value="Salvar Alterações"/>
                 </div>
             </div>
         </fieldset> 
     </form> 
-</div>    
-        <fieldset class="noEditable"><legend>Pesqueiro:</legend>
+</div>
+<form>
+    <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['cml_id'] ?>"/><br />
+        <input type="hidden" name="id_monitoramento" placeholder="ID"  value="<?= $this->entrevista['mnt_id'] ?>" /><br />
+        <input type="hidden" name="id_fichaDiaria" placeholder="ID"  value="<?= $this->monitoramento['fd_id'] ?>" /><br />
+                
+    <fieldset class="noEditable"><legend>Pesqueiro:</legend>
                 <fieldset class="noEditable"><legend>Pesqueiro e tempo até o pesqueiro:</legend>
                     <div id="base">
                         <input onclick="jsInsertPesqueiroWithTimeAndRange(this.form, '<?= $this->url(array("controller" => "coleta-manual", "action" => "insertpesqueiro"), null, true) ?>', '<?= $this->entrevista['cml_id'] ?>')" type="button" value="Add row" />

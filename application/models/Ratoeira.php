@@ -32,6 +32,9 @@ class Application_Model_Ratoeira
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
@@ -74,11 +77,31 @@ class Application_Model_Ratoeira
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableRatoeira = new Application_Model_DbTable_Ratoeira();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        $numArmadilhas = $request['numArmadilhas'];
+        
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         $dadosRatoeira = array(
             'rat_embarcada' => $request['embarcada'],
@@ -89,20 +112,18 @@ class Application_Model_Ratoeira
             'rat_quantpescadores' => $request['numPescadores'],
             'rat_dhvolta' => $timestampVolta,
             'rat_dhsaida' => $timestampSaida, 
-            'rat_avistamento' => $request['avistamento'],
             'rat_subamostra' => $request['subamostra'],
             'rat_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
             'rat_tempogasto' => $request['tempoGasto'],
-            'rat_numarmadilhas' => $request['numArmadilhas'],
-            'mnt_id' => $request['id_monitoramento'],
+            'rat_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'rat_mreviva' => $request['mareviva']
         );
  
         
         $whereRatoeira= $this->dbTableRatoeira->getAdapter()
-                ->quoteInto('"rat_id" = ?', $request[0]);
+                ->quoteInto('"rat_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableRatoeira->update($dadosRatoeira, $whereRatoeira);
@@ -140,10 +161,14 @@ class Application_Model_Ratoeira
     public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro, $distAPesqueiro)
     {
         $this->dbTableTRatoeiraHasPesqueiro = new Application_Model_DbTable_RatoeiraHasPesqueiro();
+        
         if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
         }
-        
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro = NULL;
+        }
+       
         $dadosPesqueiro = array(
             'rat_id' => $idEntrevista,
             'paf_id' => $pesqueiro,
@@ -178,7 +203,9 @@ class Application_Model_Ratoeira
     public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
     {
         $this->dbTableTRatoeiraHasEspCapturada = new Application_Model_DbTable_RatoeiraHasEspecieCapturada();
-        
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

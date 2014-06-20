@@ -30,12 +30,13 @@ class Application_Model_ArrastoFundo
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
         
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         
         if($request['subamostra']==true){
         $dadosSubamostra = array(
@@ -91,10 +92,27 @@ class Application_Model_ArrastoFundo
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
         
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
+        
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
         $diesel = $request['diesel'];
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
@@ -125,8 +143,10 @@ class Application_Model_ArrastoFundo
             'af_diesel' => $diesel,
             'af_oleo' => $oleo,
             'af_alimento' => $alimento,
-            'af_gelo' => $gelo,
-            'af_obs' => $request['observacao'],
+            'af_gelo' => $oleo,
+            'af_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
+            'af_obs' => $request['observacao']
         );
  
         
@@ -206,14 +226,17 @@ class Application_Model_ArrastoFundo
     {
         $this->dbTableTArrastoHasEspCapturada = new Application_Model_DbTable_ArrastoHasEspecieCapturada();
         
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }
         if(empty($peso)){
             $peso = NULL;
         }
-        if(empty($preco)){
-            $preco = NULL;
+        if(empty($precokg)){
+            $precokg = NULL;
         }
         $dadosEspecie = array(
             'af_id' => $idEntrevista,

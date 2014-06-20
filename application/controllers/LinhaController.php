@@ -123,6 +123,12 @@ class LinhaController extends Zend_Controller_Action
         
         $this->_redirect('linha/editar/id/'.$idLinha);
     }
+    public function atualizarAction(){
+        $idLinha = $this->_getParam('id_entrevista');
+        $this->modelLinha->update($this->_getAllParams());
+        
+        $this->_redirect('linha/editar/id/'.$idLinha);
+    }
     
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

@@ -4,7 +4,7 @@
 </div>
 
 <div id="esquerda-entrevista">
-    <form action="<?= $this->url(array("controller" => "jerere", "action" => "criar"), null, true) ?>">
+    <form action="<?= $this->url(array("controller" => "jerere", "action" => "atualizar"), null, true) ?>">
         <fieldset id="Desembarque">
             <div id="esquerda">
                 <div id="form-esq">
@@ -145,12 +145,19 @@
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observacao"value="<?=$this->entrevista['jre_obs']?>" /><br />
                 </div>
+                <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['jre_id'] ?>"/><br/>
                 <div id="Submit">
                     <input type="submit" value="Salvar Alterações"/>
                 </div>
             </div>
-
-        </fieldset>
+    
+      </fieldset>
+ </form>
+    <form>
+        <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['jre_id'] ?>"/><br />
+        <input type="hidden" name="id_monitoramento" placeholder="ID"  value="<?= $this->entrevista['mnt_id'] ?>" /><br />
+        <input type="hidden" name="id_fichaDiaria" placeholder="ID"  value="<?= $this->monitoramento['fd_id'] ?>" /><br />
+       
         <fieldset class="noEditable"><legend>Pesqueiro:</legend>
                 <fieldset class="noEditable"><legend>Pesqueiro e tempo até o pesqueiro:</legend>
                     <div id="base">

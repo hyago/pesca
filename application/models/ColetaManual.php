@@ -28,7 +28,6 @@ private $dbTableColetaManual;
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableColetaManual = new Application_Model_DbTable_ColetaManual();
-        $this->dbTableMare = new Application_Model_DbTable_Mare();
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
@@ -44,6 +43,9 @@ private $dbTableColetaManual;
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         $dadosColetaManual = array(
             'cml_embarcada' => $request['embarcada'],
             'cml_motor'=> $request['motor'],
@@ -70,10 +72,8 @@ private $dbTableColetaManual;
     {
         $this->dbTableColetaManual = new Application_Model_DbTable_ColetaManual();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
-        
-        
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
         $dadosColetaManual = array(
             'cml_embarcada' => $request['embarcada'],
@@ -86,16 +86,14 @@ private $dbTableColetaManual;
             'cml_dhvolta' => $timestampVolta,
             'cml_tempogasto' => $request['tempoGasto'],
             'cml_subamostra' => $request['subamostra'],
-            'sa_id' => $idSubamostra,
             'cml_obs' => $request['observacao'],
-            'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'cml_mreviva' => $request['mareviva']
         );
  
         
         $whereColetaManual= $this->dbTableColetaManual->getAdapter()
-                ->quoteInto('"cml_id" = ?', $request[0]);
+                ->quoteInto('"cml_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableColetaManual->update($dadosColetaManual, $whereColetaManual);
@@ -137,7 +135,9 @@ private $dbTableColetaManual;
         if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
         }
-        
+        if($tempoAPesqueiro == ""){
+            $tempoAPesqueiro = NULL;
+        }
         $dadosPesqueiro = array(
             'cml_id' => $idEntrevista,
             'paf_id' => $pesqueiro,
@@ -174,11 +174,14 @@ private $dbTableColetaManual;
     {
         $this->dbTableTColetaManualHasEspCapturada = new Application_Model_DbTable_ColetaManualHasEspecieCapturada();
         
-        if(empty($quantidade)){
-            $quantidade = NULL;
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
         }
-        if(empty($peso)){
+        else if(empty($peso)){
             $peso = NULL;
+        }
+        else if(empty($quantidade)){
+            $quantidade = NULL;
         }
         if(empty($precokg)){
             $precokg = NULL;

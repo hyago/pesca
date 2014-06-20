@@ -38,8 +38,8 @@ class EmalheController extends Zend_Controller_Action
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
@@ -77,8 +77,8 @@ class EmalheController extends Zend_Controller_Action
         //$avistamentoEmalhe = new Application_Model_DbTable_VEmalheHasAvistamento();
         $entrevista = $this->modelEmalhe->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -116,6 +116,12 @@ class EmalheController extends Zend_Controller_Action
     public function criarAction(){
         $idEmalhe = $this->modelEmalhe->insert($this->_getAllParams());
         
+        
+        $this->_redirect('emalhe/editar/id/'.$idEmalhe);
+    }
+    public function atualizarAction(){
+        $idEmalhe = $this->_getParam('id_entrevista');
+        $this->modelEmalhe->update($this->_getAllParams());
         
         $this->_redirect('emalhe/editar/id/'.$idEmalhe);
     }

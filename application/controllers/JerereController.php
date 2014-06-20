@@ -126,6 +126,13 @@ private $usuario;
         
         $this->_redirect('jerere/editar/id/'.$idJerere);
     }
+    public function atualizarAction(){
+        $idJerere = $this->_getParam('id_entrevista');
+        $this->modelJerere->update($this->_getAllParams());
+        
+        $this->_redirect('jerere/editar/id/'.$idJerere);
+    }
+    
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

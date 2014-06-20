@@ -113,6 +113,12 @@ private $usuario;
         
         $this->_redirect('calao/editar/id/'.$idCalao);
     }
+    public function atualizarAction(){
+        $idCalao = $this->_getParam('id_entrevista');
+        $this->modelCalao->update($this->_getAllParams());
+        
+        $this->_redirect('calao/editar/id/'.$idCalao);
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

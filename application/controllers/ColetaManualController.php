@@ -39,10 +39,8 @@ class ColetaManualController extends Zend_Controller_Action
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $mare = $this->modelMare->select();
         
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
@@ -54,8 +52,6 @@ class ColetaManualController extends Zend_Controller_Action
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
-        $this->view->assign('pesqueiros',$pesqueiros);
-        $this->view->assign('especies',$especies);
     
     }
 
@@ -83,8 +79,8 @@ class ColetaManualController extends Zend_Controller_Action
         //$avistamentoColetaManual = new Application_Model_DbTable_VColetaManualHasAvistamento();
         $entrevista = $this->modelColetaManual->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -127,7 +123,12 @@ class ColetaManualController extends Zend_Controller_Action
         
         $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
     }
-    
+    public function atualizarAction(){
+        $idColetaManual = $this->_getParam('id_entrevista');
+        $this->modelColetaManual->update($this->_getAllParams());
+        
+        $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

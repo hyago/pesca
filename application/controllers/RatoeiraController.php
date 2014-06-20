@@ -125,6 +125,12 @@ private $usuario;
         
         $this->_redirect('ratoeira/editar/id/'.$idRatoeira);
     }
+    public function atualizarAction(){
+        $idRatoeira = $this->_getParam('id_entrevista');
+        $this->modelRatoeira->update($this->_getAllParams());
+        
+        $this->_redirect('ratoeira/editar/id/'.$idRatoeira);
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

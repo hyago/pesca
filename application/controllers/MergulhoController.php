@@ -126,6 +126,12 @@ class MergulhoController extends Zend_Controller_Action
         
         $this->_redirect('mergulho/editar/id/'.$idMergulho);
     }
+    public function atualizarAction(){
+        $idMergulho = $this->_getParam('id_entrevista');
+        $this->modelMergulho->update($this->_getAllParams());
+        
+        $this->_redirect('mergulho/editar/id/'.$idMergulho);
+    }
     
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
