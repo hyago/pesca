@@ -195,6 +195,34 @@ class ManzuaController extends Zend_Controller_Action
 
         $this->redirect("/manzua/editar/id/" . $backUrl);
     }
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelManzua->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/manzua/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelManzua->deleteAvistamento($idAvistamento, $idEntrevista);
+
+        $this->redirect("/manzua/editar/id/" . $backUrl);
+    }
 
 }
 

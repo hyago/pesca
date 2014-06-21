@@ -197,6 +197,33 @@ private $usuario;
 
         $this->redirect("/grosseira/editar/id/" . $backUrl);
     }
-    
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelGrosseira->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/grosseira/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelGrosseira->deleteAvistamento($idAvistamento, $idEntrevista);
+
+        $this->redirect("/grosseira/editar/id/" . $backUrl);
+    }
 }
 

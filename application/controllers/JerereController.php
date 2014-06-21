@@ -199,7 +199,34 @@ private $usuario;
 
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
-    
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelJerere->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelJerere->deleteAvistamento($idAvistamento, $idEntrevista);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
     
 }
 
