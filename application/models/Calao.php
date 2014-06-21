@@ -258,6 +258,40 @@ class Application_Model_Calao
 
         return $this->dbTableCalao->fetchAll($select)->toArray();
     }
+    public function selectCalaoHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableCalaoAvistamento = new Application_Model_DbTable_VCalaoHasAvistamento();
+        $selectAvist = $this->dbTableCalaoAvistamento->select()
+                ->from($this->dbTableCalaoAvistamento)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableCalaoAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTCalaoHasAvistamento = new Application_Model_DbTable_CalaoHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'cal_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTCalaoHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTCalaoHasAvistamento = new Application_Model_DbTable_CalaoHasAvistamento();       
+                
+        $dadosCalaoHasAvistamento = array(
+            'cal_id = ?' => $idAvistamento,
+            'avs_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTCalaoHasAvistamento->delete($dadosCalaoHasAvistamento);
+    }
 }
 

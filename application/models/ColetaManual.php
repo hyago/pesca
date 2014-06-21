@@ -218,6 +218,28 @@ private $dbTableColetaManual;
 
         return $this->dbTableColetaManual->fetchAll($select)->toArray();
     }
-
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTArrastoHasAvistamento = new Application_Model_DbTable_ArrastoHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'cml_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTArrastoHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTArrastoHasAvistamento = new Application_Model_DbTable_ArrastoHasAvistamento();       
+                
+        $dadosArrastoHasAvistamento = array(
+            'cml_id = ?' => $idAvistamento,
+            'avs_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTArrastoHasAvistamento->delete($dadosArrastoHasAvistamento);
+    }
 }
 

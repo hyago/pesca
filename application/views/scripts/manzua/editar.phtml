@@ -242,6 +242,39 @@
                 </table>
             </fieldset>
     </fieldset>
+    <fieldset class="noEditable"><legend>Avistamento:</legend>
+        <fieldset class="noEditable"><legend>O Que foi avistado:</legend>
+            <div id="base">
+                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "manzua", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['man_id']?>')" type="button" value="Add row" />
+                
+                <select style="float:left;" name="SelectAvistamento">
+                    <?php foreach ($this->avistamentos as $key => $avistamento): ?>
+                        <option value="<?= $avistamento['avs_id']; ?>"><?= $avistamento['avs_descricao']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                
+            </div>
+
+        </fieldset>
+        <br>
+        <fieldset class="noEditable" id="itemArteTipoRows"><legend>Avistamentos:</legend>
+            <table id="pesqueiros">
+                <tr>
+                    <th width="5%">Id Avistamento</th>
+                    <th width="50%">Avistamento</th>
+                </tr>
+                <?php
+                foreach ($this->vManzuaAvistamento as $key => $vManzuaAvistamento):
+                    ?>
+                    <tr id="itemArrastoRows">
+                        <td name="inputIdEntrevista"> <?= $vManzuaAvistamento['avs_id'] ?> </td>
+                        <td name="inputAvistamento" > <?= $vManzuaAvistamento['avs_descricao'] ?> </td>
+                        <td><input type="button" class="button-del" width="5%" onclick="jsDeleteAvistamento(<?= $this->entrevista['man_id'] ?>, '<?= $this->url(array("controller" => "manzua", "action" => "deleteavistamento"), null, true) ?>', <?= $vManzuaAvistamento['avs_id'] ?>)"></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </fieldset>
+    </fieldset>    
     </form>        
     <br/> <br/>
     <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "editar","id" => $this->monitoramento['fd_id']), null, true) ?>" id="botao-ancora">Voltar à Ficha-Diária</a>

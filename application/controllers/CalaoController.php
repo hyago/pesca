@@ -33,6 +33,7 @@ private $usuario;
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
+        $this->modelAvistamento = new Application_Model_Avistamento();
     }
 
     public function indexAction()
@@ -90,10 +91,10 @@ private $usuario;
 
         $vEspecieCapturadas = $this->modelCalao->selectCalaoHasEspCapturadas('cal_id='.$idEntrevista);
         
-        $vArrastoAvistamento = $this->modelCalao->selectCalaoHasAvistamento('cal_id='.$idEntrevista);
+        $vCalaoAvistamento = $this->modelCalao->selectCalaoHasAvistamento('cal_id='.$idEntrevista);
         
-        //$this->view->assign('avistamentos', $avistamentos);
-        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('vCalaoAvistamento', $vCalaoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('vCalao', $vCalao);
