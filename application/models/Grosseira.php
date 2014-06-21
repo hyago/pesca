@@ -28,9 +28,6 @@ private $dbTableGrosseira;
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableGrosseira = new Application_Model_DbTable_Grosseira();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
         
         if($request['subamostra']==true){
         $dadosSubamostra = array(
@@ -47,11 +44,14 @@ private $dbTableGrosseira;
          $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         $diesel = $request['diesel'];
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
+       
         
         $numLinhas = $request['numLinhas'];
         $numAnzois = $request['numAnzois'];
@@ -70,13 +70,90 @@ private $dbTableGrosseira;
             $oleo = NULL;
         }
         if(empty($alimento)){
-            $alimento = NULL;
+            $alimento= NULL;
         }
         if(empty($gelo)){
             $gelo = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
+        
+        
+        $dadosGrosseira = array(
+            'grs_embarcada' => $request['embarcada'],
+            'bar_id' => $request['nomeBarco'],
+            'grs_motor'=> $request['motor'],
+            'tte_id' => $request['tipoBarco'],
+            'tp_id_entrevistado' => $request['pescadorEntrevistado'],
+            'grs_numpescadores' => $request['numPescadores'],
+            'grs_dhsaida' => $timestampSaida,
+            'grs_dhvolta' => $timestampVolta,
+            'grs_diesel' => $diesel, 
+            'grs_oleo' => $oleo,
+            'grs_alimento' => $alimento,
+            'grs_gelo' => $gelo,
+            'grs_numlinhas' => $numLinhas,
+            'grs_numanzoisplinha' => $numAnzois,
+            'grs_subamostra' => $request['subamostra'],
+            'sa_id' => $idSubamostra,
+            'grs_obs' => $request['observacao'],
+            'mnt_id' => $request['id_monitoramento'],
+            'isc_id' => $request['isca']
+            
+        );
+        
+        $insertArrasto = $this->dbTableGrosseira->insert($dadosGrosseira);
+        return $insertArrasto;
+    }
+    
+    public function update(array $request)
+    {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
+        $this->dbTableGrosseira = new Application_Model_DbTable_Grosseira();
+        
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['data']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        
+         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+       
+        
+        $numLinhas = $request['numLinhas'];
+        $numAnzois = $request['numAnzois'];
+        
+        if(empty($numLinhas)){
+            $numLinhas = NULL;
+        }
+        if(empty($numAnzois)){
+            $numAnzois = NULL;
+        }
+        
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento= NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
         }
         
         $dadosGrosseira = array(
@@ -94,53 +171,16 @@ private $dbTableGrosseira;
             'grs_gelo' => $gelo,
             'grs_numlinhas' => $numLinhas,
             'grs_numanzoisplinha' => $numAnzois,
-            'grs_avistou' => $avistou,
             'grs_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'grs_obs' => $request['observacao'],
-            'mnt_id' => $request['id_monitoramento'],
             'isc_id' => $request['isca']
             
-        );
-        
-        $insertArrasto = $this->dbTableGrosseira->insert($dadosGrosseira);
-        return $insertArrasto;
-    }
-    
-    public function update(array $request)
-    {
-        $this->dbTableGrosseira = new Application_Model_DbTable_Grosseira();
-        
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
-        
-        
-        $dadosGrosseira = array(
-            'grs_embarcada' => $request['embarcada'],
-            'bar_id' => $request['nomeBarco'],
-            'grs_motor'=> $request['motor'],
-            'tte_id' => $request['tipoBarco'],
-            'tp_id_entrevistado' => $request['pescadorEntrevistado'],
-            'grs_numpescadores' => $request['numPescadores'],
-            'grs_dhsaida' => $timestampSaida,
-            'grs_dhvolta' => $timestampVolta,
-            'grs_diesel' => $request['diesel'], 
-            'grs_oleo' => $request['oleo'],
-            'grs_alimento' => $request['alimento'],
-            'grs_gelo' => $request['gelo'],
-            'grs_numlinhas' => $request['numLinhas'],
-            'grs_avistou' => $request['avistamento'],
-            'grs_subamostra' => $request['subamostra'],
-            'sa_id' => $idSubamostra,
-            'grs_obs' => $request['observacao'],
-            'mnt_id' => $request['id_monitoramento'],
-            'isc_id' => $request['isca'],
-            'grs_numanzoisplinha' => $request['numAnzois']
         );
  
         
         $whereGrosseira= $this->dbTableGrosseira->getAdapter()
-                ->quoteInto('"grs_id" = ?', $request[0]);
+                ->quoteInto('"grs_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableGrosseira->update($dadosGrosseira, $whereGrosseira);
@@ -179,7 +219,9 @@ private $dbTableGrosseira;
     public function insertPesqueiro($idEntrevista,$pesqueiro, $tempoAPesqueiro)
     {
         $this->dbTableTGrosseiraHasPesqueiro = new Application_Model_DbTable_GrosseiraHasPesqueiro();
-        
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro=Null;
+        }
         
         $dadosPesqueiro = array(
             'grs_id' => $idEntrevista,
@@ -216,6 +258,9 @@ private $dbTableGrosseira;
     {
         $this->dbTableTGrosseiraHasEspCapturada = new Application_Model_DbTable_GrosseiraHasEspecieCapturada();
         
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

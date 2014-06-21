@@ -31,6 +31,9 @@ class Application_Model_Jerere
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
@@ -56,10 +59,10 @@ class Application_Model_Jerere
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'jre_quantpescadores' => $request['numPescadores'],
             'jre_dhvolta' => $timestampVolta,
-            'jre_dhsaida' => $timestampSaida, 
-            'jre_avistamento' => $request['avistamento'],
+            'jre_dhsaida' => $timestampSaida,
             'jre_subamostra' => $request['subamostra'],
             'jre_obs' => $request['observacao'],
+            'jre_motor' => $request['motor'],
             'sa_id' => $idSubamostra,
             'jre_tempogasto' => $request['tempoGasto'],
             'jre_numarmadilhas' => $numArmadilhas,
@@ -75,9 +78,31 @@ class Application_Model_Jerere
     public function update(array $request)
     {
         $this->dbTableJerere = new Application_Model_DbTable_Jerere();
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        $numArmadilhas = $request['numArmadilhas'];
+        
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         
         $dadosJerere = array(
@@ -87,27 +112,20 @@ class Application_Model_Jerere
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'jre_quantpescadores' => $request['numPescadores'],
             'jre_dhvolta' => $timestampVolta,
-            'jre_dhsaida' => $timestampSaida, 
-            'jre_tempogasto' => $request['tempoGasto'],
-            'jre_diesel' => $request['diesel'],
-            'jre_oleo' => $request['oleo'],
-            'jre_alimento' => $request['alimento'],
-            'jre_gelo' => $request['gelo'],
-            'jre_avistamento' => $request['avistamento'],
+            'jre_dhsaida' => $timestampSaida,
             'jre_subamostra' => $request['subamostra'],
             'jre_obs' => $request['observacao'],
-            'sa_id' => $request['subamostra'],
-            'jre_numanzoisplinha' => $request['numAnzois'],
-            'jre_numlinhas' => $request['numLinhas'],
-            'isc_id' => $request['isca'],
-            'mnt_id' => $request['id_monitoramento'],
+            'jre_motor' => $request['motor'],
+            'sa_id' => $idSubamostra,
+            'jre_tempogasto' => $request['tempoGasto'],
+            'jre_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'jre_mreviva' => $request['mareviva']
         );
  
         
         $whereJerere= $this->dbTableJerere->getAdapter()
-                ->quoteInto('"jre_id" = ?', $request[0]);
+                ->quoteInto('"jre_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableJerere->update($dadosJerere, $whereJerere);
@@ -148,6 +166,9 @@ class Application_Model_Jerere
         if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
         }
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'jre_id' => $idEntrevista,
@@ -185,10 +206,13 @@ class Application_Model_Jerere
     {
         $this->dbTableTJerereHasEspCapturada = new Application_Model_DbTable_JerereHasEspecieCapturada();
         
-        if(empty($quantidade)){
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
+        else if(empty($quantidade)){
             $quantidade = NULL;
         }
-        if(empty($peso)){
+        else if(empty($peso)){
             $peso = NULL;
         }
         if(empty($precokg)){

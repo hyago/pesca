@@ -69,7 +69,7 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
 
     public function editarAction(){
-        $avistamentoArrasto = new Application_Model_DbTable_VArrastoFundoHasAvistamento();
+        
         $entrevista = $this->modelArrastoFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();

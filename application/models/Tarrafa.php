@@ -28,9 +28,6 @@ class Application_Model_Tarrafa
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableTarrafa = new Application_Model_DbTable_Tarrafa();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
         
         if($request['subamostra']==true){
         $dadosSubamostra = array(
@@ -47,7 +44,6 @@ class Application_Model_Tarrafa
         $altura = $request['altura'];
         $numLances = $request['numLances'];
         $malha = $request['malha'];
-        $avistou = $request['avistamento'];
         
         if(empty($roda)){
             $roda = NULL;
@@ -59,9 +55,7 @@ class Application_Model_Tarrafa
         if(empty($numLances)){
             $numLances = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
+        
         if(empty($malha)){
             $malha = NULL;
         }
@@ -80,7 +74,6 @@ class Application_Model_Tarrafa
             'tar_altura' => $altura,
             'tar_malha' => $malha,
             'tar_numlances' => $numLances,
-            'tar_avistou' => $avistou,
             'tar_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'tar_obs' => $request['observacao'],
@@ -93,10 +86,39 @@ class Application_Model_Tarrafa
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableTarrafa = new Application_Model_DbTable_Tarrafa();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['data']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        $roda = $request['roda'];
+        $altura = $request['altura'];
+        $numLances = $request['numLances'];
+        $malha = $request['malha'];
+        
+        if(empty($roda)){
+            $roda = NULL;
+        }
+        if(empty($altura)){
+            $altura = NULL;
+        }
+        
+        if(empty($numLances)){
+            $numLances = NULL;
+        }
+        
+        if(empty($malha)){
+            $malha = NULL;
+        }
         
         
         $dadosTarrafa = array(
@@ -108,20 +130,18 @@ class Application_Model_Tarrafa
             'tar_quantpescadores' => $request['numPescadores'],
             'tar_data' => $request['data'],
             'tar_tempogasto' => $request['tempoGasto'], 
-            'tar_roda' => $request['roda'],
-            'tar_altura' => $request['altura'],
-            'tar_malha' => $request['malha'],
-            'tar_numlances' => $request['numLances'],
-            'tar_avistou' => $request['avistamento'],
+            'tar_roda' => $roda,
+            'tar_altura' => $altura,
+            'tar_malha' => $malha,
+            'tar_numlances' => $numLances,
             'tar_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'tar_obs' => $request['observacao'],
-            'mnt_id' => $request['id_monitoramento']
         );
  
         
         $whereTarrafa= $this->dbTableTarrafa->getAdapter()
-                ->quoteInto('"tar_id" = ?', $request[0]);
+                ->quoteInto('"tar_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableTarrafa->update($dadosTarrafa, $whereTarrafa);
@@ -193,6 +213,9 @@ class Application_Model_Tarrafa
     {
         $this->dbTableTTarrafaHasEspCapturada = new Application_Model_DbTable_TarrafaHasEspecieCapturada();
         
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

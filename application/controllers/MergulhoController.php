@@ -79,7 +79,7 @@ class MergulhoController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_MergulhoHasPesqueiro();
+        //$avistamentoMergulho = new Application_Model_DbTable_VMergulhoHasAvistamento();
         $entrevista = $this->modelMergulho->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -87,30 +87,48 @@ class MergulhoController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        
-        
+        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $mare = $this->modelMare->select();
         
         $idEntrevista = $this->_getParam('id');
+        $datahoraSaida[] = split(" ",$entrevista['mer_dhsaida']);
+        $datahoraVolta[] = split(" ",$entrevista['mer_dhvolta']);
         
         $vMergulho = $this->modelMergulho->selectMergulhoHasPesqueiro('mer_id='.$idEntrevista);
-        
+
         $vEspecieCapturadas = $this->modelMergulho->selectMergulhoHasEspCapturadas('mer_id='.$idEntrevista);
         
+        //$vArrastoAvistamento = $this->modelMergulho->selectMergulhoHasAvistamento('mer_id='.$idEntrevista);
+        
+        //$this->view->assign('avistamentos', $avistamentos);
+        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vMergulho', $vMergulho);
         $this->view->assign("entrevista", $entrevista);
+        $this->view->assign('dataSaida', $datahoraSaida[0][0]);
+        $this->view->assign('horaSaida', $datahoraSaida[0][1]);
+        $this->view->assign('dataVolta', $datahoraVolta[0][0]);
+        $this->view->assign('horaVolta', $datahoraVolta[0][1]);
+        $this->view->assign('mare', $mare);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+
+
     }
 
     public function criarAction(){
         $idMergulho = $this->modelMergulho->insert($this->_getAllParams());
         
+        
+        $this->_redirect('mergulho/editar/id/'.$idMergulho);
+    }
+    public function atualizarAction(){
+        $idMergulho = $this->_getParam('id_entrevista');
+        $this->modelMergulho->update($this->_getAllParams());
         
         $this->_redirect('mergulho/editar/id/'.$idMergulho);
     }
@@ -181,6 +199,33 @@ class MergulhoController extends Zend_Controller_Action
 
         $this->redirect("/mergulho/editar/id/" . $backUrl);
     }
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelMergulho->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/mergulho/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelMergulho->deleteAvistamento($idAvistamento, $idEntrevista);
+
+        $this->redirect("/mergulho/editar/id/" . $backUrl);
+    }
 }
 

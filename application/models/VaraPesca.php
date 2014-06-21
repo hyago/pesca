@@ -31,6 +31,9 @@ class Application_Model_VaraPesca
         
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         
         if($request['subamostra']==true){
         $dadosSubamostra = array(
@@ -47,7 +50,6 @@ class Application_Model_VaraPesca
         $oleo = $request['oleo'];
         $alimento = $request['alimento'];
         $gelo = $request['gelo'];
-        $avistou = $request['avistamento'];
         
         $numLinhas = $request['numLinhas'];
         $numAnzois = $request['numAnzois'];
@@ -71,9 +73,6 @@ class Application_Model_VaraPesca
         if(empty($gelo)){
             $gelo = NULL;
         }
-        if(empty($avistou)){
-            $avistou = NULL;
-        }
         
         $dadosVaraPesca = array(
             'vp_embarcada' => $request['embarcada'],
@@ -89,7 +88,6 @@ class Application_Model_VaraPesca
             'vp_oleo' => $oleo,
             'vp_alimento' => $alimento,
             'vp_gelo' => $gelo,
-            'vp_avistamento' => $avistou,
             'vp_subamostra' => $request['subamostra'],
             'vp_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
@@ -107,11 +105,53 @@ class Application_Model_VaraPesca
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableVaraPesca = new Application_Model_DbTable_VaraPesca();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        $diesel = $request['diesel'];
+        $oleo = $request['oleo'];
+        $alimento = $request['alimento'];
+        $gelo = $request['gelo'];
+        
+        $numLinhas = $request['numLinhas'];
+        $numAnzois = $request['numAnzois'];
+        
+        if(empty($numLinhas)){
+            $numLinhas = NULL;
+        }
+        if(empty($numAnzois)){
+            $numAnzois = NULL;
+        }
+        
+        if(empty($diesel)){
+            $diesel = NULL;
+        }
+        if(empty($oleo)){
+            $oleo = NULL;
+        }
+        if(empty($alimento)){
+            $alimento = NULL;
+        }
+        if(empty($gelo)){
+            $gelo = NULL;
+        }
         
         $dadosVaraPesca = array(
             'vp_embarcada' => $request['embarcada'],
@@ -123,25 +163,23 @@ class Application_Model_VaraPesca
             'vp_dhvolta' => $timestampVolta,
             'vp_dhsaida' => $timestampSaida, 
             'vp_tempogasto' => $request['tempoGasto'],
-            'vp_diesel' => $request['diesel'],
-            'vp_oleo' => $request['oleo'],
-            'vp_alimento' => $request['alimento'],
-            'vp_gelo' => $request['gelo'],
-            'vp_avistamento' => $request['avistamento'],
+            'vp_diesel' => $diesel,
+            'vp_oleo' => $oleo,
+            'vp_alimento' => $alimento,
+            'vp_gelo' => $gelo,
             'vp_subamostra' => $request['subamostra'],
             'vp_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
-            'vp_numanzoisplinha' => $request['numAnzois'],
-            'vp_numlinhas' => $request['numLinhas'],
+            'vp_numanzoisplinha' => $numAnzois,
+            'vp_numlinhas' => $numLinhas,
             'isc_id' => $request['isca'],
-            'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'vp_mreviva' => $request['mareviva']
         );
  
         
         $whereVaraPesca= $this->dbTableVaraPesca->getAdapter()
-                ->quoteInto('"vp_id" = ?', $request[0]);
+                ->quoteInto('"vp_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableVaraPesca->update($dadosVaraPesca, $whereVaraPesca);
@@ -183,6 +221,9 @@ class Application_Model_VaraPesca
         if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
         }
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro = NULL;
+        }
         
         $dadosPesqueiro = array(
             'vp_id' => $idEntrevista,
@@ -219,6 +260,9 @@ class Application_Model_VaraPesca
     {
         $this->dbTableTVaraPescaHasEspCapturada = new Application_Model_DbTable_VaraPescaHasEspecieCapturada();
         
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }

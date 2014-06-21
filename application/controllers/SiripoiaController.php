@@ -82,7 +82,7 @@ class SiripoiaController extends Zend_Controller_Action
     }
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_SiripoiaHasPesqueiro();
+         //$avistamentoSiripoia = new Application_Model_DbTable_VSiripoiaHasAvistamento();
         $entrevista = $this->modelSiripoia->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -90,20 +90,30 @@ class SiripoiaController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        
+        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $mare = $this->modelMare->select();
         
         $idEntrevista = $this->_getParam('id');
+        $datahoraSaida[] = split(" ",$entrevista['sir_dhsaida']);
+        $datahoraVolta[] = split(" ",$entrevista['sir_dhvolta']);
         
         $vSiripoia = $this->modelSiripoia->selectSiripoiaHasPesqueiro('sir_id='.$idEntrevista);
-        
+
         $vEspecieCapturadas = $this->modelSiripoia->selectSiripoiaHasEspCapturadas('sir_id='.$idEntrevista);
         
+        //$vArrastoAvistamento = $this->modelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$idEntrevista);
         
+        //$this->view->assign('avistamentos', $avistamentos);
+        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('mare', $mare);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vSiripoia', $vSiripoia);
         $this->view->assign("entrevista", $entrevista);
+        $this->view->assign('dataSaida', $datahoraSaida[0][0]);
+        $this->view->assign('horaSaida', $datahoraSaida[0][1]);
+        $this->view->assign('dataVolta', $datahoraVolta[0][0]);
+        $this->view->assign('horaVolta', $datahoraVolta[0][1]);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -113,6 +123,12 @@ class SiripoiaController extends Zend_Controller_Action
     public function criarAction(){
         $idSiripoia = $this->modelSiripoia->insert($this->_getAllParams());
         
+        
+        $this->_redirect('siripoia/editar/id/'.$idSiripoia);
+    }
+    public function atualizarAction(){
+        $idSiripoia = $this->_getParam('id_entrevista');
+        $this->modelSiripoia->update($this->_getAllParams());
         
         $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
@@ -182,6 +198,33 @@ class SiripoiaController extends Zend_Controller_Action
 
         $this->redirect("/siripoia/editar/id/" . $backUrl);
     }
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelSiripoia->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/siripoia/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelSiripoia->deleteAvistamento($idAvistamento, $idEntrevista);
+
+        $this->redirect("/siripoia/editar/id/" . $backUrl);
+    }
 }
 

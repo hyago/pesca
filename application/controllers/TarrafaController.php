@@ -77,7 +77,7 @@ private $usuario;
     }
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_TarrafaHasPesqueiro();
+        //$avistamentoTarrafa = new Application_Model_DbTable_VTarrafaHasAvistamento();
         $entrevista = $this->modelTarrafa->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -85,29 +85,39 @@ private $usuario;
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
+        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         
         
         $idEntrevista = $this->_getParam('id');
-        
+
         $vTarrafa = $this->modelTarrafa->selectTarrafaHasPesqueiro('tar_id='.$idEntrevista);
-        
+
         $vEspecieCapturadas = $this->modelTarrafa->selectTarrafaHasEspCapturadas('tar_id='.$idEntrevista);
         
+        //$vArrastoAvistamento = $this->modelTarrafa->selectTarrafaHasAvistamento('tar_id='.$idEntrevista);
+        
+        //$this->view->assign('avistamentos', $avistamentos);
+        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevistaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vTarrafa', $vTarrafa);
         $this->view->assign("entrevista", $entrevista);
+        //print_r($entrevista);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-        
     }
     public function criarAction(){
         $idTarrafa = $this->modelTarrafa->insert($this->_getAllParams());
         
+        
+        $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
+    }
+    public function atualizarAction(){
+        $idTarrafa = $this->_getParam('id_entrevista');
+        $this->modelTarrafa->update($this->_getAllParams());
         
         $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
     }
@@ -173,7 +183,34 @@ private $usuario;
 
         $this->redirect("/tarrafa/editar/id/" . $backUrl);
     }
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelTarrafa->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/tarrafa/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelTarrafa->deleteAvistamento($idAvistamento, $idEntrevista);
+
+        $this->redirect("/tarrafa/editar/id/" . $backUrl);
+    }
 }
 
     

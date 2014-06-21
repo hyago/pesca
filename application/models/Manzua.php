@@ -32,6 +32,9 @@ class Application_Model_Manzua
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
@@ -58,7 +61,7 @@ class Application_Model_Manzua
             'man_quantpescadores' => $request['numPescadores'],
             'man_dhvolta' => $timestampVolta,
             'man_dhsaida' => $timestampSaida, 
-            'man_avistamento' => $request['avistamento'],
+            
             'man_subamostra' => $request['subamostra'],
             'man_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
@@ -75,11 +78,31 @@ class Application_Model_Manzua
     
     public function update(array $request)
     {
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableManzua = new Application_Model_DbTable_Manzua();
         
-        $timestampSaida = $request['dataSaida']+$request['horaSaida'];
-        $timestampVolta = $request['dataVolta']+$request['horaVolta'];
+        $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
+        $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        if($timestampSaida > $timestampVolta){
+            $timestampVolta = 'Erro';
+        }
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+        
+       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
+        $numArmadilhas = $request['numArmadilhas'];
+        
+        if(empty($numArmadilhas)){
+            $numArmadilhas = NULL;
+        }
         
         $dadosManzua = array(
             'man_embarcada' => $request['embarcada'],
@@ -89,21 +112,17 @@ class Application_Model_Manzua
             'tp_id_entrevistado' => $request['pescadorEntrevistado'],
             'man_quantpescadores' => $request['numPescadores'],
             'man_dhvolta' => $timestampVolta,
-            'man_dhsaida' => $timestampSaida, 
-            'man_avistamento' => $request['avistamento'],
+            'man_dhsaida' => $timestampSaida,  
             'man_subamostra' => $request['subamostra'],
             'man_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
             'man_tempogasto' => $request['tempoGasto'],
-            'man_numarmadilhas' => $request['numArmadilhas'],
-            'mnt_id' => $request['id_monitoramento'],
+            'man_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'man_mreviva' => $request['mareviva']
         );
- 
-        
         $whereManzua= $this->dbTableManzua->getAdapter()
-                ->quoteInto('"man_id" = ?', $request[0]);
+                ->quoteInto('"man_id" = ?', $request['id_entrevista']);
         
         
         $this->dbTableManzua->update($dadosManzua, $whereManzua);
@@ -145,6 +164,9 @@ class Application_Model_Manzua
         if(empty($distAPesqueiro)){
             $distAPesqueiro = NULL;
         }
+        if(empty($tempoAPesqueiro)){
+            $tempoAPesqueiro = NULL;
+        }
         $dadosPesqueiro = array(
             'man_id' => $idEntrevista,
             'paf_id' => $pesqueiro,
@@ -181,6 +203,9 @@ class Application_Model_Manzua
     {
         $this->dbTableTManzuaHasEspCapturada = new Application_Model_DbTable_ManzuaHasEspecieCapturada();
         
+        if(empty($quantidade) && empty($peso)){
+            $quantidade = 'Erro';
+        }
         if(empty($quantidade)){
             $quantidade = NULL;
         }
@@ -190,6 +215,7 @@ class Application_Model_Manzua
         if(empty($precokg)){
             $precokg = NULL;
         }
+        
         $dadosEspecie = array(
             'man_id' => $idEntrevista,
             'esp_id' => $especie,

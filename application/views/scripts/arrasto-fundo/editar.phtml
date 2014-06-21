@@ -75,7 +75,7 @@
                     <br />
                 </div>
                 <div id="form-esq">
-                    <label>Qtd de Pescadores:</label>
+                    <label>Quant. de Pescadores:</label>
                     <input type="number" name="numPescadores" placeholder="QuantidadePescadores" value="<?=$this->entrevista['af_quantpescadores']?>"/><br />
                 </div>
             </div>
@@ -138,7 +138,8 @@
                         
         </fieldset>
     <br/><br/>
-    
+    <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['af_id'] ?>"/><br />
+        
     <div id="esquerda">
     <input type="submit" size="50" value="Salvar Alterações" />
     </div>

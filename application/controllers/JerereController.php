@@ -82,7 +82,7 @@ private $usuario;
     
     
     public function editarAction(){
-        $entrevistaHasPesqueiro = new Application_Model_DbTable_JerereHasPesqueiro();
+         //$avistamentoJerere = new Application_Model_DbTable_VJerereHasAvistamento();
         $entrevista = $this->modelJerere->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -90,19 +90,30 @@ private $usuario;
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        
+        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $mare = $this->modelMare->select();
         
         $idEntrevista = $this->_getParam('id');
+        $datahoraSaida[] = split(" ",$entrevista['jre_dhsaida']);
+        $datahoraVolta[] = split(" ",$entrevista['jre_dhvolta']);
         
         $vJerere = $this->modelJerere->selectJerereHasPesqueiro('jre_id='.$idEntrevista);
-        
+
         $vEspecieCapturadas = $this->modelJerere->selectJerereHasEspCapturadas('jre_id='.$idEntrevista);
         
+        //$vArrastoAvistamento = $this->modelJerere->selectJerereHasAvistamento('jre_id='.$idEntrevista);
+        
+        //$this->view->assign('avistamentos', $avistamentos);
+        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('mare', $mare);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
-        $this->view->assign('entrevisstaHasPesqueiro', $entrevistaHasPesqueiro);
         $this->view->assign('vJerere', $vJerere);
         $this->view->assign("entrevista", $entrevista);
+        $this->view->assign('dataSaida', $datahoraSaida[0][0]);
+        $this->view->assign('horaSaida', $datahoraSaida[0][1]);
+        $this->view->assign('dataVolta', $datahoraVolta[0][0]);
+        $this->view->assign('horaVolta', $datahoraVolta[0][1]);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -115,6 +126,13 @@ private $usuario;
         
         $this->_redirect('jerere/editar/id/'.$idJerere);
     }
+    public function atualizarAction(){
+        $idJerere = $this->_getParam('id_entrevista');
+        $this->modelJerere->update($this->_getAllParams());
+        
+        $this->_redirect('jerere/editar/id/'.$idJerere);
+    }
+    
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -181,7 +199,34 @@ private $usuario;
 
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
-    
+    public function insertavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $avistamento = $this->_getParam("SelectAvistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelJerere->insertAvistamento($idEntrevista, $avistamento);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
+    public function deleteavistamentoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idAvistamento = $this->_getParam("id_avistamento");
+
+        $idEntrevista = $this->_getParam("id_entrevista");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $this->modelJerere->deleteAvistamento($idAvistamento, $idEntrevista);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
     
 }
 
