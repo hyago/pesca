@@ -154,7 +154,7 @@
     <fieldset class="noEditable"><legend>Pesqueiro:</legend>
         <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
             <div id="base">
-                <input onclick="jsInsertPesqueiro(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertPesqueiro(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['af_id']?>')" type="button" value="Novo" />
                 <select style="float:left;" name="nomePesqueiro">
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
                         <option value="<?= $pesqueiro['paf_id']; ?>"><?= $pesqueiro['paf_pesqueiro']; ?></option>
@@ -190,7 +190,7 @@
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
             <div id="base">
-                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Novo" />
                 <select style="float:left;" name="SelectEspecie">
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
@@ -233,7 +233,7 @@
     <fieldset class="noEditable"><legend>Avistamento:</legend>
         <fieldset class="noEditable"><legend>O Que foi avistado:</legend>
             <div id="base">
-                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['af_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['af_id']?>')" type="button" value="Novo" />
                 
                 <select style="float:left;" name="SelectAvistamento">
                     <?php foreach ($this->avistamentos as $key => $avistamento): ?>

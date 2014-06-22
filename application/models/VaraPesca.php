@@ -304,5 +304,40 @@ class Application_Model_VaraPesca
 
         return $this->dbTableVaraPesca->fetchAll($select)->toArray();
     }
+    public function selectVaraPescaHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableVaraPescaAvistamento = new Application_Model_DbTable_VVaraPescaHasAvistamento();
+        $selectAvist = $this->dbTableVaraPescaAvistamento->select()
+                ->from($this->dbTableVaraPescaAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableVaraPescaAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTVaraPescaHasAvistamento = new Application_Model_DbTable_VaraPescaHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'vp_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTVaraPescaHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTVaraPescaHasAvistamento = new Application_Model_DbTable_VaraPescaHasAvistamento();       
+                
+        $dadosVaraPescaHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'vp_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTVaraPescaHasAvistamento->delete($dadosVaraPescaHasAvistamento);
+    }
 }
 

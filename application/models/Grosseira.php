@@ -302,5 +302,40 @@ private $dbTableGrosseira;
 
         return $this->dbTableGrosseira->fetchAll($select)->toArray();
     }
+    public function selectGrosseiraHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableGrosseiraAvistamento = new Application_Model_DbTable_VGrosseiraHasAvistamento();
+        $selectAvist = $this->dbTableGrosseiraAvistamento->select()
+                ->from($this->dbTableGrosseiraAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableGrosseiraAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTGrosseiraHasAvistamento = new Application_Model_DbTable_GrosseiraHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'grs_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTGrosseiraHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTGrosseiraHasAvistamento = new Application_Model_DbTable_GrosseiraHasAvistamento();       
+                
+        $dadosGrosseiraHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'grs_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTGrosseiraHasAvistamento->delete($dadosGrosseiraHasAvistamento);
+    }
 }
 

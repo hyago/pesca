@@ -23,7 +23,7 @@ class SiripoiaController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
+        $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelSiripoia = new Application_Model_Siripoia();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -90,7 +90,7 @@ class SiripoiaController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         
         $idEntrevista = $this->_getParam('id');
@@ -101,10 +101,10 @@ class SiripoiaController extends Zend_Controller_Action
 
         $vEspecieCapturadas = $this->modelSiripoia->selectSiripoiaHasEspCapturadas('sir_id='.$idEntrevista);
         
-        //$vArrastoAvistamento = $this->modelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$idEntrevista);
+        $vSiripoiaAvistamento = $this->modelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$idEntrevista);
         
-        //$this->view->assign('avistamentos', $avistamentos);
-        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('vSiripoiaAvistamento', $vSiripoiaAvistamento);
         $this->view->assign('mare', $mare);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);

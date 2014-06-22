@@ -140,7 +140,7 @@
 <fieldset class="noEditable"><legend>Pesqueiro:</legend>
     <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
             <div id="base">
-                <input onclick="jsInsertPesqueiroWithoutTime(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertPesqueiroWithoutTime(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Novo" />
                 <select style="float:left;" name="nomePesqueiro">
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
                         <option value="<?= $pesqueiro['paf_id']; ?>"><?= $pesqueiro['paf_pesqueiro']; ?></option>
@@ -159,7 +159,7 @@
                 <?php
                 foreach ($this->vTarrafa as $key => $vTarrafa):
                     ?>
-                    <tr id="itemArrastoRows">
+                    <tr id="itemTarrafaRows">
                         <td name="inputIdEntrevista"> <?= $vTarrafa['tar_id'] ?> </td>
                         <td name="inputPesqueiro"> <?= $vTarrafa['paf_pesqueiro'] ?> </td>
                         <td><input type="button" class="button-del" width="5%" onclick="jsDeletePesqueiro(<?= $this->entrevista['tar_id'] ?>, '<?= $this->url(array("controller" => "tarrafa", "action" => "deletepesqueiro"), null, true) ?>', <?= $vCalao['tar_paf_id'] ?>)"></td>
@@ -172,7 +172,7 @@
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
             <div id="base">
-                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Novo" />
                 <select style="float:left;" name="SelectEspecie">
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
@@ -215,7 +215,7 @@
     <fieldset class="noEditable"><legend>Avistamento:</legend>
         <fieldset class="noEditable"><legend>O Que foi avistado:</legend>
             <div id="base">
-                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Novo" />
                 
                 <select style="float:left;" name="SelectAvistamento">
                     <?php foreach ($this->avistamentos as $key => $avistamento): ?>
@@ -236,7 +236,7 @@
                 <?php
                 foreach ($this->vTarrafaAvistamento as $key => $vTarrafaAvistamento):
                     ?>
-                    <tr id="itemArrastoRows">
+                    <tr id="itemTarrafaRows">
                         <td name="inputIdEntrevista"> <?= $vTarrafaAvistamento['avs_id'] ?> </td>
                         <td name="inputAvistamento" > <?= $vTarrafaAvistamento['avs_descricao'] ?> </td>
                         <td><input type="button" class="button-del" width="5%" onclick="jsDeleteAvistamento(<?= $this->entrevista['tar_id'] ?>, '<?= $this->url(array("controller" => "tarrafa", "action" => "deleteavistamento"), null, true) ?>', <?= $vTarrafaAvistamento['avs_id'] ?>)"></td>

@@ -2438,88 +2438,95 @@ WHERE ENTREVISTA.RAT_ID = ESPCAPT.RAT_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 --Visualizações
 
 CREATE OR REPLACE VIEW v_entrevista_arrasto AS 
- SELECT entrevista.af_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id, entrevista.af_embarcado, entrevista.af_quantpescadores, 
-entrevista.af_dhsaida, entrevista.af_dhvolta, entrevista.af_diesel, entrevista.af_oleo, entrevista.af_alimento, entrevista.af_gelo, entrevista.af_obs, entrevista.af_motor, tte.tte_tipoembarcacao
-   FROM t_arrastofundo as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria,  t_tipoembarcacao as tte
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND
- monitoramento.fd_id = fichadiaria.fd_id and entrevista.tte_id=tte.tte_id;
+ SELECT t_arrastofundo.af_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_arrastofundo
+   Left Join t_pescador On t_arrastofundo.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_arrastofundo.bar_id = t_barco.bar_id Left Join t_monitoramento On t_arrastofundo.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 CREATE OR REPLACE VIEW v_entrevista_calao AS 
- SELECT entrevista.cal_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_calao as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_calao.cal_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_calao
+   Left Join t_pescador On t_calao.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_calao.bar_id = t_barco.bar_id Left Join t_monitoramento On t_calao.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 CREATE OR REPLACE VIEW v_entrevista_coletamanual AS 
- SELECT entrevista.cml_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_coletamanual as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_coletamanual.cml_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_coletamanual
+   Left Join t_pescador On t_coletamanual.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_coletamanual.bar_id = t_barco.bar_id Left Join t_monitoramento On t_coletamanual.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
+   
 CREATE OR REPLACE VIEW v_entrevista_emalhe AS 
- SELECT entrevista.em_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_emalhe as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
-
-
+ SELECT t_emalhe.em_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_emalhe
+   Left Join t_pescador On t_emalhe.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_emalhe.bar_id = t_barco.bar_id Left Join t_monitoramento On t_emalhe.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 CREATE OR REPLACE VIEW v_entrevista_grosseira AS 
- SELECT entrevista.grs_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_grosseira as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_grosseira.grs_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_grosseira
+   Left Join t_pescador On t_grosseira.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_grosseira.bar_id = t_barco.bar_id Left Join t_monitoramento On t_grosseira.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 
 CREATE OR REPLACE VIEW v_entrevista_jerere AS 
- SELECT entrevista.jre_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_jerere as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_jerere.jre_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_jerere
+   Left Join t_pescador On t_jerere.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_jerere.bar_id = t_barco.bar_id Left Join t_monitoramento On t_jerere.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 
 CREATE OR REPLACE VIEW v_entrevista_linha AS 
- SELECT entrevista.lin_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_linha as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_linha.lin_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_linha
+   Left Join t_pescador On t_linha.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_linha.bar_id = t_barco.bar_id Left Join t_monitoramento On t_linha.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 
 CREATE OR REPLACE VIEW v_entrevista_linhafundo AS 
- SELECT entrevista.lf_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_linhafundo as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_linhafundo.lf_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_linhafundo
+   Left Join t_pescador On t_linhafundo.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_linhafundo.bar_id = t_barco.bar_id Left Join t_monitoramento On t_linhafundo.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 
 CREATE OR REPLACE VIEW v_entrevista_manzua AS 
- SELECT entrevista.man_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_manzua as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_manzua.man_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_manzua
+   Left Join t_pescador On t_manzua.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_manzua.bar_id = t_barco.bar_id Left Join t_monitoramento On t_manzua.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
+
 
 CREATE OR REPLACE VIEW v_entrevista_mergulho AS 
- SELECT entrevista.mer_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_mergulho as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_mergulho.mer_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_mergulho
+   Left Join t_pescador On t_mergulho.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_mergulho.bar_id = t_barco.bar_id Left Join t_monitoramento On t_mergulho.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 
 CREATE OR REPLACE VIEW v_entrevista_ratoeira AS 
- SELECT entrevista.rat_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_ratoeira as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_ratoeira.rat_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_ratoeira
+   Left Join t_pescador On t_ratoeira.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_ratoeira.bar_id = t_barco.bar_id Left Join t_monitoramento On t_ratoeira.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 
 CREATE OR REPLACE VIEW v_entrevista_siripoia AS 
- SELECT entrevista.sir_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_siripoia as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_siripoia.sir_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_siripoia
+   Left Join t_pescador On t_siripoia.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_siripoia.bar_id = t_barco.bar_id Left Join t_monitoramento On t_siripoia.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 CREATE OR REPLACE VIEW v_entrevista_tarrafa AS 
- SELECT entrevista.tar_id, pescador.tp_nome, barco.bar_nome, 
-    monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_tarrafa entrevista, t_pescador pescador, t_barco barco, 
-    t_monitoramento monitoramento, t_ficha_diaria fichadiaria
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
-  
+ SELECT t_tarrafa.tar_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_tarrafa
+   Left Join t_pescador On t_tarrafa.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_tarrafa.bar_id = t_barco.bar_id Left Join t_monitoramento On t_tarrafa.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
+
   
 CREATE OR REPLACE VIEW v_entrevista_varapesca AS 
- SELECT entrevista.vp_id, pescador.tp_nome, barco.bar_nome, monitoramento.mnt_id, fichadiaria.fd_id
-   FROM t_varapesca as entrevista, t_pescador as pescador, t_barco as barco, t_monitoramento as monitoramento, t_ficha_diaria as fichadiaria 
-  WHERE entrevista.tp_id_entrevistado = pescador.tp_id AND entrevista.bar_id = barco.bar_id AND entrevista.mnt_id = monitoramento.mnt_id AND monitoramento.fd_id = fichadiaria.fd_id;
+ SELECT t_varapesca.vp_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
+   FROM t_varapesca
+   Left Join t_pescador On t_varapesca.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_varapesca.bar_id = t_barco.bar_id Left Join t_monitoramento On t_varapesca.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
 
 
   
@@ -2543,10 +2550,6 @@ CREATE TABLE IF NOT EXISTS T_ARRASTOFUNDO_HAS_T_AVISTAMENTO
   CONSTRAINT FK_T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
 
-CREATE OR REPLACE VIEW V_ARRASTOFUNDO_HAS_T_AVISTAMENTO AS 
-SELECT AVS.AF_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
-FROM T_ARRASTOFUNDO_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
-WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
   
 CREATE TABLE IF NOT EXISTS T_CALAO_HAS_T_AVISTAMENTO

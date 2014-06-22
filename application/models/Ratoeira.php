@@ -246,7 +246,41 @@ class Application_Model_Ratoeira
 
         return $this->dbTableRatoeira->fetchAll($select)->toArray();
     }
+    public function selectRatoeiraHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableRatoeiraAvistamento = new Application_Model_DbTable_VRatoeiraHasAvistamento();
+        $selectAvist = $this->dbTableRatoeiraAvistamento->select()
+                ->from($this->dbTableRatoeiraAvistamento)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableRatoeiraAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTRatoeiraHasAvistamento = new Application_Model_DbTable_RatoeiraHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'rat_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTRatoeiraHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTRatoeiraHasAvistamento = new Application_Model_DbTable_RatoeiraHasAvistamento();       
+                
+        $dadosRatoeiraHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'rat_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTRatoeiraHasAvistamento->delete($dadosRatoeiraHasAvistamento);
+    }
 }
 
 

@@ -24,6 +24,7 @@ private $usuario;
         $this->view->assign("usuario",$this->usuario);
         
         
+        $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelRatoeira = new Application_Model_Ratoeira();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -89,7 +90,7 @@ private $usuario;
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         
         $idEntrevista = $this->_getParam('id');
@@ -100,10 +101,10 @@ private $usuario;
 
         $vEspecieCapturadas = $this->modelRatoeira->selectRatoeiraHasEspCapturadas('rat_id='.$idEntrevista);
         
-        //$vArrastoAvistamento = $this->modelRatoeira->selectRatoeiraHasAvistamento('rat_id='.$idEntrevista);
+        $vRatoeiraAvistamento = $this->modelRatoeira->selectRatoeiraHasAvistamento('rat_id='.$idEntrevista);
         
-        //$this->view->assign('avistamentos', $avistamentos);
-        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('vRatoeiraAvistamento', $vRatoeiraAvistamento);
         $this->view->assign('mare', $mare);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);

@@ -302,5 +302,40 @@ private $dbTableLinha;
 
         return $this->dbTableLinha->fetchAll($select)->toArray();
     }
+    public function selectLinhaHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableLinhaAvistamento = new Application_Model_DbTable_VLinhaHasAvistamento();
+        $selectAvist = $this->dbTableLinhaAvistamento->select()
+                ->from($this->dbTableLinhaAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableLinhaAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTLinhaHasAvistamento = new Application_Model_DbTable_LinhaHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'lin_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTLinhaHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTLinhaHasAvistamento = new Application_Model_DbTable_LinhaHasAvistamento();       
+                
+        $dadosLinhaHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'lin_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTLinhaHasAvistamento->delete($dadosLinhaHasAvistamento);
+    }
 }
 

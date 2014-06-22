@@ -162,7 +162,7 @@
         <fieldset class="noEditable"><legend>Pesqueiro:</legend>
             <fieldset class="noEditable"><legend>Pesqueiro e tempo até o pesqueiro:</legend>
                 <div id="base">
-                    <input onclick="jsInsertPesqueiroWithTimeAndRange(this.form, '<?= $this->url(array("controller" => "ratoeira", "action" => "insertpesqueiro"), null, true) ?>', '<?= $this->entrevista['rat_id'] ?>')" type="button" value="Add row" />
+                    <input onclick="jsInsertPesqueiroWithTimeAndRange(this.form, '<?= $this->url(array("controller" => "ratoeira", "action" => "insertpesqueiro"), null, true) ?>', '<?= $this->entrevista['rat_id'] ?>')" type="button" value="Novo" />
                     <select style="float:left;" name="nomePesqueiro">
                         <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
                             <option value="<?= $pesqueiro['paf_id']; ?>"><?= $pesqueiro['paf_pesqueiro']; ?></option>
@@ -186,7 +186,7 @@
                     <?php
                     foreach ($this->vRatoeira as $key => $vRatoeira):
                         ?>
-                        <tr id="itemArrastoRows">
+                        <tr id="itemRatoeiraRows">
                             <td name="inputIdEntrevista"> <?= $vRatoeira['rat_id'] ?> </td>
                             <td name="inputPesqueiro" > <?= $vRatoeira['paf_pesqueiro'] ?> </td>
                             <td name="inputTempoaPesqueiro"> <?= $vRatoeira['t_tempoapesqueiro'] ?> </td>
@@ -201,7 +201,7 @@
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
             <div id="base">
-                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "ratoeira", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['rat_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "ratoeira", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['rat_id']?>')" type="button" value="Novo" />
                 <select style="float:left;" name="SelectEspecie">
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
@@ -244,7 +244,7 @@
     <fieldset class="noEditable"><legend>Avistamento:</legend>
         <fieldset class="noEditable"><legend>O Que foi avistado:</legend>
             <div id="base">
-                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "ratoeira", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['rat_id']?>')" type="button" value="Add row" />
+                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "ratoeira", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['rat_id']?>')" type="button" value="Novo" />
                 
                 <select style="float:left;" name="SelectAvistamento">
                     <?php foreach ($this->avistamentos as $key => $avistamento): ?>
@@ -265,7 +265,7 @@
                 <?php
                 foreach ($this->vRatoeiraAvistamento as $key => $vRatoeiraAvistamento):
                     ?>
-                    <tr id="itemArrastoRows">
+                    <tr id="itemRatoeiraRows">
                         <td name="inputIdEntrevista"> <?= $vRatoeiraAvistamento['avs_id'] ?> </td>
                         <td name="inputAvistamento" > <?= $vRatoeiraAvistamento['avs_descricao'] ?> </td>
                         <td><input type="button" class="button-del" width="5%" onclick="jsDeleteAvistamento(<?= $this->entrevista['rat_id'] ?>, '<?= $this->url(array("controller" => "ratoeira", "action" => "deleteavistamento"), null, true) ?>', <?= $vRatoeiraAvistamento['avs_id'] ?>)"></td>

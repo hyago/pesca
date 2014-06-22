@@ -301,6 +301,40 @@ class Application_Model_LinhaFundo
 
         return $this->dbTableLinhaFundo->fetchAll($select)->toArray();
     }
+    public function selectLinhaFundoHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableLinhaFundoAvistamento = new Application_Model_DbTable_VLinhaFundoHasAvistamento();
+        $selectAvist = $this->dbTableLinhaFundoAvistamento->select()
+                ->from($this->dbTableLinhaFundoAvistamento)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableLinhaFundoAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTLinhaFundoHasAvistamento = new Application_Model_DbTable_LinhaFundoHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'lf_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTLinhaFundoHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTLinhaFundoHasAvistamento = new Application_Model_DbTable_LinhaFundoHasAvistamento();       
+                
+        $dadosLinhaFundoHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'lf_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTLinhaFundoHasAvistamento->delete($dadosLinhaFundoHasAvistamento);
+    }
 }
 

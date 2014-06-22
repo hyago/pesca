@@ -256,6 +256,40 @@ class Application_Model_Tarrafa
 
         return $this->dbTableTarrafa->fetchAll($select)->toArray();
     }
+    public function selectTarrafaHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableTarrafaAvistamento = new Application_Model_DbTable_VTarrafaHasAvistamento();
+        $selectAvist = $this->dbTableTarrafaAvistamento->select()
+                ->from($this->dbTableTarrafaAvistamento)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableTarrafaAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTTarrafaHasAvistamento = new Application_Model_DbTable_TarrafaHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'tar_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTTarrafaHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTTarrafaHasAvistamento = new Application_Model_DbTable_TarrafaHasAvistamento();       
+                
+        $dadosTarrafaHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'tar_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTTarrafaHasAvistamento->delete($dadosTarrafaHasAvistamento);
+    }
 
 }

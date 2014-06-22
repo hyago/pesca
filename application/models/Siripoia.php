@@ -246,6 +246,40 @@ class Application_Model_Siripoia
 
         return $this->dbTableSiripoia->fetchAll($select)->toArray();
     }
+    public function selectSiripoiaHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableSiripoiaAvistamento = new Application_Model_DbTable_VSiripoiaHasAvistamento();
+        $selectAvist = $this->dbTableSiripoiaAvistamento->select()
+                ->from($this->dbTableSiripoiaAvistamento)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableSiripoiaAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTSiripoiaHasAvistamento = new Application_Model_DbTable_SiripoiaHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'sir_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTSiripoiaHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTSiripoiaHasAvistamento = new Application_Model_DbTable_SiripoiaHasAvistamento();       
+                
+        $dadosSiripoiaHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'sir_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTSiripoiaHasAvistamento->delete($dadosSiripoiaHasAvistamento);
+    }
 }
 

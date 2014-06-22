@@ -249,6 +249,41 @@ class Application_Model_Jerere
 
         return $this->dbTableJerere->fetchAll($select)->toArray();
     }
+    public function selectJerereHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableJerereAvistamento = new Application_Model_DbTable_VJerereHasAvistamento();
+        $selectAvist = $this->dbTableJerereAvistamento->select()
+                ->from($this->dbTableJerereAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableJerereAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTJerereHasAvistamento = new Application_Model_DbTable_JerereHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'jre_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTJerereHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTJerereHasAvistamento = new Application_Model_DbTable_JerereHasAvistamento();       
+                
+        $dadosJerereHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'jre_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTJerereHasAvistamento->delete($dadosJerereHasAvistamento);
+    }
 
 }
 

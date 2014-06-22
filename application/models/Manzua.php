@@ -247,7 +247,41 @@ class Application_Model_Manzua
 
         return $this->dbTableManzua->fetchAll($select)->toArray();
     }
+    public function selectManzuaHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableManzuaAvistamento = new Application_Model_DbTable_VManzuaHasAvistamento();
+        $selectAvist = $this->dbTableManzuaAvistamento->select()
+                ->from($this->dbTableManzuaAvistamento)->order($order)->limit($limit);
 
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableManzuaAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTManzuaHasAvistamento = new Application_Model_DbTable_ManzuaHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'man_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTManzuaHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTManzuaHasAvistamento = new Application_Model_DbTable_ManzuaHasAvistamento();       
+                
+        $dadosManzuaHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'man_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTManzuaHasAvistamento->delete($dadosManzuaHasAvistamento);
+    }
 
 
 }

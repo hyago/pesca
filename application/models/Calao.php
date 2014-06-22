@@ -287,8 +287,8 @@ class Application_Model_Calao
         $this->dbTableTCalaoHasAvistamento = new Application_Model_DbTable_CalaoHasAvistamento();       
                 
         $dadosCalaoHasAvistamento = array(
-            'cal_id = ?' => $idAvistamento,
-            'avs_id= ?' => $idEntrevista
+            'avs_id = ?' => $idAvistamento,
+            'cal_id= ?' => $idEntrevista
         );
         
         $this->dbTableTCalaoHasAvistamento->delete($dadosCalaoHasAvistamento);

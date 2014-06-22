@@ -300,8 +300,8 @@ class Application_Model_ArrastoFundo
         $this->dbTableTArrastoHasAvistamento = new Application_Model_DbTable_ArrastoHasAvistamento();       
                 
         $dadosArrastoHasAvistamento = array(
-            'af_id = ?' => $idAvistamento,
-            'avs_id= ?' => $idEntrevista
+            'avs_id = ?' => $idAvistamento,
+            'af_id= ?' => $idEntrevista
         );
         
         $this->dbTableTArrastoHasAvistamento->delete($dadosArrastoHasAvistamento);

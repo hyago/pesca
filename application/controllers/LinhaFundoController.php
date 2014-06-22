@@ -24,6 +24,7 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->view->assign("usuario",$this->usuario);
         
         
+        $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelLinhaFundo = new Application_Model_LinhaFundo();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();;
@@ -90,7 +91,7 @@ class LinhaFundoController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $mare = $this->modelMare->select();
         $idEntrevista = $this->_getParam('id');
@@ -101,10 +102,10 @@ class LinhaFundoController extends Zend_Controller_Action
 
         $vEspecieCapturadas = $this->modelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$idEntrevista);
         
-        //$vArrastoAvistamento = $this->modelLinhaFundo->selectLinhaFundoHasAvistamento('lf_id='.$idEntrevista);
+        $vLinhaFundoAvistamento = $this->modelLinhaFundo->selectLinhaFundoHasAvistamento('lf_id='.$idEntrevista);
         
-        //$this->view->assign('avistamentos', $avistamentos);
-        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('vLinhaFundoAvistamento', $vLinhaFundoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('vLinhaFundo', $vLinhaFundo);

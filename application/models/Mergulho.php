@@ -252,5 +252,39 @@ private $dbTableMergulho;
 
         return $this->dbTableMergulho->fetchAll($select)->toArray();
     }
-    
+    public function selectMergulhoHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableMergulhoAvistamento = new Application_Model_DbTable_VMergulhoHasAvistamento();
+        $selectAvist = $this->dbTableMergulhoAvistamento->select()
+                ->from($this->dbTableMergulhoAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableMergulhoAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTMergulhoHasAvistamento = new Application_Model_DbTable_MergulhoHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'mer_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTMergulhoHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTMergulhoHasAvistamento = new Application_Model_DbTable_MergulhoHasAvistamento();       
+                
+        $dadosMergulhoHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'mer_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTMergulhoHasAvistamento->delete($dadosMergulhoHasAvistamento);
+    }
 }

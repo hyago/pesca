@@ -301,7 +301,41 @@ class Application_Model_Emalhe
 
         return $this->dbTableEmalhe->fetchAll($select)->toArray();
     }
-    
+    public function selectEmalheHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableEmalheAvistamento = new Application_Model_DbTable_VEmalhelHasAvistamento();
+        $selectAvist = $this->dbTableEmalheAvistamento->select()
+                ->from($this->dbTableEmalheAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableEmalheAvistamento->fetchAll($selectAvist)->toArray();
+    }
+    public function insertAvistamento($idEntrevista,$idAvistamento)
+    {
+        $this->dbTableTEmalhelHasAvistamento = new Application_Model_DbTable_EmalhelHasAvistamento();
+        
+        
+        $dadosAvistamento = array(
+            'em_id' => $idEntrevista,
+            'avs_id' => $idAvistamento
+        );
+        
+        $this->dbTableTEmalhelHasAvistamento->insert($dadosAvistamento);
+        return;
+    }
+    public function deleteAvistamento($idAvistamento, $idEntrevista){
+        $this->dbTableTEmalhelHasAvistamento = new Application_Model_DbTable_EmalhelHasAvistamento();       
+                
+        $dadosEmalhelHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'em_id= ?' => $idEntrevista
+        );
+        
+        $this->dbTableTEmalhelHasAvistamento->delete($dadosEmalhelHasAvistamento);
+    }
 
 
 }

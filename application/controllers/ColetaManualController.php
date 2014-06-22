@@ -24,7 +24,7 @@ class ColetaManualController extends Zend_Controller_Action
         $this->view->assign("usuario",$this->usuario);
         
         
-        
+        $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
         $this->modelColetaManual = new Application_Model_ColetaManual();
@@ -84,7 +84,7 @@ class ColetaManualController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         
         $idEntrevista = $this->_getParam('id');
@@ -95,10 +95,10 @@ class ColetaManualController extends Zend_Controller_Action
 
         $vEspecieCapturadas = $this->modelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$idEntrevista);
         
-        //$vArrastoAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
+        $vColetaManualAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
         
-        //$this->view->assign('avistamentos', $avistamentos);
-        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('vColetaManualAvistamento', $vColetaManualAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('vColetaManual', $vColetaManual);

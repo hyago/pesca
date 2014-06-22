@@ -24,7 +24,7 @@ private $usuario;
         $this->view->assign("usuario",$this->usuario);
         
         
-        
+        $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
         $this->modelTarrafa = new Application_Model_Tarrafa();
@@ -85,7 +85,7 @@ private $usuario;
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
-        //$avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         
         
         $idEntrevista = $this->_getParam('id');
@@ -94,10 +94,10 @@ private $usuario;
 
         $vEspecieCapturadas = $this->modelTarrafa->selectTarrafaHasEspCapturadas('tar_id='.$idEntrevista);
         
-        //$vArrastoAvistamento = $this->modelTarrafa->selectTarrafaHasAvistamento('tar_id='.$idEntrevista);
+        $vTarrafaAvistamento = $this->modelTarrafa->selectTarrafaHasAvistamento('tar_id='.$idEntrevista);
         
-        //$this->view->assign('avistamentos', $avistamentos);
-        //$this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
+        $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('vTarrafaAvistamento', $vTarrafaAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('vTarrafa', $vTarrafa);

@@ -64,8 +64,8 @@ private $dbTableColetaManual;
             'cml_mreviva' => $request['mareviva']
         );
         
-        $insertArrasto =$this->dbTableColetaManual->insert($dadosColetaManual);
-        return $insertArrasto;
+        $insertColetaManual =$this->dbTableColetaManual->insert($dadosColetaManual);
+        return $insertColetaManual;
     }
     
     public function update(array $request)
@@ -218,9 +218,21 @@ private $dbTableColetaManual;
 
         return $this->dbTableColetaManual->fetchAll($select)->toArray();
     }
+    public function selectColetaManualHasAvistamento($where = null, $order = null, $limit = null)
+    {
+        $this->dbTableColetaManualAvistamento = new Application_Model_DbTable_VColetaManualHasAvistamento();
+        $selectAvist = $this->dbTableColetaManualAvistamento->select()
+                ->from($this->dbTableColetaManualAvistamento)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $selectAvist->where($where);
+        }
+
+        return $this->dbTableColetaManualAvistamento->fetchAll($selectAvist)->toArray();
+    }
     public function insertAvistamento($idEntrevista,$idAvistamento)
     {
-        $this->dbTableTArrastoHasAvistamento = new Application_Model_DbTable_ArrastoHasAvistamento();
+        $this->dbTableTColetaManualHasAvistamento = new Application_Model_DbTable_ColetaManualHasAvistamento();
         
         
         $dadosAvistamento = array(
@@ -228,18 +240,18 @@ private $dbTableColetaManual;
             'avs_id' => $idAvistamento
         );
         
-        $this->dbTableTArrastoHasAvistamento->insert($dadosAvistamento);
+        $this->dbTableTColetaManualHasAvistamento->insert($dadosAvistamento);
         return;
     }
     public function deleteAvistamento($idAvistamento, $idEntrevista){
-        $this->dbTableTArrastoHasAvistamento = new Application_Model_DbTable_ArrastoHasAvistamento();       
+        $this->dbTableTColetaManualHasAvistamento = new Application_Model_DbTable_ColetaManualHasAvistamento();       
                 
-        $dadosArrastoHasAvistamento = array(
-            'cml_id = ?' => $idAvistamento,
-            'avs_id= ?' => $idEntrevista
+        $dadosColetaManualHasAvistamento = array(
+            'avs_id = ?' => $idAvistamento,
+            'cml_id= ?' => $idEntrevista
         );
         
-        $this->dbTableTArrastoHasAvistamento->delete($dadosArrastoHasAvistamento);
+        $this->dbTableTColetaManualHasAvistamento->delete($dadosColetaManualHasAvistamento);
     }
 }
 
