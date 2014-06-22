@@ -65,21 +65,52 @@ class ModeloRelatorio {
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$this->page->drawText( $text,  $columnPosition, $this->linha );
 	}
-        
-        public function setLegValue( $columnPosition, $leg, $text ) {
+	
+	public function setLegValue( $columnPosition, $leg, $text ) {
 		if ( $this->isFirstPage ) {
 			$this->setNewPage();
 			$this->isFirstPage = FALSE;
 		}
-                $this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
-                $this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
-		$this->page->drawText( $leg,  $columnPosition, $this->linha );
-                $tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
 		
-                $this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
-		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
+		$this->page->drawText( $leg,  $columnPosition, $this->linha );
+		
+		$tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
+		
+		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
 		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha );
 	}
+
+	public function setLegValueAlinhadoDireita( $columnPosition, $columnLargura, $leg, $text ) {
+		if ( $this->isFirstPage ) {
+			$this->setNewPage();
+			$this->isFirstPage = FALSE;
+		}
+		
+		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
+		$this->page->drawText( $leg,  $columnPosition, $this->linha );
+		
+// 		$tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
+		
+		$tw = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
+		
+		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
+		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha );
+	}
+	
+	public function setLegAlinhadoDireita( $columnPosition,  $columnLargura, $text ) {
+		if ( $this->isFirstPage ) {
+			$this->setNewPage();
+			$this->isFirstPage = FALSE;
+		}
+		
+		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
+		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+		$pos = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
+		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha );
+		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
+	}
+	
 	
 	public function setValueAlinhadoDireita( $columnPosition,  $columnLargura, $text ) {
 		if ( $this->isFirstPage ) {

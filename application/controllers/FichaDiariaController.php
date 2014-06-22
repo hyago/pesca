@@ -258,7 +258,9 @@ class FichaDiariaController extends Zend_Controller_Action {
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelFichaDiaria = new Application_Model_FichaDiaria();
-        $localFichaDiaria = $localModelFichaDiaria->selectView(null, array('fd_data', 'pto_nome'), NULL);
+
+        $localFichaDiaria = $localModelFichaDiaria->selectView('fd_id = 303', array('fd_data', 'pto_nome'), NULL);
+// 		$localFichaDiaria = $localModelFichaDiaria->selectView(null, array('fd_data', 'pto_nome'), NULL);
 
         $localModelMonitoramento = new Application_Model_Monitoramento();
         $localModelArrastoFundo = new Application_Model_ArrastoFundo();
@@ -313,8 +315,8 @@ class FichaDiariaController extends Zend_Controller_Action {
                         }
                         $modeloRelatorio->setLegValue(480, 'Motor: ', $localMotor);
                         $modeloRelatorio->setNewLine();
-                        $modeloRelatorio->setLegValue(90, 'Data/Hora saída: ', $arrastofundo['af_dhsaida']);
-                        $modeloRelatorio->setLegValue(320, 'Data/Hora volta: ', $arrastofundo['af_dhvolta']);
+                        $modeloRelatorio->setLegValue(90, 'Data/Hora saída: ', date_format(date_create($arrastofundo['af_dhsaida']), 'd/m/Y H:i'));
+                        $modeloRelatorio->setLegValue(320, 'Data/Hora volta: ', date_format(date_create($arrastofundo['af_dhvolta']), 'd/m/Y H:i'));
                         $modeloRelatorio->setNewLine();
                         $modeloRelatorio->setLegValue(90, 'Alimento: ', $arrastofundo['af_alimento']);
                         $modeloRelatorio->setLegValue(200, 'Combustível: ', $arrastofundo['af_diesel']);
@@ -324,26 +326,42 @@ class FichaDiariaController extends Zend_Controller_Action {
                         $modeloRelatorio->setLegValue(90, 'Observações: ', $arrastofundo['af_obs']);
                         $modeloRelatorio->setNewLine();
                         
-                        $localArrastoFundoPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro("af_id=".$arrastofundo['af_id'], null, null);                        
+                        $localArrastoFundoPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro("af_id=".$arrastofundo['af_id'], null, null);
+                        if ( sizeof($localArrastoFundoPesqueiro) > 0) {
+							$modeloRelatorio->setLegValue(120, 'Tempo no pesqueiro(hora:min.)', '');
+							$modeloRelatorio->setLegValue(270, 'Pesqueiro', '');
+                            $modeloRelatorio->setNewLine();
+                        }
                         foreach ($localArrastoFundoPesqueiro as $key_p => $pesqueiro) {
-                            $modeloRelatorio->setLegValue(120, 'Tempo no pesqueiro: ', $pesqueiro['t_tempopesqueiro']);
-                            $modeloRelatorio->setLegValue(270, 'Pesqueiro: ', $pesqueiro['paf_pesqueiro']);
+                            $modeloRelatorio->setValue(120, date_format(date_create($pesqueiro['t_tempopesqueiro']), 'H:i'));
+                            $modeloRelatorio->setValue(270, $pesqueiro['paf_pesqueiro']);
                             $modeloRelatorio->setNewLine();
                         }
                         
-                        $localArrastoFundoEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas("af_id=".$arrastofundo['af_id'], null, null);                        
+                        $localArrastoFundoEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas("af_id=".$arrastofundo['af_id'], null, null);
+                        if (sizeof($localArrastoFundoEspecie) > 0) {
+							$modeloRelatorio->setLegValue(120, 'Espécie capturada ', '');
+                            $modeloRelatorio->setLegAlinhadoDireita(310, 40, 'Quantidade ');
+                            $modeloRelatorio->setLegAlinhadoDireita(360, 90, 'Peso(kg) ');
+                            $modeloRelatorio->setLegAlinhadoDireita(480, 90, 'Preço(R$/kg) ');
+                            $modeloRelatorio->setNewLine();
+                        }
                         foreach ($localArrastoFundoEspecie as $key_ep => $especie) {
-                            $modeloRelatorio->setLegValue(120, 'Espécie capturada: ', $especie['esp_nome_comum']);
-                            $modeloRelatorio->setLegValue(300, 'Peso: ', $especie['spc_peso_kg']);
-                            $modeloRelatorio->setLegValue(380, 'Quantidade: ', $especie['spc_quantidade']);
-                            $modeloRelatorio->setLegValue(480, 'Preço: ', $especie['spc_preco']);
+                            $modeloRelatorio->setValue(120, $especie['esp_nome_comum']);
+                            $modeloRelatorio->setValueAlinhadoDireita(310, 40, $especie['spc_quantidade']);
+                            $modeloRelatorio->setValueAlinhadoDireita(360, 90, number_format($especie['spc_peso_kg'], 2, ',', ' '));
+                            $modeloRelatorio->setValueAlinhadoDireita(480, 90, number_format($especie['spc_preco'], 2, ',', ' '));
                             
                             $modeloRelatorio->setNewLine();
                         }
                         
-                         $localArrastoFundoAvistamento = $localModelArrastoFundo->selectArrastoHasAvistamento("af_id=".$arrastofundo['af_id'], null, null);                        
+                        $localArrastoFundoAvistamento = $localModelArrastoFundo->selectArrastoHasAvistamento("af_id=".$arrastofundo['af_id'], null, null);
+                        if ( sizeof($localArrastoFundoAvistamento) > 0 ) {
+							$modeloRelatorio->setLegValue(120, 'Avistamento', '');
+							$modeloRelatorio->setNewLine();
+                        }
                         foreach ($localArrastoFundoAvistamento as $key_avs => $avistamento) {
-                            $modeloRelatorio->setLegValue(120, 'Avistamento: ', $avistamento['avs_descricao']);
+                            $modeloRelatorio->setValue(120, $avistamento['avs_descricao']);
                             $modeloRelatorio->setNewLine();
                         }
                         $modeloRelatorio->setNewLine();
@@ -356,11 +374,11 @@ class FichaDiariaController extends Zend_Controller_Action {
         }
         $pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_ficha_diaria.pdf"');
-        header("Content-type: application/x-pdf");
-        echo $pdf->render();
-//        header("Content-Type: application/pdf");
-// 	echo $pdf->render();
+//         header('Content-Disposition: attachment;filename="rel_ficha_diaria.pdf"');
+//         header("Content-type: application/x-pdf");
+//         echo $pdf->render();
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
     }
 
 }

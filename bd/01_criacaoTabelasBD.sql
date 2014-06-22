@@ -197,7 +197,7 @@ Drop table if exists t_calao;
 -- -----------------------------------------------------
 -- TABLE T_UF
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_UF (
+CREATE TABLE T_UF (
  TUF_SIGLA VARCHAR(2) NOT NULL,
  TUF_NOME VARCHAR(25) NOT NULL,
  PRIMARY KEY (TUF_SIGLA)
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS T_UF (
 -- -----------------------------------------------------
 -- TABLE T_MUNICIPIO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_MUNICIPIO (
+CREATE TABLE T_MUNICIPIO (
  TMUN_ID SERIAL,
  TMUN_MUNICIPIO VARCHAR(50) NOT NULL,
  TUF_SIGLA VARCHAR(2) NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS T_MUNICIPIO (
 -- -----------------------------------------------------
 -- TABLE T_ENDERECO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ENDERECO (
+CREATE TABLE T_ENDERECO (
  TE_ID SERIAL,
  TE_LOGRADOURO VARCHAR(100) NULL,
  TE_NUMERO VARCHAR(45) NULL,
@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS T_ENDERECO (
 -- -----------------------------------------------------
 -- TABLE T_ESCOLARIDADE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ESCOLARIDADE (
+CREATE TABLE T_ESCOLARIDADE (
  ESC_ID SERIAL,
  ESC_NIVEL VARCHAR(25) NULL,
  PRIMARY KEY (ESC_ID)
@@ -241,7 +241,7 @@ CREATE TABLE IF NOT EXISTS T_ESCOLARIDADE (
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR (
+CREATE TABLE T_PESCADOR (
  TP_ID SERIAL,
  TP_NOME VARCHAR(60) NOT NULL,
  TP_SEXO VARCHAR(1) NULL,
@@ -276,7 +276,7 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR (
 -- -- -----------------------------------------------------
 -- -- TABLE T_PESCADOR_HAS_T_ESCOLARIDADE
 -- -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ESCOLARIDADE (
+-- CREATE TABLE T_PESCADOR_HAS_T_ESCOLARIDADE (
 --  ESC_ID INT NOT NULL,
 --  TP_ID INT NOT NULL,
 --  PRIMARY KEY (ESC_ID),
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR (
 -- -----------------------------------------------------
 -- TABLE T_RENDA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_RENDA (
+CREATE TABLE T_RENDA (
  REN_ID SERIAL,
  REN_RENDA VARCHAR(40) NULL,
  REN_FATOR NUMERIC(4,2) NULL,
@@ -301,7 +301,7 @@ CREATE TABLE IF NOT EXISTS T_RENDA (
 -- -----------------------------------------------------
 -- TABLE T_PROGRAMASOCIAL
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PROGRAMASOCIAL (
+CREATE TABLE T_PROGRAMASOCIAL (
  PRS_ID SERIAL NOT NULL,
  PRS_PROGRAMA VARCHAR(30) NULL,
  PRIMARY KEY (PRS_ID)
@@ -310,7 +310,7 @@ CREATE TABLE IF NOT EXISTS T_PROGRAMASOCIAL (
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_T_PROGRAMASOCIAL
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_PROGRAMASOCIAL (
+CREATE TABLE T_PESCADOR_HAS_T_PROGRAMASOCIAL (
  TP_ID INT NOT NULL,
  PRS_ID INT NOT NULL,
  PRIMARY KEY (TP_ID, PRS_ID),
@@ -334,7 +334,7 @@ PS.PRS_ID = TBS.PRS_ID;
 -- -- -----------------------------------------------------
 -- -- TABLE T_PESCADOR_HAS_T_ENDERECO
 -- -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ENDERECO (
+-- CREATE TABLE T_PESCADOR_HAS_T_ENDERECO (
 --  TP_ID INT NOT NULL,
 --  TE_ID INT NOT NULL,
 --  PRIMARY KEY (TE_ID),
@@ -345,7 +345,7 @@ PS.PRS_ID = TBS.PRS_ID;
 -- -----------------------------------------------------
 -- TABLE T_COMUNIDADE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_COMUNIDADE (
+CREATE TABLE T_COMUNIDADE (
  TCOM_ID SERIAL,
  TCOM_NOME VARCHAR(50) NOT NULL,
  PRIMARY KEY (TCOM_ID),
@@ -355,7 +355,7 @@ CREATE TABLE IF NOT EXISTS T_COMUNIDADE (
 -- -----------------------------------------------------
 -- TABLE T_COLONIA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_COLONIA (
+CREATE TABLE T_COLONIA (
  TC_ID SERIAL,
  TC_NOME VARCHAR(50) NOT NULL,
  TC_ESPECIFICIDADE CHARACTER VARYING(50) NULL,
@@ -368,7 +368,7 @@ CREATE TABLE IF NOT EXISTS T_COLONIA (
 -- -----------------------------------------------------
 -- TABLE T_ARTEPESCA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ARTEPESCA (
+CREATE TABLE T_ARTEPESCA (
  TAP_ID SERIAL,
  TAP_ARTEPESCA VARCHAR(50) NOT NULL,
  tap_arteficha Varchar(50) null,
@@ -379,7 +379,7 @@ CREATE TABLE IF NOT EXISTS T_ARTEPESCA (
 -- -----------------------------------------------------
 -- TABLE T_TIPOEMBARCACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TIPOEMBARCACAO (
+CREATE TABLE T_TIPOEMBARCACAO (
  TTE_ID SERIAL,
  TTE_TIPOEMBARCACAO VARCHAR(50) NOT NULL,
  PRIMARY KEY (TTE_ID),
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS T_TIPOEMBARCACAO (
 -- -----------------------------------------------------
 -- TABLE T_TIPODEPENDENTE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TIPODEPENDENTE (
+CREATE TABLE T_TIPODEPENDENTE (
  TTD_ID SERIAL,
  TTD_TIPODEPENDENTE VARCHAR(30) NOT NULL,
  PRIMARY KEY (TTD_ID)
@@ -398,7 +398,7 @@ CREATE TABLE IF NOT EXISTS T_TIPODEPENDENTE (
 -- -----------------------------------------------------
 -- TABLE T_AREAPESCA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_AREAPESCA (
+CREATE TABLE T_AREAPESCA (
  TAREAP_ID SERIAL,
  TAREAP_AREAPESCA VARCHAR(50) NOT NULL,
  PRIMARY KEY (TAREAP_ID),
@@ -408,7 +408,7 @@ CREATE TABLE IF NOT EXISTS T_AREAPESCA (
 -- -----------------------------------------------------
 -- TABLE T_SITUACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_SITUACAO (
+CREATE TABLE T_SITUACAO (
  TS_ID SERIAL,
  TS_SITUACAO BOOLEAN DEFAULT TRUE NULL,
  TS_MOTIVO VARCHAR(100) NULL,
@@ -418,7 +418,7 @@ CREATE TABLE IF NOT EXISTS T_SITUACAO (
 -- -----------------------------------------------------
 -- TABLE T_TIPOTEL
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TIPOTEL (
+CREATE TABLE T_TIPOTEL (
  TTEL_ID SERIAL,
  TTEL_DESC VARCHAR(50) NOT NULL,
  PRIMARY KEY (TTEL_ID)
@@ -427,7 +427,7 @@ CREATE TABLE IF NOT EXISTS T_TIPOTEL (
 -- -----------------------------------------------------
 -- TABLE T_TELEFONECONTATO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TELEFONECONTATO (
+CREATE TABLE T_TELEFONECONTATO (
  TTCONT_ID SERIAL,
  TTCONT_DDD DECIMAL(2) NOT NULL,
  TTCONT_TELEFONE DECIMAL(10) NOT NULL,
@@ -439,7 +439,7 @@ CREATE TABLE IF NOT EXISTS T_TELEFONECONTATO (
 -- -----------------------------------------------------
 -- TABLE T_LOGIN
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_LOGIN (
+CREATE TABLE T_LOGIN (
  TL_ID SERIAL,
  TL_LOGIN VARCHAR(45) NOT NULL,
  TL_HASHSENHA CHAR(40) NOT NULL,
@@ -451,7 +451,7 @@ CREATE TABLE IF NOT EXISTS T_LOGIN (
 -- -----------------------------------------------------
 -- TABLE T_PERFIL
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PERFIL (
+CREATE TABLE T_PERFIL (
  TP_ID SERIAL,
  TP_PERFIL VARCHAR(40) NOT NULL,
  PRIMARY KEY (TP_ID)
@@ -460,7 +460,7 @@ CREATE TABLE IF NOT EXISTS T_PERFIL (
 -- -----------------------------------------------------
 -- TABLE T_USUARIO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_USUARIO (
+CREATE TABLE T_USUARIO (
  TU_ID SERIAL,
  TU_NOME VARCHAR(45) NOT NULL,
  TU_SEXO VARCHAR(1) NOT NULL,
@@ -482,7 +482,7 @@ CREATE TABLE IF NOT EXISTS T_USUARIO (
 -- -----------------------------------------------------
 -- TABLE T_HISTORICORECADASTRAMENTO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_HISTORICORECADASTRAMENTO (
+CREATE TABLE T_HISTORICORECADASTRAMENTO (
  THR_DATA DATE NOT NULL,
  TP_ID INT NULL,
  TS_ID INT NULL,
@@ -499,7 +499,7 @@ CREATE TABLE IF NOT EXISTS T_HISTORICORECADASTRAMENTO (
 -- -----------------------------------------------------
 -- TABLE T_TIPOCAPTURADA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TIPOCAPTURADA (
+CREATE TABLE T_TIPOCAPTURADA (
  ITC_ID SERIAL,
  ITC_TIPO VARCHAR(30) NULL,
  PRIMARY KEY (ITC_ID)
@@ -508,7 +508,7 @@ CREATE TABLE IF NOT EXISTS T_TIPOCAPTURADA (
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_T_TIPOCAPTURADA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TIPOCAPTURADA (
+CREATE TABLE T_PESCADOR_HAS_T_TIPOCAPTURADA (
  TP_ID INT NOT NULL,
  ITC_ID INT NOT NULL,
  PRIMARY KEY (TP_ID, ITC_ID),
@@ -519,7 +519,7 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TIPOCAPTURADA (
 -- -- -----------------------------------------------------
 -- -- TABLE T_PESCADOR_HAS_T_TIPOARTEPESCA
 -- -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TIPOARTEPESCA (
+-- CREATE TABLE T_PESCADOR_HAS_T_TIPOARTEPESCA (
 --  TP_ID INT NOT NULL,
 --  TAP_ID INT NOT NULL,
 --  ITC_ID INT NULL,
@@ -532,7 +532,7 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TIPOCAPTURADA (
 -- -- -----------------------------------------------------
 -- -- TABLE T_PESCADOR_HAS_T_ESPECIECAPTURADAS
 -- -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ESPECIECAPTURADAS (
+-- CREATE TABLE T_PESCADOR_HAS_T_ESPECIECAPTURADAS (
 --  TP_ID INT NOT NULL,
 --  T_TIPOCAPTURADA_ITC_ID INT NOT NULL,
 --  PRIMARY KEY (TP_ID),
@@ -543,7 +543,7 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TIPOCAPTURADA (
 -- -----------------------------------------------------
 -- TABLE T_PORTEEMBARCACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PORTEEMBARCACAO (
+CREATE TABLE T_PORTEEMBARCACAO (
  TPE_ID SERIAL,
  TPE_PORTE VARCHAR(30) NOT NULL,
  PRIMARY KEY (TPE_ID)
@@ -552,7 +552,7 @@ CREATE TABLE IF NOT EXISTS T_PORTEEMBARCACAO (
 -- -- -----------------------------------------------------
 -- -- TABLE T_PESCADOR_HAS_T_EMBARCACAO
 -- -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_EMBARCACAO (
+-- CREATE TABLE T_PESCADOR_HAS_T_EMBARCACAO (
 --  TTE_ID INT NOT NULL,
 --  TP_ID INT NOT NULL,
 --  TPTE_MOTOR BOOLEAN NOT NULL,
@@ -566,7 +566,7 @@ CREATE TABLE IF NOT EXISTS T_PORTEEMBARCACAO (
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_T_EMBARCACAO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_EMBARCACAO (
+CREATE TABLE T_PESCADOR_HAS_T_EMBARCACAO (
  TTE_ID INT NOT NULL,
  TP_ID INT NOT NULL,
  TPTE_MOTOR BOOLEAN NULL,
@@ -581,7 +581,7 @@ TPTE_DONO INT NULL,
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_T_COLONIA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_COLONIA (
+CREATE TABLE T_PESCADOR_HAS_T_COLONIA (
  TP_ID INT NOT NULL,
  TC_ID INT NOT NULL,
  TPTC_DATAINSCCOLONIA DATE NULL,
@@ -593,7 +593,7 @@ CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_COLONIA (
 -- -----------------------------------------------------
 -- TABLE T_ALTERACAOSENHA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ALTERACAOSENHA (
+CREATE TABLE T_ALTERACAOSENHA (
  TAS_TOKEN CHAR(40) NOT NULL,
  TAS_DATASOLICITACAO TIMESTAMP NOT NULL,
  TAS_DATAALTERACAO TIMESTAMP NULL,
@@ -605,7 +605,7 @@ CREATE TABLE IF NOT EXISTS T_ALTERACAOSENHA (
 -- -----------------------------------------------------
 -- TABLE T_USUARIO_HAS_T_TELEFONECONTATO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_USUARIO_HAS_T_TELEFONECONTATO (
+CREATE TABLE T_USUARIO_HAS_T_TELEFONECONTATO (
  TU_ID INT NOT NULL,
  TTCONT_ID INT NOT NULL,
  PRIMARY KEY (TU_ID, TTCONT_ID),
@@ -616,7 +616,7 @@ CREATE TABLE IF NOT EXISTS T_USUARIO_HAS_T_TELEFONECONTATO (
 -- -- -----------------------------------------------------
 -- -- TABLE T_PESCADOR_HAS_T_TELEFONECONTATO
 -- -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_TELEFONECONTATO (
+-- CREATE TABLE T_PESCADOR_HAS_T_TELEFONECONTATO (
 --  TP_ID INT NOT NULL,
 --  TTCONT_ID INT NOT NULL,
 --  PRIMARY KEY (TP_ID, TTCONT_ID),
@@ -627,7 +627,7 @@ CREATE TABLE IF NOT EXISTS T_USUARIO_HAS_T_TELEFONECONTATO (
 -- -----------------------------------------------------
 -- TABLE T_GRUPO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_GRUPO (
+CREATE TABLE T_GRUPO (
  GRP_ID SERIAL,
  GRP_NOME VARCHAR(45) NULL,
  PRIMARY KEY (GRP_ID)
@@ -636,7 +636,7 @@ CREATE TABLE IF NOT EXISTS T_GRUPO (
 -- -----------------------------------------------------
 -- TABLE T_ORDEM
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ORDEM (
+CREATE TABLE T_ORDEM (
  ORD_ID SERIAL,
  ORD_NOME VARCHAR(30) NULL,
  ORD_CARACTERISTICA VARCHAR(45) NULL,
@@ -648,7 +648,7 @@ CREATE TABLE IF NOT EXISTS T_ORDEM (
 -- -----------------------------------------------------
 -- TABLE T_FAMILIA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_FAMILIA (
+CREATE TABLE T_FAMILIA (
  FAM_ID SERIAL,
  FAM_NOME VARCHAR(45) NULL,
  FAM_ORDEM_FILOGENETICA INT NULL,
@@ -662,7 +662,7 @@ CREATE TABLE IF NOT EXISTS T_FAMILIA (
 -- -----------------------------------------------------
 -- TABLE T_GENERO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_GENERO (
+CREATE TABLE T_GENERO (
  GEN_ID SERIAL,
  GEN_NOME VARCHAR(45) NULL,
  FAM_ID INT NOT NULL,
@@ -673,7 +673,7 @@ CREATE TABLE IF NOT EXISTS T_GENERO (
 -- -----------------------------------------------------
 -- TABLE T_ESPECIE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_ESPECIE (
+CREATE TABLE T_ESPECIE (
  ESP_ID SERIAL,
  ESP_NOME VARCHAR(45) NULL,
  ESP_DESCRITOR VARCHAR(45) NULL,
@@ -696,7 +696,7 @@ CREATE TABLE t_subamostra
 -- -----------------------------------------------------
 -- TABLE T_PORTO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PORTO (
+CREATE TABLE T_PORTO (
  PTO_ID SERIAL,
  PTO_NOME VARCHAR(45) NULL,
  PTO_LOCAL VARCHAR(45) NULL,
@@ -708,7 +708,7 @@ CREATE TABLE IF NOT EXISTS T_PORTO (
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_PORTO (
+CREATE TABLE T_PESCADOR_HAS_T_PORTO (
  TP_ID INT NOT NULL,
  PTO_ID INT NOT NULL,
  PRIMARY KEY (TP_ID,  PTO_ID),
@@ -726,7 +726,7 @@ CREATE VIEW V_PESCADORHASPORTO AS
 -- -----------------------------------------------------
 -- TABLE T_TEMPO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_TEMPO (
+CREATE TABLE T_TEMPO (
  TMP_ID SERIAL,
  TMP_ESTADO VARCHAR(45) NULL,
  PRIMARY KEY (TMP_ID)
@@ -735,7 +735,7 @@ CREATE TABLE IF NOT EXISTS T_TEMPO (
 -- -----------------------------------------------------
 -- TABLE T_VENTO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_VENTO (
+CREATE TABLE T_VENTO (
  VNT_ID SERIAL,
  VNT_FORCA VARCHAR(20) NULL,
  PRIMARY KEY (VNT_ID)
@@ -744,7 +744,7 @@ CREATE TABLE IF NOT EXISTS T_VENTO (
 -- -----------------------------------------------------
 -- TABLE T_FICHA_DIARIA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_FICHA_DIARIA (
+CREATE TABLE T_FICHA_DIARIA (
  FD_ID SERIAL,
  T_ESTAGIARIO_TU_ID INT NOT NULL,
  T_MONITOR_TU_ID1 INT NOT NULL,
@@ -786,7 +786,7 @@ ORDER BY FD.FD_DATA DESC , TP.PTO_NOME ASC;
 -- -----------------------------------------------------
 -- TABLE T_MONITORAMENTO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_MONITORAMENTO (
+CREATE TABLE T_MONITORAMENTO (
  MNT_ID SERIAL,
  MNT_ARTE INT NULL,
  MNT_QUANTIDADE INT NULL,
@@ -801,7 +801,7 @@ CREATE TABLE IF NOT EXISTS T_MONITORAMENTO (
 -- -----------------------------------------------------
 -- TABLE T_PESQUEIRO_AF
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESQUEIRO_AF (
+CREATE TABLE T_PESQUEIRO_AF (
  PAF_ID SERIAL,
  PAF_PESQUEIRO VARCHAR(45) NULL,
  PRIMARY KEY (PAF_ID)
@@ -811,7 +811,7 @@ CREATE TABLE IF NOT EXISTS T_PESQUEIRO_AF (
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_TT_DEPENDENTE
 -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_TT_DEPENDENTE (
+-- CREATE TABLE T_PESCADOR_HAS_TT_DEPENDENTE (
 --  TPTD_ID SERIAL,
 --  TP_ID INT NOT NULL,
 --  T_TIPODEPENDENTE_TTD_ID INT NOT NULL,
@@ -824,7 +824,7 @@ CREATE TABLE IF NOT EXISTS T_PESQUEIRO_AF (
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_T_COMUNIDADE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_COMUNIDADE (
+CREATE TABLE T_PESCADOR_HAS_T_COMUNIDADE (
  TP_ID INT NOT NULL,
  TCOM_ID INT NOT NULL,
  PRIMARY KEY (TP_ID,  TCOM_ID),
@@ -1060,7 +1060,7 @@ PHE.TPE_ID = TPE.TPE_ID;
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_T_AREAPESCA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_AREAPESCA (
+CREATE TABLE T_PESCADOR_HAS_T_AREAPESCA (
 TP_ID INT NOT NULL,
 TAREAP_ID INT NOT NULL,
  PRIMARY KEY (TP_ID, TAREAP_ID),
@@ -1084,7 +1084,7 @@ WHERE PA.TAREAP_ID = AREA.TAREAP_ID;
 -- -----------------------------------------------------
 -- TABLE T_PESCADOR_HAS_T_ARTEPESCA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS T_PESCADOR_HAS_T_ARTEPESCA (
+CREATE TABLE T_PESCADOR_HAS_T_ARTEPESCA (
  TP_ID INT NOT NULL,
  TAP_ID INT NOT NULL,
  PRIMARY KEY (TP_ID, TAP_ID),
@@ -1125,7 +1125,7 @@ CREATE OR REPLACE VIEW v_monitoramentobyficha AS
 
 --DROP TABLE t_barco;
 
-CREATE TABLE IF NOT EXISTS t_barco
+CREATE TABLE t_barco
 (
   bar_id serial NOT NULL,
   bar_nome character varying(45) NULL,
@@ -1135,7 +1135,7 @@ CREATE TABLE IF NOT EXISTS t_barco
 
 --DROP TABLE t_isca;
 
-CREATE TABLE IF NOT EXISTS t_isca
+CREATE TABLE t_isca
 (
   isc_id serial NOT NULL,
   isc_tipo character varying(45),
@@ -1145,7 +1145,7 @@ CREATE TABLE IF NOT EXISTS t_isca
 
 -- DROP TABLE t_avistamento;
 
-CREATE TABLE IF NOT EXISTS T_AVISTAMENTO
+CREATE TABLE T_AVISTAMENTO
 (
   AVS_ID SERIAL NOT NULL,
   AVS_DESCRICAO CHARACTER VARYING(50) NULL,
@@ -1157,18 +1157,29 @@ CREATE TABLE IF NOT EXISTS T_AVISTAMENTO
 
 
 
-CREATE TABLE IF NOT EXISTS t_mare
+CREATE TABLE t_mare
 (
   mre_id serial NOT NULL,
   mre_tipo character varying(20),
   CONSTRAINT t_mare_pkey PRIMARY KEY (mre_id)
 );
 
+
+-- -----------------------------------------------------
+-- TABLE T_DESTINOPESCADO
+-- -----------------------------------------------------
+DROP TABLE T_DESTINOPESCADO;
+CREATE TABLE T_DESTINOPESCADO (
+ DP_ID SERIAL,
+ DP_DESTINO VARCHAR(40) NULL,
+ PRIMARY KEY (DP_ID)
+);
+
 -- -- Table: t_monitoramento
 -- 
 -- --DROP TABLE t_monitoramento;
 -- 
--- CREATE TABLE IF NOT EXISTS t_monitoramento
+-- CREATE TABLE t_monitoramento
 -- (
 --   mnt_id serial NOT NULL,
 --   mnt_arte integer,
@@ -1183,7 +1194,7 @@ CREATE TABLE IF NOT EXISTS t_mare
 -- Table: t_arrastofundo
 
 
-CREATE TABLE IF NOT EXISTS t_arrastofundo
+CREATE TABLE t_arrastofundo
 (
   af_id serial NOT NULL,
   af_embarcado boolean NULL,
@@ -1197,13 +1208,12 @@ CREATE TABLE IF NOT EXISTS t_arrastofundo
   af_oleo double precision NULL,
   af_alimento double precision NULL,
   af_gelo double precision NULL,
-  af_avistou character varying(255) NULL,
   af_subamostra boolean NULL,
   sa_id integer NULL,
   af_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   af_motor boolean NULL,
-  af_destino character varying(255), 
+  dp_id integer null,
   CONSTRAINT t_arrastofundo_pkey PRIMARY KEY (af_id),
   CONSTRAINT fk_t_arrastofundo_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1219,12 +1229,15 @@ CREATE TABLE IF NOT EXISTS t_arrastofundo
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_arrastofundo_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+  CONSTRAINT t_arrastofundo_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 -- Table: t_calao
 
-CREATE TABLE IF NOT EXISTS t_calao
+CREATE TABLE t_calao
 (
   cal_id serial NOT NULL,
   cal_embarcada boolean NULL,
@@ -1234,7 +1247,6 @@ CREATE TABLE IF NOT EXISTS t_calao
   cal_quantpescadores integer NULL,
   cal_data date NULL,
   cal_tempogasto time without time zone NULL,
-  cal_avistou character varying(255) NULL,
   cal_subamostra boolean NULL,
   sa_id integer NULL,
   cal_npanos integer NULL, 
@@ -1245,7 +1257,7 @@ CREATE TABLE IF NOT EXISTS t_calao
   cal_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   cal_motor boolean,
-  cal_destino character varying(255), 
+  dp_id integer null,
   CONSTRAINT t_calao_pkey PRIMARY KEY (cal_id),
   CONSTRAINT fk_t_calao_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1261,11 +1273,14 @@ CREATE TABLE IF NOT EXISTS t_calao
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_calao_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_calao_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
-CREATE TABLE IF NOT EXISTS t_coletamanual
+CREATE TABLE t_coletamanual
 (
   cml_id serial NOT NULL,
   cml_embarcada boolean NULL,
@@ -1276,7 +1291,6 @@ CREATE TABLE IF NOT EXISTS t_coletamanual
   cml_dhsaida timestamp without time zone NULL,
   cml_dhvolta timestamp without time zone NULL,
   cml_tempogasto time without time zone NULL,
-  cml_avistamento character varying(255) NULL,
   cml_subamostra boolean NULL,
   sa_id integer NULL,
   cml_obs character varying(255) NULL,
@@ -1284,7 +1298,7 @@ CREATE TABLE IF NOT EXISTS t_coletamanual
   mre_id integer NULL,
   cml_mreviva boolean NULL,
   cml_motor boolean NULL,
-  cml_destino character varying(255),
+  dp_id integer null, 
   CONSTRAINT t_coletamanual_pkey PRIMARY KEY (cml_id),
   CONSTRAINT fk_t_coletamanual_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1303,12 +1317,15 @@ CREATE TABLE IF NOT EXISTS t_coletamanual
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_coletamanual_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_coletamanual_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
 -- Table: t_emalhe
-CREATE TABLE IF NOT EXISTS t_emalhe
+CREATE TABLE t_emalhe
 (
   em_id serial NOT NULL,
   em_embarcado boolean NULL,
@@ -1322,7 +1339,6 @@ CREATE TABLE IF NOT EXISTS t_emalhe
   em_oleo double precision NULL,
   em_alimento double precision NULL,
   em_gelo double precision NULL,
-  em_avistou character varying(255) NULL,
   em_subamostra boolean NULL,
   sa_id integer NULL,
   em_tamanho double precision NULL,
@@ -1332,7 +1348,7 @@ CREATE TABLE IF NOT EXISTS t_emalhe
   em_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   em_motor boolean NULL,
-  em_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_emalhe_pkey PRIMARY KEY (em_id),
   CONSTRAINT fk_t_emalhe_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1348,6 +1364,9 @@ CREATE TABLE IF NOT EXISTS t_emalhe
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_emalhe_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_emalhe_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 -- Table: t_emalhe_has_t_especie_capturada
@@ -1355,7 +1374,7 @@ CREATE TABLE IF NOT EXISTS t_emalhe
 
 -- Table: t_grosseira
 
-CREATE TABLE IF NOT EXISTS t_grosseira
+CREATE TABLE t_grosseira
 (
   grs_id serial NOT NULL,
   grs_embarcada boolean NULL,
@@ -1369,7 +1388,6 @@ CREATE TABLE IF NOT EXISTS t_grosseira
   grs_oleo double precision NULL,
   grs_alimento double precision NULL,
   grs_gelo double precision NULL,
-  grs_avistou character varying(255) NULL,
   grs_numlinhas integer NULL,
   grs_numanzoisplinha integer NULL,
   grs_subamostra boolean NULL,
@@ -1378,7 +1396,7 @@ CREATE TABLE IF NOT EXISTS t_grosseira
   grs_obs character varying(255) NULL,
   mnt_id integer NOT NULL,
   grs_motor boolean NULL,
-  grs_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_grosseira_pkey PRIMARY KEY (grs_id),
   CONSTRAINT fk_t_grosseira_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1397,15 +1415,17 @@ CREATE TABLE IF NOT EXISTS t_grosseira
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_grosseira_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_grosseira_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
-)
-;
+);
 -- Table: t_grosseira_has_t_especie_capturada
 
 
 -- Table: t_jerere
 
-CREATE TABLE IF NOT EXISTS t_jerere
+CREATE TABLE t_jerere
 (
   jre_id serial NOT NULL,
   jre_embarcada boolean NULL,
@@ -1416,7 +1436,6 @@ CREATE TABLE IF NOT EXISTS t_jerere
   jre_dhsaida timestamp without time zone NULL,
   jre_dhvolta timestamp without time zone NULL,
   jre_tempogasto time without time zone NULL,
-  jre_avistamento character varying(255) NULL,
   jre_subamostra boolean NULL,
   sa_id integer NULL,
   jre_numarmadilhas integer NULL,
@@ -1425,7 +1444,7 @@ CREATE TABLE IF NOT EXISTS t_jerere
   mre_id integer NULL,
   jre_mreviva boolean NULL,
   jre_motor boolean NULL,
-  jre_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_jerere_pkey PRIMARY KEY (jre_id),
   CONSTRAINT fk_t_jerere_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1444,6 +1463,9 @@ CREATE TABLE IF NOT EXISTS t_jerere
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_jerere_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_jerere_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 -- Table: t_jerere_has_t_especie_capturada
@@ -1453,7 +1475,7 @@ CREATE TABLE IF NOT EXISTS t_jerere
 -- Table: t_linha
 
 
-CREATE TABLE IF NOT EXISTS t_linha
+CREATE TABLE t_linha
 (
   lin_id serial NOT NULL,
   lin_embarcada boolean NULL,
@@ -1467,7 +1489,6 @@ CREATE TABLE IF NOT EXISTS t_linha
   lin_oleo double precision NULL,
   lin_alimento double precision NULL,
   lin_gelo double precision NULL,
-  lin_avistou character varying(255) NULL,
   lin_subamostra boolean NULL,
   sa_id integer NULL,
   lin_numlinhas integer NULL,
@@ -1476,7 +1497,7 @@ CREATE TABLE IF NOT EXISTS t_linha
   mnt_id integer NOT NULL,
   lin_motor boolean NULL,
   lin_obs character varying(255) NULL,
-  lin_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_linha_pkey PRIMARY KEY (lin_id),
   CONSTRAINT fk_t_linha_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1495,6 +1516,9 @@ CREATE TABLE IF NOT EXISTS t_linha
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_linha_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_linha_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 -- Table: t_linha_has_t_especie_capturada
@@ -1504,7 +1528,7 @@ CREATE TABLE IF NOT EXISTS t_linha
 -- Table: t_linhafundo
 
 
-CREATE TABLE IF NOT EXISTS t_linhafundo
+CREATE TABLE t_linhafundo
 (
   lf_id serial NOT NULL,
   lf_embarcada boolean NULL,
@@ -1519,7 +1543,6 @@ CREATE TABLE IF NOT EXISTS t_linhafundo
   lf_oleo double precision NULL,
   lf_alimento double precision NULL, 
   lf_gelo double precision NULL,
-  lf_avistamento character varying(255) NULL,
   lf_subamostra boolean NULL,
   sa_id integer NULL,
   lf_numlinhas integer NULL,
@@ -1530,7 +1553,7 @@ CREATE TABLE IF NOT EXISTS t_linhafundo
   mre_id integer NOT NULL,
   lf_mreviva boolean NULL,
   lf_motor boolean NULL,
-  lf_destino character varying(255),
+  dp_id integer null, 
   CONSTRAINT t_linhafundo_pkey PRIMARY KEY (lf_id),
   CONSTRAINT fk_t_linhafundo_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1552,12 +1575,15 @@ CREATE TABLE IF NOT EXISTS t_linhafundo
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_linhafundo_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_linhafundo_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
 
-CREATE TABLE IF NOT EXISTS t_manzua
+CREATE TABLE t_manzua
 (
   man_id serial NOT NULL,
   man_embarcada boolean NULL,
@@ -1568,7 +1594,6 @@ CREATE TABLE IF NOT EXISTS t_manzua
   man_dhsaida timestamp without time zone NULL,
   man_dhvolta timestamp without time zone NULL,
   man_tempogasto time without time zone NULL,
-  man_avistamento character varying(255) NULL,
   man_subamostra boolean NULL,
   sa_id integer NULL,
   man_numarmadilhas integer NULL,
@@ -1577,7 +1602,7 @@ CREATE TABLE IF NOT EXISTS t_manzua
   mre_id integer NULL,
   man_mreviva boolean NULL,
   man_motor boolean NULL,
-  man_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_manzua_pkey PRIMARY KEY (man_id),
   CONSTRAINT fk_t_manzua_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1596,11 +1621,14 @@ CREATE TABLE IF NOT EXISTS t_manzua
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_manzua_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_manzua_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
-CREATE TABLE IF NOT EXISTS t_mergulho
+CREATE TABLE t_mergulho
 (
   mer_id serial NOT NULL,
   mer_embarcada boolean ,
@@ -1611,7 +1639,6 @@ CREATE TABLE IF NOT EXISTS t_mergulho
   mer_dhsaida timestamp without time zone NULL,
   mer_dhvolta timestamp without time zone NULL,
   mer_tempogasto time without time zone NULL,
-  mer_avistou character varying(255) NULL,
   mer_subamostra boolean NULL,
   sa_id integer NULL,
   mnt_id integer NOT NULL,
@@ -1619,7 +1646,7 @@ CREATE TABLE IF NOT EXISTS t_mergulho
   mre_id integer NULL,
   mer_mreviva boolean NULL,
   mer_motor boolean NULL,
-  mer_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_mergulho_pkey PRIMARY KEY (mer_id),
   CONSTRAINT fk_t_mergulho_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1638,11 +1665,14 @@ CREATE TABLE IF NOT EXISTS t_mergulho
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_mergulho_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_mergulho_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
-CREATE TABLE IF NOT EXISTS t_ratoeira
+CREATE TABLE t_ratoeira
 (
   rat_id serial NOT NULL,
   rat_embarcada boolean NULL,
@@ -1653,7 +1683,6 @@ CREATE TABLE IF NOT EXISTS t_ratoeira
   rat_dhsaida timestamp without time zone NULL,
   rat_dhvolta timestamp without time zone NULL,
   rat_tempogasto time without time zone NULL,
-  rat_avistamento character varying(255) NULL,
   rat_subamostra boolean NULL,
   sa_id integer NULL,
   rat_numarmadilhas integer NULL,
@@ -1662,7 +1691,7 @@ CREATE TABLE IF NOT EXISTS t_ratoeira
   mre_id integer NULL,
   rat_mreviva boolean NULL,
   rat_motor boolean NULL,
-  rat_destino character varying(255),
+  dp_id integer null,  
   CONSTRAINT t_ratoeira_pkey PRIMARY KEY (rat_id),
   CONSTRAINT fk_t_ratoeira_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1681,11 +1710,14 @@ CREATE TABLE IF NOT EXISTS t_ratoeira
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_ratoeira_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_ratoeira_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
-CREATE TABLE IF NOT EXISTS t_siripoia
+CREATE TABLE t_siripoia
 (
   sir_id serial NOT NULL,
   sir_embarcada boolean NULL,
@@ -1696,7 +1728,6 @@ CREATE TABLE IF NOT EXISTS t_siripoia
   sir_dhsaida timestamp without time zone NULL,
   sir_dhvolta timestamp without time zone NULL,
   sir_tempogasto time without time zone NULL,
-  sir_avistamento character varying(255) NULL,
   sir_subamostra boolean NULL,
   sa_id integer NULL,
   sir_numarmadilhas integer NULL,
@@ -1705,7 +1736,7 @@ CREATE TABLE IF NOT EXISTS t_siripoia
   mre_id integer NULL,
   sir_mreviva boolean NULL,
   sir_motor boolean NULL,
-  sir_destino character varying(255),
+    dp_id integer null, 
   CONSTRAINT t_siripoia_pkey PRIMARY KEY (sir_id),
   CONSTRAINT fk_t_siripoia_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1724,11 +1755,14 @@ CREATE TABLE IF NOT EXISTS t_siripoia
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_siripoia_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_siripoia_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
-CREATE TABLE IF NOT EXISTS t_tarrafa
+CREATE TABLE t_tarrafa
 (
   tar_id serial NOT NULL,
   tar_embarcado boolean NULL,
@@ -1738,7 +1772,6 @@ CREATE TABLE IF NOT EXISTS t_tarrafa
   tar_quantpescadores integer NULL,
   tar_data date NULL,
   tar_tempogasto time without time zone NULL,
-  tar_avistou character varying(255) NULL,
   tar_subamostra boolean NULL,
   sa_id integer NULL,
   tar_roda double precision NULL,
@@ -1748,7 +1781,7 @@ CREATE TABLE IF NOT EXISTS t_tarrafa
   mnt_id integer NOT NULL,
   tar_obs character varying(255) NULL,
   tar_motor boolean NULL,
-  tar_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_tarrafa_pkey PRIMARY KEY (tar_id),
   CONSTRAINT fk_t_tarrafa_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1764,11 +1797,14 @@ CREATE TABLE IF NOT EXISTS t_tarrafa
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_tarrafa_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_tarrafa_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
-CREATE TABLE IF NOT EXISTS t_varapesca
+CREATE TABLE t_varapesca
 (
   vp_id serial NOT NULL,
   vp_embarcada boolean NULL,
@@ -1783,7 +1819,6 @@ CREATE TABLE IF NOT EXISTS t_varapesca
   vp_oleo double precision NULL,
   vp_alimento double precision NULL,
   vp_gelo double precision NULL,
-  vp_avistamento character varying(255) NULL,
   vp_subamostra boolean NULL,
   sa_id integer NULL,
   vp_numanzoisplinha integer NULL,
@@ -1794,7 +1829,7 @@ CREATE TABLE IF NOT EXISTS t_varapesca
   mre_id integer NULL,
   vp_mreviva boolean NULL,
   vp_motor boolean NULL,
-  vp_destino character varying(255),
+  dp_id integer null,
   CONSTRAINT t_varapesca_pkey PRIMARY KEY (vp_id),
   CONSTRAINT fk_t_varapesca_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1816,12 +1851,15 @@ CREATE TABLE IF NOT EXISTS t_varapesca
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_varapesca_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT t_varapesca_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 
 
-CREATE TABLE IF NOT EXISTS t_arrastofundo_has_t_especie_capturada
+CREATE TABLE t_arrastofundo_has_t_especie_capturada
 (
   spc_af_id serial NOT NULL,
   
@@ -1839,7 +1877,7 @@ CREATE TABLE IF NOT EXISTS t_arrastofundo_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_calao_has_t_especie_capturada
+CREATE TABLE t_calao_has_t_especie_capturada
 (
   spc_cal_id serial NOT NULL,
   
@@ -1857,7 +1895,7 @@ CREATE TABLE IF NOT EXISTS t_calao_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_coletamanual_has_t_especie_capturada
+CREATE TABLE t_coletamanual_has_t_especie_capturada
 (
   spc_cml_id serial NOT NULL,
   
@@ -1876,7 +1914,7 @@ CREATE TABLE IF NOT EXISTS t_coletamanual_has_t_especie_capturada
 );
 
 
-CREATE TABLE IF NOT EXISTS t_emalhe_has_t_especie_capturada
+CREATE TABLE t_emalhe_has_t_especie_capturada
 (
   spc_em_id serial NOT NULL,
   
@@ -1894,7 +1932,7 @@ CREATE TABLE IF NOT EXISTS t_emalhe_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_grosseira_has_t_especie_capturada
+CREATE TABLE t_grosseira_has_t_especie_capturada
 (
   spc_grs_id serial NOT NULL,
   
@@ -1913,7 +1951,7 @@ CREATE TABLE IF NOT EXISTS t_grosseira_has_t_especie_capturada
 );
 
 
-CREATE TABLE IF NOT EXISTS t_jerere_has_t_especie_capturada
+CREATE TABLE t_jerere_has_t_especie_capturada
 (
   spc_jre_id serial NOT NULL,
   
@@ -1931,7 +1969,7 @@ CREATE TABLE IF NOT EXISTS t_jerere_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_linha_has_t_especie_capturada
+CREATE TABLE t_linha_has_t_especie_capturada
 (
   spc_lin_id serial NOT NULL,
   
@@ -1949,7 +1987,7 @@ CREATE TABLE IF NOT EXISTS t_linha_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_linhafundo_has_t_especie_capturada
+CREATE TABLE t_linhafundo_has_t_especie_capturada
 (
   spc_lf_id serial NOT NULL,
   
@@ -1967,7 +2005,7 @@ CREATE TABLE IF NOT EXISTS t_linhafundo_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_manzua_has_t_especie_capturada
+CREATE TABLE t_manzua_has_t_especie_capturada
 (
   spc_man_id serial NOT NULL,
   
@@ -1985,7 +2023,7 @@ CREATE TABLE IF NOT EXISTS t_manzua_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_mergulho_has_t_especie_capturada
+CREATE TABLE t_mergulho_has_t_especie_capturada
 (
   spc_mer_id serial NOT NULL,
   
@@ -2003,7 +2041,7 @@ CREATE TABLE IF NOT EXISTS t_mergulho_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_ratoeira_has_t_especie_capturada
+CREATE TABLE t_ratoeira_has_t_especie_capturada
 (
   spc_rat_id serial NOT NULL,
   
@@ -2021,7 +2059,7 @@ CREATE TABLE IF NOT EXISTS t_ratoeira_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_siripoia_has_t_especie_capturada
+CREATE TABLE t_siripoia_has_t_especie_capturada
 (
   spc_sir_id serial NOT NULL,
   
@@ -2039,7 +2077,7 @@ CREATE TABLE IF NOT EXISTS t_siripoia_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_tarrafa_has_t_especie_capturada
+CREATE TABLE t_tarrafa_has_t_especie_capturada
 (
   spc_tar_id serial NOT NULL,
   
@@ -2057,7 +2095,7 @@ CREATE TABLE IF NOT EXISTS t_tarrafa_has_t_especie_capturada
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_varapesca_has_t_especie_capturada
+CREATE TABLE t_varapesca_has_t_especie_capturada
 (
   spc_vp_id serial NOT NULL,
   
@@ -2080,7 +2118,7 @@ CREATE TABLE IF NOT EXISTS t_varapesca_has_t_especie_capturada
 
 
 
-CREATE TABLE IF NOT EXISTS t_arrastofundo_has_t_pesqueiro
+CREATE TABLE t_arrastofundo_has_t_pesqueiro
 (
   af_paf_id serial,
   af_id integer NOT NULL,
@@ -2094,7 +2132,7 @@ CREATE TABLE IF NOT EXISTS t_arrastofundo_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_calao_has_t_pesqueiro
+CREATE TABLE t_calao_has_t_pesqueiro
 (
   cal_paf_id serial,
   cal_id integer NOT NULL,
@@ -2107,7 +2145,7 @@ CREATE TABLE IF NOT EXISTS t_calao_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_coletamanual_has_t_pesqueiro
+CREATE TABLE t_coletamanual_has_t_pesqueiro
 (
   cml_paf_id serial,
   cml_id integer NOT NULL,
@@ -2122,7 +2160,7 @@ CREATE TABLE IF NOT EXISTS t_coletamanual_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_emalhe_has_t_pesqueiro
+CREATE TABLE t_emalhe_has_t_pesqueiro
 (
   em_paf_id serial,
   em_id integer NOT NULL,
@@ -2135,7 +2173,7 @@ CREATE TABLE IF NOT EXISTS t_emalhe_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_grosseira_has_t_pesqueiro
+CREATE TABLE t_grosseira_has_t_pesqueiro
 (
   grs_paf_id serial,
   grs_id integer NOT NULL,
@@ -2149,7 +2187,7 @@ CREATE TABLE IF NOT EXISTS t_grosseira_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_jerere_has_t_pesqueiro
+CREATE TABLE t_jerere_has_t_pesqueiro
 (
   jre_paf_id serial,
   jre_id integer NOT NULL,
@@ -2165,7 +2203,7 @@ CREATE TABLE IF NOT EXISTS t_jerere_has_t_pesqueiro
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS t_linha_has_t_pesqueiro
+CREATE TABLE t_linha_has_t_pesqueiro
 (
   lin_paf_id serial,
   lin_id integer NOT NULL,
@@ -2179,7 +2217,7 @@ CREATE TABLE IF NOT EXISTS t_linha_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_linhafundo_has_t_pesqueiro
+CREATE TABLE t_linhafundo_has_t_pesqueiro
 (
   lf_paf_id serial,
   lf_id integer NOT NULL,
@@ -2194,7 +2232,7 @@ CREATE TABLE IF NOT EXISTS t_linhafundo_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_manzua_has_t_pesqueiro
+CREATE TABLE t_manzua_has_t_pesqueiro
 (
   man_paf_id serial,
   man_id integer NOT NULL,
@@ -2209,7 +2247,7 @@ CREATE TABLE IF NOT EXISTS t_manzua_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_mergulho_has_t_pesqueiro
+CREATE TABLE t_mergulho_has_t_pesqueiro
 (
   mer_paf_id serial,
   mer_id integer NOT NULL,
@@ -2224,7 +2262,7 @@ CREATE TABLE IF NOT EXISTS t_mergulho_has_t_pesqueiro
       REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_ratoeira_has_t_pesqueiro
+CREATE TABLE t_ratoeira_has_t_pesqueiro
 (
   rat_paf_id serial,
   rat_id integer NOT NULL,
@@ -2239,7 +2277,7 @@ CREATE TABLE IF NOT EXISTS t_ratoeira_has_t_pesqueiro
       REFERENCES t_ratoeira (rat_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_siripoia_has_t_pesqueiro
+CREATE TABLE t_siripoia_has_t_pesqueiro
 (
   sir_paf_id serial,
   sir_id integer NOT NULL,
@@ -2254,7 +2292,7 @@ CREATE TABLE IF NOT EXISTS t_siripoia_has_t_pesqueiro
       REFERENCES t_siripoia (sir_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_tarrafa_has_t_pesqueiro
+CREATE TABLE t_tarrafa_has_t_pesqueiro
 (
   tar_paf_id serial,
   tar_id integer NOT NULL,
@@ -2267,7 +2305,7 @@ CREATE TABLE IF NOT EXISTS t_tarrafa_has_t_pesqueiro
       REFERENCES t_tarrafa (tar_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE TABLE IF NOT EXISTS t_varapesca_has_t_pesqueiro
+CREATE TABLE t_varapesca_has_t_pesqueiro
 (
   vp_paf_id serial,
   vp_id integer NOT NULL,
@@ -2541,7 +2579,7 @@ DROP TABLE T_CALAO_HAS_T_AVISTAMENTO;
   
   
   
-CREATE TABLE IF NOT EXISTS T_ARRASTOFUNDO_HAS_T_AVISTAMENTO
+CREATE TABLE T_ARRASTOFUNDO_HAS_T_AVISTAMENTO
 (
 	AF_ID INTEGER, 
 	AVS_ID INTEGER, 	
@@ -2552,7 +2590,7 @@ CREATE TABLE IF NOT EXISTS T_ARRASTOFUNDO_HAS_T_AVISTAMENTO
 
 
   
-CREATE TABLE IF NOT EXISTS T_CALAO_HAS_T_AVISTAMENTO
+CREATE TABLE T_CALAO_HAS_T_AVISTAMENTO
 (
 	CAL_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2563,7 +2601,7 @@ CREATE TABLE IF NOT EXISTS T_CALAO_HAS_T_AVISTAMENTO
   
 Drop table T_emalhe_HAS_T_AVISTAMENTO;
 
-CREATE TABLE IF NOT EXISTS T_EMALHE_HAS_T_AVISTAMENTO
+CREATE TABLE T_EMALHE_HAS_T_AVISTAMENTO
 (
 	EM_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2574,7 +2612,7 @@ CREATE TABLE IF NOT EXISTS T_EMALHE_HAS_T_AVISTAMENTO
 
 drop table T_TARRAFA_HAS_T_AVISTAMENTO;
   
- CREATE TABLE IF NOT EXISTS T_TARRAFA_HAS_T_AVISTAMENTO
+ CREATE TABLE T_TARRAFA_HAS_T_AVISTAMENTO
 (
 	TAR_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2586,7 +2624,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
  
  
  drop table T_JERERE_HAS_T_AVISTAMENTO;
-  CREATE TABLE IF NOT EXISTS T_JERERE_HAS_T_AVISTAMENTO
+  CREATE TABLE T_JERERE_HAS_T_AVISTAMENTO
 (
 	JRE_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2596,7 +2634,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 );
   
  drop table T_LINHA_HAS_T_AVISTAMENTO;
-  CREATE TABLE IF NOT EXISTS T_LINHA_HAS_T_AVISTAMENTO
+  CREATE TABLE T_LINHA_HAS_T_AVISTAMENTO
 (
 	LIN_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2606,7 +2644,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 );
 
  drop table T_grosseira_HAS_T_AVISTAMENTO;
-  CREATE TABLE IF NOT EXISTS T_grosseira_HAS_T_AVISTAMENTO
+  CREATE TABLE T_grosseira_HAS_T_AVISTAMENTO
 (
 	grs_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2616,7 +2654,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 );
 
  DROP TABLE T_VARAPESCA_HAS_T_AVISTAMENTO;
- CREATE TABLE IF NOT EXISTS T_VARAPESCA_HAS_T_AVISTAMENTO
+ CREATE TABLE T_VARAPESCA_HAS_T_AVISTAMENTO
 (
 	VP_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2627,7 +2665,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 
 
  DROP TABLE T_MERGULHO_HAS_T_AVISTAMENTO;
- CREATE TABLE IF NOT EXISTS T_MERGULHO_HAS_T_AVISTAMENTO
+ CREATE TABLE T_MERGULHO_HAS_T_AVISTAMENTO
 (
 	MER_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2638,7 +2676,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 
 
  DROP TABLE T_MANZUA_HAS_T_AVISTAMENTO;
- CREATE TABLE IF NOT EXISTS T_MANZUA_HAS_T_AVISTAMENTO
+ CREATE TABLE T_MANZUA_HAS_T_AVISTAMENTO
 (
 	MAN_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2651,7 +2689,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 
 
  DROP TABLE T_RATOEIRA_HAS_T_AVISTAMENTO;
- CREATE TABLE IF NOT EXISTS T_RATOEIRA_HAS_T_AVISTAMENTO
+ CREATE TABLE T_RATOEIRA_HAS_T_AVISTAMENTO
 (
 	RAT_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2662,7 +2700,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 
 
  DROP TABLE T_SIRIPOIA_HAS_T_AVISTAMENTO;
- CREATE TABLE IF NOT EXISTS T_SIRIPOIA_HAS_T_AVISTAMENTO
+ CREATE TABLE T_SIRIPOIA_HAS_T_AVISTAMENTO
 (
 	SIR_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2672,7 +2710,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 );
 
  DROP TABLE T_COLETAMANUAL_HAS_T_AVISTAMENTO;
- CREATE TABLE IF NOT EXISTS T_COLETAMANUAL_HAS_T_AVISTAMENTO
+ CREATE TABLE T_COLETAMANUAL_HAS_T_AVISTAMENTO
 (
 	CML_ID INTEGER,
 	AVS_ID INTEGER,
@@ -2683,7 +2721,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 
 
  DROP TABLE T_LINHAFUNDO_HAS_T_AVISTAMENTO;
- CREATE TABLE IF NOT EXISTS T_LINHAFUNDO_HAS_T_AVISTAMENTO
+ CREATE TABLE T_LINHAFUNDO_HAS_T_AVISTAMENTO
 (
 	LF_ID INTEGER,
 	AVS_ID INTEGER,
