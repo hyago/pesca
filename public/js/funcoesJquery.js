@@ -284,6 +284,48 @@ function jsReloadPerfil( frm ){
         location.replace('/perfil');
     }
 }
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ DestinoPescado /_/_/_/_/_/_/_/_/_/_/_/_/_/
+function jsInsertDestinoPescado( frm, pag )
+{
+    if (frm.inputdp_id.value) {
+
+        var tmpUpdate = ( '/destino-pescado/update' + '/dp_id/' + frm.inputdp_id.value + '/dp_destino/' + frm.inputdp_destino.value);
+
+        location.replace(tmpUpdate);
+        
+        return;
+    }
+    if (frm.inputdp_destino.value) {
+
+        var tmpUpdate = (pag + '/dp_destino/' + frm.inputdp_destino.value);
+
+        location.replace(tmpUpdate);
+    }
+}
+
+function jsDeleteDestinoPescado( idDestino, pag )
+{
+    if (confirm("Realmente deseja excluir este item?")) {
+        
+        var tmpUpdate = (pag + '/dp_id/' + idDestino);
+        
+        location.replace(tmpUpdate);
+    }
+}
+
+function jsUpdateDestinoPescado( dp_id, dp_destino, frm )
+{
+    if ( confirm("Realmente deseja EDITAR este item?") ) {
+        frm.inputdp_destino.value = dp_destino;
+        frm.inputdp_id.value = dp_id;
+    }
+}
+
+function jsReloadDestinoPescado( frm ){
+    if ( frm.inputdp_id.value || frm.inputdp_destino.value) {
+        location.replace('/destino-pescado');
+    }
+}
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsInsertPescadorHasDependente( frm, pag )

@@ -128,6 +128,9 @@
         <controllerFile controllerName="Isca">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="DestinoPescado">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -317,6 +320,7 @@
           <dbTableFile dbTableName="VRatoeiraHasAvistamento"/>
           <dbTableFile dbTableName="VSiripoiaHasAvistamento"/>
           <dbTableFile dbTableName="VTarrafaHasAvistamento"/>
+          <dbTableFile dbTableName="DestinoPescado"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -380,6 +384,7 @@
         <modelFile modelName="ColetaManual"/>
         <modelFile modelName="HistoricoLogin"/>
         <modelFile modelName="Avistamento"/>
+        <modelFile modelName="DestinoPescado"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -557,6 +562,12 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Isca">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="DestinoPescado">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="DestinoPescado">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
