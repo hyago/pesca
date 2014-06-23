@@ -48,7 +48,7 @@ private $usuario;
     {        
         $areapesca = $this->modelAreaPesca->select( NULL, 'tareap_areapesca', NULL );
       
-        $this->view->assign("area-pesca", $areapesca);
+        $this->view->assign("area_pesca", $areapesca);
     }
     
     /*
