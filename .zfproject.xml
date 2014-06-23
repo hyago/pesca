@@ -321,6 +321,7 @@
           <dbTableFile dbTableName="VSiripoiaHasAvistamento"/>
           <dbTableFile dbTableName="VTarrafaHasAvistamento"/>
           <dbTableFile dbTableName="DestinoPescado"/>
+          <dbTableFile dbTableName="VPorto"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>

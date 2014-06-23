@@ -18,23 +18,23 @@ class ModeloRelatorio {
 	private $linha = 0;
 	private $isFirstPage = true;
 	private $isLegenda = true;
-	
+
 	public function __construct() {
 		Zend_Loader::loadClass('Zend_Pdf');
-		
+
 		$this->pdfToClone = new Zend_Pdf();
 		$this->pdfToClone = Zend_Pdf::load('../library/templateRelatorio.pdf');
 
 		$this->pageToClone = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
 		$this->pageToClone = clone $this->pdfToClone->pages[0];
 		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
-		
+
 		$this->pdf = new Zend_Pdf();
 		$this->page = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
-		
+
 		$this->linha = $this->firstLine;
 	}
-	
+
 	public function setTitulo( $title ) {
 		$textColumnposition = $this->getCenterPosition(
 			$title,
@@ -44,39 +44,39 @@ class ModeloRelatorio {
 			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
 		$this->pageToClone->drawText( $title,  $textColumnposition, $this->titleLine );
 	}
-	
+
 	public function setLegendaOff() {
 		$this->isLegenda = false;
-		
+
 		$this->linha = $this->legendLine;
 	}
-	
+
 	public function setLegenda( $columnPosition, $text ) {
 		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 9);
 		$this->pageToClone->drawText( $text,  $columnPosition, $this->legendLine );
 	}
-	
+
 	public function setValue( $columnPosition, $text ) {
 		if ( $this->isFirstPage ) {
 			$this->setNewPage();
 			$this->isFirstPage = FALSE;
 		}
-		
+
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$this->page->drawText( $text,  $columnPosition, $this->linha );
 	}
-	
+
 	public function setLegValue( $columnPosition, $leg, $text ) {
 		if ( $this->isFirstPage ) {
 			$this->setNewPage();
 			$this->isFirstPage = FALSE;
 		}
-		
+
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
 		$this->page->drawText( $leg,  $columnPosition, $this->linha );
-		
+
 		$tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
-		
+
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
 		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha );
 	}
@@ -86,43 +86,43 @@ class ModeloRelatorio {
 			$this->setNewPage();
 			$this->isFirstPage = FALSE;
 		}
-		
+
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
 		$this->page->drawText( $leg,  $columnPosition, $this->linha );
-		
+
 // 		$tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
-		
+
 		$tw = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
-		
+
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
 		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha );
 	}
-	
+
 	public function setLegAlinhadoDireita( $columnPosition,  $columnLargura, $text ) {
 		if ( $this->isFirstPage ) {
 			$this->setNewPage();
 			$this->isFirstPage = FALSE;
 		}
-		
+
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$pos = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
 		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha );
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
 	}
-	
-	
+
+
 	public function setValueAlinhadoDireita( $columnPosition,  $columnLargura, $text ) {
 		if ( $this->isFirstPage ) {
 			$this->setNewPage();
 			$this->isFirstPage = FALSE;
 		}
-		
+
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$pos = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
 		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha );
 	}
-	
+
 	public function setNewLine() {
 		if ( $this->linha <= $this->lastLine ) {
 			if ( $this->isLegenda ) {
@@ -135,44 +135,44 @@ class ModeloRelatorio {
 			$this->linha = $this->linha - $this->lineLength;
 		}
 	}
-	
+
 	private function setNewPage() {
 		if ( $this->isFirstPage==FALSE ) {
 			$this->pdf->pages[] = $this->page;
 		}
-		
+
 		$this->page = clone $this->pageToClone;
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$this->countPag++;
-		
+
 		$text = 'Página: ' . $this->countPag;
 		$column = $this-> getRightPosition(
 			$text,
 			100,
 			$this->page->getFont(),
 			$this->page->getFontSize() );
-		
+
 		$this->page->drawText( $text,  $this->columnRodape+$column, $this->lineRodape );
 	}
-	
+
 	public function getModelRelatorio() {
 		$this->pdfToClone->pages[0] = $this->pageToClone;
-		
+
 		return $this->pdfToClone->pages[0];
 	}
-	
+
 // 	public function getPage() {
 // 		$this->setNewPage()
-// 		
+//
 // 		return $this->page;
 // 	}
-	
+
 	public function getRelatorio() {
 		$this->pdf->pages[] = $this->page;
-		
-		return $this->pdf;
+
+	 	return $this->pdf;
 	}
-	
+
 	private function getTextWidth($text, Zend_Pdf_Resource_Font $font, $font_size) {
 		$drawing_text = iconv('', 'UTF-16BE', $text);
 		$characters = array();
@@ -182,42 +182,42 @@ class ModeloRelatorio {
 		$glyphs = $font->glyphNumbersForCharacters($characters);
 		$widths = $font->widthsForGlyphs($glyphs);
 		$text_width = (array_sum($widths) / $font->getUnitsPerEm()) * $font_size;
-		
+
 		return $text_width;
 	}
 
 	public function getRightPosition($text, $width, Zend_Pdf_Resource_Font $font, $font_size) {
 		$textWidth = $this->getTextWidth($text, $font, $font_size);
 
-		return $width -  $textWidth - $this->columnSpace; 
+		return $width -  $textWidth - $this->columnSpace;
 	}
 
 	public function getCenterPosition($text, $width, Zend_Pdf_Resource_Font $font, $font_size) {
 		$textWidth = $this->getTextWidth($text, $font, $font_size);
 
-		return ($width/2) - ($textWidth/2); 
+		return ($width/2) - ($textWidth/2);
 	}
-	
+
 	public function getFirstLine() {
 		return $this->firstLine;
 	}
-	
+
 	public function getLastLine() {
 		return $this->lastLine;
 	}
-	
+
 	public function getColumnRodape() {
 		return $this->columnRodape;
 	}
-	
+
 	public function getLineRodape() {
 		return $this->lineRodape;
 	}
-	
+
 	public function getTextLineLength() {
 		return $this->lineLength;
 	}
-	
+
 	public function getLegendLine() {
 		return $this->lege;
 	}

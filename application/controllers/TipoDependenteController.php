@@ -7,44 +7,44 @@ class TipoDependenteController extends Zend_Controller_Action
       private $modeloTipoDependente;
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
-        
+
+
+
         $this->modeloTipoDependente = new Application_Model_TipoDependente();
     }
 
     public function indexAction()
     {
         $tipoDependente = $this->modeloTipoDependente->select(NULL,'ttd_tipodependente',NULL);
-      
+
         $this->view->assign("assignTipoDependente", $tipoDependente);
     }
-    
+
     public function novoAction()
     {
      if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
-        }   
+        }
     }
-    
+
     /*
      * Cadastra uma Area de Pesca
      */
@@ -54,7 +54,7 @@ class TipoDependenteController extends Zend_Controller_Action
 
         $this->_redirect('tipo-dependente/index');
     }
-    
+
     /*
      * Preenche um formulario com as informações de um usuário
      */
@@ -64,10 +64,10 @@ class TipoDependenteController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $tipoDependente = $this->modeloTipoDependente->find($this->_getParam('id'));
-        
+
         $this->view->assign("assignTipoDependente", $tipoDependente);
     }
-   
+
     /*
      * Atualiza os dados do usuário
      */
@@ -77,9 +77,9 @@ class TipoDependenteController extends Zend_Controller_Action
 
         $this->_redirect('tipo-dependente/index');
     }
- 
+
     /*
-     * 
+     *
      */
     public function excluirAction()
     {
@@ -92,13 +92,36 @@ class TipoDependenteController extends Zend_Controller_Action
         $this->_redirect('tipo-dependente/index');
         }
     }
-    
+
     public function beforeExcluirAction()
     {
-        
+
     }
 
+	public function relatorioAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
 
+		$localModelTD = new Application_Model_TipoDependente();
+		$localTD = $localModelTD->select(NULL, array('ttd_tipodependente'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Tipo de Dependente');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Tipo de Dependente');
+
+		foreach ($localTD as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['ttd_id']);
+			$modeloRelatorio->setValue(80, $localData['ttd_tipodependente']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+   }
 }
 
 

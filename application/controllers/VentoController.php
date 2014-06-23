@@ -5,68 +5,68 @@ class VentoController extends Zend_Controller_Action
     private $modelVento;
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
-        
+
+
+
         $this->modelVento = new Application_Model_Vento();
     }
 
     public function indexAction()
-    {        
+    {
         $dados = $this->modelVento->select();
-      
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function novoAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
     }
-    
+
     public function criarAction()
     {
         $this->modelVento->insert($this->_getAllParams());
 
         $this->_redirect('vento/index');
     }
-    
+
     public function editarAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
         $vento = $this->modelVento->find($this->_getParam('id'));
-        
+
         $this->view->assign("vento", $vento);
     }
-   
+
     public function atualizarAction()
     {
         $this->modelVento->update($this->_getAllParams());
 
         $this->_redirect('vento/index');
     }
- 
+
     public function excluirAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
@@ -79,44 +79,29 @@ class VentoController extends Zend_Controller_Action
         }
     }
 
-    public function relatorioAction(){
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-        
-        $vento = $this->modelVento->select();
-      
-        $this->view->assign("vento", $vento);
-        
-        //Title 
-        $y = 55;
-        $width = 20;
-        
-        
-        $height = 7;
-        $same_line = 0;
-        $next_line = 1;
-        $border_true = 1;
-        
-        $pdf = new FPDF("P", "mm", "A4");
-        $pdf->Open();
-        $pdf->SetMargins(10, 20, 5);
-        $pdf->setTitulo("Tipos de Ventos");
-        $pdf->SetAutoPageBreak(true, 40);
-        $pdf->AddPage();
-        //Title
-        
-        $pdf->SetFont("Arial", "B",10);
-        $pdf->SetY($y);
-        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
-        $pdf->Cell($width, $height, "Força", $border_true,$next_line);
-        
-        $pdf->SetFont("Arial", "",10);
-        sort($vento);
-        foreach($vento as $dados){
-            $pdf->Cell($width/2, $height, $dados['VNT_ID'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['VNT_Forca'],$border_true,$next_line);
-        }
-        
-        $pdf->Output("VentoRelatorio.pdf", 'I');
-    }
+
+	public function relatorioAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelVento = new Application_Model_Vento();
+		$localVento = $localModelVento->select(NULL, array('vnt_forca'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório de Intensidade do Vento');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Intensidade do Vento');
+
+		foreach ($localVento as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['vnt_id']);
+			$modeloRelatorio->setValue(80, $localData['vnt_forca']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+   }
 }

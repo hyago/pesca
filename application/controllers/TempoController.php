@@ -6,68 +6,68 @@ class TempoController extends Zend_Controller_Action
 
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
-        
+
+
+
         $this->modelTempo = new Application_Model_Tempo();
     }
 
     public function indexAction()
-    {        
+    {
         $dados = $this->modelTempo->select();
-      
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function novoAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
     }
-    
+
     public function criarAction()
     {
         $this->modelTempo->insert($this->_getAllParams());
 
         $this->_redirect('tempo/index');
     }
-    
+
     public function editarAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
         $tempo = $this->modelTempo->find($this->_getParam('id'));
-        
+
         $this->view->assign("tempo", $tempo);
     }
-   
+
     public function atualizarAction()
     {
         $this->modelTempo->update($this->_getAllParams());
 
         $this->_redirect('tempo/index');
     }
- 
+
     public function excluirAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
@@ -79,44 +79,29 @@ class TempoController extends Zend_Controller_Action
         $this->_redirect('tempo/index');
         }
     }
-    public function relatorioAction(){
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-        
-        $tempo = $this->modelTempo->select();
-      
-        $this->view->assign("tempo", $tempo);
-        
-        //Title 
-        $y = 55;
-        $width = 20;
-        
-       
-        $height = 7;
-        $same_line = 0;
-        $next_line = 1;
-        $border_true = 1;
-        
-        $pdf = new FPDF("P", "mm", "A4");
-        $pdf->Open();
-        $pdf->SetMargins(10, 20, 5);
-        $pdf->setTitulo("Tempo");
-        $pdf->SetAutoPageBreak(true, 40);
-        $pdf->AddPage();
-        //Title
-        
-        $pdf->SetFont("Arial", "B",10);
-        $pdf->SetY($y);
-        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
-        $pdf->Cell($width, $height, "Estado", $border_true,$next_line);
-        
-        $pdf->SetFont("Arial", "",10);
-        sort($tempo);
-        foreach($tempo as $dados){
-            $pdf->Cell($width/2, $height, $dados['tmp_id'],$border_true,$same_line);
-            $pdf->Cell($width, $height, $dados['tmp_estado'],$border_true,$next_line);
-        }
-        
-        $pdf->Output("TempoRelatorio.pdf", 'I');
-    }
+
+	public function relatorioAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelTempo = new Application_Model_Tempo();
+		$localTempo = $localModelTempo->select(NULL, array('tmp_estado'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Tempo');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Tempo');
+
+		foreach ($localTempo as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tmp_id']);
+			$modeloRelatorio->setValue(80, $localData['tmp_estado']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+   }
 }

@@ -263,13 +263,13 @@ CREATE TABLE T_PESCADOR (
  TE_ID INT NULL,
  TP_ESPECIFICIDADE VARCHAR(255) NULL,
  ESC_ID INT NULL,
- TP_RESP_LAN int null, 
+ TP_RESP_LAN int null,
  TP_RESP_CAD int null,
  TP_DTA_CAD date,
  TP_OBS VARCHAR(255) NULL,
  PRIMARY KEY (TP_ID),
  CONSTRAINT FK_T_PESCADOR_T_MUNICIPIO1 FOREIGN KEY (TMUN_ID_NATURAL) REFERENCES T_MUNICIPIO (TMUN_ID),
- CONSTRAINT FK_T_PESCADOR_T_ENDERECO1 FOREIGN KEY (TE_ID) REFERENCES T_ENDERECO (TE_ID), 
+ CONSTRAINT FK_T_PESCADOR_T_ENDERECO1 FOREIGN KEY (TE_ID) REFERENCES T_ENDERECO (TE_ID),
  CONSTRAINT FK_PESCADOR_ESC_ID FOREIGN KEY (ESC_ID) REFERENCES T_ESCOLARIDADE(ESC_ID)
 );
 
@@ -292,7 +292,6 @@ CREATE TABLE T_PESCADOR (
 CREATE TABLE T_RENDA (
  REN_ID SERIAL,
  REN_RENDA VARCHAR(40) NULL,
- REN_FATOR NUMERIC(4,2) NULL,
  REN_FATORMIN NUMERIC(4,2) NULL,
  REN_FATORMAX NUMERIC(4,2) NULL,
  PRIMARY KEY (REN_ID)
@@ -316,7 +315,7 @@ CREATE TABLE T_PESCADOR_HAS_T_PROGRAMASOCIAL (
  PRIMARY KEY (TP_ID, PRS_ID),
  CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PESCADOR1
  FOREIGN KEY (TP_ID) REFERENCES T_PESCADOR (TP_ID),
- CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PROGRAMASOCIAL1 
+ CONSTRAINT FK_T_PESCADOR_HAS_T_PROGRAMASOCIAL_T_PROGRAMASOCIAL1
 FOREIGN KEY (PRS_ID) REFERENCES T_PROGRAMASOCIAL (PRS_ID)
 );
 
@@ -767,7 +766,7 @@ SELECT FD.FD_ID, FD.FD_DATA, UPPER(SUBSTRING(FD.FD_TURNO, 1, 1)) AS FD_TURNO,
 FD.PTO_ID, TP.PTO_NOME,
 FD.TMP_ID, TEMPO.TMP_ESTADO,
 FD.VNT_ID, VENTO.VNT_FORCA,
-FD.T_ESTAGIARIO_TU_ID, TUE.TU_NOME AS T_ESTAGIARIO, 
+FD.T_ESTAGIARIO_TU_ID, TUE.TU_NOME AS T_ESTAGIARIO,
 FD.T_MONITOR_TU_ID1, TUM.TU_NOME AS T_MONITOR
 FROM T_FICHA_DIARIA AS FD,
 T_PORTO AS TP,
@@ -886,13 +885,13 @@ TP.TP_NIT_CEI, TP.TP_RG,
 TP.TP_CMA, TP.TP_RGB_MAA_IBAMA,
 TP.TP_CIR_CAP_PORTO, TP.TP_CPF,
 TP.TP_DATANASC,
-TP.TP_ESPECIFICIDADE, TP.ESC_ID, TESC.ESC_NIVEL, 
+TP.TP_ESPECIFICIDADE, TP.ESC_ID, TESC.ESC_NIVEL,
 TP.TMUN_ID_NATURAL, TM.TMUN_MUNICIPIO "MUNNAT", TM.TUF_SIGLA "SIGNAT",
 TP.TE_ID, TE.TE_LOGRADOURO, TE.TE_NUMERO,
 TE.TE_COMP, TE.TE_BAIRRO, TE.TE_CEP,
 TE.TMUN_ID, TM.TMUN_MUNICIPIO, TM.TUF_SIGLA,
-TP_RESP_LAN, tlan.tu_nome as tu_nome_lan, 
-TP_RESP_CAD, tcad.tu_nome as tu_nome_cad, 
+TP_RESP_LAN, tlan.tu_nome as tu_nome_lan,
+TP_RESP_CAD, tcad.tu_nome as tu_nome_cad,
 TP_OBS
 FROM
 T_PESCADOR AS TP
@@ -1112,10 +1111,10 @@ WHERE PA.ITC_ID = TIPO.ITC_ID;
 -- -----------------------------------------------------
 -- VIEW MONITORAMENTO BY FICHA DIARIA
 -- -----------------------------------------------------
--- 
-CREATE OR REPLACE VIEW v_monitoramentobyficha AS 
- SELECT t_monitoramento.mnt_id, t_monitoramento.mnt_arte, 
-    t_monitoramento.mnt_quantidade, t_monitoramento.mnt_monitorado, 
+--
+CREATE OR REPLACE VIEW v_monitoramentobyficha AS
+ SELECT t_monitoramento.mnt_id, t_monitoramento.mnt_arte,
+    t_monitoramento.mnt_quantidade, t_monitoramento.mnt_monitorado,
     t_ficha_diaria.fd_id, t_artepesca.tap_artepesca
    FROM t_monitoramento, t_ficha_diaria, t_artepesca
   WHERE t_monitoramento.fd_id = t_ficha_diaria.fd_id AND t_monitoramento.mnt_arte = t_artepesca.tap_id;
@@ -1176,9 +1175,9 @@ CREATE TABLE T_DESTINOPESCADO (
 );
 
 -- -- Table: t_monitoramento
--- 
+--
 -- --DROP TABLE t_monitoramento;
--- 
+--
 -- CREATE TABLE t_monitoramento
 -- (
 --   mnt_id serial NOT NULL,
@@ -1229,7 +1228,7 @@ CREATE TABLE t_arrastofundo
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_arrastofundo_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_arrastofundo_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1249,7 +1248,7 @@ CREATE TABLE t_calao
   cal_tempogasto time without time zone NULL,
   cal_subamostra boolean NULL,
   sa_id integer NULL,
-  cal_npanos integer NULL, 
+  cal_npanos integer NULL,
   cal_tamanho double precision NULL,
   cal_altura double precision NULL,
   cal_malha double precision NULL,
@@ -1273,7 +1272,7 @@ CREATE TABLE t_calao
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_calao_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_calao_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1298,7 +1297,7 @@ CREATE TABLE t_coletamanual
   mre_id integer NULL,
   cml_mreviva boolean NULL,
   cml_motor boolean NULL,
-  dp_id integer null, 
+  dp_id integer null,
   CONSTRAINT t_coletamanual_pkey PRIMARY KEY (cml_id),
   CONSTRAINT fk_t_coletamanual_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1317,7 +1316,7 @@ CREATE TABLE t_coletamanual
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_coletamanual_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_coletamanual_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1364,7 +1363,7 @@ CREATE TABLE t_emalhe
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_emalhe_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_emalhe_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1415,7 +1414,7 @@ CREATE TABLE t_grosseira
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_grosseira_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_grosseira_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1463,7 +1462,7 @@ CREATE TABLE t_jerere
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_jerere_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_jerere_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1516,7 +1515,7 @@ CREATE TABLE t_linha
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_linha_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_linha_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1541,7 +1540,7 @@ CREATE TABLE t_linhafundo
   lf_tempogasto time without time zone NULL,
   lf_diesel double precision NULL,
   lf_oleo double precision NULL,
-  lf_alimento double precision NULL, 
+  lf_alimento double precision NULL,
   lf_gelo double precision NULL,
   lf_subamostra boolean NULL,
   sa_id integer NULL,
@@ -1553,7 +1552,7 @@ CREATE TABLE t_linhafundo
   mre_id integer NOT NULL,
   lf_mreviva boolean NULL,
   lf_motor boolean NULL,
-  dp_id integer null, 
+  dp_id integer null,
   CONSTRAINT t_linhafundo_pkey PRIMARY KEY (lf_id),
   CONSTRAINT fk_t_linhafundo_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1575,7 +1574,7 @@ CREATE TABLE t_linhafundo
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_linhafundo_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_linhafundo_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1621,7 +1620,7 @@ CREATE TABLE t_manzua
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_manzua_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_manzua_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1665,7 +1664,7 @@ CREATE TABLE t_mergulho
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_mergulho_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_mergulho_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1691,7 +1690,7 @@ CREATE TABLE t_ratoeira
   mre_id integer NULL,
   rat_mreviva boolean NULL,
   rat_motor boolean NULL,
-  dp_id integer null,  
+  dp_id integer null,
   CONSTRAINT t_ratoeira_pkey PRIMARY KEY (rat_id),
   CONSTRAINT fk_t_ratoeira_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1710,7 +1709,7 @@ CREATE TABLE t_ratoeira
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_ratoeira_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_ratoeira_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1736,7 +1735,7 @@ CREATE TABLE t_siripoia
   mre_id integer NULL,
   sir_mreviva boolean NULL,
   sir_motor boolean NULL,
-    dp_id integer null, 
+    dp_id integer null,
   CONSTRAINT t_siripoia_pkey PRIMARY KEY (sir_id),
   CONSTRAINT fk_t_siripoia_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1755,7 +1754,7 @@ CREATE TABLE t_siripoia
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_siripoia_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_siripoia_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1797,7 +1796,7 @@ CREATE TABLE t_tarrafa
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_tarrafa_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_tarrafa_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1851,7 +1850,7 @@ CREATE TABLE t_varapesca
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT t_varapesca_t_mare1 FOREIGN KEY (mre_id)
       REFERENCES t_mare (mre_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION, 
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT t_varapesca_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -1862,7 +1861,7 @@ CREATE TABLE t_varapesca
 CREATE TABLE t_arrastofundo_has_t_especie_capturada
 (
   spc_af_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -1880,7 +1879,7 @@ CREATE TABLE t_arrastofundo_has_t_especie_capturada
 CREATE TABLE t_calao_has_t_especie_capturada
 (
   spc_cal_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -1898,7 +1897,7 @@ CREATE TABLE t_calao_has_t_especie_capturada
 CREATE TABLE t_coletamanual_has_t_especie_capturada
 (
   spc_cml_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -1917,7 +1916,7 @@ CREATE TABLE t_coletamanual_has_t_especie_capturada
 CREATE TABLE t_emalhe_has_t_especie_capturada
 (
   spc_em_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -1935,7 +1934,7 @@ CREATE TABLE t_emalhe_has_t_especie_capturada
 CREATE TABLE t_grosseira_has_t_especie_capturada
 (
   spc_grs_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -1954,7 +1953,7 @@ CREATE TABLE t_grosseira_has_t_especie_capturada
 CREATE TABLE t_jerere_has_t_especie_capturada
 (
   spc_jre_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -1972,7 +1971,7 @@ CREATE TABLE t_jerere_has_t_especie_capturada
 CREATE TABLE t_linha_has_t_especie_capturada
 (
   spc_lin_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -1990,7 +1989,7 @@ CREATE TABLE t_linha_has_t_especie_capturada
 CREATE TABLE t_linhafundo_has_t_especie_capturada
 (
   spc_lf_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -2008,7 +2007,7 @@ CREATE TABLE t_linhafundo_has_t_especie_capturada
 CREATE TABLE t_manzua_has_t_especie_capturada
 (
   spc_man_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -2026,7 +2025,7 @@ CREATE TABLE t_manzua_has_t_especie_capturada
 CREATE TABLE t_mergulho_has_t_especie_capturada
 (
   spc_mer_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -2044,7 +2043,7 @@ CREATE TABLE t_mergulho_has_t_especie_capturada
 CREATE TABLE t_ratoeira_has_t_especie_capturada
 (
   spc_rat_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -2062,7 +2061,7 @@ CREATE TABLE t_ratoeira_has_t_especie_capturada
 CREATE TABLE t_siripoia_has_t_especie_capturada
 (
   spc_sir_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -2080,7 +2079,7 @@ CREATE TABLE t_siripoia_has_t_especie_capturada
 CREATE TABLE t_tarrafa_has_t_especie_capturada
 (
   spc_tar_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -2098,7 +2097,7 @@ CREATE TABLE t_tarrafa_has_t_especie_capturada
 CREATE TABLE t_varapesca_has_t_especie_capturada
 (
   spc_vp_id serial NOT NULL,
-  
+
   spc_quantidade integer NULL,
   spc_peso_kg float NULL,
   spc_preco float NULL,
@@ -2349,7 +2348,7 @@ SELECT ENTREVISTA.LIN_ID, PESQUEIRO.PAF_PESQUEIRO, ENTPESQ.T_TEMPOAPESQUEIRO, EN
 FROM T_LINHA AS ENTREVISTA, T_PESQUEIRO_AF AS PESQUEIRO, T_LINHA_HAS_T_PESQUEIRO AS ENTPESQ
 WHERE ENTREVISTA.LIN_ID = ENTPESQ.LIN_ID AND PESQUEIRO.PAF_ID = ENTPESQ.PAF_ID;
 
-CREATE VIEW V_GROSSEIRA_HAS_T_PESQUEIRO AS 
+CREATE VIEW V_GROSSEIRA_HAS_T_PESQUEIRO AS
 SELECT ENTREVISTA.GRS_ID, PESQUEIRO.PAF_PESQUEIRO, ENTPESQ.T_TEMPOAPESQUEIRO, ENTPESQ.GRS_PAF_ID
 FROM T_GROSSEIRA AS ENTREVISTA, T_PESQUEIRO_AF AS PESQUEIRO, T_GROSSEIRA_HAS_T_PESQUEIRO AS ENTPESQ
 WHERE ENTREVISTA.GRS_ID = ENTPESQ.GRS_ID AND PESQUEIRO.PAF_ID = ENTPESQ.PAF_ID;
@@ -2475,121 +2474,121 @@ WHERE ENTREVISTA.RAT_ID = ESPCAPT.RAT_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
 --Visualizações
 
-CREATE OR REPLACE VIEW v_entrevista_arrasto AS 
+CREATE OR REPLACE VIEW v_entrevista_arrasto AS
  SELECT t_arrastofundo.af_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_arrastofundo
    Left Join t_pescador On t_arrastofundo.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_arrastofundo.bar_id = t_barco.bar_id Left Join t_monitoramento On t_arrastofundo.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
-CREATE OR REPLACE VIEW v_entrevista_calao AS 
+CREATE OR REPLACE VIEW v_entrevista_calao AS
  SELECT t_calao.cal_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_calao
    Left Join t_pescador On t_calao.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_calao.bar_id = t_barco.bar_id Left Join t_monitoramento On t_calao.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
-CREATE OR REPLACE VIEW v_entrevista_coletamanual AS 
+CREATE OR REPLACE VIEW v_entrevista_coletamanual AS
  SELECT t_coletamanual.cml_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_coletamanual
    Left Join t_pescador On t_coletamanual.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_coletamanual.bar_id = t_barco.bar_id Left Join t_monitoramento On t_coletamanual.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
-   
-CREATE OR REPLACE VIEW v_entrevista_emalhe AS 
+
+CREATE OR REPLACE VIEW v_entrevista_emalhe AS
  SELECT t_emalhe.em_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_emalhe
    Left Join t_pescador On t_emalhe.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_emalhe.bar_id = t_barco.bar_id Left Join t_monitoramento On t_emalhe.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
-CREATE OR REPLACE VIEW v_entrevista_grosseira AS 
+CREATE OR REPLACE VIEW v_entrevista_grosseira AS
  SELECT t_grosseira.grs_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_grosseira
    Left Join t_pescador On t_grosseira.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_grosseira.bar_id = t_barco.bar_id Left Join t_monitoramento On t_grosseira.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-CREATE OR REPLACE VIEW v_entrevista_jerere AS 
+CREATE OR REPLACE VIEW v_entrevista_jerere AS
  SELECT t_jerere.jre_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_jerere
    Left Join t_pescador On t_jerere.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_jerere.bar_id = t_barco.bar_id Left Join t_monitoramento On t_jerere.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-CREATE OR REPLACE VIEW v_entrevista_linha AS 
+CREATE OR REPLACE VIEW v_entrevista_linha AS
  SELECT t_linha.lin_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_linha
    Left Join t_pescador On t_linha.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_linha.bar_id = t_barco.bar_id Left Join t_monitoramento On t_linha.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-CREATE OR REPLACE VIEW v_entrevista_linhafundo AS 
+CREATE OR REPLACE VIEW v_entrevista_linhafundo AS
  SELECT t_linhafundo.lf_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_linhafundo
    Left Join t_pescador On t_linhafundo.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_linhafundo.bar_id = t_barco.bar_id Left Join t_monitoramento On t_linhafundo.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-CREATE OR REPLACE VIEW v_entrevista_manzua AS 
+CREATE OR REPLACE VIEW v_entrevista_manzua AS
  SELECT t_manzua.man_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_manzua
    Left Join t_pescador On t_manzua.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_manzua.bar_id = t_barco.bar_id Left Join t_monitoramento On t_manzua.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-CREATE OR REPLACE VIEW v_entrevista_mergulho AS 
+CREATE OR REPLACE VIEW v_entrevista_mergulho AS
  SELECT t_mergulho.mer_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_mergulho
    Left Join t_pescador On t_mergulho.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_mergulho.bar_id = t_barco.bar_id Left Join t_monitoramento On t_mergulho.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-CREATE OR REPLACE VIEW v_entrevista_ratoeira AS 
+CREATE OR REPLACE VIEW v_entrevista_ratoeira AS
  SELECT t_ratoeira.rat_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_ratoeira
    Left Join t_pescador On t_ratoeira.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_ratoeira.bar_id = t_barco.bar_id Left Join t_monitoramento On t_ratoeira.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-CREATE OR REPLACE VIEW v_entrevista_siripoia AS 
+CREATE OR REPLACE VIEW v_entrevista_siripoia AS
  SELECT t_siripoia.sir_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_siripoia
    Left Join t_pescador On t_siripoia.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_siripoia.bar_id = t_barco.bar_id Left Join t_monitoramento On t_siripoia.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
-CREATE OR REPLACE VIEW v_entrevista_tarrafa AS 
+CREATE OR REPLACE VIEW v_entrevista_tarrafa AS
  SELECT t_tarrafa.tar_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_tarrafa
    Left Join t_pescador On t_tarrafa.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_tarrafa.bar_id = t_barco.bar_id Left Join t_monitoramento On t_tarrafa.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
-  
-CREATE OR REPLACE VIEW v_entrevista_varapesca AS 
+
+CREATE OR REPLACE VIEW v_entrevista_varapesca AS
  SELECT t_varapesca.vp_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id
    FROM t_varapesca
    Left Join t_pescador On t_varapesca.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_varapesca.bar_id = t_barco.bar_id Left Join t_monitoramento On t_varapesca.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
 
 
 
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
 DROP TABLE T_CALAO_HAS_T_AVISTAMENTO;
 -- drop table T_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
 -- drop view V_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
-  
-  
-  
+
+
+
 CREATE TABLE T_ARRASTOFUNDO_HAS_T_AVISTAMENTO
 (
-	AF_ID INTEGER, 
-	AVS_ID INTEGER, 	
+	AF_ID INTEGER,
+	AVS_ID INTEGER,
   CONSTRAINT T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (AF_ID,  AVS_ID),
-  CONSTRAINT FK_T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_AF_ID FOREIGN KEY (AF_ID) REFERENCES T_ARRASTOFUNDO (AF_ID), 
+  CONSTRAINT FK_T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_AF_ID FOREIGN KEY (AF_ID) REFERENCES T_ARRASTOFUNDO (AF_ID),
   CONSTRAINT FK_T_ARRASTOFUNDO_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
 
 
-  
+
 CREATE TABLE T_CALAO_HAS_T_AVISTAMENTO
 (
 	CAL_ID INTEGER,
@@ -2598,7 +2597,7 @@ CREATE TABLE T_CALAO_HAS_T_AVISTAMENTO
 	CONSTRAINT FK_T_CALAO_HAS_T_AVISTAMENTO_CAL_ID FOREIGN KEY (CAL_ID) REFERENCES T_CALAO (CAL_ID),
 	CONSTRAINT FK_T_CALAO_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
-  
+
 Drop table T_emalhe_HAS_T_AVISTAMENTO;
 
 CREATE TABLE T_EMALHE_HAS_T_AVISTAMENTO
@@ -2611,7 +2610,7 @@ CREATE TABLE T_EMALHE_HAS_T_AVISTAMENTO
 );
 
 drop table T_TARRAFA_HAS_T_AVISTAMENTO;
-  
+
  CREATE TABLE T_TARRAFA_HAS_T_AVISTAMENTO
 (
 	TAR_ID INTEGER,
@@ -2620,9 +2619,9 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (TAR_ID) REFERENCES T_TARRAFA (TAR_ID),
 	CONSTRAINT FK_T_TARRAFA_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
- 
- 
- 
+
+
+
  drop table T_JERERE_HAS_T_AVISTAMENTO;
   CREATE TABLE T_JERERE_HAS_T_AVISTAMENTO
 (
@@ -2632,7 +2631,7 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 	CONSTRAINT FK_T_JERERE_HAS_T_AVISTAMENTO_TAR_ID FOREIGN KEY (JRE_ID) REFERENCES T_JERERE (JRE_ID),
 	CONSTRAINT FK_T_JERERE_HAS_T_AVISTAMENTO_AVS_ID FOREIGN KEY (AVS_ID)REFERENCES T_AVISTAMENTO (AVS_ID)
 );
-  
+
  drop table T_LINHA_HAS_T_AVISTAMENTO;
   CREATE TABLE T_LINHA_HAS_T_AVISTAMENTO
 (
@@ -2731,74 +2730,78 @@ drop table T_TARRAFA_HAS_T_AVISTAMENTO;
 );
 
 -- drop view V_ARRASTOFUNDO_HAS_T_AVISTAMENTO;
-CREATE OR REPLACE VIEW V_ARRASTOFUNDO_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_ARRASTOFUNDO_HAS_T_AVISTAMENTO AS
 SELECT AVS.AF_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_ARRASTOFUNDO_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_CALAO_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_CALAO_HAS_T_AVISTAMENTO AS
 SELECT AVS.CAL_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_CALAO_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_COLETAMANUAL_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_COLETAMANUAL_HAS_T_AVISTAMENTO AS
 SELECT AVS.CML_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_COLETAMANUAL_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_EMALHE_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_EMALHE_HAS_T_AVISTAMENTO AS
 SELECT AVS.EM_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_EMALHE_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
 
-CREATE OR REPLACE VIEW V_GROSSEIRA_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_GROSSEIRA_HAS_T_AVISTAMENTO AS
 SELECT AVS.GRS_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_GROSSEIRA_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_JERERE_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_JERERE_HAS_T_AVISTAMENTO AS
 SELECT AVS.JRE_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_JERERE_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_LINHA_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_LINHA_HAS_T_AVISTAMENTO AS
 SELECT AVS.LIN_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_LINHA_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_LINHAFUNDO_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_LINHAFUNDO_HAS_T_AVISTAMENTO AS
 SELECT AVS.LF_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_LINHAFUNDO_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_MANZUA_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_MANZUA_HAS_T_AVISTAMENTO AS
 SELECT AVS.MAN_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_MANZUA_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_MERGULHO_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_MERGULHO_HAS_T_AVISTAMENTO AS
 SELECT AVS.MER_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_MERGULHO_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_RATOEIRA_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_RATOEIRA_HAS_T_AVISTAMENTO AS
 SELECT AVS.RAT_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_RATOEIRA_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_SIRIPOIA_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_SIRIPOIA_HAS_T_AVISTAMENTO AS
 SELECT AVS.SIR_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_SIRIPOIA_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_TARRAFA_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_TARRAFA_HAS_T_AVISTAMENTO AS
 SELECT AVS.TAR_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_TARRAFA_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
-CREATE OR REPLACE VIEW V_VARAPESCA_HAS_T_AVISTAMENTO AS 
+CREATE OR REPLACE VIEW V_VARAPESCA_HAS_T_AVISTAMENTO AS
 SELECT AVS.VP_ID, AVS.AVS_ID, TAVS.AVS_DESCRICAO
 FROM T_VARAPESCA_HAS_T_AVISTAMENTO AS AVS, T_AVISTAMENTO AS TAVS
 WHERE AVS.AVS_ID = TAVS.AVS_ID;
 
+CREATE OR REPLACE VIEW V_PORTO AS
+SELECT PTO.PTO_ID,  PTO.PTO_NOME,  PTO.PTO_LOCAL,  PTO.TMUN_ID, TMUN.TMUN_MUNICIPIO,  TMUN.TUF_SIGLA FROM T_PORTO PTO
+LEFT JOIN T_MUNICIPIO AS TMUN
+ON  PTO.TMUN_ID = TMUN.TMUN_ID;

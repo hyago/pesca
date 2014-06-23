@@ -4,28 +4,28 @@ class DestinoPescadoController extends Zend_Controller_Action {
 
     private $ModeloDestinoPescado;
     private $usuario;
-    
+
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
+
+
         $this->ModeloDestinoPescado = new Application_Model_DestinoPescado();
     }
 
@@ -51,7 +51,7 @@ class DestinoPescadoController extends Zend_Controller_Action {
         $this->_redirect('destino-pescado/index');
         }
     }
-    
+
 
     public function insertAction() {
         $this->_helper->layout->disableLayout();
@@ -82,4 +82,28 @@ class DestinoPescadoController extends Zend_Controller_Action {
         return;
     }
 
+	public function relatorioAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelDP = new Application_Model_DestinoPescado();
+		$localDP = $localModelDP->select(NULL, array('dp_destino'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Destino do Pescado');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Destino do Pescado');
+
+		foreach ($localDP as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['dp_id']);
+			$modeloRelatorio->setValue(80, $localData['dp_destino']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+	}
 }

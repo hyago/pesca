@@ -1,8 +1,8 @@
 <?php
 
-/** 
+/**
  * Controller de Tipo de Embarcação
- * 
+ *
  * @package Pesca
  * @subpackage Controllers
  * @author Elenildo João <elenildo.joao@gmail.com>
@@ -16,27 +16,27 @@ class TipoEmbarcacaoController extends Zend_Controller_Action
     private $modelTipoEmbarcacao;
 private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
-        
+
+
+
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
     }
 
@@ -44,12 +44,12 @@ private $usuario;
      * Lista todas as artes de pesca
      */
     public function indexAction()
-    {        
+    {
         $dados = $this->modelTipoEmbarcacao->select( NULL, 'tte_tipoembarcacao', NULL );
-      
+
         $this->view->assign("dados", $dados);
     }
-    
+
     /*
      * Exibe formulário para cadastro de um usuário
      */
@@ -59,7 +59,7 @@ private $usuario;
             $this->_redirect('index');
         }
     }
-    
+
     /*
      * Cadastra uma Arte de Pesca
      */
@@ -69,7 +69,7 @@ private $usuario;
 
         $this->_redirect('tipo-embarcacao/index');
     }
-    
+
     /*
      * Preenche um formulario com as informações de um usuário
      */
@@ -79,23 +79,23 @@ private $usuario;
             $this->_redirect('index');
         }
         $tipoEmbarcacao = $this->modelTipoEmbarcacao->find($this->_getParam('id'));
-        
+
         $this->view->assign("tipoEmbarcacao", $tipoEmbarcacao);
     }
-   
+
     /*
      * Atualiza os dados do usuário
      */
     public function atualizarAction()
     {
-        
+
         $this->modelTipoEmbarcacao->update($this->_getAllParams());
 
         $this->_redirect('tipo-embarcacao/index');
     }
- 
+
     /*
-     * 
+     *
      */
     public function excluirAction()
     {
@@ -108,48 +108,30 @@ private $usuario;
         $this->_redirect('tipo-embarcacao/index');
         }
     }
-    
+
     public function relatorioAction(){
-        
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-        
-        $embarcacoes = $this->modelTipoEmbarcacao->select();
-      
-        $this->view->assign("embarcacoes", $embarcacoes);
-        
-        
-        //Title 
-        $y = 55;
-        $width = 20;
-        $height = 7;
-        $same_line = 0;
-        $next_line = 1;
-        $border_true = 1;
-        
-       
-        $pdf = new FPDF("P", "mm", "A4");
-        $pdf->Open();
-        $pdf->SetMargins(10, 20, 5);
-        $pdf->setTitulo("Tipos de Embarcações");
-        $pdf->SetAutoPageBreak(true, 40);
-        $pdf->AddPage();
-        //Title
-        
-        $pdf->SetFont("Arial", "B",10);
-        $pdf->SetY($y);
-        $pdf->Cell($width/2, $height, "ID", $border_true,$same_line);
-        $pdf->Cell($width+10, $height, "Tipo", $border_true,$next_line);
-        
-        
-        $pdf->SetFont("Arial", "",10);
-        sort($embarcacoes);
-        foreach($embarcacoes as $dados){
-            $pdf->Cell($width/2, $height, $dados['TTE_ID'],$border_true,$same_line);
-            $pdf->Cell($width+10, $height, $dados['TTE_TipoEmbarcacao'],$border_true,$next_line);
-        }
-        $pdf->Output("TiposEmbarcacaoPdf.pdf", 'I');
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
+		$localTipoEmbarcacao = $localModelTipoEmbarcacao->select(NULL, array('tte_tipoembarcacao'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório de Tipo de Embarcação');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Tipo de Embarcação');
+
+		foreach ($localTipoEmbarcacao as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tte_id']);
+			$modeloRelatorio->setValue(80, $localData['tte_tipoembarcacao']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
     }
 
 }
- 

@@ -8,44 +8,44 @@ class TipoTelefoneController extends Zend_Controller_Action
       private $modeloTipoTelefone;
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
-        
+
+
+
         $this->modeloTipoTelefone = new Application_Model_TipoTelefone();
     }
 
     public function indexAction()
     {
         $tipoTelefone = $this->modeloTipoTelefone->select(NULL, 'ttel_desc', NULL);
-      
+
         $this->view->assign("assignTipoTelefone", $tipoTelefone);
     }
-    
+
     public function novoAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
     }
-    
+
     /*
      * Cadastra uma Area de Pesca
      */
@@ -55,7 +55,7 @@ class TipoTelefoneController extends Zend_Controller_Action
 
         $this->_redirect('tipo-telefone/index');
     }
-    
+
     /*
      * Preenche um formulario com as informações de um usuário
      */
@@ -65,10 +65,10 @@ class TipoTelefoneController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $tipoTelefone = $this->modeloTipoTelefone->find($this->_getParam('id'));
-        
+
         $this->view->assign("assignTipoTelefone", $tipoTelefone);
     }
-   
+
     /*
      * Atualiza os dados do usuário
      */
@@ -78,9 +78,9 @@ class TipoTelefoneController extends Zend_Controller_Action
 
         $this->_redirect('tipo-telefone/index');
     }
- 
+
     /*
-     * 
+     *
      */
     public function excluirAction()
     {
@@ -93,12 +93,36 @@ class TipoTelefoneController extends Zend_Controller_Action
         $this->_redirect('tipo-telefone/index');
         }
     }
-    
+
     public function beforeExcluirAction()
     {
-        
+
     }
 
+	public function relatorioAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelTT = new Application_Model_TipoTelefone();
+		$localTT = $localModelTT->select(NULL, array('ttel_desc'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Tipo de Dependente');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Tipo de Dependente');
+
+		foreach ($localTT as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['ttel_id']);
+			$modeloRelatorio->setValue(80, $localData['ttel_desc']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+   }
 
 }
 
