@@ -24,7 +24,7 @@ private $usuario;
         $this->view->assign("usuario",$this->usuario);
         
         
-        
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
         $this->modelCalao = new Application_Model_Calao();
@@ -41,13 +41,13 @@ private $usuario;
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
-        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -83,7 +83,7 @@ private $usuario;
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
-        
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         
         $idEntrevista = $this->_getParam('id');
 
@@ -93,6 +93,7 @@ private $usuario;
         
         $vCalaoAvistamento = $this->modelCalao->selectCalaoHasAvistamento('cal_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vCalaoAvistamento', $vCalaoAvistamento);
         $this->view->assign('monitoramento', $monitoramento);

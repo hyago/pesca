@@ -108,6 +108,7 @@ class Application_Model_Emalhe
             'em_numpanos' => $numPanos,
             'em_malha' => $malha,
             'em_obs' => $request['observacao'],
+            'dp_id' => $request['destinoPescado'],
             'mnt_id' => $request['id_monitoramento']
         );
         
@@ -178,6 +179,7 @@ class Application_Model_Emalhe
             'em_altura' => $altura,
             'em_numpanos' => $numPanos,
             'em_malha' => $malha,
+            'dp_id' => $request['destinoPescado'],
             'em_obs' => $request['observacao']
         );
  

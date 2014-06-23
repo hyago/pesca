@@ -68,6 +68,7 @@ class Application_Model_Jerere
             'jre_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'jre_mreviva' => $request['mareviva']
         );
         
@@ -120,6 +121,7 @@ class Application_Model_Jerere
             'jre_tempogasto' => $request['tempoGasto'],
             'jre_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'jre_mreviva' => $request['mareviva']
         );
  

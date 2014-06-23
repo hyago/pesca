@@ -96,6 +96,7 @@ private $dbTableGrosseira;
             'sa_id' => $idSubamostra,
             'grs_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
+            'dp_id' => $request['destinoPescado'],
             'isc_id' => $request['isca']
             
         );
@@ -174,6 +175,7 @@ private $dbTableGrosseira;
             'grs_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'grs_obs' => $request['observacao'],
+            'dp_id' => $request['destinoPescado'],
             'isc_id' => $request['isca']
             
         );

@@ -5,7 +5,7 @@
 
 <div id="esquerda-entrevista">
     <form action="<?= $this->url(array("controller" => "calao", "action" => "atualizar"), null, true) ?>">
-        <fieldset id="Desembarque">
+        <fieldset id="Entrevista">
             <div id="esquerda">
                 <div id="form-esq">
                     <label>ID da ficha diária:</label>
@@ -113,7 +113,18 @@
             </div><br/>
             <div id="esquerda">
                 <legend><h4>Outros dados:</h4></legend>
-                
+                <div id="form-esq">    
+                    <label>Destino do Pescado:</label>
+                    <select name="destinoPescado" />
+                    <?php
+                    foreach ($this->destinos as $key => $destino):
+                        ?>
+                        <option value="<?= $destino['dp_id'] ?>" <?=( $destino['dp_id'] == $this->entrevista['dp_id'])? 'selected="selected"': '';?>><?= $destino['dp_destino'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                </div>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
                     <input type="checkbox" name="subamostra" <?php if($this->entrevista['cal_subamostra'] === true){ echo 'checked';} else{ echo '';} ?>/><br />

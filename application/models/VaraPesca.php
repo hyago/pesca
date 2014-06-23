@@ -96,6 +96,7 @@ class Application_Model_VaraPesca
             'isc_id' => $request['isca'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'vp_mreviva' => $request['mareviva']
         );
         
@@ -174,6 +175,7 @@ class Application_Model_VaraPesca
             'vp_numlinhas' => $numLinhas,
             'isc_id' => $request['isca'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'vp_mreviva' => $request['mareviva']
         );
  

@@ -78,6 +78,7 @@ class Application_Model_Calao
             'cal_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'cal_obs' => $request['observacao'],
+            'dp_id' => $request['destinoPescado'],
             'mnt_id' => $request['id_monitoramento']
         );
         
@@ -138,6 +139,7 @@ class Application_Model_Calao
             'cal_numlances' => $numLances,
             'cal_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
+            'dp_id' => $request['destinoPescado'],
             'cal_obs' => $request['observacao']
         );
  

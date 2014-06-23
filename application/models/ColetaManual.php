@@ -61,6 +61,7 @@ private $dbTableColetaManual;
             'cml_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'cml_mreviva' => $request['mareviva']
         );
         
@@ -88,6 +89,7 @@ private $dbTableColetaManual;
             'cml_subamostra' => $request['subamostra'],
             'cml_obs' => $request['observacao'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'cml_mreviva' => $request['mareviva']
         );
  

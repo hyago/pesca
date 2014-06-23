@@ -23,7 +23,7 @@ private $usuario;
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelRatoeira = new Application_Model_Ratoeira();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
@@ -46,10 +46,11 @@ private $usuario;
         $pesqueiros = $this->modelPesqueiro->select();
         $especies = $this->modelEspecie->select();
         $mare = $this->modelMare->select();
-        
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('mare', $mare);
@@ -92,6 +93,7 @@ private $usuario;
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['rat_dhsaida']);
@@ -103,6 +105,7 @@ private $usuario;
         
         $vRatoeiraAvistamento = $this->modelRatoeira->selectRatoeiraHasAvistamento('rat_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vRatoeiraAvistamento', $vRatoeiraAvistamento);
         $this->view->assign('mare', $mare);

@@ -23,7 +23,7 @@ class EmalheController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -41,11 +41,13 @@ class EmalheController extends Zend_Controller_Action
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
-        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -83,6 +85,7 @@ class EmalheController extends Zend_Controller_Action
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         
         
         $idEntrevista = $this->_getParam('id');
@@ -95,6 +98,7 @@ class EmalheController extends Zend_Controller_Action
         
         $vEmalheAvistamento = $this->modelEmalhe->selectEmalheHasAvistamento('em_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vEmalheAvistamento', $vEmalheAvistamento);
         $this->view->assign('monitoramento', $monitoramento);

@@ -69,6 +69,7 @@ private $dbTableMergulho;
             'mer_obs' => $request['observacao'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'mer_mreviva' => $request['mareviva']
         );
         
@@ -122,6 +123,7 @@ private $dbTableMergulho;
             'sa_id' => $idSubamostra,
             'mer_obs' => $request['observacao'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'mer_mreviva' => $request['mareviva']
         );
  

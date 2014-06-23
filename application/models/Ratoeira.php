@@ -68,6 +68,7 @@ class Application_Model_Ratoeira
             'rat_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'rat_mreviva' => $request['mareviva']
         );
         
@@ -118,6 +119,7 @@ class Application_Model_Ratoeira
             'rat_tempogasto' => $request['tempoGasto'],
             'rat_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'rat_mreviva' => $request['mareviva']
         );
  

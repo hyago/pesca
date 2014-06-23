@@ -20,7 +20,8 @@ class ArrastoFundoController extends Zend_Controller_Action
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-
+        
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
         $this->modelArrastoFundo = new Application_Model_ArrastoFundo();
@@ -37,10 +38,13 @@ class ArrastoFundoController extends Zend_Controller_Action
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
-
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
 
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('pescadores',$pescadores);
@@ -78,7 +82,7 @@ class ArrastoFundoController extends Zend_Controller_Action
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
-        
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['af_dhsaida']);
@@ -89,6 +93,7 @@ class ArrastoFundoController extends Zend_Controller_Action
         
         $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
         $this->view->assign('dataSaida', $datahoraSaida[0][0]);

@@ -23,6 +23,7 @@ class SiripoiaController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelSiripoia = new Application_Model_Siripoia();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
@@ -46,10 +47,12 @@ class SiripoiaController extends Zend_Controller_Action
         $pesqueiros = $this->modelPesqueiro->select();
         $especies = $this->modelEspecie->select();
         $mare = $this->modelMare->select();
-        
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('mare', $mare);
@@ -92,6 +95,7 @@ class SiripoiaController extends Zend_Controller_Action
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['sir_dhsaida']);
@@ -103,6 +107,7 @@ class SiripoiaController extends Zend_Controller_Action
         
         $vSiripoiaAvistamento = $this->modelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vSiripoiaAvistamento', $vSiripoiaAvistamento);
         $this->view->assign('mare', $mare);

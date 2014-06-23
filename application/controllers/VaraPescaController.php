@@ -23,6 +23,7 @@ class VaraPescaController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelVaraPesca = new Application_Model_VaraPesca();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
@@ -45,10 +46,12 @@ class VaraPescaController extends Zend_Controller_Action
         $especies = $this->modelEspecie->select();
         $mare = $this->modelMare->select();
         $isca = $this->modelIsca->select();
-        
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('mare', $mare);
@@ -93,6 +96,8 @@ class VaraPescaController extends Zend_Controller_Action
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $mare = $this->modelMare->select();
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['vp_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['vp_dhvolta']);
@@ -103,6 +108,7 @@ class VaraPescaController extends Zend_Controller_Action
         
         $vVaraPescaAvistamento = $this->modelVaraPesca->selectVaraPescaHasAvistamento('vp_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vVaraPescaAvistamento', $vVaraPescaAvistamento);
         $this->view->assign('monitoramento', $monitoramento);

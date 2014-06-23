@@ -61,7 +61,7 @@ class Application_Model_Manzua
             'man_quantpescadores' => $request['numPescadores'],
             'man_dhvolta' => $timestampVolta,
             'man_dhsaida' => $timestampSaida, 
-            
+            'dp_id' => $request['destinoPescado'],
             'man_subamostra' => $request['subamostra'],
             'man_obs' => $request['observacao'],
             'sa_id' => $idSubamostra,
@@ -119,6 +119,7 @@ class Application_Model_Manzua
             'man_tempogasto' => $request['tempoGasto'],
             'man_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'man_mreviva' => $request['mareviva']
         );
         $whereManzua= $this->dbTableManzua->getAdapter()

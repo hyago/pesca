@@ -77,6 +77,7 @@ class Application_Model_Tarrafa
             'tar_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'tar_obs' => $request['observacao'],
+            'dp_id' => $request['destinoPescado'],
             'mnt_id' => $request['id_monitoramento']
         );
         
@@ -136,6 +137,7 @@ class Application_Model_Tarrafa
             'tar_numlances' => $numLances,
             'tar_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
+            'dp_id' => $request['destinoPescado'],
             'tar_obs' => $request['observacao'],
         );
  

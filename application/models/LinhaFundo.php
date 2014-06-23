@@ -96,6 +96,7 @@ class Application_Model_LinhaFundo
             'isc_id' => $request['isca'],
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'lf_mreviva' => $request['mareviva']
         );
         
@@ -175,6 +176,7 @@ class Application_Model_LinhaFundo
             'lf_numlinhas' => $numLinhas,
             'isc_id' => $request['isca'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'lf_mreviva' => $request['mareviva']
         );
         $whereLinhaFundo= $this->dbTableLinhaFundo->getAdapter()

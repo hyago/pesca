@@ -83,7 +83,9 @@ class Application_Model_ArrastoFundo
             'af_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'af_obs' => $request['observacao'],
+            'dp_id' => $request['destinoPescado'],
             'mnt_id' => $request['id_monitoramento']
+            
         );
         
         $insertEntrevista = $this->dbTableArrastoFundo->insert($dadosArrastoFundo);
@@ -144,6 +146,7 @@ class Application_Model_ArrastoFundo
             'af_oleo' => $oleo,
             'af_alimento' => $alimento,
             'af_gelo' => $oleo,
+            'dp_id' => $request['destinoPescado'],
             'af_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'af_obs' => $request['observacao']

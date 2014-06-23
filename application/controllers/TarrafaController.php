@@ -23,7 +23,7 @@ private $usuario;
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -43,11 +43,13 @@ private $usuario;
         $pesqueiros = $this->modelPesqueiro->select();
         $especies = $this->modelEspecie->select();
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        
+        
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
-        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -102,7 +104,7 @@ private $usuario;
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);
         $this->view->assign('vTarrafa', $vTarrafa);
         $this->view->assign("entrevista", $entrevista);
-        //print_r($entrevista);
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);

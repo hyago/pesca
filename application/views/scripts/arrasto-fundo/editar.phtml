@@ -2,10 +2,11 @@
     <h2>Desembarque->Arrasto de Fundo</h2>
     <h3>Entrevista</h3>
 </div>
+
 <div id="esquerda-entrevista">
     <form action="<?= $this->url(array("controller" => "arrasto-fundo", "action" => "atualizar"), null, true) ?>" method="post">
 
-        <fieldset id="Desembarque">
+        <fieldset id="Entrevista">
             
             <div id="esquerda">
                 <div id="form-esq">
@@ -122,9 +123,21 @@
                     <input type="text"  name="gelo" placeholder="Gelo" value="<?=$this->entrevista['af_gelo']?>"/><br />
                 </div>
             </div>
-            <br/>
             <div id="esquerda">
-                <legend><h4>Outros dados:</h4></legend>
+                <legend><h4>Outros dados:</h4></legend>                
+                <div id="form-esq">    
+                    <label>Destino do Pescado:</label>
+                    <select name="destinoPescado" />
+                    <?php
+                    foreach ($this->destinos as $key => $destino):
+                        ?>
+                        <option value="<?= $destino['dp_id'] ?>" <?=( $destino['dp_id'] == $this->entrevista['dp_id'])? 'selected="selected"': '';?>><?= $destino['dp_destino'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                </div>
+                <br/>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
                     <input type="checkbox" name="subamostra" <?php if($this->entrevista['af_subamostra'] === true){ echo 'checked';} else{ echo '';}?> /><br />

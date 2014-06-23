@@ -68,6 +68,7 @@ class Application_Model_Siripoia
             'sir_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'sir_mreviva' => $request['mareviva']
         );
         
@@ -118,6 +119,7 @@ class Application_Model_Siripoia
             'sa_id' => $idSubamostra,
             'sir_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
+            'dp_id' => $request['destinoPescado'],
             'sir_mreviva' => $request['mareviva']
         );
  

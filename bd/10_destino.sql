@@ -444,19 +444,19 @@ UPDATE access.entrev_pesca as ep SET destino=DES.DP_ID FROM
 (SELECT CODIGO, DESTINO, DP_ID, DP_DESTINO FROM DESTINO ORDER BY CODIGO) AS DES
 WHERE ep.codigo = DES.CODIGO;
 
-alter table T_ARRASTOFUNDO drop column af_avistou,  drop column af_destino;
-alter table t_linhafundo drop column lf_avistamento,  drop column lf_destino;
-alter table T_COLETAMANUAL  drop column cml_avistamento,  drop column cml_destino;
-alter table T_SIRIPOIA drop column sir_avistamento,  drop column sir_destino;
-alter table T_RATOEIRA drop column rat_avistamento,  drop column rat_destino;
-alter table T_MANZUA drop column man_avistamento,  drop column man_destino;
-alter table T_MERGULHO drop column mer_avistou,  drop column mer_destino;
-alter table T_VARAPESCA drop column vp_avistamento,  drop column vp_destino;
-alter table T_grosseira drop column grs_avistou,  drop column grs_destino;
-alter table T_LINHA drop column lin_avistou,  drop column lin_destino;
-alter table T_JERERE drop column jre_avistamento,  drop column jre_destino;
-alter table T_TARRAFA drop column tar_avistou,  drop column tar_destino;
-alter table T_EMALHE drop column em_avistou,  drop column em_destino;
-alter table T_CALAO drop column cal_avistou,  drop column cal_destino;
+alter table T_ARRASTOFUNDO   drop column af_destino;
+alter table t_linhafundo   drop column lf_destino;
+alter table T_COLETAMANUAL    drop column cml_destino;
+alter table T_SIRIPOIA  drop column sir_destino;
+alter table T_RATOEIRA   drop column rat_destino;
+alter table T_MANZUA   drop column man_destino;
+alter table T_MERGULHO   drop column mer_destino;
+alter table T_VARAPESCA   drop column vp_destino;
+alter table T_grosseira   drop column grs_destino;
+alter table T_LINHA   drop column lin_destino;
+alter table T_JERERE   drop column jre_destino;
+alter table T_TARRAFA   drop column tar_destino;
+alter table T_EMALHE   drop column em_destino;
+alter table T_CALAO   drop column cal_destino;
 
 pg_dump -U mohonda DB_Pesca --column-inserts --inserts --schema=public -a -t T_ARRASTOFUNDO -t t_linhafundo -t  T_COLETAMANUAL -t T_SIRIPOIA -t T_RATOEIRA -t T_MANZUA -t T_MERGULHO -t T_VARAPESCA -t T_grosseira -t T_LINHA -t T_JERERE -t T_TARRAFA -t T_EMALHE -t T_CALAO -t T_DESTINOPESCADO > /tmp/01.sql

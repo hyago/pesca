@@ -23,7 +23,7 @@ private $usuario;
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -45,10 +45,13 @@ private $usuario;
         $pesqueiros = $this->modelPesqueiro->select();
         $especies = $this->modelEspecie->select();
         $iscas = $this->modelIsca->select();
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('iscas', $iscas);
@@ -91,6 +94,8 @@ private $usuario;
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $iscas = $this->modelIsca->select();
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        
         
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['grs_dhsaida']);
@@ -103,6 +108,7 @@ private $usuario;
         //
         $vGrosseiraAvistamento = $this->modelGrosseira->selectGrosseiraHasAvistamento('grs_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vGrosseiraAvistamento', $vGrosseiraAvistamento);
         $this->view->assign('monitoramento', $monitoramento);

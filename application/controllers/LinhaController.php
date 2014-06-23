@@ -23,7 +23,7 @@ class LinhaController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
-        
+        $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -43,10 +43,12 @@ class LinhaController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $iscas = $this->modelIsca->select();
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('iscas', $iscas);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -68,6 +70,8 @@ class LinhaController extends Zend_Controller_Action
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $iscas = $this->modelIsca->select();
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        
         
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['lin_dhsaida']);
@@ -79,6 +83,7 @@ class LinhaController extends Zend_Controller_Action
         
         $vLinhaAvistamento = $this->modelLinha->selectLinhaHasAvistamento('lin_id='.$idEntrevista);
         
+        $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vLinhaAvistamento', $vLinhaAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
