@@ -48,16 +48,32 @@ class MareController extends Zend_Controller_Action
             $this->_redirect('index');
         }
     }
-
-    /*
-     * Cadastra uma Area de Pesca
-     */
     public function criarAction()
     {
         $this->modelMare->insert($this->_getAllParams());
 
         $this->_redirect('mare/index');
     }
+    public function editarAction()
+    {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        $mares = $this->modelMare->find($this->_getParam('id'));
+
+        $this->view->assign("mare", $mares);
+    }
+    
+    public function atualizarAction()
+    {
+        $this->modelMare->update($this->_getAllParams());
+
+        $this->_redirect('mare/index');
+    }
+    /*
+     * Cadastra uma Area de Pesca
+     */
+    
 
 	public function relatorioAction() {
 	 $this->_helper->layout->disableLayout();

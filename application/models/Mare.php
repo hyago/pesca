@@ -40,7 +40,7 @@ private $dbTableMare;
         );
         
         $whereMare= $this->dbTableMare->getAdapter()
-                ->quoteInto('"mre_id" = ?', $request['idMare']);
+                ->quoteInto('"mre_id" = ?', $request['id_mare']);
         
         $this->dbTableMare->update($dadosMare, $whereMare);
     }
