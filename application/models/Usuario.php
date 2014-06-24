@@ -2,7 +2,7 @@
 
 /**
  * Model Usuario
- * 
+ *
  * @package Pesca
  * @subpackage Models
  * @author Elenildo João <elenildo.joao@gmail.com>
@@ -23,6 +23,17 @@ class Application_Model_Usuario {
         return $dao->fetchAll($select)->toArray();
     }
 
+    public function selectView($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VUsuario();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+
     public function find($id) {
         $dao = new Application_Model_DbTable_VUsuario();
         $arr = $dao->find($id)->toArray();
@@ -31,20 +42,20 @@ class Application_Model_Usuario {
     public function selectLogin($loginId){
         $usuario = new Application_Model_DbTable_VUsuario();
         $zendObj = $usuario->select()->from($usuario)->where("tl_id= ".$loginId);
-        
+
         $array = $usuario->fetchAll($zendObj)->toArray();
         return $array[0];
     }
     public function selectSenha($loginId){
         $usuario = new Application_Model_DbTable_Login();
         $zendObj = $usuario->select()->from($usuario)->where("tl_id= ".$loginId);
-        
+
         $array = $usuario->fetchAll($zendObj)->toArray();
         return $array[0];
     }
-    
+
     public function insert(array $request) {
-        
+
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
 
         $dataCEP = $request['cep'];
@@ -134,5 +145,5 @@ class Application_Model_Usuario {
 
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
     }
-   
+
 }
