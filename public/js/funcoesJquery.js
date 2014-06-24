@@ -725,7 +725,7 @@ function jsInsertIsca( frm, pag )
 {
     if (frm.inputIsc_id.value) {
 
-        var tmpUpdate = ( '/perfil/update' + '/tp_id/' + frm.inputIsc_id.value + '/tp_perfil/' + frm.inputIsc_tipo.value);
+        var tmpUpdate = (pag + '/isc_id/' + frm.inputIsc_id.value);
 
         location.replace(tmpUpdate);
         
@@ -733,7 +733,7 @@ function jsInsertIsca( frm, pag )
     }
     if (frm.inputIsc_tipo.value) {
 
-        var tmpUpdate = (pag + '/tp_perfil/' + frm.inputIsc_tipo.value);
+        var tmpUpdate = (pag + '/isc_tipo/' + frm.inputIsc_tipo.value);
 
         location.replace(tmpUpdate);
     }
@@ -743,7 +743,7 @@ function jsDeleteIsca( idIsca, pag )
 {
     if (confirm("Realmente deseja excluir este item?")) {
         
-        var tmpUpdate = (pag + '/tp_id/' + idIsca);
+        var tmpUpdate = (pag + '/isc_id/' + idIsca);
         
         location.replace(tmpUpdate);
     }

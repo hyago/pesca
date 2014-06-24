@@ -38,7 +38,9 @@ class ColoniaController extends Zend_Controller_Action {
 
 
         $this->modelColonia = new Application_Model_Colonia();
-
+        $this->modelComunidade = new Application_Model_Comunidade();
+        $this->modelEndereco = new Application_Model_DbTable_Endereco();
+        $this->modelMunicipio = new Application_Model_Municipio();
     }
 
     /*
@@ -96,15 +98,9 @@ class ColoniaController extends Zend_Controller_Action {
             $this->_redirect('index');
         }
         $colonia = $this->modelColonia->find($this->_getParam('id'));
-
-        $modelMunicipio = new Application_Model_Municipio();
-        $municipios = $modelMunicipio->select();
-
-        $modelEndereco = new Application_Model_DbTable_Endereco();
-        $endereco = $modelEndereco->select();
-
-        $modelComunidade = new Application_Model_Comunidade();
-        $comunidades = $modelComunidade->select();
+        $municipios = $this->modelMunicipio->select(null, 'tmun_municipio');
+        $endereco = $this->modelEndereco->select();
+        $comunidades = $this->modelComunidade->select(null, 'tcom_nome');
 
         $this->view->assign("enderecos", $endereco);
         $this->view->assign("municipios", $municipios);

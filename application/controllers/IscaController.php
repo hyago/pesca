@@ -33,13 +33,34 @@ class IscaController extends Zend_Controller_Action
 
         $this->view->assign("dadosIscas", $dadosIsca);
     }
-    public function criarAction(){
+    
+    public function insertAction() {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $setupDados = array('isc_tipo' => $this->_getParam("isc_tipo"));
+
+        $this->modelIsca->insert($setupDados);
+
+        $this->_redirect("/isca/index");
+
+        return;
     }
-    public function excluirAction(){
-        
+    public function deleteAction() {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        else{
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $this->modelIsca->delete($this->_getParam('isc_id'));
+
+        $this->_redirect('isca/index');
+        }
     }
 
 }

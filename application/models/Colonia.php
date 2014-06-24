@@ -40,11 +40,21 @@ class Application_Model_Colonia
         $dbTableColonia = new Application_Model_DbTable_Colonia();
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
+        $cep = $request['cep'];
+        $numero = $request['numero'];
+        
+        if(empty($numero)){
+            $numero = NULL;
+        }
+        if(empty($cep)){
+            $cep = NULL;
+        }
+        
         $dadosEndereco = array(
             'te_logradouro'  => $request['logradouro'],
-            'te_numero'      => $request['numero'],
+            'te_numero'      => $numero,
             'te_bairro'      => $request['bairro'],
-            'te_cep'         => $request['cep'],
+            'te_cep'         => $cep,
             'te_comp'        => $request['complemento'],
             'tmun_id'        => $request['municipio']
         );
@@ -68,11 +78,21 @@ class Application_Model_Colonia
         $dbTableColonia = new Application_Model_DbTable_Colonia();
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         
+        $cep = $request['cep'];
+        $numero = $request['numero'];
+        
+        if(empty($numero)){
+            $numero = NULL;
+        }
+        if(empty($cep)){
+            $cep = NULL;
+        }
+
         $dadosEndereco = array(
             'te_logradouro'  => $request['logradouro'],
-            'te_numero'      => $request['numero'],
+            'te_numero'      => $numero,
             'te_bairro'      => $request['bairro'],
-            'te_cep'         => $request['cep'],
+            'te_cep'         => $cep,
             'te_comp'        => $request['complemento'],
             'tmun_id'        => $request['municipio']
         );

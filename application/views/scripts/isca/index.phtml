@@ -1,15 +1,16 @@
 <h2>Desembarque->Iscas</h2>
 
 <fieldset id="Desembarque"></fieldset>
+<form>
 <a id="ancora_dependentes"></a>
     <fieldset class="noEditable"><legend>Iscas:</legend>
         <fieldset class="noEditable"><legend>Adicionar Isca:</legend>
             <div id="base">
-                <input type="button" name="Add" class="button-confirm" onclick="jsInsertIsca(this.form, '<?= $this->url(array("controller" => "isca", "action" => "criar"), null, true) ?>')">
+                <input type="button" name="Add" class="button-confirm" onclick="jsInsertIsca(this.form, '<?= $this->url(array("controller" => "isca", "action" => "insert"), null, true) ?>')">
                 <input type="button" name="Reload" class="button-clear" onclick="jsReloadIsca(this.form)">
 
-                <input type="text" name="inputIsc_tipo" placeholder="Tipo de isca" size="40"  />
-                <input readonly="" type="text" name="inputTP_ID" />
+                <input type="text" name="inputIsc_tipo" placehol    der="Tipo de isca" size="40"  />
+                <input readonly="" type="text" name="inputIsc_id" />
             </div>
         </fieldset>
         <br>
@@ -25,15 +26,14 @@
         <td><?= $isca['isc_id'] ?></td>
         <td><?= $isca['isc_tipo'] ?></td>
         <td class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"isca","action"=>"excluir", "id" => $isca['paf_id']),null,true)?>">
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
-                </ul>
-            </a>
+            <input type="button" name="Excluir" class="button-del" onclick="jsDeleteIsca(<?=$isca['isc_id']?>,'<?= $this->url(array("controller" => "isca", "action" => "delete"), null, true) ?>')">
+
         </td>
     </tr>
     <?php endforeach; ?>
 </table>
 <br/><br/>
 <a href="<?=$this->url(array("controller"=>"isca","action"=>"relatorio"),null,true)?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
-    </fieldset>
+
+</fieldset>
+</form>

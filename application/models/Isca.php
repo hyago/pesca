@@ -24,20 +24,13 @@ class Application_Model_Isca
         return $arr[0];
     }
     
-    public function insert(array $request)
-    {
-        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
+    public function insert(array $request) {
         $this->dbTableIsca = new Application_Model_DbTable_Isca();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
-        
-       
-        $dadosIsca = array(
-            'isc_tipo' => $request['tipoIsca']
-        );
-        
+
+        $dadosIsca = array('isc_tipo' => $request['isc_tipo']);
+
         $this->dbTableIsca->insert($dadosIsca);
+
         return;
     }
     
