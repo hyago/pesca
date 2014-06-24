@@ -1,24 +1,24 @@
 $(document).ready(function() {
     //funções para menu-lateral
-    if ($("fieldset").attr('id') == "Social") {
+    if ($("fieldset").attr('id') === "Social") {
         $("#Social").show();
         $("#Filo").hide();
         $("#Dsbq").hide();
         $("#Entrevista").hide();
     }
-    else if ($("fieldset").attr('id') == "Desembarque") {
+    else if ($("fieldset").attr('id') === "Desembarque") {
         $("#Dsbq").show();
         $("#Filo").hide();
         $("#Social").hide();
         $("#Entrevista").hide();
     }
-    else if ($("fieldset").attr('id') == "Filogenia") {
+    else if ($("fieldset").attr('id') === "Filogenia") {
         $("#Dsbq").show();
         $("#Filo").show();
         $("#Social").hide();
         $("#Entrevista").hide();
     }
-    else if ($("fieldset").attr('id') == "Entrevista"){
+    else if ($("fieldset").attr('id') === "Entrevista"){
         $("#Dsbq").show();
         $("#Entrevista").show();
         $("#Filo").hide();
@@ -45,11 +45,8 @@ $(document).ready(function() {
         $("#Entrevista").slideToggle();
     })
     //funcoes para menu
-
-
-
-
 });
+
 
 
 $(function() {
