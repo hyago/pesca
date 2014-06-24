@@ -16,37 +16,37 @@ class PescadorController extends Zend_Controller_Action {
     private $modelPescador;
 private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
+
+
         $this->modelPescador = new Application_Model_Pescador();
     }
 
     public function indexAction() {
         $tp_id = $this->_getParam("tp_id");
         $tp_nome = $this->_getParam("tp_nome");
-        
+
         if ( $tp_id > 0 ) {
             $dados = $this->modelPescador->select("tp_id>=". $tp_id, array('tp_id'), 20);
         } elseif ( $tp_nome ) {
-            $dados = $this->modelPescador->select("tp_nome LIKE '". $tp_nome."%'", array('tp_nome', 'tp_id'), 20);            
+            $dados = $this->modelPescador->select("tp_nome LIKE '". $tp_nome."%'", array('tp_nome', 'tp_id'), 20);
         } else {
             $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'), 20);
         }
@@ -63,7 +63,7 @@ private $usuario;
     }
 
     public function novoAction() {
-        
+
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select();
         $this->view->assign("municipios", $municipios);
@@ -71,7 +71,7 @@ private $usuario;
         $modelEscolaridade = new Application_Model_Escolaridade();
         $escolaridade = $modelEscolaridade->select();
         $this->view->assign("assignEscolaridades", $escolaridade);
-        
+
         $modelUser = new Application_Model_Usuario();
         $tipoUser = $modelUser->select();
         $this->view->assign("assignUser", $tipoUser);
@@ -85,10 +85,10 @@ private $usuario;
 
     public function editarAction() {
         $idPescador = $this->_getParam('id');
-        
+
         $pescador = $this->modelPescador->find( $idPescador );
         $this->view->assign("pescador", $pescador);
-        
+
 
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select();
@@ -101,7 +101,7 @@ private $usuario;
         $modelAreaPesca = new Application_Model_AreaPesca();
         $areasPesca = $modelAreaPesca->select();
         $this->view->assign("areasPesca", $areasPesca);
-        
+
         $modelColonia = new Application_Model_Colonia();
         $colonias = $modelColonia->select();
         $this->view->assign("colonias", $colonias);
@@ -141,23 +141,23 @@ private $usuario;
         $modelTipoRenda = new Application_Model_TipoRenda();
         $tipoRendas = $modelTipoRenda->select();
         $this->view->assign("assignTipoRendas", $tipoRendas);
-        
+
         $modelProgramaSocial = new Application_Model_ProgramaSocial();
         $tipoProgramaSocial = $modelProgramaSocial->select();
         $this->view->assign("assignProgramaSocial", $tipoProgramaSocial);
-        
+
         $modelComunidade = new Application_Model_Comunidade();
         $tipoComunidade = $modelComunidade->select();
         $this->view->assign("assignComunidade", $tipoComunidade);
-        
+
         $modelPorto = new Application_Model_Porto();
         $tipoPorto = $modelPorto->select();
         $this->view->assign("assignPorto", $tipoPorto);
-        
+
         $modelUser = new Application_Model_Usuario();
         $tipoUser = $modelUser->select();
         $this->view->assign("assignUser", $tipoUser);
-        
+
 //     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
         $vPescadorHasDependente = $model_VPescadorHasDependente->selectDependentes("tp_id=". $idPescador, "ttd_tipodependente", null);
@@ -166,11 +166,11 @@ private $usuario;
         $model_VPescadorHasRenda = new Application_Model_VPescadorHasRenda();
         $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $idPescador, "ttr_descricao", null);
         $this->view->assign("assign_vPescadorRenda", $vPescadorHasRenda);
-        
+
         $model_VPescadorHasComunidade = new Application_Model_VPescadorHasComunidade();
         $vPescadorHasComunidade = $model_VPescadorHasComunidade->select("tp_id=" . $idPescador, "tcom_nome", null);
         $this->view->assign("assign_vPescadorComunidade", $vPescadorHasComunidade);
-        
+
         $model_VPescadorHasProgramaSocial = new Application_Model_VPescadorHasProgramaSocial();
         $vPescadorHasProgramaSocial = $model_VPescadorHasProgramaSocial->select("tp_id=" . $idPescador, "prs_programa", null);
         $this->view->assign("assign_vPescadorProgramaSocial", $vPescadorHasProgramaSocial);
@@ -186,7 +186,7 @@ private $usuario;
         $model_VPescadorHasAreaPesca = new Application_Model_VPescadorHasAreaPesca();
         $vPescadorHasAreaPesca = $model_VPescadorHasAreaPesca->select("tp_id=" . $idPescador, "tareap_areapesca", null);
         $this->view->assign("assign_vPescadorAreaPesca", $vPescadorHasAreaPesca);
-        
+
         $model_VPescadorHasArteTipoArea = new Application_Model_VPescadorHasArteTipoArea();
         $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $idPescador, "tap_artepesca", null);
         $this->view->assign("assign_vPescadorArteTipoArea", $vPescadorHasArteTipoArea);
@@ -198,7 +198,7 @@ private $usuario;
         $model_VPescadorHasEmbarcacao = new Application_Model_VPescadorHasEmbarcacao();
         $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $idPescador, "tte_tipoembarcacao", null);
         $this->view->assign("assign_vPescadorEmbarcacao", $vPescadorHasEmbarcacao);
-        
+
         $model_VPescadorHasPorto = new Application_Model_VPescadorHasPorto();
         $vPescadorHasPorto = $model_VPescadorHasPorto->select("tp_id=" . $idPescador, "pto_nome", null);
         $this->view->assign("assign_vPescadorPorto", $vPescadorHasPorto);
@@ -209,7 +209,7 @@ private $usuario;
 
 //        $this->_redirect('pescador/index');
     }
-    
+
     public function atualizarAction() {
         $this->modelPescador->update($this->_getAllParams());
 
@@ -226,28 +226,28 @@ private $usuario;
         $this->_redirect('pescador/index');
         }
     }
-    
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function filteridAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $tp_id = $this->_getParam("id");
-        
+
         $dados = $this->modelPescador->select("tp_id>=". $tp_id, array('tp_nome', 'tp_id'), null);
-        
+
         $this->view->assign("dados", $dados);
-        
+
         $this->_redirect('pescador/index');
     }
-        
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function atualizarpescadorenderecoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-   
+
         $backUrl = $this->_getParam("back_url");
-        
+
         $setupDados = array(
             "idEndereco" => $this->_getParam("te_id"),
             'logradouro' => $this->_getParam("te_logradouro"),
@@ -279,23 +279,23 @@ private $usuario;
             'respCadastro'  => $this->_getParam("tp_resp_cad"),
             'obs' => $this->_getParam("tp_obs")
         );
-        
+
         $idPescador = $this->_getParam("tp_id");
-        
+
         $this->modelPescador->update($setupDados);
 
         $this->_redirect("/pescador/editar/id/" . $idPescador);
 
         return;
     }
-    
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorenderecoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $backUrl = $this->_getParam("back_url");
-        
+
         $setupDados = array(
             'logradouro' => $this->_getParam("te_logradouro"),
             'numero' => $this->_getParam("te_numero"),
@@ -332,7 +332,7 @@ private $usuario;
 
         return;
     }
- 
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasdependenteAction() {
         $this->_helper->layout->disableLayout();
@@ -370,7 +370,7 @@ private $usuario;
         return;
     }
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasrendaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -389,7 +389,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhasrendaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -408,8 +408,8 @@ private $usuario;
 
         return;
     }
-    
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_ProgramaSocial /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_ProgramaSocial /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhascomunidadeAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -426,7 +426,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhascomunidadeAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -443,8 +443,8 @@ private $usuario;
 
         return;
     }
-    
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Porto /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Porto /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasportoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -461,7 +461,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhasportoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -478,8 +478,8 @@ private $usuario;
 
         return;
     }
-    
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_ProgramaSocial /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_ProgramaSocial /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasprogramasocialAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -496,7 +496,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhasprogramasocialAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -513,8 +513,8 @@ private $usuario;
 
         return;
     }
-    
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Telefone /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhastelefoneAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -533,7 +533,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhastelefoneAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -550,8 +550,8 @@ private $usuario;
 
         return;
     }
-    
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Colonia /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Colonia /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhascoloniaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -561,7 +561,7 @@ private $usuario;
         $idColonia = $this->_getParam("idColonia");
 
         $dtaColonia = $this->_getParam("dtaColonia");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelPescador->modelInsertPescadorHasColonia($idPescador, $idColonia, $dtaColonia);
@@ -570,7 +570,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhascoloniaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -588,7 +588,7 @@ private $usuario;
         return;
     }
 
- ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Area /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Area /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasareaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -605,7 +605,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhasareaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -623,7 +623,7 @@ private $usuario;
         return;
     }
 
- ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Arte /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Arte /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasartetipoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -640,7 +640,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhasartetipoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -657,9 +657,9 @@ private $usuario;
 
         return;
     }
-    
-    
-     ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_TipoCapturada /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+
+
+     ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_TipoCapturada /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhastipoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -676,7 +676,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhastipoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -693,7 +693,7 @@ private $usuario;
 
         return;
     }
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Embarcações /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function insertpescadorhasembarcacoesAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -701,11 +701,11 @@ private $usuario;
         $idPescador = $this->_getParam("id");
 
         $idDono = $this->_getParam("idDono");
-        
+
         $idEmbarcacao = $this->_getParam("idEmbarcacao");
 
         $idPorte = $this->_getParam("idPorte");
-        
+
         $isMotor = $this->_getParam("isMotor");
 
         $backUrl = $this->_getParam("back_url");
@@ -716,7 +716,7 @@ private $usuario;
 
         return;
     }
-    
+
     public function deletepescadorhasembarcacoesAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -734,14 +734,14 @@ private $usuario;
         $this->redirect("/pescador/editar/id/" . $backUrl);
 
         return;
-    }    
-    
+    }
+
     public function relxlspescadorAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $localModelPescador = new Application_Model_Pescador();
-        
+
         $localPescador = $localModelPescador->select(NULL, array('tp_nome', 'tp_id'), NULL);
 
         require_once "../library/Classes/PHPExcel.php";
@@ -752,14 +752,14 @@ private $usuario;
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0 , 1, 'Pescador' );
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0 , 3, 'Código' );
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1 , 3, 'Nome' );
-        
+
         $linha = 4;
         foreach ( $localPescador as $key => $pescador):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0 , $linha, $pescador['tp_id'] );
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1 , $linha, $pescador['tp_nome'] );
             $linha++;
-        endforeach;       
-        
+        endforeach;
+
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         ob_end_clean();
 
@@ -771,38 +771,13 @@ private $usuario;
         $objWriter->save('php://output');
     }
 
-// 	public function relpdfpescadorAction() {
-// 		$this->_helper->layout->disableLayout();
-// 		$this->_helper->viewRenderer->setNoRender(true);
-// 
-// 		$localModelPescador = new Application_Model_Pescador();
-// 		$localPescador = $localModelPescador->select(NULL, array('tp_nome', 'tp_id'), NULL);
-// 
-// 		require_once "../library/ModeloRelatorio.php";
-// 		$modeloRelatorio = new ModeloRelatorio();
-// 		$modeloRelatorio->setTitulo('Relatório de Pescador');
-// 
-// 		$modeloRelatorio->setLegenda(30,  'Código');
-// 		$modeloRelatorio->setLegenda(70,  'Nome');
-// 		
-// 		foreach ($localPescador as $key => $pescador):
-// 			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $pescador['tp_id']);
-// 			$modeloRelatorio->setValue(70,  $pescador['tp_nome']);
-// 			$modeloRelatorio->setNewLine();
-// 		endforeach;
-// 
-// 		$pdf = $modeloRelatorio->getRelatorio();
-// 
-// 		header("Content-Type: application/pdf;");
-// 		echo $pdf->render();
-// 	}
 	public function relpdfpescadorAction() {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
 		$localModelPescador = new Application_Model_Pescador();
-		$localPescador = $localModelPescador->selectView(NULL, array('tp_nome', 'tp_id'), NULL);
-		
+		$localPescador = $localModelPescador->selectView(NULL, array('tcom_nome','tp_nome','tp_id'), NULL);
+
 		$localModelTelefone = new Application_Model_VPescadorHasTelefone();
 		$localModelDependente = new Application_Model_VPescadorHasDependente();
 		$localModelRenda = new Application_Model_VPescadorHasRenda();
@@ -811,224 +786,200 @@ private $usuario;
 		$localModelArtePesca = new Application_Model_VPescadorHasArteTipoArea();
 		$localModelTipoCapturada = new Application_Model_VPescadorHasTipoCapturada();
 		$localModelEmbarcacoes = new Application_Model_VPescadorHasEmbarcacao();
-		
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório de Pescador');
 
-// 		$modeloRelatorio->setLegenda(30,  'Código');
-// 		$modeloRelatorio->setLegenda(70,  'Nome');
 		$modeloRelatorio->setLegendaOff();
-		
+
 		foreach ($localPescador as $key => $pescador):
-			$modeloRelatorio->setValue(30, 'Código: ' . $pescador['tp_id']);
-			$modeloRelatorio->setValue(100,  'Nome: ' . $pescador['tp_nome']);
-			$modeloRelatorio->setValue(530,  'Sexo: ' . $pescador['tp_sexo']);
-					
+			$modeloRelatorio->setLegValue(30, 'Código: ', $pescador['tp_id']);
+			$modeloRelatorio->setLegValue(100,  'Nome: ', $pescador['tp_nome']);
+			$modeloRelatorio->setLegValue(530,  'Sexo: ', $pescador['tp_sexo']);
+
 			$modeloRelatorio->setNewLine();
 			if ($pescador['tp_datanasc']) {
 			$localDate = date("d/m/Y", strtotime($pescador['tp_datanasc']));
 			} else {
 				$localDate='';
 			}
-			
-			$modeloRelatorio->setValue(30,  'Data Nascimento: ' . $localDate );
-			$modeloRelatorio->setValue(230,  'Matricula: ' . $pescador['tp_matricula']);
-			$modeloRelatorio->setValue(350,  'Apelido: ' . $pescador['tp_apelido']);
-			
-			$modeloRelatorio->setNewLine();			
-			$modeloRelatorio->setValue(30,  'CPF: ' . $pescador['tp_cpf']);
-			$modeloRelatorio->setValue(130,  'RG: ' . $pescador['tp_rg']);
-			$modeloRelatorio->setValue(230,  'INSS: ' . $pescador['tp_inss']);
-			$modeloRelatorio->setValue(350,  'RGB/MAA/IBAMA: ' . $pescador['tp_rgb_maa_ibama']);
-			
-			$modeloRelatorio->setNewLine();
-			$modeloRelatorio->setValue(30,  'PIS: ' . $pescador['tp_pis']);
-			$modeloRelatorio->setValue(130,  'CTPS: ' . $pescador['tp_ctps']);
-			$modeloRelatorio->setValue(230,  'NIT/CEI: ' . $pescador['tp_nit_cei']);
-			$modeloRelatorio->setValue(350,  'CIR CAP PORTO : ' . $pescador['tp_cir_cap_porto ']);
-			
-			$modeloRelatorio->setNewLine();			
-			$modeloRelatorio->setValue(30,  'CMA: ' . $pescador['tp_cma']);
-			$modeloRelatorio->setValue(130,  'Pai: ' . $pescador['tp_filiacaopai']);
-			$modeloRelatorio->setValue(350,  'Mãe: ' . $pescador['tp_filiacaomae']);
 
-			$modeloRelatorio->setNewLine();			
-			$modeloRelatorio->setValue(30,  'Natural: ' . $pescador['munnat'] . '/' . $pescador['signat']);
-			$modeloRelatorio->setValue(130,  'Escolaridade: ' . $pescador['esc_nivel']);
+			$modeloRelatorio->setLegValue(30,  'Data Nascimento: ', $localDate );
+			$modeloRelatorio->setLegValue(230,  'Matricula: ', $pescador['tp_matricula']);
+			$modeloRelatorio->setLegValue(350,  'Apelido: ', $pescador['tp_apelido']);
 
 			$modeloRelatorio->setNewLine();
-			$modeloRelatorio->setValue(30,  'Logradouro: ' . $pescador['te_logradouro']);
-			$modeloRelatorio->setValue(230,  'Número: ' . $pescador['te_numero']);
-			$modeloRelatorio->setValue(350,  'Complemento: ' . $pescador['te_comp']);
-			
+			$modeloRelatorio->setLegValue(30,  'CPF: ', $pescador['tp_cpf']);
+			$modeloRelatorio->setLegValue(130,  'RG: ', $pescador['tp_rg']);
+			$modeloRelatorio->setLegValue(230,  'INSS: ', $pescador['tp_inss']);
+			$modeloRelatorio->setLegValue(350,  'RGB/MAA/IBAMA: ', $pescador['tp_rgb_maa_ibama']);
+
 			$modeloRelatorio->setNewLine();
-			$modeloRelatorio->setValue(30,  'Bairro: ' . $pescador['te_bairro']);
-			$modeloRelatorio->setValue(230,  'CEP: ' . $pescador['te_cep']);
-			$modeloRelatorio->setValue(350,  'Cidade: ' . $pescador['tmun_municipio'] . '/' . $pescador['tuf_sigla']);
-			
-			$modeloRelatorio->setNewLine();			
+			$modeloRelatorio->setLegValue(30,  'PIS: ', $pescador['tp_pis']);
+			$modeloRelatorio->setLegValue(130,  'CTPS: ', $pescador['tp_ctps']);
+			$modeloRelatorio->setLegValue(230,  'NIT/CEI: ', $pescador['tp_nit_cei']);
+			$modeloRelatorio->setLegValue(350,  'CIR CAP PORTO : ', $pescador['tp_cir_cap_porto ']);
+
+			$modeloRelatorio->setNewLine();
+			$modeloRelatorio->setLegValue(30,  'CMA: ', $pescador['tp_cma']);
+			$modeloRelatorio->setLegValue(130,  'Pai: ', $pescador['tp_filiacaopai']);
+			$modeloRelatorio->setLegValue(350,  'Mãe: ', $pescador['tp_filiacaomae']);
+
+			$modeloRelatorio->setNewLine();
+			$modeloRelatorio->setLegValue(30,  'Comunidade: ', $pescador['tcom_nome']);
+			$modeloRelatorio->setLegValue(230,  'Natural: ', $pescador['munnat'] . '/' . $pescador['signat']);
+			$modeloRelatorio->setLegValue(350,  'Escolaridade: ', $pescador['esc_nivel']);
+
+			$modeloRelatorio->setNewLine();
+			$modeloRelatorio->setLegValue(30,  'Logradouro: ', $pescador['te_logradouro']);
+			$modeloRelatorio->setLegValue(230,  'Número: ', $pescador['te_numero']);
+			$modeloRelatorio->setLegValue(350,  'Complemento: ', $pescador['te_comp']);
+
+			$modeloRelatorio->setNewLine();
+			$modeloRelatorio->setLegValue(30,  'Bairro: ', $pescador['te_bairro']);
+			$modeloRelatorio->setLegValue(230,  'CEP: ', $pescador['te_cep']);
+			$modeloRelatorio->setLegValue(350,  'Cidade: ', $pescador['tmun_municipio'] . '/' . $pescador['tuf_sigla']);
+
+			$modeloRelatorio->setNewLine();
 			if ($pescador['tp_dta_cad']) {
 			$localDate = date("d/m/Y", strtotime($pescador['tp_dta_cad']));
 			} else {
 				$localDate='';
 			}
-			$modeloRelatorio->setValue(30,  'Data Cadastro: ' . $pescador['tp_dta_cad']);
-			$modeloRelatorio->setValue(130,  'Resp. Lançamento: ' . $pescador['tu_nome_lan ']);
-			$modeloRelatorio->setValue(350,  'Resp. Cadastro: ' . $pescador[' tu_nome_cad ']);
+			$modeloRelatorio->setLegValue(30,  'Data Cadastro: ', $pescador['tp_dta_cad']);
+			$modeloRelatorio->setLegValue(130,  'Resp. Lançamento: ', $pescador['tu_nome_lan ']);
+			$modeloRelatorio->setLegValue(350,  'Resp. Cadastro: ', $pescador[' tu_nome_cad ']);
+			$modeloRelatorio->setNewLine();
 
+			$modeloRelatorio->setLegValue(30,  'Observações: ', $pescador['tp_obs']);
 			$modeloRelatorio->setNewLine();
-			$modeloRelatorio->setValue(30,  'Observações: ' . $pescador['tp_obs']);
-			$modeloRelatorio->setNewLine();
-			
+
 			$localDependente = $localModelDependente->selectDependentes('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localDependente as $key_d => $dependente) {
-				$modeloRelatorio->setValue(30, 'Dependente: ' . $dependente['ttd_tipodependente'] .": " .$dependente['tptd_quantidade']);
+				$modeloRelatorio->setLegValue(30, 'Dependente: ', $dependente['ttd_tipodependente'] .": " .$dependente['tptd_quantidade']);
 				$modeloRelatorio->setNewLine();
 			}
-			
+
 			$localRenda = $localModelRenda->select('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localRenda as $key_r => $renda) {
-				$modeloRelatorio->setValue(30, 'Renda: ' . $renda['ttr_descricao'] .": " .$renda['ren_renda']);
+				$modeloRelatorio->setLegValue(30, 'Renda: ', $renda['ttr_descricao'] .": " .$renda['ren_renda']);
 				$modeloRelatorio->setNewLine();
 			}
-			
+
 			$localProgramaSocial = $localModelProgramaSocial->select('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localProgramaSocial as $key_ps => $programaSocial) {
-				$modeloRelatorio->setValue(30, 'Renda: ' . $programaSocial['ttr_descricao'] .": " .$programaSocial['ren_renda']);
+				$modeloRelatorio->setLegValue(30, 'Renda: ', $programaSocial['ttr_descricao'] .": " .$programaSocial['ren_renda']);
 				$modeloRelatorio->setNewLine();
 			}
-			
+
 			$localTelefone = $localModelTelefone->select('tpt_tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localTelefone as $key_t => $telefone) {
-				$modeloRelatorio->setValue(30, 'Telefone: ' . $telefone['ttel_desc'].": " .$telefone['tpt_telefone']);
+				$modeloRelatorio->setLegValue(30, 'Telefone: ', $telefone['ttel_desc'].": " .$telefone['tpt_telefone']);
 				$modeloRelatorio->setNewLine();
 			}
-			
+
 			$localAreaPesca = $localModelAreaPesca->select('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localAreaPesca as $key_area => $areaPesca) {
-				$modeloRelatorio->setValue(30, 'Area de Pesca: ' . $areaPesca['tareap_areapesca']);
+				$modeloRelatorio->setLegValue(30, 'Area de Pesca: ', $areaPesca['tareap_areapesca']);
 				$modeloRelatorio->setNewLine();
 			}
-			
+
 			$localArtePesca = $localModelArtePesca->select('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localArtePesca as $key_arte => $artePesca) {
-				$modeloRelatorio->setValue(30, 'Arte de Pesca: ' . $artePesca['tap_artepesca']);
+				$modeloRelatorio->setLegValue(30, 'Arte de Pesca: ', $artePesca['tap_artepesca']);
 				$modeloRelatorio->setNewLine();
 			}
-			
+
 			$localTipoCapturada = $localModelTipoCapturada->select('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localTipoCapturada as $key_tc => $tipoCapturada) {
-				$modeloRelatorio->setValue(30, 'Espécies Capturadas: ' . $tipoCapturada['itc_tipo']);
+				$modeloRelatorio->setLegValue(30, 'Espécies Capturadas: ', $tipoCapturada['itc_tipo']);
 				$modeloRelatorio->setNewLine();
 			}
-			
+
 			$localEmbarcacoes = $localModelEmbarcacoes->select('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localEmbarcacoes as $key_emb => $embarcacoes) {
-				$modeloRelatorio->setValue(30, 'Embarcações: ' . $embarcacoes['tte_tipoembarcacao']);
+				$modeloRelatorio->setLegValue(30, 'Embarcações: ', $embarcacoes['tte_tipoembarcacao']);
 				if ($embarcacoes['tpte_motor'] == true)
 					$motor = 'Sim';
-				else $motor = 'Não';				 
-				$modeloRelatorio->setValue(130, 'Motor: ' . $motor );
-				$modeloRelatorio->setValue(230, 'Porte: ' . $embarcacoes['tpe_porte']);
+				else $motor = 'Não';
+				$modeloRelatorio->setLegValue(130, 'Motor: ', $motor );
+				$modeloRelatorio->setLegValue(230, 'Porte: ', $embarcacoes['tpe_porte']);
 				if ($embarcacoes['tpte_dono'] == 1)
 					$dono = 'Sim';
 				else $dono = 'Não';
-				$modeloRelatorio->setValue(330, 'Proprietário: ' . $dono);
+				$modeloRelatorio->setLegValue(330, 'Proprietário: ', $dono);
 				$modeloRelatorio->setNewLine();
 			}
 
+			$modeloRelatorio->setNewLine();
+			$modeloRelatorio->setNewLine();
 
-			$modeloRelatorio->setNewLine();
-			$modeloRelatorio->setNewLine();
-			
 		endforeach;
 
 		$pdf = $modeloRelatorio->getRelatorio();
 
-                header('Content-Disposition: attachment;filename="rel_pescador.pdf"');
-//		header('Content-Disposition: inline;filename="teste.pdf"');
-		header("Content-type: application/x-pdf"); 
-		echo $pdf->render(); 
+        header('Content-Disposition: attachment;filename="rel_pescador.pdf"');
+		header("Content-type: application/x-pdf");
+		echo $pdf->render();
 
 // 		header("Content-Type: application/pdf");
 // 		echo $pdf->render();
 	}
-    public function relatorioAction() {
 
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
+	public function relatoriopescadorcoloniaAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
 
-        $modelPescador = new Application_Model_Pescador();
-        $modelMunicipio = new Application_Model_Municipio();
-        $modelArtePesca = new Application_Model_ArtePesca();
-        $modelAreaPesca = new Application_Model_AreaPesca();
-        $modelColonia = new Application_Model_Colonia();
-        $modelEspecie = new Application_Model_Especie();
-        $modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
-        $modelPorteEmbarcacao = new Application_Model_PorteEmbarcacao();
+		$localModelPescador = new Application_Model_Pescador();
+		$localPescador = $localModelPescador->selectView(NULL, array('tc_nome', 'tp_nome'), NULL);
 
-        $pescador = $modelPescador->select_Pescador_By_Municipio();
-        //$pescador1 = $modelPescador->pescadorByMunicipio($municipio);
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório de Pescador - Colônia');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Colonia');
+		$modeloRelatorio->setLegenda(200, 'Pescador');
 
-        $municipios = $modelMunicipio->select();
-        $artesPesca = $modelArtePesca->select();
-        $areasPesca = $modelAreaPesca->select();
-        $colonias = $modelColonia->select();
-        $especies = $modelEspecie->select();
-        $tiposEmbarcacao = $modelTipoEmbarcacao->select();
-        $portesEmbarcacao = $modelPorteEmbarcacao->select();
+		foreach ($localPescador as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
+			$modeloRelatorio->setValue(80, $localData['tc_nome']);
+			$modeloRelatorio->setValue(200, $localData['tp_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
 
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }
 
-        $y = 55;
-        $width = 20;
-        $height = 6;
-        $same_line = 0;
-        $next_line = 1;
-        $border_true = 1;
+	public function relatoriopescadorcomunidadeAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
 
-        $pdf = new FPDF("L", "mm", "A4");
+		$localModelPescador = new Application_Model_Pescador();
+		$localPescador = $localModelPescador->selectView(NULL, array('tcom_nome', 'tp_nome'), NULL);
 
-        $pdf->Open();
-        $pdf->SetMargins(10, 20, 5);
-        $pdf->setTitulo("Pescadores");
-        $pdf->SetAutoPageBreak(true, 40);
-        $pdf->AddPage();
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório de Pescador - Comunidade');
+		$modeloRelatorio->setLegenda(30, 'Código');
+		$modeloRelatorio->setLegenda(80, 'Comunidade');
+		$modeloRelatorio->setLegenda(200, 'Pescador');
 
-        //Title
-        $pdf->SetFont("Arial", "B", 8);
-        $pdf->SetY($y);
-        $pdf->Cell($width / 2, $height, "ID", $border_true, $same_line);
-        $pdf->Cell($width + 20, $height, "Nome", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Sexo", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Matricula", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Apelido", $border_true, $same_line);
-        $pdf->Cell($width + 20, $height, "Pai", $border_true, $same_line);
-        $pdf->Cell($width + 20, $height, "Mãe", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Naturalidade", $border_true, $same_line);
-        $pdf->Cell($width, $height, "Estado", $border_true, $next_line);
-        //Dados
-        $pdf->SetFont("Arial", "", 8);
-        sort($pescador);
-        foreach ($pescador as $dados) {
-            $pdf->Cell($width / 2, $height, $dados['TP_ID'], $border_true, $same_line);
-            $pdf->Cell($width + 20, $height, $dados['TP_Nome'], $border_true, $same_line);
-            if ($dados['TP_Sexo'] == "M") {
-                $pdf->Cell($width, $height, "Masculino", $border_true, $same_line);
-            } else {
-                $pdf->Cell($width, $height, "Feminino", $border_true, $same_line);
-            }
+		foreach ($localPescador as $key => $localData) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
+			$modeloRelatorio->setValue(80, $localData['tcom_nome']);
+			$modeloRelatorio->setValue(200, $localData['tp_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
 
-            $pdf->Cell($width, $height, $dados['TP_Matricula'], $border_true, $same_line);
-            $pdf->Cell($width, $height, $dados['TP_Apelido'], $border_true, $same_line);
-            $pdf->Cell($width + 20, $height, $dados['TP_FiliacaoPai'], $border_true, $same_line);
-            $pdf->Cell($width + 20, $height, $dados['TP_FiliacaoMae'], $border_true, $same_line);
-            $pdf->Cell($width, $height, $dados['TMun_Municipio'], $border_true, $same_line);
-            $pdf->Cell($width, $height, $dados["TUF_Sigla"], $border_true, $next_line);
-        }
-
-
-        $pdf->Output("cadastroPdf.pdf", 'I');
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
     }
 
 }
+

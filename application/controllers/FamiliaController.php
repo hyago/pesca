@@ -151,12 +151,12 @@ class FamiliaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-// 		 header("Content-Type: application/pdf");
-// 		 echo $pdf->render();
+		 header("Content-Type: application/pdf");
+		 echo $pdf->render();
 
-		header('Content-Disposition: attachment;filename="rel_filogenia_familia.pdf"');
-		header("Content-type: application/x-pdf");
-		echo $pdf->render();
+// 		header('Content-Disposition: attachment;filename="rel_filogenia_familia.pdf"');
+// 		header("Content-type: application/x-pdf");
+// 		echo $pdf->render();
    }
 
    	public function relatoriolistaAction() {
@@ -199,11 +199,11 @@ class FamiliaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: attachment;filename="rel_familia.pdf"');
-		header("Content-type: application/x-pdf");
-		echo $pdf->render();
-
-// 		header("Content-Type: application/pdf");
+// 		header('Content-Disposition: attachment;filename="rel_familia.pdf"');
+// 		header("Content-type: application/x-pdf");
 // 		echo $pdf->render();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
    }
 }

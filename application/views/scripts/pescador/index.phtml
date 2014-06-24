@@ -26,7 +26,7 @@
         </table>
 
 
-        
+
         <table>
             <tr>
                 <th>ID</th>
@@ -66,8 +66,9 @@
             <?php endforeach; ?>
         </table>
         <br/><br/>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Colonia (lista)</a>
+		<a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Comunidade (lista)</a>
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "relxlspescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório XLS</a>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relpdfpescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório PDF</a>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relpdfpescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório PDF/Comunidade</a>
     </form>
 </html>

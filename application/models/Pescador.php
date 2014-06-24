@@ -12,7 +12,7 @@
  */
 class Application_Model_Pescador {
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function select($where = null, $order = null, $limit = null) {
         $dao = new Application_Model_DbTable_Pescador();
         $select = $dao->select()->from($dao)->order($order)->limit($limit);
@@ -23,7 +23,7 @@ class Application_Model_Pescador {
 
         return $dao->fetchAll($select)->toArray();
     }
-    
+
     public function selectView($where = null, $order = null, $limit = null) {
         $dao = new Application_Model_DbTable_VPescador();
         $select = $dao->select()->from($dao)->order($order)->limit($limit);
@@ -34,7 +34,8 @@ class Application_Model_Pescador {
 
         return $dao->fetchAll($select)->toArray();
     }
-    
+
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ FIND - UTILIZA VIEW /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function find($id) {
         $dao = new Application_Model_DbTable_VPescador();
@@ -42,17 +43,17 @@ class Application_Model_Pescador {
 
         return $arr[0];
     }
-    
- ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SETUP DADOS ENDEREÇO /_/_/_/_/_/_/_/_/_/_/_/_/_/     
+
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SETUP DADOS ENDEREÇO /_/_/_/_/_/_/_/_/_/_/_/_/_/
     private function setupDadosEndereco( array $request ) {
-        
+
         $dataCEP = explode("-", $request['cep']);
         $dataCEP = $dataCEP[0] . $dataCEP[1];
 
         if ( !$dataCEP ) {
-            $dataCEP = NULL;            
+            $dataCEP = NULL;
         }
-        
+
         $dadosEndereco = array(
             'te_logradouro' => $request['logradouro'],
             'te_numero' => $request['numero'],
@@ -61,13 +62,13 @@ class Application_Model_Pescador {
             'te_comp' => $request['complemento'],
             'tmun_id' => $request['municipio']
         );
-        
+
         return $dadosEndereco;
     }
-    
- ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SETUP DADOS PESCADOR /_/_/_/_/_/_/_/_/_/_/_/_/_/   
+
+ ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SETUP DADOS PESCADOR /_/_/_/_/_/_/_/_/_/_/_/_/_/
     private function setupDadosPescador( array $request ) {
-        
+
         $dataNasc = $request['dataNasc'];
         if (!$dataNasc) {
             $dataNasc = NULL;
@@ -97,7 +98,7 @@ class Application_Model_Pescador {
             'tp_dta_cad'  => date('d-m-y'),
             'tp_obs' => $request['obs']
         );
-        
+
         return $dadosPescador;
     }
 
@@ -107,12 +108,12 @@ class Application_Model_Pescador {
         $dbTableEndereco = new Application_Model_DbTable_Endereco();
         $dadosEndereco = $this->setupDadosEndereco( $request );
         $idEndereco = $dbTableEndereco->insert($dadosEndereco);
-        
+
         $dbTablePescador = new Application_Model_DbTable_Pescador();
         $dadosPescador = $this->setupDadosPescador( $request );
         $dadosPescador['te_id']=$idEndereco;
         $idPescador = $dbTablePescador->insert($dadosPescador);
-        
+
         return $idPescador;
     }
 
@@ -129,7 +130,7 @@ class Application_Model_Pescador {
         $dadosPescador['te_id'] = $request['idEndereco'];
         $wherePescador = "tp_id = " . $request['idPescador'];
         $idPescador = $dbTablePescador->update($dadosPescador, $wherePescador);
-        
+
         return $idPescador;
     }
 
@@ -212,7 +213,7 @@ class Application_Model_Pescador {
 
         return;
     }
-    
+
  ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Porto vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function modelInsertPescadorHasPorto($idPescador, $idPorto ) {
         $dbTable_PescadorHasPorto = new Application_Model_DbTable_PescadorHasPorto();
@@ -238,7 +239,7 @@ class Application_Model_Pescador {
 
         return;
     }
-    
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert ProgramaSocial vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function modelInsertPescadorHasProgramaSocial($idPescador, $idProgramaSocial ) {
         $dbTable_PescadorHasProgramaSocial = new Application_Model_DbTable_PescadorHasProgramaSocial();
@@ -264,7 +265,7 @@ class Application_Model_Pescador {
 
         return;
     }
-    
+
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Insert Telefones vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function modelInsertPescadorHasTelefone($idPescador, $idTelenone, $nTelefone) {
         $dbTable_PescadorHasTelefone = new Application_Model_DbTable_PescadorHasTelefone();
@@ -443,7 +444,7 @@ class Application_Model_Pescador {
         $dbTablePescador->update($dadosPescador, $wherePescador);
     }
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/    
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function select_Pescador_By_Municipio($where = null, $order = null, $limit = null) {
         $dao = new Application_Model_DbTable_VPescadorByMunicipio();
         $select = $dao->select()->from($dao)->order($order)->limit($limit);
