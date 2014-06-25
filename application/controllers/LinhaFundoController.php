@@ -271,4 +271,52 @@ class LinhaFundoController extends Zend_Controller_Action
 		header("Content-Type: application/pdf");
 		echo $pdf->render();
     }
+    public function relatoriolistaAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelLinhaFundo = new Application_Model_LinhaFundo();
+		$localLinhaFundo = $localModelLinhaFundo->selectEntrevistaLinhaFundo(NULL, array('fd_id', 'mnt_id', 'lf_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Linha de Fundo');
+		$modeloRelatorio->setLegendaOff();
+
+		foreach ( $localLinhaFundo as $key => $localData ) {
+			$modeloRelatorio->setLegValueAlinhadoDireita(30, 60, 'Ficha:', $localData['fd_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(90, 60, 'Monit.:',  $localData['mnt_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(150, 70, 'L.Fundo:', $localData['lf_id']);
+			$modeloRelatorio->setLegValue(220, 'Pescador: ', $localData['tp_nome']);
+			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+
+			$localPesqueiro = $localModelLinhaFundo->selectLinhaFundoHasPesqueiro('lf_id='.$localData['lf_id'], array('lf_id', 'paf_pesqueiro'), NULL);
+			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
+				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localEspecie = $localModelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$localData['lf_id'], array('lf_id', 'esp_nome_comum'), NULL);
+			foreach ( $localEspecie as $key => $localDataEspecie ) {
+				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localAvist = $localModelLinhaFundo->selectLinhaFundoHasAvistamento('lf_id='.$localData['lf_id'], array('lf_id', 'avs_descricao'), NULL);
+			foreach ( $localAvist as $key => $localDataAvist ) {
+				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+				$modeloRelatorio->setNewLine();
+			}
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_entrevista_linhafundo.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+    }
 }
