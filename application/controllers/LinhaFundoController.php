@@ -40,12 +40,12 @@ class LinhaFundoController extends Zend_Controller_Action
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
+        $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
+        $especies = $this->modelEspecie->select(null, 'esp_nome');
         $mare = $this->modelMare->select();
-        $isca = $this->modelIsca->select();
+        $isca = $this->modelIsca->select(null, 'isc_tipo');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
 
@@ -90,8 +90,8 @@ class LinhaFundoController extends Zend_Controller_Action
          //$avistamentoLinhaFundo = new Application_Model_DbTable_VLinhaFundoHasAvistamento();
         $entrevista = $this->modelLinhaFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -268,7 +268,8 @@ class LinhaFundoController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_entrevista_linhafundo.pdf"');
+                header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
     public function relatoriolistaAction(){
@@ -294,8 +295,13 @@ class LinhaFundoController extends Zend_Controller_Action
 			$localPesqueiro = $localModelLinhaFundo->selectLinhaFundoHasPesqueiro('lf_id='.$localData['lf_id'], array('lf_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+                                }
+                                else{
+                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+                                }
+                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
 				$modeloRelatorio->setNewLine();
 			}
 			$localEspecie = $localModelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$localData['lf_id'], array('lf_id', 'esp_nome_comum'), NULL);
@@ -315,7 +321,7 @@ class LinhaFundoController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_linhafundo.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_linhafundo.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

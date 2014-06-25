@@ -40,12 +40,10 @@ class VaraPescaController extends Zend_Controller_Action
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
-        $mare = $this->modelMare->select();
-        $isca = $this->modelIsca->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
+        $mare = $this->modelMare->select(null, 'mre_tipo');
+        $isca = $this->modelIsca->select(null, 'isc_tipo');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
 
@@ -58,8 +56,6 @@ class VaraPescaController extends Zend_Controller_Action
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
-        $this->view->assign('pesqueiros',$pesqueiros);
-        $this->view->assign('especies',$especies);
         $this->view->assign('iscas', $isca);
 
     }
@@ -88,8 +84,8 @@ class VaraPescaController extends Zend_Controller_Action
          //$avistamentoVaraPesca = new Application_Model_DbTable_VVaraPescaHasAvistamento();
         $entrevista = $this->modelVaraPesca->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -264,8 +260,9 @@ class VaraPescaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+		header('Content-Disposition: attachment;filename="rel_entrevista_varapesca.pdf"');
+                header("Content-type: application/x-pdf");
+                echo $pdf->render();
     }
 
    public function relatoriolistaAction(){
@@ -312,7 +309,7 @@ class VaraPescaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_varapesca.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_varapesca.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

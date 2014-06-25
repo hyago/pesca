@@ -256,7 +256,8 @@ class ColetaManualController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_entrevista_coletamanual.pdf"');
+                header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -283,8 +284,13 @@ class ColetaManualController extends Zend_Controller_Action
 			$localPesqueiro = $localModelColetaManual->selectColetaManualHasPesqueiro('cml_id='.$localData['cml_id'], array('cml_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				if($localDataPesqueiro['t_tempopesqueiro'] !== NULL){
+                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+                                }
+                                else{
+                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+                                }
+                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
 				$modeloRelatorio->setNewLine();
 			}
 			$localEspecie = $localModelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$localData['cml_id'], array('cml_id', 'esp_nome_comum'), NULL);
@@ -304,7 +310,7 @@ class ColetaManualController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_coletamanual.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_coletamanual.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

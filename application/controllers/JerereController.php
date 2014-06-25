@@ -41,10 +41,8 @@ private $usuario;
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
@@ -58,8 +56,6 @@ private $usuario;
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
-        $this->view->assign('pesqueiros',$pesqueiros);
-        $this->view->assign('especies',$especies);
 
     }
 
@@ -88,8 +84,8 @@ private $usuario;
          //$avistamentoJerere = new Application_Model_DbTable_VJerereHasAvistamento();
         $entrevista = $this->modelJerere->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -260,7 +256,8 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_entrevista_jerere.pdf"');
+                header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
     public function relatoriolistaAction(){
@@ -286,8 +283,13 @@ private $usuario;
 			$localPesqueiro = $localModelJerere->selectJerereHasPesqueiro('jre_id='.$localData['jre_id'], array('jre_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+                                }
+                                else{
+                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+                                }
+                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
 				$modeloRelatorio->setNewLine();
 			}
 			$localEspecie = $localModelJerere->selectJerereHasEspCapturadas('jre_id='.$localData['jre_id'], array('jre_id', 'esp_nome_comum'), NULL);
@@ -307,7 +309,7 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_jerere.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_jerere.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

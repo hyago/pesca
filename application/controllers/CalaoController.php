@@ -39,12 +39,13 @@ private $usuario;
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
 
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('destinos', $destinos);
@@ -77,8 +78,8 @@ private $usuario;
     public function editarAction(){
         $entrevista = $this->modelCalao->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -238,7 +239,8 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_entrevista_calao.pdf"');
+                header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -284,7 +286,7 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_calao.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_calao.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

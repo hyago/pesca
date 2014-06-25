@@ -245,7 +245,8 @@ class ArrastoFundoController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo.pdf"');
+                header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -272,7 +273,12 @@ class ArrastoFundoController extends Zend_Controller_Action
 			$localPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro('af_id='.$localData['af_id'], array('af_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+                              if($localDataPesqueiro['t_tempopesqueiro'] !== NULL){
 				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempopesqueiro']), 'H:i'));
+                              }
+                              else{
+                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+                              }
 				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
 				$modeloRelatorio->setNewLine();
 			}
@@ -293,7 +299,7 @@ class ArrastoFundoController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_arrastofundo.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

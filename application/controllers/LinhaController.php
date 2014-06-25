@@ -39,8 +39,8 @@ class LinhaController extends Zend_Controller_Action
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $iscas = $this->modelIsca->select();
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
@@ -255,7 +255,8 @@ class LinhaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_entrevista_linha.pdf"');
+                header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -282,8 +283,13 @@ class LinhaController extends Zend_Controller_Action
 			$localPesqueiro = $localModelLinha->selectLinhaHasPesqueiro('lin_id='.$localData['lin_id'], array('lin_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+                                }
+                                else{
+                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+                                }
+                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
 				$modeloRelatorio->setNewLine();
 			}
 			$localEspecie = $localModelLinha->selectLinhaHasEspCapturadas('lin_id='.$localData['lin_id'], array('lin_id', 'esp_nome_comum'), NULL);
@@ -303,7 +309,7 @@ class LinhaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_linha.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_linha.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

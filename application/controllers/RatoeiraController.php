@@ -41,14 +41,14 @@ private $usuario;
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
-        $pesqueiros = $this->modelPesqueiro->select();
-        $especies = $this->modelEspecie->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
+        $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
+        $especies = $this->modelEspecie->select(null, 'esp_nome');
         $mare = $this->modelMare->select();
+        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
@@ -86,8 +86,8 @@ private $usuario;
          //$avistamentoRatoeira = new Application_Model_DbTable_VRatoeiraHasAvistamento();
         $entrevista = $this->modelRatoeira->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_embarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -257,7 +257,8 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_entrevista_ratoeira.pdf"');
+                header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
     
@@ -284,8 +285,13 @@ private $usuario;
 			$localPesqueiro = $localModelRatoeira->selectRatoeiraHasPesqueiro('rat_id='.$localData['rat_id'], array('rat_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+                                }
+                                else{
+                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+                                }
+                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
 				$modeloRelatorio->setNewLine();
 			}
 			$localEspecie = $localModelRatoeira->selectRatoeiraHasEspCapturadas('rat_id='.$localData['rat_id'], array('rat_id', 'esp_nome_comum'), NULL);
@@ -305,7 +311,7 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_ratoeira.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_ratoeira.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

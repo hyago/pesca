@@ -297,7 +297,7 @@
     <fieldset class="noEditable"><legend>Avistamento:</legend>
         <fieldset class="noEditable"><legend>O Que foi avistado:</legend>
             <div id="base">
-                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "linhafundo", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['lf_id']?>')" type="button" value="Novo" />
+                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "linha-fundo", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['lf_id']?>')" type="button" value="Novo" />
                 
                 <select style="float:left;" name="SelectAvistamento">
                     <?php foreach ($this->avistamentos as $key => $avistamento): ?>
