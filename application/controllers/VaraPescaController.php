@@ -4,25 +4,25 @@ class VaraPescaController extends Zend_Controller_Action
 {
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelVaraPesca = new Application_Model_VaraPesca();
@@ -48,9 +48,9 @@ class VaraPescaController extends Zend_Controller_Action
         $isca = $this->modelIsca->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -61,14 +61,14 @@ class VaraPescaController extends Zend_Controller_Action
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
         $this->view->assign('iscas', $isca);
-    
+
     }
 
     public function visualizarAction(){
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("vp_id>=". $ent_id, array('vp_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -80,10 +80,10 @@ class VaraPescaController extends Zend_Controller_Action
          else {
             $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function editarAction(){
          //$avistamentoVaraPesca = new Application_Model_DbTable_VVaraPescaHasAvistamento();
         $entrevista = $this->modelVaraPesca->find($this->_getParam('id'));
@@ -97,17 +97,17 @@ class VaraPescaController extends Zend_Controller_Action
         $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['vp_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['vp_dhvolta']);
-        
+
         $vVaraPesca = $this->modelVaraPesca->selectVaraPescaHasPesqueiro('vp_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelVaraPesca->selectVaraPescaHasEspCapturadas('vp_id='.$idEntrevista);
-        
+
         $vVaraPescaAvistamento = $this->modelVaraPesca->selectVaraPescaHasAvistamento('vp_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vVaraPescaAvistamento', $vVaraPescaAvistamento);
@@ -131,32 +131,32 @@ class VaraPescaController extends Zend_Controller_Action
 
     public function criarAction(){
         $idVaraPesca = $this->modelVaraPesca->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
     }
     public function atualizarAction(){
         $idVaraPesca = $this->_getParam('id_entrevista');
         $this->modelVaraPesca->update($this->_getAllParams());
-        
+
         $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $pesqueiro = $this->_getParam("nomePesqueiro");
-        
-        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
-        
+
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro");
+
         $distanciapesqueiro = $this->_getParam("distAPesqueiro");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelVaraPesca->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
 
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
@@ -164,34 +164,34 @@ class VaraPescaController extends Zend_Controller_Action
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelVaraPesca->deletePesqueiro($idEntrevistaHasPesqueiro);
 
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
-    
+
     public function insertespeciecapturadaAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelVaraPesca->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
@@ -199,9 +199,9 @@ class VaraPescaController extends Zend_Controller_Action
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelVaraPesca->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -231,10 +231,89 @@ class VaraPescaController extends Zend_Controller_Action
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelVaraPesca->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
-}
 
+   public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelVara = new Application_Model_VaraPesca();
+		$localVara = $localModelVara->selectEntrevistaVaraPesca(NULL, array('fd_id', 'mnt_id', 'vp_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Vara de Pesca');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Vara Pesca');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localVara as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['vp_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }
+
+   public function relatoriolistaAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelVara = new Application_Model_VaraPesca();
+		$localVara = $localModelVara->selectEntrevistaVaraPesca(NULL, array('fd_id', 'mnt_id', 'vp_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Vara de Pesca');
+		$modeloRelatorio->setLegendaOff();
+
+		foreach ( $localVara as $key => $localData ) {
+			$modeloRelatorio->setLegValueAlinhadoDireita(30, 60, 'Ficha:', $localData['fd_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(90, 60, 'Monit.:',  $localData['mnt_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(150, 70, 'V. Pesca:', $localData['vp_id']);
+			$modeloRelatorio->setLegValue(220, 'Pescador: ', $localData['tp_nome']);
+			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+
+			$localPesqueiro = $localModelVara->selectVaraPescaHasPesqueiro('vp_id='.$localData['vp_id'], array('vp_id', 'paf_pesqueiro'), NULL);
+			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
+				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localEspecie = $localModelVara->selectVaraPescaHasEspCapturadas('vp_id='.$localData['vp_id'], array('vp_id', 'esp_nome_comum'), NULL);
+			foreach ( $localEspecie as $key => $localDataEspecie ) {
+				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localAvist = $localModelVara->selectVaraPescaHasAvistamento('vp_id='.$localData['vp_id'], array('vp_id', 'avs_descricao'), NULL);
+			foreach ( $localAvist as $key => $localDataAvist ) {
+				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+				$modeloRelatorio->setNewLine();
+			}
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_entrevista_varapesca.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+    }
+}

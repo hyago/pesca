@@ -4,25 +4,25 @@ class EmalheController extends Zend_Controller_Action
 {
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
@@ -42,8 +42,8 @@ class EmalheController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
-        
+
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -52,14 +52,14 @@ class EmalheController extends Zend_Controller_Action
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
 
-    
+
     }
 
     public function visualizarAction(){
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe("em_id>=". $ent_id, array('em_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -71,10 +71,10 @@ class EmalheController extends Zend_Controller_Action
          else {
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function editarAction(){
         //$avistamentoEmalhe = new Application_Model_DbTable_VEmalheHasAvistamento();
         $entrevista = $this->modelEmalhe->find($this->_getParam('id'));
@@ -86,18 +86,18 @@ class EmalheController extends Zend_Controller_Action
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
-        
+
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['em_dhlancamento']);
         $datahoraVolta[] = split(" ",$entrevista['em_dhrecolhimento']);
-        
+
         $vEmalhe = $this->modelEmalhe->selectEmalheHasPesqueiro('em_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelEmalhe->selectEmalheHasEspCapturadas('em_id='.$idEntrevista);
-        
+
         $vEmalheAvistamento = $this->modelEmalhe->selectEmalheHasAvistamento('em_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vEmalheAvistamento', $vEmalheAvistamento);
@@ -109,7 +109,7 @@ class EmalheController extends Zend_Controller_Action
         $this->view->assign('horaSaida', $datahoraSaida[0][1]);
         $this->view->assign('dataVolta', $datahoraVolta[0][0]);
         $this->view->assign('horaVolta', $datahoraVolta[0][1]);
-        
+
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
@@ -119,28 +119,28 @@ class EmalheController extends Zend_Controller_Action
     }
     public function criarAction(){
         $idEmalhe = $this->modelEmalhe->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('emalhe/editar/id/'.$idEmalhe);
     }
     public function atualizarAction(){
         $idEmalhe = $this->_getParam('id_entrevista');
         $this->modelEmalhe->update($this->_getAllParams());
-        
+
         $this->_redirect('emalhe/editar/id/'.$idEmalhe);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
-        $pesqueiro = $this->_getParam("nomePesqueiro"); 
-        
+
+        $pesqueiro = $this->_getParam("nomePesqueiro");
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelEmalhe->insertPesqueiro($idEntrevista, $pesqueiro);
 
         $this->redirect("/emalhe/editar/id/" . $backUrl);
@@ -148,9 +148,9 @@ class EmalheController extends Zend_Controller_Action
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelEmalhe->deletePesqueiro($idEntrevistaHasPesqueiro);
@@ -161,20 +161,20 @@ class EmalheController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelEmalhe->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/emalhe/editar/id/" . $backUrl);
@@ -182,9 +182,9 @@ class EmalheController extends Zend_Controller_Action
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelEmalhe->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -214,10 +214,40 @@ class EmalheController extends Zend_Controller_Action
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelEmalhe->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/emalhe/editar/id/" . $backUrl);
+    }
+    public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelEmalhe = new Application_Model_Emalhe();
+		$localEmalhe = $localModelEmalhe->selectEntrevistaEmalhe(NULL, array('fd_id', 'mnt_id', 'em_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Emalhe');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Emalhe');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localEmalhe as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['em_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
     }
 
 }

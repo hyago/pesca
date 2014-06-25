@@ -20,7 +20,7 @@ class ArrastoFundoController extends Zend_Controller_Action
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -39,11 +39,11 @@ class ArrastoFundoController extends Zend_Controller_Action
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
 
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -73,7 +73,7 @@ class ArrastoFundoController extends Zend_Controller_Action
     }
 
     public function editarAction(){
-        
+
         $entrevista = $this->modelArrastoFundo->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
@@ -83,16 +83,16 @@ class ArrastoFundoController extends Zend_Controller_Action
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['af_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['af_dhvolta']);
         $vArrastoFundo = $this->modelArrastoFundo->selectArrastoHasPesqueiro('af_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelArrastoFundo->selectArrastoHasEspCapturadas('af_id='.$idEntrevista);
-        
+
         $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
@@ -114,7 +114,7 @@ class ArrastoFundoController extends Zend_Controller_Action
     public function atualizarAction(){
         $idArrasto = $this->_getParam('id_entrevista');
         $this->modelArrastoFundo->update($this->_getAllParams());
-        
+
         $this->_redirect('arrasto-fundo/editar/id/'.$idArrasto);
     }
 
@@ -188,7 +188,7 @@ class ArrastoFundoController extends Zend_Controller_Action
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
-    
+
     public function insertavistamentoAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -212,9 +212,89 @@ class ArrastoFundoController extends Zend_Controller_Action
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelArrastoFundo->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+
+    public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelArrastoFundo = new Application_Model_ArrastoFundo();
+		$localArrastoFundo = $localModelArrastoFundo->selectEntrevistaArrasto(NULL, array('fd_id', 'mnt_id', 'af_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Arrasto de Fundo');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Arrasto');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localArrastoFundo as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['af_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }
+
+   public function relatoriolistaAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelArrastoFundo = new Application_Model_ArrastoFundo();
+		$localArrastoFundo = $localModelArrastoFundo->selectEntrevistaArrasto(NULL, array('fd_id', 'mnt_id', 'af_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Arrasto de Fundo');
+		$modeloRelatorio->setLegendaOff();
+
+		foreach ( $localArrastoFundo as $key => $localData ) {
+			$modeloRelatorio->setLegValueAlinhadoDireita(30, 60, 'Ficha:', $localData['fd_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(90, 60, 'Monit.:',  $localData['mnt_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(150, 70, 'A.Fundo:', $localData['af_id']);
+			$modeloRelatorio->setLegValue(220, 'Pescador: ', $localData['tp_nome']);
+			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+
+			$localPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro('af_id='.$localData['af_id'], array('af_id', 'paf_pesqueiro'), NULL);
+			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
+				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempopesqueiro']), 'H:i'));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas('af_id='.$localData['af_id'], array('af_id', 'esp_nome_comum'), NULL);
+			foreach ( $localEspecie as $key => $localDataEspecie ) {
+				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localAvist = $localModelArrastoFundo->selectArrastoHasAvistamento('af_id='.$localData['af_id'], array('af_id', 'avs_descricao'), NULL);
+			foreach ( $localAvist as $key => $localDataAvist ) {
+				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+				$modeloRelatorio->setNewLine();
+			}
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
     }
 }

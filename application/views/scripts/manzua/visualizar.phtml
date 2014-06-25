@@ -5,10 +5,15 @@
 
         <table>
             <tr>
-                
+
                 <td>
                     <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
                 </td>
+                <td>
+                <a href="<?= $this->url(array("controller" => "manzua", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+                <a href="<?= $this->url(array("controller" => "manzua", "action" => "relatoriolista"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Lista</a>
+
+				</td>
             </tr>
             <tr>
                 <td>
@@ -19,7 +24,7 @@
                     <input type="button" size="50" value="Busca por Pescador" class="button-confirmText" onclick="jsBuscaPescadorEntrevista(this.form, '<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
                     <input type="text" min="0" name="inputPescador" placeholder="Busca por Pescador" />
                 </td>
-                
+
                 <td>
                     <input type="button" size="50" value="Busca por Barco" class="button-confirmText" onclick="jsBuscaBarcoEntrevista(this.form, '<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
                     <input type="text" min="0" name="inputBarco" placeholder="Busca por Pescador" />
@@ -42,7 +47,7 @@
                     <td><?= $entrevista['man_id'] ?></td>
                     <td><?= $entrevista['tp_nome'] ?></td>
                     <td><?= $entrevista['bar_nome'] ?></td>
-                    
+
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "manzua", "action" => "editar", "id" => $entrevista['man_id']), null, true) ?>">
                             <ul id="icons" class="ui-widget ui-helper-clearfix">

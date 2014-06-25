@@ -4,25 +4,25 @@ class LinhaController extends Zend_Controller_Action
 {
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
@@ -34,7 +34,7 @@ class LinhaController extends Zend_Controller_Action
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelIsca = new Application_Model_Isca();
-        
+
     }
     public function indexAction()
     {
@@ -44,10 +44,10 @@ class LinhaController extends Zend_Controller_Action
         $iscas = $this->modelIsca->select();
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
-        
+
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('iscas', $iscas);
         $this->view->assign('fichaDiaria', $fichadiaria);
@@ -55,8 +55,8 @@ class LinhaController extends Zend_Controller_Action
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
-        
-    
+
+
     }
 
     public function editarAction(){
@@ -71,18 +71,18 @@ class LinhaController extends Zend_Controller_Action
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $iscas = $this->modelIsca->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
-        
+
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['lin_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['lin_dhvolta']);
-        
+
         $vLinha = $this->modelLinha->selectLinhaHasPesqueiro('lin_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelLinha->selectLinhaHasEspCapturadas('lin_id='.$idEntrevista);
-        
+
         $vLinhaAvistamento = $this->modelLinha->selectLinhaHasAvistamento('lin_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vLinhaAvistamento', $vLinhaAvistamento);
@@ -106,7 +106,7 @@ class LinhaController extends Zend_Controller_Action
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelLinha->selectEntrevistaLinha("lin_id>=". $ent_id, array('lin_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -118,37 +118,37 @@ class LinhaController extends Zend_Controller_Action
          else {
             $dados = $this->modelLinha->selectEntrevistaLinha(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function criarAction(){
         $idLinha = $this->modelLinha->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('linha/editar/id/'.$idLinha);
     }
     public function atualizarAction(){
         $idLinha = $this->_getParam('id_entrevista');
         $this->modelLinha->update($this->_getAllParams());
-        
+
         $this->_redirect('linha/editar/id/'.$idLinha);
     }
-    
+
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $pesqueiro = $this->_getParam("nomePesqueiro");
-        
-        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
-        
+
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro");
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelLinha->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro);
 
         $this->redirect("/linha/editar/id/" . $backUrl);
@@ -156,9 +156,9 @@ class LinhaController extends Zend_Controller_Action
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelLinha->deletePesqueiro($idEntrevistaHasPesqueiro);
@@ -169,20 +169,20 @@ class LinhaController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelLinha->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/linha/editar/id/" . $backUrl);
@@ -190,9 +190,9 @@ class LinhaController extends Zend_Controller_Action
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelLinha->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -222,10 +222,40 @@ class LinhaController extends Zend_Controller_Action
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelLinha->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/linha/editar/id/" . $backUrl);
     }
-}
+
+   public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelLinha = new Application_Model_Linha();
+		$localLinha = $localModelLinha->selectEntrevistaLinha(NULL, array('fd_id', 'mnt_id', 'lin_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Linha');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Linha');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localLinha as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['lin_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }}
 

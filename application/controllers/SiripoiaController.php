@@ -4,25 +4,25 @@ class SiripoiaController extends Zend_Controller_Action
 {
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelSiripoia = new Application_Model_Siripoia();
@@ -49,9 +49,9 @@ class SiripoiaController extends Zend_Controller_Action
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -61,14 +61,14 @@ class SiripoiaController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-    
+
     }
 
     public function visualizarAction(){
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelSiripoia->selectEntrevistaSiripoia("sir_id>=". $ent_id, array('sir_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -80,10 +80,10 @@ class SiripoiaController extends Zend_Controller_Action
          else {
             $dados = $this->modelSiripoia->selectEntrevistaSiripoia(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function editarAction(){
          //$avistamentoSiripoia = new Application_Model_DbTable_VSiripoiaHasAvistamento();
         $entrevista = $this->modelSiripoia->find($this->_getParam('id'));
@@ -96,17 +96,17 @@ class SiripoiaController extends Zend_Controller_Action
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['sir_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['sir_dhvolta']);
-        
+
         $vSiripoia = $this->modelSiripoia->selectSiripoiaHasPesqueiro('sir_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelSiripoia->selectSiripoiaHasEspCapturadas('sir_id='.$idEntrevista);
-        
+
         $vSiripoiaAvistamento = $this->modelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vSiripoiaAvistamento', $vSiripoiaAvistamento);
@@ -127,32 +127,32 @@ class SiripoiaController extends Zend_Controller_Action
     }
     public function criarAction(){
         $idSiripoia = $this->modelSiripoia->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
     public function atualizarAction(){
         $idSiripoia = $this->_getParam('id_entrevista');
         $this->modelSiripoia->update($this->_getAllParams());
-        
+
         $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $pesqueiro = $this->_getParam("nomePesqueiro");
-        
-        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
-        
+
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro");
+
         $distanciapesqueiro = $this->_getParam("distAPesqueiro");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelSiripoia->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
 
         $this->redirect("/siripoia/editar/id/" . $backUrl);
@@ -160,9 +160,9 @@ class SiripoiaController extends Zend_Controller_Action
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelSiripoia->deletePesqueiro($idEntrevistaHasPesqueiro);
@@ -173,20 +173,20 @@ class SiripoiaController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelSiripoia->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/siripoia/editar/id/" . $backUrl);
@@ -194,9 +194,9 @@ class SiripoiaController extends Zend_Controller_Action
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelSiripoia->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -226,10 +226,89 @@ class SiripoiaController extends Zend_Controller_Action
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelSiripoia->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/siripoia/editar/id/" . $backUrl);
     }
-}
 
+    public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelSiripoia = new Application_Model_Siripoia();
+		$localSiripoia = $localModelSiripoia->selectEntrevistaSiripoia(NULL, array('fd_id', 'mnt_id', 'sir_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Siripóia');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Siripóia');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localSiripoia as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['sir_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }
+
+	public function relatoriolistaAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelSiripoia = new Application_Model_Siripoia();
+		$localSiripoia = $localModelSiripoia->selectEntrevistaSiripoia(NULL, array('fd_id', 'mnt_id', 'sir_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Siripóia');
+		$modeloRelatorio->setLegendaOff();
+
+		foreach ( $localSiripoia as $key => $localData ) {
+			$modeloRelatorio->setLegValueAlinhadoDireita(30, 60, 'Ficha:', $localData['fd_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(90, 60, 'Monit.:',  $localData['mnt_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(150, 70, 'Siripóia:', $localData['sir_id']);
+			$modeloRelatorio->setLegValue(220, 'Pescador: ', $localData['tp_nome']);
+			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+
+			$localPesqueiro = $localModelSiripoia->selectSiripoiaHasPesqueiro('sir_id='.$localData['sir_id'], array('sir_id', 'paf_pesqueiro'), NULL);
+			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
+				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localEspecie = $localModelSiripoia->selectSiripoiaHasEspCapturadas('sir_id='.$localData['sir_id'], array('sir_id', 'esp_nome_comum'), NULL);
+			foreach ( $localEspecie as $key => $localDataEspecie ) {
+				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localAvist = $localModelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$localData['sir_id'], array('sir_id', 'avs_descricao'), NULL);
+			foreach ( $localAvist as $key => $localDataAvist ) {
+				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+				$modeloRelatorio->setNewLine();
+			}
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_entrevista_siripoia.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+    }
+}

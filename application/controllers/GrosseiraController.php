@@ -4,25 +4,25 @@ class GrosseiraController extends Zend_Controller_Action
 {
 private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
@@ -38,7 +38,7 @@ private $usuario;
 
     public function indexAction()
     {
-       
+
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select();
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
@@ -46,11 +46,11 @@ private $usuario;
         $especies = $this->modelEspecie->select();
         $iscas = $this->modelIsca->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -60,14 +60,14 @@ private $usuario;
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-    
+
     }
 
     public function visualizarAction(){
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelGrosseira->selectEntrevistaGrosseira("grs_id>=". $ent_id, array('grs_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -79,10 +79,10 @@ private $usuario;
          else {
             $dados = $this->modelGrosseira->selectEntrevistaGrosseira(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function editarAction(){
          //$avistamentoGrosseira = new Application_Model_DbTable_VGrosseiraHasAvistamento();
         $entrevista = $this->modelGrosseira->find($this->_getParam('id'));
@@ -95,19 +95,19 @@ private $usuario;
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $iscas = $this->modelIsca->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
-        
+
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['grs_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['grs_dhvolta']);
-        
+
         $vGrosseira = $this->modelGrosseira->selectGrosseiraHasPesqueiro('grs_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelGrosseira->selectGrosseiraHasEspCapturadas('grs_id='.$idEntrevista);
-        
+
         //
         $vGrosseiraAvistamento = $this->modelGrosseira->selectGrosseiraHasAvistamento('grs_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vGrosseiraAvistamento', $vGrosseiraAvistamento);
@@ -129,31 +129,31 @@ private $usuario;
     }
     public function criarAction(){
         $idGrosseira = $this->modelGrosseira->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('grosseira/editar/id/'.$idGrosseira);
     }
     public function atualizarAction(){
         $idGrosseira = $this->_getParam('id_entrevista');
         $this->modelGrosseira->update($this->_getAllParams());
-        
+
         $this->_redirect('grosseira/editar/id/'.$idGrosseira);
     }
-    
+
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $pesqueiro = $this->_getParam("nomePesqueiro");
-        
-        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
-        
+
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro");
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelGrosseira->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro);
 
         $this->redirect("/grosseira/editar/id/" . $backUrl);
@@ -161,9 +161,9 @@ private $usuario;
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelGrosseira->deletePesqueiro($idEntrevistaHasPesqueiro);
@@ -174,20 +174,20 @@ private $usuario;
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelGrosseira->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/grosseira/editar/id/" . $backUrl);
@@ -195,9 +195,9 @@ private $usuario;
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelGrosseira->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -227,10 +227,41 @@ private $usuario;
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelGrosseira->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/grosseira/editar/id/" . $backUrl);
+    }
+
+    public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelGrosseira = new Application_Model_Grosseira();
+		$localGrosseira = $localModelGrosseira->selectEntrevistaGrosseira(NULL, array('fd_id', 'mnt_id', 'grs_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Grosseira');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Grosseira');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localGrosseira as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['grs_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
     }
 }
 

@@ -4,25 +4,25 @@ class JerereController extends Zend_Controller_Action
 {
 private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelJerere = new Application_Model_Jerere();
@@ -47,9 +47,9 @@ private $usuario;
         $especies = $this->modelEspecie->select();
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
@@ -60,14 +60,14 @@ private $usuario;
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-    
+
     }
 
     public function visualizarAction(){
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelJerere->selectEntrevistaJerere("jre_id>=". $ent_id, array('jre_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -79,11 +79,11 @@ private $usuario;
          else {
             $dados = $this->modelJerere->selectEntrevistaJerere(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
-    
+
+
     public function editarAction(){
          //$avistamentoJerere = new Application_Model_DbTable_VJerereHasAvistamento();
         $entrevista = $this->modelJerere->find($this->_getParam('id'));
@@ -96,17 +96,17 @@ private $usuario;
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['jre_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['jre_dhvolta']);
-        
+
         $vJerere = $this->modelJerere->selectJerereHasPesqueiro('jre_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelJerere->selectJerereHasEspCapturadas('jre_id='.$idEntrevista);
-        
+
         $vJerereAvistamento = $this->modelJerere->selectJerereHasAvistamento('jre_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vJerereAvistamento', $vJerereAvistamento);
@@ -127,33 +127,33 @@ private $usuario;
     }
     public function criarAction(){
         $idJerere = $this->modelJerere->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('jerere/editar/id/'.$idJerere);
     }
     public function atualizarAction(){
         $idJerere = $this->_getParam('id_entrevista');
         $this->modelJerere->update($this->_getAllParams());
-        
+
         $this->_redirect('jerere/editar/id/'.$idJerere);
     }
-    
+
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $pesqueiro = $this->_getParam("nomePesqueiro");
-        
-        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
-        
+
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro");
+
         $distanciapesqueiro = $this->_getParam("distAPesqueiro");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelJerere->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
 
         $this->redirect("/jerere/editar/id/" . $backUrl);
@@ -161,9 +161,9 @@ private $usuario;
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelJerere->deletePesqueiro($idEntrevistaHasPesqueiro);
@@ -174,20 +174,20 @@ private $usuario;
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelJerere->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/jerere/editar/id/" . $backUrl);
@@ -195,9 +195,9 @@ private $usuario;
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelJerere->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -227,12 +227,42 @@ private $usuario;
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelJerere->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
-    
+
+   public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelJerere = new Application_Model_Jerere();
+		$localJerere = $localModelJerere->selectEntrevistaJerere(NULL, array('fd_id', 'mnt_id', 'jre_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Jereré');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Jereré');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localJerere as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['jre_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }
 }
 
 

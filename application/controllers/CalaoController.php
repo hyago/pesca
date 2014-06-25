@@ -4,26 +4,26 @@ class CalaoController extends Zend_Controller_Action
 {
 private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
-        
+
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
@@ -43,7 +43,7 @@ private $usuario;
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -51,14 +51,14 @@ private $usuario;
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
-    
+
     }
 
     public function visualizarAction(){
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelCalao->selectEntrevistaCalao("cal_id>=". $ent_id, array('cal_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -70,10 +70,10 @@ private $usuario;
          else {
             $dados = $this->modelCalao->selectEntrevistaCalao(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function editarAction(){
         $entrevista = $this->modelCalao->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -84,15 +84,15 @@ private $usuario;
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $idEntrevista = $this->_getParam('id');
 
         $vCalao = $this->modelCalao->selectCalaoHasPesqueiro('cal_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelCalao->selectCalaoHasEspCapturadas('cal_id='.$idEntrevista);
-        
+
         $vCalaoAvistamento = $this->modelCalao->selectCalaoHasAvistamento('cal_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vCalaoAvistamento', $vCalaoAvistamento);
@@ -110,28 +110,28 @@ private $usuario;
     }
     public function criarAction(){
         $idCalao = $this->modelCalao->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('calao/editar/id/'.$idCalao);
     }
     public function atualizarAction(){
         $idCalao = $this->_getParam('id_entrevista');
         $this->modelCalao->update($this->_getAllParams());
-        
+
         $this->_redirect('calao/editar/id/'.$idCalao);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
-        $pesqueiro = $this->_getParam("nomePesqueiro"); 
-        
+
+        $pesqueiro = $this->_getParam("nomePesqueiro");
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelCalao->insertPesqueiro($idEntrevista, $pesqueiro);
 
         $this->redirect("/calao/editar/id/" . $backUrl);
@@ -139,9 +139,9 @@ private $usuario;
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelCalao->deletePesqueiro($idEntrevistaHasPesqueiro);
@@ -152,20 +152,20 @@ private $usuario;
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelCalao->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/calao/editar/id/" . $backUrl);
@@ -173,9 +173,9 @@ private $usuario;
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelCalao->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -205,11 +205,88 @@ private $usuario;
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelCalao->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
-    
+
+    public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelCalao = new Application_Model_Calao();
+		$localCalao = $localModelCalao->selectEntrevistaCalao(NULL, array('fd_id', 'mnt_id', 'cal_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Calão');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Calão');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localCalao as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['cal_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }
+
+    public function relatoriolistaAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelCalao = new Application_Model_Calao();
+		$localCalao = $localModelCalao->selectEntrevistaCalao(NULL, array('fd_id', 'mnt_id', 'cal_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Calão');
+		$modeloRelatorio->setLegendaOff();
+
+		foreach ( $localCalao as $key => $localData ) {
+			$modeloRelatorio->setLegValueAlinhadoDireita(30, 60, 'Ficha:', $localData['fd_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(90, 60, 'Monit.:',  $localData['mnt_id']);
+			$modeloRelatorio->setLegValueAlinhadoDireita(150, 70, 'A.Fundo:', $localData['cal_id']);
+			$modeloRelatorio->setLegValue(220, 'Pescador: ', $localData['tp_nome']);
+			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+
+			$localPesqueiro = $localModelCalao->selectCalaoHasPesqueiro('cal_id='.$localData['cal_id'], array('cal_id', 'paf_pesqueiro'), NULL);
+			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
+				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+				$modeloRelatorio->setNewLine();
+			}
+			$localEspecie = $localModelCalao->selectCalaoHasEspCapturadas('cal_id='.$localData['cal_id'], array('cal_id', 'esp_nome_comum'), NULL);
+			foreach ( $localEspecie as $key => $localDataEspecie ) {
+				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+				$modeloRelatorio->setNewLine();
+			}
+			$localAvist = $localModelCalao->selectCalaoHasAvistamento('cal_id='.$localData['cal_id'], array('cal_id', 'avs_descricao'), NULL);
+			foreach ( $localAvist as $key => $localDataAvist ) {
+				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+				$modeloRelatorio->setNewLine();
+			}
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_entrevista_calao.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+    }
 }
 

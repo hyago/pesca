@@ -4,25 +4,25 @@ class ColetaManualController extends Zend_Controller_Action
 {
     private $usuario;
     public function init()
-    {   
+    {
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-        
+
         $this->_helper->layout->setLayout('admin');
-        
-        
+
+
         $auth = Zend_Auth::getInstance();
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-          
+
         }
-        
+
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        
+
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
@@ -43,11 +43,11 @@ class ColetaManualController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-        
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -55,14 +55,14 @@ class ColetaManualController extends Zend_Controller_Action
         $this->view->assign('pescadores',$pescadores);
         $this->view->assign('barcos',$barcos);
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
-    
+
     }
 
     public function visualizarAction(){
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        
+
         if ( $ent_id > 0 ) {
             $dados = $this->modelColetaManual->selectEntrevistaColetaManual("cml_id>=". $ent_id, array('cml_id'), 20);
         } elseif ( $ent_pescador ) {
@@ -74,10 +74,10 @@ class ColetaManualController extends Zend_Controller_Action
          else {
             $dados = $this->modelColetaManual->selectEntrevistaColetaManual(null, array( 'fd_id', 'tp_nome'), 20);
         }
-        
+
         $this->view->assign("dados", $dados);
     }
-    
+
     public function editarAction(){
         //$avistamentoColetaManual = new Application_Model_DbTable_VColetaManualHasAvistamento();
         $entrevista = $this->modelColetaManual->find($this->_getParam('id'));
@@ -90,17 +90,17 @@ class ColetaManualController extends Zend_Controller_Action
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['cml_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['cml_dhvolta']);
-        
+
         $vColetaManual = $this->modelColetaManual->selectColetaManualHasPesqueiro('cml_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$idEntrevista);
-        
+
         $vColetaManualAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vColetaManualAvistamento', $vColetaManualAvistamento);
@@ -124,32 +124,32 @@ class ColetaManualController extends Zend_Controller_Action
 
     public function criarAction(){
         $idColetaManual = $this->modelColetaManual->insert($this->_getAllParams());
-        
-        
+
+
         $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
     }
     public function atualizarAction(){
         $idColetaManual = $this->_getParam('id_entrevista');
         $this->modelColetaManual->update($this->_getAllParams());
-        
+
         $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $pesqueiro = $this->_getParam("nomePesqueiro");
-        
-        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro"); 
-        
+
+        $tempoapesqueiro = $this->_getParam("tempoAPesqueiro");
+
         $distanciapesqueiro = $this->_getParam("distAPesqueiro");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelColetaManual->insertPesqueiro($idEntrevista, $pesqueiro, $tempoapesqueiro, $distanciapesqueiro);
 
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
@@ -157,9 +157,9 @@ class ColetaManualController extends Zend_Controller_Action
     public function deletepesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasPesqueiro = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelColetaManual->deletePesqueiro($idEntrevistaHasPesqueiro);
@@ -170,20 +170,20 @@ class ColetaManualController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        
+
         $especie = $this->_getParam("selectEspecie");
-        
-        $quantidade = $this->_getParam("quantidade"); 
-        
+
+        $quantidade = $this->_getParam("quantidade");
+
         $peso = $this->_getParam("peso");
-        
+
         $preco = $this->_getParam("precokg");
-        
+
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $backUrl = $this->_getParam("back_url");
-       
-        
+
+
         $this->modelColetaManual->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
 
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
@@ -191,9 +191,9 @@ class ColetaManualController extends Zend_Controller_Action
     public function deletespecieAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $idEntrevistaHasEspecie = $this->_getParam("id");
-        
+
         $backUrl = $this->_getParam("back_url");
 
         $this->modelColetaManual->deleteEspCapturada($idEntrevistaHasEspecie);
@@ -223,11 +223,42 @@ class ColetaManualController extends Zend_Controller_Action
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $this->modelColetaManual->deleteAvistamento($idAvistamento, $idEntrevista);
 
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
     }
-    
+
+    public function relatorioAction(){
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+
+		$localModelColetaManual = new Application_Model_ColetaManual();
+		$localColetaManual = $localModelColetaManual->selectEntrevistaColetaManual(NULL, array('fd_id', 'mnt_id', 'cml_id'), NULL);
+
+		require_once "../library/ModeloRelatorio.php";
+		$modeloRelatorio = new ModeloRelatorio();
+		$modeloRelatorio->setTitulo('Relatório Entrevista de Coleta Manual');
+		$modeloRelatorio->setLegenda(30, 'Ficha');
+		$modeloRelatorio->setLegenda(80, 'Monit.');
+		$modeloRelatorio->setLegenda(130, 'Coleta');
+		$modeloRelatorio->setLegenda(180, 'Pescador');
+		$modeloRelatorio->setLegenda(350, 'Embarcação');
+
+		foreach ( $localColetaManual as $key => $localData ) {
+			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['fd_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localData['mnt_id']);
+			$modeloRelatorio->setValueAlinhadoDireita(130, 40, $localData['cml_id']);
+			$modeloRelatorio->setValue(180, $localData['tp_nome']);
+			$modeloRelatorio->setValue(350, $localData['bar_nome']);
+			$modeloRelatorio->setNewLine();
+		}
+		$modeloRelatorio->setNewLine();
+		$pdf = $modeloRelatorio->getRelatorio();
+
+		header("Content-Type: application/pdf");
+		echo $pdf->render();
+    }
+
 }
 
