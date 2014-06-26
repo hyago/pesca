@@ -1148,12 +1148,12 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
-    public function relatoriopescadorgroupcoloniaAction() {
+    public function relatoriopescadorgroupcomunidadeAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->select_Pescador_group_colonia();
+        $localPescador = $localModelPescador->select_Pescador_group_comunidade();
 
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();

@@ -5,31 +5,72 @@ $(document).ready(function() {
         $("#Filo").hide();
         $("#Dsbq").hide();
         $("#Entrevista").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
     }
     else if ($("fieldset").attr('id') === "Desembarque") {
         $("#Dsbq").show();
         $("#Filo").hide();
         $("#Social").hide();
         $("#Entrevista").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
     }
     else if ($("fieldset").attr('id') === "Filogenia") {
         $("#Dsbq").show();
         $("#Filo").show();
         $("#Social").hide();
         $("#Entrevista").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
     }
     else if ($("fieldset").attr('id') === "Entrevista"){
         $("#Dsbq").show();
         $("#Entrevista").show();
         $("#Filo").hide();
         $("#Social").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
     }
-    
+    else if ($("fieldset").attr('id') === "Relatorio"){
+        $("#Dsbq").hide();
+        $("#Entrevista").hide();
+        $("#Filo").hide();
+        $("#Social").hide();
+        $("#Relatorio").show();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
+    }
+    else if ($("fieldset").attr('id') === "RelListas"){
+        $("#Dsbq").hide();
+        $("#Entrevista").hide();
+        $("#Filo").hide();
+        $("#Social").hide();
+        $("#Relatorio").show();
+        $("#RelListas").show();
+        $("#RelConsolidados").hide();
+    }
+    else if ($("fieldset").attr('id') === "RelConsolidados"){
+        $("#Dsbq").hide();
+        $("#Entrevista").hide();
+        $("#Filo").hide();
+        $("#Social").hide();
+        $("#Relatorio").show();
+        $("#RelListas").hide();
+        $("#RelConsolidados").show();
+    }
     else {
         $("#Entrevista").hide();
         $("#Dsbq").hide();
         $("#Filo").hide();
         $("#Social").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
     }
 
     $("#for-Social").click(function() {
@@ -43,7 +84,16 @@ $(document).ready(function() {
     });
     $("#for-Entrevista").click(function(){
         $("#Entrevista").slideToggle();
-    })
+    });
+    $("#for-Relatorio").click(function(){
+        $("#Relatorio").slideToggle();
+    });
+    $("#for-RelListas").click(function(){
+        $("#RelListas").slideToggle();
+    });
+    $("#for-RelConsolidados").click(function(){
+        $("#RelConsolidados").slideToggle();
+    });
     //funcoes para menu
 });
 
