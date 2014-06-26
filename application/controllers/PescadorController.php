@@ -921,12 +921,26 @@ class PescadorController extends Zend_Controller_Action {
 //
 //		$pdf = $modeloRelatorio->getRelatorio();
 //        }
-    public function relpdfpescadorAction() {
+    public function imprimirtodospescadoresAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $this->relpdfpescador( NULL );
+    }
+
+    public function imprimirpescadoridAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $pescadorId = $this->_getParam('id_pescador');
+
+        $this->relpdfpescador( 'tp_id = ' . $pescadorId );
+    }
+    public function relpdfpescador( $where = null) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView('tp_id=813', array('tcom_nome', 'tp_nome', 'tp_id'), NULL);
+        $localPescador = $localModelPescador->selectView($where, array('tcom_nome', 'tp_nome', 'tp_id'), NULL);
 
         $localModelTelefone = new Application_Model_VPescadorHasTelefone();
         $localModelDependente = new Application_Model_VPescadorHasDependente();
@@ -969,7 +983,7 @@ class PescadorController extends Zend_Controller_Action {
             $modeloRelatorio->setLegValue(30, 'PIS: ', $pescador['tp_pis']);
             $modeloRelatorio->setLegValue(130, 'CTPS: ', $pescador['tp_ctps']);
             $modeloRelatorio->setLegValue(230, 'NIT/CEI: ', $pescador['tp_nit_cei']);
-            $modeloRelatorio->setLegValue(350, 'CIR CAP PORTO : ', $pescador['tp_cir_cap_porto ']);
+            $modeloRelatorio->setLegValue(350, 'CIR CAP PORTO : ', $pescador['tp_cir_cap_porto']);
 
             $modeloRelatorio->setNewLine();
             $modeloRelatorio->setLegValue(30, 'CMA: ', $pescador['tp_cma']);
@@ -998,8 +1012,8 @@ class PescadorController extends Zend_Controller_Action {
                 $localDate = '';
             }
             $modeloRelatorio->setLegValue(30, 'Data Cadastro: ', $pescador['tp_dta_cad']);
-            $modeloRelatorio->setLegValue(130, 'Resp. Lançamento: ', $pescador['tu_nome_lan ']);
-            $modeloRelatorio->setLegValue(350, 'Resp. Cadastro: ', $pescador[' tu_nome_cad ']);
+            $modeloRelatorio->setLegValue(130, 'Resp. Lançamento: ', $pescador['tu_nome_lan']);
+            $modeloRelatorio->setLegValue(350, 'Resp. Cadastro: ', $pescador['tu_nome_cad']);
             $modeloRelatorio->setNewLine();
 
             $modeloRelatorio->setLegValue(30, 'Observações: ', $pescador['tp_obs']);
@@ -1019,7 +1033,7 @@ class PescadorController extends Zend_Controller_Action {
 
             $localProgramaSocial = $localModelProgramaSocial->select('tp_id=' . $pescador['tp_id'], null, NULL);
             foreach ($localProgramaSocial as $key_ps => $programaSocial) {
-                $modeloRelatorio->setLegValue(30, 'Renda: ', $programaSocial['ttr_descricao'] . ": " . $programaSocial['ren_renda']);
+                $modeloRelatorio->setLegValue(30, 'Programa Social: ', $programaSocial['prs_programa']);
                 $modeloRelatorio->setNewLine();
             }
 
