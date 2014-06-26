@@ -926,7 +926,7 @@ class PescadorController extends Zend_Controller_Action {
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView(NULL, array('tcom_nome', 'tp_nome', 'tp_id'), NULL);
+        $localPescador = $localModelPescador->selectView('tp_id=813', array('tcom_nome', 'tp_nome', 'tp_id'), NULL);
 
         $localModelTelefone = new Application_Model_VPescadorHasTelefone();
         $localModelDependente = new Application_Model_VPescadorHasDependente();
@@ -1146,7 +1146,7 @@ class PescadorController extends Zend_Controller_Action {
         $modeloRelatorio->setTitulo('Relatório de Quantidade de Pescadores por Comunidade');
         $modeloRelatorio->setLegenda(30, 'Nº Pescadores');
         $modeloRelatorio->setLegenda(120, 'Comunidade');
-        
+
         $tmpSum = 0;
         foreach ($localPescador as $key => $localData) {
             $modeloRelatorio->setValueAlinhadoDireita(30, 60, $localData['count']);
@@ -1166,5 +1166,5 @@ class PescadorController extends Zend_Controller_Action {
         header("Content-Type: application/pdf");
         echo $pdf->render();
     }
-    
+
 }
