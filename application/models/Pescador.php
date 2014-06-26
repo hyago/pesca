@@ -455,5 +455,15 @@ class Application_Model_Pescador {
 
         return $dao->fetchAll($select)->toArray();
     }
+    
+    public function select_Pescador_group_colonia() {
+        $db = new Application_Model_DbTable_VPescador();
+        $select = $db->select()
+                ->from('v_pescador', array('count(*)','tcom_id', 'tcom_nome'))
+                ->group(array('tcom_id', 'tcom_nome'))
+                ->order('tcom_nome');
+        
+        return $db->fetchAll($select)->toArray();
+    }
 
 }
