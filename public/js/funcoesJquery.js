@@ -753,7 +753,7 @@ function jsUpdateIsca( isc_id, isc_tipo, frm )
 {
     if ( confirm("Realmente deseja EDITAR este item?") ) {
         frm.inputIsc_tipo.value = isc_tipo;
-        frm.inputIsc_id.value = tp_id;
+        frm.inputIsc_id.value = isc_id;
     }
 }
 
@@ -763,7 +763,10 @@ function jsReloadIsca( frm ){
     }
 }
 
-
+function relatorioIndividualPescador(id_pescador){
+    
+    location.reload('pescador/relpdfpescador/id_pescador/'.id_pescador);
+}
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
 //function addRowDependente(frm) {

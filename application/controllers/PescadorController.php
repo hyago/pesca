@@ -776,8 +776,13 @@ private $usuario;
 		$this->_helper->viewRenderer->setNoRender(true);
 
 		$localModelPescador = new Application_Model_Pescador();
-		$localPescador = $localModelPescador->selectView(NULL, array('tcom_nome','tp_nome','tp_id'), NULL);
-
+                $pescador = $this->_getParam('id_pescador');
+                if($pescador == null){
+                    $localPescador = $localModelPescador->selectView(null, array('tp_nome','tp_id'), NULL);
+                }
+                else{
+                    $localPescador = $localModelPescador->selectView("tp_id = ".$pescador, array('tp_nome','tp_id'), NULL);
+                }
 		$localModelTelefone = new Application_Model_VPescadorHasTelefone();
 		$localModelDependente = new Application_Model_VPescadorHasDependente();
 		$localModelRenda = new Application_Model_VPescadorHasRenda();
@@ -819,7 +824,7 @@ private $usuario;
 			$modeloRelatorio->setLegValue(30,  'PIS: ', $pescador['tp_pis']);
 			$modeloRelatorio->setLegValue(130,  'CTPS: ', $pescador['tp_ctps']);
 			$modeloRelatorio->setLegValue(230,  'NIT/CEI: ', $pescador['tp_nit_cei']);
-			$modeloRelatorio->setLegValue(350,  'CIR CAP PORTO : ', $pescador['tp_cir_cap_porto ']);
+			$modeloRelatorio->setLegValue(350,  'CIR CAP PORTO : ', $pescador['tp_cir_cap_porto']);
 
 			$modeloRelatorio->setNewLine();
 			$modeloRelatorio->setLegValue(30,  'CMA: ', $pescador['tp_cma']);
@@ -828,7 +833,7 @@ private $usuario;
 
 			$modeloRelatorio->setNewLine();
 			$modeloRelatorio->setLegValue(30,  'Comunidade: ', $pescador['tcom_nome']);
-			$modeloRelatorio->setLegValue(230,  'Natural: ', $pescador['munnat'] . '/' . $pescador['signat']);
+			$modeloRelatorio->setLegValue(230,  'Natural: ', $pescador['MUNNAT'] . '/' . $pescador['SIGNAT']);
 			$modeloRelatorio->setLegValue(350,  'Escolaridade: ', $pescador['esc_nivel']);
 
 			$modeloRelatorio->setNewLine();
@@ -842,14 +847,14 @@ private $usuario;
 			$modeloRelatorio->setLegValue(350,  'Cidade: ', $pescador['tmun_municipio'] . '/' . $pescador['tuf_sigla']);
 
 			$modeloRelatorio->setNewLine();
-			if ($pescador['tp_dta_cad']) {
-			$localDate = date("d/m/Y", strtotime($pescador['tp_dta_cad']));
-			} else {
-				$localDate='';
-			}
-			$modeloRelatorio->setLegValue(30,  'Data Cadastro: ', $pescador['tp_dta_cad']);
-			$modeloRelatorio->setLegValue(130,  'Resp. Lançamento: ', $pescador['tu_nome_lan ']);
-			$modeloRelatorio->setLegValue(350,  'Resp. Cadastro: ', $pescador[' tu_nome_cad ']);
+//			if ($pescador['tp_dta_cad']) { //Não existe essa coluna no banco
+//			$localDate = date("d/m/Y", strtotime($pescador['tu_dta_cad']));
+//			} else {
+//				$localDate='';
+//			}
+//			$modeloRelatorio->setLegValue(30,  'Data Cadastro: ', $localDate);
+			$modeloRelatorio->setLegValue(130,  'Resp. Lançamento: ', $pescador['tu_nome_lan']);
+			$modeloRelatorio->setLegValue(350,  'Resp. Cadastro: ', $pescador['tu_nome_cad']);
 			$modeloRelatorio->setNewLine();
 
 			$modeloRelatorio->setLegValue(30,  'Observações: ', $pescador['tp_obs']);
@@ -869,7 +874,7 @@ private $usuario;
 
 			$localProgramaSocial = $localModelProgramaSocial->select('tp_id='.$pescador['tp_id'], null, NULL);
 			foreach ($localProgramaSocial as $key_ps => $programaSocial) {
-				$modeloRelatorio->setLegValue(30, 'Renda: ', $programaSocial['ttr_descricao'] .": " .$programaSocial['ren_renda']);
+				$modeloRelatorio->setLegValue(30, 'Programa Social: ', $programaSocial['prs_programa']);
 				$modeloRelatorio->setNewLine();
 			}
 

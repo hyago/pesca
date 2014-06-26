@@ -41,9 +41,9 @@
                     <td><?= $pescador['tp_matricula'] ?></td>
 
                     <td class="td-botao">
-                        <a href="<?= $this->url(array("controller" => "pescador", "action" => "visualizar", "id" => $pescador['tp_id']), null, true) ?>">
+                        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relpdfpescador", "id_pescador" => $pescador['tp_id']), null, true) ?>">
                             <ul id="icons" class="ui-widget ui-helper-clearfix">
-                                <li class="ui-state-default ui-corner-all" title="Visualizar"><span class="ui-icon ui-icon-search"></span></li>
+                                <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-document"></span></li>
                             </ul>
                         </a>
                     </td>
@@ -69,6 +69,6 @@
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Colonia (lista)</a>
 		<a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Comunidade (lista)</a>
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "relxlspescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório XLS</a>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relpdfpescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório PDF/Comunidade</a>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relpdfpescador", "id" => null), null, true) ?>" id="botao-ancora" target="_blank">Relatório PDF/Comunidade</a>
     </form>
 </html>
