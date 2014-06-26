@@ -68,8 +68,15 @@
                 </ul>
             </a>
         </td>
+        <td width="5%" class="td-botao">
+            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"imprimirfichaid", "id" => $fichadiaria['fd_id']),null,true)?>">
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li class="ui-state-default ui-corner-all" title="Imprimir"><span class="ui-icon ui-icon-print"></span></li>
+                </ul>
+            </a>
+        </td>
     </tr>
     <?php endforeach; ?>
 </table>
-     <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "relpdfichadiaria"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+     <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "imprimirfichatodas"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
  </form>

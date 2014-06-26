@@ -252,14 +252,29 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->_redirect('ficha-diaria/index');
     }
+    
+    public function imprimirfichatodasAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $this->relatorio_completo_pdf_ficha( NULL );
+    }
+    
+    public function imprimirfichaidAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $tmpId = $this->_getParam('id');
 
-    public function relpdfichadiariaAction() {
+        $this->relatorio_completo_pdf_ficha( 'fd_id = ' . $tmpId );
+    }
+   
+    public function relatorio_completo_pdf_ficha( $where = null ) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelFichaDiaria = new Application_Model_FichaDiaria();
 
-        $localFichaDiaria = $localModelFichaDiaria->selectView('fd_id = 303', array('fd_data', 'pto_nome'), NULL);
+        $localFichaDiaria = $localModelFichaDiaria->selectView( $where , array('fd_data', 'pto_nome'), NULL);
 // 		$localFichaDiaria = $localModelFichaDiaria->selectView(null, array('fd_data', 'pto_nome'), NULL);
 
         $localModelMonitoramento = new Application_Model_Monitoramento();
@@ -374,11 +389,11 @@ class FichaDiariaController extends Zend_Controller_Action {
         }
         $pdf = $modeloRelatorio->getRelatorio();
 
-//         header('Content-Disposition: attachment;filename="rel_ficha_diaria.pdf"');
-//         header("Content-type: application/x-pdf");
-//         echo $pdf->render();
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+         header('Content-Disposition: attachment;filename="rel_ficha_diaria.pdf"');
+         header("Content-type: application/x-pdf");
+         echo $pdf->render();
+//		header("Content-Type: application/pdf");
+//		echo $pdf->render();
     }
 
 }
