@@ -49,7 +49,7 @@ class PescadorController extends Zend_Controller_Action {
         } else {
             $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'), 20);
         }
-
+        //print_r();
         $this->view->assign("dados", $dados);
     }
 

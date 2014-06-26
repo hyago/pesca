@@ -39,15 +39,7 @@
                     <td><?= $pescador['tp_id'] ?></td>
                     <td><?= $pescador['tp_nome'] ?></td>
                     <td><?= $pescador['tp_matricula'] ?></td>
-
-                    <td class="td-botao">
-                        <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirpescadorid", "id_pescador" => $pescador['tp_id']), null, true) ?>">
-                            <ul id="icons" class="ui-widget ui-helper-clearfix">
-                                <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-document"></span></li>
-                            </ul>
-                        </a>
-                    </td>
-
+                    
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">
                             <ul id="icons" class="ui-widget ui-helper-clearfix">
@@ -55,11 +47,18 @@
                             </ul>
                         </a>
                     </td>
-
                     <td class="td-botao">
                         <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
                     </td>
+                    <td class="td-botao">
+                        <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirpescadorid", "id_pescador" => $pescador['tp_id']), null, true) ?>">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all" title="Imprimir"><span class="ui-icon ui-icon-print"></span></li>
+                            </ul>
+                        </a>
+                    </td>
 
+                    
                     </a>
 
                 </tr>
@@ -67,12 +66,13 @@
         </table>
         <br/><br/>
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Colonia (lista)</a>
-		<a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Comunidade (lista)</a>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relxlspescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório XLS</a>
-
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relpdfpescador", "id" => null), null, true) ?>" id="botao-ancora" target="_blank">Relatório PDF/Comunidade</a>
-
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirtodospescadores"), null, true) ?>" id="botao-ancora" target="_blank">Relatório PDF/Comunidade</a>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorgroupcolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Group/Comunidade</a>
+	<br/>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Comunidade (lista)</a>
+        <br/>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relxlspescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório-Excel</a>
+        <br/>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirtodospescadores"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescadores Detalhados</a>
+        <br/>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorgroupcolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Quant. Pescadores/Comunidade</a>
     </form>
 </html>

@@ -140,12 +140,12 @@ class ModeloRelatorio {
 		if ( $this->isFirstPage==FALSE ) {
 			$this->pdf->pages[] = $this->page;
 		}
-
+                date_default_timezone_set("Brazil/East");
 		$this->page = clone $this->pageToClone;
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$this->countPag++;
 
-		$text = 'Página: ' . $this->countPag;
+		$text = date("d/m/Y H:m").' - '.'Página: ' . $this->countPag;
 		$column = $this-> getRightPosition(
 			$text,
 			100,
