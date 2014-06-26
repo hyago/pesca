@@ -924,17 +924,17 @@ class PescadorController extends Zend_Controller_Action {
     public function imprimirtodospescadoresAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         $this->relpdfpescador( NULL );
     }
-    
+
     public function imprimirpescadoridAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         $pescadorId = $this->_getParam('id_pescador');
 
         $this->relpdfpescador( 'tp_id = ' . $pescadorId );
-    }    
+    }
     public function relpdfpescador( $where = null) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -1160,7 +1160,7 @@ class PescadorController extends Zend_Controller_Action {
         $modeloRelatorio->setTitulo('Relatório de Quantidade de Pescadores por Comunidade');
         $modeloRelatorio->setLegenda(30, 'Nº Pescadores');
         $modeloRelatorio->setLegenda(120, 'Comunidade');
-        
+
         $tmpSum = 0;
         foreach ($localPescador as $key => $localData) {
             $modeloRelatorio->setValueAlinhadoDireita(30, 60, $localData['count']);
@@ -1180,5 +1180,5 @@ class PescadorController extends Zend_Controller_Action {
         header("Content-Type: application/pdf");
         echo $pdf->render();
     }
-    
+
 }
