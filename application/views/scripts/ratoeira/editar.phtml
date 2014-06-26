@@ -243,7 +243,7 @@
                             <td name="inputQuantidade"> <?= $vEspecieCapturada['spc_quantidade'] ?> </td>
                             <td name="inputPeso"> <?= $vEspecieCapturada['spc_peso_kg'] ?> </td>
                             <td name="inputPreco"> <?= $vEspecieCapturada['spc_preco'] ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeletePesqueiro(<?= $this->entrevista['rat_id'] ?>, '<?= $this->url(array("controller" => "ratoeira", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['spc_rat_id'] ?>)"></td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteEspecieCapturada(<?= $this->entrevista['rat_id'] ?>, '<?= $this->url(array("controller" => "ratoeira", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['spc_rat_id'] ?>)"></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
