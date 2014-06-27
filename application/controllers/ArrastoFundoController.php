@@ -216,7 +216,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
 
-    public function relatorioAction() {
+    public function relatoriolistaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -243,12 +243,12 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo.pdf"');
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_arrastofundo.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }
 
-    public function relatoriolistaAction() {
+    public function relatorioAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -296,7 +296,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_lista_entrevista_arrastofundo.pdf"');
+        header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

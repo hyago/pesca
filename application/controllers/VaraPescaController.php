@@ -233,7 +233,7 @@ class VaraPescaController extends Zend_Controller_Action
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
 
-   public function relatorioAction(){
+   public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -260,12 +260,12 @@ class VaraPescaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: attachment;filename="rel_entrevista_varapesca.pdf"');
+		header('Content-Disposition: attachment;filename="rel_lista_entrevista_varapesca.pdf"');
                 header("Content-type: application/x-pdf");
                 echo $pdf->render();
     }
 
-   public function relatoriolistaAction(){
+   public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -309,7 +309,7 @@ class VaraPescaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_lista_entrevista_varapesca.pdf"');
+        header('Content-Disposition: attachment;filename="rel_entrevista_varapesca.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

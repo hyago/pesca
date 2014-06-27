@@ -232,7 +232,7 @@ class SiripoiaController extends Zend_Controller_Action
         $this->redirect("/siripoia/editar/id/" . $backUrl);
     }
 
-    public function relatorioAction(){
+    public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -259,12 +259,12 @@ class SiripoiaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: attachment;filename="rel_entrevista_siripoia.pdf"');
+		header('Content-Disposition: attachment;filename="rel_lista_entrevista_siripoia.pdf"');
                 header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
-	public function relatoriolistaAction(){
+	public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -313,7 +313,7 @@ class SiripoiaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_lista_entrevista_siripoia.pdf"');
+        header('Content-Disposition: attachment;filename="rel_entrevista_siripoia.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

@@ -228,7 +228,7 @@ class LinhaController extends Zend_Controller_Action
         $this->redirect("/linha/editar/id/" . $backUrl);
     }
 
-   public function relatorioAction(){
+   public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -255,12 +255,12 @@ class LinhaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: attachment;filename="rel_entrevista_linha.pdf"');
+		header('Content-Disposition: attachment;filename="rel_lista_entrevista_linha.pdf"');
                 header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
-    public function relatoriolistaAction(){
+    public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -309,7 +309,7 @@ class LinhaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_lista_entrevista_linha.pdf"');
+        header('Content-Disposition: attachment;filename="rel_entrevista_linha.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

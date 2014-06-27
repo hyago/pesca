@@ -219,7 +219,7 @@ class EmalheController extends Zend_Controller_Action
 
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
-    public function relatorioAction(){
+    public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -246,11 +246,12 @@ class EmalheController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+        header('Content-Disposition: attachment;filename="rel_lista_entrevista_emalhe.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
     }
 
-    public function relatoriolistaAction(){
+    public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

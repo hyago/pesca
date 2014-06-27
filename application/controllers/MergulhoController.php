@@ -45,7 +45,7 @@ class MergulhoController extends Zend_Controller_Action
         $especies = $this->modelEspecie->select(null, 'esp_nome');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        
+
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
 
@@ -234,7 +234,7 @@ class MergulhoController extends Zend_Controller_Action
         $this->redirect("/mergulho/editar/id/" . $backUrl);
     }
 
-    public function relatorioAction(){
+    public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -261,11 +261,11 @@ class MergulhoController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: attachment;filename="rel_entrevista_mergulho.pdf"');
+		header('Content-Disposition: attachment;filename="rel_lista_entrevista_mergulho.pdf"');
                 header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
-   public function relatoriolistaAction(){
+   public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -314,7 +314,7 @@ class MergulhoController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_lista _entrevista_mergulho.pdf"');
+        header('Content-Disposition: attachment;filename="rel_entrevista_mergulho.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }

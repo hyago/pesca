@@ -45,7 +45,7 @@ private $usuario;
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
 
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-        
+
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('destinos', $destinos);
@@ -212,7 +212,7 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
 
-    public function relatorioAction(){
+    public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -239,12 +239,12 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: attachment;filename="rel_entrevista_calao.pdf"');
+		header('Content-Disposition: attachment;filename="rel_lista_entrevista_calao.pdf"');
                 header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
-    public function relatoriolistaAction(){
+    public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -286,7 +286,7 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_lista_entrevista_calao.pdf"');
+        header('Content-Disposition: attachment;filename="rel_entrevista_calao.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }
