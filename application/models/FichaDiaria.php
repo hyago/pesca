@@ -91,7 +91,7 @@ class Application_Model_FichaDiaria
         $this->dbTableFichaDiaria = new Application_Model_DbTable_FichaDiaria();       
                 
         $whereFichaDiaria= $this->dbTableFichaDiaria->getAdapter()
-                ->quoteInto('"ESP_ID" = ?', $idFichaDiaria);
+                ->quoteInto('"fd_id" = ?', $idFichaDiaria);
         
         $this->dbTableFichaDiaria->delete($whereFichaDiaria);
     }
