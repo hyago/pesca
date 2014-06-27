@@ -7,6 +7,7 @@
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/pescador/index.phtml</file>
             <file>file:/srv/www/htdocs/pesca/application/layouts/scripts/admin.phtml</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/mergulho/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/ratoeira/editar.phtml</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha/editar.phtml</file>
             <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
