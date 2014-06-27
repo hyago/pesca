@@ -65,14 +65,14 @@
             <?php endforeach; ?>
         </table>
         <br/><br/>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Colonia (lista)</a>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirlistacolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Colonia (lista)</a>
 	<br/>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorcomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Comunidade (lista)</a>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirlistacomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescador/Comunidade (lista)</a>
         <br/>
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "relxlspescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório-Excel</a>
         <br/>
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirtodospescadores"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescadores Detalhados</a>
         <br/>
-        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorgroupcolonia"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Quant. Pescadores/Comunidade</a>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorgroupcomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Quant. Pescadores/Comunidade</a>
     </form>
 </html>

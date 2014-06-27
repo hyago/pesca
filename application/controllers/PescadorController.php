@@ -1094,24 +1094,50 @@ class PescadorController extends Zend_Controller_Action {
 // 		echo $pdf->render();
     }
 
-    public function relatoriopescadorcoloniaAction() {
+    public function imprimirlistacodigoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $this->relatorioListaPescador( array('tp_id') );        
+    }
+    
+    public function imprimirlistanomeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $this->relatorioListaPescador( array('tp_nome') );        
+    }
+
+    public function imprimirlistacomunidadeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $this->relatorioListaPescadorComunidade( array('tcom_nome','tp_nome') );        
+    }
+
+    public function imprimirlistacoloniaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $this->relatorioListaPescadorColonia( array('tc_nome','tp_nome') );        
+    }
+
+    public function relatorioListaPescador( $order = null ) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView(NULL, array('tc_nome', 'tp_nome'), NULL);
+        $localPescador = $localModelPescador->selectView(NULL, $order, NULL);
 
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();
-        $modeloRelatorio->setTitulo('Relatório de Pescador - Colônia');
+        $modeloRelatorio->setTitulo('Relatório de Pescador');
         $modeloRelatorio->setLegenda(30, 'Código');
-        $modeloRelatorio->setLegenda(80, 'Colonia');
-        $modeloRelatorio->setLegenda(200, 'Pescador');
+        $modeloRelatorio->setLegenda(80, 'Pescador');
 
         foreach ($localPescador as $key => $localData) {
             $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
-            $modeloRelatorio->setValue(80, $localData['tc_nome']);
-            $modeloRelatorio->setValue(200, $localData['tp_nome']);
+            $modeloRelatorio->setValue(80, $localData['tp_nome']);
             $modeloRelatorio->setNewLine();
         }
         $modeloRelatorio->setNewLine();
@@ -1121,12 +1147,12 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
-    public function relatoriopescadorcomunidadeAction() {
+    public function relatorioListaPescadorComunidade( $order = null ) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView(NULL, array('tcom_nome', 'tp_nome'), NULL);
+        $localPescador = $localModelPescador->selectView(NULL, $order, NULL);
 
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();
@@ -1148,12 +1174,39 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
-    public function relatoriopescadorgroupcoloniaAction() {
+    public function relatorioListaPescadorColonia( $order = null ) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->select_Pescador_group_colonia();
+        $localPescador = $localModelPescador->selectView(NULL, $order, NULL);
+
+        require_once "../library/ModeloRelatorio.php";
+        $modeloRelatorio = new ModeloRelatorio();
+        $modeloRelatorio->setTitulo('Relatório de Pescador - Colônia');
+        $modeloRelatorio->setLegenda(30, 'Código');
+        $modeloRelatorio->setLegenda(80, 'Colônia');
+        $modeloRelatorio->setLegenda(130, 'Pescador');
+
+        foreach ($localPescador as $key => $localData) {
+            $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
+            $modeloRelatorio->setValue(80, $localData['tc_nome']);
+            $modeloRelatorio->setValue(130, $localData['tp_nome']);
+            $modeloRelatorio->setNewLine();
+        }
+        $modeloRelatorio->setNewLine();
+        $pdf = $modeloRelatorio->getRelatorio();
+
+        header("Content-Type: application/pdf");
+        echo $pdf->render();
+    }
+
+    public function relatoriopescadorgroupcomunidadeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $localModelPescador = new Application_Model_Pescador();
+        $localPescador = $localModelPescador->select_Pescador_group_comunidade();
 
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();
@@ -1181,4 +1234,36 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
+    public function relatoriopescadorgroupcoloniaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $localModelPescador = new Application_Model_Pescador();
+        $localPescador = $localModelPescador->select_Pescador_group_colonia();
+
+        require_once "../library/ModeloRelatorio.php";
+        $modeloRelatorio = new ModeloRelatorio();
+        $modeloRelatorio->setTitulo('Relatório de Quantidade de Pescadores por Colônia');
+        $modeloRelatorio->setLegenda(30, 'Nº Pescadores');
+        $modeloRelatorio->setLegenda(120, 'Colônia');
+
+        $tmpSum = 0;
+        foreach ($localPescador as $key => $localData) {
+            $modeloRelatorio->setValueAlinhadoDireita(30, 60, $localData['count']);
+            $tmpSum = $tmpSum + $localData['count'];
+            if (sizeof($localData['tc_nome']) > 0 ) {
+                $modeloRelatorio->setValue(120, $localData['tc_nome']);
+            } else {
+                $modeloRelatorio->setValue(120, 'Não declarado');
+            }
+            $modeloRelatorio->setNewLine();
+        }
+        $modeloRelatorio->setNewLine();
+        $modeloRelatorio->setLegValue(30, 'Total de pescadores cadastrados: ', $tmpSum );
+        $modeloRelatorio->setNewLine();
+        $pdf = $modeloRelatorio->getRelatorio();
+
+        header("Content-Type: application/pdf");
+        echo $pdf->render();
+    }
 }
