@@ -40,36 +40,49 @@ class BarcosController extends Zend_Controller_Action
             $this->_redirect('index');
         }
     }
+    public function editarAction(){
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
+        $selectBarco = $this->modelBarcos->find($this->_getParam('id'));
+        $this->view->assign("barco", $selectBarco);
+    }
     public function criarAction(){
 
         $this->modelBarcos->insert($this->getAllParams());
 
         $this->_redirect("barcos/index");
     }
+    public function atualizarAction(){
 
-	public function relatorioAction() {
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNoRender(true);
+        $this->modelBarcos->update($this->getAllParams());
 
-		$localModelBarco = new Application_Model_Barcos();
-		$localBarco = $localModelBarco->select(NULL, array('bar_nome'), NULL);
+        $this->_redirect("barcos/index");
+    }
 
-		require_once "../library/ModeloRelatorio.php";
-		$modeloRelatorio = new ModeloRelatorio();
-		$modeloRelatorio->setTitulo('Relatório Embarcações');
-		$modeloRelatorio->setLegenda(30, 'Código');
-		$modeloRelatorio->setLegenda(80, 'Embarcação');
+    public function relatorioAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
-		foreach ($localBarco as $key => $localData) {
-			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['bar_id']);
-			$modeloRelatorio->setValue(80, $localData['bar_nome']);
-			$modeloRelatorio->setNewLine();
-		}
-		$modeloRelatorio->setNewLine();
-		$pdf = $modeloRelatorio->getRelatorio();
+        $localModelBarco = new Application_Model_Barcos();
+        $localBarco = $localModelBarco->select(NULL, array('bar_nome'), NULL);
 
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+        require_once "../library/ModeloRelatorio.php";
+        $modeloRelatorio = new ModeloRelatorio();
+        $modeloRelatorio->setTitulo('Relatório Embarcações');
+        $modeloRelatorio->setLegenda(30, 'Código');
+        $modeloRelatorio->setLegenda(80, 'Embarcação');
+
+        foreach ($localBarco as $key => $localData) {
+            $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['bar_id']);
+            $modeloRelatorio->setValue(80, $localData['bar_nome']);
+            $modeloRelatorio->setNewLine();
+        }
+        $modeloRelatorio->setNewLine();
+	$pdf = $modeloRelatorio->getRelatorio();
+
+	header("Content-Type: application/pdf");
+	echo $pdf->render();
    }
 }
 
