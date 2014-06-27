@@ -51,6 +51,18 @@ class ModeloRelatorio {
 		$this->linha = $this->legendLine;
 	}
 
+	public function setLegendaCenter( $columnPosition, $columnLargura, $text ) {
+		$textColumnposition = $this->getCenterPosition(
+			$text,
+			$columnLargura,
+			$this->pageToClone->getFont(),
+			$this->pageToClone->getFontSize() );
+			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 9);
+
+		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 9);
+		$this->pageToClone->drawText( $text,  $columnPosition + $textColumnposition, $this->legendLine );
+	}
+
 	public function setLegenda( $columnPosition, $text ) {
 		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 9);
 		$this->pageToClone->drawText( $text,  $columnPosition, $this->legendLine );
