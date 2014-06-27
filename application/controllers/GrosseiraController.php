@@ -229,7 +229,7 @@ private $usuario;
         $this->redirect("/grosseira/editar/id/" . $backUrl);
     }
 
-    public function relatorioAction(){
+    public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -256,12 +256,12 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header('Content-Disposition: attachment;filename="rel_entrevista_grosseira.pdf"');
+		header('Content-Disposition: attachment;filename="rel_lista_entrevista_grosseira.pdf"');
                 header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
-    
-    public function relatoriolistaAction(){
+
+    public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -310,7 +310,7 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-        header('Content-Disposition: attachment;filename="rel_lista_entrevista_grosseira.pdf"');
+        header('Content-Disposition: attachment;filename="rel_entrevista_grosseira.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }
