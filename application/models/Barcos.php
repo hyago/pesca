@@ -46,7 +46,7 @@ private $dbTableBarcos;
         );
         
         $whereBarcos= $this->dbTableBarcos->getAdapter()
-                ->quoteInto('"bar_id" = ?', $request['idBarco']);
+                ->quoteInto('"bar_id" = ?', $request['bar_id']);
         
         $this->dbTableBarcos->update($dadosBarcos, $whereBarcos);
     }
