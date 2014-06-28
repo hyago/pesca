@@ -310,5 +310,27 @@ class Application_Model_ArrastoFundo
         $this->dbTableTArrastoHasAvistamento->delete($dadosArrastoHasAvistamento);
     }
 
-}
+    public function select_ArrastoFundo_group_EspecieCapturada() {
+        $db = new Application_Model_DbTable_VArrastoFundoHasEspecieCapturada();
+        $select = $db->select()
+                ->from('v_arrastofundo_has_t_especie_capturada', array('count(*)','esp_nome_comum',
+                'max(spc_quantidade)"max_quant"', 'AVG(spc_quantidade)"avg_quant"', 'min(spc_quantidade)"min_quant"',
+                'max(spc_peso_kg)"max_peso"', 'AVG(spc_peso_kg)"avg_peso"', 'min(spc_peso_kg)"min_peso"',
+                'max(spc_preco)"max_preco"', 'AVG(spc_preco)"avg_preco"', 'min(spc_preco)"min_preco"' ))
+                ->group(array('esp_nome_comum'))
+                ->order('esp_nome_comum');
 
+        return $db->fetchAll($select)->toArray();
+    }
+
+    public function select_ArrastoFundo_group_Pesqueiro() {
+        $db = new Application_Model_DbTable_VArrastoFundoHasPesqueiro();
+        $select = $db->select()
+                ->from('v_arrasto_has_t_pesqueiro', array('count(*)','paf_pesqueiro',
+                'max(t_tempopesqueiro)"max_tempo"', 'AVG(t_tempopesqueiro)"avg_tempo"', 'min(t_tempopesqueiro)"min_tempo"' ))
+                ->group(array('paf_pesqueiro'))
+                ->order('paf_pesqueiro');
+
+        return $db->fetchAll($select)->toArray();
+    }
+}

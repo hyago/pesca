@@ -39,7 +39,7 @@
                     <td><?= $pescador['tp_id'] ?></td>
                     <td><?= $pescador['tp_nome'] ?></td>
                     <td><?= $pescador['tp_matricula'] ?></td>
-                    
+
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">
                             <ul id="icons" class="ui-widget ui-helper-clearfix">
@@ -58,7 +58,7 @@
                         </a>
                     </td>
 
-                    
+
                     </a>
 
                 </tr>
@@ -72,6 +72,7 @@
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "relxlspescador"), null, true) ?>" id="botao-ancora" target="_blank">Relatório-Excel</a>
         <br/>
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirtodospescadores"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescadores Detalhados</a>
+        <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirtodospescadores2"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Pescadores Detalhados2</a>
         <br/>
         <a href="<?= $this->url(array("controller" => "pescador", "action" => "relatoriopescadorgroupcomunidade"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Quant. Pescadores/Comunidade</a>
     </form>

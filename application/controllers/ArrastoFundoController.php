@@ -301,4 +301,83 @@ class ArrastoFundoController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
+    public function relatoriogroupespeciecapturadaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $localModelArrastoFundo = new Application_Model_ArrastoFundo();
+        $localArrastoFundo = $localModelArrastoFundo->select_ArrastoFundo_group_EspecieCapturada();
+
+        require_once "../library/ModeloRelatorio.php";
+        $modeloRelatorio = new ModeloRelatorio();
+        $modeloRelatorio->setTitulo('Relatório Arrasto de Fundo - Espécie Capturada');
+        $modeloRelatorio->setLegenda(30, 'Quant.');
+        $modeloRelatorio->setLegenda(80, 'Espécie');
+        $modeloRelatorio->setLegendaCenter(200, 120, 'Quantidade (Max/Méd/Min)');
+        $modeloRelatorio->setLegendaCenter(320, 120, 'Peso(kg) (Max/Méd/Min)');
+        $modeloRelatorio->setLegendaCenter(440, 120, 'Preço(R$/kg)(Max/Méd/Min)');
+
+        $tmpQuant = 0;
+        foreach ($localArrastoFundo as $key => $localData) {
+            $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['count']);
+            $tmpQuant = $tmpQuant +  $localData['count'];
+            $modeloRelatorio->setValue(80, $localData['esp_nome_comum']);
+            $modeloRelatorio->setValueAlinhadoDireita(200, 40, $localData['max_quant']);
+            $modeloRelatorio->setValueAlinhadoDireita(240, 40, number_format($localData['avg_quant'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(280, 40, $localData['min_quant']);
+
+            $modeloRelatorio->setValueAlinhadoDireita(320, 40, number_format($localData['max_peso'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(360, 40, number_format($localData['avg_peso'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(400, 40, number_format($localData['min_peso'], 2, ',', ' '));
+
+            $modeloRelatorio->setValueAlinhadoDireita(440, 40, number_format($localData['max_preco'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(480, 40, number_format($localData['avg_preco'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(520, 40, number_format($localData['min_preco'], 2, ',', ' '));
+
+            $modeloRelatorio->setNewLine();
+        }
+        $modeloRelatorio->setNewLine();
+        $modeloRelatorio->setValueAlinhadoDireita(30, 40, $tmpQuant);
+        $modeloRelatorio->setValue(80, 'Total de Capturadas');
+        $pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo_group_especie.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+    }
+
+    public function relatoriogroupesqueiroAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $localModelArrastoFundo = new Application_Model_ArrastoFundo();
+        $localArrastoFundo = $localModelArrastoFundo->select_ArrastoFundo_group_Pesqueiro();
+
+        require_once "../library/ModeloRelatorio.php";
+        $modeloRelatorio = new ModeloRelatorio();
+        $modeloRelatorio->setTitulo('Relatório  Arrasto de Fundo - Pesqueiro');
+        $modeloRelatorio->setLegenda(30, 'Quant.');
+        $modeloRelatorio->setLegenda(80, 'Pesqueiro');
+        $modeloRelatorio->setLegendaCenter(250, 150, 'Tempo (H:M) (Max/Méd/Min)');
+
+        $tmpQuant = 0;
+        foreach ($localArrastoFundo as $key => $localData) {
+            $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['count']);
+            $tmpQuant = $tmpQuant +  $localData['count'];
+            $modeloRelatorio->setValue(80, $localData['paf_pesqueiro']);
+            $modeloRelatorio->setValueAlinhadoDireita(250, 50, date_format(date_create($localData['max_tempo']), 'H:i'));
+            $modeloRelatorio->setValueAlinhadoDireita(300, 50, date_format(date_create($localData['avg_tempo']), 'H:i'));
+            $modeloRelatorio->setValueAlinhadoDireita(350, 50, date_format(date_create($localData['min_tempo']), 'H:i'));
+
+            $modeloRelatorio->setNewLine();
+        }
+        $modeloRelatorio->setNewLine();
+        $modeloRelatorio->setValueAlinhadoDireita(30, 40, $tmpQuant);
+        $modeloRelatorio->setValue(80, 'Total de Pesqueiros');
+        $pdf = $modeloRelatorio->getRelatorio();
+
+        header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo_group_pesqueiro.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+    }
 }
