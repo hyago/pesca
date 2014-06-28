@@ -20,7 +20,7 @@ body{
 {
 	float: left;
 	width: 900px;
-	background: #8B8386;
+	background: #5F302B;//#8B8386;
 	min-height: 45px;
 }
 
@@ -48,7 +48,7 @@ body{
 	border-right: 1px solid #fff;
 }
 
-#menu li a:hover { background: #4F4F4F; }
+#menu li a:hover { background: #462420;}//#4F4F4F; }
 
 #login
 {
@@ -120,7 +120,7 @@ body{
 }
 
 #menu-lateral li {
-        background: #8B8386;
+        background: #5F302B;
 	margin: 0; 
 	padding: 0;
 	border-bottom: 1px solid #CCC;
@@ -133,13 +133,13 @@ body{
     
 }
 #Social li{
-    background: #9C9698;
+    background: #90544D;//#9C9698;
 }
 #Dsbq li{
-    background: #9C9698;
+    background: #90544D;//#9C9698;
 }
 #Relatorio li{
-    background: #9C9698;
+    background: #90544D;//#9C9698;
 }
 #menu-lateral a{
 	color: #fff;
@@ -149,7 +149,7 @@ body{
 	display: block;
 }
 
-#menu-lateral a:hover { background: #4F4F4F; }
+#menu-lateral a:hover { background: #462420;}//#4F4F4F; }
 
 
 

@@ -21,7 +21,7 @@ body{
         font-size: 12px;
 	float: left;
 	width: 900px;
-	background: #8B8386;
+	background: #5F302B;
 	min-height: 45px;
 }
 
@@ -113,7 +113,7 @@ body{
 }
 
 #conteudo tr th{
-	background-color: #8B8386;
+	background-color: #5F302B;
 }
 
 #conteudo table{
@@ -155,7 +155,7 @@ body{
 }
 
 #menu-lateral a:link {
-	background: #8B8386;
+	background: #5F302B;
 	color: #fff;
 	text-decoration: none;
 	padding: 8px;
