@@ -28,7 +28,7 @@
                 </ul>
                 <div id="login">
                     <p>
-                        Olá, <?= $this->usuario['tu_nome'] ?>
+                        <label id="usuario">Olá, <?= $this->usuario['tu_nome'] ?></label>
                         <a href="<?= $this->url(array("controller" => "autenticacao", "action" => "logout"), null, true) ?>">Sair</a>
                     </p>
                 </div>
