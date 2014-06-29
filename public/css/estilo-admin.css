@@ -67,12 +67,19 @@ body{
 
 #login
 {
+	float: right;
+	margin-top: 5px;
+        margin-left: 500px;
+	color: #fff;
+}
+#login p{
     float: right;
-    margin: 5px 0;
-    color: #fff;
 }
 
-#login #sair { margin: 0 5px 0; }
+#usuario {
+    color: white;
+}
+#login #sair { margin: 0 500px 0; }
 
 #login .login {	width: 10em; }
 
@@ -82,7 +89,7 @@ body{
     text-decoration: none;
 }
 
-#login a:hover { background: #4F4F4F; }
+#login a:hover { background: #462420; }
 
 #conteudo-geral
 {
@@ -220,7 +227,7 @@ table {
 }
 
 tr th{
-    background-color: #8b8386;
+    background-color: #5F302B;
     color: white;
 }
 
@@ -231,7 +238,7 @@ th, td {
 }
 
 tbody tr:nth-child(odd) {
-    background: #eee;
+    background: #ffefef;
 }
 
 

@@ -65,7 +65,7 @@ body{
 	border-right: 1px solid #fff;
 }
 
-#menu li a:hover { background: #4F4F4F; }
+#menu li a:hover { background: #462420; }
 
 #login
 {
@@ -83,7 +83,7 @@ body{
 	text-decoration: none;
 }
 
-#login a:hover { background: #4F4F4F; }
+#login a:hover { background: #462420; }
 
 #conteudo-geral
 {
@@ -179,9 +179,7 @@ body{
 	display: block;
 }
 
-#menu-lateral a:hover { background: #4F4F4F; }
-
-#menu-lateral ul li.atual { list-style-type: circle; }
+#menu-lateral a:hover { background: #462420; }
 
 #rodape {
     clear: both;
