@@ -18,8 +18,7 @@ class IndexController extends Zend_Controller_Action
     {   
         if(Zend_Auth::getInstance()->hasIdentity()){
             $this->_helper->layout->setLayout('admin');
-        }
-        $auth = Zend_Auth::getInstance();
+            $auth = Zend_Auth::getInstance();
         if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           //Converte do objeto para um array (tem que ser feito)
@@ -30,6 +29,8 @@ class IndexController extends Zend_Controller_Action
         //Busca o usuário no banco pelo id do login
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
+        }
+        
         
     }
 
