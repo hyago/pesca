@@ -18,6 +18,8 @@
     <body>
         <div id="geral">
             <div id="topo">
+                <div id="topoLeft"></div>
+                <div id="topoRight"></div>
             </div>
             <div id="menu">
                 <ul>
@@ -65,14 +67,14 @@
                                 <li><a href="<?= $this->url(array("controller" => "genero", "action" => "index"), null, true) ?>">Genero</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "especie", "action" => "index"), null, true) ?>">Espécie</a></li>
                             </ul>
-                            <li><a href="<?=$this->url(array("controller"=>"porto","action"=>"index"),null,true)?>">Porto</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"pesqueiro","action"=>"index"),null,true)?>">Pesqueiro</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"vento","action"=>"index"),null,true)?>">Vento</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"tempo","action"=>"index"),null,true)?>">Tempo</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"barcos","action"=>"index"),null,true)?>">Embarcações</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"mare","action"=>"index"),null,true)?>">Maré</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"destino-pescado","action"=>"index"),null,true)?>">Destino do Pescado</a></li>
-                            <li><a href="<?=$this->url(array("controller"=>"isca","action"=>"index"),null,true)?>">Iscas</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "porto", "action" => "index"), null, true) ?>">Porto</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "pesqueiro", "action" => "index"), null, true) ?>">Pesqueiro</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "vento", "action" => "index"), null, true) ?>">Vento</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "tempo", "action" => "index"), null, true) ?>">Tempo</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "barcos", "action" => "index"), null, true) ?>">Embarcações</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "mare", "action" => "index"), null, true) ?>">Maré</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "destino-pescado", "action" => "index"), null, true) ?>">Destino do Pescado</a></li>
+                            <li><a href="<?= $this->url(array("controller" => "isca", "action" => "index"), null, true) ?>">Iscas</a></li>
                             <li><a id="for-Entrevista">Entrevistas</a></li>
                             <ul id="Entrevista">
                                 <li><a href="<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>">Arrasto de Fundo</a></li>
@@ -143,7 +145,7 @@
                                 <li><a href="<?= $this->url(array("controller" => "siripoia", "action" => "relatoriolista"), null, true) ?>"target="_blank">Entrevistas - Siripóia</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "tarrafa", "action" => "relatoriolista"), null, true) ?>"target="_blank">Entrevistas - Tarrafa</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "vara-pesca", "action" => "relatoriolista"), null, true) ?>"target="_blank">Entrevistas - Vara de Pesca</a></li>
-                                </ul>
+                            </ul>
 
                             <li><a id="for-RelConsolidados">Consolidados</a></li>
                             <ul id="RelConsolidados">
@@ -170,8 +172,8 @@
                                 <li><a href="<?= $this->url(array("controller" => "vara-pesca", "action" => "relatorio"), null, true) ?>"target="_blank">Entrevistas - Vara de Pesca</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "arrasto-fundo", "action" => "relatoriogroupespeciecapturada"), null, true) ?>"target="_blank">Arrasto de Fundo - Espécie</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "arrasto-fundo", "action" => "relatoriogroupesqueiro"), null, true) ?>"target="_blank">Arrasto de Fundo - Pesqueiro</a></li>
-							</ul>
-						</ul>
+                            </ul>
+                        </ul>
                     </ul>
                     <div id="admin">
                         <ul>
@@ -184,27 +186,20 @@
                     </div>
                 </div>
 
-                <div id="menu-lateral">
-                    <ul>
-
-
-                    </ul>
-                </div>
                 <div id="conteudo">
                     <?php echo $this->layout()->content; ?>
                 </div>
-
-                <div id="rodape">
-                    <div id="parceiros">
-                        <ul>
-                            <br/><br/><br/>
-                            <li><a href="http://nbcgib.uesc.br/nbcgib" target="_blank"><img class="imgparc" src="img/nbcgib.gif" alt="NBCGIB" title="NBCGIB" /></a></li>
-                            <li><a href="#" target="_blank"><img class="imgparc" src="img/iSus.png" alt="iSUS" title="iSUS" /></a></li>
-                            <li><a href="http://www.bamin.com.br/" target="_blank"><img class="imgparc" src="img/bamin.jpg" alt="Bamin" title="Bamin" /></a></li>
-                        </ul>
-                    </div>
+            </div>
+            <br/><br/><br/>
+            <div id="rodape">
+                <div id="parceiros">
+                    <ul>
+                        <li><a href="http://www.uesc.br/" target="_blank"><img class="imgparc" src="img/logo_uesc_transp.png" title="UESC" /></a></li>
+                        <li><a href="http://nbcgib.uesc.br/nbcgib" target="_blank"><img class="imgparc" src="img/nbcgib.gif" title="NBCGIB" /></a></li>
+                        <li><a href="#" target="_blank"><img class="imgparc" src="img/iSus.png" title="iSUS" /></a></li>
+                        <li><a href="http://www.bamin.com.br/" target="_blank"><img class="imgparc" src="img/bamin.png" title="Bamin" /></a></li>
+                    </ul>
                 </div>
-
             </div>
         </div>
     </body>

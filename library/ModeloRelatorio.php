@@ -152,12 +152,13 @@ class ModeloRelatorio {
 		if ( $this->isFirstPage==FALSE ) {
 			$this->pdf->pages[] = $this->page;
 		}
-                date_default_timezone_set("Brazil/East");
+
+		date_default_timezone_set("Brazil/East");
 		$this->page = clone $this->pageToClone;
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$this->countPag++;
 
-		$text = date("d/m/Y H:m").' - '.'Página: ' . $this->countPag;
+		$text = date("d/m/Y H:m").' - Página: ' . $this->countPag;
 		$column = $this-> getRightPosition(
 			$text,
 			100,
@@ -232,6 +233,23 @@ class ModeloRelatorio {
 
 	public function getLegendLine() {
 		return $this->lege;
+	}
+
+	public function getLinha() {
+		return $this->linha;
+	}
+
+	public function setForceNewPage() {
+		$this->linha = $this->lineRodape;
+
+		if ( $this->linha <= $this->lastLine ) {
+			if ( $this->isLegenda ) {
+				$this->linha = $this->firstLine;
+			} else {
+				$this->linha = $this->legendLine;
+			}
+			$this->setNewPage();
+		}
 	}
 }
 

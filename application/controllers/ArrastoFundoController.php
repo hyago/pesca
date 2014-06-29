@@ -308,14 +308,14 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $localModelArrastoFundo = new Application_Model_ArrastoFundo();
         $localArrastoFundo = $localModelArrastoFundo->select_ArrastoFundo_group_EspecieCapturada();
 
-        require_once "../library/ModeloRelatorio.php";
-        $modeloRelatorio = new ModeloRelatorio();
+        require_once "../library/ModeloRelatorioHorizontal.php";
+        $modeloRelatorio = new ModeloRelatorioHorizontal();
         $modeloRelatorio->setTitulo('Relatório Arrasto de Fundo - Espécie Capturada');
         $modeloRelatorio->setLegenda(30, 'Quant.');
         $modeloRelatorio->setLegenda(80, 'Espécie');
         $modeloRelatorio->setLegendaCenter(200, 120, 'Quantidade (Max/Méd/Min)');
-        $modeloRelatorio->setLegendaCenter(320, 120, 'Peso(kg) (Max/Méd/Min)');
-        $modeloRelatorio->setLegendaCenter(440, 120, 'Preço(R$/kg)(Max/Méd/Min)');
+        $modeloRelatorio->setLegendaCenter(360, 120, 'Peso(kg) (Max/Méd/Min)');
+        $modeloRelatorio->setLegendaCenter(520, 120, 'Preço(R$/kg)(Max/Méd/Min)');
 
         $tmpQuant = 0;
         foreach ($localArrastoFundo as $key => $localData) {
@@ -326,13 +326,13 @@ class ArrastoFundoController extends Zend_Controller_Action {
             $modeloRelatorio->setValueAlinhadoDireita(240, 40, number_format($localData['avg_quant'], 2, ',', ' '));
             $modeloRelatorio->setValueAlinhadoDireita(280, 40, $localData['min_quant']);
 
-            $modeloRelatorio->setValueAlinhadoDireita(320, 40, number_format($localData['max_peso'], 2, ',', ' '));
-            $modeloRelatorio->setValueAlinhadoDireita(360, 40, number_format($localData['avg_peso'], 2, ',', ' '));
-            $modeloRelatorio->setValueAlinhadoDireita(400, 40, number_format($localData['min_peso'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(360, 40, number_format($localData['max_peso'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(400, 40, number_format($localData['avg_peso'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(440, 40, number_format($localData['min_peso'], 2, ',', ' '));
 
-            $modeloRelatorio->setValueAlinhadoDireita(440, 40, number_format($localData['max_preco'], 2, ',', ' '));
-            $modeloRelatorio->setValueAlinhadoDireita(480, 40, number_format($localData['avg_preco'], 2, ',', ' '));
-            $modeloRelatorio->setValueAlinhadoDireita(520, 40, number_format($localData['min_preco'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(520, 40, number_format($localData['max_preco'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(560, 40, number_format($localData['avg_preco'], 2, ',', ' '));
+            $modeloRelatorio->setValueAlinhadoDireita(600, 40, number_format($localData['min_preco'], 2, ',', ' '));
 
             $modeloRelatorio->setNewLine();
         }

@@ -4,7 +4,7 @@ body{
 }
 #geral
 {
-        
+
 	margin: 0 auto;
 	width: 900px;
 	background: #f8f8ff;
@@ -13,8 +13,24 @@ body{
 #topo
 {
 	height: 123px;
-	background-image: url('/img/banner.png');
 }
+#topoLeft
+{
+	height: 120px;
+	width: 350px;
+	background-image: url('/img/Rachycentronlogo.png');
+	background-repeat: no-repeat;
+	float: left;
+}
+#topoRight
+{
+	height: 120px;
+	width: 180px;
+	background-image: url('/img/mpesca.gif');
+	background-repeat: no-repeat;
+	float: right;
+}
+
 
 #menu
 {
@@ -73,11 +89,11 @@ body{
 {
 	float: left;
 	width: 900px;
-	background: #f8f8ff;	
+	background: #f8f8ff;
 }
 
 #conteudo
-{	
+{
 	width: 900px;
 	min-height: 350px;
 	padding: 20px 0;
@@ -97,8 +113,8 @@ body{
 	margin-right: 130px;
 }
 
-#conteudo h2 { 
-	margin: 0 0 0 130px; 
+#conteudo h2 {
+	margin: 0 0 0 130px;
 	padding: 0;
 }
 
@@ -137,12 +153,12 @@ body{
 }
 
 #menu-lateral ul {
-	margin: 20px 0; 
+	margin: 20px 0;
 	padding: 0;
 }
 
 #menu-lateral li {
-	margin: 0; 
+	margin: 0;
 	padding: 0;
 	border-bottom: 1px solid #CCC;
 	text-align: left;
@@ -167,31 +183,27 @@ body{
 
 #menu-lateral ul li.atual { list-style-type: circle; }
 
-#rodape
-{
-
+#rodape {
     clear: both;
     background: #f8f8ff;
     text-align: left;
     height: 70px;
-
 }
 
-#parceiros{
+#parceiros {
     margin: 0 0;
-    width: 800px;
+    width: 900px;
     height: 100px;
     background: #f8f8ff;
 }
 
-#parceiros ul{
+#parceiros ul {
     list-style: none;
-
 }
 
-#parceiros ul li{
+#parceiros ul li {
     display: inline;
-    padding-left: 80px; 
+    padding-left: 25px;
 }
 
 input[type=submit]{
