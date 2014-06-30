@@ -83,7 +83,7 @@ private $usuario;
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
-        $pesqueiros = $this->modelPesqueiro->select(null, 'pcal_pesqueiro');
+        $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
@@ -273,9 +273,9 @@ private $usuario;
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelCalao->selectCalaoHasPesqueiro('cal_id='.$localData['cal_id'], array('cal_id', 'pcal_pesqueiro'), NULL);
+			$localPesqueiro = $localModelCalao->selectCalaoHasPesqueiro('cal_id='.$localData['cal_id'], array('cal_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['pcal_pesqueiro']);
+				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
 				$modeloRelatorio->setNewLine();
 			}
 			$localEspecie = $localModelCalao->selectCalaoHasEspCapturadas('cal_id='.$localData['cal_id'], array('cal_id', 'esp_nome_comum'), NULL);
