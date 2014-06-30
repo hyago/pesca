@@ -22,6 +22,10 @@
                     <input type="button" size="50" value="Busca por nome" class="button-confirmText" onclick="jsBuscaPescadorNome(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
                     <input type="text" name="inputNome" placeholder="Busca por Nome" />
                 </td>
+                <td>
+                    <input type="button" size="50" value="Busca por Apelido" class="button-confirmText" onclick="jsBuscaPescadorApelido(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
+                    <input type="text" name="inputApelido" placeholder="Busca por Apelido" />
+                </td>
             </tr>
         </table>
 
@@ -32,6 +36,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Matricula</th>
+                <th>Apelido</th>
             </tr>
 
             <?php foreach ($this->dados as $key => $pescador): ?>
@@ -39,6 +44,7 @@
                     <td><?= $pescador['tp_id'] ?></td>
                     <td><?= $pescador['tp_nome'] ?></td>
                     <td><?= $pescador['tp_matricula'] ?></td>
+                     <td><?= $pescador['tp_apelido'] ?></td>
 
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">

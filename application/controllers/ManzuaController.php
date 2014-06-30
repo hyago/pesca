@@ -68,7 +68,7 @@ public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        //$ent_apelido = $this->_getParam("tp_apelido");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
         if ($ent_id > 0) {
             $dados = $this->modelManzua->selectEntrevistaManzua("man_id>=" . $ent_id, array('man_id'),50);
@@ -77,9 +77,9 @@ public function visualizarAction() {
         } elseif ($ent_barco) {
             $dados = $this->modelManzua->selectEntrevistaManzua("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'man_id'));
        } 
-//        elseif ($ent_apelido){
-//            $dados = $this->modelManzua->selectEntrevistaManzua("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'man_id'), 20);
-//        }
+        elseif ($ent_apelido){
+            $dados = $this->modelManzua->selectEntrevistaManzua("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'man_id'), 20);
+        }
         else {
             $dados = $this->modelManzua->selectEntrevistaManzua(null, array('fd_id', 'tp_nome'),20);
         }

@@ -70,7 +70,7 @@ public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        //$ent_apelido = $this->_getParam("tp_apelido");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
         if ($ent_id > 0) {
             $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("lf_id>=" . $ent_id, array('lf_id'),50);
@@ -79,9 +79,9 @@ public function visualizarAction() {
         } elseif ($ent_barco) {
             $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'lf_id'));
        } 
-//        elseif ($ent_apelido){
-//            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'lf_id'), 20);
-//        }
+        elseif ($ent_apelido){
+            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'lf_id'), 20);
+        }
         else {
             $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo(null, array('fd_id', 'tp_nome'),20);
         }

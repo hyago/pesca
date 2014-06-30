@@ -59,7 +59,7 @@ class EmalheController extends Zend_Controller_Action
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
-        //$ent_apelido = $this->_getParam("tp_apelido");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
         if ($ent_id > 0) {
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe("em_id>=" . $ent_id, array('em_id'),50);
@@ -68,9 +68,9 @@ class EmalheController extends Zend_Controller_Action
         } elseif ($ent_barco) {
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'em_id'));
        } 
-//        elseif ($ent_apelido){
-//            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'em_id'), 20);
-//        }
+        elseif ($ent_apelido){
+            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'em_id'), 20);
+        }
         else {
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe(null, array('fd_id', 'tp_nome'),20);
         }
