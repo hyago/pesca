@@ -59,21 +59,24 @@ private $usuario;
 
     }
 
-    public function visualizarAction(){
+    public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        //$ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("grs_id>=". $ent_id, array('grs_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'grs_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelGrosseira->selectEntrevistaGrosseira("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'grs_id'), 20);
-          }
-         else {
-            $dados = $this->modelGrosseira->selectEntrevistaGrosseira(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("grs_id>=" . $ent_id, array('grs_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'grs_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'grs_id'));
+       } 
+//        elseif ($ent_apelido){
+//            $dados = $this->modelGrosseira->selectEntrevistaGrosseira("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'grs_id'), 20);
+//        }
+        else {
+            $dados = $this->modelGrosseira->selectEntrevistaGrosseira(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
