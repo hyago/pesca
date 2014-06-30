@@ -121,6 +121,11 @@ class ArrastoFundoController extends Zend_Controller_Action {
 
         $this->_redirect('arrasto-fundo/editar/id/' . $idArrasto);
     }
+    public function excluirAction() {
+        $this->modelArrastoFundo->delete($this->_getParam('id'));
+        
+        $this->_redirect('arrasto-fundo/visualizar');
+    }
 
     public function insertpesqueiroAction() {
         $this->_helper->layout->disableLayout();

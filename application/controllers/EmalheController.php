@@ -129,6 +129,11 @@ class EmalheController extends Zend_Controller_Action
 
         $this->_redirect('emalhe/editar/id/'.$idEmalhe);
     }
+    public function excluirAction() {
+        $this->modelEmalhe->delete($this->_getParam('id'));
+        
+        $this->_redirect('emalhe/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

@@ -134,7 +134,11 @@ class LinhaController extends Zend_Controller_Action
 
         $this->_redirect('linha/editar/id/'.$idLinha);
     }
-
+    public function excluirAction() {
+        $this->modelLinha->delete($this->_getParam('id'));
+        
+        $this->_redirect('linha/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

@@ -121,6 +121,12 @@ private $usuario;
 
         $this->_redirect('calao/editar/id/'.$idCalao);
     }
+    
+    public function excluirAction() {
+        $this->modelCalao->delete($this->_getParam('id'));
+        
+        $this->_redirect('calao/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

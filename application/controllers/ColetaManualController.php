@@ -134,6 +134,12 @@ class ColetaManualController extends Zend_Controller_Action
 
         $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
     }
+    
+    public function excluirAction() {
+        $this->modelColetaManual->delete($this->_getParam('id'));
+        
+        $this->_redirect('coleta-manual/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

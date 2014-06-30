@@ -136,6 +136,11 @@ class ManzuaController extends Zend_Controller_Action
 
         $this->_redirect('manzua/editar/id/'.$idManzua);
     }
+    public function excluirAction() {
+        $this->modelManzua->delete($this->_getParam('id'));
+        
+        $this->_redirect('manzua/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

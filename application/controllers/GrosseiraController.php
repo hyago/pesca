@@ -135,7 +135,11 @@ private $usuario;
 
         $this->_redirect('grosseira/editar/id/'.$idGrosseira);
     }
-
+    public function excluirAction() {
+        $this->modelGrosseira->delete($this->_getParam('id'));
+        
+        $this->_redirect('grosseira/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

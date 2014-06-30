@@ -137,6 +137,11 @@ class SiripoiaController extends Zend_Controller_Action
 
         $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
+    public function excluirAction() {
+        $this->modelSiripoia->delete($this->_getParam('id'));
+        
+        $this->_redirect('siripoia/visualizar');
+    }
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

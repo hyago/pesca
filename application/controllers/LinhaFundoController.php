@@ -143,6 +143,12 @@ class LinhaFundoController extends Zend_Controller_Action
 
         $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
     }
+    
+    public function excluirAction() {
+        $this->modelLinhaFundo->delete($this->_getParam('id'));
+        
+        $this->_redirect('linha-fundo/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

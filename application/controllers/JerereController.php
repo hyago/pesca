@@ -133,7 +133,11 @@ private $usuario;
 
         $this->_redirect('jerere/editar/id/'.$idJerere);
     }
-
+    public function excluirAction() {
+        $this->modelJerere->delete($this->_getParam('id'));
+        
+        $this->_redirect('jerere/visualizar');
+    }
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

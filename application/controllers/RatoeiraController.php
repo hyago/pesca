@@ -87,7 +87,7 @@ private $usuario;
         $entrevista = $this->modelRatoeira->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_embarcacao');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -134,6 +134,11 @@ private $usuario;
         $this->modelRatoeira->update($this->_getAllParams());
 
         $this->_redirect('ratoeira/editar/id/'.$idRatoeira);
+    }
+    public function excluirAction() {
+        $this->modelRatoeira->delete($this->_getParam('id'));
+        
+        $this->_redirect('ratoeira/visualizar');
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

@@ -119,6 +119,11 @@ private $usuario;
 
         $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
     }
+    public function excluirAction() {
+        $this->modelTarrafa->delete($this->_getParam('id'));
+        
+        $this->_redirect('tarrafa/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
