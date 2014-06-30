@@ -64,21 +64,24 @@ class ManzuaController extends Zend_Controller_Action
 
     }
 
-    public function visualizarAction(){
+public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelManzua->selectEntrevistaManzua("man_id>=". $ent_id, array('man_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelManzua->selectEntrevistaManzua("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'man_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelManzua->selectEntrevistaManzua("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'man_id'), 20);
-          }
-         else {
-            $dados = $this->modelManzua->selectEntrevistaManzua(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelManzua->selectEntrevistaManzua("man_id>=" . $ent_id, array('man_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelManzua->selectEntrevistaManzua("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'man_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelManzua->selectEntrevistaManzua("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'man_id'));
+       } 
+        elseif ($ent_apelido){
+            $dados = $this->modelManzua->selectEntrevistaManzua("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'man_id'), 20);
+        }
+        else {
+            $dados = $this->modelManzua->selectEntrevistaManzua(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
@@ -135,6 +138,11 @@ class ManzuaController extends Zend_Controller_Action
         $this->modelManzua->update($this->_getAllParams());
 
         $this->_redirect('manzua/editar/id/'.$idManzua);
+    }
+    public function excluirAction() {
+        $this->modelManzua->delete($this->_getParam('id'));
+        
+        $this->_redirect('manzua/visualizar');
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

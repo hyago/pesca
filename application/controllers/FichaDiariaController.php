@@ -180,22 +180,22 @@ class FichaDiariaController extends Zend_Controller_Action {
         //--------------------------------------------------------------------------------------------
         $LinhaFundoFicha = $this->modelLinhaFundo->selectEntrevistaLinhaFundo('fd_id='.$idFicha);
         $this->view->assign("linhafundo", $LinhaFundoFicha);
-        
+         //--------------------------------------------------------------------------------------------
         $ManzuaFicha = $this->modelManzua->selectEntrevistaManzua('fd_id='.$idFicha);
         $this->view->assign("manzua", $ManzuaFicha);
-        
+         //--------------------------------------------------------------------------------------------
         $MergulhoFicha = $this->modelMergulho->selectEntrevistaMergulho('fd_id='.$idFicha);
         $this->view->assign("mergulho", $MergulhoFicha);
-        
+         //--------------------------------------------------------------------------------------------
         $RatoeiraFicha = $this->modelRatoeira->selectEntrevistaRatoeira('fd_id='.$idFicha);
         $this->view->assign("ratoeira", $RatoeiraFicha);
-        
+         //--------------------------------------------------------------------------------------------
         $SiripoiaFicha = $this->modelSiripoia->selectEntrevistaSiripoia('fd_id='.$idFicha);
         $this->view->assign("siripoia", $SiripoiaFicha);
-        
+         //--------------------------------------------------------------------------------------------
         $TarrafaFicha = $this->modelTarrafa->selectEntrevistaTarrafa('fd_id='.$idFicha);
         $this->view->assign("tarrafa", $TarrafaFicha);
-        
+         //--------------------------------------------------------------------------------------------
         $VaraPescaFicha = $this->modelVaraPesca->selectEntrevistaVaraPesca('fd_id='.$idFicha);
         $this->view->assign("varapesca", $VaraPescaFicha);
         

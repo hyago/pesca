@@ -66,21 +66,24 @@ class LinhaFundoController extends Zend_Controller_Action
 
     }
 
-    public function visualizarAction(){
+public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("lf_id>=". $ent_id, array('lf_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'lf_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'lf_id'), 20);
-          }
-         else {
-            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("lf_id>=" . $ent_id, array('lf_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'lf_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'lf_id'));
+       } 
+        elseif ($ent_apelido){
+            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'lf_id'), 20);
+        }
+        else {
+            $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
@@ -142,6 +145,12 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->modelLinhaFundo->update($this->_getAllParams());
 
         $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
+    }
+    
+    public function excluirAction() {
+        $this->modelLinhaFundo->delete($this->_getParam('id'));
+        
+        $this->_redirect('linha-fundo/visualizar');
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

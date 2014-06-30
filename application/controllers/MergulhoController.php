@@ -61,21 +61,24 @@ class MergulhoController extends Zend_Controller_Action
 
     }
 
-    public function visualizarAction(){
+public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelMergulho->selectEntrevistaMergulho("mer_id>=". $ent_id, array('mer_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'mer_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelMergulho->selectEntrevistaMergulho("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'mer_id'), 20);
-          }
-         else {
-            $dados = $this->modelMergulho->selectEntrevistaMergulho(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("mer_id>=" . $ent_id, array('mer_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'mer_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'mer_id'));
+       } 
+        elseif ($ent_apelido){
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'mer_id'), 20);
+        }
+        else {
+            $dados = $this->modelMergulho->selectEntrevistaMergulho(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
@@ -138,7 +141,11 @@ class MergulhoController extends Zend_Controller_Action
 
         $this->_redirect('mergulho/editar/id/'.$idMergulho);
     }
-
+    public function excluirAction() {
+        $this->modelMergulho->delete($this->_getParam('id'));
+        
+        $this->_redirect('mergulho/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

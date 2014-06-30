@@ -54,21 +54,24 @@ private $usuario;
 
     }
 
-    public function visualizarAction(){
+public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tar_id>=". $ent_id, array('tar_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'tar_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelTarrafa->selectEntrevistaTarrafa("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'tar_id'), 20);
-          }
-         else {
-            $dados = $this->modelTarrafa->selectEntrevistaTarrafa(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tar_id>=" . $ent_id, array('tar_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'tar_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'tar_id'));
+       } 
+       elseif ($ent_apelido){
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'tar_id'), 20);
+        }
+        else {
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
@@ -118,6 +121,11 @@ private $usuario;
         $this->modelTarrafa->update($this->_getAllParams());
 
         $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
+    }
+    public function excluirAction() {
+        $this->modelTarrafa->delete($this->_getParam('id'));
+        
+        $this->_redirect('tarrafa/visualizar');
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

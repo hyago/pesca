@@ -60,21 +60,24 @@ class VaraPescaController extends Zend_Controller_Action
 
     }
 
-    public function visualizarAction(){
+    public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("vp_id>=". $ent_id, array('vp_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'vp_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'vp_id'), 20);
-          }
-         else {
-            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("vp_id>=" . $ent_id, array('vp_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'vp_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'vp_id'));
+       } 
+        elseif ($ent_apelido){
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'vp_id'), 20);
+        }
+        else {
+            $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
@@ -136,6 +139,11 @@ class VaraPescaController extends Zend_Controller_Action
         $this->modelVaraPesca->update($this->_getAllParams());
 
         $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
+    }
+    public function excluirAction() {
+        $this->modelVaraPesca->delete($this->_getParam('id'));
+        
+        $this->_redirect('vara-pesca/visualizar');
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

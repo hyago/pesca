@@ -136,7 +136,14 @@ function jsBuscaPescadorNome( frm, pag )
         location.replace( tmpUpdate );
     }
 }
-
+function jsBuscaPescadorApelido( frm, pag )
+{
+    if ( frm.inputApelido.value ) {
+        var tmpUpdate = (pag + '/index/tp_apelido/' + frm.inputApelido.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
 function jsBuscaBarcoEntrevista( frm, pag )
 {
     if ( frm.inputBarco.value ) {
@@ -204,6 +211,15 @@ function jsBuscaFichaDiariaPortoData( frm, pag )
 {
     if ( frm.selectPortoName.value ) {
         var tmpUpdate = (pag + '/index/pto_id/' + frm.selectPortoName.value +'/fd_data/'+ frm.inputDate.value );
+        
+        location.replace( tmpUpdate );
+    }
+}
+
+function jsBuscaApelidoEntrevista( frm, pag )
+{
+    if ( frm.inputApelido.value ) {
+        var tmpUpdate = (pag + '/tp_apelido/' + frm.inputApelido.value  );
         
         location.replace( tmpUpdate );
     }

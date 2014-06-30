@@ -102,21 +102,24 @@ class LinhaController extends Zend_Controller_Action
         $this->view->assign('especies',$especies);
     }
 
-    public function visualizarAction(){
+public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelLinha->selectEntrevistaLinha("lin_id>=". $ent_id, array('lin_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelLinha->selectEntrevistaLinha("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'lin_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelLinha->selectEntrevistaLinha("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'lin_id'), 20);
-          }
-         else {
-            $dados = $this->modelLinha->selectEntrevistaLinha(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelLinha->selectEntrevistaLinha("lin_id>=" . $ent_id, array('lin_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelLinha->selectEntrevistaLinha("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'lin_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelLinha->selectEntrevistaLinha("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'lin_id'));
+       } 
+        elseif ($ent_apelido){
+            $dados = $this->modelLinha->selectEntrevistaLinha("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'lin_id'), 20);
+        }
+        else {
+            $dados = $this->modelLinha->selectEntrevistaLinha(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
@@ -134,7 +137,11 @@ class LinhaController extends Zend_Controller_Action
 
         $this->_redirect('linha/editar/id/'.$idLinha);
     }
-
+    public function excluirAction() {
+        $this->modelLinha->delete($this->_getParam('id'));
+        
+        $this->_redirect('linha/visualizar');
+    }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

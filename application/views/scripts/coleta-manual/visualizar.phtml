@@ -28,6 +28,10 @@
                     <input type="button" size="50" value="Busca por Barco" class="button-confirmText" onclick="jsBuscaBarcoEntrevista(this.form, '<?= $this->url(array("controller" => "coleta-manual", "action" => "visualizar"), null, true) ?>')">
                     <input type="text" min="0" name="inputBarco" placeholder="Busca por Pescador" />
                 </td>
+                <td>
+                    <input type="button" size="50" value="Busca por Apelido" class="button-confirmText" onclick="jsBuscaApelidoEntrevista(this.form, '<?= $this->url(array("controller" => "coleta-manual", "action" => "visualizar"), null, true) ?>')">
+                    <input type="text" min="0" name="inputApelido" placeholder="Busca por Pescador" />
+                </td>
             </tr>
         </table>
         <table>
@@ -36,6 +40,7 @@
                 <th>Monitoramento</th>
                 <th>Entrevista</th>
                 <th>Pescador</th>
+                <th>Apelido</th>
                 <th>Barco</th>
             </tr>
 
@@ -45,6 +50,7 @@
                     <td><?= $entrevista['mnt_id'] ?></td>
                     <td><?= $entrevista['cml_id'] ?></td>
                     <td><?= $entrevista['tp_nome'] ?></td>
+                    <td><?= $entrevista['tp_apelido']?></td>
                     <td><?= $entrevista['bar_nome'] ?></td>
 
                     <td class="td-botao">
@@ -56,7 +62,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "coleta-manual", "action" => "excluir", "id" => $entrevista['tp_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "coleta-manual", "action" => "excluir", "id" => $entrevista['cml_id']), null, true) ?>')">
                     </td>
 
                     </a>

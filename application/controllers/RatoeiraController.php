@@ -62,21 +62,24 @@ private $usuario;
 
     }
 
-    public function visualizarAction(){
+public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
+        $ent_apelido = $this->_getParam("tp_apelido");
 
-        if ( $ent_id > 0 ) {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("rat_id>=". $ent_id, array('rat_id'), 20);
-        } elseif ( $ent_pescador ) {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_nome LIKE '". $ent_pescador."%'", array('tp_nome', 'rat_id'), 20);
-         }
-          elseif ($ent_barco){
-              $dados = $this->modelRatoeira->selectEntrevistaRatoeira("bar_nome LIKE '".$ent_pescador."%'", array('bar_nome', 'rat_id'), 20);
-          }
-         else {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira(null, array( 'fd_id', 'tp_nome'), 20);
+        if ($ent_id > 0) {
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("rat_id>=" . $ent_id, array('rat_id'),50);
+        } elseif ($ent_pescador) {
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'rat_id'));
+        } elseif ($ent_barco) {
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'rat_id'));
+       } 
+        elseif ($ent_apelido){
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'rat_id'), 20);
+        }
+        else {
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira(null, array('fd_id', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);
@@ -87,7 +90,7 @@ private $usuario;
         $entrevista = $this->modelRatoeira->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_embarcacao');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
@@ -134,6 +137,11 @@ private $usuario;
         $this->modelRatoeira->update($this->_getAllParams());
 
         $this->_redirect('ratoeira/editar/id/'.$idRatoeira);
+    }
+    public function excluirAction() {
+        $this->modelRatoeira->delete($this->_getParam('id'));
+        
+        $this->_redirect('ratoeira/visualizar');
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

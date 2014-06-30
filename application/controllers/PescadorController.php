@@ -41,12 +41,17 @@ class PescadorController extends Zend_Controller_Action {
     public function indexAction() {
         $tp_id = $this->_getParam("tp_id");
         $tp_nome = $this->_getParam("tp_nome");
+        $tp_apelido = $this->_getParam('tp_apelido');
 
         if ($tp_id > 0) {
-            $dados = $this->modelPescador->select("tp_id>=" . $tp_id, array('tp_id'), 20);
+            $dados = $this->modelPescador->select("tp_id>=" . $tp_id, array('tp_id'), 30);
         } elseif ($tp_nome) {
-            $dados = $this->modelPescador->select("tp_nome LIKE '" . $tp_nome . "%'", array('tp_nome', 'tp_id'), 20);
-        } else {
+            $dados = $this->modelPescador->select("tp_nome LIKE '" . $tp_nome . "%'", array('tp_nome', 'tp_id'));
+        }
+        elseif ($tp_apelido) {
+            $dados = $this->modelPescador->select("tp_apelido LIKE '" . $tp_apelido . "%'", array('tp_nome', 'tp_id'));
+        }
+        else {
             $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'), 20);
         }
         //print_r();
