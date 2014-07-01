@@ -108,9 +108,9 @@ class TipoTelefoneController extends Zend_Controller_Action
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
-		$modeloRelatorio->setTitulo('Relatório Tipo de Dependente');
+		$modeloRelatorio->setTitulo('Relatório Tipo de Telefones');
 		$modeloRelatorio->setLegenda(30, 'Código');
-		$modeloRelatorio->setLegenda(80, 'Tipo de Dependente');
+		$modeloRelatorio->setLegenda(80, 'Tipo de Telefones');
 
 		foreach ($localTT as $key => $localData) {
 			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['ttel_id']);

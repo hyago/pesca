@@ -63,7 +63,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
             $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'af_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'af_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'af_id'));
         }
@@ -128,7 +128,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
     public function excluirAction() {
         $this->modelArrastoFundo->delete($this->_getParam('id'));
-        
+
         $this->_redirect('arrasto-fundo/visualizar');
     }
 
@@ -352,7 +352,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $pdf = $modeloRelatorio->getRelatorio();
 
         header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo_group_especie.pdf"');
-        header("Content-type: application/x-pdf");
+        header("Content-type: application/pdf");
         echo $pdf->render();
     }
 
@@ -387,7 +387,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $pdf = $modeloRelatorio->getRelatorio();
 
         header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo_group_pesqueiro.pdf"');
-        header("Content-type: application/x-pdf");
+        header("Content-type: application/pdf");
         echo $pdf->render();
     }
 }

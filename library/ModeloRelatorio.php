@@ -27,7 +27,7 @@ class ModeloRelatorio {
 
 		$this->pageToClone = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
 		$this->pageToClone = clone $this->pdfToClone->pages[0];
-		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
+		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 12);
 
 		$this->pdf = new Zend_Pdf();
 		$this->page = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
@@ -41,7 +41,7 @@ class ModeloRelatorio {
 			$this->pageToClone->getWidth(),
 			$this->pageToClone->getFont(),
 			$this->pageToClone->getFontSize() );
-			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
+			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 12);
 		$this->pageToClone->drawText( $title,  $textColumnposition, $this->titleLine );
 	}
 
@@ -57,14 +57,14 @@ class ModeloRelatorio {
 			$columnLargura,
 			$this->pageToClone->getFont(),
 			$this->pageToClone->getFontSize() );
-			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 9);
+			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 
-		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 9);
+		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 		$this->pageToClone->drawText( $text,  $columnPosition + $textColumnposition, $this->legendLine );
 	}
 
 	public function setLegenda( $columnPosition, $text ) {
-		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 9);
+		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 		$this->pageToClone->drawText( $text,  $columnPosition, $this->legendLine );
 	}
 
@@ -74,7 +74,7 @@ class ModeloRelatorio {
 			$this->isFirstPage = FALSE;
 		}
 
-		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+		$this->page->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 		$this->page->drawText( $text,  $columnPosition, $this->linha );
 	}
 
@@ -117,7 +117,7 @@ class ModeloRelatorio {
 		}
 
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
-		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+		$this->page->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 		$pos = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
 		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha );
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
@@ -130,7 +130,7 @@ class ModeloRelatorio {
 			$this->isFirstPage = FALSE;
 		}
 
-		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+		$this->page->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 		$pos = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
 		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha );
 	}
@@ -155,7 +155,7 @@ class ModeloRelatorio {
 
 		date_default_timezone_set("Brazil/East");
 		$this->page = clone $this->pageToClone;
-		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
+		$this->page->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 		$this->countPag++;
 
 		$text = date("d/m/Y H:m").' - Página: ' . $this->countPag;
