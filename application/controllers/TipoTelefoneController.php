@@ -103,6 +103,8 @@ class TipoTelefoneController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
+		Zend_Locale::setDefault('pt_BR');
+
 		$localModelTT = new Application_Model_TipoTelefone();
 		$localTT = $localModelTT->select(NULL, array('ttel_desc'), NULL);
 
