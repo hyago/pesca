@@ -288,7 +288,7 @@ private $dbTableGrosseira;
         $this->dbTableTGrosseiraHasEspCapturada = new Application_Model_DbTable_GrosseiraHasEspecieCapturada();       
                 
         $whereGrosseiraHasEspCapturada = $this->dbTableTGrosseiraHasEspCapturada->getAdapter()
-                ->quoteInto('"spc_id" = ?', $idEspecie);
+                ->quoteInto('"spc_grs_id" = ?', $idEspecie);
         
         $this->dbTableTGrosseiraHasEspCapturada->delete($whereGrosseiraHasEspCapturada);
     }
