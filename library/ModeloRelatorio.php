@@ -42,7 +42,7 @@ class ModeloRelatorio {
 			$this->pageToClone->getFont(),
 			$this->pageToClone->getFontSize() );
 			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 12);
-		$this->pageToClone->drawText( $title,  $textColumnposition, $this->titleLine );
+		$this->pageToClone->drawText( $title,  $textColumnposition, $this->titleLine ,'UTF-8');
 	}
 
 	public function setLegendaOff() {
@@ -60,12 +60,12 @@ class ModeloRelatorio {
 			$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 
 		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
-		$this->pageToClone->drawText( $text,  $columnPosition + $textColumnposition, $this->legendLine );
+		$this->pageToClone->drawText( $text,  $columnPosition + $textColumnposition, $this->legendLine ,'UTF-8');
 	}
 
 	public function setLegenda( $columnPosition, $text ) {
 		$this->pageToClone->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
-		$this->pageToClone->drawText( $text,  $columnPosition, $this->legendLine );
+		$this->pageToClone->drawText( $text,  $columnPosition, $this->legendLine ,'UTF-8');
 	}
 
 	public function setValue( $columnPosition, $text ) {
@@ -75,7 +75,7 @@ class ModeloRelatorio {
 		}
 
 		$this->page->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
-		$this->page->drawText( $text,  $columnPosition, $this->linha );
+		$this->page->drawText( $text,  $columnPosition, $this->linha ,'UTF-8');
 	}
 
 	public function setLegValue( $columnPosition, $leg, $text ) {
@@ -90,7 +90,7 @@ class ModeloRelatorio {
 		$tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
 
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
-		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha );
+		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha ,'UTF-8');
 	}
 
 	public function setLegValueAlinhadoDireita( $columnPosition, $columnLargura, $leg, $text ) {
@@ -100,14 +100,14 @@ class ModeloRelatorio {
 		}
 
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
-		$this->page->drawText( $leg,  $columnPosition, $this->linha );
+		$this->page->drawText( $leg,  $columnPosition, $this->linha ,'UTF-8');
 
 // 		$tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
 
 		$tw = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
 
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
-		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha );
+		$this->page->drawText( $text,  $columnPosition + $tw, $this->linha,'UTF-8' );
 	}
 
 	public function setLegAlinhadoDireita( $columnPosition,  $columnLargura, $text ) {
@@ -132,7 +132,7 @@ class ModeloRelatorio {
 
 		$this->page->setFont(Zend_Pdf_Font::fontWithName('Courier'), 9);
 		$pos = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
-		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha );
+		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha ,'UTF-8');
 	}
 
 	public function setNewLine() {
@@ -165,7 +165,7 @@ class ModeloRelatorio {
 			$this->page->getFont(),
 			$this->page->getFontSize() );
 
-		$this->page->drawText( $text,  $this->columnRodape+$column, $this->lineRodape );
+		$this->page->drawText( $text,  $this->columnRodape+$column, $this->lineRodape ,'UTF-8');
 	}
 
 	public function getModelRelatorio() {
