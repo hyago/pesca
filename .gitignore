@@ -1,9 +1,7 @@
 /nbproject/
+/nbproject/private/private.xml
 /library/
 *~
 *.swp
-
 /application/layouts/**/*
 /public/css/**/*
-
-/nbproject/private/private.xml
