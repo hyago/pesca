@@ -187,7 +187,7 @@ class ModeloRelatorio {
 	}
 
 	private function getTextWidth($text, Zend_Pdf_Resource_Font $font, $font_size) {
-		$drawing_text = iconv('', 'UTF-16BE', $text);
+		$drawing_text = iconv('UTF-8', 'UTF-16', $text);
 		$characters = array();
 		for ($i = 0; $i < strlen($drawing_text); $i++) {
 			$characters[] = (ord($drawing_text[$i++]) << 8) | ord($drawing_text[$i]);
