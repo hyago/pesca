@@ -2820,7 +2820,8 @@ ON  PTO.TMUN_ID = TMUN.TMUN_ID;
 CREATE TABLE t_amostra_camarao
 (
   tamc_id serial,
-  tu_id integer not null,
+  tu_id_monitor integer not null,
+  tu_id_estagiario integer not null,
   pto_id integer not null,
   tamc_data date null,
   bar_id integer not null,
@@ -2829,7 +2830,10 @@ CREATE TABLE t_amostra_camarao
   tamc_captura_total float null,
   sa_id integer not null,
   PRIMARY KEY (tamc_id),
-  CONSTRAINT fk_t_amostra_camarao_usuario1 FOREIGN KEY (tu_id)
+  CONSTRAINT fk_t_amostra_camarao_usuario1 FOREIGN KEY (tu_id_monitor)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id_estagiario)
       REFERENCES t_usuario (tu_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_amostra_camarao_porto1 FOREIGN KEY (pto_id)
@@ -2872,4 +2876,42 @@ CREATE TABLE t_unidade_camarao
   CONSTRAINT fk_t_unidade_camarao_maturidade1 FOREIGN KEY (mat_id)
       REFERENCES t_maturidade (mat_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+CREATE TABLE t_amostra_peixe
+(
+  tamp_id serial,
+  tu_id_monitor integer not null,
+  tu_id_estagiario integer not null,
+  pto_id integer not null,
+  sa_id integer not null,
+  PRIMARY KEY (tamp_id),
+  CONSTRAINT fk_t_amostra_peixe_usuario1 FOREIGN KEY (tu_id_monitor)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_peixe_usuario2 FOREIGN KEY (tu_id_estagiario)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_peixe_porto1 FOREIGN KEY (pto_id)
+      REFERENCES t_porto (pto_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_peixe_subamostra1 FOREIGN KEY (sa_id)
+      REFERENCES t_subamostra (sa_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE t_unidade_peixe
+(
+  tup_id serial,
+  tamp_id integer not null,
+  esp_id integer not null,
+  tup_comprimento float,
+  tup_peso float,
+  tuc_sexo character varying(1),
+  Primary key (tup_id),
+  CONSTRAINT fk_t_unidade_peixe_amostra1 FOREIGN KEY (tamp_id)
+      REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_unidade_peixe_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION   
 )

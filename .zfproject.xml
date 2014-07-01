@@ -134,6 +134,15 @@
         <controllerFile controllerName="Sobre">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="AmostraCamarao">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="AmostraPeixe">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Maturidade">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -325,6 +334,11 @@
           <dbTableFile dbTableName="VTarrafaHasAvistamento"/>
           <dbTableFile dbTableName="DestinoPescado"/>
           <dbTableFile dbTableName="VPorto"/>
+          <dbTableFile dbTableName="AmostraCamarao"/>
+          <dbTableFile dbTableName="AmostraPeixe"/>
+          <dbTableFile dbTableName="UnidadeCamarao"/>
+          <dbTableFile dbTableName="UnidadePeixe"/>
+          <dbTableFile dbTableName="MaturidadeCamarao"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -389,6 +403,9 @@
         <modelFile modelName="HistoricoLogin"/>
         <modelFile modelName="Avistamento"/>
         <modelFile modelName="DestinoPescado"/>
+        <modelFile modelName="AmostraCamarao"/>
+        <modelFile modelName="AmostraPeixe"/>
+        <modelFile modelName="Maturidade"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -578,6 +595,15 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Sobre">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="AmostraCamarao">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="AmostraPeixe">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Maturidade">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
