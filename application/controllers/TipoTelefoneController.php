@@ -103,14 +103,16 @@ class TipoTelefoneController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
+		Zend_Locale::setDefault('pt_BR');
+
 		$localModelTT = new Application_Model_TipoTelefone();
 		$localTT = $localModelTT->select(NULL, array('ttel_desc'), NULL);
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
-		$modeloRelatorio->setTitulo('Relatório Tipo de Dependente');
+		$modeloRelatorio->setTitulo('Relatório Tipo de Telefones');
 		$modeloRelatorio->setLegenda(30, 'Código');
-		$modeloRelatorio->setLegenda(80, 'Tipo de Dependente');
+		$modeloRelatorio->setLegenda(80, 'Tipo de Telefones');
 
 		foreach ($localTT as $key => $localData) {
 			$modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['ttel_id']);
