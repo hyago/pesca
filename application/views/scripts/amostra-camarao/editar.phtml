@@ -1,0 +1,100 @@
+<?php
+$this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
+$this->headScript()->appendFile('/js/mascaras.js');
+?>
+
+
+<div id="titulos">
+    <h2>Desembarque->Amostragem de Camarão</h2>
+    <h3>Editar</h3>
+</div>
+
+
+<form id="formulario" action="<?= $this->url(array("controller" => "amostra-camarao", "action" => "criar"), null, true) ?>" method="post">
+    <fieldset id="Desembarque">
+        <div id="esquerda">
+            <div id="form-esq">
+                <label for="id">ID:</label>
+                <input type="text" name="id_amostra" placeholder="Id" id="id_ficha" /><br />
+            </div>
+
+            <div id="form-esq">
+                <label for="tipo">Estagiário:</label>
+                <select name="select_nome_estagiario" >
+
+                    <option nome="nome_estagiario" value="<?= $this->usuario['tu_id'] ?>"><?= $this->usuario['tu_nome'] ?></option>
+
+
+                </select></br>
+            </div>
+
+            <div id="form-esq">
+                <label for="tipo">Monitor:</label>
+                <select name="select_nome_monitor" >
+                    <?php
+                    foreach ($this->users as $key => $monitor):
+                        ?>
+
+                        <option nome="nome_monitor" value="<?= $monitor['tu_id'] ?>"><?= $monitor['tu_nome'] ?></option>
+
+                        <?php
+                    endforeach;
+                    ?>
+                </select></br>
+            </div>
+
+            <div id="form-esq">
+                <label for="tipo">Data:</label>
+                <input type="date"  placeholder="Data" name="data_ficha"/><br />
+            </div>
+
+
+            <div id="form-esq">  
+                <label for="tipo">Porto:</label>
+                <select name="select_nome_porto" >
+                    <?php
+                    foreach ($this->dados_porto as $key => $porto):
+                        ?>
+
+                        <option nome="nome_porto" value="<?= $porto['pto_id'] ?>"><?= $porto['pto_nome'] ?></option>
+
+                        <?php
+                    endforeach;
+                    ?>
+                </select></br>
+            </div>   
+            <div id="form-esq">
+                <label>Barco:</label>
+                <select name="nomeBarco" placeholder="Nome do Barco" />
+                <?php
+                foreach ($this->barcos as $key => $barco):
+                    ?>
+                    <option value="<?= $barco['bar_id'] ?>"><?= $barco['bar_nome'] ?></option>
+                    <?php
+                endforeach;
+                ?>
+                </select>
+                <br />
+            </div>
+            <div id="form-esq">
+                <select name="nomePesqueiro">
+                    <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
+                        <option value="<?= $pesqueiro['paf_id']; ?>"><?= $pesqueiro['paf_pesqueiro']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div id="form-esq">
+                <label for="tipo">Captura total:</label>
+                <input type="text"  placeholder="Captura Total" name="captura_total"/><br />
+            </div>
+            <div id="Submit">
+                <input type="submit" value="Salvar Amostra" /> 
+            </div>
+            <div id="Submit">
+                <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>           
+            </div>          
+            
+        </div>
+        <br/>
+    </fieldset>
+</form> 

@@ -59,6 +59,11 @@ class BarcosController extends Zend_Controller_Action
 
         $this->_redirect("barcos/index");
     }
+    public function excluirAction() {
+        $this->modelBarcos->delete($this->_getParam('id'));
+        
+        $this->_redirect('barcos/index');
+    }
 
     public function relatorioAction() {
         $this->_helper->layout->disableLayout();
