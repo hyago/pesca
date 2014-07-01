@@ -2811,3 +2811,65 @@ CREATE OR REPLACE VIEW V_PORTO AS
 SELECT PTO.PTO_ID,  PTO.PTO_NOME,  PTO.PTO_LOCAL,  PTO.TMUN_ID, TMUN.TMUN_MUNICIPIO,  TMUN.TUF_SIGLA FROM T_PORTO PTO
 LEFT JOIN T_MUNICIPIO AS TMUN
 ON  PTO.TMUN_ID = TMUN.TMUN_ID;
+
+
+
+
+------------------------------------AMOSTRAGEM---------------------------------------------------------------------------
+--Camarão-----------------------------------------------------------------------------------------------------------------
+CREATE TABLE t_amostra_camarao
+(
+  tamc_id serial,
+  tu_id integer not null,
+  pto_id integer not null,
+  tamc_data date null,
+  bar_id integer not null,
+  paf_id integer not null,
+  esp_id integer not null,
+  tamc_captura_total float null,
+  sa_id integer not null,
+  PRIMARY KEY (tamc_id),
+  CONSTRAINT fk_t_amostra_camarao_usuario1 FOREIGN KEY (tu_id)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_porto1 FOREIGN KEY (pto_id)
+      REFERENCES t_porto (pto_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_barco1 FOREIGN KEY (bar_id)
+      REFERENCES t_barco (bar_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_pesqueiro1 FOREIGN KEY (paf_id)
+      REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_subamostra1 FOREIGN KEY (sa_id)
+      REFERENCES t_subamostra (sa_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+---Quantidades------------------------------------------------------------------------------------------------------------
+CREATE TABLE t_maturidade(
+	tmat_id serial,
+	tmat_tipo character varying(25)
+	Primary Key (tmat_id);
+);
+
+
+CREATE TABLE t_unidade_camarao
+(
+  tuc_id serial,
+  tamc_id integer not null,
+  tuc_sexo character varying(1),
+  tmat_id integer not null, 
+  tuc_comprimento_cabeca float,
+  tuc_peso float
+  Primary key (tuq_id),
+  CONSTRAINT fk_t_unidade_camarao_amostra1 FOREIGN KEY (tamc_id)
+      REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_unidade_camarao_maturidade1 FOREIGN KEY (mat_id)
+      REFERENCES t_maturidade (mat_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
