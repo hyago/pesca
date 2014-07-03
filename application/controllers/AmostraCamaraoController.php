@@ -23,7 +23,12 @@ class AmostraCamaraoController extends Zend_Controller_Action
 
         $this->usuario = $this->modelUsuario->selectLogin($ArrayIdentity['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-
+        
+        $this->modelPorto = new Application_Model_Porto();
+        $this->modelPesqueiro = new Application_Model_Pesqueiro();
+        $this->modelAmostraCamarao = new Application_Model_AmostraCamarao();
+        $this->modelBarcos = new Application_Model_Barcos();
+        $this->modelEspecies = new Application_Model_Especie();
     }
 
     public function indexAction()

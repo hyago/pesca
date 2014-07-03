@@ -1,8 +1,3 @@
-<?php
-$this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
-$this->headScript()->appendFile('/js/mascaras.js');
-?>
-
 
 <div id="titulos">
     <h2>Desembarque->Amostragem de Camarão</h2>
@@ -45,7 +40,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
             <div id="form-esq">
                 <label for="tipo">Data:</label>
-                <input type="date"  placeholder="Data" name="data_ficha"/><br />
+                <input type="date"  placeholder="Data" name="data_amostra"/><br />
             </div>
 
 
@@ -77,6 +72,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <br />
             </div>
             <div id="form-esq">
+                <label>Pesqueiro:</label>
                 <select name="nomePesqueiro">
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
                         <option value="<?= $pesqueiro['paf_id']; ?>"><?= $pesqueiro['paf_pesqueiro']; ?></option>
@@ -84,17 +80,78 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 </select>
             </div>
             <div id="form-esq">
+                <label>Espécie Capturada:</label>
+                <select name="especie_camarao">
+                    <?php foreach ($this->especies as $key => $especie): ?>
+                        <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div id="form-esq">
                 <label for="tipo">Captura total:</label>
                 <input type="text"  placeholder="Captura Total" name="captura_total"/><br />
             </div>
-            <div id="Submit">
-                <input type="submit" value="Salvar Amostra" /> 
+            <div id="form-esq">
+                <label for="tipo">Id Subamostra:</label>
+                <select name="subamostra_id"/>
+                </select>
             </div>
             <div id="Submit">
-                <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>           
-            </div>          
+                <input type="submit" value="Salvar Alterações" /> 
+            </div>
+          
+                    
             
         </div>
         <br/>
     </fieldset>
-</form> 
+</form>
+  <fieldset class="noEditable"><legend>Amostras de Camarão:</legend>
+        <fieldset class="noEditable"><legend>Dados das Amostras:</legend>
+
+            <div id="base">
+                <input onclick="jsInsertAmostraCamarao(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Adicionar" />
+                
+                <select style="float:left;" class="amostragem" name="SelectSexo" style="width:5px">
+                    
+                </select>
+                <select style="float:left;" class="amostragem" name="SelectMaturidade">
+                    
+                </select>
+                
+                <input style="float:left;" type="text" name="comprimentoCabeca" placeholder="Comp. Carapaça" size="10px">
+
+                <input style="float:left;" type="text" name="peso" placeholder="Peso" size="10px">
+
+                <input type="hidden" name="id_amostragem"  value="<?= $this->entrevista['af_id'] ?>"/>
+
+            </div>
+
+        </fieldset>
+        <br>
+         <fieldset class="noEditable" id="itemArteTipoRows"><legend>Dados Cadastrados:</legend>
+                <table id="especiesCapturadas">
+                    <tr>
+                        <th width="20%">Id Amostra</th>
+                        <th width="20%">Sexo</th>
+                        <th width="20%">Maturidade</th>
+                        <th width="20%">Comp.Carapaça</th>
+                        <th width="20%">Peso</th>
+                    </tr>
+                    <?php
+                    foreach ($this->vAmostragem as $key => $vAmostragem):
+                        ?>
+                        <tr id="itemEmbarcacoesRows">
+                            <td name="inputEntrevista"> <?= $vAmostragem['tamc_id'] ?> </td>
+                            <td name="inputSexo"> <?= $vAmostragem['tamc_sexo'] ?> </td>
+                            <td name="inputMaturidade"> <?= $vAmostragem['mat_id'] ?> </td>
+                            <td name="inputPreco"> <?= $vAmostragem['spc_preco'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteAmostragem(<?= $this->entrevista['af_id'] ?>, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "deletespecie"), null, true) ?>', <?= $vAmostragem['spc_af_id'] ?>)"></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </fieldset>
+</fieldset>
+<div id="Submit">
+    <a href="<?= $this->url(array("controller" => "amostra-camarao", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>           
+</div>  

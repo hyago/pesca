@@ -290,7 +290,6 @@ tbody tr:nth-child(odd) {
     width: 100%;
     float: right;
     padding-top: 30px;
-    float: rigth;
 }
 
 #Submit input{
@@ -307,6 +306,9 @@ select{
     height: 25px;
     background: white;
     float: right;
+}
+select.amostragem{
+    width: 130px;
 }
 #form-dir{
     padding: 8px;
