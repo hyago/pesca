@@ -42,6 +42,8 @@ class Application_Model_Calao
         }
         
         $tamanho = $request['tamanho'];
+        $tamanho1 = $request['tamanho1'];
+        $tamanho2 = $request['tamanho2'];
         $altura = $request['altura'];
         $numLances = $request['numLances'];
         $malha = $request['malha'];
@@ -49,6 +51,12 @@ class Application_Model_Calao
         
         if(empty($tamanho)){
             $tamanho = NULL;
+        }
+        if(empty($tamanho1)){
+            $tamanho1 = NULL;
+        }
+        if(empty($tamanho2)){
+            $tamanho2 = NULL;
         }
         if(empty($altura)){
             $altura = NULL;
@@ -72,6 +80,8 @@ class Application_Model_Calao
             'cal_data' => $request['data'],
             'cal_tempogasto' => $request['tempoGasto'], 
             'cal_tamanho' => $tamanho,
+            'cal_tamanho1' => $tamanho1,
+            'cal_tamanho2' => $tamanho2,
             'cal_altura' => $altura,
             'cal_malha' => $malha,
             'cal_numlances' => $numLances,
@@ -104,14 +114,22 @@ class Application_Model_Calao
         }
         
         $tamanho = $request['tamanho'];
+        $tamanho1 = $request['tamanho1'];
+        $tamanho2 = $request['tamanho2'];
         $altura = $request['altura'];
         $numLances = $request['numLances'];
         $malha = $request['malha'];
        
-        
         if(empty($tamanho)){
             $tamanho = NULL;
         }
+        if(empty($tamanho1)){
+            $tamanho1 = NULL;
+        }
+        if(empty($tamanho2)){
+            $tamanho2 = NULL;
+        }
+        
         if(empty($altura)){
             $altura = NULL;
         }
@@ -134,6 +152,8 @@ class Application_Model_Calao
             'cal_data' => $request['data'],
             'cal_tempogasto' => $request['tempoGasto'], 
             'cal_tamanho' => $tamanho,
+            'cal_tamanho1' => $tamanho1,
+            'cal_tamanho2' => $tamanho2,
             'cal_altura' => $altura,
             'cal_malha' => $malha,
             'cal_numlances' => $numLances,

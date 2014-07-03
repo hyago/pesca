@@ -1245,24 +1245,26 @@ CREATE TABLE t_arrastofundo
 CREATE TABLE t_calao
 (
   cal_id serial NOT NULL,
-  cal_embarcada boolean NULL,
-  bar_id integer NULL,
-  tte_id integer NULL,
-  tp_id_entrevistado integer NULL,
-  cal_quantpescadores integer NULL,
-  cal_data date NULL,
-  cal_tempogasto time without time zone NULL,
-  cal_subamostra boolean NULL,
-  sa_id integer NULL,
-  cal_npanos integer NULL,
-  cal_tamanho double precision NULL,
-  cal_altura double precision NULL,
-  cal_malha double precision NULL,
-  cal_numlances integer NULL,
-  cal_obs character varying(255) NULL,
+  cal_embarcada boolean,
+  bar_id integer,
+  tte_id integer,
+  tp_id_entrevistado integer,
+  cal_quantpescadores integer,
+  cal_data date,
+  cal_tempogasto time without time zone,
+  cal_subamostra boolean,
+  sa_id integer,
+  cal_npanos integer,
+  cal_tamanho double precision,
+  cal_altura double precision,
+  cal_malha double precision,
+  cal_numlances integer,
+  cal_obs character varying(255),
   mnt_id integer NOT NULL,
   cal_motor boolean,
-  dp_id integer null,
+  dp_id integer,
+  cal_tamanho1 double precision,
+  cal_tamanho2 double precision,
   CONSTRAINT t_calao_pkey PRIMARY KEY (cal_id),
   CONSTRAINT fk_t_calao_t_barco1 FOREIGN KEY (bar_id)
       REFERENCES t_barco (bar_id) MATCH SIMPLE
@@ -1279,10 +1281,10 @@ CREATE TABLE t_calao
   CONSTRAINT fk_t_calao_t_tipoembarcacao1 FOREIGN KEY (tte_id)
       REFERENCES t_tipoembarcacao (tte_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-   CONSTRAINT t_calao_dp_id_fkey FOREIGN KEY (dp_id)
+  CONSTRAINT t_calao_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
-);
+)
 
 
 CREATE TABLE t_coletamanual

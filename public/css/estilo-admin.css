@@ -324,6 +324,9 @@ input {
     border-radius: 3px;
     border-color:#8b8386;
 }
+input.tamanho{
+    width: 50px;
+}
 input:focus{
     border-color: #af3333;
 }
