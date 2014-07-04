@@ -477,3 +477,21 @@ input.button-relatorio {
     padding-left: 16px;     /* make text start to the right of the image */
     vertical-align: middle; /* align the text vertically centered */
 }
+h4,h5{
+    color: #462420;
+}
+.imgefeito { 
+    margin-left: 10px;  
+    float: right; 
+    position: relative; 
+} 
+.imgefeito a { 
+    text-decoration: none; 
+    float: left;
+} 
+.imgefeito a:hover { 
+    cursor: pointer;
+}
+.imgefeito img{
+    margin-bottom: 10px;
+}

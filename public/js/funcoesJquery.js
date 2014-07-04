@@ -1004,3 +1004,4 @@ function relatorioIndividualPescador(id_pescador){
 //    jQuery('#itemEmbarcacoesRows' + localRowNumEmbarcacao).remove();
 //}
 //
+

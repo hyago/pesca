@@ -37,13 +37,13 @@ CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id_estagiario)
   CONSTRAINT fk_t_amostra_camarao_subamostra1 FOREIGN KEY (sa_id)
       REFERENCES t_subamostra (sa_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
-)
+);
 
 ---Quantidades------------------------------------------------------------------------------------------------------------
 CREATE TABLE t_maturidade(
 	tmat_id serial,
-	tmat_tipo character varying(25)
-	Primary Key (tmat_id);
+	tmat_tipo character varying(25),
+	Primary Key (tmat_id)
 );
 
 
@@ -54,13 +54,13 @@ CREATE TABLE t_unidade_camarao
   tuc_sexo character varying(1),
   tmat_id integer not null, 
   tuc_comprimento_cabeca float,
-  tuc_peso float
+  tuc_peso float,
   Primary key (tuq_id),
   CONSTRAINT fk_t_unidade_camarao_amostra1 FOREIGN KEY (tamc_id)
       REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_unidade_camarao_maturidade1 FOREIGN KEY (mat_id)
-      REFERENCES t_maturidade (mat_id) MATCH SIMPLE
+  CONSTRAINT fk_t_unidade_camarao_maturidade1 FOREIGN KEY (tmat_id)
+      REFERENCES t_maturidade (tmat_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 CREATE TABLE t_amostra_peixe

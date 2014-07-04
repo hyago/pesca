@@ -1,11 +1,11 @@
 <?php
 
-class SobreController extends Zend_Controller_Action
+class InstituicoesController extends Zend_Controller_Action
 {
 
     public function init()
     {
-        if(Zend_Auth::getInstance()->hasIdentity()){
+       if(Zend_Auth::getInstance()->hasIdentity()){
             $this->_helper->layout->setLayout('admin');
             $auth = Zend_Auth::getInstance();
         if ( $auth->hasIdentity() ){
@@ -28,3 +28,4 @@ class SobreController extends Zend_Controller_Action
 
 
 }
+

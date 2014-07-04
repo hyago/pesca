@@ -143,6 +143,15 @@
         <controllerFile controllerName="Maturidade">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Instituicoes">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Novidades">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Passos">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -604,6 +613,15 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Maturidade">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Instituicoes">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Novidades">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Passos">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
