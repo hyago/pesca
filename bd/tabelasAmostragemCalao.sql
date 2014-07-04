@@ -1,103 +1,89 @@
 ALTER TABLE t_calao
-ADD cal_tamanho1 double precision, ADD cal_tamanho2 double precision
+DROP COLUMN cal_tamanho1, DROP COLUMN cal_tamanho2, Add cal_malha1 double precision, add cal_malha2 double precision;
 
-------------------------------------AMOSTRAGEM---------------------------------------------------------------------------
---Camarão-----------------------------------------------------------------------------------------------------------------
-CREATE TABLE t_amostra_camarao
+CREATE TABLE IF NOT EXISTS t_tipo_venda
 (
-  tamc_id serial,
-  tu_id_monitor integer not null,
-  tu_id_estagiario integer not null,
-  pto_id integer not null,
-  tamc_data date null,
-  bar_id integer not null,
-  paf_id integer not null,
-  esp_id integer not null,
-  tamc_captura_total float null,
-  sa_id integer not null,
-  PRIMARY KEY (tamc_id),
-  CONSTRAINT fk_t_amostra_camarao_usuario1 FOREIGN KEY (tu_id_monitor)
-      REFERENCES t_usuario (tu_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id_estagiario)
-      REFERENCES t_usuario (tu_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_camarao_porto1 FOREIGN KEY (pto_id)
-      REFERENCES t_porto (pto_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_camarao_barco1 FOREIGN KEY (bar_id)
-      REFERENCES t_barco (bar_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_camarao_pesqueiro1 FOREIGN KEY (paf_id)
-      REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_camarao_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_camarao_subamostra1 FOREIGN KEY (sa_id)
-      REFERENCES t_subamostra (sa_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+ttv_id serial,
+ttv_tipovenda character varying(30) NOT NULL,
+Primary Key (ttv_id)
 );
 
----Quantidades------------------------------------------------------------------------------------------------------------
-CREATE TABLE t_maturidade(
-	tmat_id serial,
-	tmat_tipo character varying(25),
-	Primary Key (tmat_id)
-);
+Alter table t_coletamanual
+Add cml_combustivel double precision;
+
+Alter table t_jerere
+Add jre_combustivel double precision;
+
+Alter table t_linhafundo
+Add lf_combustivel double precision;
+
+Alter table t_manzua
+Add man_combustivel double precision;
+
+Alter table t_mergulho
+Add mer_combustivel double precision;
+
+Alter table t_ratoeira
+Add rat_combustivel double precision;
+
+Alter table t_siripoia
+Add sir_combustivel double precision;
+
+Alter table t_varapesca
+Add vp_combustivel double precision;
 
 
-CREATE TABLE t_unidade_camarao
-(
-  tuc_id serial,
-  tamc_id integer not null,
-  tuc_sexo character varying(1),
-  tmat_id integer not null, 
-  tuc_comprimento_cabeca float,
-  tuc_peso float,
-  Primary key (tuq_id),
-  CONSTRAINT fk_t_unidade_camarao_amostra1 FOREIGN KEY (tamc_id)
-      REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_unidade_camarao_maturidade1 FOREIGN KEY (tmat_id)
-      REFERENCES t_maturidade (tmat_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-CREATE TABLE t_amostra_peixe
-(
-  tamp_id serial,
-  tu_id_monitor integer not null,
-  tu_id_estagiario integer not null,
-  pto_id integer not null,
-  sa_id integer not null,
-  PRIMARY KEY (tamp_id),
-  CONSTRAINT fk_t_amostra_peixe_usuario1 FOREIGN KEY (tu_id_monitor)
-      REFERENCES t_usuario (tu_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_peixe_usuario2 FOREIGN KEY (tu_id_estagiario)
-      REFERENCES t_usuario (tu_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_peixe_porto1 FOREIGN KEY (pto_id)
-      REFERENCES t_porto (pto_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_peixe_subamostra1 FOREIGN KEY (sa_id)
-      REFERENCES t_subamostra (sa_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
+Alter Table t_coletamanual_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
 
-CREATE TABLE t_unidade_peixe
-(
-  tup_id serial,
-  tamp_id integer not null,
-  esp_id integer not null,
-  tup_comprimento float,
-  tup_peso float,
-  tuc_sexo character varying(1),
-  Primary key (tup_id),
-  CONSTRAINT fk_t_unidade_peixe_amostra1 FOREIGN KEY (tamp_id)
-      REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_unidade_peixe_especie1 FOREIGN KEY (esp_id)
-      REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION   
-)
+Alter Table t_jerere_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_linhafundo_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_manzua_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_mergulho_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_ratoeira_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_siripoia_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_varapesca_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+INSERT INTO t_tipo_venda(ttv_tipovenda)
+    VALUES ('Unidade');
+INSERT INTO t_tipo_venda(ttv_tipovenda)
+    VALUES ('Kilo');
+INSERT INTO t_tipo_venda(ttv_tipovenda)
+    VALUES ('Dúzia');
+INSERT INTO t_tipo_venda(ttv_tipovenda)
+    VALUES ('Litro');
+INSERT INTO t_tipo_venda(ttv_tipovenda)
+    VALUES ('Lata');
+INSERT INTO t_tipo_venda(ttv_tipovenda)
+    VALUES ('Corda');
+INSERT INTO t_tipo_venda(ttv_tipovenda)
+    VALUES ('Cesto');

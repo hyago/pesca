@@ -34,6 +34,8 @@ class ColetaManualController extends Zend_Controller_Action
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelMare = new Application_Model_Mare();
+        $this->modelTipoVenda = new Application_Model_TipoVenda();
+        
     }
 
     public function indexAction()
@@ -93,7 +95,9 @@ class ColetaManualController extends Zend_Controller_Action
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-
+        $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
+        
+        
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['cml_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['cml_dhvolta']);
@@ -104,6 +108,7 @@ class ColetaManualController extends Zend_Controller_Action
 
         $vColetaManualAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
 
+        
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vColetaManualAvistamento', $vColetaManualAvistamento);
@@ -121,7 +126,7 @@ class ColetaManualController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-
+        $this->view->assign('tipovenda', $tipoVenda);
     }
 
 

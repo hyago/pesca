@@ -307,6 +307,9 @@ select{
     background: white;
     float: right;
 }
+select.espc{
+    width: 120px;
+}
 select.amostragem{
     width: 130px;
 }

@@ -93,10 +93,8 @@
                 <div id="form-esq">
                     <legend><h4>Esforço:</h4></legend>
                     <label>Tamanho(m):</label>
-                    <input type="text" class="tamanho" name="tamanho" placeholder="Tamanho" value="<?=$this->entrevista['cal_tamanho']?>"/>
-                    <input type="text" class="tamanho" name="tamanho1" placeholder="Tamanho" value="<?=$this->entrevista['cal_tamanho1']?>"/>
-                    <input type="text" class="tamanho" name="tamanho2" placeholder="Tamanho" value="<?=$this->entrevista['cal_tamanho2']?>"/>
-                </div>
+                    <input type="text" name="tamanho" placeholder="Tamanho" value="<?=$this->entrevista['cal_tamanho']?>"/>
+                                    </div>
                 <div id="form-dir">    
                     <label>Altura(m):</label>
                     <input type="text"  name="altura" placeholder="Altura"value="<?=$this->entrevista['cal_altura']?>"/><br />
@@ -110,7 +108,10 @@
                 </div>
                 <div id="form-dir">    
                     <label>Malha:</label>
-                    <input type="text"  name="malha" placeholder="malha" value="<?=$this->entrevista['cal_malha']?>"/><br />
+                    <input type="text" class="tamanho" name="malha2" placeholder="malha" value="<?=$this->entrevista['cal_malha2']?>"/>
+                    <input type="text" class="tamanho" name="malha1" placeholder="malha" value="<?=$this->entrevista['cal_malha1']?>"/>
+                    <input type="text"  class="tamanho" name="malha" placeholder="malha" value="<?=$this->entrevista['cal_malha']?>"/>
+                    
                 </div>
             </div><br/>
             <div id="esquerda">

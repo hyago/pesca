@@ -348,6 +348,7 @@
           <dbTableFile dbTableName="UnidadeCamarao"/>
           <dbTableFile dbTableName="UnidadePeixe"/>
           <dbTableFile dbTableName="MaturidadeCamarao"/>
+          <dbTableFile dbTableName="TipoVenda"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -415,6 +416,7 @@
         <modelFile modelName="AmostraCamarao"/>
         <modelFile modelName="AmostraPeixe"/>
         <modelFile modelName="Maturidade"/>
+        <modelFile modelName="TipoVenda"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

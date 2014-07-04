@@ -34,6 +34,7 @@ class MergulhoController extends Zend_Controller_Action
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelMare = new Application_Model_Mare();
+        $this->modelTipoVenda = new Application_Model_TipoVenda();
     }
 
     public function indexAction()

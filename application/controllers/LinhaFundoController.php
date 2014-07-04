@@ -35,6 +35,7 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelMare = new Application_Model_Mare();
         $this->modelIsca = new Application_Model_Isca();
+        $this->modelTipoVenda = new Application_Model_TipoVenda();
     }
 
     public function indexAction()

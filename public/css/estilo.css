@@ -4,7 +4,6 @@ body{
 }
 #geral
 {
-
 	margin: 0 auto;
 	width: 900px;
 	background: #f8f8ff;
@@ -12,11 +11,11 @@ body{
 
 #topo
 {
-	height: 123px;
+	height: 100px;
 }
 #topoLeft
 {
-	height: 120px;
+	height: 100px;
 	width: 350px;
 	background-image: url('/img/Rachycentronlogo.png');
 	background-repeat: no-repeat;
@@ -24,7 +23,7 @@ body{
 }
 #topoRight
 {
-	height: 120px;
+	height: 100px;
 	width: 180px;
 	background-image: url('/img/mpesca.png');
 	background-repeat: no-repeat;
