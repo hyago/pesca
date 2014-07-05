@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/public/css/estilo.css</file>
-            <file>file:/srv/www/htdocs/pesca/application/layouts/scripts/admin.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/VaraPescaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ColetaManualController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/RatoeiraController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/LinhaFundoController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ManzuaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/JerereController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/SiripoiaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/MergulhoController.php</file>
         </group>
     </open-files>
 </project-private>
