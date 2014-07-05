@@ -85,7 +85,7 @@ class ModeloRelatorio {
 		}
 
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
-		$this->page->drawText( $leg,  $columnPosition, $this->linha );
+		$this->page->drawText( $leg,  $columnPosition, $this->linha, 'UTF-8' );
 
 		$tw = $this->getTextWidth($leg, $this->page->getFont(), $this->page->getFontSize() );
 
@@ -119,7 +119,7 @@ class ModeloRelatorio {
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.6));
 		$this->page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 9);
 		$pos = $this->getRightPosition( $text, $columnLargura, $this->page->getFont(), $this->page->getFontSize() );
-		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha );
+		$this->page->drawText( $text,  $columnPosition + $pos, $this->linha,'UTF-8' );
 		$this->page->setFillColor(new Zend_Pdf_Color_GrayScale(0.0));
 	}
 
