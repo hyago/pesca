@@ -73,7 +73,7 @@ class VaraPescaController extends Zend_Controller_Action
             $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'vp_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'vp_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelVaraPesca->selectEntrevistaVaraPesca("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'vp_id'), 20);
         }
@@ -143,7 +143,7 @@ class VaraPescaController extends Zend_Controller_Action
     }
     public function excluirAction() {
         $this->modelVaraPesca->delete($this->_getParam('id'));
-        
+
         $this->_redirect('vara-pesca/visualizar');
     }
     public function insertpesqueiroAction(){
@@ -281,6 +281,10 @@ class VaraPescaController extends Zend_Controller_Action
 		$localModelVara = new Application_Model_VaraPesca();
 		$localVara = $localModelVara->selectEntrevistaVaraPesca(NULL, array('fd_id', 'mnt_id', 'vp_id'), NULL);
 
+		$localPesqueiro = $localModelVara->selectVaraPescaHasPesqueiro(NULL, array('vp_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelVara->selectVaraPescaHasEspCapturadas(NULL, array('vp_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelVara->selectVaraPescaHasAvistamento(NULL, array('vp_id', 'avs_descricao'), NULL);
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório Entrevista de Vara de Pesca');
@@ -294,25 +298,31 @@ class VaraPescaController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelVara->selectVaraPescaHasPesqueiro('vp_id='.$localData['vp_id'], array('vp_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelVara->selectVaraPescaHasPesqueiro('vp_id='.$localData['vp_id'], array('vp_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['vp_id'] ==  $localData['vp_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelVara->selectVaraPescaHasEspCapturadas('vp_id='.$localData['vp_id'], array('vp_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelVara->selectVaraPescaHasEspCapturadas('vp_id='.$localData['vp_id'], array('vp_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['vp_id'] ==  $localData['vp_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelVara->selectVaraPescaHasAvistamento('vp_id='.$localData['vp_id'], array('vp_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelVara->selectVaraPescaHasAvistamento('vp_id='.$localData['vp_id'], array('vp_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataAvist['vp_id'] ==  $localData['vp_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();

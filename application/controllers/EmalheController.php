@@ -67,7 +67,7 @@ class EmalheController extends Zend_Controller_Action
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'em_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'em_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'em_id'), 20);
         }
@@ -134,7 +134,7 @@ class EmalheController extends Zend_Controller_Action
     }
     public function excluirAction() {
         $this->modelEmalhe->delete($this->_getParam('id'));
-        
+
         $this->_redirect('emalhe/visualizar');
     }
     public function insertpesqueiroAction(){
@@ -266,6 +266,10 @@ class EmalheController extends Zend_Controller_Action
 		$localModelEmalhe = new Application_Model_Emalhe();
 		$localEmalhe = $localModelEmalhe->selectEntrevistaEmalhe(NULL, array('fd_id', 'mnt_id', 'em_id'), NULL);
 
+		$localPesqueiro = $localModelEmalhe->selectEmalheHasPesqueiro(NULL, array('em_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelEmalhe->selectEmalheHasEspCapturadas(NULL, array('em_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelEmalhe->selectEmalheHasAvistamento(NULL, array('em_id', 'avs_descricao'), NULL);
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório Entrevista de Emalhe');
@@ -279,24 +283,29 @@ class EmalheController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelEmalhe->selectEmalheHasPesqueiro('em_id='.$localData['em_id'], array('em_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelEmalhe->selectEmalheHasPesqueiro('em_id='.$localData['em_id'], array('em_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['em_id'] ==  $localData['em_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelEmalhe->selectEmalheHasEspCapturadas('em_id='.$localData['em_id'], array('em_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelEmalhe->selectEmalheHasEspCapturadas('em_id='.$localData['em_id'], array('em_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['em_id'] ==  $localData['em_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelEmalhe->selectEmalheHasAvistamento('em_id='.$localData['em_id'], array('em_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelEmalhe->selectEmalheHasAvistamento('em_id='.$localData['em_id'], array('em_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataAvist['em_id'] ==  $localData['em_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();

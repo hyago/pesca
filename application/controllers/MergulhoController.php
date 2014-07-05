@@ -74,7 +74,7 @@ public function visualizarAction() {
             $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'mer_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelMergulho->selectEntrevistaMergulho("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'mer_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'mer_id'), 20);
         }
@@ -144,7 +144,7 @@ public function visualizarAction() {
     }
     public function excluirAction() {
         $this->modelMergulho->delete($this->_getParam('id'));
-        
+
         $this->_redirect('mergulho/visualizar');
     }
     public function insertpesqueiroAction(){
@@ -280,6 +280,10 @@ public function visualizarAction() {
 		$localModelMergulho = new Application_Model_Mergulho();
 		$localMergulho = $localModelMergulho->selectEntrevistaMergulho(NULL, array('fd_id', 'mnt_id', 'mer_id'), NULL);
 
+		$localPesqueiro = $localModelMergulho->selectMergulhoHasPesqueiro(NULL, array('mer_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelMergulho->selectMergulhoHasEspCapturadas(NULL, array('mer_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelMergulho->selectMergulhoHasAvistamento(NULL, array('mer_id', 'avs_descricao'), NULL);
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório Entrevista de Mergulho');
@@ -293,30 +297,36 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelMergulho->selectMergulhoHasPesqueiro('mer_id='.$localData['mer_id'], array('mer_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelMergulho->selectMergulhoHasPesqueiro('mer_id='.$localData['mer_id'], array('mer_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
-                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-                                }
-                                else{
-                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
-                                }
-                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['mer_id'] ==  $localData['mer_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					}
+					else{
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelMergulho->selectMergulhoHasEspCapturadas('mer_id='.$localData['mer_id'], array('mer_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelMergulho->selectMergulhoHasEspCapturadas('mer_id='.$localData['mer_id'], array('mer_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['mer_id'] ==  $localData['mer_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelMergulho->selectMergulhoHasAvistamento('mer_id='.$localData['mer_id'], array('mer_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelMergulho->selectMergulhoHasAvistamento('mer_id='.$localData['mer_id'], array('mer_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataAvist['mer_id'] ==  $localData['mer_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();

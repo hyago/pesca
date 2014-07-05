@@ -77,7 +77,7 @@ public function visualizarAction() {
             $dados = $this->modelManzua->selectEntrevistaManzua("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'man_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelManzua->selectEntrevistaManzua("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'man_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelManzua->selectEntrevistaManzua("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'man_id'), 20);
         }
@@ -142,7 +142,7 @@ public function visualizarAction() {
     }
     public function excluirAction() {
         $this->modelManzua->delete($this->_getParam('id'));
-        
+
         $this->_redirect('manzua/visualizar');
     }
     public function insertpesqueiroAction(){
@@ -278,6 +278,10 @@ public function visualizarAction() {
 		$localModelManzua = new Application_Model_Manzua();
 		$localManzua = $localModelManzua->selectEntrevistaManzua(NULL, array('fd_id', 'mnt_id', 'man_id'), NULL);
 
+		$localPesqueiro = $localModelManzua->selectManzuaHasPesqueiro(NULL, array('man_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelManzua->selectManzuaHasEspCapturadas(NULL, array('man_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelManzua->selectManzuaHasAvistamento(NULL, array('man_id', 'avs_descricao'), NULL);
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório Entrevista de Manzuá');
@@ -291,30 +295,36 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelManzua->selectManzuaHasPesqueiro('man_id='.$localData['man_id'], array('man_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelManzua->selectManzuaHasPesqueiro('man_id='.$localData['man_id'], array('man_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
-                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-                                }
-                                else{
-                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
-                                }
-                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['man_id'] ==  $localData['man_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					}
+					else{
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelManzua->selectManzuaHasEspCapturadas('man_id='.$localData['man_id'], array('man_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelManzua->selectManzuaHasEspCapturadas('man_id='.$localData['man_id'], array('man_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['man_id'] ==  $localData['man_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelManzua->selectManzuaHasAvistamento('man_id='.$localData['man_id'], array('man_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelManzua->selectManzuaHasAvistamento('man_id='.$localData['man_id'], array('man_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['man_id'] ==  $localData['man_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();

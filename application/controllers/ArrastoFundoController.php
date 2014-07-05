@@ -265,6 +265,10 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $localModelArrastoFundo = new Application_Model_ArrastoFundo();
         $localArrastoFundo = $localModelArrastoFundo->selectEntrevistaArrasto(NULL, array('fd_id', 'mnt_id', 'af_id'), NULL);
 
+        $localPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro(NULL, array('af_id', 'paf_pesqueiro'), NULL);
+        $localEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas(NULL, array('af_id', 'esp_nome_comum'), NULL);
+        $localAvist = $localModelArrastoFundo->selectArrastoHasAvistamento(NULL, array('af_id', 'avs_descricao'), NULL);
+
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();
         $modeloRelatorio->setTitulo('Relatório Entrevista de Arrasto de Fundo');
@@ -278,29 +282,35 @@ class ArrastoFundoController extends Zend_Controller_Action {
             $modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
             $modeloRelatorio->setNewLine();
 
-            $localPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro('af_id=' . $localData['af_id'], array('af_id', 'paf_pesqueiro'), NULL);
+//             $localPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro('af_id=' . $localData['af_id'], array('af_id', 'paf_pesqueiro'), NULL);
             foreach ($localPesqueiro as $key => $localDataPesqueiro) {
-                $modeloRelatorio->setLegValue(80, 'Pesqueiro: ', $localDataPesqueiro['paf_pesqueiro']);
-                if ($localDataPesqueiro['t_tempopesqueiro'] !== NULL) {
-                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempopesqueiro']), 'H:i'));
-                } else {
-                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00");
-                }
-                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-                $modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['af_id'] ==  $localData['af_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ', $localDataPesqueiro['paf_pesqueiro']);
+					if ($localDataPesqueiro['t_tempopesqueiro'] !== NULL) {
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempopesqueiro']), 'H:i'));
+					} else {
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00");
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
             }
-            $localEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas('af_id=' . $localData['af_id'], array('af_id', 'esp_nome_comum'), NULL);
+//             $localEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas('af_id=' . $localData['af_id'], array('af_id', 'esp_nome_comum'), NULL);
             foreach ($localEspecie as $key => $localDataEspecie) {
-                $modeloRelatorio->setLegValue(80, 'Espécie: ', $localDataEspecie['esp_nome_comum']);
-                $modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-                $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-                $modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['af_id'] ==  $localData['af_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ', $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
             }
-            $localAvist = $localModelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $localData['af_id'], array('af_id', 'avs_descricao'), NULL);
+//             $localAvist = $localModelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $localData['af_id'], array('af_id', 'avs_descricao'), NULL);
             foreach ($localAvist as $key => $localDataAvist) {
-                $modeloRelatorio->setLegValue(80, 'Avist.: ', $localDataAvist['avs_descricao']);
-                $modeloRelatorio->setNewLine();
+				if ( $localDataAvist['af_id'] ==  $localData['af_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ', $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
             }
         }
         $modeloRelatorio->setNewLine();

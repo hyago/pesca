@@ -72,7 +72,7 @@ public function visualizarAction() {
             $dados = $this->modelJerere->selectEntrevistaJerere("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'jre_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelJerere->selectEntrevistaJerere("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'jre_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelJerere->selectEntrevistaJerere("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'jre_id'), 20);
         }
@@ -139,7 +139,7 @@ public function visualizarAction() {
     }
     public function excluirAction() {
         $this->modelJerere->delete($this->_getParam('id'));
-        
+
         $this->_redirect('jerere/visualizar');
     }
      public function insertpesqueiroAction(){
@@ -275,6 +275,10 @@ public function visualizarAction() {
 		$localModelJerere = new Application_Model_Jerere();
 		$localJerere = $localModelJerere->selectEntrevistaJerere(NULL, array('fd_id', 'mnt_id', 'jre_id'), NULL);
 
+		$localPesqueiro = $localModelJerere->selectJerereHasPesqueiro(NULL, array('jre_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelJerere->selectJerereHasEspCapturadas(NULL, array('jre_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelJerere->selectJerereHasAvistamento(NULL, array('jre_id', 'avs_descricao'), NULL);
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório Entrevista de Jereré');
@@ -288,30 +292,36 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelJerere->selectJerereHasPesqueiro('jre_id='.$localData['jre_id'], array('jre_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelJerere->selectJerereHasPesqueiro('jre_id='.$localData['jre_id'], array('jre_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
-                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-                                }
-                                else{
-                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
-                                }
-                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['jre_id'] ==  $localData['jre_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					}
+					else{
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelJerere->selectJerereHasEspCapturadas('jre_id='.$localData['jre_id'], array('jre_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelJerere->selectJerereHasEspCapturadas('jre_id='.$localData['jre_id'], array('jre_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['jre_id'] ==  $localData['jre_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelJerere->selectJerereHasAvistamento('jre_id='.$localData['jre_id'], array('jre_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelJerere->selectJerereHasAvistamento('jre_id='.$localData['jre_id'], array('jre_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataAvist['jre_id'] ==  $localData['jre_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();

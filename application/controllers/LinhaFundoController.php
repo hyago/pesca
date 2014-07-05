@@ -79,7 +79,7 @@ public function visualizarAction() {
             $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'lf_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'lf_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelLinhaFundo->selectEntrevistaLinhaFundo("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'lf_id'), 20);
         }
@@ -147,10 +147,10 @@ public function visualizarAction() {
 
         $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
     }
-    
+
     public function excluirAction() {
         $this->modelLinhaFundo->delete($this->_getParam('id'));
-        
+
         $this->_redirect('linha-fundo/visualizar');
     }
     public function insertpesqueiroAction(){
@@ -289,6 +289,10 @@ public function visualizarAction() {
 		$localModelLinhaFundo = new Application_Model_LinhaFundo();
 		$localLinhaFundo = $localModelLinhaFundo->selectEntrevistaLinhaFundo(NULL, array('fd_id', 'mnt_id', 'lf_id'), NULL);
 
+		$localPesqueiro = $localModelLinhaFundo->selectLinhaFundoHasPesqueiro(NULL, array('lf_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelLinhaFundo->selectLinhaFundoHasEspCapturadas(NULL, array('lf_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelLinhaFundo->selectLinhaFundoHasAvistamento(NULL, array('lf_id', 'avs_descricao'), NULL);
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório Entrevista de Linha de Fundo');
@@ -302,30 +306,36 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelLinhaFundo->selectLinhaFundoHasPesqueiro('lf_id='.$localData['lf_id'], array('lf_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelLinhaFundo->selectLinhaFundoHasPesqueiro('lf_id='.$localData['lf_id'], array('lf_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
-                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-                                }
-                                else{
-                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
-                                }
-                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['lf_id'] ==  $localData['lf_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					}
+					else {
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$localData['lf_id'], array('lf_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$localData['lf_id'], array('lf_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['lf_id'] ==  $localData['lf_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelLinhaFundo->selectLinhaFundoHasAvistamento('lf_id='.$localData['lf_id'], array('lf_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelLinhaFundo->selectLinhaFundoHasAvistamento('lf_id='.$localData['lf_id'], array('lf_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataAvist['lf_id'] ==  $localData['lf_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();
