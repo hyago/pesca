@@ -77,7 +77,7 @@ class SiripoiaController extends Zend_Controller_Action
             $dados = $this->modelSiripoia->selectEntrevistaSiripoia("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'sir_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelSiripoia->selectEntrevistaSiripoia("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'sir_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelSiripoia->selectEntrevistaSiripoia("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'sir_id'), 20);
         }
@@ -143,7 +143,7 @@ class SiripoiaController extends Zend_Controller_Action
     }
     public function excluirAction() {
         $this->modelSiripoia->delete($this->_getParam('id'));
-        
+
         $this->_redirect('siripoia/visualizar');
     }
      public function insertpesqueiroAction(){
@@ -269,7 +269,7 @@ class SiripoiaController extends Zend_Controller_Action
 		$pdf = $modeloRelatorio->getRelatorio();
 
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_siripoia.pdf"');
-                header("Content-type: application/x-pdf");
+        header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -279,6 +279,10 @@ class SiripoiaController extends Zend_Controller_Action
 
 		$localModelSiripoia = new Application_Model_Siripoia();
 		$localSiripoia = $localModelSiripoia->selectEntrevistaSiripoia(NULL, array('fd_id', 'mnt_id', 'sir_id'), NULL);
+
+		$localPesqueiro = $localModelSiripoia->selectSiripoiaHasPesqueiro(NULL, array('sir_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelSiripoia->selectSiripoiaHasEspCapturadas(NULL, array('sir_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelSiripoia->selectSiripoiaHasAvistamento(NULL, array('sir_id', 'avs_descricao'), NULL);
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
@@ -293,30 +297,36 @@ class SiripoiaController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelSiripoia->selectSiripoiaHasPesqueiro('sir_id='.$localData['sir_id'], array('sir_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelSiripoia->selectSiripoiaHasPesqueiro('sir_id='.$localData['sir_id'], array('sir_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
-                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-                                }
-                                else{
-                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
-                                }
-                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['sir_id'] ==  $localData['sir_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					}
+					else{
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelSiripoia->selectSiripoiaHasEspCapturadas('sir_id='.$localData['sir_id'], array('sir_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelSiripoia->selectSiripoiaHasEspCapturadas('sir_id='.$localData['sir_id'], array('sir_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['sir_id'] ==  $localData['sir_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$localData['sir_id'], array('sir_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$localData['sir_id'], array('sir_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataAvist['sir_id'] ==  $localData['sir_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();

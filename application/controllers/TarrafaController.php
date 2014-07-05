@@ -66,7 +66,7 @@ public function visualizarAction() {
             $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'tar_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelTarrafa->selectEntrevistaTarrafa("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'tar_id'));
-       } 
+       }
        elseif ($ent_apelido){
             $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'tar_id'), 20);
         }
@@ -124,7 +124,7 @@ public function visualizarAction() {
     }
     public function excluirAction() {
         $this->modelTarrafa->delete($this->_getParam('id'));
-        
+
         $this->_redirect('tarrafa/visualizar');
     }
     public function insertpesqueiroAction(){
@@ -249,12 +249,17 @@ public function visualizarAction() {
                 header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
-   public function relatorioAction(){
+
+    public function relatorioAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
 		$localModelTarrafa = new Application_Model_Tarrafa();
 		$localTarrafa = $localModelTarrafa->selectEntrevistaTarrafa(NULL, array('fd_id', 'mnt_id', 'tar_id'), NULL);
+
+		$localPesqueiro = $localModelTarrafa->selectTarrafaHasPesqueiro(NULL, array('tar_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelTarrafa->selectTarrafaHasEspCapturadas(NULL, array('tar_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelTarrafa->selectTarrafaHasAvistamento(NULL, array('tar_id', 'avs_descricao'), NULL);
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
@@ -269,30 +274,36 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelTarrafa->selectTarrafaHasPesqueiro('tar_id='.$localData['tar_id'], array('tar_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelTarrafa->selectTarrafaHasPesqueiro('tar_id='.$localData['tar_id'], array('tar_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
-                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-                                }
-                                else{
-                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
-                                }
-                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['tar_id'] ==  $localData['tar_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					if($localDataPesqueiro['t_tempoapesqueiro'] !== NULL){
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					}
+					else{
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelTarrafa->selectTarrafaHasEspCapturadas('tar_id='.$localData['tar_id'], array('tar_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelTarrafa->selectTarrafaHasEspCapturadas('tar_id='.$localData['tar_id'], array('tar_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
+				if ( $localDataEspecie['tar_id'] ==  $localData['tar_id'] ) {
 				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
 				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
 				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
 				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
 				$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelTarrafa->selectTarrafaHasAvistamento('tar_id='.$localData['tar_id'], array('tar_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelTarrafa->selectTarrafaHasAvistamento('tar_id='.$localData['tar_id'], array('tar_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
+				if ( $localDataAvist['tar_id'] ==  $localData['tar_id'] ) {
 				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
 				$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();

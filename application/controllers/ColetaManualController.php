@@ -35,7 +35,7 @@ class ColetaManualController extends Zend_Controller_Action
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelMare = new Application_Model_Mare();
         $this->modelTipoVenda = new Application_Model_TipoVenda();
-        
+
     }
 
     public function indexAction()
@@ -72,7 +72,7 @@ class ColetaManualController extends Zend_Controller_Action
             $dados = $this->modelColetaManual->selectEntrevistaColetaManual("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'cml_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelColetaManual->selectEntrevistaColetaManual("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'cml_id'));
-       } 
+       }
         elseif ($ent_apelido){
             $dados = $this->modelColetaManual->selectEntrevistaColetaManual("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'cml_id'), 20);
         }
@@ -96,8 +96,8 @@ class ColetaManualController extends Zend_Controller_Action
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
-        
-        
+
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['cml_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['cml_dhvolta']);
@@ -108,7 +108,7 @@ class ColetaManualController extends Zend_Controller_Action
 
         $vColetaManualAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
 
-        
+
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vColetaManualAvistamento', $vColetaManualAvistamento);
@@ -142,10 +142,10 @@ class ColetaManualController extends Zend_Controller_Action
 
         $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
     }
-    
+
     public function excluirAction() {
         $this->modelColetaManual->delete($this->_getParam('id'));
-        
+
         $this->_redirect('coleta-manual/visualizar');
     }
     public function insertpesqueiroAction(){
@@ -282,6 +282,10 @@ class ColetaManualController extends Zend_Controller_Action
 		$localModelColetaManual = new Application_Model_ColetaManual();
 		$localColetaManual = $localModelColetaManual->selectEntrevistaColetaManual(NULL, array('fd_id', 'mnt_id', 'cml_id'), NULL);
 
+		$localPesqueiro = $localModelColetaManual->selectColetaManualHasPesqueiro(NULL, array('cml_id', 'paf_pesqueiro'), NULL);
+		$localEspecie = $localModelColetaManual->selectColetaManualHasEspCapturadas(NULL, array('cml_id', 'esp_nome_comum'), NULL);
+		$localAvist = $localModelColetaManual->selectColetaManualHasAvistamento(NULL, array('cml_id', 'avs_descricao'), NULL);
+
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
 		$modeloRelatorio->setTitulo('Relatório Entrevista de Coleta Manual');
@@ -295,30 +299,36 @@ class ColetaManualController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localPesqueiro = $localModelColetaManual->selectColetaManualHasPesqueiro('cml_id='.$localData['cml_id'], array('cml_id', 'paf_pesqueiro'), NULL);
+// 			$localPesqueiro = $localModelColetaManual->selectColetaManualHasPesqueiro('cml_id='.$localData['cml_id'], array('cml_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
-				$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
-				if($localDataPesqueiro['t_tempopesqueiro'] !== NULL){
-                                    $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
-                                }
-                                else{
-                                  $modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
-                                }
-                                $modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataPesqueiro['cml_id'] ==  $localData['cml_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
+					if($localDataPesqueiro['t_tempopesqueiro'] !== NULL){
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', date_format(date_create($localDataPesqueiro['t_tempoapesqueiro']), 'H:i'));
+					}
+					else{
+						$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Tempo (H:M):', "00:00", 'H:i');
+					}
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Distância:', number_format($localDataPesqueiro['t_distapesqueiro'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localEspecie = $localModelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$localData['cml_id'], array('cml_id', 'esp_nome_comum'), NULL);
+// 			$localEspecie = $localModelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$localData['cml_id'], array('cml_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
-				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
-				$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
-				$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
-				$modeloRelatorio->setNewLine();
+				if ( $localDataEspecie['cml_id'] ==  $localData['cml_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(280, 60, 'Quant:', $localDataEspecie['spc_quantidade']);
+					$modeloRelatorio->setLegValueAlinhadoDireita(350, 90, 'Peso(kg):', number_format($localDataEspecie['spc_peso_kg'], 2, ',', ' '));
+					$modeloRelatorio->setLegValueAlinhadoDireita(450, 120, 'Preço(R$/kg):', number_format($localDataEspecie['spc_preco'], 2, ',', ' '));
+					$modeloRelatorio->setNewLine();
+				}
 			}
-			$localAvist = $localModelColetaManual->selectColetaManualHasAvistamento('cml_id='.$localData['cml_id'], array('cml_id', 'avs_descricao'), NULL);
+// 			$localAvist = $localModelColetaManual->selectColetaManualHasAvistamento('cml_id='.$localData['cml_id'], array('cml_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
-				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataAvist['cml_id'] ==  $localData['cml_id'] ) {
+					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 		}
 		$modeloRelatorio->setNewLine();
