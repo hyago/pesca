@@ -125,7 +125,12 @@ private $usuario;
 		$localModelFamilia = new Application_Model_Familia();
 		$localModelOrdem = new Application_Model_Ordem();
 		$localModelGrupo = new Application_Model_Grupo();
+
 		$localGrupo = $localModelGrupo->select(NULL, array('grp_nome'), NULL);
+		$localOrdem = $localModelOrdem->select(NULL, array('ord_nome'), NULL);
+		$localFamilia = $localModelFamilia->select(NULL, array('fam_nome'), NULL);
+		$localGenero = $localModelGenero->select(NULL, array('gen_nome'), NULL);
+		$localEspecie = $localModelEspecie->select(NULL, array('esp_nome'), NULL);
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
@@ -136,39 +141,44 @@ private $usuario;
 			$modeloRelatorio->setLegValue(30, 'Grupo: ', $localData['grp_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localOrdem = $localModelOrdem->select('grp_id='.$localData['grp_id'], array('ord_nome'), NULL);
 			foreach ($localOrdem as $key_o => $localDataOrdem) {
-				$modeloRelatorio->setLegValue(50,'Ordem: ', $localDataOrdem['ord_nome']);
-				$modeloRelatorio->setNewLine();
-
-				$localFamilia = $localModelFamilia->select('ord_id='.$localDataOrdem['ord_id'], array('fam_nome'), NULL);
-				foreach ($localFamilia as $key_f => $localDataFamilia) {
-					$modeloRelatorio->setLegValue(70,'Família: ', $localDataFamilia['fam_nome']);
+				if ( $localDataOrdem['grp_id'] ==  $localData['grp_id'] ) {
+					$modeloRelatorio->setLegValue(50,'Ordem: ', $localDataOrdem['ord_nome']);
 					$modeloRelatorio->setNewLine();
 
-					$localGenero = $localModelGenero->select('fam_id='.$localDataFamilia['fam_id'], array('gen_nome'), NULL);
-					foreach ($localGenero as $key_f => $localDataGenero ) {
-						$modeloRelatorio->setLegValue(90,'Gênero: ',$localDataGenero['gen_nome']);
-						$modeloRelatorio->setNewLine();
-
-						$localEspecie = $localModelEspecie->select('gen_id='.$localDataGenero['gen_id'], array('esp_nome'), NULL);
-						if ( sizeof($localEspecie) > 0) {
-							$modeloRelatorio->setLegValue(110, 'Código', '');
-							$modeloRelatorio->setLegValue(150, 'Espécie', '');
-							$modeloRelatorio->setLegValue(300, 'Nome Comum', '');
-							$modeloRelatorio->setLegValue(450, 'Descritor', '');
+					foreach ($localFamilia as $key_f => $localDataFamilia) {
+						if ( $localDataFamilia['ord_id'] ==  $localDataOrdem['ord_id'] ) {
+							$modeloRelatorio->setLegValue(70,'Família: ', $localDataFamilia['fam_nome']);
 							$modeloRelatorio->setNewLine();
-						}
-						foreach ($localEspecie as $key_f => $localDataEspecie ) {
-							$modeloRelatorio->setValueAlinhadoDireita(100, 40, $localDataEspecie['esp_id']);
-							$modeloRelatorio->setValue(150, $localDataEspecie['esp_nome']);
-							$modeloRelatorio->setValue(300, $localDataEspecie['esp_nome_comum']);
-							$modeloRelatorio->setValue(450, $localDataEspecie['esp_descritor']);
-							$modeloRelatorio->setNewLine();
-						}
 
+							foreach ($localGenero as $key_f => $localDataGenero ) {
+								if ( $localDataGenero['fam_id'] ==  $localDataFamilia['fam_id'] ) {
+									$modeloRelatorio->setLegValue(90,'Gênero: ',$localDataGenero['gen_nome']);
+									$modeloRelatorio->setNewLine();
+
+									$isPrinted = FALSE;
+									foreach ($localEspecie as $key_f => $localDataEspecie ) {
+										if ( $localDataGenero['gen_id'] ==  $localDataEspecie['gen_id'] ) {
+											if ( $isPrinted == FALSE ) {
+												$modeloRelatorio->setLegValue(110, 'Código', '');
+												$modeloRelatorio->setLegValue(150, 'Espécie', '');
+												$modeloRelatorio->setLegValue(300, 'Nome Comum', '');
+												$modeloRelatorio->setLegValue(450, 'Descritor', '');
+												$modeloRelatorio->setNewLine();
+
+												$isPrinted = TRUE;
+											}
+											$modeloRelatorio->setValueAlinhadoDireita(100, 40, $localDataEspecie['esp_id']);
+											$modeloRelatorio->setValue(150, $localDataEspecie['esp_nome']);
+											$modeloRelatorio->setValue(300, $localDataEspecie['esp_nome_comum']);
+											$modeloRelatorio->setValue(450, $localDataEspecie['esp_descritor']);
+											$modeloRelatorio->setNewLine();
+										}
+									}
+								}
+							}
+						}
 					}
-
 				}
 			}
 		}

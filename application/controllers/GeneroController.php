@@ -102,7 +102,11 @@ class GeneroController extends Zend_Controller_Action
 		$localModelFamilia = new Application_Model_Familia();
 		$localModelOrdem = new Application_Model_Ordem();
 		$localModelGrupo = new Application_Model_Grupo();
+
 		$localGrupo = $localModelGrupo->select(NULL, array('grp_nome'), NULL);
+		$localOrdem = $localModelOrdem->select(NULL, array('ord_nome'), NULL);
+		$localFamilia = $localModelFamilia->select(NULL, array('fam_nome'), NULL);
+		$localGenero = $localModelGenero->select(NULL, array('gen_nome'), NULL);
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
@@ -113,26 +117,32 @@ class GeneroController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(30, 'Grupo: ', $localData['grp_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localOrdem = $localModelOrdem->select('grp_id='.$localData['grp_id'], array('ord_nome'), NULL);
 			foreach ($localOrdem as $key_o => $localDataOrdem) {
-				$modeloRelatorio->setLegValue(50,'Ordem: ', $localDataOrdem['ord_nome']);
-				$modeloRelatorio->setNewLine();
-
-				$localFamilia = $localModelFamilia->select('ord_id='.$localDataOrdem['ord_id'], array('fam_nome'), NULL);
-				foreach ($localFamilia as $key_f => $localDataFamilia) {
-					$modeloRelatorio->setLegValue(70,'Família: ', $localDataFamilia['fam_nome']);
+				if ( $localDataOrdem['grp_id'] ==  $localData['grp_id'] ) {
+					$modeloRelatorio->setLegValue(50,'Ordem: ', $localDataOrdem['ord_nome']);
 					$modeloRelatorio->setNewLine();
 
-					$localGenero = $localModelGenero->select('fam_id='.$localDataFamilia['fam_id'], array('gen_nome'), NULL);
-					if ( sizeof($localGenero) > 0) {
-						$modeloRelatorio->setLegValue(90, 'Código', '');
-						$modeloRelatorio->setLegValue(130, 'Gênero', '');
-						$modeloRelatorio->setNewLine();
-					}
-					foreach ($localGenero as $key_f => $localDataGenero ) {
-						$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localDataGenero['gen_id']);
-						$modeloRelatorio->setValue(130, $localDataGenero['gen_nome']);
-						$modeloRelatorio->setNewLine();
+					foreach ($localFamilia as $key_f => $localDataFamilia) {
+						if ( $localDataFamilia['ord_id'] ==  $localDataOrdem['ord_id'] ) {
+							$modeloRelatorio->setLegValue(70,'Família: ', $localDataFamilia['fam_nome']);
+							$modeloRelatorio->setNewLine();
+
+							$isPrinted = FALSE;
+							foreach ($localGenero as $key_f => $localDataGenero ) {
+								if ( $localDataGenero['fam_id'] ==  $localDataFamilia['fam_id'] ) {
+									if ( $isPrinted == FALSE ) {
+										$modeloRelatorio->setLegValue(90, 'Código', '');
+										$modeloRelatorio->setLegValue(130, 'Gênero', '');
+										$modeloRelatorio->setNewLine();
+
+										$isPrinted = TRUE;
+									}
+									$modeloRelatorio->setValueAlinhadoDireita(80, 40, $localDataGenero['gen_id']);
+									$modeloRelatorio->setValue(130, $localDataGenero['gen_nome']);
+									$modeloRelatorio->setNewLine();
+								}
+							}
+						}
 					}
 				}
 			}
@@ -140,12 +150,9 @@ class GeneroController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_filogenia_genero.pdf"');
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
-
-// 		header('Content-Disposition: attachment;filename="rel_filogenia_genero.pdf"');
-// 		header("Content-type: application/x-pdf");
-// 		echo $pdf->render();
    }
 
 	public function relatoriolistaAction() {
@@ -172,11 +179,8 @@ class GeneroController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-// 		header('Content-Disposition: attachment;filename="rel_filogenia_especie.pdf"');
-// 		header("Content-type: application/x-pdf");
-// 		echo $pdf->render();
-
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_filogenia_genero_lista.pdf"');
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
    }
 
