@@ -97,6 +97,7 @@ class VaraPescaController extends Zend_Controller_Action
         $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
 
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['vp_dhsaida']);
@@ -126,6 +127,7 @@ class VaraPescaController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+        $this->view->assign('tipovenda', $tipoVenda);
     }
 
 
@@ -193,11 +195,13 @@ class VaraPescaController extends Zend_Controller_Action
         $preco = $this->_getParam("precokg");
 
         $idEntrevista = $this->_getParam("id_entrevista");
+        
+        $idTipoVenda =  $this->_getParam("id_tipovenda");
 
         $backUrl = $this->_getParam("back_url");
 
 
-        $this->modelVaraPesca->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $this->modelVaraPesca->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }

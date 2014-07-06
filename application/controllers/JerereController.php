@@ -96,7 +96,8 @@ public function visualizarAction() {
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-
+        $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
+        
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['jre_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['jre_dhvolta']);
@@ -124,6 +125,7 @@ public function visualizarAction() {
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+        $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
         $idJerere = $this->modelJerere->insert($this->_getAllParams());
@@ -190,9 +192,11 @@ public function visualizarAction() {
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
+        
+        $idTipoVenda =  $this->_getParam("id_tipovenda");
 
 
-        $this->modelJerere->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $this->modelJerere->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }

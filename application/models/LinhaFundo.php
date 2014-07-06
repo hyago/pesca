@@ -257,7 +257,7 @@ class Application_Model_LinhaFundo
         return $this->dbTableLinhaFundoHasEspCapturada->fetchAll($select)->toArray();
     }
 
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg, $idTipoVenda)
     {
         $this->dbTableTLinhaFundoHasEspCapturada = new Application_Model_DbTable_LinhaFundoHasEspecieCapturada();
         if(empty($quantidade) && empty($peso)){
@@ -277,7 +277,8 @@ class Application_Model_LinhaFundo
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id' =>$idTipoVenda
         );
         
         $this->dbTableTLinhaFundoHasEspCapturada->insert($dadosEspecie);

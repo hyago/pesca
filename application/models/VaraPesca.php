@@ -258,7 +258,7 @@ class Application_Model_VaraPesca
         
         return $this->dbTableVaraPescaHasEspCapturada->fetchAll($select)->toArray();
     }
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg, $idTipoVenda)
     {
         $this->dbTableTVaraPescaHasEspCapturada = new Application_Model_DbTable_VaraPescaHasEspecieCapturada();
         
@@ -279,7 +279,8 @@ class Application_Model_VaraPesca
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id' => $idTipoVenda
         );
         
         $this->dbTableTVaraPescaHasEspCapturada->insert($dadosEspecie);

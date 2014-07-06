@@ -97,7 +97,7 @@ public function visualizarAction() {
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-
+        $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
 
         $mare = $this->modelMare->select();
         $idEntrevista = $this->_getParam('id');
@@ -127,6 +127,7 @@ public function visualizarAction() {
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+        $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
         $idManzua = $this->modelManzua->insert($this->_getAllParams());
@@ -194,8 +195,9 @@ public function visualizarAction() {
 
         $backUrl = $this->_getParam("back_url");
 
-
-        $this->modelManzua->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $idTipoVenda =  $this->_getParam("id_tipovenda");
+        
+        $this->modelManzua->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/manzua/editar/id/" . $backUrl);
     }

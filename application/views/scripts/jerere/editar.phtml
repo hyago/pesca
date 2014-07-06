@@ -153,6 +153,10 @@
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observacao"value="<?=$this->entrevista['jre_obs']?>" /><br />
                 </div>
+                <div id="form-esq">
+                    <label for="tipo">Combustível(R$):</label>
+                    <input type="text" name="combustivel" placeholder="Combustível" value="<?=$this->entrevista['jre_combustivel']?>"/><br />
+                </div>
                 <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['jre_id'] ?>"/><br/>
                 <div id="Submit">
                     <input type="submit" value="Salvar Alterações"/>

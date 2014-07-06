@@ -103,7 +103,7 @@ public function visualizarAction() {
         $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-
+        $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
 
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['lf_dhsaida']);
@@ -133,6 +133,7 @@ public function visualizarAction() {
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+        $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
         $idLinhaFundo = $this->modelLinhaFundo->insert($this->_getAllParams());
@@ -203,8 +204,9 @@ public function visualizarAction() {
 
         $backUrl = $this->_getParam("back_url");
 
-
-        $this->modelLinhaFundo->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $idTipoVenda =  $this->_getParam("id_tipovenda");
+        
+        $this->modelLinhaFundo->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }

@@ -154,8 +154,10 @@
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observacao" value="<?=$this->entrevista['man_obs']?>"/><br />
                 </div>
-                <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['man_id'] ?>"/><br />
-        
+                <div id="form-esq">
+                    <label for="tipo">Combustível(R$):</label>
+                    <input type="text" name="combustivel" placeholder="Combustível" value="<?=$this->entrevista['man_combustivel']?>"/><br />
+                </div>
                 <div id="Submit">
                     <input type="submit" value="Salvar Alterações"/>
                 </div>
@@ -238,6 +240,7 @@
                         <th width="20%">Quantidade</th>
                         <th width="20%">Peso (kg)</th>
                         <th width="20%">Preço por kg</th>
+                        <th width="10%">Venda</th>
                     </tr>
                     <?php
                     foreach ($this->vEspecieCapturadas as $key => $vEspecieCapturada):
@@ -248,6 +251,7 @@
                             <td name="inputQuantidade"> <?= $vEspecieCapturada['spc_quantidade'] ?> </td>
                             <td name="inputPeso"> <?= $vEspecieCapturada['spc_peso_kg'] ?> </td>
                             <td name="inputPreco"> <?= $vEspecieCapturada['spc_preco'] ?> </td>
+                            <td name="inputTVenda"> <?= $vEspecieCapturada['ttv_tipovenda']?></td>
                             <td><input type="button" class="button-del" width="5%" onclick="jsDeleteEspecieCapturada(<?= $this->entrevista['man_id'] ?>, '<?= $this->url(array("controller" => "manzua", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['spc_man_id'] ?>)"></td>
                         </tr>
                     <?php endforeach; ?>

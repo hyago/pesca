@@ -50,7 +50,10 @@ class Application_Model_Jerere
         if(empty($numArmadilhas)){
             $numArmadilhas = NULL;
         }
-        
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         
         $dadosJerere = array(
             'jre_embarcada' => $request['embarcada'],
@@ -69,7 +72,8 @@ class Application_Model_Jerere
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'jre_mreviva' => $request['mareviva']
+            'jre_mreviva' => $request['mareviva'],
+            'jre_combustivel' => $combustivel
         );
         
         $insertArrasto = $this->dbTableJerere->insert($dadosJerere);
@@ -99,6 +103,10 @@ class Application_Model_Jerere
         else {
             $idSubamostra = null;
         }
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $numArmadilhas = $request['numArmadilhas'];
         
         if(empty($numArmadilhas)){
@@ -122,7 +130,8 @@ class Application_Model_Jerere
             'jre_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'jre_mreviva' => $request['mareviva']
+            'jre_mreviva' => $request['mareviva'],
+            'jre_combustivel' => $combustivel
         );
  
         
@@ -204,7 +213,7 @@ class Application_Model_Jerere
         return $this->dbTableJerereHasEspCapturada->fetchAll($select)->toArray();
     }
 
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg, $idTipoVenda)
     {
         $this->dbTableTJerereHasEspCapturada = new Application_Model_DbTable_JerereHasEspecieCapturada();
         
@@ -225,7 +234,8 @@ class Application_Model_Jerere
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id' => $idTipoVenda
         );
         
         $this->dbTableTJerereHasEspCapturada->insert($dadosEspecie);

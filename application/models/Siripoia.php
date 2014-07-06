@@ -51,7 +51,10 @@ class Application_Model_Siripoia
         if(empty($numArmadilhas)){
             $numArmadilhas = NULL;
         }
-        
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $dadosSiripoia = array(
             'sir_embarcada' => $request['embarcada'],
             'sir_motor'=> $request['motor'],
@@ -69,7 +72,8 @@ class Application_Model_Siripoia
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'sir_mreviva' => $request['mareviva']
+            'sir_mreviva' => $request['mareviva'],
+            'sir_combustivel' => $combustivel
         );
         
         $insertArrasto = $this->dbTableSiripoia->insert($dadosSiripoia);
@@ -103,7 +107,10 @@ class Application_Model_Siripoia
         if(empty($numArmadilhas)){
             $numArmadilhas = NULL;
         }
-        
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $dadosSiripoia = array(
             'sir_embarcada' => $request['embarcada'],
             'sir_motor'=> $request['motor'],
@@ -120,7 +127,8 @@ class Application_Model_Siripoia
             'sir_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'sir_mreviva' => $request['mareviva']
+            'sir_mreviva' => $request['mareviva'],
+            'sir_combustivel' => $combustivel
         );
  
         
@@ -201,7 +209,7 @@ class Application_Model_Siripoia
         
         return $this->dbTableSiripoiaHasEspCapturada->fetchAll($select)->toArray();
     }
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg, $idTipoVenda)
     {
         $this->dbTableTSiripoiaHasEspCapturada = new Application_Model_DbTable_SiripoiaHasEspecieCapturada();
         
@@ -222,7 +230,8 @@ class Application_Model_Siripoia
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id' => $idTipoVenda
         );
         
         $this->dbTableTSiripoiaHasEspCapturada->insert($dadosEspecie);

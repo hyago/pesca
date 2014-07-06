@@ -46,6 +46,10 @@ private $dbTableColetaManual;
         if($timestampSaida > $timestampVolta){
             $timestampVolta = 'Erro';
         }
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $dadosColetaManual = array(
             'cml_embarcada' => $request['embarcada'],
             'cml_motor'=> $request['motor'],
@@ -62,7 +66,8 @@ private $dbTableColetaManual;
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'cml_mreviva' => $request['mareviva']
+            'cml_mreviva' => $request['mareviva'],
+            'cml_combustivel' => $combustivel
         );
         
         $insertColetaManual =$this->dbTableColetaManual->insert($dadosColetaManual);
@@ -76,6 +81,10 @@ private $dbTableColetaManual;
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $dadosColetaManual = array(
             'cml_embarcada' => $request['embarcada'],
             'cml_motor'=> $request['motor'],
@@ -90,7 +99,8 @@ private $dbTableColetaManual;
             'cml_obs' => $request['observacao'],
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'cml_mreviva' => $request['mareviva']
+            'cml_mreviva' => $request['mareviva'],
+            'cml_combustivel' => $combustivel
         );
  
         
@@ -172,7 +182,7 @@ private $dbTableColetaManual;
         return $this->dbTableColetaManualHasEspCapturada->fetchAll($select)->toArray();
     }
 
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg, $idTipoVenda)
     {
         $this->dbTableTColetaManualHasEspCapturada = new Application_Model_DbTable_ColetaManualHasEspecieCapturada();
         
@@ -194,7 +204,8 @@ private $dbTableColetaManual;
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id' => $idTipoVenda,
         );
         
         $this->dbTableTColetaManualHasEspCapturada->insert($dadosEspecie);

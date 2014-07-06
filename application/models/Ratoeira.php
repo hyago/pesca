@@ -51,7 +51,10 @@ class Application_Model_Ratoeira
         if(empty($numArmadilhas)){
             $numArmadilhas = NULL;
         }
-        
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $dadosRatoeira = array(
             'rat_embarcada' => $request['embarcada'],
             'rat_motor'=> $request['motor'],
@@ -69,7 +72,8 @@ class Application_Model_Ratoeira
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'rat_mreviva' => $request['mareviva']
+            'rat_mreviva' => $request['mareviva'],
+            'rat_combustivel' => $combustivel
         );
         
         $insertArrasto = $this->dbTableRatoeira->insert($dadosRatoeira);
@@ -98,6 +102,10 @@ class Application_Model_Ratoeira
         else {
             $idSubamostra = null;
         }
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $numArmadilhas = $request['numArmadilhas'];
         
         if(empty($numArmadilhas)){
@@ -120,7 +128,8 @@ class Application_Model_Ratoeira
             'rat_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'rat_mreviva' => $request['mareviva']
+            'rat_mreviva' => $request['mareviva'],
+            'rat_combustivel' => $combustivel
         );
  
         
@@ -202,7 +211,7 @@ class Application_Model_Ratoeira
         
         return $this->dbTableRatoeiraHasEspCapturada->fetchAll($select)->toArray();
     }
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg, $idTipoVenda)
     {
         $this->dbTableTRatoeiraHasEspCapturada = new Application_Model_DbTable_RatoeiraHasEspecieCapturada();
         if(empty($quantidade) && empty($peso)){
@@ -222,7 +231,8 @@ class Application_Model_Ratoeira
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id'=> $idTipoVenda
         );
         
         $this->dbTableTRatoeiraHasEspCapturada->insert($dadosEspecie);

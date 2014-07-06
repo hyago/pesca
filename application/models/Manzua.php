@@ -51,7 +51,10 @@ class Application_Model_Manzua
         if(empty($numArmadilhas)){
             $numArmadilhas = NULL;
         }
-        
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $dadosManzua = array(
             'man_embarcada' => $request['embarcada'],
             'man_motor'=> $request['motor'],
@@ -69,7 +72,8 @@ class Application_Model_Manzua
             'man_numarmadilhas' => $numArmadilhas,
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
-            'man_mreviva' => $request['mareviva']
+            'man_mreviva' => $request['mareviva'],
+            'man_combustivel' => $combustivel
         );
         
         $insertArrasto = $this->dbTableManzua->insert($dadosManzua);
@@ -98,6 +102,10 @@ class Application_Model_Manzua
         else {
             $idSubamostra = null;
         }
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $numArmadilhas = $request['numArmadilhas'];
         
         if(empty($numArmadilhas)){
@@ -120,7 +128,8 @@ class Application_Model_Manzua
             'man_numarmadilhas' => $numArmadilhas,
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'man_mreviva' => $request['mareviva']
+            'man_mreviva' => $request['mareviva'],
+            'man_combustivel' => $combustivel
         );
         $whereManzua= $this->dbTableManzua->getAdapter()
                 ->quoteInto('"man_id" = ?', $request['id_entrevista']);
@@ -200,7 +209,7 @@ class Application_Model_Manzua
         return $this->dbTableManzuaHasEspCapturada->fetchAll($select)->toArray();
     }
 
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg , $idTipoVenda)
     {
         $this->dbTableTManzuaHasEspCapturada = new Application_Model_DbTable_ManzuaHasEspecieCapturada();
         
@@ -222,7 +231,8 @@ class Application_Model_Manzua
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id' => $idTipoVenda
         );
         
         $this->dbTableTManzuaHasEspCapturada->insert($dadosEspecie);

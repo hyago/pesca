@@ -97,7 +97,7 @@ public function visualizarAction() {
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-
+        $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
 
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['mer_dhsaida']);
@@ -126,7 +126,7 @@ public function visualizarAction() {
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
-
+        $this->view->assign('tipovenda', $tipoVenda);
 
     }
 
@@ -196,8 +196,9 @@ public function visualizarAction() {
 
         $backUrl = $this->_getParam("back_url");
 
+        $idTipoVenda =  $this->_getParam("id_tipovenda");
 
-        $this->modelMergulho->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $this->modelMergulho->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/mergulho/editar/id/" . $backUrl);
     }

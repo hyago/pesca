@@ -197,8 +197,9 @@ class ColetaManualController extends Zend_Controller_Action
 
         $backUrl = $this->_getParam("back_url");
 
-
-        $this->modelColetaManual->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $idTipoVenda =  $this->_getParam("id_tipovenda");
+        
+        $this->modelColetaManual->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
     }

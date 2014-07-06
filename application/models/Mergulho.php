@@ -47,7 +47,10 @@ private $dbTableMergulho;
         else {
             $mareViva = false;
         }
-        
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
+        }
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         if($timestampSaida > $timestampVolta){
@@ -70,7 +73,8 @@ private $dbTableMergulho;
             'mnt_id' => $request['id_monitoramento'],
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'mer_mreviva' => $request['mareviva']
+            'mer_mreviva' => $request['mareviva'],
+            'mer_combustivel' => $combustivel
         );
         
         $insertArrasto = $this->dbTableMergulho->insert($dadosMergulho);
@@ -92,6 +96,10 @@ private $dbTableMergulho;
         }
         else {
             $idSubamostra = null;
+        }
+        $combustivel = $request['combustivel'];
+        if(empty($combustivel)){
+            $combustivel = null;
         }
         
         $mareViva = $request['mareviva'];
@@ -124,7 +132,8 @@ private $dbTableMergulho;
             'mer_obs' => $request['observacao'],
             'mre_id' => $request['mare'],
             'dp_id' => $request['destinoPescado'],
-            'mer_mreviva' => $request['mareviva']
+            'mer_mreviva' => $request['mareviva'],
+            'mer_combustivel' => $combustivel
         );
  
         
@@ -207,7 +216,7 @@ private $dbTableMergulho;
         
         return $this->dbTableMergulhoHasEspCapturada->fetchAll($select)->toArray();
     }
-    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg)
+    public function insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $precokg, $idTipoVenda)
     {
         $this->dbTableTMergulhoHasEspCapturada = new Application_Model_DbTable_MergulhoHasEspecieCapturada();
         
@@ -228,7 +237,8 @@ private $dbTableMergulho;
             'esp_id' => $especie,
             'spc_quantidade' => $quantidade,
             'spc_peso_kg' => $peso,
-            'spc_preco' => $precokg
+            'spc_preco' => $precokg,
+            'ttv_id' =>$idTipoVenda
         );
         
         $this->dbTableTMergulhoHasEspCapturada->insert($dadosEspecie);

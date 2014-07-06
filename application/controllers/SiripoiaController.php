@@ -100,6 +100,7 @@ class SiripoiaController extends Zend_Controller_Action
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
+        $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
 
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['sir_dhsaida']);
@@ -128,6 +129,7 @@ class SiripoiaController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
         $this->view->assign('pesqueiros',$pesqueiros);
         $this->view->assign('especies',$especies);
+        $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
         $idSiripoia = $this->modelSiripoia->insert($this->_getAllParams());
@@ -195,8 +197,9 @@ class SiripoiaController extends Zend_Controller_Action
 
         $backUrl = $this->_getParam("back_url");
 
-
-        $this->modelSiripoia->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco);
+        $idTipoVenda =  $this->_getParam("id_tipovenda");
+        
+        $this->modelSiripoia->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/siripoia/editar/id/" . $backUrl);
     }
