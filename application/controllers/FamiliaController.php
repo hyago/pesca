@@ -104,6 +104,8 @@ class FamiliaController extends Zend_Controller_Action
 		$localModelOrdem = new Application_Model_Ordem();
 		$localModelGrupo = new Application_Model_Grupo();
 		$localGrupo = $localModelGrupo->select(NULL, array('grp_nome'), NULL);
+		$localOrdem = $localModelOrdem->select(NULL, array('ord_nome'), NULL);
+		$localFamilia = $localModelFamilia->select(NULL, array('fam_nome'), NULL);
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
@@ -114,49 +116,52 @@ class FamiliaController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(30, 'Grupo: ', $localData['grp_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localOrdem = $localModelOrdem->select('grp_id='.$localData['grp_id'], array('ord_nome'), NULL);
 			foreach ($localOrdem as $key_o => $localDataOrdem) {
-				$modeloRelatorio->setLegValue(50,'Ordem: ', $localDataOrdem['ord_nome']);
-				$modeloRelatorio->setNewLine();
-
-				$localFamilia = $localModelFamilia->select('ord_id='.$localDataOrdem['ord_id'], array('fam_nome'), NULL);
-				if ( sizeof($localFamilia) > 0) {
-					$modeloRelatorio->setLegValue(80, 'Código', '');
-					$modeloRelatorio->setLegValue(120, 'Família', '');
-					$modeloRelatorio->setLegValue(250, 'Tipo', '');
+				if ( $localDataOrdem['grp_id'] ==  $localData['grp_id'] ) {
+					$modeloRelatorio->setLegValue(50,'Ordem: ', $localDataOrdem['ord_nome']);
 					$modeloRelatorio->setNewLine();
-				}
-				foreach ($localFamilia as $key_f => $localDataFamilia) {
-					$modeloRelatorio->setValueAlinhadoDireita(70, 40, $localDataFamilia['fam_id']);
-					$modeloRelatorio->setValue(120, $localDataFamilia['fam_nome']);
-					$modeloRelatorio->setValue(250, $localDataFamilia['fam_tipo']);
-					$tmpCaracteristica = $localDataFamilia['fam_caracteristica'];
-					if ( sizeof($tmpCaracteristica) > 0 ) {
-						$modeloRelatorio->setNewLine();
-						if (strlen($tmpCaracteristica) > 100 ) {
-							$tmp1 = substr($tmpCaracteristica, 0, 100);
-							$tmp2 = substr($tmpCaracteristica, 101, strlen($tmpCaracteristica)+1);
-							$modeloRelatorio->setLegValue(120,'Caract.: ', $tmp1);
-							$modeloRelatorio->setNewLine();
-							$modeloRelatorio->setLegValue(120,'', $tmp2);
 
-						} else {
-							$modeloRelatorio->setLegValue(120,'Caract.: ', $tmpCaracteristica);
+					$isPrinted = FALSE;
+					foreach ($localFamilia as $key_f => $localDataFamilia) {
+						if ( $localDataFamilia['ord_id'] ==  $localDataOrdem['ord_id'] ) {
+							if ( $isPrinted == FALSE ) {
+								$modeloRelatorio->setLegValue(80, 'Código', '');
+								$modeloRelatorio->setLegValue(120, 'Família', '');
+								$modeloRelatorio->setLegValue(250, 'Tipo', '');
+								$modeloRelatorio->setNewLine();
+
+								$isPrinted = TRUE;
+							}
+
+							$modeloRelatorio->setValueAlinhadoDireita(70, 40, $localDataFamilia['fam_id']);
+							$modeloRelatorio->setValue(120, $localDataFamilia['fam_nome']);
+							$modeloRelatorio->setValue(250, $localDataFamilia['fam_tipo']);
+							$tmpCaracteristica = $localDataFamilia['fam_caracteristica'];
+							if ( sizeof($tmpCaracteristica) > 0 ) {
+								$modeloRelatorio->setNewLine();
+								if (strlen($tmpCaracteristica) > 100 ) {
+									$tmp1 = substr($tmpCaracteristica, 0, 100);
+									$tmp2 = substr($tmpCaracteristica, 101, strlen($tmpCaracteristica)+1);
+									$modeloRelatorio->setLegValue(120,'Caract.: ', $tmp1);
+									$modeloRelatorio->setNewLine();
+									$modeloRelatorio->setLegValue(120,'', $tmp2);
+
+								} else {
+									$modeloRelatorio->setLegValue(120,'Caract.: ', $tmpCaracteristica);
+								}
+							}
+							$modeloRelatorio->setNewLine();
 						}
 					}
-					$modeloRelatorio->setNewLine();
 				}
 			}
 		}
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		 header("Content-Type: application/pdf");
-		 echo $pdf->render();
-
-// 		header('Content-Disposition: attachment;filename="rel_filogenia_familia.pdf"');
-// 		header("Content-type: application/x-pdf");
-// 		echo $pdf->render();
+		header('Content-Disposition: attachment;filename="rel_filogenia_familia.pdf"');
+		header("Content-type: application/x-pdf");
+		echo $pdf->render();
    }
 
    	public function relatoriolistaAction() {
@@ -188,7 +193,6 @@ class FamiliaController extends Zend_Controller_Action
 					$modeloRelatorio->setLegValue(80,'Caract.: ', $tmp1);
 					$modeloRelatorio->setNewLine();
 					$modeloRelatorio->setLegValue(80,'', $tmp2);
-
 				} else {
 					$modeloRelatorio->setLegValue(80,'Caract.: ', $tmpCaracteristica);
 				}
@@ -199,11 +203,8 @@ class FamiliaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-// 		header('Content-Disposition: attachment;filename="rel_familia.pdf"');
-// 		header("Content-type: application/x-pdf");
-// 		echo $pdf->render();
-
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_filogenia_familia.pdf"');
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
    }
 }

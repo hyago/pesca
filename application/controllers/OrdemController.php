@@ -101,7 +101,9 @@ class OrdemController extends Zend_Controller_Action
 
 		$localModelOrdem = new Application_Model_Ordem();
 		$localModelGrupo = new Application_Model_Grupo();
+
 		$localGrupo = $localModelGrupo->select(NULL, array('grp_nome'), NULL);
+		$localOrdem = $localModelOrdem->select(NULL, array('ord_nome'), NULL);
 
 		require_once "../library/ModeloRelatorio.php";
 		$modeloRelatorio = new ModeloRelatorio();
@@ -112,27 +114,34 @@ class OrdemController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(30, 'Grupo: ', $localData['grp_nome']);
 			$modeloRelatorio->setNewLine();
 
-			$localOrdem = $localModelOrdem->select('grp_id='.$localData['grp_id'], array('ord_nome'), NULL);
-			if ( sizeof($localOrdem) > 0) {
-				$modeloRelatorio->setLegValue(60, 'Código', '');
-				$modeloRelatorio->setLegValue(100, 'Ordem', '');
-				$modeloRelatorio->setLegValue(250, 'Característica', '');
-				$modeloRelatorio->setNewLine();
-			}
+			$isPrinted = FALSE;
+
 			foreach ($localOrdem as $key => $localDataOrdem) {
-				$modeloRelatorio->setValueAlinhadoDireita(50, 40, $localDataOrdem['ord_id']);
-				$modeloRelatorio->setValue(100, $localDataOrdem['ord_nome']);
-				$modeloRelatorio->setValue(250, $localDataOrdem['ord_caracteristica']);
-				$modeloRelatorio->setNewLine();
+				if ( $localDataOrdem['grp_id'] ==  $localData['grp_id'] ) {
+					if ( $isPrinted == FALSE ) {
+						$modeloRelatorio->setLegValue(60, 'Código', '');
+						$modeloRelatorio->setLegValue(100, 'Ordem', '');
+						$modeloRelatorio->setLegValue(250, 'Característica', '');
+						$modeloRelatorio->setNewLine();
+
+						$isPrinted = TRUE;
+					}
+
+					$modeloRelatorio->setValueAlinhadoDireita(50, 40, $localDataOrdem['ord_id']);
+					$modeloRelatorio->setValue(100, $localDataOrdem['ord_nome']);
+					$modeloRelatorio->setValue(250, $localDataOrdem['ord_caracteristica']);
+					$modeloRelatorio->setNewLine();
+				}
 			}
 
 		}
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_filogenia_ordem.pdf"');
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
-   }
+	}
 
    	public function relatoriolistaAction() {
 		$this->_helper->layout->disableLayout();
@@ -160,12 +169,12 @@ class OrdemController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-// 		header('Content-Disposition: attachment;filename="rel_filogenia_especie.pdf"');
-// 		header("Content-type: application/x-pdf");
-// 		echo $pdf->render();
-
-		header("Content-Type: application/pdf");
+		header('Content-Disposition: attachment;filename="rel_filogenia_ordem_lista.pdf"');
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
+
+// 		header("Content-Type: application/pdf");
+// 		echo $pdf->render();
    }
 
 }
