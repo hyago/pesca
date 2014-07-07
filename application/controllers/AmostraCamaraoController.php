@@ -33,6 +33,7 @@ class AmostraCamaraoController extends Zend_Controller_Action
         $this->modelUsuario = new Application_Model_Usuario();
         $this->modelSubamostra = new Application_Model_Subamostra();
         $this->modelUnidadeCamarao = new Application_Model_UnidadeCamarao();
+        $this->modelMaturidade = new Application_Model_Maturidade();
     }
 
     public function indexAction()
@@ -72,7 +73,7 @@ class AmostraCamaraoController extends Zend_Controller_Action
         $unidadeCamarao = $this->modelUnidadeCamarao->select();
         $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
         
-        
+        $this->view->assign('maturidade', $maturidade);
         $this->view->assign('unidadeCamarao', $unidadeCamarao);
         $this->view->assign('subamostras', $subamostras);
         $this->view->assign("amostragem", $amostragem);

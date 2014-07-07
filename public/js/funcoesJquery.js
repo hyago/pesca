@@ -863,6 +863,27 @@ function relatorioIndividualPescador(id_pescador){
     
     location.reload('pescador/relpdfpescador/id_pescador/'.id_pescador);
 }
+
+function jsInsertAmostraCamarao(frm, pag, amostragem){
+    
+    var TmpUrl  = (amostragem+ '#base');
+    
+    var tmpUpdate = (pag + '/SelectSexo/' + frm.SelectSexo.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + '/comprimentoCabeca/'+ frm.comprimentoCabeca.value + '/peso/'+frm.peso.value+'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+function jsDeleteAmostragem(fichaId, pag, idAvistamento) {
+    var TmpUrl = (+fichaId + '#base');
+
+    var tmpUpdate = (pag + '/id_entrevista/' + fichaId + '/id_avistamento/'+idAvistamento+ '/back_url/' + TmpUrl);
+
+    if (confirm("Realmente deseja excluir este item?")) {
+        location.replace(tmpUpdate);
+    }
+}
+
+
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
 //function addRowDependente(frm) {
