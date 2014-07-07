@@ -1284,7 +1284,7 @@ CREATE TABLE t_calao
   CONSTRAINT t_calao_dp_id_fkey FOREIGN KEY (dp_id)
       REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
-)
+);
 
 
 CREATE TABLE t_coletamanual
@@ -2439,10 +2439,60 @@ SELECT ENTREVISTA.GRS_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAP
 FROM T_GROSSEIRA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_GROSSEIRA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.GRS_ID = ESPCAPT.GRS_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
+
+drop table t_tipo_venda;
+CREATE TABLE t_tipo_venda
+(
+ttv_id serial,
+ttv_tipovenda character varying(30) NOT NULL,
+Primary Key (ttv_id)
+);
+
+Alter Table t_coletamanual_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_jerere_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_linhafundo_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_manzua_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_mergulho_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_ratoeira_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_siripoia_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Alter Table t_varapesca_has_t_especie_capturada
+Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
+      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
 CREATE OR REPLACE VIEW v_coletamanual_has_t_especie_capturada AS
  SELECT entrevista.cml_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_cml_id, tvenda.ttv_tipovenda
-   FROM t_coletamanual entrevista
+   FROM t_coletamanual as entrevista
 
   LEFT JOIN t_coletamanual_has_t_especie_capturada as espcapt On entrevista.cml_id = espcapt.cml_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2451,7 +2501,7 @@ CREATE OR REPLACE VIEW v_coletamanual_has_t_especie_capturada AS
 CREATE OR REPLACE VIEW v_jerere_has_t_especie_capturada AS
  SELECT entrevista.jre_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_jre_id, tvenda.ttv_tipovenda
-   FROM t_jerere entrevista
+   FROM t_jerere as entrevista
 
   LEFT JOIN t_jerere_has_t_especie_capturada as espcapt On entrevista.jre_id = espcapt.jre_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2461,7 +2511,7 @@ CREATE OR REPLACE VIEW v_jerere_has_t_especie_capturada AS
 CREATE OR REPLACE VIEW v_linhafundo_has_t_especie_capturada AS
  SELECT entrevista.lf_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_lf_id, tvenda.ttv_tipovenda
-   FROM t_linhafundo entrevista
+   FROM t_linhafundo as entrevista
 
   LEFT JOIN t_linhafundo_has_t_especie_capturada as espcapt On entrevista.lf_id = espcapt.lf_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2471,7 +2521,7 @@ CREATE OR REPLACE VIEW v_linhafundo_has_t_especie_capturada AS
 CREATE OR REPLACE VIEW v_manzua_has_t_especie_capturada AS
  SELECT entrevista.man_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_man_id, tvenda.ttv_tipovenda
-   FROM t_manzua entrevista
+   FROM t_manzua as entrevista
 
   LEFT JOIN t_manzua_has_t_especie_capturada as espcapt On entrevista.man_id = espcapt.man_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2481,7 +2531,7 @@ CREATE OR REPLACE VIEW v_manzua_has_t_especie_capturada AS
 CREATE OR REPLACE VIEW v_mergulho_has_t_especie_capturada AS
  SELECT entrevista.mer_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_mer_id, tvenda.ttv_tipovenda
-   FROM t_mergulho entrevista
+   FROM t_mergulho as entrevista
 
   LEFT JOIN t_mergulho_has_t_especie_capturada as espcapt On entrevista.mer_id = espcapt.mer_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2491,7 +2541,7 @@ CREATE OR REPLACE VIEW v_mergulho_has_t_especie_capturada AS
 CREATE OR REPLACE VIEW v_ratoeira_has_t_especie_capturada AS
  SELECT entrevista.rat_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_rat_id, tvenda.ttv_tipovenda
-   FROM t_ratoeira entrevista
+   FROM t_ratoeira as entrevista
 
   LEFT JOIN t_ratoeira_has_t_especie_capturada as espcapt On entrevista.rat_id = espcapt.rat_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2501,7 +2551,7 @@ CREATE OR REPLACE VIEW v_ratoeira_has_t_especie_capturada AS
 CREATE OR REPLACE VIEW v_siripoia_has_t_especie_capturada AS
  SELECT entrevista.sir_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_sir_id, tvenda.ttv_tipovenda
-   FROM t_siripoia entrevista
+   FROM t_siripoia as entrevista
 
   LEFT JOIN t_siripoia_has_t_especie_capturada as espcapt On entrevista.sir_id = espcapt.sir_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2512,7 +2562,7 @@ CREATE OR REPLACE VIEW v_siripoia_has_t_especie_capturada AS
 CREATE OR REPLACE VIEW v_varapesca_has_t_especie_capturada AS
  SELECT entrevista.vp_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_vp_id, tvenda.ttv_tipovenda
-   FROM t_varapesca entrevista
+   FROM t_varapesca as entrevista
 
   LEFT JOIN t_varapesca_has_t_especie_capturada as espcapt On entrevista.vp_id = espcapt.vp_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
@@ -2863,6 +2913,7 @@ ON  PTO.TMUN_ID = TMUN.TMUN_ID;
 
 ------------------------------------AMOSTRAGEM---------------------------------------------------------------------------
 --Camarão-----------------------------------------------------------------------------------------------------------------
+drop table t_amostra_camarao cascade;
 CREATE TABLE t_amostra_camarao
 (
   tamc_id serial,
@@ -2900,13 +2951,14 @@ CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id_estagiario)
 );
 
 ---Quantidades------------------------------------------------------------------------------------------------------------
+drop table t_maturidade cascade;
 CREATE TABLE t_maturidade(
 	tmat_id serial,
 	tmat_tipo character varying(25),
 	Primary Key (tmat_id)
 );
 
-
+drop table t_unidade_camarao cascade;
 CREATE TABLE t_unidade_camarao
 (
   tuc_id serial,
@@ -2923,6 +2975,8 @@ CREATE TABLE t_unidade_camarao
       REFERENCES t_maturidade (tmat_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+drop table t_amostra_peixe cascade;
 CREATE TABLE t_amostra_peixe
 (
   tamp_id serial,
@@ -2945,6 +2999,7 @@ CREATE TABLE t_amostra_peixe
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
+drop table t_unidade_peixe cascade;
 CREATE TABLE t_unidade_peixe
 (
   tup_id serial,
@@ -2961,16 +3016,13 @@ CREATE TABLE t_unidade_peixe
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+
 ALTER TABLE t_calao
 --DROP COLUMN cal_tamanho1, DROP COLUMN cal_tamanho2,
 Add cal_malha1 double precision, add cal_malha2 double precision;
 
-CREATE TABLE IF NOT EXISTS t_tipo_venda
-(
-ttv_id serial,
-ttv_tipovenda character varying(30) NOT NULL,
-Primary Key (ttv_id)
-);
+
 
 Alter table t_coletamanual
 Add cml_combustivel double precision;
@@ -2991,42 +3043,4 @@ Add rat_combustivel double precision;
 Alter table t_siripoia
 Add sir_combustivel double precision;
 
-Alter Table t_coletamanual_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
 
-Alter Table t_jerere_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-Alter Table t_linhafundo_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-Alter Table t_manzua_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-Alter Table t_mergulho_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-Alter Table t_ratoeira_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-Alter Table t_siripoia_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-Alter Table t_varapesca_has_t_especie_capturada
-Add ttv_id integer, ADD FOREIGN KEY (ttv_id)
-      REFERENCES t_tipo_venda (ttv_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
