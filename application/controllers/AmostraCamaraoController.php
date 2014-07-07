@@ -24,11 +24,13 @@ class AmostraCamaraoController extends Zend_Controller_Action
         $this->usuario = $this->modelUsuario->selectLogin($ArrayIdentity['tl_id']);
         $this->view->assign("usuario",$this->usuario);
         
+        
         $this->modelPorto = new Application_Model_Porto();
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelAmostraCamarao = new Application_Model_AmostraCamarao();
         $this->modelBarcos = new Application_Model_Barcos();
         $this->modelEspecies = new Application_Model_Especie();
+        $this->modelUsuario = new Application_Model_Usuario();
     }
 
     public function indexAction()
@@ -37,10 +39,30 @@ class AmostraCamaraoController extends Zend_Controller_Action
     }
     public function novoAction()
     {
-        // action body
+        $users = $this->modelUsuario->select(null, 'tu_nome');
+        $portos = $this->modelPorto->select(null, 'pto_nome');
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $especies = $this->modelEspecies->selectCamarao(null, 'esp_nome_comum');
+        $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
+        
+        $this->view->assign("pesqueiros", $pesqueiros);
+        $this->view->assign("users", $users);
+        $this->view->assign("dados_porto", $portos);
+        $this->view->assign("barcos", $barcos);
+        $this->view->assign("especies", $especies);
     }
     public function editarAction(){
+        $users = $this->modelUsuario->select(null, 'tu_nome');
+        $portos = $this->modelPorto->select(null, 'pto_nome');
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $especies = $this->modelEspecies->selectCamarao(null, 'esp_nome_comum');
+        $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         
+        $this->view->assign("pesqueiros", $pesqueiros);
+        $this->view->assign("users", $users);
+        $this->view->assign("dados_porto", $portos);
+        $this->view->assign("barcos", $barcos);
+        $this->view->assign("especies", $especies);
     }
 
 }

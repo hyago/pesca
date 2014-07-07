@@ -75,6 +75,13 @@ class Application_Model_Especie
 
         $this->dbTableEspecie->delete($whereEspecie);
     }
+    public function selectCamarao(){
+        $this->dbTableEspecie = new Application_Model_DbTable_Especie();
+        $select = $this->dbTableEspecie->select()
+                ->from($this->dbTableEspecie)->where('esp_nome_comum = ?', 'Rosa')->orWhere('esp_nome_comum = ?', '7 barbas')->orWhere('esp_nome_comum = ?', 'Pistola');
 
+
+        return $this->dbTableEspecie->fetchAll($select)->toArray();
+    }
 }
 

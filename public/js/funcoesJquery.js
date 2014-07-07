@@ -698,11 +698,20 @@ function jsInsertPesqueiroWithTimeAndRange(frm, pag, entrevista) {
         location.replace(tmpUpdate);
 }
 
-function jsInsertEspecieCapturada(frm, pag, entrevista){
+function jsInsertEspecieCapturadaTipoVenda(frm, pag, entrevista){
     
     var TmpUrl  = (entrevista+ '#base');
     
     var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista + '/id_tipovenda/'+frm.tipoVenda.value+'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+function jsInsertEspecieCapturada(frm, pag, entrevista){
+    
+    var TmpUrl  = (entrevista+ '#base');
+    
+    var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista +'/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
     
