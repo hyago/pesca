@@ -2439,81 +2439,81 @@ SELECT ENTREVISTA.GRS_ID, ESPECIE.ESP_NOME_COMUM, ESPCAPT.SPC_QUANTIDADE, ESPCAP
 FROM T_GROSSEIRA AS ENTREVISTA, T_ESPECIE AS ESPECIE, T_GROSSEIRA_HAS_T_ESPECIE_CAPTURADA AS ESPCAPT
 WHERE ENTREVISTA.GRS_ID = ESPCAPT.GRS_ID AND ESPECIE.ESP_ID = ESPCAPT.ESP_ID;
 
-CREATE OR REPLACE VIEW v_coletamanual_has_t_especie_capturada AS 
- SELECT entrevista.cml_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_coletamanual_has_t_especie_capturada AS
+ SELECT entrevista.cml_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_cml_id, tvenda.ttv_tipovenda
    FROM t_coletamanual entrevista
-    
+
   LEFT JOIN t_coletamanual_has_t_especie_capturada as espcapt On entrevista.cml_id = espcapt.cml_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
 
-CREATE OR REPLACE VIEW v_jerere_has_t_especie_capturada AS 
- SELECT entrevista.jre_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_jerere_has_t_especie_capturada AS
+ SELECT entrevista.jre_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_jre_id, tvenda.ttv_tipovenda
    FROM t_jerere entrevista
-    
+
   LEFT JOIN t_jerere_has_t_especie_capturada as espcapt On entrevista.jre_id = espcapt.jre_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
 
 
-CREATE OR REPLACE VIEW v_linhafundo_has_t_especie_capturada AS 
- SELECT entrevista.lf_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_linhafundo_has_t_especie_capturada AS
+ SELECT entrevista.lf_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_lf_id, tvenda.ttv_tipovenda
    FROM t_linhafundo entrevista
-    
+
   LEFT JOIN t_linhafundo_has_t_especie_capturada as espcapt On entrevista.lf_id = espcapt.lf_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
 
 
-CREATE OR REPLACE VIEW v_manzua_has_t_especie_capturada AS 
- SELECT entrevista.man_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_manzua_has_t_especie_capturada AS
+ SELECT entrevista.man_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_man_id, tvenda.ttv_tipovenda
    FROM t_manzua entrevista
-    
+
   LEFT JOIN t_manzua_has_t_especie_capturada as espcapt On entrevista.man_id = espcapt.man_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
 
 
-CREATE OR REPLACE VIEW v_mergulho_has_t_especie_capturada AS 
- SELECT entrevista.mer_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_mergulho_has_t_especie_capturada AS
+ SELECT entrevista.mer_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_mer_id, tvenda.ttv_tipovenda
    FROM t_mergulho entrevista
-    
+
   LEFT JOIN t_mergulho_has_t_especie_capturada as espcapt On entrevista.mer_id = espcapt.mer_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
 
 
-CREATE OR REPLACE VIEW v_ratoeira_has_t_especie_capturada AS 
- SELECT entrevista.rat_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_ratoeira_has_t_especie_capturada AS
+ SELECT entrevista.rat_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_rat_id, tvenda.ttv_tipovenda
    FROM t_ratoeira entrevista
-    
+
   LEFT JOIN t_ratoeira_has_t_especie_capturada as espcapt On entrevista.rat_id = espcapt.rat_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
 
 
-CREATE OR REPLACE VIEW v_siripoia_has_t_especie_capturada AS 
- SELECT entrevista.sir_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_siripoia_has_t_especie_capturada AS
+ SELECT entrevista.sir_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_sir_id, tvenda.ttv_tipovenda
    FROM t_siripoia entrevista
-    
+
   LEFT JOIN t_siripoia_has_t_especie_capturada as espcapt On entrevista.sir_id = espcapt.sir_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
 
 
 
-CREATE OR REPLACE VIEW v_varapesca_has_t_especie_capturada AS 
- SELECT entrevista.vp_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+CREATE OR REPLACE VIEW v_varapesca_has_t_especie_capturada AS
+ SELECT entrevista.vp_id, especie.esp_nome_comum, espcapt.spc_quantidade,
     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_vp_id, tvenda.ttv_tipovenda
    FROM t_varapesca entrevista
-    
+
   LEFT JOIN t_varapesca_has_t_especie_capturada as espcapt On entrevista.vp_id = espcapt.vp_id
   LEFT JOIN  t_especie as especie ON especie.esp_id = espcapt.esp_id
   LEFT JOIN t_tipo_venda as tvenda ON espcapt.ttv_id = tvenda.ttv_id;
@@ -2857,9 +2857,9 @@ ON  PTO.TMUN_ID = TMUN.TMUN_ID;
 
 
 
-
-ALTER TABLE t_calao
-ADD cal_tamanho1 double precision, ADD cal_tamanho2 double precision
+-- ERRO AQUI
+-- ALTER TABLE t_calao
+-- ADD cal_tamanho1 double precision, ADD cal_tamanho2 double precision
 
 ------------------------------------AMOSTRAGEM---------------------------------------------------------------------------
 --Camarão-----------------------------------------------------------------------------------------------------------------
@@ -2912,10 +2912,10 @@ CREATE TABLE t_unidade_camarao
   tuc_id serial,
   tamc_id integer not null,
   tuc_sexo character varying(1),
-  tmat_id integer not null, 
+  tmat_id integer not null,
   tuc_comprimento_cabeca float,
   tuc_peso float,
-  Primary key (tuq_id),
+  Primary key (tuc_id),
   CONSTRAINT fk_t_unidade_camarao_amostra1 FOREIGN KEY (tamc_id)
       REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -2959,10 +2959,10 @@ CREATE TABLE t_unidade_peixe
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_unidade_peixe_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION   
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 ALTER TABLE t_calao
---DROP COLUMN cal_tamanho1, DROP COLUMN cal_tamanho2, 
+--DROP COLUMN cal_tamanho1, DROP COLUMN cal_tamanho2,
 Add cal_malha1 double precision, add cal_malha2 double precision;
 
 CREATE TABLE IF NOT EXISTS t_tipo_venda
