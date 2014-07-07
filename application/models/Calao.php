@@ -31,7 +31,7 @@ class Application_Model_Calao
         
         if($request['subamostra']==true){
         $dadosSubamostra = array(
-            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_pescador' => $request['PescadorEntrevistado'],
             'sa_datachegada' => $request['data']
         );
         

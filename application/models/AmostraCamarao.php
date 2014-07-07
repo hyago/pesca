@@ -45,16 +45,20 @@ class Application_Model_AmostraCamarao
         $this->dbTableEstagiario = new Application_Model_Usuario();
         $this->dbTableMonitor = new Application_Model_Usuario();
         
+        $capturaTotal = $request['captura_total'];
         
+        if(empty($capturaTotal)){
+            $capturaTotal = null;
+        }
         $dadosAmostraCamarao = array(
             
-            'tu_id_estagiario' => $request['select_nome_estagiario'],
+            'tu_id' => $request['select_nome_estagiario'],
             'tu_id_monitor' => $request['select_nome_monitor'],
-            'tamc_data' => $request['data_ficha'], 
+            'tamc_data' => $request['data_amostra'], 
             'pto_id' => $request['select_nome_porto'],
-            'bar_id' => $request['barcoNome'],
+            'bar_id' => $request['nomeBarco'],
             'paf_id' => $request['nomePesqueiro'],
-            'tamc_captura_total' => $request['captura_total'],
+            'tamc_captura_total' => $capturaTotal,
             'esp_id' => $request['especie_camarao'],
             'sa_id' => $request['subamostra_id']
         );
@@ -67,15 +71,20 @@ class Application_Model_AmostraCamarao
     {
         $this->dbTableAmostraCamarao = new Application_Model_DbTable_AmostraCamarao();
         
+        $capturaTotal = $request['captura_total'];
+        
+        if(empty($capturaTotal)){
+            $capturaTotal = null;
+        }
         $dadosAmostraCamarao = array(
             
-            'tu_id_estagiario' => $request['select_nome_estagiario'],
+            'tu_id' => $request['select_nome_estagiario'],
             'tu_id_monitor' => $request['select_nome_monitor'],
-            'tamc_data' => $request['data_ficha'], 
+            'tamc_data' => $request['data_amostra'], 
             'pto_id' => $request['select_nome_porto'],
-            'bar_id' => $request['barcoNome'],
+            'bar_id' => $request['nomeBarco'],
             'paf_id' => $request['nomePesqueiro'],
-            'tamc_captura_total' => $request['captura_total'],
+            'tamc_captura_total' => $capturaTotal,
             'esp_id' => $request['especie_camarao'],
             'sa_id' => $request['subamostra_id']
         );

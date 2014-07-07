@@ -52,7 +52,7 @@ class Application_Model_FichaDiaria
             't_monitor_tu_id1' => $request['select_nome_monitor'],
             'fd_data' => $request['data_ficha'], 
             'fd_turno' => $request['select_turno'],
-            'obs' => $request['observacao'],
+            'obs' => $request['obs'],
             'pto_id' => $request['select_nome_porto'],
             'tmp_id' => $request['select_tempo'],
             'vnt_id' => $request['select_vento']
@@ -72,7 +72,7 @@ class Application_Model_FichaDiaria
             't_monitor_tu_id1' => $request['select_nome_monitor'],
             'fd_data' => $request['data_ficha'], 
             'fd_turno' => $request['select_turno'],
-            'obs' => $request['observacao'],
+            'obs' => $request['obs'],
             'pto_id' => $request['select_nome_porto'],
             'tmp_id' => $request['select_tempo'],
             'vnt_id' => $request['select_vento']
@@ -80,7 +80,7 @@ class Application_Model_FichaDiaria
  
         
         $whereFichaDiaria= $this->dbTableFichaDiaria->getAdapter()
-                ->quoteInto('"fd_id" = ?', $request[0]);
+                ->quoteInto('"fd_id" = ?', $request['id_fichaDiaria']);
         
         
         $this->dbTableFichaDiaria->update($dadosFichaDiaria, $whereFichaDiaria);

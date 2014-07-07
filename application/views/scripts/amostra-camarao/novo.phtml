@@ -17,7 +17,7 @@
                 <label for="tipo">Estagiário:</label>
                 <select name="select_nome_estagiario" >
 
-                    <option nome="nome_estagiario" value="<?= $this->usuario['tu_id'] ?>"><?= $this->usuario['tu_nome'] ?></option>
+                    <option nome="nome_estagiario" value="<?= $this->usuario['tu_id'] ?>"><?= $this->usuario['tu_nome']  ?></option>
 
 
                 </select></br>
@@ -30,7 +30,7 @@
                     foreach ($this->users as $key => $monitor):
                         ?>
 
-                        <option nome="nome_monitor" value="<?= $monitor['tu_id'] ?>"><?= $monitor['tu_nome'] ?></option>
+                        <option nome="nome_monitor" value="<?= $monitor['tu_id'] ; ?>"><?= $monitor['tu_nome'] ?></option>
 
                         <?php
                     endforeach;
@@ -40,7 +40,7 @@
 
             <div id="form-esq">
                 <label for="tipo">Data:</label>
-                <input type="date"  placeholder="Data" name="data_amostra"/><br />
+                <input type="date"  placeholder="Data" name="data_amostra" /><br />
             </div>
 
 
@@ -94,6 +94,9 @@
             <div id="form-esq">
                 <label for="tipo">Id Subamostra:</label>
                 <select name="subamostra_id"/>
+                    <?php foreach ($this->subamostras as $key => $subamostra): ?>
+                        <option value="<?= $subamostra['sa_id']; ?>"><?= $subamostra['tp_nome'].'-'.$subamostra['sa_id']; ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div id="Submit">

@@ -152,6 +152,9 @@
         <controllerFile controllerName="Passos">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Subamostra">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -349,6 +352,8 @@
           <dbTableFile dbTableName="UnidadePeixe"/>
           <dbTableFile dbTableName="MaturidadeCamarao"/>
           <dbTableFile dbTableName="TipoVenda"/>
+          <dbTableFile dbTableName="VSubamostra"/>
+          <dbTableFile dbTableName="VUnidadeCamarao"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -417,6 +422,9 @@
         <modelFile modelName="AmostraPeixe"/>
         <modelFile modelName="Maturidade"/>
         <modelFile modelName="TipoVenda"/>
+        <modelFile modelName="Subamostra"/>
+        <modelFile modelName="UnidadeCamarao"/>
+        <modelFile modelName="UnidadePeixe"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -624,6 +632,9 @@
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Passos">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Subamostra">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

@@ -8,6 +8,7 @@
     <h3>Editar</h3>
 </div>
 
+<form action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
 <fieldset id="Desembarque">
     <div id="esquerda">
         <div id="form-esq">
@@ -121,20 +122,25 @@
             <input type="text" id="obs" name="obs"  value="<?= $this->fichadiaria['obs'] ?>"/><br />
             <br/>
         </div>
-
+        <input type="hidden" name="id_fichaDiaria"  value="<?= $this->fichadiaria['fd_id'] ?>"/><br />
+        <div id="Submit">
+            <input type="submit" value="Salvar Alterações"/><br />
+            <br/>
+        </div>
     </div>
 
     <br/>
     <br/>
 
 </fieldset>
+</form>
 <form id="formulario" action="<?= $this->url(array("controller" => "ficha-diaria", "action" => "atualizar"), null, true) ?>" method="post">
     <fieldset class="noEditable"><legend>Monitoramento:</legend>
         <fieldset class="noEditable"><legend>Artes de Pesca e quantidade de embarcacoes:</legend>
 
             <div id="base">
 
-                <input onclick="jsInsertMonitoramento(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "insertmonitoramento"), null, true) ?>')" type="button" value="Add row" />
+                <input onclick="jsInsertMonitoramento(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "insertmonitoramento"), null, true) ?>')" type="button" value="Adicionar" />
 
                 <select id="tam_medio" name="SelectMonitorada" style="float:left">
                     <option   value="TRUE" selected="selected">Monitorada</option>

@@ -206,6 +206,10 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function atualizarAction() {
+        $idFicha = $this->_getParam('id_fichaDiaria');
+        $this->modelFichaDiaria->update($this->_getAllParams());
+
+        $this->_redirect('/ficha-diaria/editar/id/'.$idFicha);
         
     }
     
