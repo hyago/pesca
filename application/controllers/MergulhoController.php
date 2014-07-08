@@ -270,8 +270,9 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_mergulho.pdf"');
-                header("Content-type: application/x-pdf");
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
    public function relatorioAction(){
@@ -298,7 +299,6 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelMergulho->selectMergulhoHasPesqueiro('mer_id='.$localData['mer_id'], array('mer_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['mer_id'] ==  $localData['mer_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -312,7 +312,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelMergulho->selectMergulhoHasEspCapturadas('mer_id='.$localData['mer_id'], array('mer_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['mer_id'] ==  $localData['mer_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -322,7 +321,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelMergulho->selectMergulhoHasAvistamento('mer_id='.$localData['mer_id'], array('mer_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['mer_id'] ==  $localData['mer_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -333,6 +331,7 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_mergulho.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

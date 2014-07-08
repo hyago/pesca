@@ -254,6 +254,7 @@ class EmalheController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_lista_entrevista_emalhe.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
@@ -283,14 +284,12 @@ class EmalheController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelEmalhe->selectEmalheHasPesqueiro('em_id='.$localData['em_id'], array('em_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['em_id'] ==  $localData['em_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelEmalhe->selectEmalheHasEspCapturadas('em_id='.$localData['em_id'], array('em_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['em_id'] ==  $localData['em_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -300,7 +299,6 @@ class EmalheController extends Zend_Controller_Action
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelEmalhe->selectEmalheHasAvistamento('em_id='.$localData['em_id'], array('em_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['em_id'] ==  $localData['em_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -311,6 +309,7 @@ class EmalheController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_emalhe.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

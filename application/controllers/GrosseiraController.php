@@ -104,7 +104,6 @@ private $usuario;
 
         $vEspecieCapturadas = $this->modelGrosseira->selectGrosseiraHasEspCapturadas('grs_id='.$idEntrevista);
 
-        //
         $vGrosseiraAvistamento = $this->modelGrosseira->selectGrosseiraHasAvistamento('grs_id='.$idEntrevista);
 
         $this->view->assign('destinos', $destinos);
@@ -263,8 +262,9 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_grosseira.pdf"');
-                header("Content-type: application/x-pdf");
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -292,7 +292,6 @@ private $usuario;
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelGrosseira->selectGrosseiraHasPesqueiro('grs_id='.$localData['grs_id'], array('grs_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['grs_id'] ==  $localData['grs_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -306,7 +305,6 @@ private $usuario;
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelGrosseira->selectGrosseiraHasEspCapturadas('grs_id='.$localData['grs_id'], array('grs_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['grs_id'] ==  $localData['grs_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -316,7 +314,6 @@ private $usuario;
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelGrosseira->selectGrosseiraHasAvistamento('grs_id='.$localData['grs_id'], array('grs_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['grs_id'] ==  $localData['grs_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -327,6 +324,7 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_grosseira.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

@@ -85,7 +85,6 @@ class VaraPescaController extends Zend_Controller_Action
     }
 
     public function editarAction(){
-         //$avistamentoVaraPesca = new Application_Model_DbTable_VVaraPescaHasAvistamento();
         $entrevista = $this->modelVaraPesca->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
@@ -195,7 +194,7 @@ class VaraPescaController extends Zend_Controller_Action
         $preco = $this->_getParam("precokg");
 
         $idEntrevista = $this->_getParam("id_entrevista");
-        
+
         $idTipoVenda =  $this->_getParam("id_tipovenda");
 
         $backUrl = $this->_getParam("back_url");
@@ -273,9 +272,10 @@ class VaraPescaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_varapesca.pdf"');
-                header("Content-type: application/x-pdf");
-                echo $pdf->render();
+		header("Content-type: application/x-pdf");
+		echo $pdf->render();
     }
 
    public function relatorioAction(){
@@ -302,7 +302,6 @@ class VaraPescaController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelVara->selectVaraPescaHasPesqueiro('vp_id='.$localData['vp_id'], array('vp_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['vp_id'] ==  $localData['vp_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -311,7 +310,6 @@ class VaraPescaController extends Zend_Controller_Action
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelVara->selectVaraPescaHasEspCapturadas('vp_id='.$localData['vp_id'], array('vp_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['vp_id'] ==  $localData['vp_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -321,7 +319,6 @@ class VaraPescaController extends Zend_Controller_Action
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelVara->selectVaraPescaHasAvistamento('vp_id='.$localData['vp_id'], array('vp_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['vp_id'] ==  $localData['vp_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -332,6 +329,7 @@ class VaraPescaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_varapesca.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

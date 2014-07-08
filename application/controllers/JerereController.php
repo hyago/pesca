@@ -97,7 +97,7 @@ public function visualizarAction() {
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
-        
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['jre_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['jre_dhvolta']);
@@ -192,7 +192,7 @@ public function visualizarAction() {
         $idEntrevista = $this->_getParam("id_entrevista");
 
         $backUrl = $this->_getParam("back_url");
-        
+
         $idTipoVenda =  $this->_getParam("id_tipovenda");
 
 
@@ -268,8 +268,9 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_jerere.pdf"');
-                header("Content-type: application/x-pdf");
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
     public function relatorioAction(){
@@ -296,7 +297,6 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelJerere->selectJerereHasPesqueiro('jre_id='.$localData['jre_id'], array('jre_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['jre_id'] ==  $localData['jre_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -310,7 +310,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelJerere->selectJerereHasEspCapturadas('jre_id='.$localData['jre_id'], array('jre_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['jre_id'] ==  $localData['jre_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -320,7 +319,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelJerere->selectJerereHasAvistamento('jre_id='.$localData['jre_id'], array('jre_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['jre_id'] ==  $localData['jre_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -331,6 +329,7 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_jerere.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

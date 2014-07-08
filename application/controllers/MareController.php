@@ -63,7 +63,7 @@ class MareController extends Zend_Controller_Action
 
         $this->view->assign("mare", $mares);
     }
-    
+
     public function atualizarAction()
     {
         $this->modelMare->update($this->_getAllParams());
@@ -73,7 +73,7 @@ class MareController extends Zend_Controller_Action
     /*
      * Cadastra uma Area de Pesca
      */
-    
+
 
 	public function relatorioAction() {
 	 $this->_helper->layout->disableLayout();
@@ -96,7 +96,9 @@ class MareController extends Zend_Controller_Action
 	 $modeloRelatorio->setNewLine();
 	 $pdf = $modeloRelatorio->getRelatorio();
 
-	 header("Content-Type: application/pdf");
-	 echo $pdf->render();
+		ob_end_clean();
+		header('Content-Disposition: attachment;filename="rel_mare.pdf"');
+		header("Content-type: application/x-pdf");
+		echo $pdf->render();
    }
 }

@@ -96,7 +96,9 @@ class PesqueiroController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
+		ob_end_clean();
+		header('Content-Disposition: attachment;filename="rel_pesqueiros.pdf"');
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
    }
 }

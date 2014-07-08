@@ -110,6 +110,7 @@ class GrupoController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_filogenia_grupo.pdf"');
 		header("Content-type: application/x-pdf");
 		echo $pdf->render();

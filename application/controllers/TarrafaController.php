@@ -245,8 +245,9 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_tarrafa.pdf"');
-                header("Content-type: application/x-pdf");
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -274,7 +275,6 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelTarrafa->selectTarrafaHasPesqueiro('tar_id='.$localData['tar_id'], array('tar_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['tar_id'] ==  $localData['tar_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -288,7 +288,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelTarrafa->selectTarrafaHasEspCapturadas('tar_id='.$localData['tar_id'], array('tar_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['tar_id'] ==  $localData['tar_id'] ) {
 				$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -298,7 +297,6 @@ public function visualizarAction() {
 				$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelTarrafa->selectTarrafaHasAvistamento('tar_id='.$localData['tar_id'], array('tar_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['tar_id'] ==  $localData['tar_id'] ) {
 				$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -309,6 +307,7 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_tarrafa.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

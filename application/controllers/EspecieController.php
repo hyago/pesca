@@ -185,12 +185,10 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_filogenia_especie.pdf"');
 		header("Content-type: application/x-pdf");
 		echo $pdf->render();
-
-// 		header("Content-Type: application/pdf");
-// 		echo $pdf->render();
    }
 
    	public function relatoriolistaAction() {
@@ -221,11 +219,9 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-// 		header('Content-Disposition: attachment;filename="rel_filogenia_especie.pdf"');
-// 		header("Content-type: application/x-pdf");
-// 		echo $pdf->render();
-
-		header("Content-Type: application/pdf");
+		ob_end_clean();
+		header('Content-Disposition: attachment;filename="rel_filogenia_especie_lista.pdf"');
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
    }
 

@@ -87,7 +87,6 @@ public function visualizarAction() {
     }
 
     public function editarAction(){
-         //$avistamentoRatoeira = new Application_Model_DbTable_VRatoeiraHasAvistamento();
         $entrevista = $this->modelRatoeira->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
@@ -99,7 +98,7 @@ public function visualizarAction() {
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $tipoVenda = $this->modelTipoVenda->select(null, 'ttv_tipovenda');
-        
+
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['rat_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['rat_dhvolta']);
@@ -196,7 +195,7 @@ public function visualizarAction() {
         $backUrl = $this->_getParam("back_url");
 
         $idTipoVenda =  $this->_getParam("id_tipovenda");
-        
+
         $this->modelRatoeira->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/ratoeira/editar/id/" . $backUrl);
@@ -269,8 +268,9 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_ratoeira.pdf"');
-                header("Content-type: application/x-pdf");
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -298,7 +298,6 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelRatoeira->selectRatoeiraHasPesqueiro('rat_id='.$localData['rat_id'], array('rat_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['rat_id'] ==  $localData['rat_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -312,7 +311,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelRatoeira->selectRatoeiraHasEspCapturadas('rat_id='.$localData['rat_id'], array('rat_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['rat_id'] ==  $localData['rat_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -322,7 +320,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelRatoeira->selectRatoeiraHasAvistamento('rat_id='.$localData['rat_id'], array('rat_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['rat_id'] ==  $localData['rat_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -333,6 +330,7 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_ratoeira.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

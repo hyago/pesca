@@ -111,8 +111,10 @@ class TipoCapturadaController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+		ob_end_clean();
+        header('Content-Disposition: attachment;filename="rel_lista_tipo_capturada.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
    }
 }
 

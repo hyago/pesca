@@ -253,6 +253,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 
+        ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_lista_entrevista_arrastofundo.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
@@ -282,7 +283,6 @@ class ArrastoFundoController extends Zend_Controller_Action {
             $modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
             $modeloRelatorio->setNewLine();
 
-//             $localPesqueiro = $localModelArrastoFundo->selectArrastoHasPesqueiro('af_id=' . $localData['af_id'], array('af_id', 'paf_pesqueiro'), NULL);
             foreach ($localPesqueiro as $key => $localDataPesqueiro) {
 				if ( $localDataPesqueiro['af_id'] ==  $localData['af_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ', $localDataPesqueiro['paf_pesqueiro']);
@@ -295,7 +295,6 @@ class ArrastoFundoController extends Zend_Controller_Action {
 					$modeloRelatorio->setNewLine();
 				}
             }
-//             $localEspecie = $localModelArrastoFundo->selectArrastoHasEspCapturadas('af_id=' . $localData['af_id'], array('af_id', 'esp_nome_comum'), NULL);
             foreach ($localEspecie as $key => $localDataEspecie) {
 				if ( $localDataEspecie['af_id'] ==  $localData['af_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ', $localDataEspecie['esp_nome_comum']);
@@ -305,7 +304,6 @@ class ArrastoFundoController extends Zend_Controller_Action {
 					$modeloRelatorio->setNewLine();
 				}
             }
-//             $localAvist = $localModelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $localData['af_id'], array('af_id', 'avs_descricao'), NULL);
             foreach ($localAvist as $key => $localDataAvist) {
 				if ( $localDataAvist['af_id'] ==  $localData['af_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ', $localDataAvist['avs_descricao']);
@@ -316,6 +314,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 
+        ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
@@ -361,6 +360,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $modeloRelatorio->setValue(80, 'Total de Capturadas');
         $pdf = $modeloRelatorio->getRelatorio();
 
+        ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo_group_especie.pdf"');
         header("Content-type: application/pdf");
         echo $pdf->render();
@@ -396,6 +396,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $modeloRelatorio->setValue(80, 'Total de Pesqueiros');
         $pdf = $modeloRelatorio->getRelatorio();
 
+        ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_arrastofundo_group_pesqueiro.pdf"');
         header("Content-type: application/pdf");
         echo $pdf->render();

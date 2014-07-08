@@ -150,6 +150,7 @@ class GeneroController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_filogenia_genero.pdf"');
 		header("Content-type: application/x-pdf");
 		echo $pdf->render();
@@ -179,6 +180,7 @@ class GeneroController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_filogenia_genero_lista.pdf"');
 		header("Content-type: application/x-pdf");
 		echo $pdf->render();

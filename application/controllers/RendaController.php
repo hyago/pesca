@@ -111,8 +111,10 @@ private $usuario;
 	 $modeloRelatorio->setNewLine();
 	 $pdf = $modeloRelatorio->getRelatorio();
 
-	 header("Content-Type: application/pdf");
-	 echo $pdf->render();
+		ob_end_clean();
+        header('Content-Disposition: attachment;filename="rel_lista_renda.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
    }
 
 	public function relatoriofatorAction() {
@@ -140,8 +142,10 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+		ob_end_clean();
+        header('Content-Disposition: attachment;filename="rel_lista_renda_fator.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
    }
 }
 

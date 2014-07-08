@@ -204,8 +204,10 @@ class UsuariosController extends Zend_Controller_Action {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+		ob_end_clean();
+        header('Content-Disposition: attachment;filename="rel_usuarios_lista.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
    }
 
     public function relatoriocompletoAction() {
@@ -258,8 +260,10 @@ class UsuariosController extends Zend_Controller_Action {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
-		header("Content-Type: application/pdf");
-		echo $pdf->render();
+		ob_end_clean();
+        header('Content-Disposition: attachment;filename="rel_usuarios.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
    }
 
 	private function mascara_string($mascara,$string) {

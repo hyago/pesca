@@ -248,8 +248,9 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_calao.pdf"');
-                header("Content-type: application/x-pdf");
+        header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -277,14 +278,12 @@ private $usuario;
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelCalao->selectCalaoHasPesqueiro('cal_id='.$localData['cal_id'], array('cal_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['cal_id'] ==  $localData['cal_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelCalao->selectCalaoHasEspCapturadas('cal_id='.$localData['cal_id'], array('cal_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['cal_id'] ==  $localData['cal_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -294,7 +293,6 @@ private $usuario;
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelCalao->selectCalaoHasAvistamento('cal_id='.$localData['cal_id'], array('cal_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['cal_id'] ==  $localData['cal_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -305,6 +303,7 @@ private $usuario;
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_calao.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

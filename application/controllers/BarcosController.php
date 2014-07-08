@@ -61,7 +61,7 @@ class BarcosController extends Zend_Controller_Action
     }
     public function excluirAction() {
         $this->modelBarcos->delete($this->_getParam('id'));
-        
+
         $this->_redirect('barcos/index');
     }
 
@@ -86,8 +86,10 @@ class BarcosController extends Zend_Controller_Action
         $modeloRelatorio->setNewLine();
 	$pdf = $modeloRelatorio->getRelatorio();
 
-	header("Content-Type: application/pdf");
-	echo $pdf->render();
+		ob_end_clean();
+        header('Content-Disposition: attachment;filename="rel_lista_embarcacoes.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
    }
 }
 

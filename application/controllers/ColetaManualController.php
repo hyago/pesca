@@ -198,7 +198,7 @@ class ColetaManualController extends Zend_Controller_Action
         $backUrl = $this->_getParam("back_url");
 
         $idTipoVenda =  $this->_getParam("id_tipovenda");
-        
+
         $this->modelColetaManual->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
@@ -271,8 +271,9 @@ class ColetaManualController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_coletamanual.pdf"');
-                header("Content-type: application/x-pdf");
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
 
@@ -300,7 +301,6 @@ class ColetaManualController extends Zend_Controller_Action
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelColetaManual->selectColetaManualHasPesqueiro('cml_id='.$localData['cml_id'], array('cml_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['cml_id'] ==  $localData['cml_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -314,7 +314,6 @@ class ColetaManualController extends Zend_Controller_Action
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$localData['cml_id'], array('cml_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['cml_id'] ==  $localData['cml_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -324,7 +323,6 @@ class ColetaManualController extends Zend_Controller_Action
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelColetaManual->selectColetaManualHasAvistamento('cml_id='.$localData['cml_id'], array('cml_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataAvist['cml_id'] ==  $localData['cml_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -335,6 +333,7 @@ class ColetaManualController extends Zend_Controller_Action
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_coletamanual.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();

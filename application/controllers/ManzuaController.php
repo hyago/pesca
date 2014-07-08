@@ -196,7 +196,7 @@ public function visualizarAction() {
         $backUrl = $this->_getParam("back_url");
 
         $idTipoVenda =  $this->_getParam("id_tipovenda");
-        
+
         $this->modelManzua->insertEspCapturada($idEntrevista, $especie, $quantidade, $peso, $preco, $idTipoVenda);
 
         $this->redirect("/manzua/editar/id/" . $backUrl);
@@ -269,8 +269,9 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
 		header('Content-Disposition: attachment;filename="rel_lista_entrevista_manzua.pdf"');
-                header("Content-type: application/x-pdf");
+		header("Content-type: application/x-pdf");
 		echo $pdf->render();
     }
    public function relatorioAction(){
@@ -297,7 +298,6 @@ public function visualizarAction() {
 			$modeloRelatorio->setLegValue(450, 'Barco: ', $localData['bar_nome']);
 			$modeloRelatorio->setNewLine();
 
-// 			$localPesqueiro = $localModelManzua->selectManzuaHasPesqueiro('man_id='.$localData['man_id'], array('man_id', 'paf_pesqueiro'), NULL);
 			foreach ( $localPesqueiro as $key => $localDataPesqueiro ) {
 				if ( $localDataPesqueiro['man_id'] ==  $localData['man_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Pesqueiro: ',  $localDataPesqueiro['paf_pesqueiro']);
@@ -311,7 +311,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localEspecie = $localModelManzua->selectManzuaHasEspCapturadas('man_id='.$localData['man_id'], array('man_id', 'esp_nome_comum'), NULL);
 			foreach ( $localEspecie as $key => $localDataEspecie ) {
 				if ( $localDataEspecie['man_id'] ==  $localData['man_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Espécie: ',  $localDataEspecie['esp_nome_comum']);
@@ -321,7 +320,6 @@ public function visualizarAction() {
 					$modeloRelatorio->setNewLine();
 				}
 			}
-// 			$localAvist = $localModelManzua->selectManzuaHasAvistamento('man_id='.$localData['man_id'], array('man_id', 'avs_descricao'), NULL);
 			foreach ( $localAvist as $key => $localDataAvist ) {
 				if ( $localDataEspecie['man_id'] ==  $localData['man_id'] ) {
 					$modeloRelatorio->setLegValue(80, 'Avist.: ',  $localDataAvist['avs_descricao']);
@@ -332,6 +330,7 @@ public function visualizarAction() {
 		$modeloRelatorio->setNewLine();
 		$pdf = $modeloRelatorio->getRelatorio();
 
+		ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_entrevista_manzua.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
