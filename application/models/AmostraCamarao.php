@@ -91,7 +91,7 @@ class Application_Model_AmostraCamarao
  
         
         $whereAmostraCamarao= $this->dbTableAmostraCamarao->getAdapter()
-                ->quoteInto('"tamc_id" = ?', $request[0]);
+                ->quoteInto('"tamc_id" = ?', $request['id_amostra']);
         
         
         $this->dbTableAmostraCamarao->update($dadosAmostraCamarao, $whereAmostraCamarao);
@@ -114,5 +114,20 @@ class Application_Model_AmostraCamarao
         
         return $this->dbTableAmostraCamarao->fetchAll($select)->toArray();
     }
+    public function insertUnidade($idAmostra, $sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableUnidadeCamarao = new Application_Model_DbTable_UnidadeCamarao();
 
+
+        $dadosUnidade = array(
+            'tamc_id' => $idAmostra,
+            'tuc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tuc_comprimento_cabeca' => $compCabeca,
+            'tuc_peso' => $peso
+        );
+
+        $this->dbTableUnidadeCamarao->insert($dadosUnidade);
+        return;
+    }
 }

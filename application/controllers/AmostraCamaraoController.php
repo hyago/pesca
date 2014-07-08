@@ -62,6 +62,12 @@ class AmostraCamaraoController extends Zend_Controller_Action
         
         $this->redirect('amostra-camarao/editar/id/'.$idAmostra);
     }
+    public function atualizarAction() {
+        $idAmostra = $this->_getParam('id_amostra');
+        $this->modelAmostraCamarao->update($this->_getAllParams());
+
+        $this->_redirect('amostra-camarao/editar/id/' . $idAmostra);
+    }
     public function editarAction(){
         $amostragem = $this->modelAmostraCamarao->find($this->_getParam('id'));
         $users = $this->modelUsuario->select(null, 'tu_nome');
@@ -82,6 +88,26 @@ class AmostraCamaraoController extends Zend_Controller_Action
         $this->view->assign("dados_porto", $portos);
         $this->view->assign("barcos", $barcos);
         $this->view->assign("especies", $especies);
+    }
+    public function insertunidadeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idAmostra = $this->_getParam("id_amostragem");
+
+        $sexo = $this->_getParam("SelectSexo");
+
+        $maturidade = $this->_getParam("SelectMaturidade");
+
+        $compCabeca = $this->_getParam("comprimentoCabeca");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelAmostraCamarao->insertUnidade($idAmostra, $sexo, $maturidade, $compCabeca, $peso);
+
+        $this->redirect("/amostra-camarao/editar/id/" . $backUrl);
     }
 
 }

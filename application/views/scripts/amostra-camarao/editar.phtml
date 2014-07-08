@@ -99,6 +99,8 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+            <input type="hidden" name="id_amostra" value="<?= $this->amostragem['tamc_id']?>"/><br />
+            
             <div id="Submit">
                 <input type="submit" value="Salvar Alterações" /> 
             </div>
@@ -140,7 +142,7 @@
          <fieldset class="noEditable" id="itemArteTipoRows"><legend>Dados Cadastrados:</legend>
                 <table id="especiesCapturadas">
                     <tr>
-                        <th width="20%">Id Amostragem</th>
+                        
                         <th width="20%">Id Amostra</th>
                         <th width="10%">Sexo</th>
                         <th width="20%">Maturidade</th>
@@ -151,7 +153,7 @@
                     foreach ($this->unidadeCamarao as $key => $unidadeCamarao):
                         ?>
                         <tr id="itemEmbarcacoesRows">
-                            <td name="inputAmostragem"> <?= $unidadeCamarao['tamc_id'] ?> </td>
+                            
                             <td name="inputAmostra"> <?= $unidadeCamarao['tuc_id'] ?> </td>
                             <td name="inputSexo"> <?= $unidadeCamarao['tuc_sexo'] ?> </td>
                             <td name="inputMaturidade"> <?= $unidadeCamarao['tmat_tipo'] ?> </td>

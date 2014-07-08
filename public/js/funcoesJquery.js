@@ -868,7 +868,7 @@ function jsInsertAmostraCamarao(frm, pag, amostragem){
     
     var TmpUrl  = (amostragem+ '#base');
     
-    var tmpUpdate = (pag + '/SelectSexo/' + frm.SelectSexo.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + '/comprimentoCabeca/'+ frm.comprimentoCabeca.value + '/peso/'+frm.peso.value+'/back_url/' + TmpUrl);
+    var tmpUpdate = (pag + '/id_amostragem/'+amostragem+'/SelectSexo/' + frm.SelectSexo.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + '/comprimentoCabeca/'+ frm.comprimentoCabeca.value + '/peso/'+frm.peso.value+'/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
     
