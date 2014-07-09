@@ -2918,7 +2918,7 @@ CREATE TABLE t_amostra_camarao
 (
   tamc_id serial,
   tu_id_monitor integer not null,
-  tu_id_estagiario integer not null,
+  tu_id integer not null,
   pto_id integer not null,
   tamc_data date null,
   bar_id integer not null,
@@ -2981,7 +2981,7 @@ CREATE TABLE t_amostra_peixe
 (
   tamp_id serial,
   tu_id_monitor integer not null,
-  tu_id_estagiario integer not null,
+  tu_id integer not null,
   pto_id integer not null,
   sa_id integer not null,
   PRIMARY KEY (tamp_id),

@@ -1,3 +1,64 @@
+drop table t_amostra_camarao cascade;
+CREATE TABLE t_amostra_camarao
+(
+  tamc_id serial,
+  tu_id_monitor integer not null,
+  tu_id integer not null,
+  pto_id integer not null,
+  tamc_data date null,
+  bar_id integer not null,
+  paf_id integer not null,
+  esp_id integer not null,
+  tamc_captura_total float null,
+  sa_id integer not null,
+  PRIMARY KEY (tamc_id),
+  CONSTRAINT fk_t_amostra_camarao_usuario1 FOREIGN KEY (tu_id_monitor)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id_estagiario)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_porto1 FOREIGN KEY (pto_id)
+      REFERENCES t_porto (pto_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_barco1 FOREIGN KEY (bar_id)
+      REFERENCES t_barco (bar_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_pesqueiro1 FOREIGN KEY (paf_id)
+      REFERENCES t_pesqueiro_af (paf_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_especie1 FOREIGN KEY (esp_id)
+      REFERENCES t_especie (esp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_camarao_subamostra1 FOREIGN KEY (sa_id)
+      REFERENCES t_subamostra (sa_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+
+drop table t_amostra_peixe cascade;
+CREATE TABLE t_amostra_peixe
+(
+  tamp_id serial,
+  tu_id_monitor integer not null,
+  tu_id integer not null,
+  pto_id integer not null,
+  sa_id integer not null,
+  PRIMARY KEY (tamp_id),
+  CONSTRAINT fk_t_amostra_peixe_usuario1 FOREIGN KEY (tu_id_monitor)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_peixe_usuario2 FOREIGN KEY (tu_id_estagiario)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_peixe_porto1 FOREIGN KEY (pto_id)
+      REFERENCES t_porto (pto_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_t_amostra_peixe_subamostra1 FOREIGN KEY (sa_id)
+      REFERENCES t_subamostra (sa_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
 CREATE OR REPLACE VIEW v_subamostra AS
  SELECT t_subamostra.sa_id, t_pescador.tp_nome, t_subamostra.sa_datachegada, t_subamostra.sa_pescador
    FROM t_subamostra, t_pescador
