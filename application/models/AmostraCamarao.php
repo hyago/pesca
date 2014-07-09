@@ -41,9 +41,6 @@ class Application_Model_AmostraCamarao
     public function insert(array $request)
     {
         $this->dbTableAmostraCamarao = new Application_Model_DbTable_AmostraCamarao();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
         
         $capturaTotal = $request['captura_total'];
         
@@ -129,5 +126,14 @@ class Application_Model_AmostraCamarao
 
         $this->dbTableUnidadeCamarao->insert($dadosUnidade);
         return;
+    }
+    public function deleteUnidade($idUnidade){
+        
+        $this->dbTableUnidadeCamarao = new Application_Model_DbTable_UnidadeCamarao();
+        
+        $whereUnidade= $this->dbTableUnidadeCamarao->getAdapter()
+                ->quoteInto('"tuc_id" = ?', $idUnidade);
+        
+        $this->dbTableUnidadeCamarao->delete($whereUnidade);
     }
 }

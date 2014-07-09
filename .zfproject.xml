@@ -355,6 +355,8 @@
           <dbTableFile dbTableName="VSubamostra"/>
           <dbTableFile dbTableName="VUnidadeCamarao"/>
           <dbTableFile dbTableName="VAmostraCamarao"/>
+          <dbTableFile dbTableName="VUnidadePeixe"/>
+          <dbTableFile dbTableName="VAmostraPeixe"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>

@@ -24,43 +24,6 @@ private $dbTableUnidadeCamarao;
         return $arr[0];
     }
     
-    public function insert(array $request)
-    {
-        $this->dbTableUnidadeCamarao = new Application_Model_DbTable_UnidadeCamarao();
-        
-        $dadosUnidadeCamarao = array(
-            'tareap_areapesca' => $request['areaPesca']
-        );
-        
-        $this->dbTableUnidadeCamarao->insert($dadosUnidadeCamarao);
-
-        return;
-    }
-    
-    public function update(array $request)
-    {
-        $this->dbTableUnidadeCamarao = new Application_Model_DbTable_UnidadeCamarao();
-        
-        $dadosUnidadeCamarao = array(
-            'tareap_areapesca' => $request['areaPesca']
-        );
-        
-        $whereUnidadeCamarao= $this->dbTableUnidadeCamarao->getAdapter()
-                ->quoteInto('"tareap_id" = ?', $request['idUnidadeCamarao']);
-        
-        $this->dbTableUnidadeCamarao->update($dadosUnidadeCamarao, $whereUnidadeCamarao);
-    }
-    
-    public function delete($idUnidadeCamarao)
-    {
-        $this->dbTableUnidadeCamarao = new Application_Model_DbTable_UnidadeCamarao();       
-                
-        $whereUnidadeCamarao= $this->dbTableUnidadeCamarao->getAdapter()
-                ->quoteInto('"tareap_id" = ?', $idUnidadeCamarao);
-        
-        $this->dbTableUnidadeCamarao->delete($whereUnidadeCamarao);
-    }
-    
 }
 
 

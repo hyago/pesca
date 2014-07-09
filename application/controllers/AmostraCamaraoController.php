@@ -112,10 +112,22 @@ class AmostraCamaraoController extends Zend_Controller_Action
         $this->redirect("/amostra-camarao/editar/id/" . $backUrl);
     }
     public function deleteAction(){
+        $this->modelAmostraCamarao->delete($this->_getParam('id'));
+
+        $this->_redirect('amostra-camarao/index');
         
     }
     public function deleteunidadeAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
         
+        $idUnidade = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelAmostraCamarao->deleteUnidade($idUnidade);
+
+        $this->redirect("/amostra-camarao/editar/id/" . $backUrl);
     }
 }
 

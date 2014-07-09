@@ -3010,7 +3010,7 @@ CREATE TABLE t_unidade_peixe
   tuc_sexo character varying(1),
   Primary key (tup_id),
   CONSTRAINT fk_t_unidade_peixe_amostra1 FOREIGN KEY (tamp_id)
-      REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
+      REFERENCES t_amostra_peixe (tamp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_unidade_peixe_especie1 FOREIGN KEY (esp_id)
       REFERENCES t_especie (esp_id) MATCH SIMPLE

@@ -873,16 +873,24 @@ function jsInsertAmostraCamarao(frm, pag, amostragem){
     location.replace(tmpUpdate);
     
 }
-function jsDeleteAmostragem(fichaId, pag, idAvistamento) {
-    var TmpUrl = (+fichaId + '#base');
+function jsDeleteUnidade(amostragemId, pag, idUnidade) {
+    var TmpUrl = (+amostragemId + '#base');
 
-    var tmpUpdate = (pag + '/id_entrevista/' + fichaId + '/id_avistamento/'+idAvistamento+ '/back_url/' + TmpUrl);
+    var tmpUpdate = (pag + '/id_amostragem/' + amostragemId + '/id/'+idUnidade+ '/back_url/' + TmpUrl);
 
     if (confirm("Realmente deseja excluir este item?")) {
         location.replace(tmpUpdate);
     }
 }
-
+function jsInsertAmostraPeixe(frm, pag, amostragem){
+    
+    var TmpUrl  = (amostragem+ '#base');
+    
+    var tmpUpdate = (pag + '/id_amostragem/'+amostragem+'/SelectSexo/' + frm.SelectSexo.value +'/SelectEspecie/' + frm.SelectEspecie.value + '/comprimento/'+ frm.comprimento.value + '/peso/'+frm.peso.value+'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
 
 ////            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependente /_/_/_/_/_/_/_/_/_/_/_/_/_/
 //var rowNumDependente = 1000;
