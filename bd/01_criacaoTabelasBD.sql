@@ -2930,7 +2930,7 @@ CREATE TABLE t_amostra_camarao
   CONSTRAINT fk_t_amostra_camarao_usuario1 FOREIGN KEY (tu_id_monitor)
       REFERENCES t_usuario (tu_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id_estagiario)
+CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id)
       REFERENCES t_usuario (tu_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_amostra_camarao_porto1 FOREIGN KEY (pto_id)
@@ -2988,7 +2988,7 @@ CREATE TABLE t_amostra_peixe
   CONSTRAINT fk_t_amostra_peixe_usuario1 FOREIGN KEY (tu_id_monitor)
       REFERENCES t_usuario (tu_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_amostra_peixe_usuario2 FOREIGN KEY (tu_id_estagiario)
+  CONSTRAINT fk_t_amostra_peixe_usuario2 FOREIGN KEY (tu_id)
       REFERENCES t_usuario (tu_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_t_amostra_peixe_porto1 FOREIGN KEY (pto_id)
