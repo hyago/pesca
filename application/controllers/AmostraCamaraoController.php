@@ -2,7 +2,6 @@
 
 class AmostraCamaraoController extends Zend_Controller_Action
 {
-
     public function init()
     {
         $this->modelUsuario = new Application_Model_Usuario();
@@ -38,7 +37,9 @@ class AmostraCamaraoController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $vAmostraCamarao = $this->modelAmostraCamarao->selectView();
+        
+        $this->view->assign('vAmostraCamarao', $vAmostraCamarao);
     }
     public function novoAction()
     {
@@ -76,7 +77,8 @@ class AmostraCamaraoController extends Zend_Controller_Action
         $especies = $this->modelEspecies->selectCamarao(null, 'esp_nome_comum');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $subamostras = $this->modelSubamostra->select(null, 'tp_nome');
-        $unidadeCamarao = $this->modelUnidadeCamarao->select();
+        $idAmostra = $this->_getParam('id');
+        $unidadeCamarao = $this->modelUnidadeCamarao->select('tamc_id = '.$idAmostra);
         $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
         
         $this->view->assign('maturidade', $maturidade);
@@ -109,6 +111,11 @@ class AmostraCamaraoController extends Zend_Controller_Action
 
         $this->redirect("/amostra-camarao/editar/id/" . $backUrl);
     }
-
+    public function deleteAction(){
+        
+    }
+    public function deleteunidadeAction(){
+        
+    }
 }
 

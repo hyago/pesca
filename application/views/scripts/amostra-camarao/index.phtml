@@ -5,18 +5,28 @@
     <table>
         <tr>
             <th>Id</th>
-            <th></th>
+            <th>Estagiário</th>
+            <th>Monitor</th>
+            <th>Porto</th>
+            <th>Pesqueiro</th>
+            <th>Camarão</th>
+            <th>Captura total</th>
         </tr>
 
         <?php
-        foreach ($this->barcos as $key => $barco):
+        foreach ($this->vAmostraCamarao as $key => $vAmostra):
             ?>
             <tr>
-                <td><?= $barco['bar_id'] ?></td>
-                <td><?= $barco['bar_nome'] ?></td>
+                <td><?= $vAmostra['tamc_id'] ?></td>
+                <td><?= $vAmostra['tu_nome'] ?></td>
+                <td><?= $vAmostra['tmonitor'] ?></td>
+                <td><?= $vAmostra['pto_nome'] ?></td>
+                <td><?= $vAmostra['paf_pesqueiro'] ?></td>
+                <td><?= $vAmostra['esp_nome_comum'] ?></td>
+                <td><?= $vAmostra['tamc_captura_total'] ?></td>
 
                 <td class="td-botao">
-                    <a href="<?= $this->url(array("controller" => "barcos", "action" => "editar", "id" => $barco['bar_id']), null, true) ?>">
+                    <a href="<?= $this->url(array("controller" => "amostra-camarao", "action" => "editar", "id" => $vAmostra['tamc_id']), null, true) ?>">
                         <ul id="icons" class="ui-widget ui-helper-clearfix">
                             <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
                         </ul>
@@ -24,11 +34,11 @@
                 </td>
 
                 <td class="td-botao">
-                    <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "barcos", "action" => "excluir", "id" => $barco['bar_id']), null, true) ?>')">
+                    <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "amostra-camarao", "action" => "excluir", "id" => $vAmostra['tamc_id']), null, true) ?>')">
                 </td>
 
             </tr>
         <?php endforeach; ?>
     </table>
     <br/><br/>
-    <a href="<?= $this->url(array("controller" => "barcos", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+ 

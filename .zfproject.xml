@@ -354,6 +354,7 @@
           <dbTableFile dbTableName="TipoVenda"/>
           <dbTableFile dbTableName="VSubamostra"/>
           <dbTableFile dbTableName="VUnidadeCamarao"/>
+          <dbTableFile dbTableName="VAmostraCamarao"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
