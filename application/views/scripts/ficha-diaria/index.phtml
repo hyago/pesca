@@ -62,11 +62,7 @@
             </a>
         </td>
         <td width="5%" class="td-botao">
-            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"excluir", "id" => $fichadiaria['fd_id']),null,true)?>">
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-trash"></span></li>
-                </ul>
-            </a>
+            <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "ficha-diaria", "action" => "excluir", "id" => $fichadiaria['fd_id']), null, true) ?>')">
         </td>
         <td width="5%" class="td-botao">
             <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"imprimirfichaid", "id" => $fichadiaria['fd_id']),null,true)?>">
