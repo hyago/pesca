@@ -23,7 +23,7 @@
             <label for="municipio">Município</label>
             <select name="municipio" id="municipio">
                 <?php foreach ($this->municipios as $key => $municipio): ?>
-                <option value="<?= $municipio['tmun_id']; ?>"><?= $municipio['tuf_sigla'], ' ',$municipio['tmun_municipio']; ?></option>
+                <option value="<?= $municipio['tmun_id']; ?>"><?= $municipio['tmun_municipio'],' - ',$municipio['tuf_sigla']; ?></option>
                 <?php endforeach; ?>
             </select>            
         </div>

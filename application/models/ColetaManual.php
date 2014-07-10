@@ -85,6 +85,17 @@ private $dbTableColetaManual;
         if(empty($combustivel)){
             $combustivel = null;
         }
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+
+        $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
         $dadosColetaManual = array(
             'cml_embarcada' => $request['embarcada'],
             'cml_motor'=> $request['motor'],

@@ -184,14 +184,14 @@ body{
 #rodape {
     clear: both;
     background: #f8f8ff;
-    text-align: left;
+    //text-align: left;
     height: 70px;
 }
 
 #parceiros {
     margin: 0px;
-    width: 900px;
-    height: 100px;
+    width: 1000px;
+    height: 70px;
     background: #f8f8ff;
 }
 
@@ -201,7 +201,8 @@ body{
 
 #parceiros ul li {
     display: inline;
-    padding-right: 95px;
+    margin-left: 0px;
+    margin-right: 123px;
 }
 
 input[type=submit]{
@@ -226,4 +227,8 @@ input[type=submit]{
 h4,h5{
     margin-left: 130px;
     color: #462420;
+}
+#titulo-img{
+    color: #5F302B;
+    font-size: 10px;
 }

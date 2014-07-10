@@ -41,7 +41,7 @@ class LinhaController extends Zend_Controller_Action
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
-        $iscas = $this->modelIsca->select();
+        $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
@@ -63,13 +63,13 @@ class LinhaController extends Zend_Controller_Action
          //$avistamentoLinha = new Application_Model_DbTable_VLinhaHasAvistamento();
         $entrevista = $this->modelLinha->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
-        $barcos = $this->modelBarcos->select();
-        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select();
+        $barcos = $this->modelBarcos->select(null, 'bar_nome');
+        $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
-        $iscas = $this->modelIsca->select();
+        $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
 

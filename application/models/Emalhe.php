@@ -160,6 +160,17 @@ class Application_Model_Emalhe
         $timestampLancamento = $request['dataLancamento']." ".$request['horaLancamento'];
         $timestampRecolhimento = $request['dataRecolhimento']." ".$request['horaRecolhimento'];
         
+        if($request['subamostra']==true){
+        $dadosSubamostra = array(
+            'sa_pescador' => $request['pescadorEntrevistado'],
+            'sa_datachegada' => $request['dataVolta']
+        );
+
+        $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        }
+        else {
+            $idSubamostra = null;
+        }
         
         
         $dadosEmalhe = array(

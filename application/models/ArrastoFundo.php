@@ -110,7 +110,7 @@ class Application_Model_ArrastoFundo
             'sa_datachegada' => $request['dataVolta']
         );
 
-       $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
+        $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
         }
         else {
             $idSubamostra = null;
