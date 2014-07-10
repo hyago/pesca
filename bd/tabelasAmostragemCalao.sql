@@ -34,30 +34,7 @@ CONSTRAINT fk_t_amostra_camarao_usuario2 FOREIGN KEY (tu_id)
       REFERENCES t_subamostra (sa_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-drop table t_maturidade cascade;
-CREATE TABLE t_maturidade(
-	tmat_id serial,
-	tmat_tipo character varying(25),
-	Primary Key (tmat_id)
-);
 
-drop table t_unidade_camarao cascade;
-CREATE TABLE t_unidade_camarao
-(
-  tuc_id serial,
-  tamc_id integer not null,
-  tuc_sexo character varying(1),
-  tmat_id integer not null,
-  tuc_comprimento_cabeca float,
-  tuc_peso float,
-  Primary key (tuc_id),
-  CONSTRAINT fk_t_unidade_camarao_amostra1 FOREIGN KEY (tamc_id)
-      REFERENCES t_amostra_camarao (tamc_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_t_unidade_camarao_maturidade1 FOREIGN KEY (tmat_id)
-      REFERENCES t_maturidade (tmat_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
 
 drop table t_amostra_peixe cascade;
 CREATE TABLE t_amostra_peixe
@@ -82,6 +59,28 @@ CREATE TABLE t_amostra_peixe
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
+CREATE OR REPLACE VIEW v_subamostra AS
+ SELECT t_subamostra.sa_id, t_pescador.tp_nome, t_subamostra.sa_datachegada, t_subamostra.sa_pescador
+   FROM t_subamostra, t_pescador
+  WHERE to_number(t_subamostra.sa_pescador, '9999999') = t_pescador.tp_id;
+
+
+-- Alter table t_amostra_camarao
+-- Add tu_id_monitor integer not null, Add Foreign Key (tu_id_monitor)
+--       REFERENCES t_usuario (tu_id) MATCH SIMPLE
+--       ON UPDATE NO ACTION ON DELETE NO ACTION;
+Alter table t_unidade_peixe
+Add Foreign Key (tamp_id)
+References t_amostra_peixe (tamp_id) match Simple ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+Insert into t_maturidade (tmat_tipo) values ('Aberto');
+Insert into t_maturidade (tmat_tipo) values ('Fechado');
+Insert into t_maturidade (tmat_tipo) values ('Em Desenvolvimento');
+Insert into t_maturidade (tmat_tipo) values ('Desenvolvida');
+Insert into t_maturidade (tmat_tipo) values ('Rudimentar');
+Insert into t_maturidade (tmat_tipo) values ('Não informado');
+
 drop table t_unidade_peixe cascade;
 CREATE TABLE t_unidade_peixe
 (
@@ -99,58 +98,39 @@ CREATE TABLE t_unidade_peixe
       REFERENCES t_especie (esp_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-CREATE OR REPLACE VIEW v_subamostra AS
- SELECT t_subamostra.sa_id, t_pescador.tp_nome, t_subamostra.sa_datachegada, t_subamostra.sa_pescador
-   FROM t_subamostra, t_pescador
-  WHERE to_number(t_subamostra.sa_pescador, '9999999') = t_pescador.tp_id;
 
+CREATE OR REPLACE VIEW V_AMOSTRA_CAMARAO AS
+SELECT T_AMOSTRA_CAMARAO.TAMC_ID, TUE.TU_NOME, T_PORTO.PTO_NOME,
+T_AMOSTRA_CAMARAO.TAMC_DATA, T_BARCO.BAR_NOME, T_PESQUEIRO_AF.PAF_PESQUEIRO,
+T_ESPECIE.ESP_NOME_COMUM, T_AMOSTRA_CAMARAO.TAMC_CAPTURA_TOTAL,
+T_SUBAMOSTRA.SA_ID, TUM.TU_NOME AS TMONITOR
+FROM T_AMOSTRA_CAMARAO
+INNER JOIN T_USUARIO TUE ON T_AMOSTRA_CAMARAO.TU_ID = TUE.TU_ID
+INNER JOIN T_PESQUEIRO_AF ON T_AMOSTRA_CAMARAO.PAF_ID = T_PESQUEIRO_AF.PAF_ID
+INNER JOIN T_PORTO ON T_AMOSTRA_CAMARAO.PTO_ID = T_PORTO.PTO_ID
+INNER JOIN T_BARCO ON T_AMOSTRA_CAMARAO.BAR_ID = T_BARCO.BAR_ID
+INNER JOIN T_ESPECIE ON T_AMOSTRA_CAMARAO.ESP_ID = T_ESPECIE.ESP_ID
+INNER JOIN T_SUBAMOSTRA ON T_AMOSTRA_CAMARAO.SA_ID = T_SUBAMOSTRA.SA_ID
+INNER JOIN T_USUARIO TUM ON T_AMOSTRA_CAMARAO.TU_ID_MONITOR = TUM.TU_ID;
 
--- Alter table t_amostra_camarao
--- Add tu_id_monitor integer not null, Add Foreign Key (tu_id_monitor)
---       REFERENCES t_usuario (tu_id) MATCH SIMPLE
---       ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE OR REPLACE VIEW V_UNIDADE_CAMARAO AS
+SELECT T_UNIDADE_CAMARAO.TUC_ID, T_UNIDADE_CAMARAO.TAMC_ID,
+T_UNIDADE_CAMARAO.TUC_SEXO, T_MATURIDADE.TMAT_TIPO,
+T_UNIDADE_CAMARAO.TUC_COMPRIMENTO_CABECA, T_UNIDADE_CAMARAO.TUC_PESO
+FROM T_UNIDADE_CAMARAO, T_MATURIDADE
+WHERE T_UNIDADE_CAMARAO.TMAT_ID = T_MATURIDADE.TMAT_ID;
 
+CREATE OR REPLACE VIEW V_AMOSTRA_PEIXE AS
+SELECT T_AMOSTRA_PEIXE.TAMP_ID, TUE.TU_NOME, T_PORTO.PTO_NOME,
+T_SUBAMOSTRA.SA_ID, TUM.TU_NOME AS TMONITOR
+FROM T_AMOSTRA_PEIXE
+JOIN T_USUARIO TUE ON T_AMOSTRA_PEIXE.TU_ID = TUE.TU_ID
+JOIN T_PORTO ON T_AMOSTRA_PEIXE.PTO_ID = T_PORTO.PTO_ID
+JOIN T_SUBAMOSTRA ON T_AMOSTRA_PEIXE.SA_ID = T_SUBAMOSTRA.SA_ID
+JOIN T_USUARIO TUM ON T_AMOSTRA_PEIXE.TU_ID_MONITOR = TUM.TU_ID;
 
-CREATE OR REPLACE VIEW v_unidade_camarao AS
- SELECT t_unidade_camarao.tuc_id, t_unidade_camarao.tamc_id,
-    t_unidade_camarao.tuc_sexo, t_maturidade.tmat_tipo,
-    t_unidade_camarao.tuc_comprimento_cabeca, t_unidade_camarao.tuc_peso
-   FROM t_unidade_camarao, t_maturidade
-  WHERE t_unidade_camarao.tmat_id = t_maturidade.tmat_id;
-
-
-Insert into t_maturidade (tmat_tipo) values ('Aberto');
-Insert into t_maturidade (tmat_tipo) values ('Fechado');
-Insert into t_maturidade (tmat_tipo) values ('Em Desenvolvimento');
-Insert into t_maturidade (tmat_tipo) values ('Desenvolvida');
-Insert into t_maturidade (tmat_tipo) values ('Rudimentar');
-Insert into t_maturidade (tmat_tipo) values ('Não informado');
-
-CREATE OR REPLACE VIEW v_amostra_camarao AS 
- SELECT t_amostra_camarao.tamc_id, tue.tu_nome, t_porto.pto_nome, 
-    t_amostra_camarao.tamc_data, t_barco.bar_nome, t_pesqueiro_af.paf_pesqueiro, 
-    t_especie.esp_nome_comum, t_amostra_camarao.tamc_captura_total, 
-    t_subamostra.sa_id, tum.tu_nome AS tmonitor
-   FROM t_amostra_camarao
-  INNER JOIN t_usuario tue ON t_amostra_camarao.tu_id = tue.tu_id
-  INNER JOIN t_pesqueiro_af ON t_amostra_camarao.paf_id = t_pesqueiro_af.paf_id 
-  INNER JOIN t_porto ON t_amostra_camarao.pto_id = t_porto.pto_id 
-  INNER JOIN t_barco ON t_amostra_camarao.bar_id = t_barco.bar_id 
-  INNER JOIN t_especie ON t_amostra_camarao.esp_id = t_especie.esp_id 
-  INNER JOIN t_subamostra ON t_amostra_camarao.sa_id = t_subamostra.sa_id
-  INNER JOIN t_usuario tum ON t_amostra_camarao.tu_id_monitor = tum.tu_id;
-
-Drop view if exists v_unidade_peixe;
-Create or Replace View v_unidade_peixe AS
-SELECT t_unidade_peixe.tup_id, t_amostra_peixe.tamp_id, t_especie.esp_nome_comum, t_unidade_peixe.tup_comprimento, t_unidade_peixe.tup_peso, t_unidade_peixe.tup_sexo
-  FROM t_unidade_peixe, t_amostra_peixe, t_especie
-  WHERE t_unidade_peixe.tamp_id = t_amostra_peixe.tamp_id AND t_unidade_peixe.esp_id = t_especie.esp_id;
-
-CREATE OR REPLACE VIEW v_amostra_peixe AS 
- SELECT t_amostra_peixe.tamp_id, tue.tu_nome, t_porto.pto_nome,
-    t_subamostra.sa_id, tum.tu_nome AS tmonitor
-   FROM t_amostra_peixe
-   JOIN t_usuario tue ON t_amostra_peixe.tu_id = tue.tu_id
-   JOIN t_porto ON t_amostra_peixe.pto_id = t_porto.pto_id
-   JOIN t_subamostra ON t_amostra_peixe.sa_id = t_subamostra.sa_id
-   JOIN t_usuario tum ON t_amostra_peixe.tu_id_monitor = tum.tu_id;
+DROP VIEW V_UNIDADE_PEIXE;
+CREATE OR REPLACE VIEW V_UNIDADE_PEIXE AS
+SELECT T_UNIDADE_PEIXE.TUP_ID, T_AMOSTRA_PEIXE.TAMP_ID, T_ESPECIE.ESP_NOME_COMUM, T_UNIDADE_PEIXE.TUP_COMPRIMENTO, T_UNIDADE_PEIXE.TUP_PESO, T_UNIDADE_PEIXE.TUP_SEXO
+FROM T_UNIDADE_PEIXE, T_AMOSTRA_PEIXE, T_ESPECIE
+WHERE T_UNIDADE_PEIXE.TAMP_ID = T_AMOSTRA_PEIXE.TAMP_ID AND T_UNIDADE_PEIXE.ESP_ID = T_ESPECIE.ESP_ID;
