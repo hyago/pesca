@@ -31,7 +31,7 @@ private $dbTableColetaManual;
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
-            'sa_datachegada' => $request['data']
+            'sa_datachegada' => $request['dataVolta']
         );
         
        $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);

@@ -35,7 +35,7 @@ class Application_Model_Emalhe
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
-            'sa_datachegada' => $request['data']
+            'sa_datachegada' => $request['dataRecolhimento']
         );
         
        $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
@@ -163,7 +163,7 @@ class Application_Model_Emalhe
         if($request['subamostra']==true){
         $dadosSubamostra = array(
             'sa_pescador' => $request['pescadorEntrevistado'],
-            'sa_datachegada' => $request['dataVolta']
+            'sa_datachegada' => $request['dataRecolhimento']
         );
 
         $idSubamostra =  $this->dbTableSubamostra->insert($dadosSubamostra);
