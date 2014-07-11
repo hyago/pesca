@@ -194,6 +194,7 @@
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observação" value="<?=$this->entrevista['vp_obs']?>"/><br />
                 </div>
+                <input type="hidden" name="id_entrevista"value="<?= $this->entrevista['vp_id'] ?>"/><br />
                 
                 <div id="Submit">
                     <input type="submit" value="Salvar Alterações"/>

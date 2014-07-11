@@ -615,7 +615,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                             <td name="inputPorte[]" > <?= $vPescadorHasEmbarcacao['tpe_porte'] ?> </td>
                             <td name="inputMotorID[]"> <?= $vPescadorHasEmbarcacao['tpte_motor'] ?> </td>
                             <td name="inputMotor[]" > <?= ( $vPescadorHasEmbarcacao['tpte_motor'] == 0 ) ? 'Sem motor' : 'Com motor' ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeletePescadorHasEmbarcacoes(<?= $vPescadorHasEmbarcacao['tte_id'] ?>, <?= $vPescadorHasEmbarcacao['tpe_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhasembarcacoes"), null, true) ?>')"></td> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeletePescadorHasEmbarcacoes(<?= $vPescadorHasEmbarcacao['tp_id'] ?>,<?= $vPescadorHasEmbarcacao['tpte_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhasembarcacoes"), null, true) ?>')"></td> </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>

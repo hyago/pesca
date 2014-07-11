@@ -724,15 +724,11 @@ class PescadorController extends Zend_Controller_Action {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $idPescador = $this->_getParam("id");
-
-        $idEmbarcacao = $this->_getParam("idEmbarcacao");
-
-        $idPorte = $this->_getParam("idPorte");
+        $idPescadorEmbarcacao = $this->_getParam("idPescadorEmbarcacao");
 
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelPescador->modelDeletePescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte);
+        $this->modelPescador->modelDeletePescadorHasEmbarcacoes($idPescadorEmbarcacao);
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 

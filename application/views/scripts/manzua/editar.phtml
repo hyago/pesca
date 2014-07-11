@@ -158,6 +158,8 @@
                     <label for="tipo">Combustível(R$):</label>
                     <input type="text" name="combustivel" placeholder="Combustível" value="<?=$this->entrevista['man_combustivel']?>"/><br />
                 </div>
+                <input type="hidden" name="id_entrevista" value="<?= $this->entrevista['man_id'] ?>"/><br />
+                
                 <div id="Submit">
                     <input type="submit" value="Salvar Alterações"/>
                 </div>

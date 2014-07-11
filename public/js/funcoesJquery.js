@@ -630,11 +630,11 @@ function jsInsertPescadorHasEmbarcacoes( frm, pag )
     location.replace(tmpUpdate);
 }
 
-function jsDeletePescadorHasEmbarcacoes(idEmbarcacao, idPorte, frm, pag )
+function jsDeletePescadorHasEmbarcacoes(idPescador,idEmbarcacao, frm, pag )
 {
-    var TmpUrl = (+frm.idPescador.value + '#ancora_embarcacoes');
+    var TmpUrl = (+idPescador + '#ancora_embarcacoes');
 
-    var tmpUpdate = (pag + '/id/' + frm.idPescador.value + '/idEmbarcacao/' + idEmbarcacao + '/idPorte/' + idPorte + '/back_url/' + TmpUrl);
+    var tmpUpdate = (pag +'/idPescador/' +idPescador + '/idPescadorEmbarcacao/' + idEmbarcacao + '/back_url/' + TmpUrl);
 
     if (confirm("Realmente deseja excluir este item?")) {
         location.replace(tmpUpdate);

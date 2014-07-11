@@ -418,15 +418,14 @@ class Application_Model_Pescador {
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Delete Embarcações vindos do Cadastro de Pescador  /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function modelDeletePescadorHasEmbarcacoes($idPescador, $idEmbarcacao, $idPorte) {
+    public function modelDeletePescadorHasEmbarcacoes($idPescadorEmbarcacao) {
         $dbTable_PescadorHasEmbarcacoes = new Application_Model_DbTable_PescadorHasEmbarcacao();
 
-        $dadosPescadorHasEmbarcacoes = array(
-            'tp_id = ?' => $idPescador,
-            'tte_id  = ?' => $idEmbarcacao,
-            'tpe_id  = ?' => $idPorte
-        );
-        $dbTable_PescadorHasEmbarcacoes->delete($dadosPescadorHasEmbarcacoes);
+        
+        $wherePescadorHasEmbarcacao= $dbTable_PescadorHasEmbarcacoes->getAdapter()
+                ->quoteInto('"tpte_id" = ?', $idPescadorEmbarcacao);
+        
+        $dbTable_PescadorHasEmbarcacoes->delete($wherePescadorHasEmbarcacao);
 
         return;
     }
