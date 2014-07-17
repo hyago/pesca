@@ -185,7 +185,7 @@ public function visualizarAction() {
 
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelSiripoia->deleteEspCapturada($idEntrevistaHasEspecie);
+        $this->modelTarrafa->deleteEspCapturada($idEntrevistaHasEspecie);
 
         $this->redirect("/tarrafa/editar/id/" . $backUrl);
     }

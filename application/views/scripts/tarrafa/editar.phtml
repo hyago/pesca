@@ -195,7 +195,7 @@
                 <input style="float:left;" type="text" name="peso" placeholder="Peso" size="10px">
                 <input style="float:left;" type="text" name="precokg" placeholder="Preço por kg" size="10px">
 
-                <input type="hidden" name="id_entrevista"  value="<?= $this->entrevista['vp_id'] ?>"/>
+                <input type="hidden" name="id_entrevista"  value="<?= $this->entrevista['tar_id'] ?>"/>
 
             </div>
 
@@ -219,7 +219,7 @@
                             <td name="inputQuantidade"> <?= $vEspecieCapturada['spc_quantidade'] ?> </td>
                             <td name="inputPeso"> <?= $vEspecieCapturada['spc_peso_kg'] ?> </td>
                             <td name="inputPreco"> <?= $vEspecieCapturada['spc_preco'] ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteEspecieCapturada(<?= $this->entrevista['vp_id'] ?>, '<?= $this->url(array("controller" => "vara-pesca", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['spc_tar_id'] ?>)"></td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteEspecieCapturada(<?= $this->entrevista['tar_id'] ?>, '<?= $this->url(array("controller" => "tarrafa", "action" => "deletespecie"), null, true) ?>', <?= $vEspecieCapturada['spc_tar_id'] ?>)"></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
