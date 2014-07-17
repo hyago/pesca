@@ -192,6 +192,74 @@ function jsBuscaPescadorEntrevista( frm, pag )
         location.replace( tmpUpdate );
     }
 }
+//Necessário quando é na index
+function jsBuscaPescadorGeral( frm, pag )
+{
+    if ( frm.inputPescador.value ) {
+        var tmpUpdate = (pag + '/index/tp_nome/' + frm.inputPescador.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+function jsBuscaBarcoGeral( frm, pag )
+{
+    if ( frm.inputBarco.value ) {
+        var tmpUpdate = (pag + '/index/bar_nome/' + frm.inputBarco.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
+            var Entrevista;
+            if (nomeArtePesca.toLowerCase() === "Arrasto de Fundo".toLowerCase()) {
+                Entrevista = "arrasto-fundo";
+            }
+            else if (nomeArtePesca.toLowerCase() === "Calão".toLowerCase()) {
+                Entrevista = 'calao';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Espinhel/Groseira".toLowerCase()) {
+                Entrevista = 'grosseira';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Pesca de Linha".toLowerCase()) {
+                Entrevista = 'linha';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Emalhe".toLowerCase()) {
+                Entrevista = 'emalhe';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Tarrafa".toLowerCase()) {
+                Entrevista = 'tarrafa';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Vara de Pesca".toLowerCase()) {
+                Entrevista = 'vara-pesca';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Jereré".toLowerCase()) {
+                Entrevista = 'jerere';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Manzuá".toLowerCase()) {
+                Entrevista = 'manzua';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Ratoeira".toLowerCase()) {
+                Entrevista = 'ratoeira';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Coleta Manual".toLowerCase()) {
+                Entrevista = 'coleta-manual';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Mergulho".toLowerCase()) {
+                Entrevista = 'mergulho';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Linha de Fundo".toLowerCase()) {
+                Entrevista = 'linha-fundo';
+            }
+            else if (nomeArtePesca.toLowerCase() === "Siripóia".toLowerCase()) {
+                Entrevista = 'siripoia';
+            }
+            else
+                Entrevista = 'error';
+            var pag = (Entrevista + '/editar');
+            var tmpUpdate = (pag + '/id/' + idEntrevista);
+            location.replace(tmpUpdate);
+}
+
 function jsClearBuscaEntrevista( pag )
 {
         location.hash = '';
@@ -796,15 +864,15 @@ function jsEntrevista(nomeArtePesca, idMonitoramento, idFichaDiaria) {
             var tmpUpdate = (pag + '/id/' + idFichaDiaria + '/idMonitoramento/' + idMonitoramento);
             location.replace(tmpUpdate);
         }
-        function jsDeleteMonitoramento(idMnt, frm, pag, fichaId) {
-            var TmpUrl = (+fichaId + '#base');
+function jsDeleteMonitoramento(idMnt, frm, pag, fichaId) {
+      var TmpUrl = (+fichaId + '#base');
 
-            var tmpUpdate = (pag + '/id/' + idMnt + '/back_url/' + TmpUrl);
+      var tmpUpdate = (pag + '/id/' + idMnt + '/back_url/' + TmpUrl);
 
-            if (confirm("Realmente deseja excluir este item?")) {
+      if (confirm("Realmente deseja excluir este item?")) {
                 location.replace(tmpUpdate);
             }
-        }
+}
 
         function jsInsertMonitoramento(frm, pag)
         {

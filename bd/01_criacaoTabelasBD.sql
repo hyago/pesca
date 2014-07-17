@@ -3077,4 +3077,130 @@ Add rat_combustivel double precision;
 Alter table t_siripoia
 Add sir_combustivel double precision;
 
+--Já está no servidor
+Alter table t_pescador_has_t_embarcacao
+Drop Constraint t_pescador_has_t_embarcacao_pkey,
+Add tpte_id serial,
+ADD PRIMARY KEY (tpte_id);
 
+--Já está no servidor
+CREATE OR REPLACE VIEW v_pescadorhasembarcacao AS 
+ SELECT phe.tp_id, phe.tte_id, tte.tte_tipoembarcacao, phe.tpte_motor, 
+    phe.tpe_id, tpe.tpe_porte, phe.tpte_dono, phe.tpte_id
+   FROM t_pescador_has_t_embarcacao phe, t_tipoembarcacao tte, 
+    t_porteembarcacao tpe
+  WHERE phe.tte_id = tte.tte_id AND phe.tpe_id = tpe.tpe_id;
+
+--Já está no servidor
+Create or Replace View v_entrevistas As
+SELECT 'Arrasto-Fundo',t_arrastofundo.af_id as id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_arrastofundo
+   LEFT JOIN t_pescador ON t_arrastofundo.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_arrastofundo.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_arrastofundo.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Calão',t_calao.cal_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_calao
+   LEFT JOIN t_pescador ON t_calao.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_calao.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_calao.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Coleta Manual',t_coletamanual.cml_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_coletamanual
+   LEFT JOIN t_pescador ON t_coletamanual.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_coletamanual.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_coletamanual.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Emalhe', t_emalhe.em_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_emalhe
+   LEFT JOIN t_pescador ON t_emalhe.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_emalhe.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_emalhe.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Groseira',t_grosseira.grs_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_grosseira
+   LEFT JOIN t_pescador ON t_grosseira.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_grosseira.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_grosseira.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Jereré',t_jerere.jre_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_jerere
+   LEFT JOIN t_pescador ON t_jerere.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_jerere.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_jerere.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Linha',t_linha.lin_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_linha
+   LEFT JOIN t_pescador ON t_linha.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_linha.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_linha.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Linha de Fundo',t_linhafundo.lf_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_linhafundo
+   LEFT JOIN t_pescador ON t_linhafundo.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_linhafundo.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_linhafundo.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Manzuá',t_manzua.man_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_manzua
+   LEFT JOIN t_pescador ON t_manzua.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_manzua.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_manzua.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Mergulho',t_mergulho.mer_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_mergulho
+   LEFT JOIN t_pescador ON t_mergulho.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_mergulho.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_mergulho.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+ SELECT 'Ratoeira',t_ratoeira.rat_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_ratoeira
+   LEFT JOIN t_pescador ON t_ratoeira.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_ratoeira.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_ratoeira.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Siripóia',t_siripoia.sir_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_siripoia
+   LEFT JOIN t_pescador ON t_siripoia.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_siripoia.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_siripoia.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+SELECT 'Tarrafa',t_tarrafa.tar_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_tarrafa
+   LEFT JOIN t_pescador ON t_tarrafa.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_tarrafa.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_tarrafa.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+Union All
+ SELECT 'Vara de Pesca',t_varapesca.vp_id, t_pescador.tp_nome, t_barco.bar_nome, 
+    t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
+   FROM t_varapesca
+   LEFT JOIN t_pescador ON t_varapesca.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_varapesca.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_varapesca.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id;

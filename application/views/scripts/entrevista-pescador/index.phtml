@@ -1,0 +1,59 @@
+<fieldset id="Entrevista"></fieldset>
+    <form name="arrasto-fundo" method="post">
+
+        <h2>Todas Entrevistas Cadastradas - Limite(50)</h2>
+
+        <table>
+            <tr>
+
+                <td>
+                    <input type="button" size="50" value="Limpar" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" size="50" value="Busca por Pescador" class="button-confirmText" onclick="jsBuscaPescadorGeral(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
+                    <input type="text" min="0" name="inputPescador" placeholder="Busca por Pescador" />
+                </td>
+
+                <td>
+                    <input type="button" size="40" value="Busca por Barco" class="button-confirmText" onclick="jsBuscaBarcoGeral(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
+                    <input type="text" min="0" name="inputBarco" placeholder="Busca por Barco" />
+                </td>
+                <td>
+                    <input type="button" size="30" value="Busca por Apelido" class="button-confirmText" onclick="jsBuscaPescadorApelido(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
+                    <input type="text" min="0" name="inputApelido" placeholder="Busca por Pescador" />
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Arte de Pesca</th>
+                <th>Entrevista</th>
+                <th>Pescador</th>
+                <th>Apelido</th>
+                <th>Barco</th>
+            </tr>
+
+            <?php foreach ($this->dados as $key => $entrevista): ?>
+                <tr>
+                    <td><b><?= $entrevista['artepesca']?></b></td>
+                    <td><?= $entrevista['id'] ?></td>
+                    <td><?= $entrevista['tp_nome'] ?></td>
+                    <td><?= $entrevista['tp_apelido'] ?></td>
+                    <td><?= $entrevista['bar_nome'] ?></td>
+
+                    <td>
+                       <input type="button" width="10%" target="_blank" value ="Editar" onclick="jsEditarEntrevistas('<?= $entrevista['artepesca']?>',<?= $entrevista['id'] ?>)"/></td>
+
+                    </td>
+
+         
+
+                    </a>
+
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <br/><br/>
+    </form>
