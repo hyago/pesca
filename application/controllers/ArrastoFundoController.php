@@ -401,4 +401,6 @@ class ArrastoFundoController extends Zend_Controller_Action {
         header("Content-type: application/pdf");
         echo $pdf->render();
     }
+    
+
 }

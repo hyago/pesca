@@ -75,7 +75,7 @@
                 </div>
                 <div id="form-esq">
                     <label>Quant. de Pescadores:</label>
-                    <input type="number" name="numPescadores" placeholder="QuantidadePescadores" value="<?=$this->entrevista['lin_numpescadores']?>"/><br />
+                    <input type="number" name="numPescadores" min="1" placeholder="QuantidadePescadores" value="<?=$this->entrevista['lin_numpescadores']?>"/><br />
                 </div>
             </div>
             <div id="esquerda">
@@ -83,7 +83,7 @@
                 <div id="form-esq">
 
                     <label>Data:</label>
-                    <input type="date" name="dataSaida" placeholder="Data da Saída" value="<?=$this->dataSaida?>"/>
+                    <input type="date" name="dataSaida" min="2013-11-01" placeholder="Data da Saída" value="<?=$this->dataSaida?>"/>
                 </div>
                 <div id="form-esq">
                     <label>Horas:</label>
@@ -93,7 +93,7 @@
             <div id="direita-entrevista">
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="date" name="dataVolta" placeholder="Data da Volta" value="<?=$this->dataVolta?>"/>
+                    <input type="date" name="dataVolta" min="2013-11-01" placeholder="Data da Volta" value="<?=$this->dataVolta?>"/>
                 </div>
                 <div id="form-esq">
                     <label>Horas:</label>

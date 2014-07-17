@@ -34,6 +34,7 @@
                 <div id="form-esq">
                     <label>Barco:</label>
                     <select name="nomeBarco" placeholder="Nome do Barco" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->barcos as $key => $barco):
                         ?>
@@ -47,6 +48,7 @@
                 <div id="form-esq">
                     <label>Tipo de Barco:</label>
                     <select name="tipoBarco" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->tipoEmbarcacoes as $key => $tipoEmbarcacao):
                         ?>
@@ -62,6 +64,7 @@
                 <div id="form-esq">    
                     <label>Pescador Entrevistado:</label>
                     <select name="pescadorEntrevistado" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->pescadores as $key => $pescador):
                         ?>
@@ -73,7 +76,7 @@
                 </div>
                 <div id="form-esq">
                     <label>Quant. de Pescadores:</label>
-                    <input type="text"  name="numPescadores" placeholder="Quantidade de Pescadores "/><br />
+                    <input type="text"  name="numPescadores" min="1" placeholder="Quantidade de Pescadores "/><br />
                 </div>
             </div>
             <div id="esquerda">
@@ -81,7 +84,7 @@
                 <div id="form-esq">
 
                     <label>Data:</label>
-                    <input type="date" name="dataSaida" placeholder="Data da Saída"/>
+                    <input type="date" name="dataSaida" min="2013-11-01" placeholder="Data da Saída"/>
                 </div>
                 <div id="form-esq">
                     <label>Horas:</label>
@@ -91,7 +94,7 @@
             <div id="direita-entrevista">
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="date" name="dataVolta" placeholder="Data da Volta"/>
+                    <input type="date" name="dataVolta" min="2013-11-01" placeholder="Data da Volta"/>
                 </div>
                 <div id="form-esq">
                     <label>Horas:</label>
@@ -112,6 +115,7 @@
                     <legend><h4>Maré:</h4></legend>
                     <label>Tipo:</label>
                     <select name="mare" >
+                            <option value="" selected></option>
                         <?php
                         foreach ($this->mare as $key => $mare):
                             ?>
@@ -133,6 +137,7 @@
                 <div id="form-esq">    
                     <label>Destino do Pescado:</label>
                     <select name="destinoPescado" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->destinos as $key => $destino):
                         ?>
@@ -151,7 +156,7 @@
                     <input type="text" name="observacao" placeholder="Observação" /><br />
                 </div>
                 <div id="form-esq">
-                    <label for="tipo">Combustível(R$):</label>
+                    <label for="tipo">Combustível(L):</label>
                     <input type="text" name="combustivel" placeholder="Combustível"/><br />
                 </div>
                 <div id="Submit">

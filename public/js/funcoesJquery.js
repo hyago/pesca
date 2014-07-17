@@ -211,7 +211,7 @@ function jsBuscaBarcoGeral( frm, pag )
 }
 function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
             var Entrevista;
-            if (nomeArtePesca.toLowerCase() === "Arrasto de Fundo".toLowerCase()) {
+            if (nomeArtePesca.toLowerCase() === "Arrasto-Fundo".toLowerCase()) {
                 Entrevista = "arrasto-fundo";
             }
             else if (nomeArtePesca.toLowerCase() === "Calão".toLowerCase()) {

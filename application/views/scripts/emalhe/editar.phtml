@@ -74,14 +74,14 @@
                 </div>
                 <div id="form-esq">
                     <label>Quant. de Pescadores:</label>
-                    <input type="number" name="numPescadores" placeholder="Número de Pescadores" value="<?=$this->entrevista['em_quantpescadores']?>"/><br />
+                    <input type="number" name="numPescadores" min="1" placeholder="Número de Pescadores" value="<?=$this->entrevista['em_quantpescadores']?>"/><br />
                 </div>
             </div>
             <div id="esquerda">
                 <legend><h4>Lançamento e Recolhimento:</h4></legend>
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="date" name="dataLancamento" placeholder="Lançamento" value="<?=$this->dataSaida?>"/>
+                    <input type="date" name="dataLancamento" min="2013-11-01" placeholder="Lançamento" value="<?=$this->dataSaida?>"/>
                 </div>
                 <div id="form-esq">
                     <label>Hora:</label>
@@ -91,7 +91,7 @@
             <div id="direita-entrevista">
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="date" name="dataRecolhimento" placeholder="Recolhimento" value="<?=$this->dataVolta?>"/>
+                    <input type="date" name="dataRecolhimento" min="2013-11-01" placeholder="Recolhimento" value="<?=$this->dataVolta?>"/>
                 </div>
                 <div id="form-esq">
                     <label>Hora:</label>
@@ -182,6 +182,7 @@
             <div id="base">
                 <input onclick="jsInsertPesqueiroWithoutTime(this.form, '<?= $this->url(array("controller" => "emalhe", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['em_id']?>')" type="button" value="Adicionar" />
                 <select style="float:left;" name="nomePesqueiro">
+                    <option value="" selected></option>
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
                         <option value="<?= $pesqueiro['paf_id']; ?>"><?= $pesqueiro['paf_pesqueiro']; ?></option>
                     <?php endforeach; ?>
@@ -214,6 +215,7 @@
             <div id="base">
                 <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "emalhe", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['em_id']?>')" type="button" value="Adicionar" />
                 <select style="float:left;" name="SelectEspecie">
+                    <option value="" selected></option>
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
                     <?php endforeach; ?>
@@ -258,6 +260,7 @@
                 <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "emalhe", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['em_id']?>')" type="button" value="Adicionar" />
                 
                 <select style="float:left;" name="SelectAvistamento">
+                    <option value="" selected></option>
                     <?php foreach ($this->avistamentos as $key => $avistamento): ?>
                         <option value="<?= $avistamento['avs_id']; ?>"><?= $avistamento['avs_descricao']; ?></option>
                     <?php endforeach; ?>

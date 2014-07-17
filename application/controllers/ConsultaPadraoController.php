@@ -142,5 +142,48 @@ class ConsultaPadraoController extends Zend_Controller_Action
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }
+    
+    public function relatorioxlsAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $consultaPadrao = new Application_Model_VConsultaPadrao();
+        
+	$selectConsulta = $consultaPadrao->select(); 
+        $selectMonitoramentos = $consultaPadrao->selectMonitoramentos(); 
+        $selectFichas = $consultaPadrao->selectFichas();
+        $selectSubamostras = $consultaPadrao->selectSubamostras();
+        $totalEntrevistas = $consultaPadrao->selectTotalEntrevistas();
+        $diasByPorto = $consultaPadrao->selectDiasByPorto();
+        $dias = $consultaPadrao->selectDias();
+
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+
+        $objPHPExcel->setActiveSheetIndex(0);
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 0, 'Entrevistas por porto e por Arte');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 3, 'Artes de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, 3, 'Quantidade');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, 3, 'Porto');
+
+        $linha = 4;
+        foreach ($selectConsulta as $key => $consulta):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['consulta']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha,  $consulta['quantidade']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $linha, $consulta['pto_nome']);
+            $linha++;
+        endforeach;
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="teste.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
 }
 

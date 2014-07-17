@@ -34,6 +34,7 @@
                 <div id="form-esq">
                     <label>Barco:</label>
                     <select name="nomeBarco" placeholder="Nome do Barco" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->barcos as $key => $barco):
                         ?>
@@ -47,6 +48,7 @@
                 <div id="form-esq">
                     <label>Tipo de Barco:</label>
                     <select name="tipoBarco" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->tipoEmbarcacoes as $key => $tipoEmbarcacao):
                         ?>
@@ -63,6 +65,7 @@
                 <div id="form-esq">    
                     <label>Pescador Entrevistado:</label>
                     <select name="PescadorEntrevistado" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->pescadores as $key => $pescador):
                         ?>
@@ -74,14 +77,14 @@
                 </div>
                 <div id="form-esq">
                     <label>Quant. de Pescadores:</label>
-                    <input type="text"  name="NumPescadores" placeholder="Quantidade de Pescadores "/><br />
+                    <input type="text"  name="NumPescadores" min="1" placeholder="Quantidade de Pescadores "/><br />
                 </div>
             </div>
             <div id="esquerda">
                 <legend><h4>Tempo:</h4></legend>
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="date" name="data"/>
+                    <input type="date" name="data" min="2013-11-01"/>
                 </div>
                 <div id="form-esq">
                     <label>Tempo Gasto:</label>
@@ -110,9 +113,7 @@
                     <input type="text" class="tamanho" name="malha2" placeholder="malha"/>
                     <input type="text" class="tamanho" name="malha1" placeholder="malha"/>
                     <input type="text"  class="tamanho" name="malha" placeholder="malha"/>
-                    
-                    
-                
+
                 </div>
             </div><br/>
             <div id="esquerda">
@@ -120,6 +121,7 @@
                 <div id="form-esq">    
                     <label>Destino do Pescado:</label>
                     <select name="destinoPescado" />
+                        <option value="" selected></option>
                     <?php
                     foreach ($this->destinos as $key => $destino):
                         ?>
