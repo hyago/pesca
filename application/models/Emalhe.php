@@ -28,9 +28,7 @@ class Application_Model_Emalhe
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableEmalhe = new Application_Model_DbTable_Emalhe();
-        $this->dbTablePorto = new Application_Model_DbTable_Porto();
-        $this->dbTableEstagiario = new Application_Model_Usuario();
-        $this->dbTableMonitor = new Application_Model_Usuario();
+
         
         if($request['subamostra']==true){
         $dadosSubamostra = array(
@@ -119,6 +117,7 @@ class Application_Model_Emalhe
     public function update(array $request)
     {
         $this->dbTableEmalhe = new Application_Model_DbTable_Emalhe();
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         
         $diesel = $request['diesel'];
         $oleo = $request['oleo'];
@@ -187,6 +186,7 @@ class Application_Model_Emalhe
             'em_alimento' => $alimento,
             'em_gelo' => $gelo,
             'em_tamanho' => $tamanho,
+            'em_subamostra' => $request['subamostra'],
             'em_altura' => $altura,
             'em_numpanos' => $numPanos,
             'em_malha' => $malha,

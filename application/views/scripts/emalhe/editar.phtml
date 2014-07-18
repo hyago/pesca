@@ -157,7 +157,7 @@
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Subamostra?:</label>
-                    <input type="checkbox" name="subamostra" /><br />
+                    <input type="checkbox" name="subamostra" <?php if($this->entrevista['em_subamostra'] === true){ echo 'checked';} else{ echo '';}?>/><br />
                 </div>
                 <div id="form-esq">
                     <label for="tipo">Observacao:</label>

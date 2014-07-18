@@ -3,27 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/coleta-manual/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/siripoia/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/coleta-manual/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/novidades/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/ConsultaPadraoController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/layouts/scripts/admin.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/mergulho/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha-fundo/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ratoeira/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/manzua/index.phtml</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/tarrafa/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/jerere/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/manzua/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/mergulho/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ratoeira/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/tarrafa/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/siripoia/editar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha-fundo/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/TarrafaController.php</file>
         </group>
     </open-files>
 </project-private>

@@ -77,7 +77,7 @@ private $dbTableColetaManual;
     public function update(array $request)
     {
         $this->dbTableColetaManual = new Application_Model_DbTable_ColetaManual();
-        
+        $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
         
@@ -105,6 +105,7 @@ private $dbTableColetaManual;
             'cml_quantpescadores' => $request['numPescadores'],
             'cml_dhsaida' => $timestampSaida,
             'cml_dhvolta' => $timestampVolta,
+            'cml_subamostra' => $request['subamostra'],
             'cml_tempogasto' => $request['tempoGasto'],
             'cml_subamostra' => $request['subamostra'],
             'cml_obs' => $request['observacao'],
