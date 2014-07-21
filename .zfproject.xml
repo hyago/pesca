@@ -362,6 +362,7 @@
           <dbTableFile dbTableName="VAmostraPeixe"/>
           <dbTableFile dbTableName="VConsultaPadrao"/>
           <dbTableFile dbTableName="VEntrevistas"/>
+          <dbTableFile dbTableName="Projetos"/>
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Perfil"/>
@@ -435,6 +436,7 @@
         <modelFile modelName="UnidadePeixe"/>
         <modelFile modelName="VConsultaPadrao"/>
         <modelFile modelName="Entrevistas"/>
+        <modelFile modelName="Projetos"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

@@ -164,8 +164,8 @@ $this->headScript()->appendFile('/js/mascaras.js');
                     </div>
 
                     <div id="form-dir">
-                        <label for="rgb_maa_ibama">RGB MAA IBAMA</label>
-                        <input type="text" name="rgb_maa_ibama" id="rgb_maa_ibama" placeholder="RGB MAA IBAMA" value="<?= $this->pescador['tp_rgb_maa_ibama'] ?>"/>
+                        <label for="rgb_maa_ibama">RGP MAA IBAMA</label>
+                        <input type="text" name="rgb_maa_ibama" id="rgb_maa_ibama" placeholder="RGP MAA IBAMA" value="<?= $this->pescador['tp_rgb_maa_ibama'] ?>"/>
                     </div>
 
                     <div id="form-dir">
@@ -182,7 +182,15 @@ $this->headScript()->appendFile('/js/mascaras.js');
                             <?php endforeach; ?>
                         </select>
                     </div>
-
+                <div id="form-dir">
+                    
+                    <label for="Projeto">Projeto</label>
+                    <select name="selectProjeto" id="selectProjetoId">
+                        <?php foreach ($this->assignProjetos as $key => $localProjetos): ?>
+                            <option value="<?= $localProjetos['tpr_id']; ?>"<?= ( $localProjetos['tpr_id'] == $this->pescador['tpr_id']) ? 'selected="selected"' : ''; ?>><?= $localProjetos['tpr_descricao']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                 </div>
             </fieldset>
 

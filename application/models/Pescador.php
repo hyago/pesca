@@ -96,7 +96,8 @@ class Application_Model_Pescador {
             'tp_resp_lan'  => $request['respLancamento'],
             'tp_resp_cad'  => $request['respCadastro'],
             'tp_dta_cad'  => date('d-m-y'),
-            'tp_obs' => $request['obs']
+            'tp_obs' => $request['obs'],
+            'tpr_id' => $request['selectProjeto']
         );
 
         return $dadosPescador;

@@ -341,7 +341,7 @@ function jsInsertPescadorEndereco( frm, pag )
             '/tp_resp_lan/' + frm.respLancamento.value +
             '/tp_resp_cad/' + frm.respCadastro.value +
             '/tp_obs/' + frm.obs.value +
-            
+            '/tpr_id/' + frm.selectProjeto.value +
             '/te_logradouro/' + frm.logradouro.value +
             '/te_numero/' + frm.numero.value +
             '/te_bairro/' + frm.bairro.value +

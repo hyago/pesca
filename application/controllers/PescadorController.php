@@ -69,7 +69,7 @@ class PescadorController extends Zend_Controller_Action {
     public function novoAction() {
 
         $modelMunicipio = new Application_Model_Municipio();
-        $municipios = $modelMunicipio->select();
+        $municipios = $modelMunicipio->select(NULL,'tmun_municipio');
         $this->view->assign("municipios", $municipios);
 
         $modelEscolaridade = new Application_Model_Escolaridade();
@@ -77,8 +77,12 @@ class PescadorController extends Zend_Controller_Action {
         $this->view->assign("assignEscolaridades", $escolaridade);
 
         $modelUser = new Application_Model_Usuario();
-        $tipoUser = $modelUser->select();
+        $tipoUser = $modelUser->select(NULL, 'tu_nome');
         $this->view->assign("assignUser", $tipoUser);
+        
+        $modelProjetos = new Application_Model_Projetos(Null, 'tpr_descricao');
+        $projetos = $modelProjetos->select();
+        $this->view->assign("assignProjetos", $projetos);
     }
 
     public function criarAction() {
@@ -92,10 +96,10 @@ class PescadorController extends Zend_Controller_Action {
 
         $pescador = $this->modelPescador->find($idPescador);
         $this->view->assign("pescador", $pescador);
-
+        
 
         $modelMunicipio = new Application_Model_Municipio();
-        $municipios = $modelMunicipio->select();
+        $municipios = $modelMunicipio->select(NULL,'tmun_municipio');
         $this->view->assign("municipios", $municipios);
 
         $modelArtePesca = new Application_Model_ArtePesca();
@@ -161,6 +165,11 @@ class PescadorController extends Zend_Controller_Action {
         $modelUser = new Application_Model_Usuario();
         $tipoUser = $modelUser->select();
         $this->view->assign("assignUser", $tipoUser);
+        
+        
+        $modelProjetos = new Application_Model_Projetos(Null, 'tpr_descricao');
+        $projetos = $modelProjetos->select();
+        $this->view->assign("assignProjetos", $projetos);
 
 //     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
@@ -324,6 +333,7 @@ class PescadorController extends Zend_Controller_Action {
             'dataNasc' => $this->_getParam("tp_datanasc"),
             'municipioNat' => $this->_getParam("tmun_id_natural"),
             'selectEscolaridade' => $this->_getParam("esc_id"),
+            'selectProjeto' => $this->_getParam("tpr_id"),
             'respLancamento' => $this->_getParam("tp_resp_lan"),
             'respCadastro' => $this->_getParam("tp_resp_cad"),
             'obs' => $this->_getParam("tp_obs")
@@ -735,13 +745,13 @@ class PescadorController extends Zend_Controller_Action {
         return;
     }
 
-    public function relxlspescadorAction() {
+    public function relxlspescadorAction($where = NULL) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
 
-        $localPescador = $localModelPescador->select(NULL, array('tp_nome', 'tp_id'), NULL);
+        $localPescador = $localModelPescador->select($where, array('tp_nome', 'tp_id'), NULL);
 
         require_once "../library/Classes/PHPExcel.php";
 
@@ -774,14 +784,14 @@ class PescadorController extends Zend_Controller_Action {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->relpdfpescador( NULL );
+        $this->relpdfpescador( 'tpr_id = 2' );
     }
 
     public function imprimirtodospescadores2Action() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->relpdfpescador( NULL );
+        $this->relpdfpescador( Null );
     }
 
     public function imprimirpescadoridAction() {
@@ -974,41 +984,52 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
+    public function imprimirpescadortodosAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        $this->relatorioListaPescador(array('tp_nome'), "tpr_id=1" );
+    }
+    public function imprimirpescadordesembarqueAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $this->relatorioListaPescador(array('tp_nome'), "tpr_id=3" );
+    }
     public function imprimirlistacodigoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->relatorioListaPescador( array('tp_id') );
+        $this->relatorioListaPescador( array('tp_id'), "tpr_id=2");
     }
 
     public function imprimirlistanomeAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->relatorioListaPescador( array('tp_nome') );
+        $this->relatorioListaPescador( array('tp_nome') , "tpr_id=2");
     }
 
     public function imprimirlistacomunidadeAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->relatorioListaPescadorComunidade( array('tcom_nome','tp_nome') );
+        $this->relatorioListaPescadorComunidade( array('tcom_nome','tp_nome'), "tpr_id=2" );
     }
 
     public function imprimirlistacoloniaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->relatorioListaPescadorColonia( array('tc_nome','tp_nome') );
+        $this->relatorioListaPescadorColonia( array('tc_nome','tp_nome'), "tpr_id=2" );
     }
 
-    public function relatorioListaPescador( $order = null ) {
+    public function relatorioListaPescador( $order = null, $where = null ) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView(NULL, $order, NULL);
+        $localPescador = $localModelPescador->selectView($where, $order, NULL);
 
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();
@@ -1030,12 +1051,12 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
-    public function relatorioListaPescadorComunidade( $order = null ) {
+    public function relatorioListaPescadorComunidade( $order = null, $where  = null ) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView(NULL, $order, NULL);
+        $localPescador = $localModelPescador->selectView($where, $order, NULL);
 
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();
@@ -1059,12 +1080,12 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
-    public function relatorioListaPescadorColonia( $order = null ) {
+    public function relatorioListaPescadorColonia( $order = null, $where = null ) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView(NULL, $order, NULL);
+        $localPescador = $localModelPescador->selectView($where, $order, NULL);
 
         require_once "../library/ModeloRelatorio.php";
         $modeloRelatorio = new ModeloRelatorio();
