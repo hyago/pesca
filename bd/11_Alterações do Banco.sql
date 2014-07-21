@@ -218,14 +218,14 @@ CREATE TABLE t_projeto
 );
 
 INSERT INTO t_projeto(tpr_id, tpr_descricao)
-    VALUES (1, "Não Declarado");
+    VALUES (1, 'Não Declarado');
 
 
 INSERT INTO t_projeto(tpr_id, tpr_descricao)
-    VALUES (2, "Perfil Social");
+    VALUES (2, 'Perfil Social');
 
 INSERT INTO t_projeto(tpr_id, tpr_descricao)
-    VALUES (3, "Desembarque");
+    VALUES (3, 'Desembarque');
 
 ALTER TABLE t_pescador
 ADD tpr_id integer, Add Foreign Key (tpr_id)
