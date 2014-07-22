@@ -365,7 +365,7 @@ fieldset.noEditable {
     padding: 1em;
     /*font:80%/1 sans-serif;*/
     border: 2px #af3333 solid;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 fieldset.noEditable label {
@@ -528,4 +528,9 @@ h4,h5{
 #tabelaSemEstilo tr td{
     border: none;
     background-color: #f8f8ff;
+}
+
+legend{
+    font-size: 14px;
+    font-weight: bold;
 }

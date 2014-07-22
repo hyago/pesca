@@ -194,9 +194,9 @@ $this->headScript()->appendFile('/js/mascaras.js');
 
         <fieldset class="noBorder">
             <div id="Submit">
-                <table>
+                <table id="tabelaSemEstilo">
                     <td><a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a></td>
-                    <td><input type="submit" value="Cadastrar" /></td>
+                    
                     <td><input type="button" size="50" value="Salvar e Continuar" class="button-confirmText" onclick="jsInsertPescadorEndereco(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertpescadorendereco"), null, true) ?>')"></td>
                 </table>
             </div>
