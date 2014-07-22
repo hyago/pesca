@@ -462,14 +462,15 @@ input.button-up {
     vertical-align: middle; /* align the text vertically centered */
 }
 input.button-confirmText {
+    color:#555555;
     background-image: url(/img/edit-validated-icon.png);
-    background-color: transparent; /* make the button transparent */
+    background-color:#e6e6e6; /* make the button transparent */
     background-repeat: no-repeat;  /* make the background image appear only once */
     background-position: 0px 0px;  /* equivalent to 'top left' */
-    border: none;            /*assuming we don't want any borders */
+    border-color: #CCC;            /*assuming we don't want any borders */
     cursor: pointer;        /* make the cursor like hovering over an <a> element */
-    height: 50px;
-    /*width: 80px;*/
+    height: 30px;
+    width: 150px;
     padding-left: 22px;
     vertical-align: middle; /* align the text vertically centered */
 }
@@ -517,7 +518,7 @@ h4,h5{
     padding-left: 3px;
 }
 #buscaInicial a:hover{
-    color: #462420;
+    color: #000;
     cursor: pointer;
 }
 #buscaInicial a:visited{
@@ -526,5 +527,5 @@ h4,h5{
 
 #tabelaSemEstilo tr td{
     border: none;
-    background-color:#f8f8ff;
+    background-color: #f8f8ff;
 }

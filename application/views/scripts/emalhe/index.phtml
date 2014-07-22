@@ -25,7 +25,7 @@
                 <legend><h4>Embarcação:</h4></legend>
                 <div id="form-esq">
                     <label>Utilizou Barco?</label>
-                    <input type="checkbox"  name="embarcada" checked="true"/><br />
+                    <input type="checkbox"  name="embarcada" /><br />
                 </div>
                 <div id="form-esq">
                     <label>Motor?</label>
@@ -33,7 +33,7 @@
                 </div>
                 <div id="form-esq">
                     <label>Barco:</label>
-                    <select name="nomeBarco" placeholder="Nome do Barco" />
+                    <select name="nomeBarco"  required/>
                         <option value="" selected></option>
                     <?php
                     foreach ($this->barcos as $key => $barco):
@@ -47,7 +47,7 @@
                 </div>
                 <div id="form-esq">
                     <label>Tipo de Barco:</label>
-                    <select name="tipoBarco" />
+                    <select name="tipoBarco" required/>
                         <option value="" selected></option>
                     <?php
                     foreach ($this->tipoEmbarcacoes as $key => $tipoEmbarcacao):
@@ -64,7 +64,7 @@
             <div id="direita-entrevista">
                 <div id="form-esq">    
                     <label>Pescador Entrevistado:</label>
-                    <select name="pescadorEntrevistado" />
+                    <select name="pescadorEntrevistado" required/>
                         <option value="" selected></option>
                     <?php
                     foreach ($this->pescadores as $key => $pescador):
@@ -78,28 +78,28 @@
                 </div>
                 <div id="form-esq">
                     <label>Quant. de Pescadores:</label>
-                    <input type="number" name="numPescadores" min="1" placeholder="QuantidadePescadores"/><br />
+                    <input type="number" name="numPescadores" min="1" placeholder="Quantidade de Pescadores" required/><br />
                 </div>
             </div>
             <div id="esquerda">
                 <legend><h4>Lançamento e Recolhimento:</h4></legend>
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="date" name="dataLancamento" min="2013-11-01" placeholder="Lançamento"/>
+                    <input type="date" name="dataLancamento" min="2013-11-01" required/>
                 </div>
                 <div id="form-esq">
                     <label>Hora:</label>
-                    <input type="time" name="horaLancamento" placeholder="Lançamento"/>
+                    <input type="time" name="horaLancamento" required/>
                 </div>
             </div>
             <div id="direita-entrevista">
                 <div id="form-esq">
                     <label>Data:</label>
-                    <input type="date" name="dataRecolhimento" min="2013-11-01" placeholder="Recolhimento"/>
+                    <input type="date" name="dataRecolhimento" min="2013-11-01" required/>
                 </div>
                 <div id="form-esq">
                     <label>Hora:</label>
-                    <input type="time" name="horaRecolhimento" placeholder="Recolhimento"/>
+                    <input type="time" name="horaRecolhimento" required/>
                 </div>
             </div>
             <div id="esquerda">
@@ -149,7 +149,7 @@
                 <legend><h4>Outros dados:</h4></legend>
                 <div id="form-esq">    
                     <label>Destino do Pescado:</label>
-                    <select name="destinoPescado" />
+                    <select name="destinoPescado" required/>
                         <option value="" selected></option>
                     <?php
                     foreach ($this->destinos as $key => $destino):

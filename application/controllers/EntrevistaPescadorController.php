@@ -31,12 +31,12 @@ class EntrevistaPescadorController extends Zend_Controller_Action
         $ent_apelido = $this->_getParam("tp_apelido");
 
         if ($ent_pescador) {
-            $dados = $this->modelEntrevistas->select("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'id'));
+            $dados = $this->modelEntrevistas->select("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelEntrevistas->select("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'id'));
+            $dados = $this->modelEntrevistas->select("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'id'));
          }
         elseif ($ent_apelido){
-            $dados = $this->modelEntrevistas->select("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'id'));
+            $dados = $this->modelEntrevistas->select("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'id'));
         }
         else {
             $dados = $this->modelEntrevistas->select(null, array('artepesca', 'tp_nome'), 50);

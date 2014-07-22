@@ -70,6 +70,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <div id="form-dir">
                     <label for="municipioNat">Naturalidade</label>
                     <select name="municipioNat" id="municipioNat">
+                        <option value="0" selected> Não Declarado-BA</option>
                         <?php foreach ($this->municipios as $key => $municipio): ?>
                             <option value="<?= $municipio['tmun_id']; ?>"><?=$municipio['tmun_municipio'],'-', $municipio['tuf_sigla']; ?></option>
                         <?php endforeach; ?>
@@ -121,6 +122,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <div id="form-dir">
                     <label for="municipio">Município</label>
                     <select name="municipio" id="municipio" required="">
+                        <option value="0" selected> Não Declarado-BA</option>
                         <?php foreach ($this->municipios as $key => $municipio): ?>
                             <option value="<?= $municipio['tmun_id']; ?>"><?=$municipio['tmun_municipio'], '-', $municipio['tuf_sigla']; ?></option>
                         <?php endforeach; ?>
@@ -171,6 +173,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <div id="form-dir">
                     <label for="selectEscolaridade">Escolaridade</label>
                     <select name="selectEscolaridade" id="selectEscolaridadeId">
+                        <option value="0" selected> Não Declarado</option>
                         <?php foreach ($this->assignEscolaridades as $key => $localEscolaridade): ?>
                             <option value="<?= $localEscolaridade['esc_id']; ?>"><?= $localEscolaridade['esc_nivel']; ?></option>
                         <?php endforeach; ?>
@@ -179,6 +182,7 @@ $this->headScript()->appendFile('/js/mascaras.js');
                 <div id="form-dir">
                     <label for="Projeto">Projeto</label>
                     <select name="selectProjeto" id="selectProjetoId">
+                        
                         <?php foreach ($this->assignProjetos as $key => $localProjetos): ?>
                             <option value="<?= $localProjetos['tpr_id']; ?>"><?= $localProjetos['tpr_descricao']; ?></option>
                         <?php endforeach; ?>
