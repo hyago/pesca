@@ -25,7 +25,6 @@ private $usuario;
 
         $this->modelDestinoPescado = new Application_Model_DestinoPescado();
         $this->modelAvistamento = new Application_Model_Avistamento();
-        $this->modelJerere = new Application_Model_Jerere();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
         $this->modelJerere = new Application_Model_Jerere();
@@ -69,12 +68,12 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelJerere->selectEntrevistaJerere("jre_id>=" . $ent_id, array('jre_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelJerere->selectEntrevistaJerere("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'jre_id'));
+            $dados = $this->modelJerere->selectEntrevistaJerere("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'jre_id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelJerere->selectEntrevistaJerere("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'jre_id'));
+            $dados = $this->modelJerere->selectEntrevistaJerere("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'jre_id'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelJerere->selectEntrevistaJerere("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'jre_id'), 20);
+            $dados = $this->modelJerere->selectEntrevistaJerere("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'jre_id'), 20);
         }
         else {
             $dados = $this->modelJerere->selectEntrevistaJerere(null, array('fd_id', 'tp_nome'),20);

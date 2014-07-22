@@ -28,7 +28,6 @@ class SiripoiaController extends Zend_Controller_Action
         $this->modelSiripoia = new Application_Model_Siripoia();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
-        $this->modelSiripoia = new Application_Model_Siripoia();
         $this->modelPescador = new Application_Model_Pescador();
         $this->modelBarcos = new Application_Model_Barcos();
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
@@ -74,12 +73,12 @@ class SiripoiaController extends Zend_Controller_Action
         if ($ent_id > 0) {
             $dados = $this->modelSiripoia->selectEntrevistaSiripoia("sir_id>=" . $ent_id, array('sir_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'sir_id'));
+            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'sir_id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'sir_id'));
+            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'sir_id'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'sir_id'), 20);
+            $dados = $this->modelSiripoia->selectEntrevistaSiripoia("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'sir_id'), 20);
         }
         else {
             $dados = $this->modelSiripoia->selectEntrevistaSiripoia(null, array('fd_id', 'tp_nome'),20);

@@ -69,12 +69,12 @@ class ColetaManualController extends Zend_Controller_Action
         if ($ent_id > 0) {
             $dados = $this->modelColetaManual->selectEntrevistaColetaManual("cml_id>=" . $ent_id, array('cml_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelColetaManual->selectEntrevistaColetaManual("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'cml_id'));
+            $dados = $this->modelColetaManual->selectEntrevistaColetaManual("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'cml_id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelColetaManual->selectEntrevistaColetaManual("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'cml_id'));
+            $dados = $this->modelColetaManual->selectEntrevistaColetaManual("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'cml_id'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelColetaManual->selectEntrevistaColetaManual("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'cml_id'), 20);
+            $dados = $this->modelColetaManual->selectEntrevistaColetaManual("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'cml_id'), 20);
         }
         else {
             $dados = $this->modelColetaManual->selectEntrevistaColetaManual(null, array('fd_id', 'tp_nome'),20);

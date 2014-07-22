@@ -109,6 +109,9 @@ body{
     display: inline;
     text-align: justify;
 }
+
+
+
 #titulos{
     width: 350px;
     height: auto;
@@ -502,4 +505,26 @@ h4,h5{
 #titulo-img{
     color: #5F302B;
     font-size: 10px;
+}
+
+#buscaInicial{
+    font-size: 16px;
+    cursor:default;
+}
+#buscaInicial a{
+    text-decoration: none;
+    color: #5F302B;
+    padding-left: 3px;
+}
+#buscaInicial a:hover{
+    color: #462420;
+    cursor: pointer;
+}
+#buscaInicial a:visited{
+    color: #5F302B;
+}
+
+#tabelaSemEstilo tr td{
+    border: none;
+    background-color:#f8f8ff;
 }

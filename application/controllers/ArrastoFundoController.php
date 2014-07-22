@@ -60,12 +60,12 @@ class ArrastoFundoController extends Zend_Controller_Action {
         if ($ent_id > 0) {
             $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("af_id>=" . $ent_id, array('af_id'), 50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'af_id'));
+            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'af_id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'af_id'));
+            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'af_id'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'af_id'));
+            $dados = $this->modelArrastoFundo->selectEntrevistaArrasto("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'af_id'));
         }
         else {
             $dados = $this->modelArrastoFundo->selectEntrevistaArrasto(null, array('fd_id', 'tp_nome'), 20);

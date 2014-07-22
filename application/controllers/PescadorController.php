@@ -42,14 +42,22 @@ class PescadorController extends Zend_Controller_Action {
         $tp_id = $this->_getParam("tp_id");
         $tp_nome = $this->_getParam("tp_nome");
         $tp_apelido = $this->_getParam('tp_apelido');
+        $tp_letra = $this->_getParam("tp_letra");
+        $tp_all = $this->_getParam("tp_all");
 
         if ($tp_id > 0) {
             $dados = $this->modelPescador->select("tp_id>=" . $tp_id, array('tp_id'), 30);
         } elseif ($tp_nome) {
-            $dados = $this->modelPescador->select("tp_nome LIKE '"."% ". $tp_nome . "%' or tp_nome LIKE '". strtoupper($tp_nome) . "%'", array('tp_nome', 'tp_id'));
+            $dados = $this->modelPescador->select("tp_nome ~*'". $tp_nome ."'", array('tp_nome', 'tp_id'));
         }
         elseif ($tp_apelido) {
-            $dados = $this->modelPescador->select("tp_apelido LIKE '" . $tp_apelido . "%'", array('tp_nome', 'tp_id'));
+            $dados = $this->modelPescador->select("tp_apelido ~* '" . $tp_apelido. "'", array('tp_nome', 'tp_id'));
+        }
+        elseif($tp_letra){
+            $dados = $this->modelPescador->select("tp_nome LIKE '".$tp_letra."%'", array('tp_nome'));
+        }
+        elseif($tp_all){
+            $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'));
         }
         else {
             $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'), 20);

@@ -59,19 +59,24 @@ class FichaDiariaController extends Zend_Controller_Action {
         $fd_id = $this->_getParam("fd_id");
         $pto_id = $this->_getParam("pto_id");
         $fd_data = $this->_getParam("fd_data");
+        $fd_all = $this->_getParam("fd_all");
         
         if ( $fd_id > 0 ) {
             $dados = $this->modelFichaDiaria->selectView("fd_id>=". $fd_id, array('fd_id'), 25);
         } elseif ( $pto_id ) {
-            if ( $fd_data ) {
-                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id ." and fd_data = '". $fd_data."'" , NULL);            
-            } else {
-                $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id , NULL);            
-            }
-        } else {
-            $dados = $this->modelFichaDiaria->selectView(NULL, NULL, 25);
+            $dados = $this->modelFichaDiaria->selectView("pto_id =". $pto_id , NULL);
         }
-         
+        elseif ( $fd_data ) {
+                $dados = $this->modelFichaDiaria->selectView("fd_data = '". $fd_data."'" , NULL);            
+            }
+        elseif($fd_all){
+            $dados = $this->modelFichaDiaria->selectView(NULL, "fd_id DESC");  
+        }
+        else {
+            $dados = $this->modelFichaDiaria->selectView(NULL, "fd_id DESC", 25);
+        }
+        
+        
         $dadosPorto = $this->modelPorto->select();
 
         $this->view->assign("assignDadosPorto", $dadosPorto);

@@ -28,7 +28,6 @@ private $usuario;
         $this->modelRatoeira = new Application_Model_Ratoeira();
         $this->modelMonitoramento = new Application_Model_Monitoramento();
         $this->modelFichaDiaria = new Application_Model_FichaDiaria();
-        $this->modelRatoeira = new Application_Model_Ratoeira();
         $this->modelPescador = new Application_Model_Pescador();
         $this->modelBarcos = new Application_Model_Barcos();
         $this->modelTipoEmbarcacao = new Application_Model_TipoEmbarcacao();
@@ -72,12 +71,12 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelRatoeira->selectEntrevistaRatoeira("rat_id>=" . $ent_id, array('rat_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'rat_id'));
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'rat_id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'rat_id'));
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'rat_id'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'rat_id'), 20);
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'rat_id'), 20);
         }
         else {
             $dados = $this->modelRatoeira->selectEntrevistaRatoeira(null, array('fd_id', 'tp_nome'),20);

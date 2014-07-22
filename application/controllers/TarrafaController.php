@@ -63,12 +63,12 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tar_id>=" . $ent_id, array('tar_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_nome LIKE '" . $ent_pescador . "%'", array('tp_nome', 'tar_id'));
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'tar_id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("bar_nome LIKE '" . $ent_barco . "%'", array('bar_nome', 'tar_id'));
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'tar_id'));
        }
        elseif ($ent_apelido){
-            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_apelido LIKE '" . $ent_apelido . "%'", array('tp_apelido', 'tar_id'), 20);
+            $dados = $this->modelTarrafa->selectEntrevistaTarrafa("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'tar_id'), 20);
         }
         else {
             $dados = $this->modelTarrafa->selectEntrevistaTarrafa(null, array('fd_id', 'tp_nome'),20);

@@ -3,11 +3,11 @@
 
         <h2>Entrevistas Cadastradas->Pesca de Manzuá (lista limitada em 20)</h2>
 
-        <table>
+        <table id="tabelaSemEstilo">
             <tr>
 
                 <td>
-                    <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
+                    <input type="button" size="50" value="Limpar Busca" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "manzua", "action" => "visualizar"), null, true) ?>')">
                 </td>
                 <td>
                 <a href="<?= $this->url(array("controller" => "manzua", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>

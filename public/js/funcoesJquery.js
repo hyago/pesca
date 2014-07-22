@@ -274,14 +274,24 @@ function jsClearBuscaPescador( pag )
         location.hash = '';
         location.replace( pag );
 }
+function jsBuscaTodosPescadores( pag )
+{
+        location.hash = '';
+        location.replace( pag );
+}
 
 function scrollTo(hash) {
     location.hash = "#" + hash;
     location.hash = '';
 }
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
+///_/_/_/_/_/_/_/_/_/_/_/_/_/ Fichas diárias /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsClearBuscaFichaDiaria( pag )
+{
+    location.hash = '';
+    location.replace(pag);
+}
+function jsBuscaTodasFichas( pag )
 {
     location.hash = '';
     location.replace(pag);
@@ -299,7 +309,15 @@ function jsBuscaFichaDiariaId( frm, pag )
 function jsBuscaFichaDiariaPortoData( frm, pag )
 {
     if ( frm.selectPortoName.value ) {
-        var tmpUpdate = (pag + '/index/pto_id/' + frm.selectPortoName.value +'/fd_data/'+ frm.inputDate.value );
+        var tmpUpdate = (pag + '/index/pto_id/' + frm.selectPortoName.value);
+        
+        location.replace( tmpUpdate );
+    }
+}
+function jsBuscaFichaDiariaData( frm, pag )
+{
+    if ( frm.inputDate.value ) {
+        var tmpUpdate = (pag + '/index/pto_id/'+'/fd_data/'+ frm.inputDate.value );
         
         location.replace( tmpUpdate );
     }

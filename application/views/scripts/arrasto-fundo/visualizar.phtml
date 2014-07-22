@@ -3,11 +3,11 @@
 
         <h2>Entrevistas Cadastradas->Arrasto de Fundo (lista limitada em 20)</h2>
 
-        <table>
+        <table id="tabelaSemEstilo">
             <tr>
 
                 <td>
-                    <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>')">
+                    <input type="button" size="50" value="Limpar Busca" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "arrasto-fundo", "action" => "visualizar"), null, true) ?>')">
                 </td>
             </tr>
             <tr>
