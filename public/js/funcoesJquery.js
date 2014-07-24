@@ -8,6 +8,9 @@ $(document).ready(function() {
         $("#Relatorio").hide();
         $("#RelListas").hide();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
     else if ($("fieldset").attr('id') === "Desembarque") {
@@ -18,6 +21,9 @@ $(document).ready(function() {
         $("#Relatorio").hide();
         $("#RelListas").hide();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
     else if ($("fieldset").attr('id') === "Filogenia") {
@@ -28,6 +34,9 @@ $(document).ready(function() {
         $("#Relatorio").hide();
         $("#RelListas").hide();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
     else if ($("fieldset").attr('id') === "Entrevista"){
@@ -38,6 +47,9 @@ $(document).ready(function() {
         $("#Relatorio").hide();
         $("#RelListas").hide();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
     else if ($("fieldset").attr('id') === "Relatorio"){
@@ -48,6 +60,9 @@ $(document).ready(function() {
         $("#Relatorio").show();
         $("#RelListas").hide();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
     else if ($("fieldset").attr('id') === "RelListas"){
@@ -58,6 +73,9 @@ $(document).ready(function() {
         $("#Relatorio").show();
         $("#RelListas").show();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
     else if ($("fieldset").attr('id') === "RelConsolidados"){
@@ -68,6 +86,9 @@ $(document).ready(function() {
         $("#Relatorio").show();
         $("#RelListas").hide();
         $("#RelConsolidados").show();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
     else if($("fieldset").attr('id') === "Amostras"){
@@ -78,6 +99,9 @@ $(document).ready(function() {
         $("#Relatorio").hide();
         $("#RelListas").hide();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").show();
     }
     else {
@@ -88,6 +112,9 @@ $(document).ready(function() {
         $("#Relatorio").hide();
         $("#RelListas").hide();
         $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
         $("#Amostras").hide();
     }
 
@@ -111,6 +138,15 @@ $(document).ready(function() {
     });
     $("#for-RelConsolidados").click(function(){
         $("#RelConsolidados").slideToggle();
+    });
+    $("#for-RelPescador").click(function(){
+        $("#RelPescador").slideToggle();
+    });
+    $("#for-RelPerfilSocial").click(function(){
+        $("#RelPerfilSocial").slideToggle();
+    });
+    $("#for-RelDesembarque").click(function(){
+        $("#RelDesembarque").slideToggle();
     });
     $("#for-Amostra").click(function(){
         $("#Amostras").slideToggle();

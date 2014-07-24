@@ -799,7 +799,7 @@ class PescadorController extends Zend_Controller_Action {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->relpdfpescador( Null );
+        $this->relpdfpescador( 'tpr_id = 1' );
     }
 
     public function imprimirpescadoridAction() {
@@ -957,11 +957,12 @@ class PescadorController extends Zend_Controller_Action {
             foreach ($localEmbarcacoes as $key_emb => $embarcacoes) {
 				if ( $embarcacoes['tp_id'] == $pescador['tp_id']) {
 					$modeloRelatorio->setLegValue(50, 'Embarcações: ', $embarcacoes['tte_tipoembarcacao']);
-					if ($embarcacoes['tpte_motor'] == true)
-						$motor = 'Sim';
-					else
-						$motor = 'Não';
-					$modeloRelatorio->setLegValue(150, 'Motor: ', $motor);
+					if ($embarcacoes['tpte_motor'] == true) {
+                                                    $motor = 'Sim';
+                                        } else {
+                                        $motor = 'Não';
+                                        }
+                                        $modeloRelatorio->setLegValue(150, 'Motor: ', $motor);
 					$modeloRelatorio->setLegValue(250, 'Porte: ', $embarcacoes['tpe_porte']);
 					if ($embarcacoes['tpte_dono'] == 1)
 						$dono = 'Sim';
