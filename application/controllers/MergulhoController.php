@@ -71,15 +71,15 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelMergulho->selectEntrevistaMergulho("mer_id>=" . $ent_id, array('mer_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'mer_id'));
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'mer_id DESC'));
         } elseif ($ent_barco) {
-            $dados = $this->modelMergulho->selectEntrevistaMergulho("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'mer_id'));
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'mer_id DESC'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'mer_id'), 20);
+            $dados = $this->modelMergulho->selectEntrevistaMergulho("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'mer_id v'), 20);
         }
         else {
-            $dados = $this->modelMergulho->selectEntrevistaMergulho(null, array('fd_id', 'tp_nome'),20);
+            $dados = $this->modelMergulho->selectEntrevistaMergulho(null, array('fd_id DESC', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);

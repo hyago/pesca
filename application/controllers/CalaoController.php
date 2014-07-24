@@ -64,15 +64,15 @@ private $usuario;
         if ($ent_id > 0) {
             $dados = $this->modelCalao->selectEntrevistaCalao("cal_id>=" . $ent_id, array('cal_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelCalao->selectEntrevistaCalao("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'cal_id'));
+            $dados = $this->modelCalao->selectEntrevistaCalao("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'cal_id DESC'));
         } elseif ($ent_barco) {
-            $dados = $this->modelCalao->selectEntrevistaCalao("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'cal_id'));
+            $dados = $this->modelCalao->selectEntrevistaCalao("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'cal_id DESC'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelCalao->selectEntrevistaCalao("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'cal_id'), 20);
+            $dados = $this->modelCalao->selectEntrevistaCalao("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'cal_id DESC'), 20);
         }
         else {
-            $dados = $this->modelCalao->selectEntrevistaCalao(null, array('fd_id', 'tp_nome'),20);
+            $dados = $this->modelCalao->selectEntrevistaCalao(null, array('fd_id DESC', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);

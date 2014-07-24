@@ -71,15 +71,15 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelRatoeira->selectEntrevistaRatoeira("rat_id>=" . $ent_id, array('rat_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'rat_id'));
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome DESC', 'rat_id'));
         } elseif ($ent_barco) {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'rat_id'));
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("bar_nome ~* '" . $ent_barco . "'", array('bar_nome DESC', 'rat_id'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'rat_id'), 20);
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido DESC', 'rat_id'), 20);
         }
         else {
-            $dados = $this->modelRatoeira->selectEntrevistaRatoeira(null, array('fd_id', 'tp_nome'),20);
+            $dados = $this->modelRatoeira->selectEntrevistaRatoeira(null, array('fd_id DESC', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);

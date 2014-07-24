@@ -15,7 +15,17 @@ class Application_Model_Pescador {
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/
     public function select($where = null, $order = null, $limit = null) {
         $dao = new Application_Model_DbTable_Pescador();
-        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+        $select = $dao->select()->from($dao)->where('tp_pescadordeletado = false')->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectDeletado($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_Pescador();
+        $select = $dao->select()->from($dao)->where('tp_pescadordeletado = true')->order($order)->limit($limit);
 
         if (!is_null($where)) {
             $select->where($where);
@@ -437,6 +447,17 @@ class Application_Model_Pescador {
 
         $dadosPescador = array(
             'tp_pescadordeletado' => TRUE
+        );
+
+        $wherePescador = $dbTablePescador->getAdapter()->quoteInto('"tp_id" = ?', $idPescador);
+
+        $dbTablePescador->update($dadosPescador, $wherePescador);
+    }
+    public function restaure($idPescador) {
+        $dbTablePescador = new Application_Model_DbTable_Pescador();
+
+        $dadosPescador = array(
+            'tp_pescadordeletado' => FALSE
         );
 
         $wherePescador = $dbTablePescador->getAdapter()->quoteInto('"tp_id" = ?', $idPescador);

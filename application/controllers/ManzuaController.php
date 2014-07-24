@@ -73,15 +73,15 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelManzua->selectEntrevistaManzua("man_id>=" . $ent_id, array('man_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelManzua->selectEntrevistaManzua("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'man_id'));
+            $dados = $this->modelManzua->selectEntrevistaManzua("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'man_id DESC'));
         } elseif ($ent_barco) {
-            $dados = $this->modelManzua->selectEntrevistaManzua("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'man_id'));
+            $dados = $this->modelManzua->selectEntrevistaManzua("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'man_id DESC'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelManzua->selectEntrevistaManzua("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'man_id'), 20);
+            $dados = $this->modelManzua->selectEntrevistaManzua("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'man_id DESC'), 20);
         }
         else {
-            $dados = $this->modelManzua->selectEntrevistaManzua(null, array('fd_id', 'tp_nome'),20);
+            $dados = $this->modelManzua->selectEntrevistaManzua(null, array('fd_id DESC', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);

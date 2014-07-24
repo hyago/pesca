@@ -210,33 +210,39 @@
 -- Inner join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id group by t_porto.pto_nome;
 
 
-CREATE TABLE t_projeto
-(
-	tpr_id serial,
-	tpr_descricao character(40) Not Null,
-        Primary Key (tpr_id)
-);
+-- CREATE TABLE t_projeto
+-- (
+-- 	tpr_id serial,
+-- 	tpr_descricao character(40) Not Null,
+--         Primary Key (tpr_id)
+-- );
+-- 
+-- INSERT INTO t_projeto(tpr_id, tpr_descricao)
+--     VALUES (1, 'Não Declarado');
+-- 
+-- 
+-- INSERT INTO t_projeto(tpr_id, tpr_descricao)
+--     VALUES (2, 'Perfil Social');
+-- 
+-- INSERT INTO t_projeto(tpr_id, tpr_descricao)
+--     VALUES (3, 'Desembarque');
+-- 
+-- ALTER TABLE t_pescador
+-- ADD tpr_id integer, Add Foreign Key (tpr_id)
+-- References t_projeto (tpr_id) match Simple ON UPDATE NO ACTION ON DELETE NO ACTION;
+-- 
+-- --Valor padrão de Não Declarado
+-- UPDATE t_pescador
+--    SET tpr_id=1;
 
-INSERT INTO t_projeto(tpr_id, tpr_descricao)
-    VALUES (1, 'Não Declarado');
+Alter table t_pescador
+Add tp_pescadordeletado boolean;
 
-
-INSERT INTO t_projeto(tpr_id, tpr_descricao)
-    VALUES (2, 'Perfil Social');
-
-INSERT INTO t_projeto(tpr_id, tpr_descricao)
-    VALUES (3, 'Desembarque');
-
-ALTER TABLE t_pescador
-ADD tpr_id integer, Add Foreign Key (tpr_id)
-References t_projeto (tpr_id) match Simple ON UPDATE NO ACTION ON DELETE NO ACTION;
-
---Valor padrão de Não Declarado
-UPDATE t_pescador
-   SET tpr_id=1;
-
+update t_pescador
+set tp_pescadordeletado = false;
 --Adicionar o campo tpr_id e tpd_descricao
-Drop View if exists v_pescador;
+DROP VIEW IF EXISTS v_pescador;
+
 CREATE OR REPLACE VIEW v_pescador AS 
  SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tp_matricula, tp.tp_apelido, 
     tp.tp_filiacaopai, tp.tp_filiacaomae, tp.tp_ctps, tp.tp_pis, tp.tp_inss, 
@@ -247,7 +253,8 @@ CREATE OR REPLACE VIEW v_pescador AS
     te.te_logradouro, te.te_numero, te.te_comp, te.te_bairro, te.te_cep, 
     te.tmun_id, tmi.tmun_municipio, tmi.tuf_sigla, tp.tp_resp_lan, 
     tlan.tu_nome AS tu_nome_lan, tp.tp_resp_cad, tcad.tu_nome AS tu_nome_cad, 
-    tp.tp_obs, col.tc_id, tc.tc_nome, tcom.tcom_id, tcom.tcom_nome, tp.tpr_id, tpr.tpr_descricao
+    tp.tp_obs, col.tc_id, tc.tc_nome, tcom.tcom_id, tcom.tcom_nome, tp.tpr_id, 
+    tpr.tpr_descricao, tp.tp_pescadordeletado
    FROM t_pescador tp
    LEFT JOIN t_municipio tm ON tp.tmun_id_natural = tm.tmun_id
    LEFT JOIN t_endereco te ON tp.te_id = te.te_id
@@ -259,4 +266,5 @@ CREATE OR REPLACE VIEW v_pescador AS
    LEFT JOIN t_pescador_has_t_colonia col ON col.tp_id = tp.tp_id
    LEFT JOIN t_municipio tmi ON te.tmun_id = tmi.tmun_id
    LEFT JOIN t_colonia tc ON tc.tc_id = col.tc_id
-   LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id;
+   LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
+   Where tp.tp_pescadordeletado = false;

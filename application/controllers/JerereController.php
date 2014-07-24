@@ -68,15 +68,15 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelJerere->selectEntrevistaJerere("jre_id>=" . $ent_id, array('jre_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelJerere->selectEntrevistaJerere("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'jre_id'));
+            $dados = $this->modelJerere->selectEntrevistaJerere("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'jre_id DESC'));
         } elseif ($ent_barco) {
-            $dados = $this->modelJerere->selectEntrevistaJerere("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'jre_id'));
+            $dados = $this->modelJerere->selectEntrevistaJerere("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'jre_id DESC'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelJerere->selectEntrevistaJerere("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'jre_id'), 20);
+            $dados = $this->modelJerere->selectEntrevistaJerere("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'jre_id DESC'), 20);
         }
         else {
-            $dados = $this->modelJerere->selectEntrevistaJerere(null, array('fd_id', 'tp_nome'),20);
+            $dados = $this->modelJerere->selectEntrevistaJerere(null, array('fd_id DESC', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);

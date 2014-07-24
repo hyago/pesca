@@ -111,15 +111,15 @@ public function visualizarAction() {
         if ($ent_id > 0) {
             $dados = $this->modelLinha->selectEntrevistaLinha("lin_id>=" . $ent_id, array('lin_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelLinha->selectEntrevistaLinha("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'lin_id'));
+            $dados = $this->modelLinha->selectEntrevistaLinha("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'lin_id DESC'));
         } elseif ($ent_barco) {
-            $dados = $this->modelLinha->selectEntrevistaLinha("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'lin_id'));
+            $dados = $this->modelLinha->selectEntrevistaLinha("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'lin_id DESC'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelLinha->selectEntrevistaLinha("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'lin_id'), 20);
+            $dados = $this->modelLinha->selectEntrevistaLinha("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'lin_id DESC'), 20);
         }
         else {
-            $dados = $this->modelLinha->selectEntrevistaLinha(null, array('fd_id', 'tp_nome'),20);
+            $dados = $this->modelLinha->selectEntrevistaLinha(null, array('fd_id DESC', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);

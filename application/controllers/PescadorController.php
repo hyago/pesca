@@ -46,21 +46,21 @@ class PescadorController extends Zend_Controller_Action {
         $tp_all = $this->_getParam("tp_all");
 
         if ($tp_id > 0) {
-            $dados = $this->modelPescador->select("tp_id>=" . $tp_id, array('tp_id'), 30);
+            $dados = $this->modelPescador->selectView("tp_id>=" . $tp_id, array('tp_id'), 30);
         } elseif ($tp_nome) {
-            $dados = $this->modelPescador->select("tp_nome ~*'". $tp_nome ."'", array('tp_nome', 'tp_id'));
+            $dados = $this->modelPescador->selectView("tp_nome ~*'". $tp_nome ."'", array('tp_nome', 'tp_id '));
         }
         elseif ($tp_apelido) {
-            $dados = $this->modelPescador->select("tp_apelido ~* '" . $tp_apelido. "'", array('tp_nome', 'tp_id'));
+            $dados = $this->modelPescador->selectView("tp_apelido ~* '" . $tp_apelido. "'", array('tp_nome', 'tp_id'));
         }
         elseif($tp_letra){
-            $dados = $this->modelPescador->select("tp_nome LIKE '".$tp_letra."%'", array('tp_nome'));
+            $dados = $this->modelPescador->selectView("tp_nome LIKE '".$tp_letra."%'", array('tp_nome'));
         }
         elseif($tp_all){
-            $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'));
+            $dados = $this->modelPescador->selectView(null, array('tp_nome', 'tp_id'));
         }
         else {
-            $dados = $this->modelPescador->select(null, array('tp_nome', 'tp_id'), 20);
+            $dados = $this->modelPescador->selectView(null, array('tp_id DESC'), 20);
         }
         //print_r();
         $this->view->assign("dados", $dados);
@@ -244,6 +244,15 @@ class PescadorController extends Zend_Controller_Action {
             $this->modelPescador->delete($this->_getParam('id'));
 
             $this->_redirect('pescador/index');
+        }
+    }
+    public function restaureAction() {
+        if ($this->usuario['tp_id'] == 15 | $this->usuario['tp_id'] == 17 | $this->usuario['tp_id'] == 21) {
+            $this->_redirect('index');
+        } else {
+            $this->modelPescador->restaure($this->_getParam('id'));
+
+            $this->_redirect('administrador/index');
         }
     }
 

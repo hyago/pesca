@@ -64,15 +64,15 @@ class EmalheController extends Zend_Controller_Action
         if ($ent_id > 0) {
             $dados = $this->modelEmalhe->selectEntrevistaEmalhe("em_id>=" . $ent_id, array('em_id'),50);
         } elseif ($ent_pescador) {
-            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'em_id'));
+            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'em_id DESC'));
         } elseif ($ent_barco) {
-            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'em_id'));
+            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("bar_nome ~* '" . $ent_barco . "'", array('bar_nome', 'em_id DESC'));
        }
         elseif ($ent_apelido){
-            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'em_id'), 20);
+            $dados = $this->modelEmalhe->selectEntrevistaEmalhe("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'em_id DESC'), 20);
         }
         else {
-            $dados = $this->modelEmalhe->selectEntrevistaEmalhe(null, array('fd_id', 'tp_nome'),20);
+            $dados = $this->modelEmalhe->selectEntrevistaEmalhe(null, array('fd_id DESC', 'tp_nome'),20);
         }
 
         $this->view->assign("dados", $dados);

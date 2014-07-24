@@ -67,16 +67,16 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Matricula</th>
                 <th>Apelido</th>
+                <th width="20%">Projeto Cadastrado</th>
             </tr>
 
             <?php foreach ($this->dados as $key => $pescador): ?>
                 <tr>
                     <td><?= $pescador['tp_id'] ?></td>
                     <td><?= $pescador['tp_nome'] ?></td>
-                    <td><?= $pescador['tp_matricula'] ?></td>
                      <td><?= $pescador['tp_apelido'] ?></td>
+                     <td><?= $pescador['tpr_descricao'] ?></td>
 
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">
