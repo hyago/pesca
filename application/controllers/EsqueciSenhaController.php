@@ -28,10 +28,8 @@ class EsqueciSenhaController extends Zend_Controller_Action
             $modelAlteracaoSenha = new Application_Model_AlteracaoSenha();
             $modelAlteracaoSenha->solicitar($usuario[0]['tu_id'], $token);
             
-            $mensagem = "Clique no link a seguir para alterar a sua senha:<br />";
-            $mensagem .= 'http://' . $_SERVER['HTTP_HOST'] . $this->view->baseUrl() . 
-                    $this->view->url(array("controller"=>"esqueci-senha","action"=>"redefinir", "token" => $token),null,true);
-            
+            $mensagem = "Clique no link a seguir para alterar a sua senha: ";
+            $mensagem .= "esqueci-senha/redefinir/". $token;
             $assunto = 'Redefinir a senha no Pesca.';
             
             $email = new Application_Model_Email($mensagem, $assunto, $usuario[0]['tu_email'], $usuario[0]['tu_nome']);

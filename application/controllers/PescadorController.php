@@ -48,7 +48,7 @@ class PescadorController extends Zend_Controller_Action {
         if ($tp_id > 0) {
             $dados = $this->modelPescador->selectView("tp_id>=" . $tp_id, array('tp_id'), 30);
         } elseif ($tp_nome) {
-            $dados = $this->modelPescador->selectView("tp_nome ~*'". $tp_nome ."'", array('tp_nome', 'tp_id '));
+            $dados = $this->modelPescador->selectView("tp_nome ~*'". $tp_nome ."'", array('tp_nome', 'tp_id'));
         }
         elseif ($tp_apelido) {
             $dados = $this->modelPescador->selectView("tp_apelido ~* '" . $tp_apelido. "'", array('tp_nome', 'tp_id'));
@@ -778,14 +778,15 @@ class PescadorController extends Zend_Controller_Action {
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Pescador');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 3, 'Código');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, 3, 'Nome');
-
+        $cont = 0;
         $linha = 4;
         foreach ($localPescador as $key => $pescador):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $pescador['tp_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $pescador['tp_nome']);
             $linha++;
+            $cont++;
         endforeach;
-
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $cont);
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         ob_end_clean();
 
@@ -818,7 +819,7 @@ class PescadorController extends Zend_Controller_Action {
 
         $this->relpdfpescador( 'tp_id = ' . $pescadorId );
     }
-
+    
     public function relpdfpescador( $where = null) {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -851,7 +852,7 @@ class PescadorController extends Zend_Controller_Action {
         $localEmbarcacoes = $localModelEmbarcacoes->select(NULL, null, NULL);
 
         $countNPescPag = 0;
-
+        $contPescador = 0;  
         foreach ($localPescador as $key => $pescador):
             $modeloRelatorio->setLegValue(30, 'Nome: ', $pescador['tp_nome']);
 			$modeloRelatorio->setLegValueAlinhadoDireita(460, 70, 'Código: ', $pescador['tp_id']);
@@ -990,10 +991,10 @@ class PescadorController extends Zend_Controller_Action {
             } else {
 				$modeloRelatorio->setNewLine();
 			}
-
+            $contPescador++;            
         endforeach;
-
-		$modeloRelatorio->setNewLine();
+        $modeloRelatorio->setLegValue(30, 'Quantidade total de Pescadores: ', $contPescador);
+	$modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 
         ob_end_clean();
@@ -1054,12 +1055,14 @@ class PescadorController extends Zend_Controller_Action {
         $modeloRelatorio->setTitulo('Relatório de Pescador');
         $modeloRelatorio->setLegenda(30, 'Código');
         $modeloRelatorio->setLegenda(80, 'Pescador');
-
+        $contPescador = 0;
         foreach ($localPescador as $key => $localData) {
             $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
             $modeloRelatorio->setValue(80, $localData['tp_nome']);
             $modeloRelatorio->setNewLine();
+            $contPescador++;
         }
+        $modeloRelatorio->setLegValue(30, 'Quantidade total de Pescadores: ', $contPescador);
         $modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 
@@ -1082,13 +1085,16 @@ class PescadorController extends Zend_Controller_Action {
         $modeloRelatorio->setLegenda(30, 'Código');
         $modeloRelatorio->setLegenda(80, 'Comunidade');
         $modeloRelatorio->setLegenda(200, 'Pescador');
-
+        
+        $contPescador = 0;
         foreach ($localPescador as $key => $localData) {
             $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
             $modeloRelatorio->setValue(80, $localData['tcom_nome']);
             $modeloRelatorio->setValue(200, $localData['tp_nome']);
             $modeloRelatorio->setNewLine();
+            $contPescador++;
         }
+        $modeloRelatorio->setLegValue(30, 'Quantidade total de Pescadores: ', $contPescador);
         $modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 
@@ -1111,13 +1117,16 @@ class PescadorController extends Zend_Controller_Action {
         $modeloRelatorio->setLegenda(30, 'Código');
         $modeloRelatorio->setLegenda(80, 'Colônia');
         $modeloRelatorio->setLegenda(130, 'Pescador');
-
+        
+        $contPescador = 0;
         foreach ($localPescador as $key => $localData) {
             $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
             $modeloRelatorio->setValue(80, $localData['tc_nome']);
             $modeloRelatorio->setValue(130, $localData['tp_nome']);
             $modeloRelatorio->setNewLine();
+            $contPescador++;
         }
+        $modeloRelatorio->setLegValue(30, 'Quantidade total de Pescadores: ', $contPescador);
         $modeloRelatorio->setNewLine();
         $pdf = $modeloRelatorio->getRelatorio();
 

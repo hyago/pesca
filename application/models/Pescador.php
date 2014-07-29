@@ -10,6 +10,7 @@
  * @access public
  *
  */
+
 class Application_Model_Pescador {
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ SELECT /_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -107,7 +108,8 @@ class Application_Model_Pescador {
             'tp_resp_cad'  => $request['respCadastro'],
             'tp_dta_cad'  => date('d-m-y'),
             'tp_obs' => $request['obs'],
-            'tpr_id' => $request['selectProjeto']
+            'tpr_id' => $request['selectProjeto'],
+            'tp_pescadordeletado' => 0
         );
 
         return $dadosPescador;

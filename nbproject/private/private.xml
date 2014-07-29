@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/bd/ScriptAlterarPescadores.sql</file>
+            <file>file:/srv/www/htdocs/pesca/bd/11_Alterações%20do%20Banco.sql</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/administrador/index.phtml</file>
             <file>file:/srv/www/htdocs/pesca/bd/12_pescador_especialista.sql</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/BarcosController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
+            <file>file:/srv/www/htdocs/pesca/bd/01_criacaoTabelasBD.sql</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Pescador.php</file>
         </group>
     </open-files>
 </project-private>
