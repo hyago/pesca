@@ -18,15 +18,15 @@
         <table id="tblPerfil">
             <tr>
                 <th width="15%">ID </th>
-                <th width="65%">AAssociação de Pesca</th>
+                <th width="65%">Associação de Pesca</th>
                 <th width="5%"></th>
                 <th width="5%"></th>
             </tr>
-            <?php foreach ($this->assignAssPesca as $key => $dadosAssociacaoPesca): ?>
+            <?php foreach ($this->assignAssociacaoPesca as $key => $dadosAssociacaoPesca): ?>
                 <tr id="rowNumPeril<?= $key ?>">
                     <td><?= $dadosAssociacaoPesca['tasp_id'] ?></td>
-                    <td><?= $dadosAssociacaoPesca['tasp_companhia'] ?></td>
-                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosAssociacaoPesca['tasp_id'] ?>', '<?= $dadosAssociacaoPesca['tasp_companhia'] ?>', this.form)"></td>
+                    <td><?= $dadosAssociacaoPesca['tasp_associacao'] ?></td>
+                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosAssociacaoPesca['tasp_id'] ?>', '<?= $dadosAssociacaoPesca['tasp_associacao'] ?>', this.form)"></td>
                     <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosAssociacaoPesca['tasp_id'] ?>, '<?= $this->url(array("controller" => "associacao-pesca", "action" => "delete"), null, true) ?>')"></td>
                 </tr>
             <?php endforeach; ?>
