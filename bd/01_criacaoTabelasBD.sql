@@ -192,7 +192,12 @@ Drop table if exists t_coletamanual;
 Drop table if exists t_emalhe;
 Drop table if exists t_calao;
 
-
+DROP TABLE IF EXISTS T_MATURIDADE CASCADE;
+DROP TABLE IF EXISTS T_UNIDADE_PEIXE CASCADE;
+DROP TABLE IF EXISTS T_PROJETO CASCADE;
+DROP TABLE IF EXISTS T_ENTREVISTA_HAS_T_AVISTAMENTO CASCADE;
+DROP TABLE IF EXISTS T_TURNO CASCADE;
+DROP TABLE IF EXISTS T_UNIDADE_CAMARAO CASCADE;
 
 -- -----------------------------------------------------
 -- TABLE T_UF
@@ -2984,19 +2989,22 @@ CREATE OR REPLACE VIEW v_subamostra AS
 -- Add tu_id_monitor integer not null, Add Foreign Key (tu_id_monitor)
 --       REFERENCES t_usuario (tu_id) MATCH SIMPLE
 --       ON UPDATE NO ACTION ON DELETE NO ACTION;
-Alter table t_unidade_peixe
-Add Foreign Key (tamp_id)
-References t_amostra_peixe (tamp_id) match Simple ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
-Insert into t_maturidade (tmat_tipo) values ('Aberto');
-Insert into t_maturidade (tmat_tipo) values ('Fechado');
-Insert into t_maturidade (tmat_tipo) values ('Em Desenvolvimento');
-Insert into t_maturidade (tmat_tipo) values ('Desenvolvida');
-Insert into t_maturidade (tmat_tipo) values ('Rudimentar');
-Insert into t_maturidade (tmat_tipo) values ('Não informado');
+CREATE TABLE t_maturidade
+(
+  tmat_id serial NOT NULL,
+  tmat_tipo character varying(25),
+  CONSTRAINT t_maturidade_pkey PRIMARY KEY (tmat_id)
+);
 
-drop table t_unidade_peixe cascade;
+-- Insert into t_maturidade (tmat_tipo) values ('Aberto');
+-- Insert into t_maturidade (tmat_tipo) values ('Fechado');
+-- Insert into t_maturidade (tmat_tipo) values ('Em Desenvolvimento');
+-- Insert into t_maturidade (tmat_tipo) values ('Desenvolvida');
+-- Insert into t_maturidade (tmat_tipo) values ('Rudimentar');
+-- Insert into t_maturidade (tmat_tipo) values ('Não informado');
+
 CREATE TABLE t_unidade_peixe
 (
   tup_id serial,
@@ -3014,6 +3022,10 @@ CREATE TABLE t_unidade_peixe
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
+Alter table t_unidade_peixe
+Add Foreign Key (tamp_id)
+References t_amostra_peixe (tamp_id) match Simple ON UPDATE NO ACTION ON DELETE NO ACTION;
+
 CREATE OR REPLACE VIEW V_AMOSTRA_CAMARAO AS
 SELECT T_AMOSTRA_CAMARAO.TAMC_ID, TUE.TU_NOME, T_PORTO.PTO_NOME,
 T_AMOSTRA_CAMARAO.TAMC_DATA, T_BARCO.BAR_NOME, T_PESQUEIRO_AF.PAF_PESQUEIRO,
@@ -3027,6 +3039,20 @@ INNER JOIN T_BARCO ON T_AMOSTRA_CAMARAO.BAR_ID = T_BARCO.BAR_ID
 INNER JOIN T_ESPECIE ON T_AMOSTRA_CAMARAO.ESP_ID = T_ESPECIE.ESP_ID
 INNER JOIN T_SUBAMOSTRA ON T_AMOSTRA_CAMARAO.SA_ID = T_SUBAMOSTRA.SA_ID
 INNER JOIN T_USUARIO TUM ON T_AMOSTRA_CAMARAO.TU_ID_MONITOR = TUM.TU_ID;
+
+
+
+
+CREATE TABLE T_UNIDADE_CAMARAO (
+  TUC_ID SERIAL NOT NULL,
+  TAMC_ID INTEGER NOT NULL,
+  TUC_SEXO CHARACTER VARYING(1),
+  TMAT_ID INTEGER NOT NULL,
+  TUC_COMPRIMENTO_CABECA DOUBLE PRECISION,
+  TUC_PESO DOUBLE PRECISION,
+  CONSTRAINT T_UNIDADE_CAMARAO_PKEY PRIMARY KEY (TUC_ID)
+);
+
 
 CREATE OR REPLACE VIEW V_UNIDADE_CAMARAO AS
 SELECT T_UNIDADE_CAMARAO.TUC_ID, T_UNIDADE_CAMARAO.TAMC_ID,
@@ -3044,7 +3070,7 @@ JOIN T_PORTO ON T_AMOSTRA_PEIXE.PTO_ID = T_PORTO.PTO_ID
 JOIN T_SUBAMOSTRA ON T_AMOSTRA_PEIXE.SA_ID = T_SUBAMOSTRA.SA_ID
 JOIN T_USUARIO TUM ON T_AMOSTRA_PEIXE.TU_ID_MONITOR = TUM.TU_ID;
 
-DROP VIEW V_UNIDADE_PEIXE;
+-- DROP VIEW V_UNIDADE_PEIXE;
 CREATE OR REPLACE VIEW V_UNIDADE_PEIXE AS
 SELECT T_UNIDADE_PEIXE.TUP_ID, T_AMOSTRA_PEIXE.TAMP_ID, T_ESPECIE.ESP_NOME_COMUM, T_UNIDADE_PEIXE.TUP_COMPRIMENTO, T_UNIDADE_PEIXE.TUP_PESO, T_UNIDADE_PEIXE.TUP_SEXO
 FROM T_UNIDADE_PEIXE, T_AMOSTRA_PEIXE, T_ESPECIE
@@ -3084,16 +3110,16 @@ Add tpte_id serial,
 ADD PRIMARY KEY (tpte_id);
 
 --Já está no servidor
-CREATE OR REPLACE VIEW v_pescadorhasembarcacao AS 
- SELECT phe.tp_id, phe.tte_id, tte.tte_tipoembarcacao, phe.tpte_motor, 
+CREATE OR REPLACE VIEW v_pescadorhasembarcacao AS
+ SELECT phe.tp_id, phe.tte_id, tte.tte_tipoembarcacao, phe.tpte_motor,
     phe.tpe_id, tpe.tpe_porte, phe.tpte_dono, phe.tpte_id
-   FROM t_pescador_has_t_embarcacao phe, t_tipoembarcacao tte, 
+   FROM t_pescador_has_t_embarcacao phe, t_tipoembarcacao tte,
     t_porteembarcacao tpe
   WHERE phe.tte_id = tte.tte_id AND phe.tpe_id = tpe.tpe_id;
 
 --Já está no servidor
 Create or Replace View v_entrevistas As
-SELECT 'Arrasto-Fundo',t_arrastofundo.af_id as id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Arrasto-Fundo',t_arrastofundo.af_id as id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_arrastofundo
    LEFT JOIN t_pescador ON t_arrastofundo.tp_id_entrevistado = t_pescador.tp_id
@@ -3101,7 +3127,7 @@ SELECT 'Arrasto-Fundo',t_arrastofundo.af_id as id, t_pescador.tp_nome, t_barco.b
    LEFT JOIN t_monitoramento ON t_arrastofundo.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Calão',t_calao.cal_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Calão',t_calao.cal_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_calao
    LEFT JOIN t_pescador ON t_calao.tp_id_entrevistado = t_pescador.tp_id
@@ -3109,7 +3135,7 @@ SELECT 'Calão',t_calao.cal_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_calao.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Coleta Manual',t_coletamanual.cml_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Coleta Manual',t_coletamanual.cml_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_coletamanual
    LEFT JOIN t_pescador ON t_coletamanual.tp_id_entrevistado = t_pescador.tp_id
@@ -3117,7 +3143,7 @@ SELECT 'Coleta Manual',t_coletamanual.cml_id, t_pescador.tp_nome, t_barco.bar_no
    LEFT JOIN t_monitoramento ON t_coletamanual.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Emalhe', t_emalhe.em_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Emalhe', t_emalhe.em_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_emalhe
    LEFT JOIN t_pescador ON t_emalhe.tp_id_entrevistado = t_pescador.tp_id
@@ -3125,7 +3151,7 @@ SELECT 'Emalhe', t_emalhe.em_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_emalhe.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Groseira',t_grosseira.grs_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Groseira',t_grosseira.grs_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_grosseira
    LEFT JOIN t_pescador ON t_grosseira.tp_id_entrevistado = t_pescador.tp_id
@@ -3133,7 +3159,7 @@ SELECT 'Groseira',t_grosseira.grs_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_grosseira.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Jereré',t_jerere.jre_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Jereré',t_jerere.jre_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_jerere
    LEFT JOIN t_pescador ON t_jerere.tp_id_entrevistado = t_pescador.tp_id
@@ -3141,7 +3167,7 @@ SELECT 'Jereré',t_jerere.jre_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_jerere.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Linha',t_linha.lin_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Linha',t_linha.lin_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_linha
    LEFT JOIN t_pescador ON t_linha.tp_id_entrevistado = t_pescador.tp_id
@@ -3149,7 +3175,7 @@ SELECT 'Linha',t_linha.lin_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_linha.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Linha de Fundo',t_linhafundo.lf_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Linha de Fundo',t_linhafundo.lf_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_linhafundo
    LEFT JOIN t_pescador ON t_linhafundo.tp_id_entrevistado = t_pescador.tp_id
@@ -3157,7 +3183,7 @@ SELECT 'Linha de Fundo',t_linhafundo.lf_id, t_pescador.tp_nome, t_barco.bar_nome
    LEFT JOIN t_monitoramento ON t_linhafundo.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Manzuá',t_manzua.man_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Manzuá',t_manzua.man_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_manzua
    LEFT JOIN t_pescador ON t_manzua.tp_id_entrevistado = t_pescador.tp_id
@@ -3165,7 +3191,7 @@ SELECT 'Manzuá',t_manzua.man_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_manzua.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Mergulho',t_mergulho.mer_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Mergulho',t_mergulho.mer_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_mergulho
    LEFT JOIN t_pescador ON t_mergulho.tp_id_entrevistado = t_pescador.tp_id
@@ -3173,7 +3199,7 @@ SELECT 'Mergulho',t_mergulho.mer_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_mergulho.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
- SELECT 'Ratoeira',t_ratoeira.rat_id, t_pescador.tp_nome, t_barco.bar_nome, 
+ SELECT 'Ratoeira',t_ratoeira.rat_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_ratoeira
    LEFT JOIN t_pescador ON t_ratoeira.tp_id_entrevistado = t_pescador.tp_id
@@ -3181,7 +3207,7 @@ Union All
    LEFT JOIN t_monitoramento ON t_ratoeira.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Siripóia',t_siripoia.sir_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Siripóia',t_siripoia.sir_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_siripoia
    LEFT JOIN t_pescador ON t_siripoia.tp_id_entrevistado = t_pescador.tp_id
@@ -3189,7 +3215,7 @@ SELECT 'Siripóia',t_siripoia.sir_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_siripoia.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
-SELECT 'Tarrafa',t_tarrafa.tar_id, t_pescador.tp_nome, t_barco.bar_nome, 
+SELECT 'Tarrafa',t_tarrafa.tar_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_tarrafa
    LEFT JOIN t_pescador ON t_tarrafa.tp_id_entrevistado = t_pescador.tp_id
@@ -3197,10 +3223,78 @@ SELECT 'Tarrafa',t_tarrafa.tar_id, t_pescador.tp_nome, t_barco.bar_nome,
    LEFT JOIN t_monitoramento ON t_tarrafa.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
 Union All
- SELECT 'Vara de Pesca',t_varapesca.vp_id, t_pescador.tp_nome, t_barco.bar_nome, 
+ SELECT 'Vara de Pesca',t_varapesca.vp_id, t_pescador.tp_nome, t_barco.bar_nome,
     t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_varapesca
    LEFT JOIN t_pescador ON t_varapesca.tp_id_entrevistado = t_pescador.tp_id
    LEFT JOIN t_barco ON t_varapesca.bar_id = t_barco.bar_id
    LEFT JOIN t_monitoramento ON t_varapesca.mnt_id = t_monitoramento.mnt_id
    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
+CREATE TABLE T_PROJETO (
+	TPR_ID SERIAL,
+	TPR_DESCRICAO CHARACTER(40) NOT NULL,
+	PRIMARY KEY (TPR_ID)
+);
+
+ALTER TABLE T_PESCADOR
+	ADD TPR_ID INTEGER,
+	ADD FOREIGN KEY (TPR_ID) REFERENCES T_PROJETO (TPR_ID) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE T_PESCADOR
+ADD TP_PESCADORDELETADO BOOLEAN;
+
+
+CREATE TABLE T_ENTREVISTA_HAS_T_AVISTAMENTO
+(
+  TE_ID INTEGER NOT NULL,
+  FD_ID INTEGER NOT NULL,
+  TA_ID INTEGER NOT NULL,
+  CONSTRAINT T_T_ENTREVISTA_HAS_T_AVISTAMENTO_PKEY PRIMARY KEY (TE_ID, FD_ID, TA_ID)
+);
+
+CREATE TABLE T_TURNO (
+  TURNO_ID CHARACTER VARYING NOT NULL,
+  TURNO_NOME CHARACTER VARYING(30) NOT NULL,
+  CONSTRAINT T_TURNO_PKEY PRIMARY KEY (TURNO_ID)
+);
+
+
+
+--- POR ULTIMO
+
+CREATE INDEX IDX_T_PESCADOR_TP_NOME ON T_PESCADOR (TP_NOME);
+CREATE INDEX IDX_T_ARTEPESCA_TAP_ARTEPESCA ON T_ARTEPESCA (TAP_ARTEPESCA);
+CREATE INDEX IDX_T_AREAPESCA_TAREAP_AREAPESCA ON T_AREAPESCA (TAREAP_AREAPESCA);
+CREATE INDEX IDX_T_TIPOEMBARCACAO_TTE_TIPOEMBARCACAO ON T_TIPOEMBARCACAO (TTE_TIPOEMBARCACAO);
+CREATE INDEX IDX_T_PORTEEMBARCACAO_TPE_PORTE ON T_PORTEEMBARCACAO (TPE_PORTE);
+CREATE INDEX IDX_T_TIPOCAPTURADA_ITC_TIPO ON T_TIPOCAPTURADA (ITC_TIPO);
+CREATE INDEX IDX_T_COMUNIDADE_TCOM_NOME ON T_COMUNIDADE (TCOM_NOME);
+CREATE INDEX IDX_T_COLONIA_TC_NOME ON T_COLONIA (TC_NOME);
+CREATE INDEX IDX_T_MUNICIPIO_TMUN_MUNICIPIO ON T_MUNICIPIO (TMUN_MUNICIPIO);
+CREATE INDEX IDX_T_MUNICIPIO_TUF_SIGLA ON T_MUNICIPIO (TUF_SIGLA, TMUN_MUNICIPIO);
+CREATE INDEX IDX_T_RENDA_REN_RENDA ON T_RENDA (REN_RENDA);
+CREATE INDEX IDX_T_TIPORENDA_TTR_DESCRICAO ON T_TIPORENDA (TTR_DESCRICAO);
+CREATE INDEX IDX_T_PROGRAMASOCIAL_PRS_PROGRAMA ON T_PROGRAMASOCIAL (PRS_PROGRAMA);
+CREATE INDEX IDX_T_ESCOLARIDADE_ESC_NIVEL ON T_ESCOLARIDADE (ESC_NIVEL);
+CREATE INDEX IDX_T_TIPODEPENDENTE_TTD_TIPODEPENDENTE ON T_TIPODEPENDENTE (TTD_TIPODEPENDENTE);
+CREATE INDEX IDX_T_TIPOTEL_TTEL_DESC ON T_TIPOTEL (TTEL_DESC);
+CREATE INDEX IDX_T_GRUPO_GRP_NOME ON T_GRUPO (GRP_NOME);
+CREATE INDEX IDX_T_ORDEM_ORD_NOME ON T_ORDEM (ORD_NOME);
+CREATE INDEX IDX_T_ORDEM_GRP_ID ON T_ORDEM (GRP_ID, ORD_NOME);
+CREATE INDEX IDX_T_FAMILIA_FAM_NOME ON T_FAMILIA (FAM_NOME);
+CREATE INDEX IDX_T_FAMILIA_ORD_ID ON T_FAMILIA (ORD_ID,  FAM_NOME);
+CREATE INDEX IDX_T_GENERO_GEN_NOME ON T_GENERO (GEN_NOME);
+CREATE INDEX IDX_T_GENERO_FAM_ID ON T_GENERO (FAM_ID, GEN_NOME);
+CREATE INDEX IDX_T_ESPECIE_ESP_NOME ON T_ESPECIE (ESP_NOME);
+CREATE INDEX IDX_T_ESPECIE_GEN_ID ON T_ESPECIE (GEN_ID, ESP_NOME);
+CREATE INDEX IDX_T_PORTO_PTO_NOME ON T_PORTO (PTO_NOME);
+CREATE INDEX IDX_T_PESQUEIRO_AF_PAF_PESQUEIRO ON T_PESQUEIRO_AF (PAF_PESQUEIRO);
+CREATE INDEX IDX_T_VENTO_VNT_FORCA ON T_VENTO (VNT_FORCA);
+CREATE INDEX IDX_T_TEMPO_TMP_ESTADO ON T_TEMPO (TMP_ESTADO);
+CREATE INDEX IDX_T_BARCO_BAR_NOME ON T_BARCO (BAR_NOME);
+CREATE INDEX IDX_T_MARE_MRE_TIPO ON T_MARE (MRE_TIPO);
+CREATE INDEX IDX_T_DESTINOPESCADO_DP_DESTINO ON T_DESTINOPESCADO (DP_DESTINO);
+
+
+
