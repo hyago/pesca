@@ -235,36 +235,45 @@
 -- UPDATE t_pescador
 --    SET tpr_id=1;
 
-Alter table t_pescador
-Add tp_pescadordeletado boolean;
-
-update t_pescador
-set tp_pescadordeletado = false;
---Adicionar o campo tpr_id e tpd_descricao
-DROP VIEW IF EXISTS v_pescador;
-
-CREATE OR REPLACE VIEW v_pescador AS 
- SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tp_matricula, tp.tp_apelido, 
-    tp.tp_filiacaopai, tp.tp_filiacaomae, tp.tp_ctps, tp.tp_pis, tp.tp_inss, 
-    tp.tp_nit_cei, tp.tp_rg, tp.tp_cma, tp.tp_rgb_maa_ibama, 
-    tp.tp_cir_cap_porto, tp.tp_cpf, tp.tp_datanasc, tp.tp_dta_cad, 
-    tp.tp_especificidade, tp.esc_id, tesc.esc_nivel, tp.tmun_id_natural, 
-    tm.tmun_municipio AS munnat, tm.tuf_sigla AS signat, tp.te_id, 
-    te.te_logradouro, te.te_numero, te.te_comp, te.te_bairro, te.te_cep, 
-    te.tmun_id, tmi.tmun_municipio, tmi.tuf_sigla, tp.tp_resp_lan, 
-    tlan.tu_nome AS tu_nome_lan, tp.tp_resp_cad, tcad.tu_nome AS tu_nome_cad, 
-    tp.tp_obs, col.tc_id, tc.tc_nome, tcom.tcom_id, tcom.tcom_nome, tp.tpr_id, 
-    tpr.tpr_descricao, tp.tp_pescadordeletado
-   FROM t_pescador tp
-   LEFT JOIN t_municipio tm ON tp.tmun_id_natural = tm.tmun_id
-   LEFT JOIN t_endereco te ON tp.te_id = te.te_id
-   LEFT JOIN t_escolaridade tesc ON tp.esc_id = tesc.esc_id
-   LEFT JOIN t_usuario tlan ON tp.tp_resp_lan = tlan.tu_id
-   LEFT JOIN t_usuario tcad ON tp.tp_resp_cad = tcad.tu_id
-   LEFT JOIN t_pescador_has_t_comunidade com ON com.tp_id = tp.tp_id
-   LEFT JOIN t_comunidade tcom ON tcom.tcom_id = com.tcom_id
-   LEFT JOIN t_pescador_has_t_colonia col ON col.tp_id = tp.tp_id
-   LEFT JOIN t_municipio tmi ON te.tmun_id = tmi.tmun_id
-   LEFT JOIN t_colonia tc ON tc.tc_id = col.tc_id
-   LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
-   Where tp.tp_pescadordeletado = false;
+-- Alter table t_pescador
+-- Add tp_pescadordeletado boolean;
+-- 
+-- update t_pescador
+-- set tp_pescadordeletado = false;
+-- --Adicionar o campo tpr_id e tpd_descricao
+-- DROP VIEW IF EXISTS v_pescador;
+-- 
+-- CREATE OR REPLACE VIEW v_pescador AS 
+--  SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tp_matricula, tp.tp_apelido, 
+--     tp.tp_filiacaopai, tp.tp_filiacaomae, tp.tp_ctps, tp.tp_pis, tp.tp_inss, 
+--     tp.tp_nit_cei, tp.tp_rg, tp.tp_cma, tp.tp_rgb_maa_ibama, 
+--     tp.tp_cir_cap_porto, tp.tp_cpf, tp.tp_datanasc, tp.tp_dta_cad, 
+--     tp.tp_especificidade, tp.esc_id, tesc.esc_nivel, tp.tmun_id_natural, 
+--     tm.tmun_municipio AS munnat, tm.tuf_sigla AS signat, tp.te_id, 
+--     te.te_logradouro, te.te_numero, te.te_comp, te.te_bairro, te.te_cep, 
+--     te.tmun_id, tmi.tmun_municipio, tmi.tuf_sigla, tp.tp_resp_lan, 
+--     tlan.tu_nome AS tu_nome_lan, tp.tp_resp_cad, tcad.tu_nome AS tu_nome_cad, 
+--     tp.tp_obs, col.tc_id, tc.tc_nome, tcom.tcom_id, tcom.tcom_nome, tp.tpr_id, 
+--     tpr.tpr_descricao, tp.tp_pescadordeletado
+--    FROM t_pescador tp
+--    LEFT JOIN t_municipio tm ON tp.tmun_id_natural = tm.tmun_id
+--    LEFT JOIN t_endereco te ON tp.te_id = te.te_id
+--    LEFT JOIN t_escolaridade tesc ON tp.esc_id = tesc.esc_id
+--    LEFT JOIN t_usuario tlan ON tp.tp_resp_lan = tlan.tu_id
+--    LEFT JOIN t_usuario tcad ON tp.tp_resp_cad = tcad.tu_id
+--    LEFT JOIN t_pescador_has_t_comunidade com ON com.tp_id = tp.tp_id
+--    LEFT JOIN t_comunidade tcom ON tcom.tcom_id = com.tcom_id
+--    LEFT JOIN t_pescador_has_t_colonia col ON col.tp_id = tp.tp_id
+--    LEFT JOIN t_municipio tmi ON te.tmun_id = tmi.tmun_id
+--    LEFT JOIN t_colonia tc ON tc.tc_id = col.tc_id
+--    LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
+--    Where tp.tp_pescadordeletado = false;
+--Já está no servidor
+-- CREATE OR REPLACE VIEW v_pescador_porto AS 
+--  SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tpr_id, 
+--     tpr.tpr_descricao, tp.tp_pescadordeletado, pto.pto_nome
+--    FROM t_pescador tp
+--    LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
+--    LEFT JOIN t_pescador_has_t_porto tppto ON tppto.tp_id = tp.tp_id
+--    LEFT JOIN t_porto pto ON tppto.pto_id = pto.pto_id
+--   WHERE tp.tp_pescadordeletado = false;

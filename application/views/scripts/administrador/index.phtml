@@ -2,14 +2,14 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Apelido</th>
+                <th>Id do pescador</th>
             </tr>
 
             <?php foreach ($this->pescadorDeletado as $key => $pescador): ?>
                 <tr>
                     <td><?= $pescador['tp_id'] ?></td>
                     <td><?= $pescador['tp_nome'] ?></td>
-                     <td><?= $pescador['tp_apelido'] ?></td>
+                     <td><?= $pescador['tp_obs'] ?></td>
 
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>">

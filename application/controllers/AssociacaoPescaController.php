@@ -30,7 +30,7 @@ class AssociacaoPescaController extends Zend_Controller_Action
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
-        $dadosAssociacaoPesca = $this->ModelAssociacaoPesca->select(NULL, 'tacp_companhia', NULL);
+        $dadosAssociacaoPesca = $this->ModelAssociacaoPesca->select(NULL, 'tasp_associacao', NULL);
 
         $this->view->assign("assignAssociacaoPesca", $dadosAssociacaoPesca);
     }
@@ -45,7 +45,7 @@ class AssociacaoPescaController extends Zend_Controller_Action
 
         $this->ModelAssociacaoPesca->delete($this->_getParam('id'));
 
-        $this->_redirect('acompanhado/index');
+        $this->_redirect('associacao-pesca/index');
         }
     }
 
@@ -54,11 +54,11 @@ class AssociacaoPescaController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $setupDados = array('tacp_companhia' => $this->_getParam("valor"));
+        $setupDados = array('tasp_associacao' => $this->_getParam("valor"));
 
         $this->ModelAssociacaoPesca->insert($setupDados);
 
-        $this->_redirect("/acompanhado/index");
+        $this->_redirect("/associacao-pesca/index");
 
         return;
     }
@@ -68,13 +68,13 @@ class AssociacaoPescaController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         $setupDados = array(
-            'tacp_id' => $this->_getParam("id"),
-            'tacp_companhia' => $this->_getParam("valor")
+            'tasp_id' => $this->_getParam("id"),
+            'tasp_associacao' => $this->_getParam("valor")
         );
 
         $this->ModelAssociacaoPesca->update($setupDados);
 
-        $this->_redirect("/acompanhado/index");
+        $this->_redirect("/associacao-pesca/index");
 
         return;
     }

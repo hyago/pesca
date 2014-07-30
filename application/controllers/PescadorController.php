@@ -855,7 +855,7 @@ class PescadorController extends Zend_Controller_Action {
         $contPescador = 0;  
         foreach ($localPescador as $key => $pescador):
             $modeloRelatorio->setLegValue(30, 'Nome: ', $pescador['tp_nome']);
-			$modeloRelatorio->setLegValueAlinhadoDireita(460, 70, 'Código: ', $pescador['tp_id']);
+            $modeloRelatorio->setLegValueAlinhadoDireita(460, 70, 'Código: ', $pescador['tp_id']);
             $modeloRelatorio->setLegValue(530, 'Sexo: ', $pescador['tp_sexo']);
 
             $modeloRelatorio->setNewLine();
@@ -1171,7 +1171,9 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
 
-    public function relatoriopescadorgroupcoloniaAction() {
+    
+    
+        public function relatoriopescadorgroupcoloniaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -1202,6 +1204,38 @@ class PescadorController extends Zend_Controller_Action {
 
         ob_end_clean();
         header('Content-Disposition: attachment;filename="rel_lista_qtde_colonia.pdf"');
+        header("Content-type: application/x-pdf");
+        echo $pdf->render();
+    }
+    
+    public function relatoriopescadorportoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $localModelPescador = new Application_Model_Pescador();
+        $localPescador = $localModelPescador->selectPescadorByPortos();
+
+        require_once "../library/ModeloRelatorio.php";
+        $modeloRelatorio = new ModeloRelatorio();
+        $modeloRelatorio->setTitulo('Relatório de Pescador - Colônia');
+        $modeloRelatorio->setLegenda(30, 'Código');
+        $modeloRelatorio->setLegenda(80, 'Porto');
+        $modeloRelatorio->setLegenda(180, 'Pescador');
+        
+        $contPescador = 0;
+        foreach ($localPescador as $key => $localData) {
+            $modeloRelatorio->setValueAlinhadoDireita(30, 40, $localData['tp_id']);
+            $modeloRelatorio->setValue(80, $localData['pto_nome']);
+            $modeloRelatorio->setValue(180, $localData['tp_nome']);
+            $modeloRelatorio->setNewLine();
+            $contPescador++;
+        }
+        $modeloRelatorio->setLegValue(30, 'Quantidade total de Pescadores: ', $contPescador);
+        $modeloRelatorio->setNewLine();
+        $pdf = $modeloRelatorio->getRelatorio();
+
+        ob_end_clean();
+        header('Content-Disposition: attachment;filename="rel_lista_pescador_colonia.pdf"');
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }
