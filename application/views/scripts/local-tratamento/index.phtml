@@ -1,6 +1,6 @@
 <h2>Pescador Especialista -> Local de Tratamento</h2>
 <form method="post">
-<!--     <fieldset id="Social"></fieldset> -->
+<fieldset id="Especialista"></fieldset>
 
     <a id="ancora_local-tratamento"></a>
     <fieldset class="noEditable"><legend>Local de Tratamento:</legend>
@@ -22,10 +22,10 @@
             </tr>
             <?php foreach ($this->assignLocalTratamento as $key => $dadosLocalTratamento): ?>
                 <tr id="rowNumPeril<?= $key ?>">
-                    <td><?= $dadosLocalTratamento['tin_id'] ?></td>
-                    <td><?= $dadosLocalTratamento['tin_insumo'] ?></td>
-                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosLocalTratamento['tin_id'] ?>', '<?= $dadosLocalTratamento['tin_insumo'] ?>', this.form)"></td>
-                    <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosLocalTratamento['tin_id'] ?>, '<?= $this->url(array("controller" => "local-tratamento", "action" => "delete"), null, true) ?>')"></td>
+                    <td><?= $dadosLocalTratamento['tlt_id'] ?></td>
+                    <td><?= $dadosLocalTratamento['tlt_local'] ?></td>
+                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosLocalTratamento['tlt_id'] ?>', '<?= $dadosLocalTratamento['tlt_local'] ?>', this.form)"></td>
+                    <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosLocalTratamento['tlt_id'] ?>, '<?= $this->url(array("controller" => "local-tratamento", "action" => "delete"), null, true) ?>')"></td>
                 </tr>
             <?php endforeach; ?>
         </table>

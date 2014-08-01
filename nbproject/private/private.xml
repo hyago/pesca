@@ -3,15 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/AssociacaoPescaController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/DificuldadesController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/acompanhado/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/layouts/scripts/layout.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/AssociacaoPesca.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/dificuldades/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/Dificuldade.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/Dificuldade.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ultima-pesca/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/tipo-transporte/index.phtml</file>
         </group>
     </open-files>
 </project-private>

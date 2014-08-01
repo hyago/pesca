@@ -28,7 +28,7 @@ class Application_Model_UltimaPesca
     {
         $this->dbTableUltimaPesca = new Application_Model_DbTable_UltimaPesca();
         
-        $dadosUltimaPesca = array('tup_pesca' => $request['inputUltimaPesca'] );
+        $dadosUltimaPesca = array('tup_pesca' => $request['tup_pesca'] );
         
         $this->dbTableUltimaPesca->insert($dadosUltimaPesca);
 
@@ -39,9 +39,9 @@ class Application_Model_UltimaPesca
     {
         $this->dbTableUltimaPesca = new Application_Model_DbTable_UltimaPesca();
         
-        $dadosUltimaPesca = array( 'tup_pesca' => $request['inputUltimaPesca' ] );
+        $dadosUltimaPesca = array( 'tup_pesca' => $request['tup_pesca'] );
         
-        $whereUltimaPesca= $this->dbTableUltimaPesca->getAdapter() ->quoteInto('"tup_id" = ?', $request['idUltimaPesca']);
+        $whereUltimaPesca= $this->dbTableUltimaPesca->getAdapter() ->quoteInto('"tup_id" = ?', $request['tup_id']);
         
         $this->dbTableUltimaPesca->update($dadosUltimaPesca, $whereUltimaPesca);
     }

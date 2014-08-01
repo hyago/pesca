@@ -12,6 +12,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
     else if ($("fieldset").attr('id') === "Desembarque") {
         $("#Dsbq").show();
@@ -25,6 +26,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
     else if ($("fieldset").attr('id') === "Filogenia") {
         $("#Dsbq").show();
@@ -38,6 +40,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
     else if ($("fieldset").attr('id') === "Entrevista"){
         $("#Dsbq").show();
@@ -51,6 +54,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
     else if ($("fieldset").attr('id') === "Relatorio"){
         $("#Dsbq").hide();
@@ -64,6 +68,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
     else if ($("fieldset").attr('id') === "RelListas"){
         $("#Dsbq").hide();
@@ -77,6 +82,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
     else if ($("fieldset").attr('id') === "RelConsolidados"){
         $("#Dsbq").hide();
@@ -90,6 +96,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
     else if($("fieldset").attr('id') === "Amostras"){
         $("#Entrevista").hide();
@@ -103,6 +110,21 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").show();
+        $("#Especialista").hide();
+    }
+    else if($("fieldset").attr('id') === "Especialista"){
+        $("#Entrevista").hide();
+        $("#Dsbq").hide();
+        $("#Filo").hide();
+        $("#Social").show();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
+        $("#Amostras").hide();
+        $("#Especialista").show();
     }
     else {
         $("#Entrevista").hide();
@@ -116,6 +138,7 @@ $(document).ready(function() {
         $("#RelPerfilSocial").hide();
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
+        $("#Especialista").hide();
     }
 
     $("#for-Social").click(function() {
@@ -150,6 +173,9 @@ $(document).ready(function() {
     });
     $("#for-Amostra").click(function(){
         $("#Amostras").slideToggle();
+    });
+    $("#for-Especialista").click(function(){
+        $("#Especialista").slideToggle();
     });
     //funcoes para menu
 });

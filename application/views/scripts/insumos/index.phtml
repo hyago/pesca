@@ -1,10 +1,10 @@
-<h2>Pescador Especialista -> Insumos</h2>
+<h2>Pescador Especialista -> Insumo</h2>
 <form method="post">
-<!--     <fieldset id="Social"></fieldset> -->
+<fieldset id="Especialista"></fieldset>
 
     <a id="ancora_insumos"></a>
-    <fieldset class="noEditable"><legend>Insumos:</legend>
-        <fieldset class="noEditable"><legend>Adicionar Insumos:</legend>
+    <fieldset class="noEditable"><legend>Insumo:</legend>
+        <fieldset class="noEditable"><legend>Adicionar Insumo:</legend>
             <div id="base">
                 <input type="button" name="Add" class="button-confirm" onclick="jsInsertDynamic(this.form, '<?= $this->url(array("controller" => "insumos", "action" => "insert"), null, true) ?>', '<?= $this->url(array("controller" => "insumos", "action" => "update"), null, true) ?>')">
                 <input type="button" name="Reload" class="button-clear" onclick="jsReloadDynamic(this.form)">
@@ -18,14 +18,14 @@
         <table id="tblPerfil">
             <tr>
                 <th width="15%">ID </th>
-                <th width="65%">Insumos</th>
+                <th width="65%">Insumo</th>
             </tr>
-            <?php foreach ($this->assignInsumos as $key => $dadosInsumos): ?>
+            <?php foreach ($this->assignInsumo as $key => $dadosInsumo): ?>
                 <tr id="rowNumPeril<?= $key ?>">
-                    <td><?= $dadosInsumos['thp_id'] ?></td>
-                    <td><?= $dadosInsumos['thp_horario'] ?></td>
-                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosInsumos['thp_id'] ?>', '<?= $dadosInsumos['thp_horario'] ?>', this.form)"></td>
-                    <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosInsumos['thp_id'] ?>, '<?= $this->url(array("controller" => "insumos", "action" => "delete"), null, true) ?>')"></td>
+                    <td><?= $dadosInsumo['tin_id'] ?></td>
+                    <td><?= $dadosInsumo['tin_insumo'] ?></td>
+                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosInsumo['tin_id'] ?>', '<?= $dadosInsumo['tin_insumo'] ?>', this.form)"></td>
+                    <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosInsumo['tin_id'] ?>, '<?= $this->url(array("controller" => "insumos", "action" => "delete"), null, true) ?>')"></td>
                 </tr>
             <?php endforeach; ?>
         </table>

@@ -37,7 +37,7 @@ private $dbTableEstadoCivil;
 
         $dadosEstadoCivil = array('tec_estado' => $request['tec_estado']);
 
-        $whereEstadoCivil = $this->dbTableEstadoCivil->getAdapter()->quoteInto('"tsp_id" = ?', $request['tsp_id']);
+        $whereEstadoCivil = $this->dbTableEstadoCivil->getAdapter()->quoteInto('"tec_id" = ?', $request['tec_id']);
 
         $this->dbTableEstadoCivil->update($dadosEstadoCivil, $whereEstadoCivil);
     }
@@ -45,7 +45,7 @@ private $dbTableEstadoCivil;
     public function delete($input_id) {
         $this->dbTableEstadoCivil = new Application_Model_DbTable_EstadoCivil();
 
-        $whereEstadoCivil = $this->dbTableEstadoCivil->getAdapter()->quoteInto('"tsp_id" = ?', $input_id);
+        $whereEstadoCivil = $this->dbTableEstadoCivil->getAdapter()->quoteInto('"tec_id" = ?', $input_id);
 
         $this->dbTableEstadoCivil->delete($whereEstadoCivil);
     }

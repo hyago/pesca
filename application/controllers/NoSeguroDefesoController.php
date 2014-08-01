@@ -1,6 +1,6 @@
 <?php
 
-class FornecedorInsumosController extends Zend_Controller_Action
+class NoSeguroDefesoController extends Zend_Controller_Action
 {
 
    public function init()
@@ -23,16 +23,16 @@ class FornecedorInsumosController extends Zend_Controller_Action
 
         $this->usuario = $this->modelUsuario->selectLogin($ArrayIdentity['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-        $this->ModelFornecedorInsumos = new Application_Model_FornecedorInsumos();
+        $this->ModelNoSeguroDefeso = new Application_Model_NoSeguroDefeso();
     }
 
     public function indexAction() {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
-        $dadosFornecedorInsumos = $this->ModelFornecedorInsumos->select(NULL, 'tfi_fornecedor', NULL);
+        $dadosNoSeguroDefeso = $this->ModelNoSeguroDefeso->select(NULL, 'tns_situacao', NULL);
 
-        $this->view->assign("assignFornecedorInsumos", $dadosFornecedorInsumos);
+        $this->view->assign("assignNoSeguroDefeso", $dadosNoSeguroDefeso);
     }
 
     public function deleteAction() {
@@ -43,9 +43,9 @@ class FornecedorInsumosController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->ModelFornecedorInsumos->delete($this->_getParam('id'));
+        $this->ModelNoSeguroDefeso->delete($this->_getParam('id'));
 
-        $this->_redirect('fornecedor-insumos/index');
+        $this->_redirect('no-seguro-defeso/index');
         }
     }
 
@@ -54,11 +54,11 @@ class FornecedorInsumosController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $setupDados = array('tfi_fornecedor' => $this->_getParam("valor"));
+        $setupDados = array('tns_situacao' => $this->_getParam("valor"));
 
-        $this->ModelFornecedorInsumos->insert($setupDados);
+        $this->ModelNoSeguroDefeso->insert($setupDados);
 
-        $this->_redirect("/fornecedor-insumos/index");
+        $this->_redirect("/no-seguro-defeso/index");
 
         return;
     }
@@ -68,13 +68,13 @@ class FornecedorInsumosController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         $setupDados = array(
-            'tfi_id' => $this->_getParam("id"),
-            'tfi_fornecedor' => $this->_getParam("valor")
+            'tns_id' => $this->_getParam("id"),
+            'tns_situacao' => $this->_getParam("valor")
         );
 
-        $this->ModelFornecedorInsumos->update($setupDados);
+        $this->ModelNoSeguroDefeso->update($setupDados);
 
-        $this->_redirect("/fornecedor-insumos/index");
+        $this->_redirect("/no-seguro-defeso/index");
 
         return;
     }

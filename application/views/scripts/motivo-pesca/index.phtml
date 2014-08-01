@@ -1,6 +1,6 @@
 <h2>Pescador Especialista -> Motivo da Pesca</h2>
 <form method="post">
-<!--     <fieldset id="Social"></fieldset> -->
+<fieldset id="Especialista"></fieldset>
 
     <a id="ancora_motivo-pesca"></a>
     <fieldset class="noEditable"><legend>Motivo da Pesca:</legend>
@@ -22,10 +22,10 @@
             </tr>
             <?php foreach ($this->assignMotivoPesca as $key => $dadosMotivoPesca): ?>
                 <tr id="rowNumPeril<?= $key ?>">
-                    <td><?= $dadosMotivoPesca['tlt_id'] ?></td>
-                    <td><?= $dadosMotivoPesca['tlt_local'] ?></td>
-                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosMotivoPesca['tlt_id'] ?>', '<?= $dadosMotivoPesca['tlt_local'] ?>', this.form)"></td>
-                    <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosMotivoPesca['tlt_id'] ?>, '<?= $this->url(array("controller" => "motivo-pesca", "action" => "delete"), null, true) ?>')"></td>
+                    <td><?= $dadosMotivoPesca['tmp_id'] ?></td>
+                    <td><?= $dadosMotivoPesca['tmp_motivo'] ?></td>
+                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosMotivoPesca['tmp_id'] ?>', '<?= $dadosMotivoPesca['tmp_motivo'] ?>', this.form)"></td>
+                    <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosMotivoPesca['tmp_id'] ?>, '<?= $this->url(array("controller" => "motivo-pesca", "action" => "delete"), null, true) ?>')"></td>
                 </tr>
             <?php endforeach; ?>
         </table>

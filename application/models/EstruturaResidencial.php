@@ -25,7 +25,7 @@ private $dbTableEstruturaResidencial;
     public function insert(array $request) {
         $this->dbTableEstruturaResidencial = new Application_Model_DbTable_EstruturaResidencial();
 
-        $dadosEstruturaResidencial = array('ter_estrutura' => $request['ter_estrutura']);
+        $dadosEstruturaResidencial = array('terd_estrutura' => $request['terd_estrutura']);
 
         $this->dbTableEstruturaResidencial->insert($dadosEstruturaResidencial);
 
@@ -35,9 +35,9 @@ private $dbTableEstruturaResidencial;
     public function update(array $request) {
         $this->dbTableEstruturaResidencial = new Application_Model_DbTable_EstruturaResidencial();
 
-        $dadosEstruturaResidencial = array('ter_estrutura' => $request['ter_estrutura']);
+        $dadosEstruturaResidencial = array('terd_estrutura' => $request['terd_estrutura']);
 
-        $whereEstruturaResidencial = $this->dbTableEstruturaResidencial->getAdapter()->quoteInto('"ter_id" = ?', $request['ter_id']);
+        $whereEstruturaResidencial = $this->dbTableEstruturaResidencial->getAdapter()->quoteInto('"terd_id" = ?', $request['terd_id']);
 
         $this->dbTableEstruturaResidencial->update($dadosEstruturaResidencial, $whereEstruturaResidencial);
     }
@@ -45,7 +45,7 @@ private $dbTableEstruturaResidencial;
     public function delete($input_id) {
         $this->dbTableEstruturaResidencial = new Application_Model_DbTable_EstruturaResidencial();
 
-        $whereEstruturaResidencial = $this->dbTableEstruturaResidencial->getAdapter()->quoteInto('"ter_id" = ?', $input_id);
+        $whereEstruturaResidencial = $this->dbTableEstruturaResidencial->getAdapter()->quoteInto('"terd_id" = ?', $input_id);
 
         $this->dbTableEstruturaResidencial->delete($whereEstruturaResidencial);
     }

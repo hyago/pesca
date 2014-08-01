@@ -1,6 +1,6 @@
 <h2>Pescador Especialista -> Órgão de RGP</h2>
 <form method="post">
-<!--     <fieldset id="Social"></fieldset> -->
+<fieldset id="Especialista"></fieldset>
 
     <a id="ancora_orgao-rgp"></a>
     <fieldset class="noEditable"><legend>Órgão de RGP:</legend>
@@ -23,8 +23,8 @@
             <?php foreach ($this->assignOrgaoRgp as $key => $dadosOrgaoRgp): ?>
                 <tr id="rowNumPeril<?= $key ?>">
                     <td><?= $dadosOrgaoRgp['trgp_id'] ?></td>
-                    <td><?= $dadosOrgaoRgp['trgp_entidade'] ?></td>
-                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosOrgaoRgp['trgp_id'] ?>', '<?= $dadosOrgaoRgp['trgp_entidade'] ?>', this.form)"></td>
+                    <td><?= $dadosOrgaoRgp['trgp_emissor'] ?></td>
+                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dadosOrgaoRgp['trgp_id'] ?>', '<?= $dadosOrgaoRgp['trgp_emissor'] ?>', this.form)"></td>
                     <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dadosOrgaoRgp['trgp_id'] ?>, '<?= $this->url(array("controller" => "orgao-rgp", "action" => "delete"), null, true) ?>')"></td>
                 </tr>
             <?php endforeach; ?>
