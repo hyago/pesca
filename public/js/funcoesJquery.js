@@ -1081,3 +1081,4 @@ function jsReloadDynamic( frm , pag){
         location.replace(pag);
     }
 }
+

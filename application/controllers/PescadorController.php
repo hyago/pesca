@@ -1239,4 +1239,15 @@ class PescadorController extends Zend_Controller_Action {
         header("Content-type: application/x-pdf");
         echo $pdf->render();
     }
+    
+    
+    
+    public function barAction()
+    {
+        if($this->getRequest->isXmlHttpRequest()) {
+            $this->_helper->layout->disableLayout();
+        }
+        ob_end_clean();
+        // normal logic goes here
+    }
 }

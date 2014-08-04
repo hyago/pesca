@@ -305,6 +305,20 @@ tbody tr:nth-child(odd) {
     width: 120px;
 
 }
+
+#pescador_especialista{
+    float: left;
+    padding: 0;
+    width: 630px;
+    height: auto;
+}
+#pescador_especialista input{
+    width: 220px;
+}
+#pescador_especialista select{
+    width: 220px;
+}
+
 select{
     width: 168px;
     height: 25px;
@@ -533,4 +547,35 @@ h4,h5{
 legend{
     font-size: 14px;
     font-weight: bold;
+}
+
+#tabs ul{
+    height: 20px;
+}
+#tabs ul li{
+    color: #555;
+    font-size: 12px;
+    display: inline;
+    padding: 10px;
+}
+
+#abas li{
+    
+    
+}
+#abas a{
+    background: #e6e6e6 url(smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding: 8px;
+}
+#abas a:hover{
+    background: #8b8386 url(smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+    border-color: #555;
+    cursor: pointer;
+}
+
+#tabs-2 div{
+    margin-bottom: 8px;
 }
