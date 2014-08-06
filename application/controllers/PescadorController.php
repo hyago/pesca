@@ -249,7 +249,73 @@ class PescadorController extends Zend_Controller_Action {
         $selectEstruturaResidencial = $modelEstruturaResidencial->select(null, "terd_estrutura");
         $this->view->assign("selectEstruturaResidencial", $selectEstruturaResidencial);
         
+        $modelEstacaoAno = new Application_Model_EstacaoAno();
+        $selectEstacaoAno = $modelEstacaoAno->select(null, "tea_estacao");
+        $this->view->assign("selectEstacaoAno", $selectEstacaoAno);
         
+        $modelSeguroDefeso = new Application_Model_SeguroDefeso();
+        $selectSeguroDefeso = $modelSeguroDefeso->select(null, "tsd_seguro");
+        $this->view->assign("selectSeguroDefeso", $selectSeguroDefeso);
+        
+        $modelMotivoPesca = new Application_Model_MotivoPesca();
+        $selectMotivoPesca = $modelMotivoPesca->select(null, "tmp_motivo");
+        $this->view->assign("selectMotivoPesca", $selectMotivoPesca);
+        
+        $modelTipoTransporte = new Application_Model_TipoTransporte();
+        $selectTipoTransporte = $modelTipoTransporte->select(null, "ttr_transporte");
+        $this->view->assign("selectTipoTransporte", $selectTipoTransporte);
+        
+        $modelAcompanhado = new Application_Model_Acompanhado();
+        $selectAcompanhado = $modelAcompanhado->select(null, "tacp_companhia");
+        $this->view->assign("selectAcompanhado", $selectAcompanhado);
+        
+        $modelFrequenciaPesca = new Application_Model_FrequenciaPesca();
+        $selectFrequenciaPesca = $modelFrequenciaPesca->select(null, "tfp_frequencia");
+        $this->view->assign("selectFrequenciaPesca", $selectFrequenciaPesca);
+        
+        $modelHorarioPesca = new Application_Model_HorarioPesca();
+        $selectHorarioPesca = $modelHorarioPesca->select(null, "thp_horario");
+        $this->view->assign("selectHorarioPesca", $selectHorarioPesca);
+        
+        $modelUltimaPesca = new Application_Model_UltimaPesca();
+        $selectUltimaPesca = $modelUltimaPesca->select(null, "tup_pesca");
+        $this->view->assign("selectUltimaPesca", $selectUltimaPesca);
+        
+        $modelInsumo = new Application_Model_Insumo();
+        $selectInsumo = $modelInsumo->select(null, "tin_insumo");
+        $this->view->assign("selectInsumo", $selectInsumo);
+        
+        $modelFornecedorInsumos = new Application_Model_FornecedorInsumos();
+        $selectFornecedorInsumos = $modelFornecedorInsumos->select(null, "tfi_fornecedor");
+        $this->view->assign("selectFornecedorInsumos", $selectFornecedorInsumos);
+        
+        $modelRecursos = new Application_Model_Recurso();
+        $selectRecursos = $modelRecursos->select(null, "trec_recurso");
+        $this->view->assign("selectRecursos", $selectRecursos);
+        
+        $modelLocalTratamento = new Application_Model_LocalTratamento();
+        $selectLocalTratamento = $modelLocalTratamento->select(null, "tlt_local");
+        $this->view->assign("selectLocalTratamento", $selectLocalTratamento);
+        
+        $modelAssociacaoPesca = new Application_Model_AssociacaoPesca();
+        $selectAssociacaoPesca = $modelAssociacaoPesca->select(null, "tasp_associacao");
+        $this->view->assign("selectAssociacaoPesca", $selectAssociacaoPesca);
+        
+        $modelOrgaoRgp = new Application_Model_OrgaoRgp();
+        $selectOrgaoRgp = $modelOrgaoRgp->select(null, "trgp_emissor");
+        $this->view->assign("selectOrgaoRgp", $selectOrgaoRgp);
+        
+        $modelDificuldade = new Application_Model_Dificuldade();
+        $selectDificuldade = $modelDificuldade->select(null, "tdif_dificuldade");
+        $this->view->assign("selectDificuldade", $selectDificuldade);
+        
+        $modelDestinoPescado = new Application_Model_DestinoPescado();
+        $selectDestinoPescado= $modelDestinoPescado->select(null, 'dp_destino');
+        $this->view->assign("selectDestinoPescado", $selectDestinoPescado);
+        
+        $modelSobraDaPesca = new Application_Model_SobraDaPesca();
+        $selectSobraDaPesca= $modelSobraDaPesca->select(null, 'tsp_sobra');
+        $this->view->assign("selectSobraPesca", $selectSobraDaPesca);
     }
 
     public function atualizarsemreloadAction() {
