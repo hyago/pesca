@@ -181,25 +181,6 @@ $(document).ready(function() {
 });
 
 
-
-$(function() {
-    function removeCampoTelefonesPescador() {
-        $(".removeCampoTelefonesPescador").unbind("click");
-        $(".removeCampoTelefonesPescador").bind("click", function() {
-            if ($("tr.tr_listasTelefonesPescador").length > 1) {
-                $(this).parent().parent().remove();
-            }
-        });
-    }
-    removeCampoTelefonesPescador();
-    $(".adicionarCampoTelefonesPescador").click(function() {
-        novoCampo1 = $("tr.tr_listasTelefonesPescador:first").clone();
-        novoCampo1.find("input").val("");
-        novoCampo1.insertAfter("tr.tr_listasTelefonesPescador:last");
-        removeCampoTelefonesPescador();
-    });
-});
-
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsBuscaPescadorId( frm, pag )
 {

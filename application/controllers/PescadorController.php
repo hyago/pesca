@@ -223,6 +223,33 @@ class PescadorController extends Zend_Controller_Action {
         $model_VPescadorHasPorto = new Application_Model_VPescadorHasPorto();
         $vPescadorHasPorto = $model_VPescadorHasPorto->select("tp_id=" . $idPescador, "pto_nome", null);
         $this->view->assign("assign_vPescadorPorto", $vPescadorHasPorto);
+        
+        
+        
+        
+        
+        
+        
+//Pescador Especialista///////////////////////////////////////////////////////////////////////
+        
+        
+        $modelEstadoCivil = new Application_Model_EstadoCivil();
+        $selectEstadoCivil = $modelEstadoCivil->select(null, "tec_estado");
+        $this->view->assign("selectEstadoCivil", $selectEstadoCivil);
+        
+        $modelOrigem = new Application_Model_Origem();
+        $selectOrigem = $modelOrigem->select(null, "to_origem");
+        $this->view->assign("selectOrigem", $selectOrigem);
+        
+        $modelResidencia = new Application_Model_Residencia();
+        $selectResidencia = $modelResidencia->select(null, "tre_residencia");
+        $this->view->assign("selectResidencia", $selectResidencia);
+        
+        $modelEstruturaResidencial = new Application_Model_EstruturaResidencial();
+        $selectEstruturaResidencial = $modelEstruturaResidencial->select(null, "terd_estrutura");
+        $this->view->assign("selectEstruturaResidencial", $selectEstruturaResidencial);
+        
+        
     }
 
     public function atualizarsemreloadAction() {
