@@ -174,7 +174,71 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $linha, $consulta['pto_nome']);
             $linha++;
         endforeach;
-
+            $linha++;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Total de Entrevistas');
+            $linha++;
+        
+        foreach($totalEntrevistas as $key => $consultaEntrevistas):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consultaEntrevistas['sum']);
+            $linha++;
+        endforeach;
+        
+        
+            $linha++;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Dias por Portos');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, 'Portos');
+            $linha++;
+        
+            
+        foreach ( $diasByPorto as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['count']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['pto_nome']);
+            $linha++;
+        endforeach;
+            
+            $linha++;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Total de Dias');
+            $linha++;
+         
+            
+        foreach ($dias as $key => $consulta):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['count']);
+            $linha++;
+        endforeach;
+        
+            $linha++;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Monitoramentos');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, 'Quantidade');
+            $linha++;
+            
+        foreach ( $selectMonitoramentos as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['consulta']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        
+            $linha++;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Portos');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, 'Quantidade de Fichas');
+            $linha++;
+            
+        foreach ( $selectFichas as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        
+            $linha++;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Subamostras');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, 'Quantidade');
+            $linha++;
+            
+        foreach ( $selectSubamostras as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['consulta']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         ob_end_clean();
 

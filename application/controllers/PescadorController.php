@@ -1333,7 +1333,70 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
     
-    
+    public function insertpescadorespecialistaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $modelPescadorEspecialista = new Application_Model_PescadorEspecialista();
+        
+        $backUrl = $this->_getParam("back_url");
+        $dadosPescadorEspecialista = array(
+            'idPescadorSp'                      => $this->_getParam("tp_id"),
+            "selectPortoEspecialista"           => $this->_getParam('pto_id'),
+            'tps_dataNasc'                      => $this->_getParam('tps_data_nasc'),              
+            'tps_idade'                         => $this->_getParam('tps_idade'),
+            'selectEstadoCivil'                 => $this->_getParam('tec_id'),                     
+            'tps_numFilhos'                     => $this->_getParam('tps_filhos'),                 
+            'tps_tempoResidencia'               => $this->_getParam('tps_tempo_residencia'),       
+            'selectOrigem'                      => $this->_getParam('to_id'),                      
+            'selectResidencia'                  => $this->_getParam('tre_id'),                     
+            'tps_quantPessoas'                  => $this->_getParam('tps_pessoas_na_casa'),        
+            'tps_tempoSemPesca'                 => $this->_getParam('tps_tempo_sustento'),         
+            'tps_menorRenda'                    => $this->_getParam('tps_renda_menor_ano'),        
+            'selectMenorEstacaoAno'             => $this->_getParam('tea_id_menor'),               
+            'tps_maiorRenda'                    => $this->_getParam('tps_renda_maior_ano'),        
+            'selectMaiorEstacaoAno'             => $this->_getParam('tea_id_maior'),               
+            'tps_valorRendaDefeso'              => $this->_getParam('tps_renda_no_defeso'),        
+            'tps_tempoPesca'                    => $this->_getParam('tps_tempo_de_pesca'),         
+            'selectTutorPesca'                  => $this->_getParam('ttd_id_tutor_pesca'),         
+            'selectAntesPesca'                  => $this->_getParam('ttr_id_antes_pesca'),         
+            'selectMoraOndePesca'               => $this->_getParam('tps_mora_onde_pesca'),        
+            'selectEmbarcado'                   => $this->_getParam('tps_embarcado'),              
+            'tps_numPescadorFamilia'            => $this->_getParam('tps_num_familiar_pescador'),  
+            'selectFrequenciaPesca'             => $this->_getParam('tfp_id'),                     
+            'tps_diasPescando'                  => $this->_getParam('tps_num_dias_pescando'),      
+            'tps_horasPescando'                 => $this->_getParam('tps_hora_pescando'),          
+            'selectUltimaPesca'                 => $this->_getParam('tup_id'),                     
+            'selectFornecedorInsumo'            => $this->_getParam('tfi_id'),                     
+            'selectRecurso'                     => $this->_getParam('trec_id'),                    
+            'selectDestinoPescado'              => $this->_getParam('dp_id_pescado'),              
+            'selectFrequenciaConsumo'           => $this->_getParam('tfp_id_consumo'),             
+            'selectCompradorPescado'            => $this->_getParam('dp_id_comprador'),            
+            'selectSobraPesca'                  => $this->_getParam('tsp_id'),                     
+            'selectLocalTratamento'             => $this->_getParam('tlt_id'),                     
+            'tps_unidadeBeneficiamento'         => $this->_getParam('tps_unidade_beneficiamento'), 
+            'tps_cursoBeneficiamento'           => $this->_getParam('tps_curso_beneficiamento'),   
+            'selectAssociacaoPesca'             => $this->_getParam('tasp_id'),                    
+            'selectColoniaEspecialista'         => $this->_getParam('tc_id'),                      
+            'tps_tempoColonizado'               => $this->_getParam('tps_tempo_em_colonia'),       
+            'tps_dificuldadeColonia'            => $this->_getParam('tps_motivo_falta_pagamento'), 
+            'tps_beneficiosColonia'             => $this->_getParam('tps_beneficio_colonia'),      
+            'selectOrgaoRgp'                    => $this->_getParam('trgp_id'),                    
+            'selectDificuldade'                 => $this->_getParam('tdif_id_area'),               
+            'selectOutraHabilidade'             => $this->_getParam('ttr_id_outra_habilidade'),    
+            'selectAlternativaRenda'            => $this->_getParam('ttr_id_alternativa_renda'),   
+            'selectOutraProfissao'              => $this->_getParam('ttr_id_outra_profissao'),     
+            'tps_filhoPescador'                 => $this->_getParam('tps_filho_seguir_profissao'), 
+            'tps_dependenciaPesca'              => $this->_getParam('tps_grau_dependencia_pesca'), 
+            'selectEntrevistador'               => $this->_getParam('tu_id_entrevistador'),        
+            'tps_data'                          => $this->_getParam('tps_data'),                   
+        );
+
+        $idPescadorEspecialista  = $modelPescadorEspecialista->insert($dadosPescadorEspecialista);
+        $this->redirect("/pescador/editar/id/" . $backUrl . "#pescador_especialista");
+
+        return;
+    }
     
     public function barAction()
     {
@@ -1343,4 +1406,5 @@ class PescadorController extends Zend_Controller_Action {
         ob_end_clean();
         // normal logic goes here
     }
+    
 }

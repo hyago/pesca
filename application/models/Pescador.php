@@ -508,4 +508,8 @@ class Application_Model_Pescador {
 
         return $dao->fetchAll($select)->toArray();
     }
+    
+    
+    
+    
 }

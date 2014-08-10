@@ -6,9 +6,12 @@ $this->headScript()->appendFile('/js/mascaras.js');
 ?>
 <script>
 $(function() {
-    var href=window.location.href.toString();
     
-    if(href.search("#pescador_especialista")!==-1){
+    
+    var href=window.location.hash;
+    
+    var out = window.location.pathname;
+    if(href === "#pescador_especialista"){
         $("#tabs-1").hide();
         $("#tabs-2").show();
     }
@@ -19,6 +22,7 @@ $(function() {
     $("#for_tabs-1").click(function() {
         $("#tabs-2").hide();
         $("#tabs-1").slideToggle();
+        window.location.replace(out + "#ancora_dependentes");
     });
     
     
@@ -26,11 +30,12 @@ $(function() {
         if (confirm("Deseja adicionar o pescador especialista?")) {
             $("#tabs-2").slideToggle();
             $("#tabs-1").hide();
+            window.location.replace(out + "#pescador_especialista");
         }
     });
+    
+    
 });
-
-
   </script>
     <div id="titulos">
         <h2>Perfil Social->Pescador</h2>
@@ -47,7 +52,7 @@ $(function() {
                 <div id="esquerda">
                     <div id="form-dir">
                         <label >Código</label>
-                        <input readonly="" type="text" name="idPescador" value="<?= $this->pescador['tp_id'] ?>" />
+                        <input  type="text" name="idPescador" value="<?= $this->pescador['tp_id'] ?>" />
                     </div>
 
                     <div id="form-dir">
@@ -252,7 +257,7 @@ $(function() {
                     <div id="base">
                         <input type="button" name="Add" class="button-confirm" onclick="jsInsertPescadorHasDependente(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertpescadorhasdependente"), null, true) ?>')">
 
-                        <input type="number" min="1" name="inputQuantidadeDependente" placeholder="Número de dependentes" size="20"  />
+                        <input type="number" required min="1" name="inputQuantidadeDependente" placeholder="Número de dependentes" size="20"  />
 
                         <select name="SelectDependente" id="Dependente">
                             <?php foreach ($this->assignTipoDependentes as $key => $localTipoDependente): ?>
@@ -680,7 +685,7 @@ $(function() {
         
         
         
-        <!--//  PESCADOR ESPECIALISTA          /_/_/_/_/_/_/_/_/_/_/_/_/_//_/_/_/_/_/_/_/_/_/_/_/_/_/-->
+<!--//  PESCADOR ESPECIALISTA          /_/_/_/_/_/_/_/_/_/_/_/_/_//_/_/_/_/_/_/_/_/_/_/_/_/_/-->
         
         <a href="#pescador_especialista"></a>
         <div id="tabs-2">
@@ -688,16 +693,24 @@ $(function() {
                 <fieldset>
                     <legend> Pescador Especialista </legend>
                   <div id="pescador_especialista">  
-<!--                    <div id="form-dir">
+                    <div id="form-dir">
                         <label >Código: </label>
-                        <input readonly="" type="text" name="idPescador" value="<?= $this->pescador['tp_id'] ?>" />
+                        <input  type="text" name="idPescadorSp" value="<?= $this->pescador['tp_id'] ?>" />
                     </div>
 
                     <div id="form-dir">
                         <label for="nome">Nome: </label>
-                        <input type="text" name="nome" id="nome" placeholder="Nome" value="<?= $this->pescador['tp_nome'] ?>"/><br/>
+                        <input type="hidden" name="nome" id="nome" placeholder="Nome" value="<?= $this->pescador['tp_nome'] ?>"/><br/>
                     </div>
-                    -->
+                    
+                    <div id="form-dir">
+                        <label  id="pure-checkbox">Porto ou Comunidade:</label>
+                        <select name="selectPortoEspecialista" id="selectEstadoCivilId">
+                            <?php foreach ($this->assignPorto as $key => $porto): ?>
+                                <option value="<?= $porto['pto_id']; ?>"><?= $porto['pto_nome']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
 <!-- 1.-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Data de Nascimento /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                     <div id="form-dir">
                         <label for="dataNasc">1. Data de Nascimento: </label>
@@ -706,7 +719,7 @@ $(function() {
 <!-- 2.-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Idade /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                    
                     <div id="form-dir">
                             <label >2. Idade: </label>
-                            <input type="number" name="tps_idade" min="0" placeholder="Idade"/>
+                            <input type="number" required name="tps_idade" min="0" placeholder="Idade"/>
                     </div>
 <!-- 3-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Estado Civil /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                     <div id="form-dir">
@@ -720,12 +733,12 @@ $(function() {
 <!-- 4-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Filhos /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                     <div id="form-dir">
                             <label >4. Quantos Filhos? </label>
-                            <input type="number" name="tps_numFilhos" min="0" placeholder="Quantos Filhos?"/>
+                                <input type="number" required name="tps_numFilhos" min="0" placeholder="Quantos Filhos?"/>
                     </div>
 <!-- 5-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tempo de Residência /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                     <div id="form-dir">
                             <label >5. Tempo de residência no município: </label>
-                            <input type="number" name="tps_tempoResidencia" min="0" placeholder="Tempo de residência no município"/>
+                            <input type="number" required name="tps_tempoResidencia" min="0" placeholder="Tempo de residência no município"/>
                     </div>
 <!-- 6-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Origem /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                     <div id="form-dir">
@@ -748,7 +761,7 @@ $(function() {
 <!-- 8-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pessoas Em Casa /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                     <div id="form-dir">
                             <label >8. Quantas pessoas moram em casa?: </label>
-                            <input type="number" name="tps_quantPessoas" min="0" placeholder="Quantas Pessoas moram em casa?"/>
+                            <input type="number" required name="tps_quantPessoas" min="0" placeholder="Quantas Pessoas moram em casa?"/>
                     </div>
 <!-- 9-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Infroestrutura Casa /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                         <a id="ancora_tipos"></a>
@@ -786,7 +799,7 @@ $(function() {
 <!-- 10-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tempo Sem sustentar família /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                        
                     <div id="form-dir">
                             <label >10.Há quanto tempo deixou de sustentar a família somente com pesca? </label>
-                            <input type="number" name="tps_tempoSemPesca" min="0" placeholder="Tempo de sustento"/>
+                            <input type="number" required name="tps_tempoSemPesca" min="0" placeholder="Tempo de sustento"/>
                     </div>
 
 <!-- 11-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Programa Social /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -831,7 +844,7 @@ $(function() {
                                         <option value="<?= $selectEstacaoAno['tea_id']; ?>"><?= $selectEstacaoAno['tea_estacao']; ?></option>
                                     <?php endforeach; ?>
                             </select>
-                            <input type="number" name="tps_menorRenda" min="0" placeholder="Menor Renda"/>
+                            <input type="number" required name="tps_menorRenda" min="0" placeholder="Menor Renda"/>
                  </div>       
                  <div id="form-dir">
                             <label >12.2 <b>Maior</b> Renda do ano: </label>
@@ -840,7 +853,7 @@ $(function() {
                                         <option value="<?= $selectEstacaoAno['tea_id']; ?>"><?= $selectEstacaoAno['tea_estacao']; ?></option>
                                     <?php endforeach; ?>
                             </select>
-                            <input type="number" name="tps_maiorRenda" min="0" placeholder="Maior Renda"/>
+                            <input type="number" required name="tps_maiorRenda" min="0" placeholder="Maior Renda"/>
                  </div>        
                  
                  <div id="form-dir">
@@ -908,14 +921,14 @@ $(function() {
 <!-- 13.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda no Defeso /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
                             <div id="form-dir">
                                 <label  id="pure-checkbox">13.2. Renda no Defeso: </label>
-                                    <input type="number" name="tps_valorRendaDefeso" min="0" placeholder="Renda no Defeso"/>
+                                    <input type="number" required name="tps_valorRendaDefeso" min="0" placeholder="Renda no Defeso"/>
                                 
                             </div>
                         </div>
 <!-- 14-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tempo de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                         <div id="form-dir">
                                 <label  id="pure-checkbox">14. Há quanto tempo pesca/marisca? </label>
-                                    <input type="number" name="tps_tempoPesca" min="0" placeholder="Há quanto tempo pesca?"/>
+                                    <input type="number" required name="tps_tempoPesca" min="0" placeholder="Há quanto tempo pesca?"/>
                         </div>
 <!-- 15-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tutor de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
                         <div id="form-dir">
@@ -1024,6 +1037,8 @@ $(function() {
                                     <option value="<?= $acompanhado['tacp_id']; ?>"><?= $acompanhado['tacp_companhia']; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            
+                            <input type="numeric" name="tps_qtdCompanhia" placeholder="Acompanhado de ___ Pessoas"/>
                         </div>
 
                             </fieldset>
@@ -1054,7 +1069,7 @@ $(function() {
                                     <option value="<?= $companhiaPesca['ttd_id']; ?>"><?= $companhiaPesca['ttd_tipodependente']; ?></option>
                                 <?php endforeach; ?>
                             </select> 
-                            <input type="number" id="small" name="tps_quantCompanhia" min="0" placeholder="Quantos Companheiros"/>
+                            <input type="number" required id="small" name="tps_quantCompanhia" min="0" placeholder="Quantos Companheiros"/>
                             
                         </div>
 
@@ -1089,7 +1104,7 @@ $(function() {
 <!-- 22-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescadores na Família /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                  
                  <div id="form-dir">
                         <label >22.Número de pessoas da família que pescam/mariscam?</label>
-                        <input type="number" id="small" name="tps_numPescadorFamilia" min="0" placeholder="Pessoas que pescam"/>
+                        <input type="number" required name="tps_numPescadorFamilia" min="0" placeholder="Pessoas que pescam"/>
                  </div>
                  
 <!-- 22.1-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Familiares /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
@@ -1168,12 +1183,12 @@ $(function() {
 <!-- 25-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Num Dias Pescando /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                  <div id="form-dir">
                         <label >25.Número de dias pescando:</label>
-                        <input type="number"  name="tps_diasPescando" min="0" />
+                        <input type="number" required  name="tps_diasPescando" min="0" />
                  </div> 
 <!-- 26-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Num Horas Pescando /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <div id="form-dir">
                         <label >26.Horas pescando por dia:</label>
-                        <input type="number"  name="tps_horasPescando" min="0" />
+                        <input type="number" required  name="tps_horasPescando" min="0" />
                  </div> 
 <!-- 27-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Ultima Pescaria /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
                 <div id="form-dir">
@@ -1195,7 +1210,7 @@ $(function() {
                                     <option value="<?= $insumos['tin_id']; ?>"><?= $insumos['tin_insumo']; ?></option>
                                 <?php endforeach; ?>
                             </select> 
-                            <input type="number" id="small" name="tps_valorInsumo" min="0" />
+                            <input type="number" required id="small" name="tps_valorInsumo" min="0" />
                             
                         </div>
 
@@ -1275,7 +1290,7 @@ $(function() {
                 <div id="form-dir">
                         <label >31.Local de Tratamento do pescado?</label>
                         <select name="selectLocalTratamento" >
-                                <?php foreach ($this->electLocalTratamento as $key => $localTratamento): ?>
+                                <?php foreach ($this->selectLocalTratamento as $key => $localTratamento): ?>
                                     <option value="<?= $localTratamento['tlt_id']; ?>"><?= $localTratamento['tlt_local']; ?></option>
                                 <?php endforeach; ?>
                         </select>
@@ -1310,8 +1325,8 @@ $(function() {
                  </div>
 <!-- 34.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ TempoColonizado /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <div id="form-dir">
-                        <label >34.Tempo colonizado(a):</label>
-                        <input type="number"  name="tps_tempoColonizado" min="0" />
+                        <label >34.2.Tempo colonizado(a):</label>
+                        <input type="number" required  name="tps_tempoColonizado" min="0" />
                  </div> 
 <!-- 34.3-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Dificuldade em Pagar colônia /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <div id="form-dir">
@@ -1344,7 +1359,7 @@ $(function() {
 <!-- 37-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Outras Habilidades /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
                 <div id="form-dir">
                         <label >37.Possui habilidade para atuar em outra área?</label>
-                        <select name="selectOutraHabilidade" >
+                            <select name="selectOutraHabilidade" >
                                 <?php foreach ($this->assignTipoRendas as $key => $outraHabilidade): ?>
                                     <option value="<?= $outraHabilidade['ttr_id']; ?>"><?= $outraHabilidade['ttr_descricao']; ?></option>
                                 <?php endforeach; ?>
@@ -1377,12 +1392,30 @@ $(function() {
 <!-- 40-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
                  <div id="form-dir">
                         <label >41.Grau de dependência da pesca (sem o %)?</label>
-                        <input type="number"  name="tps_filhoPescador" min="0" />
+                            <input type="number" required  name="tps_dependenciaPesca" min="0" />
+                 </div>
+                 
+                 <div id="form-dir">
+                        <label >42.Entrevistador:</label>
+                           <select name="selectEntrevistador" >
+                                <?php foreach ($this->assignUser as $key => $entrevistador): ?>
+                                    <option value="<?= $entrevistador['tu_id']; ?>"><?= $entrevistador['tu_nome']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                  </div>
 
+                 <div id="form-dir">
+                        <label >43.Data da entrevista:</label>
+                            <input type="date"  name="tps_data" min="0" />
+                 </div>
 
                 </div>
                 </fieldset>
-            </form>
+               <table id="tabelaSemEstilo">
+                    <td><a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a></td>
+                    
+                    <td><input type="button" size="50" value="Salvar e Continuar" class="button-confirmText" onclick="jsInsertPescadorEspecialista( this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertpescadorespecialista"), null, true) ?>', <?= $this->pescador['tp_id'] ?>)"></td>
+                </table>
+            
         </div>
 </div>

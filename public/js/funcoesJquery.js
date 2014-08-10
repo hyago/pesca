@@ -1063,3 +1063,61 @@ function jsReloadDynamic( frm , pag){
     }
 }
 
+function jsInsertPescadorEspecialista( frm, pag, idPescador )
+{
+    var TmpUrl = (idPescador +'#pescador_especialista');
+
+    var tmpUpdate = (pag +
+            '/tp_id/'+ frm.idPescadorSp.value +
+            '/pto_id/'+ frm.selectPortoEspecialista.value +
+            '/tps_data_nasc/'+ frm.tps_dataNasc.value +
+            '/tps_idade/'+ frm.tps_idade.value +
+            '/tec_id/'+ frm.selectEstadoCivil.value +
+            '/tps_filhos/'+ frm.tps_numFilhos.value +
+            '/tps_tempo_residencia/'+ frm.tps_tempoResidencia.value +
+            '/to_id/'+  frm.selectOrigem.value +
+            '/tre_id/'+ frm.selectResidencia.value +
+            '/tps_pessoas_na_casa/'+ frm.tps_quantPessoas.value +
+            '/tps_tempo_sustento/'+ frm.tps_tempoSemPesca.value +
+            '/tps_renda_menor_ano/'+ frm.tps_menorRenda.value +
+            '/tea_id_menor/'+ frm.selectMenorEstacaoAno.value +
+            '/tps_renda_maior_ano/'+ frm.tps_maiorRenda.value +
+            '/tea_id_maior/'+ frm.selectMaiorEstacaoAno.value +
+            '/tps_renda_no_defeso/'+ frm.tps_valorRendaDefeso.value +
+            '/tps_tempo_de_pesca/'+ frm.tps_tempoPesca.value +
+            '/ttd_id_tutor_pesca/'+ frm.selectTutorPesca.value +
+            '/ttr_id_antes_pesca/'+ frm.selectAntesPesca.value +
+            '/tps_mora_onde_pesca/'+ frm.selectMoraOndePesca.value +
+            '/tps_embarcado/' + frm.selectEmbarcado.value +
+            '/tps_num_familiar_pescador/' + frm.tps_numPescadorFamilia.value +
+            '/tfp_id/' + frm.selectFrequenciaPesca.value +
+            '/tps_num_dias_pescando/'+ frm.tps_diasPescando.value +
+            '/tps_hora_pescando/'+ frm.tps_horasPescando.value +
+            '/tup_id/'+ frm.selectUltimaPesca.value +
+            '/tfi_id/' + frm.selectFornecedorInsumo.value +
+            '/trec_id/' + frm.selectRecurso.value +
+            '/dp_id_pescado/'+ frm.selectDestinoPescado.value +
+            '/tfp_id_consumo/'+ frm.selectFrequenciaConsumo.value +
+            '/dp_id_comprador/'+ frm.selectCompradorPescado.value +
+            '/tsp_id/' + frm.selectSobraPesca.value +
+            '/tlt_id/' + frm.selectLocalTratamento.value +
+            '/tps_unidade_beneficiamento/'+ frm.tps_unidadeBeneficiamento.value +
+            '/tps_curso_beneficiamento/'+ frm.tps_cursoBeneficiamento.value +
+            '/tasp_id/'+ frm.selectAssociacaoPesca.value +
+            '/tc_id/' + frm.selectColoniaEspecialista.value +
+            '/tps_tempo_em_colonia/'+ frm.tps_tempoColonizado.value +
+            '/tps_motivo_falta_pagamento/'+ frm.tps_dificuldadeColonia.value +
+            '/tps_beneficio_colonia/'+ frm.tps_beneficiosColonia.value +
+            '/trgp_id/' + frm.selectOrgaoRgp.value +
+            '/tdif_id_area/'+ frm.selectDificuldade.value +
+            '/ttr_id_outra_habilidade/' + frm.selectOutraHabilidade.value +
+            '/ttr_id_alternativa_renda/' + frm.selectAlternativaRenda.value +
+            '/ttr_id_outra_profissao/' + frm.selectOutraProfissao.value +
+            '/tps_filho_seguir_profissao/'+ frm.tps_filhoPescador.value +
+            '/tps_grau_dependencia_pesca/' + frm.tps_dependenciaPesca.value +
+            '/tu_id_entrevistador/' + frm.selectEntrevistador.value +
+            '/tps_data/'+ frm.tps_data.value +
+            '/back_url/' + TmpUrl);
+
+    location.replace(tmpUpdate);
+}
