@@ -4,7 +4,7 @@ class Application_Model_DbTable_PescadorEspecialistaHasEstruturaResidencial exte
 {
 
     protected $_name = 't_pescador_especialista_has_t_estrutura_residencial';
-
+    protected $_primary = 'tpsterd_id';
 
 }
 

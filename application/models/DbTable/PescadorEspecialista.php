@@ -4,7 +4,7 @@ class Application_Model_DbTable_PescadorEspecialista extends Zend_Db_Table_Abstr
 {
 
     protected $_name = 't_pescador_especialista';
-    protected $_primary = 'tps_id';
+    protected $_primary = 'tp_id';
 
 }
 

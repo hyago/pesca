@@ -107,9 +107,7 @@ class Application_Model_PescadorEspecialista
         if(empty($tps_data)){
             $tps_data = NULL;
         }
-        
         $dadosPescadorEspecialista = array(
-            'tp_id' => $request['idPescadorSp'],
             'pto_id' => $request['selectPortoEspecialista'],
             'tps_data_nasc' => $tps_dataNasc,
             'tps_idade' => $tps_idade,
@@ -164,25 +162,281 @@ class Application_Model_PescadorEspecialista
     }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ INSERT /_/_/_/_/_/_/_/_/_/_/_/_/_/
-    public function insert(array $request) {
-        
-        
+    public function insert($idPescador, $respCadastro) {
         $dbTablePescadorEspecialista = new Application_Model_DbTable_PescadorEspecialista();
-        $dadosPescador = $this->setupDadosPescadorEspecialista( $request );
-        $idPescadorEspecialista = $dbTablePescadorEspecialista->insert($dadosPescador);
+        
+        $dbTablePescador = new Application_Model_DbTable_Pescador();
+        
+        $insertDatePescador = array('tp_especialidade' => date('Y-m-d H:i:s') );
+        $insertIdPescador = array('tp_id' => $idPescador,
+                                  'tp_resp_cad' => $respCadastro);
+        //$selectEspecialista = $dbTablePescadorEspecialista->select('tp_id='.$idPescador);
+        
+        $wherePescador = "tp_id=".$idPescador;
+        $idPescador =$dbTablePescador->update($insertDatePescador, $wherePescador); 
+        $idPescadorEspecialista = $dbTablePescadorEspecialista->insert($insertIdPescador);
         
         return $idPescadorEspecialista;
     }
     
     public function update(array $request) {
 
-        $dbTablePescador = new Application_Model_DbTable_Pescador();
-        $dadosPescador = $this->setupDadosPescador( $request );
-        $dadosPescador['te_id'] = $request['idEndereco'];
-        $wherePescador = "tp_id = " . $request['idPescador'];
+        $dbTablePescador = new Application_Model_DbTable_PescadorEspecialista();
+        $dadosPescador = $this->setupDadosPescadorEspecialista( $request );
+        $wherePescador = "tps_id = " . $request['idEspecialista'];
         $idPescador = $dbTablePescador->update($dadosPescador, $wherePescador);
 
         return $idPescador;
+    }
+    
+    
+    public function insertEstruturaResidencial($idPescador, $valor){
+        $dbTable_PescadorEHasEstResidencial = new Application_Model_DbTable_PescadorEspecialistaHasEstruturaResidencial();
+
+        $dadosPescadorEspHasEstRes = array(
+            'tps_id' => $idPescador,
+            'terd_id' => $valor
+        );
+        $dbTable_PescadorEHasEstResidencial->insert($dadosPescadorEspHasEstRes);
+        
+        return;
+    }
+    public function insertProgramaSocial($idPescador, $valor){
+        $dbTable_PescadorProgramaSocial = new Application_Model_DbTable_PescadorEspecialistaHasProgramaSocial();
+
+        $dadosPescadorHasProgSocial = array(
+            'tps_id' => $idPescador,
+            'prs_id' => $valor
+        );
+        $dbTable_PescadorProgramaSocial->insert($dadosPescadorHasProgSocial);
+        
+        return;
+    }
+    public function insertSeguroDefeso($idPescador, $valor){
+        $dbTable_PescadorSeguroDefeso= new Application_Model_DbTable_PescadorEspecialistaHasSeguroDefeso();
+
+        $dadosPescadorHasSegDefeso = array(
+            'tps_id' => $idPescador,
+            'tsd_id' => $valor
+        );
+        $dbTable_PescadorSeguroDefeso->insert($dadosPescadorHasSegDefeso);
+        
+        return;
+    }
+    public function insertRendaDefeso($idPescador, $valor){
+        $dbTable_PescadorRendaDefeso = new Application_Model_DbTable_PescadorEspecialistaHasNoSeguro();
+
+        $dadosPescadorHasRendaDefeso = array(
+            'tps_id' => $idPescador,
+            'ttr_id' => $valor
+        );
+        $dbTable_PescadorRendaDefeso->insert($dadosPescadorHasRendaDefeso);
+        
+        return;
+    }
+    public function insertMotivoPesca($idPescador, $valor){
+        $dbTable_PescadorMotivoPesca = new Application_Model_DbTable_PescadorEspecialistaHasMotivoPesca();
+
+        $dadosPescadorHasMotivoPesca = array(
+            'tps_id' => $idPescador,
+            'tmp_id' => $valor
+        );
+        $dbTable_PescadorMotivoPesca->insert($dadosPescadorHasMotivoPesca);
+        
+        return;
+    }
+    public function insertTransporte($idPescador, $valor){
+        $dbTable_PescadorTransporte = new Application_Model_DbTable_PescadorEspecialistaHasTipoTransporte();
+
+        $dadosPescadorHasTransporte = array(
+            'tps_id' => $idPescador,
+            'ttr_id' => $valor
+        );
+        $dbTable_PescadorTransporte->insert($dadosPescadorHasTransporte);
+        
+        return;
+    }
+    public function insertAcompanhado($idPescador, $valor, $quantidade){
+        $dbTable_PescadorAcompanhado = new Application_Model_DbTable_PescadorEspecialistaHasAcompanhado();
+
+        $dadosPescadorHasAcompanhado = array(
+            'tps_id' => $idPescador,
+            'tacp_id' => $valor,
+            'tpstacp_quantidade' => $quantidade
+        );
+        $dbTable_PescadorAcompanhado->insert($dadosPescadorHasAcompanhado);
+        
+        return;
+    }
+
+    public function insertCompanhia($idPescador, $valor, $quantidade){
+        $dbTable_PescadorCompanhia = new Application_Model_DbTable_PescadorEspecialistaHasCompanhia();
+
+        $dadosPescadorHasCompanhia = array(
+            'tps_id' => $idPescador,
+            'ttd_id' => $valor,
+            'tpstcp_quantidade' => $quantidade
+        );
+        $dbTable_PescadorCompanhia->insert($dadosPescadorHasCompanhia);
+        
+        return;
+    }
+    public function insertFamiliaPescador($idPescador, $valor){
+        $dbTable_PescadorFamiliaPescador = new Application_Model_DbTable_PescadorEspecialistaHasParentes();
+
+        $dadosPescadorHasParentes = array(
+            'tps_id' => $idPescador,
+            'ttd_id_parente' => $valor
+        );
+        $dbTable_PescadorFamiliaPescador->insert($dadosPescadorHasParentes);
+        
+        return;
+    }
+     public function insertHorarioPesca($idPescador, $valor){
+        $dbTable_PescadorHorarioPesca = new Application_Model_DbTable_PescadorEspecialistaHasHorarioPesca();
+
+        $dadosPescadorHasHorarioPesca = array(
+            'tps_id' => $idPescador,
+            'thp_id' => $valor
+        );
+        $dbTable_PescadorHorarioPesca->insert($dadosPescadorHasHorarioPesca);
+        
+        return;
+    }
+        public function insertInsumoPesca($idPescador, $valor, $preco){
+        $dbTable_PescadorInsumos = new Application_Model_DbTable_PescadorEspecialistaHasInsumos();
+
+        $dadosPescadorHasInsumos = array(
+            'tps_id' => $idPescador,
+            'tin_id' => $valor,
+            'tin_valor_insumo' => $preco
+        );
+        $dbTable_PescadorInsumos->insert($dadosPescadorHasInsumos);
+        
+        return;
+    }
+    
+    
+    
+    
+//VIEWS/////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    public function selectVAcompanhado($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasAcompanhado();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+        public function selectVCompanhia($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasCompanhia();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    
+        public function selectVEstruturaResidencial($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasEstruturaResidencial();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    
+        public function selectVHorarioPesca($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasHorarioPesca();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    
+    public function selectVInsumos($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasInsumo();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    
+    public function selectVMotivoPesca($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasMotivoPesca();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectVNoSeguro($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasNoSeguro();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    
+    public function selectVParentes($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasParentes();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectVProgramaSocial($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasProgramaSocial();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+   public function selectVSeguroDefeso($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasSeguroDefeso();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+   public function selectVTipoTransporte($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasTipoTransporte();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
     }
     
 }

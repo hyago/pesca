@@ -1063,12 +1063,12 @@ function jsReloadDynamic( frm , pag){
     }
 }
 
-function jsInsertPescadorEspecialista( frm, pag, idPescador )
+function jsAtualizaPescadorEspecialista( frm, pag, idPescador, idEspecialista)
 {
     var TmpUrl = (idPescador +'#pescador_especialista');
 
     var tmpUpdate = (pag +
-            '/tp_id/'+ frm.idPescadorSp.value +
+            '/tps_id/' + idEspecialista +
             '/pto_id/'+ frm.selectPortoEspecialista.value +
             '/tps_data_nasc/'+ frm.tps_dataNasc.value +
             '/tps_idade/'+ frm.tps_idade.value +
@@ -1118,6 +1118,130 @@ function jsInsertPescadorEspecialista( frm, pag, idPescador )
             '/tu_id_entrevistador/' + frm.selectEntrevistador.value +
             '/tps_data/'+ frm.tps_data.value +
             '/back_url/' + TmpUrl);
-
+    
     location.replace(tmpUpdate);
+}
+
+function jsInsertPescadorEspecialista(pag,idPescador, respCadastro){
+    var TmpUrl = (idPescador +'#pescador_especialista');
+    
+    var tmpUpdate = (pag +
+        '/tp_id/'+ idPescador + '/tp_resp_cad/'+respCadastro+'/back_url/' + TmpUrl
+    );
+    
+    location.replace(tmpUpdate);
+}
+// -9 -------------------------------------------------------//
+function jsInsertEstruturaResidencial(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectValor.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+
+// -11 -------------------------------------------------------//
+function jsInsertProgramaSocial(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectProgramaSocial.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+
+// -13 -------------------------------------------------------//
+function jsInsertSeguroDefeso(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+ retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectSeguroDefeso.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -13.1 -------------------------------------------------------//
+function jsInsertRendaDefeso(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+ retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectRendaDefeso.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -16 -------------------------------------------------------//
+function jsInsertMotivoPesca(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectMotivoPesca.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -19 -------------------------------------------------------//
+function jsInsertTransporte(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectTransporte.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -20 -------------------------------------------------------//
+function jsInsertAcompanhado(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectAcompanhado.value +'/quantidade/'+frm.tps_qtdCompanhia.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+
+// -20.1 -------------------------------------------------------//
+function jsInsertCompanhia(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectCompanhia.value +'/quantidade/'+frm.tps_quantParente.value  +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+
+// -22.1 -------------------------------------------------------//
+function jsInsertFamiliaPescador(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectFamiliaPescador.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -24 -------------------------------------------------------//
+function jsInsertHorarioPesca(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectHorarioPesca.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -28 -------------------------------------------------------//
+function jsInsertInsumoPesca(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectInsumo.value+ '/preco/' +frm.tps_valorInsumo.value+'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
 }

@@ -136,7 +136,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
         }
 	$pdf = $modeloRelatorio->getRelatorio();
 
-	//ob_end_clean();
+	ob_end_clean();
         
         header('Content-Disposition: attachment;filename="rel_consulta.pdf"');
         header("Content-type: application/x-pdf");

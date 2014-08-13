@@ -15,6 +15,7 @@ class PescadorController extends Zend_Controller_Action {
 
     private $modelPescador;
     private $usuario;
+    private $modelPescadorEspecialista;
 
     public function init() {
         if (!Zend_Auth::getInstance()->hasIdentity()) {
@@ -36,6 +37,7 @@ class PescadorController extends Zend_Controller_Action {
 
 
         $this->modelPescador = new Application_Model_Pescador();
+        $this->modelPescadorEspecialista = new Application_Model_PescadorEspecialista();
     }
 
     public function indexAction() {
@@ -232,6 +234,9 @@ class PescadorController extends Zend_Controller_Action {
         
 //Pescador Especialista///////////////////////////////////////////////////////////////////////
         
+        $assignEspecialista = $this->modelPescadorEspecialista->select("tp_id=".$idPescador);
+        $this->view->assign("assignEspecialista", $assignEspecialista);
+        
         
         $modelEstadoCivil = new Application_Model_EstadoCivil();
         $selectEstadoCivil = $modelEstadoCivil->select(null, "tec_estado");
@@ -316,6 +321,42 @@ class PescadorController extends Zend_Controller_Action {
         $modelSobraDaPesca = new Application_Model_SobraDaPesca();
         $selectSobraDaPesca= $modelSobraDaPesca->select(null, 'tsp_sobra');
         $this->view->assign("selectSobraPesca", $selectSobraDaPesca);
+        
+        
+/////VIEWS PESCADOR ESPECIALISTA
+        
+        $vEspecialistaHasAcompanhado = $this->modelPescadorEspecialista->selectVAcompanhado("tps_id=" . $idPescador, "tacp_companhia", null);
+        $this->view->assign("assign_vEspecialistaHasAcompanhado", $vEspecialistaHasAcompanhado);
+        
+        $vEspecialistaHasCompanhia = $this->modelPescadorEspecialista->selectVCompanhia("tps_id=" . $idPescador, "ttd_tipodependente", null);
+        $this->view->assign("assign_vEspecialistaHasCompanhia", $vEspecialistaHasCompanhia);
+        
+        $vEspecialistaHasEstruturaResidencial = $this->modelPescadorEspecialista->selectVEstruturaResidencial("tps_id=" . $idPescador, "terd_estrutura", null);
+        $this->view->assign("assign_vEspecialistaHasEstruturaResidencial", $vEspecialistaHasEstruturaResidencial);
+        
+        $vEspecialistaHasHorarioPesca = $this->modelPescadorEspecialista->selectVHorarioPesca("tps_id=" . $idPescador, "thp_horario", null);
+        $this->view->assign("assign_vEspecialistaHasHorarioPesca", $vEspecialistaHasHorarioPesca);
+        
+        $vEspecialistaHasInsumo = $this->modelPescadorEspecialista->selectVInsumos("tps_id=" . $idPescador, "tin_insumo", null);
+        $this->view->assign("assign_vEspecialistaHasInsumo", $vEspecialistaHasInsumo);
+        
+        $vEspecialistaHasMotivoPesca = $this->modelPescadorEspecialista->selectVMotivoPesca("tps_id=" . $idPescador, "tmp_motivo", null);
+        $this->view->assign("assign_vEspecialistaHasMotivoPesca", $vEspecialistaHasMotivoPesca);
+        
+        $vEspecialistaHasNoSeguro = $this->modelPescadorEspecialista->selectVNoSeguro("tps_id=" . $idPescador, "ttr_descricao", null);
+        $this->view->assign("assign_vEspecialistaHasNoSeguro", $vEspecialistaHasNoSeguro);
+        
+        $vEspecialistaHasParentes = $this->modelPescadorEspecialista->selectVParentes("tps_id=" . $idPescador, "ttd_tipodependente", null);
+        $this->view->assign("assign_vEspecialistaHasParentes", $vEspecialistaHasParentes);
+        
+        $vEspecialistaHasProgramaSocial = $this->modelPescadorEspecialista->selectVProgramaSocial("tps_id=" . $idPescador, "prs_programa", null);
+        $this->view->assign("assign_vEspecialistaHasProgramaSocial", $vEspecialistaHasProgramaSocial);
+        
+        $vEspecialistaHasSeguroDefeso = $this->modelPescadorEspecialista->selectVSeguroDefeso("tps_id=" . $idPescador, "tsd_seguro", null);
+        $this->view->assign("assign_vEspecialistaHasSeguroDefeso", $vEspecialistaHasSeguroDefeso);
+        
+        $vEspecialistaHasTipoTransporte = $this->modelPescadorEspecialista->selectVTipoTransporte("tps_id=" . $idPescador, "ttr_transporte", null);
+        $this->view->assign("assign_vEspecialistaHasTipoTransporte", $vEspecialistaHasTipoTransporte);
     }
 
     public function atualizarsemreloadAction() {
@@ -1333,15 +1374,13 @@ class PescadorController extends Zend_Controller_Action {
         echo $pdf->render();
     }
     
-    public function insertpescadorespecialistaAction(){
+    public function atualizapescadorespecialistaAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $modelPescadorEspecialista = new Application_Model_PescadorEspecialista();
-        
         $backUrl = $this->_getParam("back_url");
         $dadosPescadorEspecialista = array(
-            'idPescadorSp'                      => $this->_getParam("tp_id"),
+            'idEspecialista'                    => $this->_getParam("tps_id"),
             "selectPortoEspecialista"           => $this->_getParam('pto_id'),
             'tps_dataNasc'                      => $this->_getParam('tps_data_nasc'),              
             'tps_idade'                         => $this->_getParam('tps_idade'),
@@ -1392,10 +1431,10 @@ class PescadorController extends Zend_Controller_Action {
             'tps_data'                          => $this->_getParam('tps_data'),                   
         );
 
-        $idPescadorEspecialista  = $modelPescadorEspecialista->insert($dadosPescadorEspecialista);
+        $idPescadorEspecialista  = $this->modelPescadorEspecialista->update($dadosPescadorEspecialista);
         $this->redirect("/pescador/editar/id/" . $backUrl . "#pescador_especialista");
 
-        return;
+        return $idPescadorEspecialista;
     }
     
     public function barAction()
@@ -1407,4 +1446,216 @@ class PescadorController extends Zend_Controller_Action {
         // normal logic goes here
     }
     
+        public function insertpescadorespecialistaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("tp_id");
+
+        $backUrl = $this->_getParam("back_url");
+        
+        $respCadastro = $this->_getParam("tp_resp_cad");
+        $selectPescador = $this->modelPescadorEspecialista->select('tp_id='. $idPescador);
+        
+        if(empty($selectPescador)){
+        
+            $this->modelPescadorEspecialista->insert($idPescador, $respCadastro);
+        }
+        else{
+            $this->redirect("/pescador/editar/id/" . $backUrl);
+        }
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+        return;
+    }
+// -9 -------------------------------------------------------//
+    public function insertestruturaresidencialAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertEstruturaResidencial($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -11 -------------------------------------------------------//
+     public function insertprogramasocialAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertProgramaSocial($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -13 -------------------------------------------------------//
+     public function insertsegurodefesoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertSeguroDefeso($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -13.1 -------------------------------------------------------//
+    public function insertrendadefesoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertRendaDefeso($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -16 -------------------------------------------------------//
+    public function insertmotivopescaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertMotivoPesca($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+// -19 -------------------------------------------------------//
+    public function inserttransporteAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertTransporte($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -20 -------------------------------------------------------//
+    public function insertacompanhadoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+        
+        $quantidade = $this->_getParam('quantidade');
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertAcompanhado($idPescador, $valor, $quantidade);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -20.1 -------------------------------------------------------//
+    public function insertcompanhiaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $quantidade = $this->_getParam("quantidade");
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertCompanhia($idPescador, $valor, $quantidade);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -22.1 -------------------------------------------------------//
+    public function insertfamiliapescadorAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertFamiliaPescador($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -24 -------------------------------------------------------//
+    public function inserthorariopescaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertHorarioPesca($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -28 -------------------------------------------------------//
+    public function insertinsumopescaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $preco = $this->_getParam("preco");
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertInsumoPesca($idPescador, $valor, $preco);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
 }

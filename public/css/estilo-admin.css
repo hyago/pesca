@@ -315,6 +315,15 @@ tbody tr:nth-child(odd) {
 #pescador_especialista input{
     width: 220px;
 }
+#pescador_especialista .button-confirm{
+    width: 30px;
+}
+#pescador_especialista .button-del{
+    width: 30px;
+}
+#pescador_especialista #small{
+    width: 160px;
+}
 #pescador_especialista select{
     width: 220px;
 }
@@ -399,7 +408,7 @@ fieldset.noEditable input[type="text"] {
 }
 
 fieldset.noEditable base{
-    float: left;
+    float: right;
     padding: 0;
     width: 100%;
     height: auto;
@@ -578,4 +587,8 @@ legend{
 
 #tabs-2 div{
     margin-bottom: 8px;
+}
+
+#dynamicInput select input{
+    float: left;
 }

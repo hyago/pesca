@@ -1,26 +1,39 @@
 
-Drop table if exists t_estado_civil;
-Drop table if exists t_origem;
-Drop table if exists t_residencia;
-Drop table if exists t_possui_em_casa;
-Drop table if exists t_estrutura_residencial;
-Drop table if exists t_seguro_defeso;
-Drop table if exists t_no_seguro;
-Drop table if exists t_motivo_pesca;
-Drop table if exists t_tipo_transporte;
-Drop table if exists t_horario_pesca;
-Drop table if exists t_frequencia_pesca;
-Drop table if exists t_ultima_pesca;
-Drop table if exists t_fornecedor_insumos;
-Drop table if exists t_sobra_pesca;
-Drop table if exists t_rgp_orgao;
-Drop table if exists t_dificuldade;
-Drop table if exists t_estacao_ano;
-Drop table if exists t_associacao_pesca;
-Drop table if exists t_acompanhado;
-Drop table if exists t_insumo;
-Drop table if exists t_recurso;
-Drop table if exists t_pescador_especialista;
+Drop table if exists t_estado_civil Cascade;
+Drop table if exists t_origem Cascade;
+Drop table if exists t_residencia Cascade;
+Drop table if exists t_possui_em_casa Cascade;
+Drop table if exists t_estrutura_residencial Cascade;
+Drop table if exists t_seguro_defeso Cascade;
+Drop table if exists t_no_seguro Cascade;
+Drop table if exists t_motivo_pesca Cascade;
+Drop table if exists t_tipo_transporte Cascade;
+Drop table if exists t_horario_pesca Cascade;
+Drop table if exists t_frequencia_pesca Cascade;
+Drop table if exists t_ultima_pesca Cascade;
+Drop table if exists t_fornecedor_insumos Cascade;
+Drop table if exists t_sobra_pesca Cascade;
+Drop table if exists t_rgp_orgao Cascade;
+Drop table if exists t_dificuldade Cascade;
+Drop table if exists t_estacao_ano Cascade;
+Drop table if exists t_associacao_pesca Cascade;
+Drop table if exists t_acompanhado Cascade;
+Drop table if exists t_insumo Cascade;
+Drop table if exists t_recurso Cascade;
+
+DROP VIEW  if exists v_pescador_especialista_has_t_acompanhado;
+DROP VIEW  if exists v_pescador_especialista_has_t_companhia;
+DROP VIEW  if exists v_pescador_especialista_has_t_estrutura_residencial;
+DROP VIEW  if exists v_pescador_especialista_has_t_horario_pesca;
+DROP VIEW  if exists v_pescador_especialista_has_t_insumo;
+DROP VIEW  if exists v_pescador_especialista_has_t_motivo_pesca;
+DROP VIEW  if exists v_pescador_especialista_has_t_no_seguro;
+DROP VIEW  if exists v_pescador_especialista_has_t_parentes;
+DROP VIEW  if exists v_pescador_especialista_has_t_programa_social;
+DROP VIEW  if exists v_pescador_especialista_has_t_seguro_defeso;
+DROP VIEW  if exists v_pescador_especialista_has_t_tipo_transporte;
+
+
 Drop table if exists t_pescador_especialista_has_t_estrutura_residencial;
 Drop table if exists t_pescador_especialista_has_t_programa_social;
 Drop table if exists t_pescador_especialista_has_t_seguro_defeso;
@@ -32,6 +45,7 @@ Drop table if exists t_pescador_especialista_has_t_companhia;
 Drop table if exists t_pescador_especialista_has_t_parentes;
 Drop table if exists t_pescador_especialista_has_t_horario_pesca;
 Drop table if exists t_pescador_especialista_has_t_insumo;
+Drop table if exists t_pescador_especialista;
 
 
 Create Table t_estado_civil(
@@ -55,8 +69,8 @@ Create Table t_residencia(
 
 Create Table t_estrutura_residencial(
     terd_id serial,
-    terd_possui Varchar(50),
-    Primary Key (tpec_id)
+    terd_estrutura Varchar(50),
+    Primary Key (terd_id)
 
 );
 
@@ -175,9 +189,8 @@ Create Table t_recurso(
 );
 -- IMPORTAR ATÉ AQUI -----------------------------
  Create Table if not exists t_pescador_especialista(
- 
- tps_id serial,
- tp_id int unique,
+     tp_id int unique,
+     tp_resp_cad int,
      pto_id int,
  tps_data_nasc Date,
  tps_idade int,
@@ -224,9 +237,9 @@ Create Table t_recurso(
       ttr_id_outra_profissao int,
  tps_filho_seguir_profissao Varchar(100),
  tps_grau_dependencia_pesca float,
- tu_id_entrevistador int,
+      tu_id_entrevistador int,
  tps_data date,
- Primary Key (tps_id),
+ Primary Key (tp_id),
  Foreign Key (pto_id) References t_porto,
  Foreign Key (tec_id) References t_estado_civil,
  Foreign Key (to_id) References t_origem,
@@ -251,9 +264,14 @@ Create Table t_recurso(
  Foreign Key (ttr_id_outra_profissao) References t_tiporenda,
  Foreign Key (ttr_id_outra_habilidade) References t_tiporenda,
  Foreign Key (ttr_id_alternativa_renda) References t_tiporenda,
- Foreign Key (tp_id) References t_pescador
+ Foreign Key (tp_id) References t_pescador,
+ Foreign Key (tp_resp_cad) References t_usuario,
+ Foreign Key (tu_id_entrevistador) References t_usuario
  );
- 
+ Alter table t_pescador_especialista ADD CONSTRAINT tp_id_unique UNIQUE (tp_id);
+ Alter Table t_pescador Add column tp_especialidade timestamp without time zone;
+
+
  Create Table t_pescador_especialista_has_t_estrutura_residencial(
      tpsterd_id serial,
      tps_id int,
@@ -281,11 +299,11 @@ Create Table t_recurso(
  );
  
  Create Table t_pescador_especialista_has_t_no_seguro(
-     tns_id int,
+     ttr_id int,
      tps_id int,
-     Primary Key (tns_id, tps_id),
+     Primary Key (ttr_id, tps_id),
      Foreign Key (tps_id) References t_pescador_especialista,
-     Foreign Key (tns_id) References t_no_seguro
+     Foreign Key (ttr_id) References t_tiporenda
  );
  
  Create Table t_pescador_especialista_has_t_motivo_pesca(
@@ -344,10 +362,69 @@ Create Table t_recurso(
  );
  
  Create Table t_pescador_especialista_has_t_insumo(
+   tpstin_id serial,
    tps_id int,
    tin_id int,
    tin_valor_insumo float,
-     Primary Key (tps_id, tin_id),
+     Primary Key (tpstin_id),
      Foreign Key (tps_id) References t_pescador_especialista,
      Foreign Key (tin_id) References t_insumo
  );
+
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_estrutura_residencial AS 
+ SELECT hasestr.tps_id, hasestr.terd_id, estrutura.terd_estrutura
+   FROM t_pescador_especialista_has_t_estrutura_residencial as hasestr, t_estrutura_residencial as estrutura
+  WHERE hasestr.terd_id = estrutura.terd_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_programa_social AS 
+ SELECT hasprogsocial.tps_id, hasprogsocial.prs_id, social.prs_programa
+   FROM t_pescador_especialista_has_t_programa_social as hasprogsocial, t_programasocial as social
+  WHERE hasprogsocial.prs_id = social.prs_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_seguro_defeso AS 
+ SELECT hassegdefeso.tps_id, hassegdefeso.tsd_id, segdefeso.tsd_seguro
+   FROM t_pescador_especialista_has_t_seguro_defeso as hassegdefeso, t_seguro_defeso as segdefeso
+  WHERE hassegdefeso.tsd_id = segdefeso.tsd_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_no_seguro AS 
+ SELECT hastiporenda.tps_id, hastiporenda.ttr_id, tiporenda.ttr_descricao
+   FROM t_pescador_especialista_has_t_no_seguro as hastiporenda, t_tiporenda as tiporenda
+  WHERE hastiporenda.ttr_id = tiporenda.ttr_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_motivo_pesca AS 
+ SELECT hasmotivopesca.tps_id, hasmotivopesca.tmp_id, motivopesca.tmp_motivo
+   FROM t_pescador_especialista_has_t_motivo_pesca as hasmotivopesca, t_motivo_pesca as motivopesca
+  WHERE hasmotivopesca.tmp_id = motivopesca.tmp_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_tipo_transporte AS 
+ SELECT hastransporte.tps_id, hastransporte.ttr_id, transporte.ttr_transporte
+   FROM t_pescador_especialista_has_t_tipo_transporte as hastransporte, t_tipo_transporte as transporte
+  WHERE hastransporte.ttr_id = transporte.ttr_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_acompanhado AS 
+ SELECT hasacompanhado.tps_id, hasacompanhado.tacp_id, hasacompanhado.tpstacp_quantidade, acompanhado.tacp_companhia
+   FROM t_pescador_especialista_has_t_acompanhado as hasacompanhado, t_acompanhado as acompanhado
+  WHERE hasacompanhado.tacp_id = acompanhado.tacp_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_companhia AS 
+ SELECT hascompanhia.tps_id, hascompanhia.ttd_id, hascompanhia.tpstcp_quantidade, companhia.ttd_tipodependente
+   FROM t_pescador_especialista_has_t_companhia as hascompanhia, t_tipodependente as companhia
+  WHERE hascompanhia.ttd_id = companhia.ttd_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_parentes AS 
+ SELECT hasparentes.tps_id, hasparentes.ttd_id_parente, parentes.ttd_tipodependente
+   FROM t_pescador_especialista_has_t_parentes as hasparentes, t_tipodependente as parentes
+  WHERE hasparentes.ttd_id_parente = parentes.ttd_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_horario_pesca AS 
+ SELECT hashorariopesca.tps_id, hashorariopesca.thp_id, horariopesca.thp_horario
+   FROM t_pescador_especialista_has_t_horario_pesca as hashorariopesca, t_horario_pesca as horariopesca
+  WHERE hashorariopesca.thp_id = horariopesca.thp_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_insumo AS 
+ SELECT hasinsumo.tps_id, hasinsumo.tin_id, insumo.tin_insumo, hasinsumo.tin_valor_insumo
+   FROM t_pescador_especialista_has_t_insumo as hasinsumo, t_insumo as insumo
+  WHERE hasinsumo.tin_id = insumo.tin_id;
+
+
