@@ -749,8 +749,8 @@ $(function() {
                     <div id="form-dir">
                         <label  id="pure-checkbox">6. Origem: </label>
                         <select name="selectOrigem" id="selectOrigemId">
-                            <?php foreach ($this->selectOrigem as $key => $origem): ?>
-                                <option value="<?= $origem['to_id']; ?>"><?= $origem['to_origem']; ?></option>
+                            <?php foreach ($this->municipios as $key => $origem): ?>
+                                <option value="<?= $origem['tmun_id']; ?>"><?= $origem['tmun_municipio'], ' ', $origem['tuf_sigla']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

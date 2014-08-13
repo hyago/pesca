@@ -54,18 +54,28 @@ Create Table t_estado_civil(
     Primary Key (tec_id)
 );
 
-Create Table t_origem(
-    to_id serial,
-    to_origem Varchar(45),
-    Primary Key (to_id)
-);
+
+INSERT INTO t_estado_civil(tec_estado)VALUES ('Solteiro(a)');
+INSERT INTO t_estado_civil(tec_estado)VALUES ('Casado(a)');
+INSERT INTO t_estado_civil(tec_estado)VALUES ('Amasiado(a)');
+INSERT INTO t_estado_civil(tec_estado)VALUES ('Divorciado(a)');
+INSERT INTO t_estado_civil(tec_estado)VALUES ('Viúvo(a)');
+INSERT INTO t_estado_civil(tec_estado)VALUES ('Não Declarado');
+
 
 Create Table t_residencia(
     tre_id serial,
     tre_residencia Varchar(50),
     Primary Key (tre_id)
-
 );
+
+INSERT INTO t_residencia(tre_residencia)VALUES ('Própria');
+INSERT INTO t_residencia(tre_residencia)VALUES ('Alugada');
+INSERT INTO t_residencia(tre_residencia)VALUES ('Financiada');
+INSERT INTO t_residencia(tre_residencia)VALUES ('Cedida');
+INSERT INTO t_residencia(tre_residencia)VALUES ('Mora com a família');
+INSERT INTO t_residencia(tre_residencia)VALUES ('Mora com outra família');
+INSERT INTO t_residencia(tre_residencia)VALUES ('Não Declarado');
 
 Create Table t_estrutura_residencial(
     terd_id serial,
@@ -73,13 +83,25 @@ Create Table t_estrutura_residencial(
     Primary Key (terd_id)
 
 );
+INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Banheiro');
+INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Água Encanada');
+INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Energia Elétrica');
+INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Rede de Esgoto');
+INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Fossa');
+INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Não Possui');
+
 
 Create Table t_seguro_defeso(
     tsd_id serial,
     tsd_seguro Varchar(45),
     Primary Key (tsd_id)
-
 );
+INSERT INTO t_seguro_defeso(tsd_seguro)VALUES ('Camarão');
+INSERT INTO t_seguro_defeso(tsd_seguro)VALUES ('Robalo');
+INSERT INTO t_seguro_defeso(tsd_seguro)VALUES ('Não Possui');
+
+
+
 
 Create Table t_no_seguro(
     tns_id serial,
@@ -87,6 +109,8 @@ Create Table t_no_seguro(
     Primary Key (tns_id)
 
 );
+INSERT INTO t_tiporenda(ttr_descricao)VALUES ('Pesca outras espécies');
+INSERT INTO t_tiporenda(ttr_descricao)VALUES ('Busca outra renda em terra');
 
 Create Table t_motivo_pesca(
     tmp_id serial,
@@ -94,6 +118,12 @@ Create Table t_motivo_pesca(
     Primary Key (tmp_id)
 
 );
+INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Gosta');
+INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Tradição de Família');
+INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Não teve outra opção');
+INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Sobrevivência');
+INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Não Declarado');
+
 
 Create Table t_tipo_transporte(
     ttr_id serial,
@@ -101,6 +131,12 @@ Create Table t_tipo_transporte(
     Primary Key (ttr_id)
 
 );
+INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('A Pé');
+INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Bicicleta');
+INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Õnibus');
+INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Moto');
+INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Carro');
+INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Não Declarado');
 
 Create Table t_horario_pesca(
     thp_id serial,
@@ -108,6 +144,11 @@ Create Table t_horario_pesca(
     Primary Key (thp_id)
 
 );
+INSERT INTO t_horario_pesca(tho_horario)VALUES ('Dia todo');
+INSERT INTO t_horario_pesca(tho_horario)VALUES ('Manhã');
+INSERT INTO t_horario_pesca(tho_horario)VALUES ('Tarde');
+INSERT INTO t_horario_pesca(tho_horario)VALUES ('Entardecer');
+INSERT INTO t_horario_pesca(tho_horario)VALUES ('Noite');
 
 
 Create Table t_frequencia_pesca(
@@ -116,6 +157,12 @@ Create Table t_frequencia_pesca(
     Primary Key (tfp_id)
 
 );
+
+INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Diária');
+INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Semanal');
+INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Quinzenal');
+INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Semestral');
+INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Não Declarado');
 
 Create Table t_ultima_pesca(
     tup_id serial,
@@ -242,7 +289,7 @@ Create Table t_recurso(
  Primary Key (tp_id),
  Foreign Key (pto_id) References t_porto,
  Foreign Key (tec_id) References t_estado_civil,
- Foreign Key (to_id) References t_origem,
+ Foreign Key (to_id) References t_municipio,
  Foreign Key (tre_id) References t_residencia,
  Foreign Key (tea_id_maior) References t_estacao_ano,
  Foreign Key (tea_id_menor) References t_estacao_ano,
