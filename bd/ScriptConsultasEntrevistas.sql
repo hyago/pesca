@@ -144,7 +144,7 @@ Select Count(pto_id) from t_porto;
 Select Count(paf_id) from t_pesqueiro_af;
 Select Count(tu_id) from t_usuario;
 Select Count(bar_id) from t_barco;
-Select Count(tp_id) from t_pescador;
+Select Count(tp_id) from t_pescador where tp_pescadordeletado=false;
 Select Count(fd_id) from t_ficha_diaria;
 Select count(af_id) from t_arrastofundo;
 Select count(cal_id) from t_calao;

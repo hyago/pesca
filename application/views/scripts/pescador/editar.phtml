@@ -1146,7 +1146,7 @@ $(function() {
                             </tr>
                             <?php foreach ($this->assign_vEspecialistaHasParentes as $key => $vFamiliarPescador): ?>
                                 <tr id="linhaTipoCapturadaRows<?= $key ?>">
-                                    <td name="inputTipoID[]"> <?= $vFamiliarPescador['ttd_id'] ?> </td>
+                                    <td name="inputTipoID[]"> <?= $vFamiliarPescador['ttd_id_parente'] ?> </td>
                                     <td name="inputTipo[]" > <?= $vFamiliarPescador['ttd_tipodependente'] ?> </td>
                                     <td><input type="button" class="button-del" width="5%" onclick="jsDeletePescadorHasTipoCapturada(<?= $vPescadorHasTipoCapturada['itc_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhastipo"), null, true) ?>')"></td> </td>
                                 </tr>
@@ -1432,7 +1432,7 @@ $(function() {
                <table id="tabelaSemEstilo">
                     <td><a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a></td>
                     
-                    <td><input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' , <?= $this->pescador['tp_id']?>,<?= $this->assignEspecialista[0]['tp_id']?> )"></td>
+                    <td><input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?> )"></td>
                 </table>
           
         </div>

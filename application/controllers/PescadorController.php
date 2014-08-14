@@ -242,9 +242,6 @@ class PescadorController extends Zend_Controller_Action {
         $selectEstadoCivil = $modelEstadoCivil->select(null, "tec_estado");
         $this->view->assign("selectEstadoCivil", $selectEstadoCivil);
         
-        $modelOrigem = new Application_Model_Origem();
-        $selectOrigem = $modelOrigem->select(null, "to_origem");
-        $this->view->assign("selectOrigem", $selectOrigem);
         
         $modelResidencia = new Application_Model_Residencia();
         $selectResidencia = $modelResidencia->select(null, "tre_residencia");

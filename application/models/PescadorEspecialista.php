@@ -183,7 +183,7 @@ class Application_Model_PescadorEspecialista
 
         $dbTablePescador = new Application_Model_DbTable_PescadorEspecialista();
         $dadosPescador = $this->setupDadosPescadorEspecialista( $request );
-        $wherePescador = "tps_id = " . $request['idEspecialista'];
+        $wherePescador = "tp_id = " . $request['idEspecialista'];
         $idPescador = $dbTablePescador->update($dadosPescador, $wherePescador);
 
         return $idPescador;

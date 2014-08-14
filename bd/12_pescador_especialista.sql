@@ -21,6 +21,29 @@ Drop table if exists t_acompanhado Cascade;
 Drop table if exists t_insumo Cascade;
 Drop table if exists t_recurso Cascade;
 
+Drop table if exists t_estado_civil Cascade;
+Drop table if exists t_origem Cascade;
+Drop table if exists t_residencia Cascade;
+Drop table if exists t_possui_em_casa Cascade;
+Drop table if exists t_estrutura_residencial Cascade;
+Drop table if exists t_seguro_defeso Cascade;
+Drop table if exists t_no_seguro Cascade;
+Drop table if exists t_motivo_pesca Cascade;
+Drop table if exists t_tipo_transporte Cascade;
+Drop table if exists t_horario_pesca Cascade;
+Drop table if exists t_frequencia_pesca Cascade;
+Drop table if exists t_ultima_pesca Cascade;
+Drop table if exists t_fornecedor_insumos Cascade;
+Drop table if exists t_sobra_pesca Cascade;
+Drop table if exists t_rgp_orgao Cascade;
+Drop table if exists t_dificuldade Cascade;
+Drop table if exists t_estacao_ano Cascade;
+Drop table if exists t_associacao_pesca Cascade;
+Drop table if exists t_acompanhado Cascade;
+Drop table if exists t_insumo Cascade;
+Drop table if exists t_recurso Cascade;
+Drop table if exists t_local_tratamento Cascade;
+
 DROP VIEW  if exists v_pescador_especialista_has_t_acompanhado;
 DROP VIEW  if exists v_pescador_especialista_has_t_companhia;
 DROP VIEW  if exists v_pescador_especialista_has_t_estrutura_residencial;
@@ -54,13 +77,12 @@ Create Table t_estado_civil(
     Primary Key (tec_id)
 );
 
-
+INSERT INTO t_estado_civil(tec_estado)VALUES ('Não Declarado');
 INSERT INTO t_estado_civil(tec_estado)VALUES ('Solteiro(a)');
 INSERT INTO t_estado_civil(tec_estado)VALUES ('Casado(a)');
 INSERT INTO t_estado_civil(tec_estado)VALUES ('Amasiado(a)');
 INSERT INTO t_estado_civil(tec_estado)VALUES ('Divorciado(a)');
 INSERT INTO t_estado_civil(tec_estado)VALUES ('Viúvo(a)');
-INSERT INTO t_estado_civil(tec_estado)VALUES ('Não Declarado');
 
 
 Create Table t_residencia(
@@ -68,14 +90,13 @@ Create Table t_residencia(
     tre_residencia Varchar(50),
     Primary Key (tre_id)
 );
-
+INSERT INTO t_residencia(tre_residencia)VALUES ('Não Declarado');
 INSERT INTO t_residencia(tre_residencia)VALUES ('Própria');
 INSERT INTO t_residencia(tre_residencia)VALUES ('Alugada');
 INSERT INTO t_residencia(tre_residencia)VALUES ('Financiada');
 INSERT INTO t_residencia(tre_residencia)VALUES ('Cedida');
 INSERT INTO t_residencia(tre_residencia)VALUES ('Mora com a família');
 INSERT INTO t_residencia(tre_residencia)VALUES ('Mora com outra família');
-INSERT INTO t_residencia(tre_residencia)VALUES ('Não Declarado');
 
 Create Table t_estrutura_residencial(
     terd_id serial,
@@ -83,6 +104,7 @@ Create Table t_estrutura_residencial(
     Primary Key (terd_id)
 
 );
+INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Não Declarado');
 INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Banheiro');
 INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Água Encanada');
 INSERT INTO t_estrutura_residencial(terd_estrutura)VALUES ('Energia Elétrica');
@@ -96,6 +118,7 @@ Create Table t_seguro_defeso(
     tsd_seguro Varchar(45),
     Primary Key (tsd_id)
 );
+INSERT INTO t_seguro_defeso(tsd_seguro)VALUES ('Não Declarado');
 INSERT INTO t_seguro_defeso(tsd_seguro)VALUES ('Camarão');
 INSERT INTO t_seguro_defeso(tsd_seguro)VALUES ('Robalo');
 INSERT INTO t_seguro_defeso(tsd_seguro)VALUES ('Não Possui');
@@ -118,11 +141,13 @@ Create Table t_motivo_pesca(
     Primary Key (tmp_id)
 
 );
+
+INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Não Declarado');
 INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Gosta');
 INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Tradição de Família');
 INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Não teve outra opção');
 INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Sobrevivência');
-INSERT INTO t_motivo_pesca(tmp_motivo)VALUES ('Não Declarado');
+
 
 
 Create Table t_tipo_transporte(
@@ -131,12 +156,13 @@ Create Table t_tipo_transporte(
     Primary Key (ttr_id)
 
 );
+INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Não Declarado');
 INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('A Pé');
 INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Bicicleta');
 INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Õnibus');
 INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Moto');
 INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Carro');
-INSERT INTO t_tipo_transporte(ttr_transporte)VALUES ('Não Declarado');
+
 
 Create Table t_horario_pesca(
     thp_id serial,
@@ -144,11 +170,12 @@ Create Table t_horario_pesca(
     Primary Key (thp_id)
 
 );
-INSERT INTO t_horario_pesca(tho_horario)VALUES ('Dia todo');
-INSERT INTO t_horario_pesca(tho_horario)VALUES ('Manhã');
-INSERT INTO t_horario_pesca(tho_horario)VALUES ('Tarde');
-INSERT INTO t_horario_pesca(tho_horario)VALUES ('Entardecer');
-INSERT INTO t_horario_pesca(tho_horario)VALUES ('Noite');
+INSERT INTO t_horario_pesca(thp_horario)VALUES ('Não Declarado');
+INSERT INTO t_horario_pesca(thp_horario)VALUES ('Dia todo');
+INSERT INTO t_horario_pesca(thp_horario)VALUES ('Manhã');
+INSERT INTO t_horario_pesca(thp_horario)VALUES ('Tarde');
+INSERT INTO t_horario_pesca(thp_horario)VALUES ('Entardecer');
+INSERT INTO t_horario_pesca(thp_horario)VALUES ('Noite');
 
 
 Create Table t_frequencia_pesca(
@@ -157,19 +184,24 @@ Create Table t_frequencia_pesca(
     Primary Key (tfp_id)
 
 );
-
+INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Não Declarado');
 INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Diária');
 INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Semanal');
 INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Quinzenal');
 INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Semestral');
-INSERT INTO t_frequencia_pesca(tfp_frequencia)VALUES ('Não Declarado');
 
 Create Table t_ultima_pesca(
     tup_id serial,
     tup_pesca Varchar(50),
     Primary Key (tup_id)
-
 );
+INSERT INTO t_ultima_pesca(tup_pesca)VALUES ('Não Declarado');
+INSERT INTO t_ultima_pesca(tup_pesca)VALUES ('Hoje');
+INSERT INTO t_ultima_pesca(tup_pesca)VALUES ('1 Dia');
+INSERT INTO t_ultima_pesca(tup_pesca)VALUES ('1 Semana');
+INSERT INTO t_ultima_pesca(tup_pesca)VALUES ('15 Dias');
+INSERT INTO t_ultima_pesca(tup_pesca)VALUES ('1 Mês');
+
 
 Create Table t_fornecedor_insumos(
     tfi_id serial,
@@ -178,6 +210,14 @@ Create Table t_fornecedor_insumos(
 
 );
 
+INSERT INTO t_fornecedor_insumos(tfi_fornecedor)VALUES ('Não Declarado');
+INSERT INTO t_fornecedor_insumos(tfi_fornecedor)VALUES ('Você que leva');
+INSERT INTO t_fornecedor_insumos(tfi_fornecedor)VALUES ('Dono da Embarcação');
+
+
+
+
+
 Create Table t_sobra_pesca(
     tsp_id serial,
     tsp_sobra Varchar(100),
@@ -185,11 +225,26 @@ Create Table t_sobra_pesca(
 
 );
 
+INSERT INTO t_sobra_pesca(tsp_sobra)VALUES ('Não Declarado');
+INSERT INTO t_sobra_pesca(tsp_sobra)VALUES ('Joga Fora');
+INSERT INTO t_sobra_pesca(tsp_sobra)VALUES ('Usa como isca');
+INSERT INTO t_sobra_pesca(tsp_sobra)VALUES ('Faz artesanato');
+INSERT INTO t_sobra_pesca(tsp_sobra)VALUES ('Ração');
+
+
+
+
+
 Create Table t_rgp_orgao(
     trgp_id serial,
     trgp_emissor Varchar(30),
     Primary Key (trgp_id)
 );
+INSERT INTO t_rgp_orgao(trgp_emissor)VALUES ('Não Declarado');
+INSERT INTO t_rgp_orgao(trgp_emissor)VALUES ('Ibama');
+INSERT INTO t_rgp_orgao(trgp_emissor)VALUES ('SEAP');
+INSERT INTO t_rgp_orgao(trgp_emissor)VALUES ('Não Possui');
+
 
 Create Table t_dificuldade(
     tdif_id serial,
@@ -197,11 +252,26 @@ Create Table t_dificuldade(
     Primary Key (tdif_id)
 );
 
+INSERT INTO t_dificuldade(tdif_dificuldade)VALUES ('Não Declarado');
+INSERT INTO t_dificuldade(tdif_dificuldade)VALUES ('Financiamento');
+INSERT INTO t_dificuldade(tdif_dificuldade)VALUES ('Equipamentos');
+INSERT INTO t_dificuldade(tdif_dificuldade)VALUES ('Assitência Técnica');
+INSERT INTO t_dificuldade(tdif_dificuldade)VALUES ('Capacitação Técnica');
+INSERT INTO t_dificuldade(tdif_dificuldade)VALUES ('Não Possui');
+
+
+
 Create Table t_estacao_ano(
     tea_id serial,
     tea_estacao Varchar(20),
     Primary Key (tea_id)
 );
+
+Insert Into t_estacao_ano(tea_estacao)Values ('Não Declarado');
+Insert Into t_estacao_ano(tea_estacao)Values ('Inverno');
+Insert Into t_estacao_ano(tea_estacao)Values ('Verão');
+
+
 
 Create Table t_local_tratamento(
     tlt_id serial,
@@ -209,11 +279,25 @@ Create Table t_local_tratamento(
     Primary Key (tlt_id)
 );
 
+Insert Into t_local_tratamento(tlt_local)Values('Não Declarado');
+Insert Into t_local_tratamento(tlt_local)Values('Casa');
+Insert Into t_local_tratamento(tlt_local)Values('Local de Pesca');
+
+
+
+
 Create Table t_associacao_pesca(
     tasp_id serial,
     tasp_associacao Varchar(100),
     Primary Key (tasp_id)
 );
+
+Insert Into t_associacao_pesca(tasp_associacao)Values('Não Declarado');
+Insert Into t_associacao_pesca(tasp_associacao)Values('ASPERI');
+Insert Into t_associacao_pesca(tasp_associacao)Values('Assoc. Pesc. e Marisq. do Porto de Trás');
+Insert Into t_associacao_pesca(tasp_associacao)Values('ASPEMAR A-87');
+Insert Into t_associacao_pesca(tasp_associacao)Values('Assoc. Pesc. e Marisc. SG');
+Insert Into t_associacao_pesca(tasp_associacao)Values('Não Possui');
 
 
 Create Table t_acompanhado(
@@ -222,18 +306,39 @@ Create Table t_acompanhado(
     Primary Key (tacp_id)
 );
 
+Insert Into t_acompanhado(tacp_companhia)Values('Não Declarado');
+Insert Into t_acompanhado(tacp_companhia)Values('Sozinho');
+Insert Into t_acompanhado(tacp_companhia)Values('Acompanhado');
+
 Create Table t_insumo(
     tin_id serial,
     tin_insumo Varchar(50),
     Primary Key (tin_id)
 );
-    
+
+Insert Into t_insumo(tin_insumo) Values('Não Declarado');
+Insert Into t_insumo(tin_insumo) Values('Alimentação');
+Insert Into t_insumo(tin_insumo) Values('Combustível');
+Insert Into t_insumo(tin_insumo) Values('Gelo');
+Insert Into t_insumo(tin_insumo) Values('Gás');
+Insert Into t_insumo(tin_insumo) Values('Aviamentos');
+Insert Into t_insumo(tin_insumo) Values('Não Utiliza');
+
+
+
 
 Create Table t_recurso(
     trec_id serial,
     trec_recurso Varchar(50),
     Primary Key (trec_id)
 );
+
+Insert Into t_recurso(trec_recurso) Values('Não Declarado');
+Insert Into t_recurso(trec_recurso) Values('Vale');
+Insert Into t_recurso(trec_recurso) Values('Recurso Próprio');
+Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
+
+
 -- IMPORTAR ATÉ AQUI -----------------------------
  Create Table if not exists t_pescador_especialista(
      tp_id int unique,
@@ -475,3 +580,28 @@ CREATE OR REPLACE VIEW v_pescador_especialista_has_t_insumo AS
   WHERE hasinsumo.tin_id = insumo.tin_id;
 
 
+CREATE OR REPLACE VIEW v_pescador AS 
+ SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tp_matricula, tp.tp_apelido, 
+    tp.tp_filiacaopai, tp.tp_filiacaomae, tp.tp_ctps, tp.tp_pis, tp.tp_inss, 
+    tp.tp_nit_cei, tp.tp_rg, tp.tp_cma, tp.tp_rgb_maa_ibama, 
+    tp.tp_cir_cap_porto, tp.tp_cpf, tp.tp_datanasc, tp.tp_dta_cad, 
+    tp.tp_especificidade, tp.esc_id, tesc.esc_nivel, tp.tmun_id_natural, 
+    tm.tmun_municipio AS munnat, tm.tuf_sigla AS signat, tp.te_id, 
+    te.te_logradouro, te.te_numero, te.te_comp, te.te_bairro, te.te_cep, 
+    te.tmun_id, tmi.tmun_municipio, tmi.tuf_sigla, tp.tp_resp_lan, 
+    tlan.tu_nome AS tu_nome_lan, tp.tp_resp_cad, tcad.tu_nome AS tu_nome_cad, 
+    tp.tp_obs, col.tc_id, tc.tc_nome, tcom.tcom_id, tcom.tcom_nome, tp.tpr_id, 
+    tpr.tpr_descricao, tp.tp_pescadordeletado, tp.tp_especialidade
+   FROM t_pescador tp
+   LEFT JOIN t_municipio tm ON tp.tmun_id_natural = tm.tmun_id
+   LEFT JOIN t_endereco te ON tp.te_id = te.te_id
+   LEFT JOIN t_escolaridade tesc ON tp.esc_id = tesc.esc_id
+   LEFT JOIN t_usuario tlan ON tp.tp_resp_lan = tlan.tu_id
+   LEFT JOIN t_usuario tcad ON tp.tp_resp_cad = tcad.tu_id
+   LEFT JOIN t_pescador_has_t_comunidade com ON com.tp_id = tp.tp_id
+   LEFT JOIN t_comunidade tcom ON tcom.tcom_id = com.tcom_id
+   LEFT JOIN t_pescador_has_t_colonia col ON col.tp_id = tp.tp_id
+   LEFT JOIN t_municipio tmi ON te.tmun_id = tmi.tmun_id
+   LEFT JOIN t_colonia tc ON tc.tc_id = col.tc_id
+   LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
+  WHERE tp.tp_pescadordeletado = false;
