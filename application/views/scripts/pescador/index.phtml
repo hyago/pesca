@@ -96,7 +96,7 @@
                         </a>
                     </td>
                     <td class="td-botao">
-                        <input type="button" name="Especialista" value="Especialista" <?php if(empty($pescador['tp_especialidade'])){ echo "disabled='True'";} ?>onclick="jsRedirectEspecialista('<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>', '#pescador_especialista')">
+                        <input type="button" name="Especialista" class="button-especialista" title="Especialista" <?php if(empty($pescador['tp_especialidade'])){ echo "disabled='True'";} ?>onclick="jsRedirectEspecialista('<?= $this->url(array("controller" => "pescador", "action" => "editar", "id" => $pescador['tp_id']), null, true) ?>', '#pescador_especialista')">
                     </td>
 
 

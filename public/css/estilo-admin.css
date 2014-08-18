@@ -497,6 +497,27 @@ input.button-confirmText {
     padding-left: 22px;
     vertical-align: middle; /* align the text vertically centered */
 }
+input.button-especialista{
+    background-image: url(/img/fish_icon.png);
+    background-color:#e6e6e6; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border-color: #CCC;            /*assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    padding-left: 22px;
+    vertical-align: middle; /* align the text vertically centered */
+}
+input.button-especialista:disabled{
+    background-image: url(/img/fish_icon.png);
+    background-color: white; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border-color: white;            /*assuming we don't want any borders */
+    cursor:default;        /* make the cursor like hovering over an <a> element */
+    padding-left: 22px;
+    vertical-align: middle; /* align the text vertically centered */
+}
+
 input.button-relatorio {
     background-image: url(/img/icon_relatorio.png);
     background-color: transparent; /* make the button transparent */
@@ -569,9 +590,12 @@ legend{
 }
 
 #abas li{
-    
-    
+        
 }
+#for_tabs-2{
+    color: red;
+}
+
 #abas a{
     background: #e6e6e6 url(smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
     border: 1px solid #d3d3d3;

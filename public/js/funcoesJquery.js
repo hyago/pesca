@@ -1128,8 +1128,10 @@ function jsInsertPescadorEspecialista(pag,idPescador, respCadastro){
     var tmpUpdate = (pag +
         '/tp_id/'+ idPescador + '/tp_resp_cad/'+respCadastro+'/back_url/' + TmpUrl
     );
-    
-    location.replace(tmpUpdate);
+    if (confirm("Deseja adicionar o pescador especialista?")) {
+            $("#tabs-1").hide();
+            location.replace(tmpUpdate);
+    }
 }
 // -9 -------------------------------------------------------//
 function jsInsertEstruturaResidencial(frm, pag, idPescador, idEspecialista, retorno){
@@ -1250,4 +1252,15 @@ function jsRedirectEspecialista(url, hash){
     var especialista = url+hash;
     
     location.replace(especialista);
+}
+
+function jsDeleteDynamicEspecialista( id, idPescador, pag, idBack,back)
+{
+        var back_url = idBack+back;
+    if (confirm("Realmente deseja excluir este item?")) {
+        
+        var tmpUpdate = (pag + '/id/' + id + '/tps_id/' + idPescador + '/back_url/' +back_url);
+        
+        location.replace(tmpUpdate);
+    }
 }

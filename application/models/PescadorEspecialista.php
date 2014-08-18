@@ -258,7 +258,10 @@ class Application_Model_PescadorEspecialista
     }
     public function insertAcompanhado($idPescador, $valor, $quantidade){
         $dbTable_PescadorAcompanhado = new Application_Model_DbTable_PescadorEspecialistaHasAcompanhado();
-
+        
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
         $dadosPescadorHasAcompanhado = array(
             'tps_id' => $idPescador,
             'tacp_id' => $valor,
@@ -271,7 +274,9 @@ class Application_Model_PescadorEspecialista
 
     public function insertCompanhia($idPescador, $valor, $quantidade){
         $dbTable_PescadorCompanhia = new Application_Model_DbTable_PescadorEspecialistaHasCompanhia();
-
+        if(empty($quantidade)){
+            $quantidade = NULL;
+        }
         $dadosPescadorHasCompanhia = array(
             'tps_id' => $idPescador,
             'ttd_id' => $valor,
@@ -305,7 +310,9 @@ class Application_Model_PescadorEspecialista
     }
         public function insertInsumoPesca($idPescador, $valor, $preco){
         $dbTable_PescadorInsumos = new Application_Model_DbTable_PescadorEspecialistaHasInsumos();
-
+        if(empty($preco)){
+            $preco = NULL;
+        }
         $dadosPescadorHasInsumos = array(
             'tps_id' => $idPescador,
             'tin_id' => $valor,
@@ -439,5 +446,116 @@ class Application_Model_PescadorEspecialista
         return $dao->fetchAll($select)->toArray();
     }
     
+    
+    public function deleteEstruturaResidencial( $idEstrutura,$idPescador){
+        $dbTable_PescadorEHasEstResidencial = new Application_Model_DbTable_PescadorEspecialistaHasEstruturaResidencial();
+
+        $dadosPescadorEspHasEstRes = array(
+            'tps_id = ?' => $idPescador,
+            'terd_id = ?' => $idEstrutura
+        );
+        
+        $dbTable_PescadorEHasEstResidencial->delete($dadosPescadorEspHasEstRes);
+    }
+    public function deleteProgramaSocial( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasProgramaSocial();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'prs_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteSeguroDefeso( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasSeguroDefeso();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'tsd_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteRendaDefeso( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasNoSeguro();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'ttr_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteMotivoPesca( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasMotivoPesca();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'tmp_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteTransporte( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasTipoTransporte();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'ttr_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteAcompanhado( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasAcompanhado();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'tacp_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteCompanhia( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasCompanhia();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'ttd_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteFamiliaPescador( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasParentes();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'ttd_id_parente = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteHorarioPesca( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasHorarioPesca();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'thp_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteInsumoPesca( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasInsumos();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'tin_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
 }
 
