@@ -9,20 +9,31 @@
                 <td>
                     <input type="button" size="50" value="Limpar" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
                 </td>
+                <td>
+                    <input type="button" size="50" value="Listar Todos" class="button-confirmText" onclick="jsBuscaTodasFichas('<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index", "ent_all"=>"all"), null, true) ?>')">
+                </td>
+                <td>
+                    <input type="button" size="30" value="Busca por Data" class="button-confirmText" onclick="jsBuscaData(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
+                    <input type="date" min="0" name="inputData" id="small" placeholder="Busca por Data" />
+                </td>
             </tr>
             <tr>
                 <td>
                     <input type="button" size="50" value="Busca por Pescador" class="button-confirmText" onclick="jsBuscaPescadorGeral(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
-                    <input type="text" min="0" name="inputPescador" placeholder="Busca por Pescador" />
+                    <input type="text" min="0" name="inputPescador" id="small" placeholder="Busca por Pescador" />
                 </td>
 
                 <td>
                     <input type="button" size="40" value="Busca por Barco" class="button-confirmText" onclick="jsBuscaBarcoGeral(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
-                    <input type="text" min="0" name="inputBarco" placeholder="Busca por Barco" />
+                    <input type="text" min="0" name="inputBarco" id="small" placeholder="Busca por Barco" />
                 </td>
                 <td>
                     <input type="button" size="30" value="Busca por Apelido" class="button-confirmText" onclick="jsBuscaPescadorApelido(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
-                    <input type="text" min="0" name="inputApelido" placeholder="Busca por Pescador" />
+                    <input type="text" min="0" name="inputApelido" id="small" placeholder="Busca por Apelido" />
+                </td>
+                <td>
+                    <input type="button" size="30" value="Busca por Porto" class="button-confirmText" onclick="jsBuscaPescadorPorto(this.form, '<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>')">
+                    <input type="text" min="0" name="inputPorto" id="small" placeholder="Busca por Porto" />
                 </td>
             </tr>
         </table>
@@ -33,6 +44,8 @@
                 <th>Pescador</th>
                 <th>Apelido</th>
                 <th>Barco</th>
+                <th>Porto</th>
+                <th>Data</th>
             </tr>
 
             <?php foreach ($this->dados as $key => $entrevista): ?>
@@ -42,6 +55,8 @@
                     <td><?= $entrevista['tp_nome'] ?></td>
                     <td><?= $entrevista['tp_apelido'] ?></td>
                     <td><?= $entrevista['bar_nome'] ?></td>
+                    <td><?= $entrevista['pto_nome'] ?></td>
+                    <td><?= date("d-m-Y", strtotime($entrevista['data']))  ?></td>
 
                     <td>
                        <input type="button" width="10%" target="_blank" value ="Editar" onclick="jsEditarEntrevistas('<?= $entrevista['artepesca']?>',<?= $entrevista['id'] ?>)"/></td>

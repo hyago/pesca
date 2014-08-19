@@ -29,6 +29,9 @@ class EntrevistaPescadorController extends Zend_Controller_Action
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
         $ent_apelido = $this->_getParam("tp_apelido");
+        $ent_porto = $this->_getParam("porto");
+        $all = $this->_getParam("ent_all");
+        $data = $this->_getParam('data');
 
         if ($ent_pescador) {
             $dados = $this->modelEntrevistas->select("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome', 'id'));
@@ -37,6 +40,15 @@ class EntrevistaPescadorController extends Zend_Controller_Action
          }
         elseif ($ent_apelido){
             $dados = $this->modelEntrevistas->select("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido', 'id'));
+        }
+        elseif ($ent_porto){
+            $dados = $this->modelEntrevistas->select("pto_nome ~* '" . $ent_porto . "'", array('pto_nome', 'id'));
+        }
+        elseif($all){
+            $dados = $this->modelEntrevistas->select(null, array('artepesca', 'tp_nome'));
+        }
+        elseif ($data){
+            $dados = $this->modelEntrevistas->select("data = '" . $data . "'", array('data', 'id'));
         }
         else {
             $dados = $this->modelEntrevistas->select(null, array('artepesca', 'tp_nome'), 50);

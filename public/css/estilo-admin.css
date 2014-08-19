@@ -321,7 +321,7 @@ tbody tr:nth-child(odd) {
 #pescador_especialista .button-del{
     width: 30px;
 }
-#pescador_especialista #small{
+#small{
     width: 160px;
 }
 #pescador_especialista select{

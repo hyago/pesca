@@ -208,6 +208,14 @@ function jsBuscaPescadorApelido( frm, pag )
         location.replace( tmpUpdate );
     }
 }
+function jsBuscaPescadorPorto( frm, pag )
+{
+    if ( frm.inputPorto.value ) {
+        var tmpUpdate = (pag + '/index/porto/' + frm.inputPorto.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
 function jsBuscaBarcoEntrevista( frm, pag )
 {
     if ( frm.inputBarco.value ) {
@@ -252,6 +260,15 @@ function jsBuscaBarcoGeral( frm, pag )
         location.replace( tmpUpdate );
     }
 }
+function jsBuscaData( frm, pag )
+{
+    if ( frm.inputData.value ) {
+        var tmpUpdate = (pag + '/index/data/' + frm.inputData.value  );
+        
+        location.replace( tmpUpdate );
+    }
+}
+
 function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
             var Entrevista;
             if (nomeArtePesca.toLowerCase() === "Arrasto-Fundo".toLowerCase()) {
@@ -323,6 +340,8 @@ function jsBuscaTodosPescadores( pag )
         location.replace( pag );
 }
 
+
+
 function scrollTo(hash) {
     location.hash = "#" + hash;
     location.hash = '';
@@ -336,8 +355,10 @@ function jsClearBuscaFichaDiaria( pag )
 }
 function jsBuscaTodasFichas( pag )
 {
-    location.hash = '';
-    location.replace(pag);
+    if ( confirm("São Aproximadamente 6mil itens, deseja realmente continuar?") ){
+        location.hash = '';
+        location.replace(pag);
+    }
 }
 
 function jsBuscaFichaDiariaId( frm, pag )
