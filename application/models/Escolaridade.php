@@ -1,5 +1,16 @@
 
 <?php
+/** 
+ * Model Escolaridades
+ * 
+ * @package Pesca
+ * @subpackage Models
+ * @author Stefano Azevedo Silva <stefanouesc@gmail.com>
+ * @author Marcelo Ossamu Honda <mohonda@uesc.com>
+ * @version 1.0
+ * @access public
+ *
+ */
 
 class Application_Model_Escolaridade
 {

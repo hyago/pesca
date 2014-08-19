@@ -31,6 +31,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $this->modelPesqueiro = new Application_Model_Pesqueiro();
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelAvistamento = new Application_Model_Avistamento();
+        $this->modelMaturidade = new Application_Model_Maturidade();
     }
 
     public function indexAction() {
@@ -85,16 +86,21 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ", $entrevista['af_dhsaida']);
         $datahoraVolta[] = split(" ", $entrevista['af_dhvolta']);
         $vArrastoFundo = $this->modelArrastoFundo->selectArrastoHasPesqueiro('af_id=' . $idEntrevista);
-
         $vEspecieCapturadas = $this->modelArrastoFundo->selectArrastoHasEspCapturadas('af_id=' . $idEntrevista);
+        $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $idEntrevista);           
+        $vBioCamarao = $this->modelArrastoFundo->selectVBioCamarao('taf_id='.$idEntrevista);
+        $vBioPeixe = $this->modelArrastoFundo->selectVBioPeixe('taf_id='.$idEntrevista);
 
-        $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $idEntrevista);
-
+        
+        $this->view->assign('vBioCamarao', $vBioCamarao);
+        $this->view->assign('vBioPeixe', $vBioPeixe);
+        $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);
@@ -148,7 +154,49 @@ class ArrastoFundoController extends Zend_Controller_Action {
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
+    public function insertbiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
 
+        $maturidade = $this->_getParam("SelectMaturidade");
+
+        $compCabeca = $this->_getParam("comprimentoCabeca");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelArrastoFundo->insertBioCamarao($idEntrevista, $idEspecie, $sexo, $maturidade, $compCabeca, $peso);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+    public function insertbiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
+
+        $comprimento = $this->_getParam("comprimento");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelArrastoFundo->insertBioPeixe($idEntrevista, $idEspecie, $sexo, $comprimento, $peso);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+    
     public function deletepesqueiroAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);

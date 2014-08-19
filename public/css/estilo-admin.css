@@ -242,7 +242,7 @@ th, td {
 }
 
 tbody tr:nth-child(odd) {
-    background: #ffefef;
+    background: #F9F2F1;
 }
 
 
@@ -338,7 +338,7 @@ select.espc{
     width: 120px;
 }
 select.amostragem{
-    width: 130px;
+    width: 80px;
 }
 #form-dir{
     padding: 8px;

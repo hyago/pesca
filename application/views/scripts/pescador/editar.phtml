@@ -28,7 +28,7 @@ $(function() {
     
     
 });
-  </script>
+</script>
     <div id="titulos">
         <h2>Perfil Social->Pescador</h2>
         <h3>Editar</h3>
@@ -110,14 +110,14 @@ $(function() {
                     </div>
                     <div id="form-dir">
                         <label for="respLancamento">Responsável Lançamento</label>
-                        <select name="respLancamento" id="respLancamentoID" required="">
+                        <select name="respLancamento" id="respLancamentoID" required="required">
                                 <option value="<?= $this->usuario['tu_id']; ?>" <?= ($this->usuario['tu_id'] == $this->pescador['tp_resp_lan']) ? 'selected="selected"' : ''; ?>><?= $this->usuario['tu_nome']; ?></option>
 
                         </select>
                     </div>
                     <div id="form-dir">
                         <label for="respCadastro">Responsável Cadastro</label>
-                        <select name="respCadastro" id="respCadastroID" required="">
+                        <select name="respCadastro" id="respCadastroID" required="required">
                             <?php foreach ($this->assignUser as $key => $respCad): ?>
                                 <option value="<?= $respCad['tu_id']; ?>" <?= ($respCad['tu_id'] == $this->pescador['tp_resp_cad']) ? 'selected="selected"' : ''; ?>><?= $respCad['tu_nome']; ?></option>
                             <?php endforeach; ?>
@@ -207,15 +207,15 @@ $(function() {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                <div id="form-dir">
-                    
-                    <label for="Projeto">Projeto</label>
-                    <select name="selectProjeto" id="selectProjetoId">
-                        <?php foreach ($this->assignProjetos as $key => $localProjetos): ?>
-                            <option value="<?= $localProjetos['tpr_id']; ?>"<?= ( $localProjetos['tpr_id'] == $this->pescador['tpr_id']) ? 'selected="selected"' : ''; ?>><?= $localProjetos['tpr_descricao']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+                    <div id="form-dir">
+
+                        <label for="Projeto">Projeto</label>
+                        <select name="selectProjeto" id="selectProjetoId">
+                            <?php foreach ($this->assignProjetos as $key => $localProjetos): ?>
+                                <option value="<?= $localProjetos['tpr_id']; ?>"<?= ( $localProjetos['tpr_id'] == $this->pescador['tpr_id']) ? 'selected="selected"' : ''; ?>><?= $localProjetos['tpr_descricao']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 
             </fieldset>
@@ -232,7 +232,7 @@ $(function() {
                     
                 </div>
             </fieldset>
-        </form>
+    </form>
     <div id="tabs">
         <ul id="abas">
             <li><a id="for_tabs-1">Pescador</a></li>
@@ -695,7 +695,7 @@ $(function() {
 
                     <div id="form-dir">
                         <label for="respLancamento">Responsável Lançamento</label>
-                        <select name="respCadastro" id="respLancamentoID" required="">
+                        <select name="respCadastro" id="respLancamentoID" required="required">
                                 <option value="<?= $this->usuario['tu_id']; ?>" <?= ($this->usuario['tu_id'] == $this->pescador['tp_resp_lan']) ? 'selected="selected"' : ''; ?>><?= $this->usuario['tu_nome']; ?></option>
 
                         </select>

@@ -993,11 +993,13 @@ function relatorioIndividualPescador(id_pescador){
     location.reload('pescador/relpdfpescador/id_pescador/'.id_pescador);
 }
 
-function jsInsertAmostraCamarao(frm, pag, amostragem){
+function jsInsertAmostraCamarao(frm, pag, idEntrevista){
     
-    var TmpUrl  = (amostragem+ '#base');
+    var TmpUrl  = (idEntrevista+ '#base');
     
-    var tmpUpdate = (pag + '/id_amostragem/'+amostragem+'/SelectSexo/' + frm.SelectSexo.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + '/comprimentoCabeca/'+ frm.comprimentoCabeca.value + '/peso/'+frm.peso.value+'/back_url/' + TmpUrl);
+    var tmpUpdate = (pag + '/id/' +idEntrevista+ '/SelectEspecie/'+ frm.SelectEspecieCamarao.value +
+    '/SelectSexo/' + frm.SelectSexoCamarao.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + 
+    '/comprimentoCabeca/'+ frm.comprimentoCabeca.value + '/peso/'+frm.pesoCamarao.value+'/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
     
@@ -1011,11 +1013,13 @@ function jsDeleteUnidade(amostragemId, pag, idUnidade) {
         location.replace(tmpUpdate);
     }
 }
-function jsInsertAmostraPeixe(frm, pag, amostragem){
+function jsInsertAmostraPeixe(frm, pag, idEntrevista){
     
-    var TmpUrl  = (amostragem+ '#base');
+    var TmpUrl  = (idEntrevista+ '#base');
     
-    var tmpUpdate = (pag + '/id_amostragem/'+amostragem+'/SelectSexo/' + frm.SelectSexo.value +'/SelectEspecie/' + frm.SelectEspecie.value + '/comprimento/'+ frm.comprimento.value + '/peso/'+frm.peso.value+'/back_url/' + TmpUrl);
+    var tmpUpdate = (pag + '/id/'+idEntrevista+'/SelectSexo/' + frm.SelectSexoPeixe.value +
+    '/SelectEspecie/' + frm.SelectEspeciePeixe.value + '/comprimento/'+ frm.comprimentoPeixe.value + 
+    '/peso/'+frm.pesoPeixe.value+'/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
     

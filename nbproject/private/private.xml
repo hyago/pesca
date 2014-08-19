@@ -5,6 +5,8 @@
         <group>
             <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/pescador/editar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/bd/12_pescador_especialista.sql</file>
+            <file>file:/srv/www/htdocs/pesca/public/css/estilo-admin.css</file>
             <file>file:/srv/www/htdocs/pesca/application/models/PescadorEspecialista.php</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
             <file>file:/srv/www/htdocs/pesca/application/models/Pescador.php</file>

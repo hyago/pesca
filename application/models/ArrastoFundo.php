@@ -1,11 +1,24 @@
 <?php
+/** 
+ * Model Arte de Pesca - Arrasto de Fundo
+ * 
+ * @package Pesca
+ * @subpackage Models
+ * @author Stefano Azevedo Silva <stefanouesc@gmail.com>
+ * @author Marcelo Ossamu Honda <mohonda@uesc.com>
+ * @version 1.0
+ * @access public
+ *
+ */
 
 class Application_Model_ArrastoFundo
 {
     private $dbTableArrastoFundo;
     private $dbTableArrastoHasPesqueiro;
     private $dbTableArrastoHasEspCapturada;
-
+    private $dbTableArrastoHasBioCamarao;
+    private $dbTableArrastoHasBioPeixe;
+    
     public function select($where = null, $order = null, $limit = null)
     {
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
@@ -204,6 +217,9 @@ class Application_Model_ArrastoFundo
         $this->dbTableTArrastoHasPesqueiro->insert($dadosPesqueiro);
         return;
     }
+
+    
+    
     public function deletePesqueiro($idPesqueiro){
         $this->dbTableTArrastoHasPesqueiro = new Application_Model_DbTable_ArrastoHasPesqueiro();
 
@@ -309,7 +325,85 @@ class Application_Model_ArrastoFundo
 
         $this->dbTableTArrastoHasAvistamento->delete($dadosArrastoHasAvistamento);
     }
+    ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableArrastoHasBioCamarao = new Application_Model_DbTable_ArrastoFundoHasBioCamarao();
 
+
+        $dadosPesqueiro = array(
+            'taf_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableArrastoHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableArrastoHasBioCamarao = new Application_Model_DbTable_VArrastoFundoHasBioCamarao();
+        $select = $this->dbTableArrastoHasBioCamarao->select()
+                ->from($this->dbTableArrastoHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableArrastoHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTArrastoHasBioCamarao = new Application_Model_DbTable_ArrastoHasBioCamarao();
+
+        $whereArrastoHasBiometria = $this->dbTableTArrastoHasBioCamarao->getAdapter()
+                ->quoteInto('tafbc_id = ?', $idBiometria);
+
+        $this->dbTableTArrastoHasBioCamarao->delete($whereArrastoHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableArrastoHasBioPeixe = new Application_Model_DbTable_ArrastoFundoHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'taf_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableArrastoHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableArrastoHasBioPeixe = new Application_Model_DbTable_VArrastoFundoHasBioPeixe();
+        $select = $this->dbTableArrastoHasBioPeixe->select()
+                ->from($this->dbTableArrastoHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableArrastoHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTArrastoHasBioCamarao = new Application_Model_DbTable_ArrastoHasBioPeixe();
+
+        $whereArrastoHasBiometria = $this->dbTableTArrastoHasBioCamarao->getAdapter()
+                ->quoteInto('tafbp_id = ?', $idBiometria);
+
+        $this->dbTableTArrastoHasBioCamarao->delete($whereArrastoHasBiometria);
+        
+    }
+////////////ENTREVISTAS/////////////////////////////////////////////////////////////////
     public function select_ArrastoFundo_group_EspecieCapturada() {
         $db = new Application_Model_DbTable_VArrastoFundoHasEspecieCapturada();
         $select = $db->select()
