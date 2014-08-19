@@ -36,6 +36,7 @@ private $usuario;
         $this->modelMare = new Application_Model_Mare();
         $this->modelIsca = new Application_Model_Isca();
         $this->modelTipoVenda = new Application_Model_TipoVenda();
+        $this->modelMaturidade = new Application_Model_Maturidade();
     }
 
     public function indexAction()
@@ -106,7 +107,14 @@ public function visualizarAction() {
         $vEspecieCapturadas = $this->modelJerere->selectJerereHasEspCapturadas('jre_id='.$idEntrevista);
 
         $vJerereAvistamento = $this->modelJerere->selectJerereHasAvistamento('jre_id='.$idEntrevista);
-
+        $vBioCamarao = $this->modelJerere->selectVBioCamarao('tjre_id='.$idEntrevista);
+        $vBioPeixe = $this->modelJerere->selectVBioPeixe('tjre_id='.$idEntrevista);
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        
+        
+        $this->view->assign('vBioCamarao', $vBioCamarao);
+        $this->view->assign('vBioPeixe', $vBioPeixe);
+        $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vJerereAvistamento', $vJerereAvistamento);
@@ -239,7 +247,73 @@ public function visualizarAction() {
 
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
+    public function insertbiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
 
+        $maturidade = $this->_getParam("SelectMaturidade");
+
+        $compCabeca = $this->_getParam("comprimentoCabeca");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelJerere->insertBioCamarao($idEntrevista, $idEspecie, $sexo, $maturidade, $compCabeca, $peso);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
+    public function deletebiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelJerere->deleteBioCamarao($idBiometria);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
+    
+    public function insertbiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
+
+        $comprimento = $this->_getParam("comprimento");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelJerere->insertBioPeixe($idEntrevista, $idEspecie, $sexo, $comprimento, $peso);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
+    public function deletebiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelJerere->deleteBioPeixe($idBiometria);
+
+        $this->redirect("/jerere/editar/id/" . $backUrl);
+    }
    public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);

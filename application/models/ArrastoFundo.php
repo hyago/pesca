@@ -325,7 +325,7 @@ class Application_Model_ArrastoFundo
 
         $this->dbTableTArrastoHasAvistamento->delete($dadosArrastoHasAvistamento);
     }
-    ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
     public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
     {
         $this->dbTableArrastoHasBioCamarao = new Application_Model_DbTable_ArrastoFundoHasBioCamarao();
@@ -357,7 +357,7 @@ class Application_Model_ArrastoFundo
         
     }
     public function deleteBioCamarao($idBiometria){
-        $this->dbTableTArrastoHasBioCamarao = new Application_Model_DbTable_ArrastoHasBioCamarao();
+        $this->dbTableTArrastoHasBioCamarao = new Application_Model_DbTable_ArrastoFundoHasBioCamarao();
 
         $whereArrastoHasBiometria = $this->dbTableTArrastoHasBioCamarao->getAdapter()
                 ->quoteInto('tafbc_id = ?', $idBiometria);
@@ -395,12 +395,12 @@ class Application_Model_ArrastoFundo
         
     }
     public function deleteBioPeixe($idBiometria){
-        $this->dbTableTArrastoHasBioCamarao = new Application_Model_DbTable_ArrastoHasBioPeixe();
+        $this->dbTableTArrastoHasBioPeixe = new Application_Model_DbTable_ArrastoFundoHasBioPeixe();
 
-        $whereArrastoHasBiometria = $this->dbTableTArrastoHasBioCamarao->getAdapter()
+        $whereArrastoHasBiometria = $this->dbTableTArrastoHasBioPeixe->getAdapter()
                 ->quoteInto('tafbp_id = ?', $idBiometria);
 
-        $this->dbTableTArrastoHasBioCamarao->delete($whereArrastoHasBiometria);
+        $this->dbTableTArrastoHasBioPeixe->delete($whereArrastoHasBiometria);
         
     }
 ////////////ENTREVISTAS/////////////////////////////////////////////////////////////////

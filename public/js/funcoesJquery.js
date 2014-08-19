@@ -995,7 +995,7 @@ function relatorioIndividualPescador(id_pescador){
 
 function jsInsertAmostraCamarao(frm, pag, idEntrevista){
     
-    var TmpUrl  = (idEntrevista+ '#base');
+    var TmpUrl  = (idEntrevista+ '#base_camarao');
     
     var tmpUpdate = (pag + '/id/' +idEntrevista+ '/SelectEspecie/'+ frm.SelectEspecieCamarao.value +
     '/SelectSexo/' + frm.SelectSexoCamarao.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + 
@@ -1004,18 +1004,20 @@ function jsInsertAmostraCamarao(frm, pag, idEntrevista){
     location.replace(tmpUpdate);
     
 }
-function jsDeleteUnidade(amostragemId, pag, idUnidade) {
-    var TmpUrl = (+amostragemId + '#base');
 
-    var tmpUpdate = (pag + '/id_amostragem/' + amostragemId + '/id/'+idUnidade+ '/back_url/' + TmpUrl);
+function jsDeleteUnidade( pag, idEntrevista ,idUnidade, retorno) {
+    var TmpUrl = (+idEntrevista + retorno);
+
+    var tmpUpdate = (pag + '/id/'+idUnidade+ '/back_url/' + TmpUrl);
 
     if (confirm("Realmente deseja excluir este item?")) {
         location.replace(tmpUpdate);
     }
 }
+
 function jsInsertAmostraPeixe(frm, pag, idEntrevista){
     
-    var TmpUrl  = (idEntrevista+ '#base');
+    var TmpUrl  = (idEntrevista+ '#base_peixe');
     
     var tmpUpdate = (pag + '/id/'+idEntrevista+'/SelectSexo/' + frm.SelectSexoPeixe.value +
     '/SelectEspecie/' + frm.SelectEspeciePeixe.value + '/comprimento/'+ frm.comprimentoPeixe.value + 

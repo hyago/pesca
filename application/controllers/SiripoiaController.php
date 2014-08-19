@@ -36,6 +36,7 @@ class SiripoiaController extends Zend_Controller_Action
         $this->modelMare = new Application_Model_Mare();
         $this->modelIsca = new Application_Model_Isca();
         $this->modelTipoVenda = new Application_Model_TipoVenda();
+        $this->modelMaturidade = new Application_Model_Maturidade();
 
     }
 
@@ -110,7 +111,14 @@ class SiripoiaController extends Zend_Controller_Action
         $vEspecieCapturadas = $this->modelSiripoia->selectSiripoiaHasEspCapturadas('sir_id='.$idEntrevista);
 
         $vSiripoiaAvistamento = $this->modelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$idEntrevista);
-
+        $vBioCamarao = $this->modelSiripoia->selectVBioCamarao('tsir_id='.$idEntrevista);
+        $vBioPeixe = $this->modelSiripoia->selectVBioPeixe('tsir_id='.$idEntrevista);
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        
+        
+        $this->view->assign('vBioCamarao', $vBioCamarao);
+        $this->view->assign('vBioPeixe', $vBioPeixe);
+        $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vSiripoiaAvistamento', $vSiripoiaAvistamento);
@@ -242,7 +250,73 @@ class SiripoiaController extends Zend_Controller_Action
 
         $this->redirect("/siripoia/editar/id/" . $backUrl);
     }
+    public function insertbiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
 
+        $maturidade = $this->_getParam("SelectMaturidade");
+
+        $compCabeca = $this->_getParam("comprimentoCabeca");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelSiripoia->insertBioCamarao($idEntrevista, $idEspecie, $sexo, $maturidade, $compCabeca, $peso);
+
+        $this->redirect("/siripoia/editar/id/" . $backUrl);
+    }
+    public function deletebiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelSiripoia->deleteBioCamarao($idBiometria);
+
+        $this->redirect("/siripoia/editar/id/" . $backUrl);
+    }
+    
+    public function insertbiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
+
+        $comprimento = $this->_getParam("comprimento");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelSiripoia->insertBioPeixe($idEntrevista, $idEspecie, $sexo, $comprimento, $peso);
+
+        $this->redirect("/siripoia/editar/id/" . $backUrl);
+    }
+    public function deletebiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelSiripoia->deleteBioPeixe($idBiometria);
+
+        $this->redirect("/siripoia/editar/id/" . $backUrl);
+    }
     public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);

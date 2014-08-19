@@ -36,6 +36,7 @@ private $usuario;
         $this->modelMare = new Application_Model_Mare();
         $this->modelIsca = new Application_Model_Isca();
         $this->modelTipoVenda = new Application_Model_TipoVenda();
+        $this->modelMaturidade = new Application_Model_Maturidade();
     }
 
     public function indexAction()
@@ -107,7 +108,14 @@ public function visualizarAction() {
         $vEspecieCapturadas = $this->modelRatoeira->selectRatoeiraHasEspCapturadas('rat_id='.$idEntrevista);
 
         $vRatoeiraAvistamento = $this->modelRatoeira->selectRatoeiraHasAvistamento('rat_id='.$idEntrevista);
-
+        $vBioCamarao = $this->modelRatoeira->selectVBioCamarao('trat_id='.$idEntrevista);
+        $vBioPeixe = $this->modelRatoeira->selectVBioPeixe('trat_id='.$idEntrevista);
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        
+        
+        $this->view->assign('vBioCamarao', $vBioCamarao);
+        $this->view->assign('vBioPeixe', $vBioPeixe);
+        $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vRatoeiraAvistamento', $vRatoeiraAvistamento);
@@ -239,7 +247,73 @@ public function visualizarAction() {
 
         $this->redirect("/ratoeira/editar/id/" . $backUrl);
     }
+    public function insertbiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
 
+        $maturidade = $this->_getParam("SelectMaturidade");
+
+        $compCabeca = $this->_getParam("comprimentoCabeca");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelRatoeira->insertBioCamarao($idEntrevista, $idEspecie, $sexo, $maturidade, $compCabeca, $peso);
+
+        $this->redirect("/ratoeira/editar/id/" . $backUrl);
+    }
+    public function deletebiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelRatoeira->deleteBioCamarao($idBiometria);
+
+        $this->redirect("/ratoeira/editar/id/" . $backUrl);
+    }
+    
+    public function insertbiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
+
+        $comprimento = $this->_getParam("comprimento");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelRatoeira->insertBioPeixe($idEntrevista, $idEspecie, $sexo, $comprimento, $peso);
+
+        $this->redirect("/ratoeira/editar/id/" . $backUrl);
+    }
+    public function deletebiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelRatoeira->deleteBioPeixe($idBiometria);
+
+        $this->redirect("/ratoeira/editar/id/" . $backUrl);
+    }
     public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);

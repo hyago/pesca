@@ -35,6 +35,7 @@ class ColetaManualController extends Zend_Controller_Action
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelMare = new Application_Model_Mare();
         $this->modelTipoVenda = new Application_Model_TipoVenda();
+        $this->modelMaturidade = new Application_Model_Maturidade();
 
     }
 
@@ -107,8 +108,14 @@ class ColetaManualController extends Zend_Controller_Action
         $vEspecieCapturadas = $this->modelColetaManual->selectColetaManualHasEspCapturadas('cml_id='.$idEntrevista);
 
         $vColetaManualAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
-
-
+        $vBioCamarao = $this->modelColetaManual->selectVBioCamarao('tcml_id='.$idEntrevista);
+        $vBioPeixe = $this->modelColetaManual->selectVBioPeixe('tcml_id='.$idEntrevista);
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        
+        
+        $this->view->assign('vBioCamarao', $vBioCamarao);
+        $this->view->assign('vBioPeixe', $vBioPeixe);
+        $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vColetaManualAvistamento', $vColetaManualAvistamento);
@@ -243,7 +250,73 @@ class ColetaManualController extends Zend_Controller_Action
 
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
     }
+    public function insertbiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
 
+        $maturidade = $this->_getParam("SelectMaturidade");
+
+        $compCabeca = $this->_getParam("comprimentoCabeca");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelColetaManual->insertBioCamarao($idEntrevista, $idEspecie, $sexo, $maturidade, $compCabeca, $peso);
+
+        $this->redirect("/coleta-manual/editar/id/" . $backUrl);
+    }
+    public function deletebiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelColetaManual->deleteBioCamarao($idBiometria);
+
+        $this->redirect("/coleta-manual/editar/id/" . $backUrl);
+    }
+    
+    public function insertbiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
+
+        $comprimento = $this->_getParam("comprimento");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelColetaManual->insertBioPeixe($idEntrevista, $idEspecie, $sexo, $comprimento, $peso);
+
+        $this->redirect("/coleta-manual/editar/id/" . $backUrl);
+    }
+    public function deletebiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelColetaManual->deleteBioPeixe($idBiometria);
+
+        $this->redirect("/coleta-manual/editar/id/" . $backUrl);
+    }
     public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);

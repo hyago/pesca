@@ -283,7 +283,7 @@
     <fieldset class="noEditable"><legend>Amostras de Peixes:</legend>
         <fieldset class="noEditable"><legend>Dados das Amostras:</legend>
 
-            <div id="base">
+            <div id="base_peixe">
                 <input onclick="jsInsertAmostraPeixe(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertbiopeixe"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Adicionar" />
                 
                 <select style="float:left;" name="SelectEspeciePeixe">
@@ -326,7 +326,7 @@
                             <td name="inputComp.Cabeca"> <?= $unidadePeixe['tbp_comprimento'] ?> </td>
                             <td name="inputSexo"> <?= $unidadePeixe['tbp_sexo'] ?> </td>
                             <td name="inputPeso"> <?= $unidadePeixe['tbp_peso'] ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteUnidade(<?= $this->amostragem['tamp_id'] ?>, '<?= $this->url(array("controller" => "amostra-peixe", "action" => "deleteunidade"), null, true) ?>', <?= $unidadePeixe['tup_id'] ?>)"></td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteUnidade('<?= $this->url(array("controller" => "arrasto-fundo", "action" => "deletebiopeixe"), null, true) ?>', '<?=$this->entrevista['af_id']?>','<?= $unidadePeixe['tafbp_id'] ?>', '#base_peixe')"></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -336,7 +336,7 @@
         <fieldset class="noEditable"><legend>Amostras de Camarão:</legend>
         <fieldset class="noEditable"><legend>Dados das Amostras:</legend>
 
-            <div id="base">
+            <div id="base_camarao">
                 <input onclick="jsInsertAmostraCamarao(this.form, '<?= $this->url(array("controller" => "arrasto-fundo", "action" => "insertbiocamarao"), null, true) ?>','<?=$this->entrevista['af_id']?>')" type="button" value="Adicionar" />
                 
                 <select style="float:left;" name="SelectEspecieCamarao">
@@ -386,7 +386,7 @@
                             <td name="inputMaturidade"> <?= $unidadeCamarao['tmat_tipo'] ?> </td>
                             <td name="inputComp.Cabeca"> <?= $unidadeCamarao['tbc_comprimento_cabeca'] ?> </td>
                             <td name="inputPeso"> <?= $unidadeCamarao['tbc_peso'] ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteUnidade(<?= $this->amostragem['tamc_id'] ?>, '<?= $this->url(array("controller" => "amostra-camarao", "action" => "deleteunidade"), null, true) ?>', <?= $unidadeCamarao['tuc_id'] ?>)"></td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteUnidade('<?= $this->url(array("controller" => "arrasto-fundo", "action" => "deletebiocamarao"), null, true) ?>', '<?=$this->entrevista['af_id']?>','<?= $unidadeCamarao['tafbc_id'] ?>', '#base_camarao')"></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>

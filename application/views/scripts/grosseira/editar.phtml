@@ -302,8 +302,121 @@
                 <?php endforeach; ?>
             </table>
         </fieldset>
-    </fieldset>    
-    </form>
+    </fieldset>
+    <!--////////////////////////////////////////////////////////AMOSTRAGEM PEIXES///////////////////////////////////////////////////////////-->
+    <fieldset class="noEditable"><legend>Amostras de Peixes:</legend>
+        <fieldset class="noEditable"><legend>Dados das Amostras:</legend>
+
+            <div id="base_peixe">
+                <input onclick="jsInsertAmostraPeixe(this.form, '<?= $this->url(array("controller" => "grosseira", "action" => "insertbiopeixe"), null, true) ?>','<?=$this->entrevista['grs_id']?>')" type="button" value="Adicionar" />
+                
+                <select style="float:left;" name="SelectEspeciePeixe">
+                    <?php foreach ($this->especies as $key => $especie): ?>
+                        <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <input style="float:left;" type="text" name="comprimentoPeixe" placeholder="Comprimento" size="10px">
+
+                <select style="float:left;" class="amostragem" name="SelectSexoPeixe" style="width:5px">
+                    <option value="M">Macho</option>
+                    <option value="F">Fêmea</option>
+                    <option value="I">Indefinido</option>
+                </select>
+                
+                <input style="float:left;" type="text" name="pesoPeixe" placeholder="Peso" size="10px">
+
+                
+            </div>
+
+        </fieldset>
+        <br>
+         <fieldset class="noEditable" id="itemArteTipoRows"><legend>Dados Cadastrados:</legend>
+                <table id="especiesCapturadas">
+                    <tr>
+                        
+                        <th width="20%">Id Amostra</th>
+                        <th width="20%">Espécie</th>
+                        <th width="20%">Comprimento</th>
+                        <th width="10%">Sexo</th>
+                        <th width="20%">Peso</th>
+                    </tr>
+                    <?php
+                    foreach ($this->vBioPeixe as $key => $unidadePeixe):
+                        ?>
+                        <tr id="itemEmbarcacoesRows">
+                            
+                            <td name="inputAmostra"> <?= $unidadePeixe['tgrsbp_id'] ?> </td>
+                            <td name="inputMaturidade"> <?= $unidadePeixe['esp_nome_comum'] ?> </td>
+                            <td name="inputComp.Cabeca"> <?= $unidadePeixe['tbp_comprimento'] ?> </td>
+                            <td name="inputSexo"> <?= $unidadePeixe['tbp_sexo'] ?> </td>
+                            <td name="inputPeso"> <?= $unidadePeixe['tbp_peso'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteUnidade('<?= $this->url(array("controller" => "grosseira", "action" => "deletebiopeixe"), null, true) ?>', '<?=$this->entrevista['grs_id']?>','<?= $unidadePeixe['tgrsbp_id'] ?>', '#base_peixe')"></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </fieldset>
+        </fieldset>
+<!--////////////////////////////////////////////////////////AMOSTRAGEM PEIXES///////////////////////////////////////////////////////////-->
+        <fieldset class="noEditable"><legend>Amostras de Camarão:</legend>
+        <fieldset class="noEditable"><legend>Dados das Amostras:</legend>
+
+            <div id="base_camarao">
+                <input onclick="jsInsertAmostraCamarao(this.form, '<?= $this->url(array("controller" => "grosseira", "action" => "insertbiocamarao"), null, true) ?>','<?=$this->entrevista['grs_id']?>')" type="button" value="Adicionar" />
+                
+                <select style="float:left;" name="SelectEspecieCamarao">
+                    <?php foreach ($this->especies as $key => $especieCamarao): ?>
+                        <option value="<?= $especieCamarao['esp_id']; ?>"><?= $especieCamarao['esp_nome_comum']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <select style="float:left;" class="amostragem" name="SelectSexoCamarao" >
+                    <option value="M">Macho</option>
+                    <option value="F">Fêmea</option>
+                    <option value="I">Indefinido</option>
+                </select>
+                <select style="float:left;" class="amostragem" name="SelectMaturidade">
+                    <?php foreach ($this->maturidade as $key => $maturidade): ?>
+                        <option value="<?= $maturidade['tmat_id']; ?>"><?= $maturidade['tmat_tipo']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                
+                <input style="float:left;" type="text" name="comprimentoCabeca" placeholder="Comp. Carapaça" size="10px">
+
+                <input style="float:left;" type="text" name="pesoCamarao" placeholder="Peso" size="10px">
+
+
+            </div>
+
+        </fieldset>
+        <br>
+         <fieldset class="noEditable" id="itemArteTipoRows"><legend>Dados Cadastrados:</legend>
+                <table id="especiesCapturadas">
+                    <tr>
+                        
+                        <th width="20%">Id Amostra</th>
+                        <th width='20%'>Espécie</th>
+                        <th width="10%">Sexo</th>
+                        <th width="20%">Maturidade</th>
+                        <th width="20%">Comp.Carapaça</th>
+                        <th width="20%">Peso</th>
+                    </tr>
+                    <?php
+                    foreach ($this->vBioCamarao as $key => $unidadeCamarao):
+                        ?>
+                        <tr id="itemEmbarcacoesRows">
+                            
+                            <td name="inputAmostra"> <?= $unidadeCamarao['tgrsbc_id'] ?> </td>
+                            <td name="inputEspecie"> <?= $unidadeCamarao['esp_nome_comum'] ?> </td>
+                            <td name="inputSexo"> <?= $unidadeCamarao['tbc_sexo'] ?> </td>
+                            <td name="inputMaturidade"> <?= $unidadeCamarao['tmat_tipo'] ?> </td>
+                            <td name="inputComp.Cabeca"> <?= $unidadeCamarao['tbc_comprimento_cabeca'] ?> </td>
+                            <td name="inputPeso"> <?= $unidadeCamarao['tbc_peso'] ?> </td>
+                            <td><input type="button" class="button-del" width="5%" onclick="jsDeleteUnidade('<?= $this->url(array("controller" => "grosseira", "action" => "deletebiocamarao"), null, true) ?>', '<?=$this->entrevista['grs_id']?>','<?= $unidadeCamarao['tgrsbc_id'] ?>', '#base_camarao')"></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </fieldset>
+</fieldset>    
+</form>
     <br/> <br/>
     <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "editar","id" => $this->monitoramento['fd_id']), null, true) ?>" id="botao-ancora">Voltar à Ficha-Diária</a>
     

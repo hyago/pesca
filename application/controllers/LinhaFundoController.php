@@ -36,6 +36,7 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->modelMare = new Application_Model_Mare();
         $this->modelIsca = new Application_Model_Isca();
         $this->modelTipoVenda = new Application_Model_TipoVenda();
+        $this->modelMaturidade = new Application_Model_Maturidade();
     }
 
     public function indexAction()
@@ -114,7 +115,14 @@ public function visualizarAction() {
         $vEspecieCapturadas = $this->modelLinhaFundo->selectLinhaFundoHasEspCapturadas('lf_id='.$idEntrevista);
 
         $vLinhaFundoAvistamento = $this->modelLinhaFundo->selectLinhaFundoHasAvistamento('lf_id='.$idEntrevista);
-
+        $vBioCamarao = $this->modelLinhaFundo->selectVBioCamarao('tlf_id='.$idEntrevista);
+        $vBioPeixe = $this->modelLinhaFundo->selectVBioPeixe('tlf_id='.$idEntrevista);
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        
+        
+        $this->view->assign('vBioCamarao', $vBioCamarao);
+        $this->view->assign('vBioPeixe', $vBioPeixe);
+        $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vLinhaFundoAvistamento', $vLinhaFundoAvistamento);
@@ -250,7 +258,73 @@ public function visualizarAction() {
 
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
+public function insertbiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
 
+        $maturidade = $this->_getParam("SelectMaturidade");
+
+        $compCabeca = $this->_getParam("comprimentoCabeca");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelLinhaFundo->insertBioCamarao($idEntrevista, $idEspecie, $sexo, $maturidade, $compCabeca, $peso);
+
+        $this->redirect("/linha-fundo/editar/id/" . $backUrl);
+    }
+    public function deletebiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelLinhaFundo->deleteBioCamarao($idBiometria);
+
+        $this->redirect("/linha-fundo/editar/id/" . $backUrl);
+    }
+    
+    public function insertbiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idEntrevista = $this->_getParam("id");
+        
+        $idEspecie  = $this->_getParam("SelectEspecie");
+        
+        $sexo = $this->_getParam("SelectSexo");
+
+        $comprimento = $this->_getParam("comprimento");
+        
+        $peso = $this->_getParam("peso");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelLinhaFundo->insertBioPeixe($idEntrevista, $idEspecie, $sexo, $comprimento, $peso);
+
+        $this->redirect("/linha-fundo/editar/id/" . $backUrl);
+    }
+    public function deletebiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelLinhaFundo->deleteBioPeixe($idBiometria);
+
+        $this->redirect("/linha-fundo/editar/id/" . $backUrl);
+    }
    public function relatoriolistaAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);

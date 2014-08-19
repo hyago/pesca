@@ -230,7 +230,7 @@ class Application_Model_Calao
         
         $dadosPesqueiro = array(
             'cal_id' => $idEntrevista,
-            'paf_id' => $pesqueiro,
+            'pcal_id' => $pesqueiro,
         );
         
         $this->dbTableTCalao->insert($dadosPesqueiro);
@@ -240,7 +240,7 @@ class Application_Model_Calao
         $this->dbTableTCalao = new Application_Model_DbTable_CalaoHasPesqueiro();       
                 
         $whereCalaoHasPesqueiro = $this->dbTableTCalao->getAdapter()
-                ->quoteInto('"cal_paf_id" = ?', $idPesqueiro);
+                ->quoteInto('"cal_pcal_id" = ?', $idPesqueiro);
         
         $this->dbTableTCalao->delete($whereCalaoHasPesqueiro);
         
@@ -326,5 +326,85 @@ class Application_Model_Calao
         
         $this->dbTableTCalaoHasAvistamento->delete($dadosCalaoHasAvistamento);
     }
+    ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableCalaoHasBioCamarao = new Application_Model_DbTable_CalaoHasBioCamarao();
+
+
+        $dadosPesqueiro = array(
+            'tcal_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableCalaoHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableCalaoHasBioCamarao = new Application_Model_DbTable_VCalaoHasBioCamarao();
+        $select = $this->dbTableCalaoHasBioCamarao->select()
+                ->from($this->dbTableCalaoHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableCalaoHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTCalaoHasBioCamarao = new Application_Model_DbTable_CalaoHasBioCamarao();
+
+        $whereCalaoHasBiometria = $this->dbTableTCalaoHasBioCamarao->getAdapter()
+                ->quoteInto('tcalbc_id = ?', $idBiometria);
+
+        $this->dbTableTCalaoHasBioCamarao->delete($whereCalaoHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableCalaoHasBioPeixe = new Application_Model_DbTable_CalaoHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tcal_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableCalaoHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableCalaoHasBioPeixe = new Application_Model_DbTable_VCalaoHasBioPeixe();
+        $select = $this->dbTableCalaoHasBioPeixe->select()
+                ->from($this->dbTableCalaoHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableCalaoHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTCalaoHasBioPeixe = new Application_Model_DbTable_CalaoHasBioPeixe();
+
+        $whereCalaoHasBiometria = $this->dbTableTCalaoHasBioPeixe->getAdapter()
+                ->quoteInto('tcalbp_id = ?', $idBiometria);
+
+        $this->dbTableTCalaoHasBioPeixe->delete($whereCalaoHasBiometria);
+        
+    }
+
+    
 }
 

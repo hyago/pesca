@@ -342,5 +342,84 @@ class Application_Model_VaraPesca
         
         $this->dbTableTVaraPescaHasAvistamento->delete($dadosVaraPescaHasAvistamento);
     }
+    
+        ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableVaraPescaHasBioCamarao = new Application_Model_DbTable_VaraPescaHasBioCamarao();
+
+
+        $dadosPesqueiro = array(
+            'tvp_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableVaraPescaHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableVaraPescaHasBioCamarao = new Application_Model_DbTable_VVaraPescaHasBioCamarao();
+        $select = $this->dbTableVaraPescaHasBioCamarao->select()
+                ->from($this->dbTableVaraPescaHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableVaraPescaHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTVaraPescaHasBioCamarao = new Application_Model_DbTable_VaraPescaHasBioCamarao();
+
+        $whereVaraPescaHasBiometria = $this->dbTableTVaraPescaHasBioCamarao->getAdapter()
+                ->quoteInto('tvpbc_id = ?', $idBiometria);
+
+        $this->dbTableTVaraPescaHasBioCamarao->delete($whereVaraPescaHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableVaraPescaHasBioPeixe = new Application_Model_DbTable_VaraPescaHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tvp_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableVaraPescaHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableVaraPescaHasBioPeixe = new Application_Model_DbTable_VVaraPescaHasBioPeixe();
+        $select = $this->dbTableVaraPescaHasBioPeixe->select()
+                ->from($this->dbTableVaraPescaHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableVaraPescaHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTVaraPescaHasBioPeixe = new Application_Model_DbTable_VaraPescaHasBioPeixe();
+
+        $whereVaraPescaHasBiometria = $this->dbTableTVaraPescaHasBioPeixe->getAdapter()
+                ->quoteInto('tvpbp_id = ?', $idBiometria);
+
+        $this->dbTableTVaraPescaHasBioPeixe->delete($whereVaraPescaHasBiometria);
+        
+    }
 }
 

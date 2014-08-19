@@ -293,7 +293,85 @@ class Application_Model_Manzua
         
         $this->dbTableTManzuaHasAvistamento->delete($dadosManzuaHasAvistamento);
     }
+    
+        ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableManzuaHasBioCamarao = new Application_Model_DbTable_ManzuaHasBioCamarao();
 
+
+        $dadosPesqueiro = array(
+            'tman_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableManzuaHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableManzuaHasBioCamarao = new Application_Model_DbTable_VManzuaHasBioCamarao();
+        $select = $this->dbTableManzuaHasBioCamarao->select()
+                ->from($this->dbTableManzuaHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableManzuaHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTManzuaHasBioCamarao = new Application_Model_DbTable_ManzuaHasBioCamarao();
+
+        $whereManzuaHasBiometria = $this->dbTableTManzuaHasBioCamarao->getAdapter()
+                ->quoteInto('tmanbc_id = ?', $idBiometria);
+
+        $this->dbTableTManzuaHasBioCamarao->delete($whereManzuaHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableManzuaHasBioPeixe = new Application_Model_DbTable_ManzuaHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tman_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableManzuaHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableManzuaHasBioPeixe = new Application_Model_DbTable_VManzuaHasBioPeixe();
+        $select = $this->dbTableManzuaHasBioPeixe->select()
+                ->from($this->dbTableManzuaHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableManzuaHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTManzuaHasBioPeixe = new Application_Model_DbTable_ManzuaHasBioPeixe();
+
+        $whereManzuaHasBiometria = $this->dbTableTManzuaHasBioPeixe->getAdapter()
+                ->quoteInto('tmanbp_id = ?', $idBiometria);
+
+        $this->dbTableTManzuaHasBioPeixe->delete($whereManzuaHasBiometria);
+        
+    }
 
 }
 

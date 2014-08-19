@@ -350,5 +350,84 @@ class Application_Model_LinhaFundo
         
         $this->dbTableTLinhaFundoHasAvistamento->delete($dadosLinhaFundoHasAvistamento);
     }
+    
+        ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableLinhaFundoHasBioCamarao = new Application_Model_DbTable_LinhaFundoHasBioCamarao();
+
+
+        $dadosPesqueiro = array(
+            'tlf_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableLinhaFundoHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableLinhaFundoHasBioCamarao = new Application_Model_DbTable_VLinhaFundoHasBioCamarao();
+        $select = $this->dbTableLinhaFundoHasBioCamarao->select()
+                ->from($this->dbTableLinhaFundoHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableLinhaFundoHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTLinhaFundoHasBioCamarao = new Application_Model_DbTable_LinhaFundoHasBioCamarao();
+
+        $whereLinhaFundoHasBiometria = $this->dbTableTLinhaFundoHasBioCamarao->getAdapter()
+                ->quoteInto('tlfbc_id = ?', $idBiometria);
+
+        $this->dbTableTLinhaFundoHasBioCamarao->delete($whereLinhaFundoHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableLinhaFundoHasBioPeixe = new Application_Model_DbTable_LinhaFundoHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tlf_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableLinhaFundoHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableLinhaFundoHasBioPeixe = new Application_Model_DbTable_VLinhaFundoHasBioPeixe();
+        $select = $this->dbTableLinhaFundoHasBioPeixe->select()
+                ->from($this->dbTableLinhaFundoHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableLinhaFundoHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTLinhaFundoHasBioPeixe = new Application_Model_DbTable_LinhaFundoHasBioPeixe();
+
+        $whereLinhaFundoHasBiometria = $this->dbTableTLinhaFundoHasBioPeixe->getAdapter()
+                ->quoteInto('tlfbp_id = ?', $idBiometria);
+
+        $this->dbTableTLinhaFundoHasBioPeixe->delete($whereLinhaFundoHasBiometria);
+        
+    }
 }
 

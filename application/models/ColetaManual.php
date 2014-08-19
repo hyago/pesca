@@ -289,5 +289,84 @@ private $dbTableColetaManual;
         
         $this->dbTableTColetaManualHasAvistamento->delete($dadosColetaManualHasAvistamento);
     }
+    
+////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableColetaManualHasBioCamarao = new Application_Model_DbTable_ColetaManualHasBioCamarao();
+
+
+        $dadosPesqueiro = array(
+            'tcml_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableColetaManualHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableColetaManualHasBioCamarao = new Application_Model_DbTable_VColetaManualHasBioCamarao();
+        $select = $this->dbTableColetaManualHasBioCamarao->select()
+                ->from($this->dbTableColetaManualHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableColetaManualHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTColetaManualHasBioCamarao = new Application_Model_DbTable_ColetaManualHasBioCamarao();
+
+        $whereColetaManualHasBiometria = $this->dbTableTColetaManualHasBioCamarao->getAdapter()
+                ->quoteInto('tcmlbc_id = ?', $idBiometria);
+
+        $this->dbTableTColetaManualHasBioCamarao->delete($whereColetaManualHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableColetaManualHasBioPeixe = new Application_Model_DbTable_ColetaManualHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tcml_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableColetaManualHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableColetaManualHasBioPeixe = new Application_Model_DbTable_VColetaManualHasBioPeixe();
+        $select = $this->dbTableColetaManualHasBioPeixe->select()
+                ->from($this->dbTableColetaManualHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableColetaManualHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTColetaManualHasBioPeixe = new Application_Model_DbTable_ColetaManualHasBioPeixe();
+
+        $whereColetaManualHasBiometria = $this->dbTableTColetaManualHasBioPeixe->getAdapter()
+                ->quoteInto('tcmlbp_id = ?', $idBiometria);
+
+        $this->dbTableTColetaManualHasBioPeixe->delete($whereColetaManualHasBiometria);
+        
+    }
 }
 

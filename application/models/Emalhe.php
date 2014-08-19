@@ -360,7 +360,84 @@ class Application_Model_Emalhe
         
         $this->dbTableTEmalhelHasAvistamento->delete($dadosEmalhelHasAvistamento);
     }
+        ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableEmalheHasBioCamarao = new Application_Model_DbTable_EmalheHasBioCamarao();
 
+
+        $dadosPesqueiro = array(
+            'tem_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableEmalheHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableEmalheHasBioCamarao = new Application_Model_DbTable_VEmalheHasBioCamarao();
+        $select = $this->dbTableEmalheHasBioCamarao->select()
+                ->from($this->dbTableEmalheHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableEmalheHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTEmalheHasBioCamarao = new Application_Model_DbTable_EmalheHasBioCamarao();
+
+        $whereEmalheHasBiometria = $this->dbTableTEmalheHasBioCamarao->getAdapter()
+                ->quoteInto('tembc_id = ?', $idBiometria);
+
+        $this->dbTableTEmalheHasBioCamarao->delete($whereEmalheHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableEmalheHasBioPeixe = new Application_Model_DbTable_EmalheHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tem_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableEmalheHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableEmalheHasBioPeixe = new Application_Model_DbTable_VEmalheHasBioPeixe();
+        $select = $this->dbTableEmalheHasBioPeixe->select()
+                ->from($this->dbTableEmalheHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableEmalheHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTEmalheHasBioPeixe = new Application_Model_DbTable_EmalheHasBioPeixe();
+
+        $whereEmalheHasBiometria = $this->dbTableTEmalheHasBioPeixe->getAdapter()
+                ->quoteInto('tembp_id = ?', $idBiometria);
+
+        $this->dbTableTEmalheHasBioPeixe->delete($whereEmalheHasBiometria);
+        
+    }
 
 }
 

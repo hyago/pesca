@@ -292,5 +292,84 @@ class Application_Model_Siripoia
         
         $this->dbTableTSiripoiaHasAvistamento->delete($dadosSiripoiaHasAvistamento);
     }
+    
+ ////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableSiripoiaHasBioCamarao = new Application_Model_DbTable_SiripoiaHasBioCamarao();
+
+
+        $dadosPesqueiro = array(
+            'tsir_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableSiripoiaHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableSiripoiaHasBioCamarao = new Application_Model_DbTable_VSiripoiaHasBioCamarao();
+        $select = $this->dbTableSiripoiaHasBioCamarao->select()
+                ->from($this->dbTableSiripoiaHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableSiripoiaHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTSiripoiaHasBioCamarao = new Application_Model_DbTable_SiripoiaHasBioCamarao();
+
+        $whereSiripoiaHasBiometria = $this->dbTableTSiripoiaHasBioCamarao->getAdapter()
+                ->quoteInto('tsirbc_id = ?', $idBiometria);
+
+        $this->dbTableTSiripoiaHasBioCamarao->delete($whereSiripoiaHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableSiripoiaHasBioPeixe = new Application_Model_DbTable_SiripoiaHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tsir_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableSiripoiaHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableSiripoiaHasBioPeixe = new Application_Model_DbTable_VSiripoiaHasBioPeixe();
+        $select = $this->dbTableSiripoiaHasBioPeixe->select()
+                ->from($this->dbTableSiripoiaHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableSiripoiaHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTSiripoiaHasBioPeixe = new Application_Model_DbTable_SiripoiaHasBioPeixe();
+
+        $whereSiripoiaHasBiometria = $this->dbTableTSiripoiaHasBioPeixe->getAdapter()
+                ->quoteInto('tsirbp_id = ?', $idBiometria);
+
+        $this->dbTableTSiripoiaHasBioPeixe->delete($whereSiripoiaHasBiometria);
+        
+    }
 }
 

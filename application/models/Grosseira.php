@@ -350,5 +350,84 @@ private $dbTableGrosseira;
         
         $this->dbTableTGrosseiraHasAvistamento->delete($dadosGrosseiraHasAvistamento);
     }
+    
+////////////////////BIOMETRIA CAMARAO //////////////////////////////////////////////////////////////
+    public function insertBioCamarao($idEntrevista, $idEspecie,$sexo, $maturidade, $compCabeca, $peso)
+    {
+        $this->dbTableGrosseiraHasBioCamarao = new Application_Model_DbTable_GrosseiraHasBioCamarao();
+
+
+        $dadosPesqueiro = array(
+            'tgrs_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbc_sexo' => $sexo,
+            'tmat_id' => $maturidade,
+            'tbc_comprimento_cabeca' => $compCabeca,
+            'tbc_peso' => $peso
+        );
+
+        $this->dbTableGrosseiraHasBioCamarao->insert($dadosPesqueiro);
+        return;
+    }
+    
+    public function selectVBioCamarao($where = null, $order = null, $limit = null){
+        $this->dbTableGrosseiraHasBioCamarao = new Application_Model_DbTable_VGrosseiraHasBioCamarao();
+        $select = $this->dbTableGrosseiraHasBioCamarao->select()
+                ->from($this->dbTableGrosseiraHasBioCamarao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableGrosseiraHasBioCamarao->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioCamarao($idBiometria){
+        $this->dbTableTGrosseiraHasBioCamarao = new Application_Model_DbTable_GrosseiraHasBioCamarao();
+
+        $whereGrosseiraHasBiometria = $this->dbTableTGrosseiraHasBioCamarao->getAdapter()
+                ->quoteInto('tgrsbc_id = ?', $idBiometria);
+
+        $this->dbTableTGrosseiraHasBioCamarao->delete($whereGrosseiraHasBiometria);
+        
+    }
+////////////////BIOMETRIA PEIXES //////////////////////////////////////////////////////////////////////
+    public function insertBioPeixe($idEntrevista, $idEspecie,$sexo, $comprimento, $peso)
+    {
+        $this->dbTableGrosseiraHasBioPeixe = new Application_Model_DbTable_GrosseiraHasBioPeixe();
+
+
+        $dadosPesqueiro = array(
+            'tgrs_id' => $idEntrevista,
+            'esp_id' => $idEspecie,
+            'tbp_sexo' => $sexo,
+            'tbp_comprimento' => $comprimento,
+            'tbp_peso' => $peso
+        );
+
+        $this->dbTableGrosseiraHasBioPeixe->insert($dadosPesqueiro);
+        return;
+    }
+    public function selectVBioPeixe($where = null, $order = null, $limit = null){
+        $this->dbTableGrosseiraHasBioPeixe = new Application_Model_DbTable_VGrosseiraHasBioPeixe();
+        $select = $this->dbTableGrosseiraHasBioPeixe->select()
+                ->from($this->dbTableGrosseiraHasBioPeixe)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableGrosseiraHasBioPeixe->fetchAll($select)->toArray();
+        
+    }
+    public function deleteBioPeixe($idBiometria){
+        $this->dbTableTGrosseiraHasBioPeixe = new Application_Model_DbTable_GrosseiraHasBioPeixe();
+
+        $whereGrosseiraHasBiometria = $this->dbTableTGrosseiraHasBioPeixe->getAdapter()
+                ->quoteInto('tgrsbp_id = ?', $idBiometria);
+
+        $this->dbTableTGrosseiraHasBioPeixe->delete($whereGrosseiraHasBiometria);
+        
+    }
 }
 

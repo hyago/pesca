@@ -86,7 +86,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        
         
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ", $entrevista['af_dhsaida']);
@@ -96,7 +96,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $idEntrevista);           
         $vBioCamarao = $this->modelArrastoFundo->selectVBioCamarao('taf_id='.$idEntrevista);
         $vBioPeixe = $this->modelArrastoFundo->selectVBioPeixe('taf_id='.$idEntrevista);
-
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
         
         $this->view->assign('vBioCamarao', $vBioCamarao);
         $this->view->assign('vBioPeixe', $vBioPeixe);
@@ -176,6 +176,19 @@ class ArrastoFundoController extends Zend_Controller_Action {
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
+    public function deletebiocamaraoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelArrastoFundo->deleteBioCamarao($idBiometria);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
+    
     public function insertbiopeixeAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -196,7 +209,18 @@ class ArrastoFundoController extends Zend_Controller_Action {
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
-    
+    public function deletebiopeixeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idBiometria = $this->_getParam("id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelArrastoFundo->deleteBioPeixe($idBiometria);
+
+        $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
+    }
     public function deletepesqueiroAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -209,6 +233,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
 
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
+    
 
     public function insertespeciecapturadaAction() {
         $this->_helper->layout->disableLayout();
