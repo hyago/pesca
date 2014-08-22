@@ -29,7 +29,7 @@ class Application_Model_Maturidade
         $this->dbTableMaturidade = new Application_Model_DbTable_MaturidadeCamarao();
         
         $dadosMaturidade = array(
-            'tareap_areapesca' => $request['areaPesca']
+            'tmat_tipo' => $request['maturidade']
         );
         
         $this->dbTableMaturidade->insert($dadosMaturidade);

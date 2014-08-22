@@ -320,6 +320,8 @@ class PescadorController extends Zend_Controller_Action {
         $this->view->assign("selectSobraPesca", $selectSobraDaPesca);
         
         
+        
+        
 /////VIEWS PESCADOR ESPECIALISTA
         
         $vEspecialistaHasAcompanhado = $this->modelPescadorEspecialista->selectVAcompanhado("tps_id=" . $idPescador, "tacp_companhia", null);
@@ -354,8 +356,16 @@ class PescadorController extends Zend_Controller_Action {
         
         $vEspecialistaHasTipoTransporte = $this->modelPescadorEspecialista->selectVTipoTransporte("tps_id=" . $idPescador, "ttr_transporte", null);
         $this->view->assign("assign_vEspecialistaHasTipoTransporte", $vEspecialistaHasTipoTransporte);
+    
+        $vEspecialistaHasDestinoPescado = $this->modelPescadorEspecialista->selectVDestinoPescado("tps_id=".$idPescador, "dp_id_pescado", null);
+        $this->view->assign("assign_vEspecialistaHasDestinoPescado", $vEspecialistaHasDestinoPescado);
+    
+        $vEspecialistaHasDificuldadeArea = $this->modelPescadorEspecialista->selectVDificuldadeArea("tps_id=".$idPescador, "tdif_id_area", null);
+        $this->view->assign("assign_vEspecialistaHasDificuldadeArea", $vEspecialistaHasDificuldadeArea);
+    
+        
+        
     }
-
     public function atualizarsemreloadAction() {
         $this->modelPescador->update($this->_getAllParams());
 
@@ -1404,8 +1414,7 @@ class PescadorController extends Zend_Controller_Action {
             'tps_horasPescando'                 => $this->_getParam('tps_hora_pescando'),          
             'selectUltimaPesca'                 => $this->_getParam('tup_id'),                     
             'selectFornecedorInsumo'            => $this->_getParam('tfi_id'),                     
-            'selectRecurso'                     => $this->_getParam('trec_id'),                    
-            'selectDestinoPescado'              => $this->_getParam('dp_id_pescado'),              
+            'selectRecurso'                     => $this->_getParam('trec_id'),                                
             'selectFrequenciaConsumo'           => $this->_getParam('tfp_id_consumo'),             
             'selectCompradorPescado'            => $this->_getParam('dp_id_comprador'),            
             'selectSobraPesca'                  => $this->_getParam('tsp_id'),                     
@@ -1417,8 +1426,7 @@ class PescadorController extends Zend_Controller_Action {
             'tps_tempoColonizado'               => $this->_getParam('tps_tempo_em_colonia'),       
             'tps_dificuldadeColonia'            => $this->_getParam('tps_motivo_falta_pagamento'), 
             'tps_beneficiosColonia'             => $this->_getParam('tps_beneficio_colonia'),      
-            'selectOrgaoRgp'                    => $this->_getParam('trgp_id'),                    
-            'selectDificuldade'                 => $this->_getParam('tdif_id_area'),               
+            'selectOrgaoRgp'                    => $this->_getParam('trgp_id'),                                
             'selectOutraHabilidade'             => $this->_getParam('ttr_id_outra_habilidade'),    
             'selectAlternativaRenda'            => $this->_getParam('ttr_id_alternativa_renda'),   
             'selectOutraProfissao'              => $this->_getParam('ttr_id_outra_profissao'),     
@@ -1826,6 +1834,72 @@ class PescadorController extends Zend_Controller_Action {
         $backUrl = $this->_getParam("back_url");
 
         $this->modelPescadorEspecialista->deleteInsumoPesca($id, $idPescador);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -29 -------------------------------------------------------//
+    public function insertdestinopescadoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertDestinoPescado($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deletedestinopescadoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id = $this->_getParam("id");
+
+        $idPescador = $this->_getParam("tps_id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->deleteDestinoPesca($id, $idPescador);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -36 -------------------------------------------------------//
+    public function insertdificuldadeareaAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertDificuldadePesca($idPescador, $valor, $preco);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deletedificuldadeareaAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id = $this->_getParam("id");
+
+        $idPescador = $this->_getParam("tps_id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->deleteDificuldadePesca($id, $idPescador);
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 

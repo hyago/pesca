@@ -1090,9 +1090,9 @@ function jsReloadDynamic( frm , pag){
     }
 }
 
-function jsAtualizaPescadorEspecialista( frm, pag, idEspecialista)
+function jsAtualizaPescadorEspecialista( frm, pag, idEspecialista, redirect)
 {
-    var TmpUrl = (idEspecialista +'#pescador_especialista');
+    var TmpUrl = (idEspecialista +redirect);
 
     var tmpUpdate = (pag +
             '/tps_id/' + idEspecialista +
@@ -1123,7 +1123,6 @@ function jsAtualizaPescadorEspecialista( frm, pag, idEspecialista)
             '/tup_id/'+ frm.selectUltimaPesca.value +
             '/tfi_id/' + frm.selectFornecedorInsumo.value +
             '/trec_id/' + frm.selectRecurso.value +
-            '/dp_id_pescado/'+ frm.selectDestinoPescado.value +
             '/tfp_id_consumo/'+ frm.selectFrequenciaConsumo.value +
             '/dp_id_comprador/'+ frm.selectCompradorPescado.value +
             '/tsp_id/' + frm.selectSobraPesca.value +
@@ -1136,7 +1135,6 @@ function jsAtualizaPescadorEspecialista( frm, pag, idEspecialista)
             '/tps_motivo_falta_pagamento/'+ frm.tp_dificuldadeColonia.value +
             '/tps_beneficio_colonia/'+ frm.tp_beneficiosColonia.value +
             '/trgp_id/' + frm.selectOrgaoRgp.value +
-            '/tdif_id_area/'+ frm.selectDificuldade.value +
             '/ttr_id_outra_habilidade/' + frm.selectOutraHabilidade.value +
             '/ttr_id_alternativa_renda/' + frm.selectAlternativaRenda.value +
             '/ttr_id_outra_profissao/' + frm.selectOutraProfissao.value +
@@ -1270,6 +1268,27 @@ function jsInsertInsumoPesca(frm, pag, idPescador, idEspecialista, retorno){
     var TmpUrl  = (idPescador+retorno);
     
     var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectInsumo.value+ '/preco/' +frm.tp_valorInsumo.value+'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+
+// -29 -------------------------------------------------------//
+function jsInsertDestinoPescadoEspecialista(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectDestinoPescado.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -36 -------------------------------------------------------//
+function jsInsertDificuldadePesca(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectDificuldadePesca.value +'/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
     

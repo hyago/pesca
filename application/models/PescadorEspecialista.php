@@ -135,7 +135,6 @@ class Application_Model_PescadorEspecialista
             'tup_id' => $request['selectUltimaPesca'],
             'tfi_id'  => $request['selectFornecedorInsumo'],
             'trec_id'  => $request['selectRecurso'],
-            'dp_id_pescado' => $request['selectDestinoPescado'],
             'tfp_id_consumo' => $request['selectFrequenciaConsumo'],
             'dp_id_comprador' => $request['selectCompradorPescado'],
             'tsp_id'  => $request['selectSobraPesca'],
@@ -148,7 +147,6 @@ class Application_Model_PescadorEspecialista
             'tps_motivo_falta_pagamento' => $request['tps_dificuldadeColonia'],
             'tps_beneficio_colonia' => $request['tps_beneficiosColonia'],
             'trgp_id'  => $request['selectOrgaoRgp'],
-            'tdif_id_area' => $request['selectDificuldade'],
             'ttr_id_outra_habilidade'  => $request['selectOutraHabilidade'],
             'ttr_id_alternativa_renda'  => $request['selectAlternativaRenda'],
             'ttr_id_outra_profissao'  => $request['selectOutraProfissao'],
@@ -322,7 +320,28 @@ class Application_Model_PescadorEspecialista
         
         return;
     }
-    
+     public function insertDestinoPescado($idPescador, $valor){
+        $dbTable_EspecialistaDestinoPescado = new Application_Model_DbTable_PescadorEspecialistaHasDestinoPescado();
+        
+        $dadosPescadorHasDestino = array(
+            'tps_id' => $idPescador,
+            'dp_id_pescado' => $valor,
+        );
+        $dbTable_EspecialistaDestinoPescado->insert($dadosPescadorHasDestino);
+        
+        return;
+    }
+     public function insertDificuldadePesca($idPescador, $valor){
+        $dbTable_EspecialistaDificuldadePesca = new Application_Model_DbTable_PescadorEspecialistaHasDificuldadeArea();
+        
+        $dadosPescadorHasDificuldade = array(
+            'tps_id' => $idPescador,
+            'tdif_id_area' => $valor,
+        );
+        $dbTable_EspecialistaDificuldadePesca->insert($dadosPescadorHasDificuldade);
+        
+        return;
+    }
     
     
     
@@ -446,7 +465,28 @@ class Application_Model_PescadorEspecialista
         return $dao->fetchAll($select)->toArray();
     }
     
+    public function selectVDestinoPescado($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasDestinoPescado();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectVDificuldadeArea($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasDificuldadeArea();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
     
+///////////////////DELETES ////////////////////////////////////////////////////////////////////
     public function deleteEstruturaResidencial( $idEstrutura,$idPescador){
         $dbTable_PescadorEHasEstResidencial = new Application_Model_DbTable_PescadorEspecialistaHasEstruturaResidencial();
 
@@ -553,6 +593,26 @@ class Application_Model_PescadorEspecialista
         $dadosPescador = array(
             'tps_id = ?' => $idPescador,
             'tin_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteDestinoPesca( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasDestinoPescado();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'dp_id_pescado = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteDificuldadePesca( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasDificuldadeArea();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'tdif_id_area = ?' => $id
         );
         
         $dbTable->delete($dadosPescador);

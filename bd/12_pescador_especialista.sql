@@ -1,4 +1,4 @@
-
+    
 Drop table if exists t_estado_civil Cascade;
 Drop table if exists t_origem Cascade;
 Drop table if exists t_residencia Cascade;
@@ -370,20 +370,20 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
       tup_id int,
       tfi_id int,
       trec_id int,
-      dp_id_pescado int,
+      --dp_id_pescado int,
       tfp_id_consumo int,
       dp_id_comprador int,
       tsp_id int,
       tlt_id int,
- tps_unidade_beneficiamento Varchar(50),
+ tps_unidade_beneficiamento Varchar(100),
  tps_curso_beneficiamento Varchar(100),
       tasp_id int,
       tc_id int,
  tps_tempo_em_colonia float,
- tps_motivo_falta_pagamento Varchar(50),
- tps_beneficio_colonia Varchar(50),
+ tps_motivo_falta_pagamento Varchar(100),
+ tps_beneficio_colonia Varchar(100),
       trgp_id int,
-      tdif_id_area int,
+      --tdif_id_area int,
       ttr_id_outra_habilidade int,
       ttr_id_alternativa_renda int,
       ttr_id_outra_profissao int,
@@ -404,7 +404,7 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  Foreign Key (tup_id) References t_ultima_pesca,
  Foreign Key (tfi_id) References t_fornecedor_insumos,
  Foreign Key (trec_id) References t_recurso,
- Foreign Key (dp_id_pescado) References t_destinopescado,
+--Foreign Key (dp_id_pescado) References t_destinopescado,
  Foreign Key (tfp_id_consumo) References t_frequencia_pesca,
  Foreign Key (dp_id_comprador) References t_destinopescado,
  Foreign Key (tsp_id) References t_sobra_pesca,
@@ -412,7 +412,7 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  Foreign Key (tc_id) References t_colonia,
  Foreign Key (tasp_id) References t_associacao_pesca,
  Foreign Key (trgp_id) References t_rgp_orgao,
- Foreign Key (tdif_id_area) References t_dificuldade,
+ --Foreign Key (tdif_id_area) References t_dificuldade,
  Foreign Key (ttr_id_outra_profissao) References t_tiporenda,
  Foreign Key (ttr_id_outra_habilidade) References t_tiporenda,
  Foreign Key (ttr_id_alternativa_renda) References t_tiporenda,
@@ -420,8 +420,8 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  Foreign Key (tp_resp_cad) References t_usuario,
  Foreign Key (tu_id_entrevistador) References t_usuario
  );
- Alter table t_pescador_especialista ADD CONSTRAINT tp_id_unique UNIQUE (tp_id);
- Alter Table t_pescador Add column tp_especialidade timestamp without time zone;
+ --Alter table t_pescador_especialista ADD CONSTRAINT tp_id_unique UNIQUE (tp_id);
+ --Alter Table t_pescador Add column tp_especialidade timestamp without time zone;
 
 
  Create Table t_pescador_especialista_has_t_estrutura_residencial(
@@ -523,6 +523,27 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
      Foreign Key (tin_id) References t_insumo
  );
 
+ Create Table t_pescador_especialista_has_t_destino_pescado(
+    tpsdp_id serial,
+    dp_id_pescado int,
+    tps_id int,
+    Primary Key (tpsdp_id), 
+    Foreign Key (dp_id_pescado) References t_destinopescado,
+    Foreign Key (tps_id) References t_pescador_especialista
+
+ );
+ 
+ Create Table t_pescador_especialista_has_t_dificuldade_area(
+    tpstdif_id serial,
+    tdif_id_area int,
+    tps_id int,
+    Primary Key (tpstdif_id),
+    Foreign Key (tdif_id_area) References t_dificuldade,
+    Foreign Key (tps_id) References t_pescador_especialista
+
+ );
+
+ 
 
 CREATE OR REPLACE VIEW v_pescador_especialista_has_t_estrutura_residencial AS 
  SELECT hasestr.tps_id, hasestr.terd_id, estrutura.terd_estrutura
@@ -579,6 +600,15 @@ CREATE OR REPLACE VIEW v_pescador_especialista_has_t_insumo AS
    FROM t_pescador_especialista_has_t_insumo as hasinsumo, t_insumo as insumo
   WHERE hasinsumo.tin_id = insumo.tin_id;
 
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_destino_pescado AS 
+ SELECT hasdestino.tps_id, hasdestino.dp_id_pescado, destino.dp_destino
+   FROM t_pescador_especialista_has_t_destino_pescado as hasdestino, t_destinopescado as destino
+  WHERE hasdestino.dp_id_pescado = destino.dp_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_dificuldade_area AS 
+ SELECT hasdificuldade.tps_id, hasdificuldade.tdif_id_area, dificuldade.tdif_dificuldade
+   FROM t_pescador_especialista_has_t_dificuldade_area as hasdificuldade, t_dificuldade as dificuldade
+  WHERE hasdificuldade.tdif_id_area = dificuldade.tdif_id;
 
 CREATE OR REPLACE VIEW v_pescador AS 
  SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tp_matricula, tp.tp_apelido, 
@@ -605,3 +635,10 @@ CREATE OR REPLACE VIEW v_pescador AS
    LEFT JOIN t_colonia tc ON tc.tc_id = col.tc_id
    LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
   WHERE tp.tp_pescadordeletado = false;
+
+
+zf create db-table PescadorEspecialistaHasDestinoPescado t_pescador_especialista_has_t_destino_pescado;
+zf create db-table PescadorEspecialistaHasDificuldadeArea t_pescador_especialista_has_t_dificuldade_pesca;
+
+zf create db-table VPescadorEspecialistaHasDestinoPescado v_pescador_especialista_has_t_destino_pescado;
+zf create db-table VPescadorEspecialistaHasDificuldadeArea v_pescador_especialista_has_t_dificuldade_pesca;
