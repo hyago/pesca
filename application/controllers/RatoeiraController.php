@@ -110,7 +110,7 @@ public function visualizarAction() {
         $vRatoeiraAvistamento = $this->modelRatoeira->selectRatoeiraHasAvistamento('rat_id='.$idEntrevista);
         $vBioCamarao = $this->modelRatoeira->selectVBioCamarao('trat_id='.$idEntrevista);
         $vBioPeixe = $this->modelRatoeira->selectVBioPeixe('trat_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

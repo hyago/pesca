@@ -110,7 +110,7 @@ class ColetaManualController extends Zend_Controller_Action
         $vColetaManualAvistamento = $this->modelColetaManual->selectColetaManualHasAvistamento('cml_id='.$idEntrevista);
         $vBioCamarao = $this->modelColetaManual->selectVBioCamarao('tcml_id='.$idEntrevista);
         $vBioPeixe = $this->modelColetaManual->selectVBioPeixe('tcml_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

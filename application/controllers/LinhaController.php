@@ -85,7 +85,7 @@ class LinhaController extends Zend_Controller_Action
         $vLinhaAvistamento = $this->modelLinha->selectLinhaHasAvistamento('lin_id='.$idEntrevista);
         $vBioCamarao = $this->modelLinha->selectVBioCamarao('tlin_id='.$idEntrevista);
         $vBioPeixe = $this->modelLinha->selectVBioPeixe('tlin_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

@@ -99,7 +99,7 @@ private $usuario;
         $vCalaoAvistamento = $this->modelCalao->selectCalaoHasAvistamento('cal_id='.$idEntrevista);
         $vBioCamarao = $this->modelCalao->selectVBioCamarao('tcal_id='.$idEntrevista);
         $vBioPeixe = $this->modelCalao->selectVBioPeixe('tcal_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

@@ -111,7 +111,7 @@ public function visualizarAction() {
         $vManzuaAvistamento = $this->modelManzua->selectManzuaHasAvistamento('man_id='.$idEntrevista);
         $vBioCamarao = $this->modelManzua->selectVBioCamarao('tman_id='.$idEntrevista);
         $vBioPeixe = $this->modelManzua->selectVBioPeixe('tman_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

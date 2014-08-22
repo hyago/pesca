@@ -117,7 +117,7 @@ public function visualizarAction() {
         $vLinhaFundoAvistamento = $this->modelLinhaFundo->selectLinhaFundoHasAvistamento('lf_id='.$idEntrevista);
         $vBioCamarao = $this->modelLinhaFundo->selectVBioCamarao('tlf_id='.$idEntrevista);
         $vBioPeixe = $this->modelLinhaFundo->selectVBioPeixe('tlf_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

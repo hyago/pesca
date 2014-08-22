@@ -109,7 +109,7 @@ public function visualizarAction() {
         $vJerereAvistamento = $this->modelJerere->selectJerereHasAvistamento('jre_id='.$idEntrevista);
         $vBioCamarao = $this->modelJerere->selectVBioCamarao('tjre_id='.$idEntrevista);
         $vBioPeixe = $this->modelJerere->selectVBioPeixe('tjre_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

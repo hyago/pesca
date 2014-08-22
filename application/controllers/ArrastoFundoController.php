@@ -96,7 +96,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $idEntrevista);           
         $vBioCamarao = $this->modelArrastoFundo->selectVBioCamarao('taf_id='.$idEntrevista);
         $vBioPeixe = $this->modelArrastoFundo->selectVBioPeixe('taf_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6','tmat_tipo');
         
         $this->view->assign('vBioCamarao', $vBioCamarao);
         $this->view->assign('vBioPeixe', $vBioPeixe);

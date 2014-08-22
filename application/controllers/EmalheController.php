@@ -103,7 +103,7 @@ class EmalheController extends Zend_Controller_Action
         $vEmalheAvistamento = $this->modelEmalhe->selectEmalheHasAvistamento('em_id='.$idEntrevista);
         $vBioCamarao = $this->modelEmalhe->selectVBioCamarao('tem_id='.$idEntrevista);
         $vBioPeixe = $this->modelEmalhe->selectVBioPeixe('tem_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

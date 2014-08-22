@@ -113,7 +113,7 @@ class SiripoiaController extends Zend_Controller_Action
         $vSiripoiaAvistamento = $this->modelSiripoia->selectSiripoiaHasAvistamento('sir_id='.$idEntrevista);
         $vBioCamarao = $this->modelSiripoia->selectVBioCamarao('tsir_id='.$idEntrevista);
         $vBioPeixe = $this->modelSiripoia->selectVBioPeixe('tsir_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

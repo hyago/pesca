@@ -110,7 +110,7 @@ class VaraPescaController extends Zend_Controller_Action
         $vVaraPescaAvistamento = $this->modelVaraPesca->selectVaraPescaHasAvistamento('vp_id='.$idEntrevista);
         $vBioCamarao = $this->modelVaraPesca->selectVBioCamarao('tvp_id='.$idEntrevista);
         $vBioPeixe = $this->modelVaraPesca->selectVBioPeixe('tvp_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

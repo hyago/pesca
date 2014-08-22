@@ -108,7 +108,7 @@ private $usuario;
         $vGrosseiraAvistamento = $this->modelGrosseira->selectGrosseiraHasAvistamento('grs_id='.$idEntrevista);
         $vBioCamarao = $this->modelGrosseira->selectVBioCamarao('tgrs_id='.$idEntrevista);
         $vBioPeixe = $this->modelGrosseira->selectVBioPeixe('tgrs_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);

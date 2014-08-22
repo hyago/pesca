@@ -111,7 +111,7 @@ public function visualizarAction() {
         $vMergulhoAvistamento = $this->modelMergulho->selectMergulhoHasAvistamento('mer_id='.$idEntrevista);
         $vBioCamarao = $this->modelMergulho->selectVBioCamarao('tmer_id='.$idEntrevista);
         $vBioPeixe = $this->modelMergulho->selectVBioPeixe('tmer_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);
