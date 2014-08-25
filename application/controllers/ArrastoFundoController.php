@@ -83,6 +83,7 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
+        $especiesCamarao = $this->modelEspecie->select('gen_id = 99 or gen_id = 100 or gen_id = 101');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
@@ -96,11 +97,12 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $vArrastoAvistamento = $this->modelArrastoFundo->selectArrastoHasAvistamento('af_id=' . $idEntrevista);           
         $vBioCamarao = $this->modelArrastoFundo->selectVBioCamarao('taf_id='.$idEntrevista);
         $vBioPeixe = $this->modelArrastoFundo->selectVBioPeixe('taf_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select('tmat_id <= 6','tmat_tipo');
+        $maturidade = $this->modelMaturidade->select(null,'tmat_tipo');
         
         $this->view->assign('vBioCamarao', $vBioCamarao);
         $this->view->assign('vBioPeixe', $vBioPeixe);
         $this->view->assign('maturidade', $maturidade);
+        $this->view->assign('especieCamarao', $especiesCamarao);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vArrastoAvistamento', $vArrastoAvistamento);

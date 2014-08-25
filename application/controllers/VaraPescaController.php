@@ -92,6 +92,7 @@ class VaraPescaController extends Zend_Controller_Action
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
+        $especiesCamarao = $this->modelEspecie->select('gen_id = 99 or gen_id = 100 or gen_id = 101');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $iscas = $this->modelIsca->select(null, 'isc_tipo');
@@ -110,7 +111,7 @@ class VaraPescaController extends Zend_Controller_Action
         $vVaraPescaAvistamento = $this->modelVaraPesca->selectVaraPescaHasAvistamento('vp_id='.$idEntrevista);
         $vBioCamarao = $this->modelVaraPesca->selectVBioCamarao('tvp_id='.$idEntrevista);
         $vBioPeixe = $this->modelVaraPesca->selectVBioPeixe('tvp_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);
@@ -118,6 +119,7 @@ class VaraPescaController extends Zend_Controller_Action
         $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
         $this->view->assign('avistamentos', $avistamentos);
+        $this->view->assign('especieCamarao', $especiesCamarao);
         $this->view->assign('vVaraPescaAvistamento', $vVaraPescaAvistamento);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('vEspecieCapturadas', $vEspecieCapturadas);

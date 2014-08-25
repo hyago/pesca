@@ -320,7 +320,7 @@
                 <input onclick="jsInsertAmostraCamarao(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertbiocamarao"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
                 
                 <select style="float:left;" name="SelectEspecieCamarao">
-                    <?php foreach ($this->especies as $key => $especieCamarao): ?>
+                    <?php foreach ($this->especieCamarao as $key => $especieCamarao): ?>
                         <option value="<?= $especieCamarao['esp_id']; ?>"><?= $especieCamarao['esp_nome_comum']; ?></option>
                     <?php endforeach; ?>
                 </select>

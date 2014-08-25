@@ -92,6 +92,7 @@ public function visualizarAction() {
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $pesqueiros = $this->modelPesqueiro->select(null, 'paf_pesqueiro');
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
+        $especiesCamarao = $this->modelEspecie->select('gen_id = 99 or gen_id = 100 or gen_id = 101');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
@@ -109,13 +110,14 @@ public function visualizarAction() {
         $vJerereAvistamento = $this->modelJerere->selectJerereHasAvistamento('jre_id='.$idEntrevista);
         $vBioCamarao = $this->modelJerere->selectVBioCamarao('tjre_id='.$idEntrevista);
         $vBioPeixe = $this->modelJerere->selectVBioPeixe('tjre_id='.$idEntrevista);
-        $maturidade = $this->modelMaturidade->select('tmat_id <= 6', 'tmat_tipo');
+        $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
         
         
         $this->view->assign('vBioCamarao', $vBioCamarao);
         $this->view->assign('vBioPeixe', $vBioPeixe);
         $this->view->assign('maturidade', $maturidade);
         $this->view->assign('destinos', $destinos);
+        $this->view->assign('especieCamarao', $especiesCamarao);
         $this->view->assign('avistamentos', $avistamentos);
         $this->view->assign('vJerereAvistamento', $vJerereAvistamento);
         $this->view->assign('mare', $mare);
