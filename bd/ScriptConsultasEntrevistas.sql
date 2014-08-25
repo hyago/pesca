@@ -172,86 +172,86 @@ Select count(spc_vp_id) from t_varapesca_has_t_especie_capturada;
 
 
 --IMPORTAR -----------------
-Create View v_consulta_portosbydata As
-Select 'Arrasto de Fundo' as consulta,count(t_arrastofundo.af_id) as quantidade, t_porto.pto_nome, date_part('month/year', date_trunc('month/year', af_dhvolta)) as data_ficha From t_arrastofundo 
+Create or Replace View v_consulta_portosbydata As
+Select 'Arrasto de Fundo' as consulta,count(t_arrastofundo.af_id) as quantidade, t_porto.pto_nome, to_char( date_trunc('month', af_dhvolta),'MM/YYYY') as data_ficha From t_arrastofundo 
 Inner Join t_monitoramento on t_arrastofundo.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', af_dhvolta)
 Union All
-Select 'Calão',count(t_calao.cal_id), t_porto.pto_nome, date_part('month', date_trunc('month', cal_data)) From t_calao 
+Select 'Calão',count(t_calao.cal_id), t_porto.pto_nome, to_char( date_trunc('month', cal_data),'MM/YYYY') From t_calao 
 Inner Join t_monitoramento on t_calao.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', cal_data)
 Union ALL
-Select 'Coleta Manual',count(t_coletamanual.cml_id), t_porto.pto_nome, date_part('month', date_trunc('month', cml_dhvolta)) From t_coletamanual 
+Select 'Coleta Manual',count(t_coletamanual.cml_id), t_porto.pto_nome, to_char( date_trunc('month', cml_dhvolta),'MM/YYYY') From t_coletamanual 
 Inner Join t_monitoramento on t_coletamanual.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', cml_dhvolta)
 Union ALL
-Select 'Emalhe',count(t_emalhe.em_id), t_porto.pto_nome, date_part('month', date_trunc('month', em_dhrecolhimento)) From t_emalhe 
+Select 'Emalhe',count(t_emalhe.em_id), t_porto.pto_nome, to_char( date_trunc('month', em_dhrecolhimento),'MM/YYYY') From t_emalhe 
 Inner Join t_monitoramento on t_emalhe.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', em_dhrecolhimento)
 Union ALL
-Select 'Grosseira',count(t_grosseira.grs_id), t_porto.pto_nome, date_part('month', date_trunc('month', grs_dhvolta)) From t_grosseira
+Select 'Grosseira',count(t_grosseira.grs_id), t_porto.pto_nome, to_char( date_trunc('month', grs_dhvolta),'MM/YYYY') From t_grosseira
 Inner Join t_monitoramento on t_grosseira.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', grs_dhvolta)
 Union ALL
-Select 'Jereré',count(t_jerere.jre_id), t_porto.pto_nome, date_part('month', date_trunc('month', jre_dhvolta)) From t_jerere
+Select 'Jereré',count(t_jerere.jre_id), t_porto.pto_nome, to_char( date_trunc('month', jre_dhvolta),'MM/YYYY') From t_jerere
 Inner Join t_monitoramento on t_jerere.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', jre_dhvolta)
 Union ALL
-Select 'Linha',count(t_linha.lin_id), t_porto.pto_nome, date_part('month', date_trunc('month', lin_dhvolta)) From t_linha
+Select 'Linha',count(t_linha.lin_id), t_porto.pto_nome, to_char( date_trunc('month', lin_dhvolta),'MM/YYYY') From t_linha
 Inner Join t_monitoramento on t_linha.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', lin_dhvolta)
 Union ALL
-Select 'Linha de Fundo',count(t_linhafundo.lf_id), t_porto.pto_nome, date_part('month', date_trunc('month', lf_dhvolta)) From t_linhafundo
+Select 'Linha de Fundo',count(t_linhafundo.lf_id), t_porto.pto_nome, to_char( date_trunc('month', lf_dhvolta),'MM/YYYY') From t_linhafundo
 Inner Join t_monitoramento on t_linhafundo.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', lf_dhvolta)
 Union ALL
-Select 'Manzuá',count(t_manzua.man_id), t_porto.pto_nome, date_part('month', date_trunc('month', man_dhvolta)) From t_manzua
+Select 'Manzuá',count(t_manzua.man_id), t_porto.pto_nome, to_char( date_trunc('month', man_dhvolta),'MM/YYYY') From t_manzua
 Inner Join t_monitoramento on t_manzua.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', man_dhvolta)
 Union ALL
-Select 'Mergulho',count(t_mergulho.mer_id), t_porto.pto_nome, date_part('month', date_trunc('month', mer_dhvolta)) From t_mergulho
+Select 'Mergulho',count(t_mergulho.mer_id), t_porto.pto_nome, to_char( date_trunc('month', mer_dhvolta),'MM/YYYY') From t_mergulho
 Inner Join t_monitoramento on t_mergulho.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', mer_dhvolta)
 Union ALL
-Select 'Ratoeira',count(t_ratoeira.rat_id), t_porto.pto_nome, date_part('month', date_trunc('month', rat_dhvolta)) From t_ratoeira
+Select 'Ratoeira',count(t_ratoeira.rat_id), t_porto.pto_nome, to_char( date_trunc('month', rat_dhvolta),'MM/YYYY') From t_ratoeira
 Inner Join t_monitoramento on t_ratoeira.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', rat_dhvolta)
 Union ALL
-Select 'Siripóia',count(t_siripoia.sir_id), t_porto.pto_nome, date_part('month', date_trunc('month', sir_dhvolta)) From t_siripoia
+Select 'Siripóia',count(t_siripoia.sir_id), t_porto.pto_nome, to_char( date_trunc('month', sir_dhvolta),'MM/YYYY') From t_siripoia
 Inner Join t_monitoramento on t_siripoia.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', sir_dhvolta)
 Union ALL
-Select 'Tarrafa',count(t_tarrafa.tar_id), t_porto.pto_nome, date_part('month', date_trunc('month', tar_data)) From t_tarrafa
+Select 'Tarrafa',count(t_tarrafa.tar_id), t_porto.pto_nome, to_char( date_trunc('month', tar_data),'MM/YYYY') From t_tarrafa
 Inner Join t_monitoramento on t_tarrafa.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', tar_data)
 Union ALL
-Select 'Vara de Pesca',count(t_varapesca.vp_id), t_porto.pto_nome, date_part('month', date_trunc('month', vp_dhvolta)) From t_varapesca
+Select 'Vara de Pesca',count(t_varapesca.vp_id), t_porto.pto_nome, to_char( date_trunc('month', vp_dhvolta),'MM/YYYY') From t_varapesca
 Inner Join t_monitoramento on t_varapesca.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
