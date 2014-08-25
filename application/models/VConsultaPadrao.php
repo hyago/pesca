@@ -4,6 +4,7 @@ class Application_Model_VConsultaPadrao
 {
     var $totalEntrevistas;
     var $totalDias;
+    
     public function select($where = null, $limit = null)
     {
         $this->dbVConsultaPadrao = new Application_Model_DbTable_VConsultaPadrao();
@@ -71,6 +72,14 @@ class Application_Model_VConsultaPadrao
         
         
         return $this->dbVConsultaPadrao->fetchAll($selectFicha)->toArray();
+    }
+    
+    public function selectPortosByData(){
+        $this->dbVConsultaPortos = new Application_Model_DbTable_VConsultaPortosbyData();
+        
+        $selectPortosData = $this->dbVConsultaPortos->select();
+        
+        return $this->dbVConsultaPortos->fetchAll($selectPortosData)->toArray();
     }
 
 }

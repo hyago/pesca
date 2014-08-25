@@ -34,108 +34,101 @@ Select count(sa_id) From t_subamostra;
 
 --Quantidade de entrevistas por porto
 Create or Replace View v_consultas_padrao As
-Select 'Arrasto de Fundo' as consulta,count(t_arrastofundo.af_id) as quantidade, t_porto.pto_nome From t_arrastofundo 
+Select 'Arrasto de Fundo' as consulta,count(t_arrastofundo.af_id) as quantidade, t_porto.pto_nome, null From t_arrastofundo 
 Inner Join t_monitoramento on t_arrastofundo.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
 
-Select 'Calão',count(t_calao.cal_id), t_porto.pto_nome From t_calao 
+Select 'Calão',count(t_calao.cal_id), t_porto.pto_nome, null From t_calao 
 Inner Join t_monitoramento on t_calao.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Coleta Manual',count(t_coletamanual.cml_id), t_porto.pto_nome From t_coletamanual 
+Select 'Coleta Manual',count(t_coletamanual.cml_id), t_porto.pto_nome, null From t_coletamanual 
 Inner Join t_monitoramento on t_coletamanual.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Emalhe',count(t_emalhe.em_id), t_porto.pto_nome From t_emalhe 
+Select 'Emalhe',count(t_emalhe.em_id), t_porto.pto_nome, null From t_emalhe 
 Inner Join t_monitoramento on t_emalhe.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Grosseira',count(t_grosseira.grs_id), t_porto.pto_nome From t_grosseira
+Select 'Grosseira',count(t_grosseira.grs_id), t_porto.pto_nome, null From t_grosseira
 Inner Join t_monitoramento on t_grosseira.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Jereré',count(t_jerere.jre_id), t_porto.pto_nome From t_jerere
+Select 'Jereré',count(t_jerere.jre_id), t_porto.pto_nome, null From t_jerere
 Inner Join t_monitoramento on t_jerere.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Linha',count(t_linha.lin_id), t_porto.pto_nome From t_linha
+Select 'Linha',count(t_linha.lin_id), t_porto.pto_nome, null From t_linha
 Inner Join t_monitoramento on t_linha.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome 
 Union ALL
-Select 'Linha de Fundo',count(t_linhafundo.lf_id), t_porto.pto_nome From t_linhafundo
+Select 'Linha de Fundo',count(t_linhafundo.lf_id), t_porto.pto_nome, null From t_linhafundo
 Inner Join t_monitoramento on t_linhafundo.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome 
 Union ALL
-Select 'Manzuá',count(t_manzua.man_id), t_porto.pto_nome From t_manzua
+Select 'Manzuá',count(t_manzua.man_id), t_porto.pto_nome, null From t_manzua
 Inner Join t_monitoramento on t_manzua.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Mergulho',count(t_mergulho.mer_id), t_porto.pto_nome From t_mergulho
+Select 'Mergulho',count(t_mergulho.mer_id), t_porto.pto_nome, null From t_mergulho
 Inner Join t_monitoramento on t_mergulho.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Ratoeira',count(t_ratoeira.rat_id), t_porto.pto_nome From t_ratoeira
+Select 'Ratoeira',count(t_ratoeira.rat_id), t_porto.pto_nome, null From t_ratoeira
 Inner Join t_monitoramento on t_ratoeira.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Siripóia',count(t_siripoia.sir_id), t_porto.pto_nome From t_siripoia
+Select 'Siripóia',count(t_siripoia.sir_id), t_porto.pto_nome, null From t_siripoia
 Inner Join t_monitoramento on t_siripoia.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Tarrafa',count(t_tarrafa.tar_id), t_porto.pto_nome From t_tarrafa
+Select 'Tarrafa',count(t_tarrafa.tar_id), t_porto.pto_nome, null From t_tarrafa
 Inner Join t_monitoramento on t_tarrafa.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union ALL
-Select 'Vara de Pesca',count(t_varapesca.vp_id), t_porto.pto_nome From t_varapesca
+Select 'Vara de Pesca',count(t_varapesca.vp_id), t_porto.pto_nome, null From t_varapesca
 Inner Join t_monitoramento on t_varapesca.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome
 Union All
-Select 'Monitoradas',sum(mnt_quantidade), NULL From t_monitoramento Where mnt_monitorado = TRUE
+Select 'Monitoradas',sum(mnt_quantidade), NULL, null From t_monitoramento Where mnt_monitorado = TRUE
 Union All
 --Quantidade de monitoramentos não monitorados total
-Select 'Não monitorados',sum(mnt_quantidade), NULL From t_monitoramento Where mnt_monitorado = FALSE
+Select 'Não monitorados',sum(mnt_quantidade), NULL, null From t_monitoramento Where mnt_monitorado = FALSE
 Union All
 --Quantidade de Subamostras
-Select 'Subamostras',count(sa_id), NULL From t_subamostra
+Select 'Subamostras',count(sa_id), NULL, null From t_subamostra
 Union all
-Select 'Quantidade de Fichas',count(t_ficha_diaria.fd_data), t_porto.pto_nome from t_ficha_diaria 
+Select 'Quantidade de Fichas',count(t_ficha_diaria.fd_data), t_porto.pto_nome, null from t_ficha_diaria 
 Inner join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id group by t_porto.pto_nome;
-
-
-
-
-
-
-
 
 
 
@@ -178,8 +171,9 @@ Select count(spc_tar_id) from t_tarrafa_has_t_especie_capturada;
 Select count(spc_vp_id) from t_varapesca_has_t_especie_capturada;
 
 
-
-Select 'Arrasto de Fundo' as consulta,count(t_arrastofundo.af_id) as quantidade, t_porto.pto_nome, date_part('month', date_trunc('month', af_dhvolta)) as data_ficha From t_arrastofundo 
+--IMPORTAR -----------------
+Create View v_consulta_portosbydata As
+Select 'Arrasto de Fundo' as consulta,count(t_arrastofundo.af_id) as quantidade, t_porto.pto_nome, date_part('month/year', date_trunc('month/year', af_dhvolta)) as data_ficha From t_arrastofundo 
 Inner Join t_monitoramento on t_arrastofundo.mnt_id = t_monitoramento.mnt_id 
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
@@ -262,3 +256,6 @@ Inner Join t_monitoramento on t_varapesca.mnt_id = t_monitoramento.mnt_id
 Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
 Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', vp_dhvolta) Order By consulta, pto_nome;
+
+
+

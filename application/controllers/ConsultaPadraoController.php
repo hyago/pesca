@@ -156,7 +156,9 @@ class ConsultaPadraoController extends Zend_Controller_Action
         $totalEntrevistas = $consultaPadrao->selectTotalEntrevistas();
         $diasByPorto = $consultaPadrao->selectDiasByPorto();
         $dias = $consultaPadrao->selectDias();
-
+        
+        $selectPortosByData = $consultaPadrao->selectPortosByData();
+        
         require_once "../library/Classes/PHPExcel.php";
 
         $objPHPExcel = new PHPExcel();
@@ -238,6 +240,24 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['quantidade']);
             $linha++;
         endforeach;
+        
+        $linha++;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Entrevistas por Arte, porto e Data');
+        $linha++;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, 'Artes de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, 'Quantidade');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $linha, 'Porto');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, $linha, 'Mês');
+
+        $linha++;
+        foreach ($selectPortosByData as $key => $consulta):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['consulta']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha,  $consulta['quantidade']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $linha, $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, $linha, $consulta['data_ficha']);
+            $linha++;
+        endforeach;
+        
         
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         ob_end_clean();
