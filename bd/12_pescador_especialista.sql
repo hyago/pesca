@@ -422,7 +422,7 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  );
  --Alter table t_pescador_especialista ADD CONSTRAINT tp_id_unique UNIQUE (tp_id);
  --Alter Table t_pescador Add column tp_especialidade timestamp without time zone;
-
+Alter table t_pescador_especialista Add Column bar_id_barco int, Add Column tps_obs Varchar(200);
 
  Create Table t_pescador_especialista_has_t_estrutura_residencial(
      tpsterd_id serial,

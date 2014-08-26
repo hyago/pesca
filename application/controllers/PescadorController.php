@@ -176,6 +176,9 @@ class PescadorController extends Zend_Controller_Action {
         $tipoUser = $modelUser->select();
         $this->view->assign("assignUser", $tipoUser);
         
+        $modelBarcos = new Application_Model_Barcos();
+        $barcos = $modelBarcos->select(null, 'bar_nome');
+        $this->view->assign("assignBarcos", $barcos);
         
         $modelProjetos = new Application_Model_Projetos(Null, 'tpr_descricao');
         $projetos = $modelProjetos->select();
@@ -464,7 +467,7 @@ class PescadorController extends Zend_Controller_Action {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $backUrl = $this->_getParam("back_url");
+        
 
         $setupDados = array(
             'logradouro' => $this->_getParam("te_logradouro"),
@@ -1433,7 +1436,9 @@ class PescadorController extends Zend_Controller_Action {
             'tps_filhoPescador'                 => $this->_getParam('tps_filho_seguir_profissao'), 
             'tps_dependenciaPesca'              => $this->_getParam('tps_grau_dependencia_pesca'), 
             'selectEntrevistador'               => $this->_getParam('tu_id_entrevistador'),        
-            'tps_data'                          => $this->_getParam('tps_data'),                   
+            'tps_data'                          => $this->_getParam('tps_data'),
+            'selectBarco'                       => $this->_getParam('bar_id_barco'),
+            'tps_obs'                           => $this->_getParam('tps_obs')
         );
 
         $idPescadorEspecialista  = $this->modelPescadorEspecialista->update($dadosPescadorEspecialista);

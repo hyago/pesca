@@ -1142,9 +1142,14 @@ function jsAtualizaPescadorEspecialista( frm, pag, idEspecialista, redirect)
             '/tps_grau_dependencia_pesca/' + frm.tp_dependenciaPesca.value +
             '/tu_id_entrevistador/' + frm.selectEntrevistador.value +
             '/tps_data/'+ frm.tp_data.value +
+            '/bar_id_barco/' + frm.selectBarco.value +
+            '/tps_obs/' + frm.tps_obs.value +
             '/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
+    
+    window.alert("Dados do Especialista adicionado com sucesso");
+    
 }
 
 function jsInsertPescadorEspecialista(pag,idPescador, respCadastro){
@@ -1162,9 +1167,8 @@ function jsInsertPescadorEspecialista(pag,idPescador, respCadastro){
 function jsInsertEstruturaResidencial(frm, pag, idPescador, idEspecialista, retorno){
     
     var TmpUrl  = (idPescador+retorno);
-    
-    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectValor.value +'/back_url/' + TmpUrl);
-    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectValor.value +'/back_url/' + TmpUrl); 
+
     location.replace(tmpUpdate);
     
 }

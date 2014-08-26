@@ -153,7 +153,9 @@ class Application_Model_PescadorEspecialista
             'tps_filho_seguir_profissao' => $request['tps_filhoPescador'],
             'tps_grau_dependencia_pesca'  => $tps_dependenciaPesca,
             'tu_id_entrevistador'  => $request['selectEntrevistador'],
-            'tps_data' => $tps_data
+            'tps_data' => $tps_data,
+            'bar_id_barco' => $request['selectBarco'],
+            'tps_obs' => $request['tps_obs']
         );
 
         return $dadosPescadorEspecialista;

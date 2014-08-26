@@ -1521,7 +1521,21 @@ $(function() {
                         <label >43.Data da entrevista:</label>
                             <input type="date"  name="tp_data" min="0" placeholder="Data da Entrevista" value="<?= $this->assignEspecialista[0]['tps_data']?>"/>
                  </div>
-
+                 
+                 <div id="form-dir">
+                        <label >44.Embaracação Utilizada?</label>
+                        <select name="selectBarco" >
+                            <option value="0"></option>
+                                <?php foreach ($this->assignBarcos as $key => $barcos): ?>
+                                    <option value="<?= $barcos['bar_id']; ?>"<?= ($barcos['bar_id'] == $this->assignEspecialista[0]['bar_id_barco']) ? 'selected' : ''; ?>><?= $barcos['bar_nome']; ?></option>
+                                <?php endforeach; ?>
+                        </select>
+                 </div>
+                 
+                 <div id="form-dir">
+                        <label >45.Observação:</label>
+                            <input type="text"  name="tps_obs" min="0" placeholder="Observação" value="<?= $this->assignEspecialista[0]['tps_obs']?>"/>
+                 </div>
                 </div>
                 </fieldset>
                <table id="tabelaSemEstilo">
