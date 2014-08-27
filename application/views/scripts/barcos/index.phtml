@@ -1,12 +1,8 @@
-<html dir="ltr">
-    <head>
-        <script src="/js/funcoesJquery.js"></script>
-    </head>
 
     <h2>Desembarque->Embarcações</h2>
 
     <a href="<?= $this->url(array("controller" => "barcos", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
-    <fieldset id="Desembarque"></fieldset>
+    <fieldset id="dadosDesembarque"></fieldset>
     <table>
         <tr>
             <th>Id</th>
@@ -37,4 +33,4 @@
             
     </table>
     <br/><br/>
-    <a href="<?= $this->url(array("controller" => "barcos", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+<a href="<?= $this->url(array("controller" => "barcos", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>

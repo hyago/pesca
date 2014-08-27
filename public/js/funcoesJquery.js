@@ -16,10 +16,42 @@ $(document).ready(function() {
         $("#Amostras").hide();
         $("#Especialista").hide();
     }
+    if ($("fieldset").attr('id') === "dadosSocial") {
+        $("#Social").show();
+        $("#dadosSocial").show();
+        $("#dadosDesembarque").hide();
+        $("#Filo").hide();
+        $("#Dsbq").hide();
+        $("#Entrevista").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
+        $("#Amostras").hide();
+        $("#Especialista").hide();
+    }
     else if ($("fieldset").attr('id') === "Desembarque") {
         $("#Dsbq").show();
         $("#dadosSocial").hide();
         $("#dadosDesembarque").hide();
+        $("#Filo").hide();
+        $("#Social").hide();
+        $("#Entrevista").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
+        $("#Amostras").hide();
+        $("#Especialista").hide();
+    }
+    else if ($("fieldset").attr('id') === "dadosDesembarque") {
+        $("#Dsbq").show();
+        $("#dadosSocial").hide();
+        $("#dadosDesembarque").show();
         $("#Filo").hide();
         $("#Social").hide();
         $("#Entrevista").hide();
