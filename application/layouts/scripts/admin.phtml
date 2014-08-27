@@ -49,21 +49,24 @@
                         <li><a id="for-Social">Perfil Social</a></li>
                         <ul id="Social">
                             <li><a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>">Pescadores</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "arte-pesca", "action" => "index"), null, true) ?>">Artes de pesca</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "area-pesca", "action" => "index"), null, true) ?>">Áreas de pesca</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "tipo-embarcacao", "action" => "index"), null, true) ?>">Tipos de embarcações</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "porte-embarcacao", "action" => "index"), null, true) ?>">Porte Embarcações</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "tipo-capturada", "action" => "index"), null, true) ?>">Tipo Capturadas</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "comunidade", "action" => "index"), null, true) ?>">Comunidades</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "colonia", "action" => "index"), null, true) ?>">Colônias</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "municipio", "action" => "index"), null, true) ?>">Municipios</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "renda", "action" => "index"), null, true) ?>">Renda</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "tipo-renda", "action" => "index"), null, true) ?>">Tipo Renda</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "programa-social", "action" => "index"), null, true) ?>">Programa Social</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "escolaridade", "action" => "index"), null, true) ?>">Escolaridade</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "tipo-dependente", "action" => "index"), null, true) ?>">Tipo Dependente</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "tipo-telefone", "action" => "index"), null, true) ?>">Tipo Telefone</a></li>
-                            <li><a id="for-Especialista">Pescador Especialista</a></li>
+                            <li><a id="for-dadosSocial">Dados do Pescador</a></li>
+                            <ul id="dadosSocial">
+                                <li><a href="<?= $this->url(array("controller" => "arte-pesca", "action" => "index"), null, true) ?>">Artes de pesca</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "area-pesca", "action" => "index"), null, true) ?>">Áreas de pesca</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tipo-embarcacao", "action" => "index"), null, true) ?>">Tipos de embarcações</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "porte-embarcacao", "action" => "index"), null, true) ?>">Porte Embarcações</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tipo-capturada", "action" => "index"), null, true) ?>">Tipo Capturadas</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "comunidade", "action" => "index"), null, true) ?>">Comunidades</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "colonia", "action" => "index"), null, true) ?>">Colônias</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "municipio", "action" => "index"), null, true) ?>">Municipios</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "renda", "action" => "index"), null, true) ?>">Renda</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tipo-renda", "action" => "index"), null, true) ?>">Tipo Renda</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "programa-social", "action" => "index"), null, true) ?>">Programa Social</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "escolaridade", "action" => "index"), null, true) ?>">Escolaridade</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tipo-dependente", "action" => "index"), null, true) ?>">Tipo Dependente</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tipo-telefone", "action" => "index"), null, true) ?>">Tipo Telefone</a></li>
+                            </ul>
+                            <li><a id="for-Especialista">Dados do Pescador Especialista</a></li>
                             <ul id="Especialista">
                                 <li><a href="<?= $this->url(array("controller" => "acompanhado", "action" => "index"), null, true) ?>">Acompanhamento</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "associacao-pesca", "action" => "index"), null, true) ?>">Associacao de Pesca</a></li>
@@ -100,15 +103,18 @@
                                 <li><a href="<?= $this->url(array("controller" => "genero", "action" => "index"), null, true) ?>">Genero</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "especie", "action" => "index"), null, true) ?>">Espécie</a></li>
                             </ul>
-                            <li><a href="<?= $this->url(array("controller" => "porto", "action" => "index"), null, true) ?>">Porto</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "pesqueiro", "action" => "index"), null, true) ?>">Pesqueiro</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "vento", "action" => "index"), null, true) ?>">Vento</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "tempo", "action" => "index"), null, true) ?>">Tempo</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "barcos", "action" => "index"), null, true) ?>">Embarcações</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "mare", "action" => "index"), null, true) ?>">Maré</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "destino-pescado", "action" => "index"), null, true) ?>">Destino do Pescado</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "isca", "action" => "index"), null, true) ?>">Iscas</a></li>
-                            <li><a href="<?= $this->url(array("controller" => "subamostra", "action" => "index"), null, true) ?>">Subamostras</a></li>
+                            <li><a id="for-dadosDesembarque">Dados do Desembarque</a></li>
+                            <ul id="dadosDesembarque">
+                                <li><a href="<?= $this->url(array("controller" => "porto", "action" => "index"), null, true) ?>">Porto</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "pesqueiro", "action" => "index"), null, true) ?>">Pesqueiro</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "vento", "action" => "index"), null, true) ?>">Vento</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tempo", "action" => "index"), null, true) ?>">Tempo</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "barcos", "action" => "index"), null, true) ?>">Embarcações</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "mare", "action" => "index"), null, true) ?>">Maré</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "destino-pescado", "action" => "index"), null, true) ?>">Destino do Pescado</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "isca", "action" => "index"), null, true) ?>">Iscas</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "subamostra", "action" => "index"), null, true) ?>">Subamostras</a></li>
+                            </ul>
                             <li><a id="for-Amostra">Amostragem</a></li>
                             <ul id="Amostras">
                                 <li><a href="<?= $this->url(array("controller" => "amostra-camarao", "action" => "index"), null, true) ?>">Camarão</a></li>
@@ -133,8 +139,6 @@
                                 <li><a href="<?= $this->url(array("controller" => "entrevista-pescador", "action" => "index"), null, true) ?>">Todas Entrevistas</a></li>
                             </ul>
                         </ul>
-                        <li><a id="Embarcacoes">Tráfego de Embarcações</a></li>
-                        <li><a id="Noticias">Notícias</a></li>
                         <li><a id="for-Relatorio">Relatórios</a></li>
                         <ul id="Relatorio">
                             <li><a id="for-RelListas">Listas</a></li>
@@ -262,3 +266,6 @@
         </div>
     </body>
 </html>
+
+
+

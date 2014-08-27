@@ -1442,7 +1442,7 @@ class PescadorController extends Zend_Controller_Action {
         );
 
         $idPescadorEspecialista  = $this->modelPescadorEspecialista->update($dadosPescadorEspecialista);
-        $this->redirect("/pescador/editar/id/" . $backUrl . "#pescador_especialista");
+        $this->redirect("/pescador/editar/id/" . $backUrl);
 
         return $idPescadorEspecialista;
     }
