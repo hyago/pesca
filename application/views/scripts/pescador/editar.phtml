@@ -40,18 +40,18 @@ $(function() {
 
             <fieldset id="Social">
                 <input type="hidden" name="idEndereco" value="<?= $this->pescador['te_id'] ?>" />
-                <div id="esquerda">
-                    <div id="form-dir">
+                <div class="esquerda">
+                    <div class="form-dir">
                         <label >Código</label>
                         <input  type="text" name="idPescador" value="<?= $this->pescador['tp_id'] ?>" />
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="nome">Nome</label>
                         <input type="text" name="nome" id="nome" placeholder="Nome" value="<?= $this->pescador['tp_nome'] ?>"/><br/>
                     </div>
 
-                    <div id="form-esq">
+                    <div class="form-esq">
                         <label for="sexo">Sexo</label>
                         <select name="sexo" id="sexo">
                             <option value="M" <?= ( "M" == $this->pescador['tp_sexo']) ? 'selected="selected"' : ''; ?>><?= "Masculino"; ?></option>
@@ -59,42 +59,42 @@ $(function() {
                         </select>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="matricula">Matricula</label>
                         <input type="text" name="matricula" id="matricula" placeholder="Matricula" value="<?= $this->pescador['tp_matricula'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="apelido">Apelido</label>
                         <input type="text" name="apelido" id="apelido" placeholder="Apelido" value="<?= $this->pescador['tp_apelido'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="filiacaoPai">Nome de Pai</label>
                         <input type="text" name="filiacaoPai" id="filiacaoPai" placeholder="Nome de Pai" value="<?= $this->pescador['tp_filiacaopai'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="filiacaoMae">Nome da Mãe</label>
                         <input type="text" name="filiacaoMae" id="filiacaoMae" placeholder="Nome da Mãe" value="<?= $this->pescador['tp_filiacaomae'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="rg">RG</label>
                         <input type="text" name="rg" id="rg" placeholder="RG" value="<?= $this->pescador['tp_rg'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="cpf">CPF</label>
                         <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<?= $this->pescador['tp_cpf'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="dataNasc">Data Nascimento</label>
                         <input type="date" name="dataNasc" placeholder="Data Nascimento" min="1910-01-01" value="<?= $this->pescador['tp_datanasc'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="$municipioNat">Naturalidade</label>
                         <select name="municipioNat" id="municipioNat">
                             <?php foreach ($this->municipios as $key => $municipioNat): ?>
@@ -104,18 +104,18 @@ $(function() {
                         </select>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="ctps">CTPS</label>
                         <input type="text" name="ctps" id="ctps" placeholder="CTPS" value="<?= $this->pescador['tp_ctps'] ?>"/>
                     </div>
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="respLancamento">Responsável Lançamento</label>
                         <select name="respLancamento" id="respLancamentoID" required="required">
                                 <option value="<?= $this->usuario['tu_id']; ?>" <?= ($this->usuario['tu_id'] == $this->pescador['tp_resp_lan']) ? 'selected="selected"' : ''; ?>><?= $this->usuario['tu_nome']; ?></option>
 
                         </select>
                     </div>
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="respCadastro">Responsável Cadastro</label>
                         <select name="respCadastro" id="respCadastroID" required="required">
                             <?php foreach ($this->assignUser as $key => $respCad): ?>
@@ -123,30 +123,30 @@ $(function() {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="Observacoes">Observações</label>
                         <input type="text" name="obs" id="obs2" placeholder="Observações" value="<?= $this->pescador['tp_obs'] ?>" />
                     </div>
 
                 </div>
 
-                <div id="direita">
-                    <div id="form-dir">
+                <div class="direita">
+                    <div class="form-dir">
                         <label for="logradouro">Logradouro</label>
                         <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro" value="<?= $this->pescador['te_logradouro'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="numero">Número</label>
                         <input type="text" name="numero" id="numero" placeholder="Número" value="<?= $this->pescador['te_numero'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="bairro">Bairro</label>
                         <input type="text" name="bairro" id="bairro" placeholder="Bairro" value="<?= $this->pescador['te_bairro'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="$municipio">Municipio</label>
                         <select name="municipio" id="municipio">
                             <?php foreach ($this->municipios as $key => $municipio): ?>
@@ -158,48 +158,48 @@ $(function() {
                         </select>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="cep">CEP</label>
                         <input type="text" name="cep" id="cep" placeholder="CEP" value="<?= $this->pescador['te_cep'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="complemento">Complemento</label>
                         <input type="text" name="complemento" id="complemento" placeholder="Complemento" value="<?= $this->pescador['te_comp'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="pis">PIS</label>
                         <input type="text" name="pis" id="pis" placeholder="PIS" value="<?= $this->pescador['tp_pis'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="inss">INSS</label>
                         <input type="text" name="inss" id="inss" placeholder="INSS" value="<?= $this->pescador['tp_inss'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="nit_cei">NIT CEI</label>
                         <input type="text" name="nit_cei" id="nit_cei" placeholder="NIT CEI" value="<?= $this->pescador['tp_nit_cei'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="cma">CMA</label>
                         <input type="text" name="cma" id="cma" placeholder="CMA" value="<?= $this->pescador['tp_cma'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="rgb_maa_ibama">RGP MAA IBAMA</label>
                         <input type="text" name="rgb_maa_ibama" id="rgb_maa_ibama" placeholder="RGP MAA IBAMA" value="<?= $this->pescador['tp_rgb_maa_ibama'] ?>"/>
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="cir_cap_porto">CIR Cap. Porto</label>
                         <input type="text" name="cir_cap_porto" id="cir_cap_porto" placeholder="CIR Cap. Portos" value="<?= $this->pescador['tp_cir_cap_porto'] ?>"/>
                     </div>
 
                     <!--/_/_/_/_/_/_/_/_/_/_/_/_/_/ Escolaridade /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label  id="pure-checkbox">Escolaridade</label>
                         <select name="selectEscolaridade" >
                             <?php foreach ($this->assignEscolaridades as $key => $localEscolaridade): ?>
@@ -207,7 +207,7 @@ $(function() {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div id="form-dir">
+                    <div class="form-dir">
 
                         <label for="Projeto">Projeto</label>
                         <select name="selectProjeto" id="selectProjetoId">
@@ -224,7 +224,7 @@ $(function() {
         
             <!--/_/_/_/_/_/_/_/_/_/_/_/_/_/ BOTÕES /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
             <fieldset class="noBorder">
-                <div id="Submit">
+                <div class="Submit">
                     
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
                         <input type="submit" value="Atualizar" />
@@ -243,7 +243,7 @@ $(function() {
     <form>
        <div id="tabs-1">
             <!--//            /_/_/_/_/_/_/_/_/_/_/_/_/_/ Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-            <div id="form-dir">
+            <div class="form-dir">
                         <input  type="hidden" name="idPescador" value="<?= $this->pescador['tp_id'] ?>" />
             </div>
             <a id="ancora_dependentes"></a>
@@ -688,12 +688,12 @@ $(function() {
                 <fieldset>
                     <legend> Pescador Especialista </legend>
                   <div id="pescador_especialista">  
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label >Código: </label>
                         <input  type="text" name="idPescadorSp" value="<?= $this->assignEspecialista[0]['tp_id'] ?>" />
                     </div>
 
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="respLancamento">Responsável Lançamento</label>
                         <select name="respCadastro" id="respLancamentoID" required="required">
                                 <option value="<?= $this->usuario['tu_id']; ?>" <?= ($this->usuario['tu_id'] == $this->pescador['tp_resp_lan']) ? 'selected="selected"' : ''; ?>><?= $this->usuario['tu_nome']; ?></option>
@@ -701,7 +701,7 @@ $(function() {
                         </select>
                     </div>
                     
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label  id="pure-checkbox">Porto ou Comunidade:</label>
                         <select name="selectPortoEspecialista" id="selectEstadoCivilId">
                             <?php foreach ($this->assignPorto as $key => $porto): ?>
@@ -710,17 +710,17 @@ $(function() {
                         </select>
                     </div>
 <!-- 1.-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Data de Nascimento /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label for="dataNasc">1. Data de Nascimento: </label>
                         <input type="date" name="tp_dataNasc" placeholder="Data Nascimento" min="1910-01-01" value="<?= $this->assignEspecialista[0]['tps_data_nasc']?>"/>
                     </div>
 <!-- 2.-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Idade /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                    
-                    <div id="form-dir">
+                    <div class="form-dir">
                             <label >2. Idade: </label>
                             <input type="number" required name="tp_idade" min="0" placeholder="Idade" value="<?= $this->assignEspecialista[0]['tps_idade']?>"/>
                     </div>
 <!-- 3-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Estado Civil /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label  id="pure-checkbox">3. Estado Civil</label>
                         <select name="selectEstadoCivil" id="selectEstadoCivilId">
                             <option value='1' selected> Não Declarado</option>
@@ -730,17 +730,17 @@ $(function() {
                         </select>
                     </div>
 <!-- 4-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Filhos /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                             <label >4. Quantos Filhos? </label>
                                 <input type="number" required name="tp_numFilhos" min="0" placeholder="Quantos Filhos?" value="<?= $this->assignEspecialista[0]['tps_filhos']?>"/>
                     </div>
 <!-- 5-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tempo de Residência /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                             <label >5. Tempo de residência no município: </label>
                             <input type="number" required name="tp_tempoResidencia" min="0" placeholder="Tempo de residência no município" value="<?= $this->assignEspecialista[0]['tps_tempo_residencia']?>"/>
                     </div>
 <!-- 6-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Origem /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label  id="pure-checkbox">6. Origem: </label>
                         <select name="selectOrigem" id="selectOrigemId">
                             <?php foreach ($this->municipios as $key => $origem): ?>
@@ -749,7 +749,7 @@ $(function() {
                         </select>
                     </div>
 <!-- 7-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Residência /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <label  id="pure-checkbox">7. Residência: </label>
                         <select name="selectResidencia" id="selectResidenciaId">
                             <?php foreach ($this->selectResidencia as $key => $residencia): ?>
@@ -758,7 +758,7 @@ $(function() {
                         </select>
                     </div>
 <!-- 8-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pessoas Em Casa /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                    <div id="form-dir">
+                    <div class="form-dir">
                             <label >8. Quantas pessoas moram em casa?: </label>
                             <input type="number" required name="tp_quantPessoas" min="0" placeholder="Quantas Pessoas moram em casa?" value="<?= $this->assignEspecialista[0]['tps_pessoas_na_casa']?>"/>
                     </div>
@@ -801,7 +801,7 @@ $(function() {
                      
                     </fieldset>
 <!-- 10-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tempo Sem sustentar família /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                        
-                    <div id="form-dir">
+                    <div class="form-dir">
                             <label >10.Há quanto tempo deixou de sustentar a família somente com pesca? </label>
                             <input type="number" required name="tp_tempoSemPesca" min="0" placeholder="Tempo de sustento" value="<?= $this->assignEspecialista[0]['tps_tempo_sustento']?>"/>
                     </div>
@@ -811,7 +811,7 @@ $(function() {
                     </table>
 <!-- 11-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Programa Social /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                     
-                    <div id="form-dir">
+                    <div class="form-dir">
                         <a id="pescador_especialista_progsocial"></a><fieldset class="noEditable"><legend>11.Programa Social:</legend>
                             <fieldset>
 
@@ -846,7 +846,7 @@ $(function() {
                  </div>
                 
 <!-- 12-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda Mensal /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                        
-                 <div id="form-dir">
+                 <div class="form-dir">
                             <label >12. Renda Mensal com pesca/mariscagem: </label><br/><br/>
                             <label >12.1 <b>Menor</b> Renda do ano: </label>
                             <select name="selectMenorEstacaoAno" id="programaSocial">
@@ -856,7 +856,7 @@ $(function() {
                             </select>
                             <input type="number" required name="tp_menorRenda" id="small" min="0" placeholder="Menor Renda" value="<?= $this->assignEspecialista[0]['tps_renda_menor_ano']?>"/>
                  </div>       
-                 <div id="form-dir">
+                 <div class="form-dir">
                             <label >12.2 <b>Maior</b> Renda do ano: </label>
                             <select name="selectMaiorEstacaoAno" id="programaSocial">
                                     <?php foreach ($this->selectEstacaoAno as $key => $selectEstacaoAno): ?>
@@ -869,7 +869,7 @@ $(function() {
                     
                             <td><input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?>, '#pescador_especialista_progsocial' )"></td>
                  </table>
-                 <div id="form-dir">
+                 <div class="form-dir">
 <!-- 13-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Seguro Defeso /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                         <a id="pescador_especialista_segdefeso"></a><fieldset class="noEditable"><legend>13.Recebe algum Seguro Defeso?</legend>
                             <fieldset>
@@ -935,19 +935,19 @@ $(function() {
                            
                         </fieldset>
 <!-- 13.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Renda no Defeso /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                            <div id="form-dir">
+                            <div class="form-dir">
                                 <label  id="pure-checkbox">13.2. Renda no Defeso: </label>
                                     <input type="number" required name="tp_valorRendaDefeso" min="0" placeholder="Renda no Defeso" value="<?= $this->assignEspecialista[0]['tps_renda_no_defeso']?>"/>
                                 
                             </div>
                         </div>
 <!-- 14-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tempo de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                        <div id="form-dir">
+                        <div class="form-dir">
                                 <label  id="pure-checkbox">14. Há quanto tempo pesca/marisca? </label>
                                     <input type="number" required name="tp_tempoPesca" min="0" placeholder="Há quanto tempo pesca?" value="<?= $this->assignEspecialista[0]['tps_tempo_de_pesca']?>"/>
                         </div>
 <!-- 15-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tutor de Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                        <div id="form-dir">
+                        <div class="form-dir">
                                 <label  id="pure-checkbox">15. Com quem aprendeu a pescar/mariscar? </label>
                                 <select name="selectTutorPesca" id="programaSocial">
                                     <?php foreach ($this->assignTipoDependentes as $key => $tutorPesca): ?>
@@ -994,7 +994,7 @@ $(function() {
                      
                     </fieldset>
 <!-- 17-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Antes da Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                     
-                    <div id="form-dir">
+                    <div class="form-dir">
                        <label  id="pure-checkbox">17. O que fazia antes de ser Pescador(a)/marisqueiro(a)? </label>
                          <select name="selectAntesPesca" id="dynamicInput">
                              <?php foreach ($this->assignTipoRendas as $key => $tipoRendaAnterior): ?>
@@ -1003,7 +1003,7 @@ $(function() {
                          </select>
                     </div>    
 <!-- 18-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Mora onde Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                      
-                    <div id="form-dir">
+                    <div class="form-dir">
                        <label  id="pure-checkbox">18.Mora no mesmo ponto/comunidade onde pesca/marisca? </label>
                          <select name="selectMoraOndePesca" id="programaSocial">
                                  <option value="0" <?= ( "0" == $this->assignEspecialista[0]['tps_mora_onde_pesca']) ? 'selected="selected"' : ''; ?>>Não</option>
@@ -1126,7 +1126,7 @@ $(function() {
                         </fieldset> 
                     </fieldset>        
 <!-- 21-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pesca Embarcado /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                     
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >21.Pesca Embarcado?</label>
                         <select name="selectEmbarcado" >
                                 <option value="0"<?= ( "0" == $this->assignEspecialista[0]['tps_embarcado']) ? 'selected="selected"' : ''; ?>>Não</option>
@@ -1135,7 +1135,7 @@ $(function() {
                         </select>
                  </div>
 <!-- 22-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescadores na Família /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                  
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >22.Número de pessoas da família que pescam/mariscam?</label>
                         <input type="number" required name="tp_numPescadorFamilia" min="0" placeholder="Pessoas que pescam" value="<?= $this->assignEspecialista[0]['tps_num_familiar_pescador']?>"/>
                  </div>
@@ -1178,7 +1178,7 @@ $(function() {
                      
                </fieldset>
 <!-- 23-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Frequencia da Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                        <div id="form-dir">
+                        <div class="form-dir">
                             <label >23.Frequência de pescarias</label>
                             <select name="selectFrequenciaPesca" >
                                 <?php foreach ($this->selectFrequenciaPesca as $key => $frequenciaPesca): ?>
@@ -1225,17 +1225,17 @@ $(function() {
                      
                         </fieldset>
 <!-- 25-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Num Dias Pescando /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >25.Número de dias pescando:</label>
                         <input type="number" required  name="tp_diasPescando" min="0" placeholder="Dias Pescando" value="<?= $this->assignEspecialista[0]['tps_num_dias_pescando']?>"/>
                  </div> 
 <!-- 26-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Num Horas Pescando /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >26.Horas pescando por dia:</label>
                         <input type="number" required  name="tp_horasPescando" min="0" placeholder="Horas por dia" value="<?= $this->assignEspecialista[0]['tps_hora_pescando']?>"/>
                  </div> 
 <!-- 27-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Ultima Pescaria /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >27.Ultima pescaria?</label>
                         <select name="selectUltimaPesca" >
                                 <?php foreach ($this->selectUltimaPesca as $key => $ultimaPesca): ?>
@@ -1286,7 +1286,7 @@ $(function() {
                      
                </fieldset> 
 <!-- 28.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Fornecedor Insumos /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >28.2.Fornecedor dos insumos?</label>
                         <select name="selectFornecedorInsumo" >
                                 <?php foreach ($this->selectFornecedorInsumos as $key => $fornecedorInsumo): ?>
@@ -1295,7 +1295,7 @@ $(function() {
                         </select>
                  </div> 
 <!-- 28.3-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Recursos /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >28.3.Recurso utilizado?</label>
                         <select name="selectRecurso" >
                                 <?php foreach ($this->selectRecursos as $key => $recurso): ?>
@@ -1343,7 +1343,7 @@ $(function() {
                      
                </fieldset> 
 <!-- 29.1-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Frequencia do consumo /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >29.1.Frequência do consumo pescado?</label>
                         <select name="selectFrequenciaConsumo" >
                                 <?php foreach ($this->selectFrequenciaPesca as $key => $frequenciaConsumo): ?>
@@ -1352,7 +1352,7 @@ $(function() {
                         </select>
                  </div>
 <!-- 29.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Comprador pescado /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >29.2.Quem compra o pescado?</label>
                         <select name="selectCompradorPescado" >
                                 <?php foreach ($this->selectDestinoPescado as $key => $compradorPescado): ?>
@@ -1361,7 +1361,7 @@ $(function() {
                         </select>
                  </div>
 <!-- 30-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Sobra da Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >30.O que é feito com a sobra da pescaria?</label>
                         <select name="selectSobraPesca" >
                                 <?php foreach ($this->selectSobraPesca as $key => $sobraPesca): ?>
@@ -1370,7 +1370,7 @@ $(function() {
                         </select>
                  </div>
 <!-- 31-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Tratamento /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >31.Local de Tratamento do pescado?</label>
                         <select name="selectLocalTratamento" >
                                 <?php foreach ($this->selectLocalTratamento as $key => $localTratamento): ?>
@@ -1379,17 +1379,17 @@ $(function() {
                         </select>
                  </div>
 <!-- 31.1-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Unidade Beneficiamento /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >31.1.Unidade de Beneficiamento?</label>
                         <input type="text" name="tp_unidadeBeneficiamento" min="0" placeholder="Unidade de Beneficiamento" value="<?= $this->assignEspecialista[0]['tps_unidade_beneficiamento']?>"/>
                  </div>
 <!-- 32-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Curso de conservacao /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >32.Curso de conservação ou beneficiamento?</label>
                         <input type="text"  name="tp_cursoBeneficiamento" min="0" placeholder="Curso de Conservação ou Beneficiamento" value="<?= $this->assignEspecialista[0]['tps_curso_beneficiamento']?>"/>
                  </div>
 <!-- 33-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Cooperativa /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >33.Veiculado a alguma Associação/Cooperativa?</label>
                         <select name="selectAssociacaoPesca" >
                                 <?php foreach ($this->selectAssociacaoPesca as $key => $associacaoPesca): ?>
@@ -1398,7 +1398,7 @@ $(function() {
                         </select>
                  </div>
 <!-- 34-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Colônias /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >34. e 34.1.Veiculado a alguma Colônia?</label>
                        <select name="selectColoniaEspecialista" id="colonia">
                             <?php foreach ($this->colonias as $key => $coloniaEspecialista): ?>
@@ -1407,22 +1407,22 @@ $(function() {
                         </select>
                  </div>
 <!-- 34.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ TempoColonizado /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >34.2.Tempo colonizado(a):</label>
                         <input type="number" required  name="tp_tempoColonizado" min="0" placeholder="Tempo Colonizado" value="<?= $this->assignEspecialista[0]['tps_tempo_em_colonia']?>"/>
                  </div> 
 <!-- 34.3-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Dificuldade em Pagar colônia /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >34.3.Dificuldade em pagar a Colônia?</label>
                         <input type="text"  name="tp_dificuldadeColonia" min="0" placeholder="Dificuldades de pagamento" value="<?= $this->assignEspecialista[0]['tps_motivo_falta_pagamento']?>"/>
                  </div>
 <!-- 34.4-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Beneficio Colônia /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >34.4.Quais beneficios em ser colonizado(a)?</label>
                         <input type="text"  name="tp_beneficiosColonia" min="0" placeholder="Benefícios em ser Colonizado" value="<?= $this->assignEspecialista[0]['tps_beneficio_colonia']?>"/>
                  </div>
 <!-- 35-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Rgp /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >35.Órgão emissor do RGP:</label>
                         <select name="selectOrgaoRgp" >
                                 <?php foreach ($this->selectOrgaoRgp as $key => $orgaoRgp): ?>
@@ -1470,7 +1470,7 @@ $(function() {
                      
                </fieldset> 
 <!-- 37-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Outras Habilidades /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >37.Possui habilidade para atuar em outra área?</label>
                             <select name="selectOutraHabilidade" >
                                 <?php foreach ($this->assignTipoRendas as $key => $outraHabilidade): ?>
@@ -1479,7 +1479,7 @@ $(function() {
                         </select>
                  </div>
 <!-- 38-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Alternativa Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >38.Alternativa à renda?</label>
                         <select name="selectAlternativaRenda" >
                                 <?php foreach ($this->assignTipoRendas as $key => $outraRenda): ?>
@@ -1488,7 +1488,7 @@ $(function() {
                         </select>
                  </div>
 <!-- 39-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Outra Profissao /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >39.Se não fosse pescador?</label>
                         <select name="selectOutraProfissao" >
                                 <?php foreach ($this->assignTipoRendas as $key => $outraProfissao): ?>
@@ -1498,17 +1498,17 @@ $(function() {
                  </div>
     
 <!-- 40-///_/_/_/_/_/_/_/_/_/_/_/_/_/ FilhoPescador /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                <div id="form-dir">
+                <div class="form-dir">
                         <label >40.Gostaria que o filho fosse pescador?</label>
                         <input type="text"  name="tp_filhoPescador" min="0" placeholder="Gostaria que o filho fosse pescador?" value="<?= $this->assignEspecialista[0]['tps_filho_seguir_profissao']?>"/>
                  </div>
 <!-- 40-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >41.Grau de dependência da pesca (sem o %)?</label>
                             <input type="number" required  name="tp_dependenciaPesca" min="0" placeholder="Dependencia da Pesca" value="<?= $this->assignEspecialista[0]['tps_grau_dependencia_pesca']?>"/>
                  </div>
                  
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >42.Entrevistador:</label>
                            <select name="selectEntrevistador" >
                                 <?php foreach ($this->assignUser as $key => $entrevistador): ?>
@@ -1517,12 +1517,12 @@ $(function() {
                             </select>
                  </div>
 
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >43.Data da entrevista:</label>
                             <input type="date"  name="tp_data" min="0" placeholder="Data da Entrevista" value="<?= $this->assignEspecialista[0]['tps_data']?>"/>
                  </div>
                  
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >44.Embaracação Utilizada?</label>
                         <select name="selectBarco" >
                             <option value="0"></option>
@@ -1532,7 +1532,7 @@ $(function() {
                         </select>
                  </div>
                  
-                 <div id="form-dir">
+                 <div class="form-dir">
                         <label >45.Observação:</label>
                             <input type="text"  name="tps_obs" min="0" placeholder="Observação" value="<?= $this->assignEspecialista[0]['tps_obs']?>"/>
                  </div>

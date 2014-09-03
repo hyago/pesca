@@ -262,27 +262,27 @@ tbody tr:nth-child(odd) {
     height: auto;
 }
 
-#esquerda{
+.esquerda{
     float: left;
     padding: 0;
     width: 330px;
     height: auto;
 }
 
-#direita{
+.direita{
     float: right;
     padding: 0;
     width: 310px;
     height: auto;
 }
-#esquerda-entrevista{
+.esquerda-entrevista{
     float: left;
     padding: 0;
     width: 680px;
     height: auto;
 }
 
-#direita-entrevista{
+.direita-entrevista{
     float: right;
     margin-left: 30px;
     width: 330px;
@@ -290,18 +290,18 @@ tbody tr:nth-child(odd) {
     margin-top: -62px;
 }
 
-#Submit{
+.Submit{
     width: 100%;
     float: right;
     padding-top: 30px;
 }
 
-#Submit input{
+.Submit input{
     height: 25px;
 }
 
 
-#tam_medio{
+.tam_medio{
     width: 120px;
 
 }
@@ -340,11 +340,11 @@ select.espc{
 select.amostragem{
     width: 80px;
 }
-#form-dir{
+.form-dir{
     padding: 8px;
     padding-left: 0px;
 }
-#form-esq{
+.form-esq{
     padding: 8px;
     padding-left: 0px;
 }

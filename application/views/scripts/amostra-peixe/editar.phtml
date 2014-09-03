@@ -6,13 +6,13 @@
 
 <form id="formulario" action="<?= $this->url(array("controller" => "amostra-peixe", "action" => "atualizar"), null, true) ?>" method="post">
     <fieldset id="Desembarque">
-        <div id="esquerda">
-            <div id="form-esq">
+        <div class="esquerda">
+            <div class="form-esq">
                 <label for="id">ID:</label>
                 <input type="text" name="id_amostra" placeholder="Id" id="id_ficha" value="<?= $this->amostragem['tamp_id']?>"/><br />
             </div>
 
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Estagiário:</label>
                 <select name="select_nome_estagiario" >
 
@@ -22,7 +22,7 @@
                 </select></br>
             </div>
 
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Monitor:</label>
                 <select name="select_nome_monitor" >
                     <?php
@@ -36,7 +36,7 @@
                     ?>
                 </select></br>
             </div>
-            <div id="form-esq">  
+            <div class="form-esq">  
                 <label for="tipo">Porto:</label>
                 <select name="select_nome_porto" >
                     <?php
@@ -50,7 +50,7 @@
                     ?>
                 </select></br>
             </div>   
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Id Subamostra:</label>
                 <select name="subamostra_id"/>
                     <?php foreach ($this->subamostras as $key => $subamostra): ?>
@@ -59,7 +59,7 @@
                 </select>
             </div>
             <input type="hidden" name="id_amostra" value="<?= $this->amostragem['tamp_id']?>"/><br />
-            <div id="Submit">
+            <div class="Submit">
                 <input type="submit" value="Salvar Alterações" /> 
             </div>
         </div>
@@ -121,6 +121,6 @@
             </fieldset>
 </fieldset>
 </form>
-<div id="Submit">
+<div class="Submit">
     <a href="<?= $this->url(array("controller" => "amostra-peixe", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>           
 </div>  

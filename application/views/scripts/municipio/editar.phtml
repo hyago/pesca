@@ -6,14 +6,14 @@
 
 <form action="<?=$this->url(array("controller"=>"municipio","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="dadosSocial">
-      <div id="esquerda">  
+      <div class="esquerda">  
         <input type="hidden" name="idMunicipio" value="<?=$this->municipio['tmun_id']?>" />
-        <div id="form-esq">
+        <div class="form-esq">
             <label>Municipio: </label>
             <input type="text" name="municipio" value="<?=$this->municipio['tmun_municipio']?>"/> <br/>
         </div>
         
-        <div id="form-esq">
+        <div class="form-esq">
             <label>Estado: </label>
             <select name="estado">
                 <?php foreach ($this->estados as $estado): ?>
@@ -22,7 +22,7 @@
             </select>
         <br />
         </div>
-        <div id="Submit">
+        <div class="Submit">
             <a href="<?=$this->url(array("controller"=>"municipio","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
             <input type="submit" value="Atualizar" />
         </div>

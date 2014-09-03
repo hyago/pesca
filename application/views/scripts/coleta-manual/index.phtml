@@ -3,35 +3,35 @@
     <h3>Entrevista</h3>
 </div>
 
-<div id="esquerda-entrevista">
+<div class="esquerda-entrevista">
     <form action="<?= $this->url(array("controller" => "coleta-manual", "action" => "criar"), null, true) ?>">
         <fieldset id="Entrevista">
-            <div id="esquerda">
-                <div id="form-esq">
+            <div class="esquerda">
+                <div class="form-esq">
                     <label>ID da ficha diária:</label>
                     <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" value="<?= $this->fichaDiaria['fd_id'] ?>" /><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>ID monitoramento:</label>
                     <input type="text" name="id_monitoramento" placeholder="ID"  value="<?= $this->monitoramento['mnt_id'] ?>" /><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label for="tipo">ID Entrevista:</label>
                     <input type="text" placeholder = "ID" name="id_entrevista" disabled="true"/><br />
                 </div>
             </div>
             <br/>
-            <div id="esquerda">
+            <div class="esquerda">
                 <legend><h4>Embarcação:</h4></legend>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Utilizou Barco?</label>
                     <input type="checkbox"  name="embarcada" /><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Motor?</label>
                     <input type="checkbox"  name="motor"/><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Barco:</label>
                     <select name="nomeBarco" required/>
                         <option value="" selected></option>
@@ -45,7 +45,7 @@
                     </select>
 
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Tipo de Barco:</label>
                     <select name="tipoBarco" required/>
                         <option value="" selected></option>
@@ -60,8 +60,8 @@
 
                 </div>
             </div>    
-            <div id="direita-entrevista">
-                <div id="form-esq">    
+            <div class="direita-entrevista">
+                <div class="form-esq">    
                     <label>Pescador Entrevistado:</label>
                     <select name="pescadorEntrevistado" required/>
                         <option value="" selected></option>
@@ -74,44 +74,44 @@
                     ?>
                     </select><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Quant. de Pescadores:</label>
                     <input type="text"  name="numPescadores" min="1" placeholder="Quantidade de Pescadores" required/><br />
                 </div>
             </div>
-            <div id="esquerda">
+            <div class="esquerda">
                 <legend><h4>Saída e Volta:</h4></legend>
-                <div id="form-esq">
+                <div class="form-esq">
 
                     <label>Data:</label>
                     <input type="date" name="dataSaida" min="2013-11-01"  required/>
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Horas:</label>
                     <input type="time" name="horaSaida"  required/>
                 </div>
             </div>
-            <div id="direita-entrevista">
-                <div id="form-esq">
+            <div class="direita-entrevista">
+                <div class="form-esq">
                     <label>Data:</label>
                     <input type="date" name="dataVolta" min="2013-11-01" required/>
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Horas:</label>
                     <input type="time" name="horaVolta" required/>
                 </div>
             </div>
             <br/>
-            <div id="esquerda">
-                <div id="form-esq">
+            <div class="esquerda">
+                <div class="form-esq">
                     <label>Tempo Gasto:</label>
                     <input type="time" name="tempoGasto"  required/>
                 </div>
             </div>    
 
             <br/>
-            <div id="esquerda">
-                <div id="form-esq">
+            <div class="esquerda">
+                <div class="form-esq">
                     <legend><h4>Maré:</h4></legend>
                     <label>Tipo:</label>
                     <select name="mare" required>
@@ -125,16 +125,16 @@
                         ?>
                     </select>
                 </div>   
-                <div id="form-dir">    
+                <div class="form-dir">    
                     <label>Maré Viva?</label>
                     <input type="checkbox" name="mareviva">
                 </div>   
             </div>
             <br/>            
             
-            <div id="esquerda">
+            <div class="esquerda">
                 <legend><h4>Outros dados:</h4></legend>
-                <div id="form-esq">    
+                <div class="form-esq">    
                     <label>Destino do Pescado:</label>
                     <select name="destinoPescado" required/>
                         <option value="" selected></option>
@@ -147,19 +147,19 @@
                     ?>
                     </select>
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label for="tipo">Subamostra?:</label>
                     <input type="checkbox" name="subamostra" /><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observação" /><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label for="tipo">Combustível(L):</label>
                     <input type="text" name="combustivel" placeholder="Combustível"/><br />
                 </div>
-                <div id="Submit">
+                <div class="Submit">
                     <input type="submit" value="Enviar"/>
                 </div>
             </div>

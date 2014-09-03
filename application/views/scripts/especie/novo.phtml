@@ -5,24 +5,24 @@
 
 <form id="cadastro-usuario" action="<?=$this->url(array("controller"=>"especie","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
-        <div id="esquerda">
-         <div id="form-esq">     
+        <div class="esquerda">
+         <div class="form-esq">     
             <label for="id" >ID:</label>
             <input type="text" name="id_especie" id="id_especie" placeholder="Id"/><br />
          </div>
-         <div id="form-esq">   
+         <div class="form-esq">   
             <label for="tipo">Nome:</label>
             <input type="text" id="nome_especie" name="nome_especie" placeholder="Nome"/><br />
          </div>  
-         <div id="form-esq">   
+         <div class="form-esq">   
             <label for="tipo">Descritor:</label>
             <input type="text" id="descritor_especie" name="descritor_especie" placeholder="Descritor"/><br />
          </div>   
-         <div id="form-esq">   
+         <div class="form-esq">   
             <label for="tipo">Nome Comum:</label>
             <input type="text" id="nome_comum" name="nome_comum" placeholder="Nome Comum"/><br />
          </div>
-         <div id="form-esq">   
+         <div class="form-esq">   
             <label for="tipo">Gênero:</label>
               <select name="genero_especie" id="genero_especie">
               <?php
@@ -36,7 +36,7 @@
               ?>
               </select></br>
           </div>  
-        <div id="Submit">
+        <div class="Submit">
             <a href="<?=$this->url(array("controller"=>"especie","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
             <input type="submit" value="Cadastrar" />
         </div>

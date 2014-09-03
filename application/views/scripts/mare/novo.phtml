@@ -5,12 +5,12 @@
 
 <form action="<?=$this->url(array("controller"=>"mare","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="dadosDesembarque">
-        <div id="esquerda">
-            <div id="form-esq">
+        <div class="esquerda">
+            <div class="form-esq">
                 <label>Tipo de Maré: </label>
                 <input type="text" placeholder="Tipo de Maré" name="mare" /> <br/>
             </div>
-        <div id="Submit">
+        <div class="Submit">
             <a href="<?=$this->url(array("controller"=>"mare","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
             <input type="submit" value="Cadastrar" />
         </div> 

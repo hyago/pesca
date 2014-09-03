@@ -8,14 +8,14 @@
 <form action="<?=$this->url(array("controller"=>"programa-social","action"=>"criar"),null,true)?>" method="post">
    <input type="hidden" name="idRenda" placeholder="ID" />
    <fieldset id="dadosSocial">
-      <div id="esquerda">
+      <div class="esquerda">
       
-        <div id="form-esq"> 
+        <div class="form-esq"> 
             <label>Programa: </label>
             <input type="text" name="nomeProgramadadosSocial" placeholder="Programa dadosSocial"/> <br />
         </div>
 
-          <div id="Submit">
+          <div class="Submit">
             <a href="<?=$this->url(array("controller"=>"programa-social","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
             <input type="submit" value="Cadastrar" />
         </div>

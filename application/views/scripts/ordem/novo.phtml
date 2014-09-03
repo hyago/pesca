@@ -5,21 +5,21 @@
 
 <form action="<?=$this->url(array("controller"=>"ordem","action"=>"criar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
-      <div id="esquerda">  
-        <div id="form-esq">
+      <div class="esquerda">  
+        <div class="form-esq">
               <label for="id">ID:</label>
               <input type="text" name="id_ordem" placeholder="Id" id="id_ordem" /><br />
         </div>
-        <div id="form-esq"> 
+        <div class="form-esq"> 
               <label for="tipo">Nome:</label>
               <input type="text" id="nome_ordem" placeholder="Nome" name="nome_ordem" /><br />
         </div>
-        <div id="form-esq">   
+        <div class="form-esq">   
               <label for="tipo">Característica:</label>
               <input type="text" id="caracteristica_ordem" placeholder="Caracteristica" name="caracteristica_ordem"/><br />
         </div>
         
-        <div id="form-esq">
+        <div class="form-esq">
 		  <label for="tipo">Grupo:</label>
 		  <select name="grupo_ordem" id="grupo_ordem">
 		  <?php foreach ($this->dados as $key => $grupo): ?>
@@ -28,7 +28,7 @@
 		  </select><br/>
         </div>
 
-        <div id="Submit">
+        <div class="Submit">
             <a href="<?=$this->url(array("controller"=>"ordem","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a>
             <input type="submit" value="Cadastrar" />
         </div>

@@ -7,13 +7,13 @@
 
 <form id="formulario" action="<?= $this->url(array("controller" => "amostra-camarao", "action" => "criar"), null, true) ?>" method="post">
     <fieldset id="Desembarque">
-        <div id="esquerda">
-            <div id="form-esq">
+        <div class="esquerda">
+            <div class="form-esq">
                 <label for="id">ID:</label>
                 <input type="text" name="id_amostra" placeholder="Id" id="id_ficha" /><br />
             </div>
 
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Estagiário:</label>
                 <select name="select_nome_estagiario" >
 
@@ -23,7 +23,7 @@
                 </select></br>
             </div>
 
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Monitor:</label>
                 <select name="select_nome_monitor" >
                     <?php
@@ -38,13 +38,13 @@
                 </select></br>
             </div>
 
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Data:</label>
                 <input type="date"  placeholder="Data" name="data_amostra" /><br />
             </div>
 
 
-            <div id="form-esq">  
+            <div class="form-esq">  
                 <label for="tipo">Porto:</label>
                 <select name="select_nome_porto" >
                     <?php
@@ -58,7 +58,7 @@
                     ?>
                 </select></br>
             </div>   
-            <div id="form-esq">
+            <div class="form-esq">
                 <label>Barco:</label>
                 <select name="nomeBarco" placeholder="Nome do Barco" />
                 <?php
@@ -71,7 +71,7 @@
                 </select>
                 <br />
             </div>
-            <div id="form-esq">
+            <div class="form-esq">
                 <label>Pesqueiro:</label>
                 <select name="nomePesqueiro">
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
@@ -79,7 +79,7 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div id="form-esq">
+            <div class="form-esq">
                 <label>Espécie Capturada:</label>
                 <select name="especie_camarao">
                     <?php foreach ($this->especies as $key => $especie): ?>
@@ -87,11 +87,11 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Captura total:</label>
                 <input type="text"  placeholder="Captura Total" name="captura_total"/><br />
             </div>
-            <div id="form-esq">
+            <div class="form-esq">
                 <label for="tipo">Id Subamostra:</label>
                 <select name="subamostra_id"/>
                     <?php foreach ($this->subamostras as $key => $subamostra): ?>
@@ -99,7 +99,7 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div id="Submit">
+            <div class="Submit">
                 <input type="submit" value="Salvar Alterações" /> 
             </div>
           

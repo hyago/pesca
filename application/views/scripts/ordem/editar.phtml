@@ -5,21 +5,21 @@
 
  <form action="<?=$this->url(array("controller"=>"ordem","action"=>"atualizar"),null,true)?>" method="post">
     <fieldset id="Filogenia">
-      <div id="esquerda">  
-        <div id="form-esq">
+      <div class="esquerda">  
+        <div class="form-esq">
               <label for="id">ID:</label>
               <input type="text" name="id_ordem" value="<?=$this->ordem['ord_id']?>"/><br />
         </div>
-        <div id="form-esq"> 
+        <div class="form-esq"> 
               <label for="tipo">Nome:</label>
               <input type="text" name="nome_ordem" value="<?=$this->ordem['ord_nome']?>"/><br />
         </div>
-        <div id="form-esq">   
+        <div class="form-esq">   
               <label for="tipo">Característica:</label>
               <input type="text" name="caracteristica_ordem" value="<?=$this->ordem['ord_caracteristica']?>"/><br />
         </div>
         
-                <div id="form-esq">
+                <div class="form-esq">
             <label>Grupo: </label>
             <select name="grupo_ordem">
                 <?php foreach ($this->grupos as $key => $grupo): ?>
@@ -31,7 +31,7 @@
       
 
         
-        <div id="Submit">
+        <div class="Submit">
             <a href="<?=$this->url(array("controller"=>"ordem","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
             <input type="submit" value="Atualizar" />
         </div>

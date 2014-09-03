@@ -6,19 +6,19 @@
 <form action="<?=$this->url(array("controller"=>"porto","action"=>"atualizar"),null,true)?>" method="post">
    <input type="hidden" name="idPorto" value="<?= $this->porto['pto_id'] ?>" />
    <fieldset id="dadosDesembarque">
-     <div id="esquerda">   
-       <div id="form-esq"> 
+     <div class="esquerda">   
+       <div class="form-esq"> 
             <label>Nome: </label>
             <input type="text" name="nome" value="<?= $this->porto['pto_nome'] ?>"/> <br />
         </div>
         
-        <div id="form-esq">
+        <div class="form-esq">
             <label>Local: </label> 
             <input type="text" name="local" value="<?=$this->porto['pto_local'];?>" /><br/>
         </div>
 
         
-        <div id="form-esq">
+        <div class="form-esq">
             <label for="municipio">Município</label>
             <select name="municipio" id="municipio">
                 <?php foreach ($this->municipios as $key => $municipio): ?>
@@ -29,7 +29,7 @@
         
         
         
-         <div id="Submit">
+         <div class="Submit">
             <a href="<?=$this->url(array("controller"=>"porto","action"=>"index"),null,true)?>" id="botao-ancora">Voltar</a> 
             <input type="submit" value="Atualizar" />
         </div>

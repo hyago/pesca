@@ -6,20 +6,20 @@
 <form action="<?= $this->url(array("controller" => "tipo-dependente", "action" => "atualizar"), null, true) ?>" method="post">
 
     <fieldset id="dadosSocial" name="editarTipoDependente">
-        <div id="esquerda">
+        <div class="esquerda">
 
-            <div id="form-esq"> 
+            <div class="form-esq"> 
                 <label>Código: </label>
                 <input type="text" readonly="" size="5" name="idTipoDependente" value="<?= $this->assignTipoDependente['ttd_id'] ?>" />
             </div>
 
-            <div id="form-esq"> 
+            <div class="form-esq"> 
                 <label>Dependente: </label>
                 <input type="text" required=""  name="tipoDependente" value="<?= $this->assignTipoDependente['ttd_tipodependente'] ?>"/> <br />
             </div>
 
 
-            <div id="Submit">
+            <div class="Submit">
                 <a href="<?= $this->url(array("controller" => "tipo-dependente", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a> 
                 <input type="submit" value="Atualizar" />
             </div>

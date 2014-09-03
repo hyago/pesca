@@ -100,7 +100,8 @@ class Application_Model_Calao
             'sa_id' => $idSubamostra,
             'cal_obs' => $request['observacao'],
             'dp_id' => $request['destinoPescado'],
-            'mnt_id' => $request['id_monitoramento']
+            'mnt_id' => $request['id_monitoramento'],
+            'cal_tipo' => $request['tipocalao']
         );
         
         $insertEntrevista = $this->dbTableCalao->insert($dadosCalao);
@@ -171,7 +172,8 @@ class Application_Model_Calao
             'cal_subamostra' => $request['subamostra'],
             'sa_id' => $idSubamostra,
             'dp_id' => $request['destinoPescado'],
-            'cal_obs' => $request['observacao']
+            'cal_obs' => $request['observacao'],
+            'cal_tipo' => $request['tipocalao']
         );
  
         
@@ -230,7 +232,7 @@ class Application_Model_Calao
         
         $dadosPesqueiro = array(
             'cal_id' => $idEntrevista,
-            'pcal_id' => $pesqueiro,
+            'paf_id' => $pesqueiro,
         );
         
         $this->dbTableTCalao->insert($dadosPesqueiro);
@@ -240,7 +242,7 @@ class Application_Model_Calao
         $this->dbTableTCalao = new Application_Model_DbTable_CalaoHasPesqueiro();       
                 
         $whereCalaoHasPesqueiro = $this->dbTableTCalao->getAdapter()
-                ->quoteInto('"cal_pcal_id" = ?', $idPesqueiro);
+                ->quoteInto('"cal_paf_id" = ?', $idPesqueiro);
         
         $this->dbTableTCalao->delete($whereCalaoHasPesqueiro);
         

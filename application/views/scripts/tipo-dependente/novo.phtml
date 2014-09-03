@@ -5,19 +5,19 @@
 
 <form action="<?= $this->url(array("controller" => "tipo-dependente", "action" => "criar"), null, true) ?>" method="post">
     <fieldset id="dadosSocial" name="novoTipoDependente">
-        <div id="esquerda">
+        <div class="esquerda">
 
-            <div id="form-esq"> 
+            <div class="form-esq"> 
                 <label>Código: </label>
                 <input type="text" readonly="" size="5" name="idTipoDependente" placeholder="Código Dependente (Automático)"/>
             </div>
 
-            <div id="form-esq"> 
+            <div class="form-esq"> 
                 <label>Dependente: </label>
                 <input type="text" required=""  name="tipoDependente" placeholder="Tipo Dependente"/> <br />
             </div>
 
-            <div id="Submit">
+            <div class="Submit">
                 <a href="<?= $this->url(array("controller" => "tipo-dependente", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>
                 <input type="submit" value="Cadastrar" />
             </div>

@@ -23,7 +23,7 @@
         </td>
         <td width="35%">
             <input type="button" size="50" value="Busca por Porto" class="button-confirmText" onclick="jsBuscaFichaDiariaPortoData(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
-            <div id="form-dir">
+            <div class="form-dir">
                 <select name="selectPortoName" id="selectPortoID">
                     <?php foreach ($this->assignDadosPorto as $key => $localPorto): ?>
                         <option value="<?= $localPorto['pto_id']; ?>"><?= $localPorto['pto_nome']; ?></option>

@@ -3,35 +3,35 @@
     <h3>Entrevista</h3>
 </div>
 
-<div id="esquerda-entrevista">
+<div class="esquerda-entrevista">
     <form action="<?= $this->url(array("controller" => "calao", "action" => "atualizar"), null, true) ?>">
         <fieldset id="Entrevista">
-            <div id="esquerda">
-                <div id="form-esq">
+            <div class="esquerda">
+                <div class="form-esq">
                     <label>ID da ficha diária:</label>
                     <input type="text" name="id_fichaDiaria" placeholder="ID" disabled="true" value="<?= $this->monitoramento['fd_id'] ?>" /><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>ID monitoramento:</label>
                     <input type="text" name="id_monitoramento" placeholder="ID" disabled="true" value="<?= $this->entrevista['mnt_id'] ?>" /><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label for="tipo">ID Entrevista:</label>
                     <input type="text" placeholder = "ID" name="id_entrevista" disabled="true" value="<?= $this->entrevista['cal_id'] ?>"/><br />
                 </div>
             </div>
             <br/>
-            <div id="esquerda">
+            <div class="esquerda">
                 <legend><h4>Embarcação:</h4></legend>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Utilizou Barco?</label>
                     <input type="checkbox" id="nome" name="embarcada" <?php if($this->entrevista['cal_embarcada'] === true){ echo 'checked';} else{ echo '';}?>/><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Motor?</label>
                     <input type="checkbox"  name="motor" <?php if($this->entrevista['cal_motor'] === true){ echo 'checked';} else{ echo '';} ?>/><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Barco:</label>
                     <select name="nomeBarco" placeholder="Nome do Barco" />
                     <?php
@@ -44,7 +44,7 @@
                     </select>
 
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Tipo de Barco:</label>
                     <select name="tipoBarco" />
                     <?php
@@ -59,8 +59,8 @@
                 </div>
 
             </div>
-            <div id="direita-entrevista">
-                <div id="form-esq">    
+            <div class="direita-entrevista">
+                <div class="form-esq">    
                     <label>Pescador Entrevistado:</label>
                     <select name="PescadorEntrevistado" />
                     <?php
@@ -72,41 +72,41 @@
                     ?>
                     </select><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Quant. de Pescadores:</label>
                     <input type="text"  name="NumPescadores" min="1" placeholder="Quantidade de Pescadores "value="<?=$this->entrevista['cal_quantpescadores']?>"/><br />
                 </div>
             </div>
-            <div id="esquerda">
+            <div class="esquerda">
                 <legend><h4>Tempo:</h4></legend>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Data:</label>
                     <input type="date" name="data" min="2013-11-01" value="<?=$this->entrevista['cal_data']?>"/>
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label>Tempo Gasto:</label>
                     <input type="time" name="tempoGasto"value="<?=$this->entrevista['cal_tempogasto']?>"/>
                 </div>
             </div>
             <br/>
-            <div id="esquerda">
-                <div id="form-esq">
+            <div class="esquerda">
+                <div class="form-esq">
                     <legend><h4>Esforço:</h4></legend>
                     <label>Tamanho(m):</label>
                     <input type="text" name="tamanho" placeholder="Tamanho" value="<?=$this->entrevista['cal_tamanho']?>"/>
                                     </div>
-                <div id="form-dir">    
+                <div class="form-dir">    
                     <label>Altura(m):</label>
                     <input type="text"  name="altura" placeholder="Altura"value="<?=$this->entrevista['cal_altura']?>"/><br />
                 </div>
                 
             </div>
-            <div id="direita-entrevista">
-                <div id="form-dir">    
+            <div class="direita-entrevista">
+                <div class="form-dir">    
                     <label>Número de Lances:</label>
                     <input type="text"  name="numLances" placeholder="Lances" value="<?=$this->entrevista['cal_numlances']?>"/><br />
                 </div>
-                <div id="form-dir">    
+                <div class="form-dir">    
                     <label>Malha:</label>
                     <input type="text" class="tamanho" name="malha2" placeholder="malha" value="<?=$this->entrevista['cal_malha2']?>"/>
                     <input type="text" class="tamanho" name="malha1" placeholder="malha" value="<?=$this->entrevista['cal_malha1']?>"/>
@@ -114,9 +114,9 @@
                     
                 </div>
             </div><br/>
-            <div id="esquerda">
+            <div class="esquerda">
                 <legend><h4>Outros dados:</h4></legend>
-                <div id="form-esq">    
+                <div class="form-esq">    
                     <label>Destino do Pescado:</label>
                     <select name="destinoPescado" />
                     <?php
@@ -128,21 +128,34 @@
                     ?>
                     </select>
                 </div>
-                <div id="form-esq">
+                
+                <div class="form-esq">
                     <label for="tipo">Subamostra?:</label>
                     <input type="checkbox" name="subamostra" <?php if($this->entrevista['cal_subamostra'] === true){ echo 'checked';} else{ echo '';} ?>/><br />
                 </div>
-                <div id="form-esq">
+                <div class="form-esq">
                     <label for="tipo">Observacao:</label>
                     <input type="text" name="observacao" placeholder="Observação" value="<?=$this->entrevista['cal_obs']?>"/><br />
                 </div>
-                
+                <br/>
+                <div class="form-esq">    
+                    <label>Tipo de Pesca:</label>
+                    <select name="tipocalao" required/>
+                    <?php
+                    foreach ($this->tipoCalao as $key => $tipocalao):
+                        ?>
+                        <option value="<?= $tipocalao['tcat_id'] ?>" <?=( $tipocalao['tcat_id'] == $this->entrevista['cal_tipo'])? 'selected="selected"': '';?>><?= $tipocalao['tcat_tipo'] ?></option>
+                        <?php
+                    endforeach;
+                    ?>
+                    </select>
+                </div>
             </div>
         </fieldset>
             <br/>
             <br/>
             <input type="hidden" placeholder = "ID" name="id_entrevista"  value="<?= $this->entrevista['cal_id'] ?>"/><br />
-            <div id="esquerda">
+            <div class="esquerda">
                  <input type="submit" size="50" value="Salvar Alterações" />
             </div>
     </form>        

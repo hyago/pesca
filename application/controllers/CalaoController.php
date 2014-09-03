@@ -35,6 +35,7 @@ private $usuario;
         $this->modelEspecie = new Application_Model_Especie();
         $this->modelAvistamento = new Application_Model_Avistamento();
         $this->modelMaturidade = new Application_Model_Maturidade();
+        $this->modelTipoCalao = new Application_Model_TipoCalao();
     }
 
     public function indexAction()
@@ -44,9 +45,11 @@ private $usuario;
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-
+        $tipocalao = $this->modelTipoCalao->select(null, 'tcat_id');
+        
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        
+        $this->view->assign('tipoCalao', $tipocalao);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('destinos', $destinos);
@@ -90,7 +93,8 @@ private $usuario;
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
-
+        $tipocalao = $this->modelTipoCalao->select(null, 'tcat_id');
+        
         $idEntrevista = $this->_getParam('id');
 
         $vCalao = $this->modelCalao->selectCalaoHasPesqueiro('cal_id='.$idEntrevista);
@@ -102,7 +106,7 @@ private $usuario;
         $vBioPeixe = $this->modelCalao->selectVBioPeixe('tcal_id='.$idEntrevista);
         $maturidade = $this->modelMaturidade->select(null, 'tmat_tipo');
         
-        
+        $this->view->assign('tipoCalao', $tipocalao);
         $this->view->assign('vBioCamarao', $vBioCamarao);
         $this->view->assign('vBioPeixe', $vBioPeixe);
         $this->view->assign('maturidade', $maturidade);
