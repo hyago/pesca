@@ -133,10 +133,7 @@ class Application_Model_PescadorEspecialista
             'tps_num_dias_pescando' => $tps_diasPescando,
             'tps_hora_pescando' => $tps_horasPescando,
             'tup_id' => $request['selectUltimaPesca'],
-            'tfi_id'  => $request['selectFornecedorInsumo'],
-            'trec_id'  => $request['selectRecurso'],
             'tfp_id_consumo' => $request['selectFrequenciaConsumo'],
-            'dp_id_comprador' => $request['selectCompradorPescado'],
             'tsp_id'  => $request['selectSobraPesca'],
             'tlt_id'  => $request['selectLocalTratamento'],
             'tps_unidade_beneficiamento' => $request['tps_unidadeBeneficiamento'],
@@ -147,14 +144,12 @@ class Application_Model_PescadorEspecialista
             'tps_motivo_falta_pagamento' => $request['tps_dificuldadeColonia'],
             'tps_beneficio_colonia' => $request['tps_beneficiosColonia'],
             'trgp_id'  => $request['selectOrgaoRgp'],
-            'ttr_id_outra_habilidade'  => $request['selectOutraHabilidade'],
             'ttr_id_alternativa_renda'  => $request['selectAlternativaRenda'],
             'ttr_id_outra_profissao'  => $request['selectOutraProfissao'],
             'tps_filho_seguir_profissao' => $request['tps_filhoPescador'],
             'tps_grau_dependencia_pesca'  => $tps_dependenciaPesca,
             'tu_id_entrevistador'  => $request['selectEntrevistador'],
             'tps_data' => $tps_data,
-            'bar_id_barco' => $request['selectBarco'],
             'tps_obs' => $request['tps_obs']
         );
 
@@ -344,8 +339,61 @@ class Application_Model_PescadorEspecialista
         
         return;
     }
-    
-    
+    public function insertRecurso($idPescador, $valor){
+        $dbTable_EspecialistaRecurso = new Application_Model_DbTable_PescadorEspecialistaHasRecurso();
+        
+        $dadosPescadorHasRecurso = array(
+            'tps_id' => $idPescador,
+            'trec_id' => $valor,
+        );
+        $dbTable_EspecialistaRecurso->insert($dadosPescadorHasRecurso);
+        
+        return;
+    }
+    public function insertFornecedorInsumos($idPescador, $valor){
+        $dbTable_EspecialistaFornecedorInsumos = new Application_Model_DbTable_PescadorEspecialistaHasFornecedorInsumos();
+        
+        $dadosPescadorHasFornecedorInsumos = array(
+            'tps_id' => $idPescador,
+            'tfi_id' => $valor,
+        );
+        $dbTable_EspecialistaFornecedorInsumos->insert($dadosPescadorHasFornecedorInsumos);
+        
+        return;
+    }
+    public function insertCompradorPescado($idPescador, $valor){
+        $dbTable_EspecialistaCompradorPescado = new Application_Model_DbTable_PescadorEspecialistaHasCompradorPescado();
+        
+        $dadosPescadorHasCompradorPescado = array(
+            'tps_id' => $idPescador,
+            'dp_id' => $valor,
+        );
+        $dbTable_EspecialistaCompradorPescado->insert($dadosPescadorHasCompradorPescado);
+        
+        return;
+    }
+    public function insertHabilidades($idPescador, $valor){
+        $dbTable_EspecialistaHabilidades = new Application_Model_DbTable_PescadorEspecialistaHasHabilidades();
+        
+        $dadosPescadorHasHabilidades = array(
+            'tps_id' => $idPescador,
+            'ttr_id' => $valor,
+        );
+        $dbTable_EspecialistaHabilidades->insert($dadosPescadorHasHabilidades);
+        
+        return;
+    }
+    public function insertBarco($idPescador, $valor){
+        $dbTable_EspecialistaBarco = new Application_Model_DbTable_PescadorEspecialistaHasBarco();
+        
+        $dadosPescadorHasBarco = array(
+            'tps_id' => $idPescador,
+            'bar_id' => $valor,
+        );
+        $dbTable_EspecialistaBarco->insert($dadosPescadorHasBarco);
+        
+        return;
+    }
     
 //VIEWS/////////////////////////////////////////////////////////////////////////////////
     
@@ -488,6 +536,57 @@ class Application_Model_PescadorEspecialista
         return $dao->fetchAll($select)->toArray();
     }
     
+    public function selectVRecurso($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasRecurso();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectVFornecedorInsumos($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasFornecedorInsumos();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectVCompradorPescado($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasCompradorPescado();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectVHabilidades($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasHabilidades();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    public function selectVBarco($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialistaHasBarco();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
+    
 ///////////////////DELETES ////////////////////////////////////////////////////////////////////
     public function deleteEstruturaResidencial( $idEstrutura,$idPescador){
         $dbTable_PescadorEHasEstResidencial = new Application_Model_DbTable_PescadorEspecialistaHasEstruturaResidencial();
@@ -619,5 +718,17 @@ class Application_Model_PescadorEspecialista
         
         $dbTable->delete($dadosPescador);
     }
+    public function deleteRecurso( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasRecurso();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'trec_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    
+    
 }
 

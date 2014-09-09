@@ -81,6 +81,14 @@ class Application_Model_VConsultaPadrao
         
         return $this->dbVConsultaPortos->fetchAll($selectPortosData)->toArray();
     }
+    
+    public function selectRelatorioMensal(){
+        $this->dbRelatorioMensal = new Application_Model_DbTable_VRelatorioMensal();
+        
+        $selectRelatorio = $this->dbRelatorioMensal->select();
+        
+        return $this->dbRelatorioMensal->fetchAll($selectRelatorio)->toArray();
+    }
 
 }
 

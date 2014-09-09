@@ -31,8 +31,7 @@ body{
     float: right;
 }
 
-#menu
-{
+#menu{
     float: left;
     width: 900px;
     background: #5F302B;//#8B8386;
@@ -131,7 +130,6 @@ body{
 }
 
 
-
 #menu-lateral
 {
     float: left;
@@ -157,15 +155,10 @@ body{
     background: black;
 
 }
-#Social li{
+#Social li, #Dsbq li, #Relatorio li{
     background: #90544D;//#9C9698;
 }
-#Dsbq li{
-    background: #90544D;//#9C9698;
-}
-#Relatorio li{
-    background: #90544D;//#9C9698;
-}
+
 #menu-lateral a{
     color: #fff;
     text-decoration: none;
@@ -245,8 +238,6 @@ tbody tr:nth-child(odd) {
     background: #F9F2F1;
 }
 
-
-
 .td-botao {
     width: 3px;
     height: 3px;
@@ -312,21 +303,17 @@ tbody tr:nth-child(odd) {
     width: 630px;
     height: auto;
 }
-#pescador_especialista input{
+#pescador_especialista input, select{
     width: 220px;
 }
-#pescador_especialista .button-confirm{
+#pescador_especialista .button-confirm, .button-del{
     width: 30px;
 }
-#pescador_especialista .button-del{
-    width: 30px;
-}
+
 #small{
     width: 160px;
 }
-#pescador_especialista select{
-    width: 220px;
-}
+
 
 select{
     width: 168px;
@@ -340,14 +327,11 @@ select.espc{
 select.amostragem{
     width: 80px;
 }
-.form-dir{
+.form-dir, .form-esq{
     padding: 8px;
     padding-left: 0px;
 }
-.form-esq{
-    padding: 8px;
-    padding-left: 0px;
-}
+
 input {
     float: right;
     height: 22px;
@@ -589,9 +573,6 @@ legend{
     padding: 10px;
 }
 
-#abas li{
-        
-}
 #for_tabs-2{
     color: red;
 }

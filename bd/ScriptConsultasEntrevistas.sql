@@ -133,43 +133,78 @@ Inner join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id group by t_porto.pt
 
 
 --Entrevists
-Select Count(pto_id) from t_porto;
-Select Count(paf_id) from t_pesqueiro_af;
-Select Count(tu_id) from t_usuario;
-Select Count(bar_id) from t_barco;
-Select Count(tp_id) from t_pescador where tp_pescadordeletado=false;
-Select Count(fd_id) from t_ficha_diaria;
-Select count(af_id) from t_arrastofundo;
-Select count(cal_id) from t_calao;
-Select count(cml_id) from t_coletamanual;
-Select count(em_id) from t_emalhe;
-Select count(grs_id) from t_grosseira;
-Select count(jre_id) from t_jerere;
-Select count(lin_id) from t_linha;
-Select count(lf_id) from t_linhafundo;
-Select count(man_id) from t_manzua;
-Select count(mer_id) from t_mergulho;
-Select count(rat_id) from t_ratoeira;
-Select count(sir_id) from t_siripoia;
-Select count(tar_id) from t_tarrafa;
-Select count(vp_id) from t_varapesca;
-Select count(esp_id) from t_especie;
+Create View v_relatorio_mensal as
+Select 'Portos' as nome,Count(pto_id) as quantidade from t_porto
+Union All
+Select 'Pesqueiros',Count(paf_id) from t_pesqueiro_af
+Union All
+Select 'Usuários',Count(tu_id) from t_usuario
+Union All
+Select 'Barcos',Count(bar_id) from t_barco
+Union All
+Select 'Pescadores',Count(tp_id) from t_pescador where tp_pescadordeletado=false
+Union All
+Select 'Fichas Diárias',Count(fd_id) from t_ficha_diaria
+Union All
+Select 'Entrevistas Arrasto de Fundo',count(af_id) from t_arrastofundo
+Union All
+Select 'Entrevistas Calão',count(cal_id) from t_calao
+Union All
+Select 'Entrevistas ColetaManual',count(cml_id) from t_coletamanual
+Union All
+Select 'Entrevistas Emalhe',count(em_id) from t_emalhe
+Union All
+Select 'Entrevistas Grosseira',count(grs_id) from t_grosseira
+Union All
+Select 'Entrevistas Jereré',count(jre_id) from t_jerere
+Union All
+Select 'Entrevistas Linha',count(lin_id) from t_linha
+Union All
+Select 'Entrevistas LinhaFundo',count(lf_id) from t_linhafundo
+Union All
+Select 'Entrevistas Manzua',count(man_id) from t_manzua
+Union All
+Select 'Entrevistas Mergulho',count(mer_id) from t_mergulho
+Union All
+Select 'Entrevistas Ratoeira',count(rat_id) from t_ratoeira
+Union All
+Select 'Entrevistas Siripoia',count(sir_id) from t_siripoia
+Union All
+Select 'Entrevistas Tarrafa',count(tar_id) from t_tarrafa
+Union All
+Select 'Entrevistas Vara de Pesca',count(vp_id) from t_varapesca
+Union All
+Select 'Espécies',count(esp_id) from t_especie
+Union All
+Select 'Esp.Capturadas Arrasto de fundo',count(spc_af_id) from t_arrastofundo_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Calão',count(spc_cal_id) from t_calao_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Coleta Manual',count(spc_cml_id) from t_coletamanual_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Emalhe',count(spc_em_id) from t_emalhe_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Groseira',count(spc_grs_id) from t_grosseira_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Jereré',count(spc_jre_id) from t_jerere_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Linha',count(spc_lin_id) from t_linha_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas LinhaFundo',count(spc_lf_id) from t_linhafundo_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Manzuá',count(spc_man_id) from t_manzua_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Mergulho',count(spc_mer_id) from t_mergulho_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Ratoeira',count(spc_rat_id) from t_ratoeira_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Siripoia',count(spc_sir_id) from t_siripoia_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Tarrafa',count(spc_tar_id) from t_tarrafa_has_t_especie_capturada
+Union All
+Select 'Esp.Capturadas Vara de Pesca',count(spc_vp_id) from t_varapesca_has_t_especie_capturada;
 
-Select count(spc_af_id) from t_arrastofundo_has_t_especie_capturada;
-Select count(spc_cal_id) from t_calao_has_t_especie_capturada;
-Select count(spc_cml_id) from t_coletamanual_has_t_especie_capturada;
-Select count(spc_em_id) from t_emalhe_has_t_especie_capturada;
-Select count(spc_grs_id) from t_grosseira_has_t_especie_capturada;
-Select count(spc_jre_id) from t_jerere_has_t_especie_capturada;
-Select count(spc_lin_id) from t_linha_has_t_especie_capturada;
-Select count(spc_lf_id) from t_linhafundo_has_t_especie_capturada;
-Select count(spc_man_id) from t_manzua_has_t_especie_capturada;
-Select count(spc_mer_id) from t_mergulho_has_t_especie_capturada;
-Select count(spc_rat_id) from t_ratoeira_has_t_especie_capturada;
-Select count(spc_sir_id) from t_siripoia_has_t_especie_capturada;
-Select count(spc_tar_id) from t_tarrafa_has_t_especie_capturada;
-Select count(spc_vp_id) from t_varapesca_has_t_especie_capturada;
-
+zf create db-table VRelatorioMensal v_relatorio_mensal;
 
 --IMPORTAR -----------------
 Create or Replace View v_consulta_portosbydata As

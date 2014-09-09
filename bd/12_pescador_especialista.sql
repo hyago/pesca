@@ -368,11 +368,11 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  tps_num_dias_pescando int,
  tps_hora_pescando float,
       tup_id int,
-      tfi_id int,
-      trec_id int,
+      --tfi_id int,
+      --trec_id int,
       --dp_id_pescado int,
       tfp_id_consumo int,
-      dp_id_comprador int,
+      --dp_id_comprador int,
       tsp_id int,
       tlt_id int,
  tps_unidade_beneficiamento Varchar(100),
@@ -384,7 +384,7 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  tps_beneficio_colonia Varchar(100),
       trgp_id int,
       --tdif_id_area int,
-      ttr_id_outra_habilidade int,
+      --ttr_id_outra_habilidade int,
       ttr_id_alternativa_renda int,
       ttr_id_outra_profissao int,
  tps_filho_seguir_profissao Varchar(100),
@@ -402,11 +402,11 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  Foreign Key (ttr_id_antes_pesca) References t_tiporenda,
  Foreign Key (tfp_id) References t_frequencia_pesca,
  Foreign Key (tup_id) References t_ultima_pesca,
- Foreign Key (tfi_id) References t_fornecedor_insumos,
- Foreign Key (trec_id) References t_recurso,
+ --Foreign Key (tfi_id) References t_fornecedor_insumos,
+ --Foreign Key (trec_id) References t_recurso,
 --Foreign Key (dp_id_pescado) References t_destinopescado,
  Foreign Key (tfp_id_consumo) References t_frequencia_pesca,
- Foreign Key (dp_id_comprador) References t_destinopescado,
+ --Foreign Key (dp_id_comprador) References t_destinopescado,
  Foreign Key (tsp_id) References t_sobra_pesca,
  Foreign Key (tlt_id) References t_local_tratamento,
  Foreign Key (tc_id) References t_colonia,
@@ -414,7 +414,7 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  Foreign Key (trgp_id) References t_rgp_orgao,
  --Foreign Key (tdif_id_area) References t_dificuldade,
  Foreign Key (ttr_id_outra_profissao) References t_tiporenda,
- Foreign Key (ttr_id_outra_habilidade) References t_tiporenda,
+ --Foreign Key (ttr_id_outra_habilidade) References t_tiporenda,
  Foreign Key (ttr_id_alternativa_renda) References t_tiporenda,
  Foreign Key (tp_id) References t_pescador,
  Foreign Key (tp_resp_cad) References t_usuario,
@@ -422,7 +422,7 @@ Insert Into t_recurso(trec_recurso) Values('Não Utiliza');
  );
  --Alter table t_pescador_especialista ADD CONSTRAINT tp_id_unique UNIQUE (tp_id);
  --Alter Table t_pescador Add column tp_especialidade timestamp without time zone;
-Alter table t_pescador_especialista Add Column bar_id_barco int, Add Column tps_obs Varchar(200);
+--Alter table t_pescador_especialista Add Column bar_id_barco int, Add Column tps_obs Varchar(200);
 
  Create Table t_pescador_especialista_has_t_estrutura_residencial(
      tpsterd_id serial,
@@ -543,7 +543,97 @@ Alter table t_pescador_especialista Add Column bar_id_barco int, Add Column tps_
 
  );
 
- 
+
+--SUGESTÕES CARLA 08-09---------------------------------------------------------
+Create Table t_pescador_especialista_has_t_recurso(
+
+    tpsrec_id serial,
+    trec_id int,
+    tps_id int,
+    Primary Key (tpsrec_id),
+    Foreign Key (trec_id) References t_recurso,
+    Foreign Key (tps_id) References t_pescador_especialista
+    
+);
+
+
+Create Table t_pescador_especialista_has_t_fornecedor_insumos(
+
+    tpsfi_id serial,
+    tfi_id int,
+    tps_id int,
+    Primary Key (tpsfi_id),
+    Foreign Key (tfi_id) References t_fornecedor_insumos,
+    Foreign Key (tps_id) References t_pescador_especialista
+
+);
+
+Create Table t_pescador_especialista_has_t_comprador_pescado(
+
+    tpsdp_id serial,
+    dp_id int,
+    tps_id int,
+    Primary Key (tpsdp_id),
+    Foreign Key (dp_id) References t_destinopescado,
+    Foreign Key (tps_id) References t_pescador_especialista
+);
+
+
+Create Table t_pescador_especialista_has_t_habilidades(
+
+    tpsttr_id serial,
+    ttr_id int,
+    tps_id int,
+    Primary Key (tpsttr_id),
+    Foreign Key (ttr_id) References t_tiporenda,
+    Foreign Key (tps_id) References t_pescador_especialista
+
+);
+
+
+Create Table t_pescador_especialista_has_t_barco(
+
+    tpsbar_id serial,
+    bar_id int,
+    tps_id int,
+    Primary Key (tpsbar_id),
+    Foreign Key (bar_id) References t_barco,
+    Foreign Key (tps_id) References t_pescador_especialista
+
+);
+
+ALTER TABLE t_pescador_especialista DROP COLUMN tfi_id ,DROP COLUMN trec_id, DROP COLUMN dp_id_comprador, DROP COLUMN ttr_id_outra_habilidade, DROP COLUMN bar_id_barco;
+--ALTER TABLE t_pescador_especialista DROP CONSTRAINT t_pescador_especialista_tfi_id_fkey, DROP CONSTRAINT t_pescador_especialista_trec_id_fkey, DROP CONSTRAINT t_pescador_especialista_ttr_id_outra_habilidade_fkey,DROP CONSTRAINT t_pescador_especialista_dp_id_comprador_fkey; 
+
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_recurso AS 
+ SELECT hasrecurso.tps_id, hasrecurso.trec_id, recurso.trec_recurso
+   FROM t_pescador_especialista_has_t_recurso as hasrecurso, t_recurso as recurso
+  WHERE hasrecurso.trec_id = recurso.trec_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_fornecedor_insumos AS 
+ SELECT hasfornecedor_insumos.tps_id, hasfornecedor_insumos.tfi_id, fornecedor_insumos.tfi_fornecedor
+   FROM t_pescador_especialista_has_t_fornecedor_insumos as hasfornecedor_insumos, t_fornecedor_insumos as fornecedor_insumos
+  WHERE hasfornecedor_insumos.tfi_id = fornecedor_insumos.tfi_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_comprador_pescado AS 
+ SELECT hasdestino_pescado.tps_id, hasdestino_pescado.dp_id, destino_pescado.dp_destino
+   FROM t_pescador_especialista_has_t_comprador_pescado as hasdestino_pescado, t_destinopescado as destino_pescado
+  WHERE hasdestino_pescado.dp_id = destino_pescado.dp_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_habilidades AS 
+ SELECT hashabilidades.tps_id, hashabilidades.ttr_id, habilidades.ttr_descricao
+   FROM t_pescador_especialista_has_t_habilidades as hashabilidades, t_tiporenda as habilidades
+  WHERE hashabilidades.ttr_id = habilidades.ttr_id;
+
+CREATE OR REPLACE VIEW v_pescador_especialista_has_t_barco AS 
+ SELECT hasbarco.tps_id, hasbarco.bar_id, barco.bar_nome
+   FROM t_pescador_especialista_has_t_barco as hasbarco, t_barco as barco
+  WHERE hasbarco.bar_id = barco.bar_id;
+
+
+--------------------------------------------------------------------------------
+
 
 CREATE OR REPLACE VIEW v_pescador_especialista_has_t_estrutura_residencial AS 
  SELECT hasestr.tps_id, hasestr.terd_id, estrutura.terd_estrutura
