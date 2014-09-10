@@ -728,7 +728,46 @@ class Application_Model_PescadorEspecialista
         
         $dbTable->delete($dadosPescador);
     }
-    
+    public function deleteFornecedorInsumos( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasFornecedorInsumos();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'tfi_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteCompradorPescado( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasCompradorPescado();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'dp_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteHabilidades( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasHabilidades();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'ttr_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
+    public function deleteBarco( $id,$idPescador){
+        $dbTable = new Application_Model_DbTable_PescadorEspecialistaHasBarco();
+
+        $dadosPescador = array(
+            'tps_id = ?' => $idPescador,
+            'bar_id = ?' => $id
+        );
+        
+        $dbTable->delete($dadosPescador);
+    }
     
 }
 

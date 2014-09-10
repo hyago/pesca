@@ -89,6 +89,14 @@ class Application_Model_VConsultaPadrao
         
         return $this->dbRelatorioMensal->fetchAll($selectRelatorio)->toArray();
     }
+    
+    public function selectEntrevistaPesqueiro(){
+        $this->dbEntrevistaPortoPesqueiro = new Application_Model_DbTable_VEntrevistaPortoPesqueiro();
+        
+        $selectRelatorio = $this->dbEntrevistaPortoPesqueiro->select();
+        
+        return $this->dbEntrevistaPortoPesqueiro->fetchAll($selectRelatorio)->toArray();
+    }
 
 }
 

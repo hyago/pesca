@@ -632,6 +632,26 @@ CREATE OR REPLACE VIEW v_pescador_especialista_has_t_barco AS
   WHERE hasbarco.bar_id = barco.bar_id;
 
 
+zf create db-table PescadorEspecialistaHasRecurso;
+zf create db-table PescadorEspecialistaHasFornecedorInsumos;
+zf create db-table PescadorEspecialistaHasCompradorPescado;
+zf create db-table PescadorEspecialistaHasHabilidades;
+zf create db-table PescadorEspecialistaHasBarco;
+
+zf create db-table VPescadorEspecialistaHasRecurso;
+zf create db-table VPescadorEspecialistaHasFornecedorInsumos;
+zf create db-table VPescadorEspecialistaHasCompradorPescado;
+zf create db-table VPescadorEspecialistaHasHabilidades;
+zf create db-table VPescadorEspecialistaHasBarco;
+
+
+
+
+
+
+
+
+
 --------------------------------------------------------------------------------
 
 

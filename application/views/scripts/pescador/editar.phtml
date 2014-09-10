@@ -1286,27 +1286,77 @@ $(function() {
                      
                </fieldset> 
 <!-- 28.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Fornecedor Insumos /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div class="form-dir">
-                        <label >28.2.Fornecedor dos insumos?</label>
-                        <select name="selectFornecedorInsumo" >
-                                <?php foreach ($this->selectFornecedorInsumos as $key => $fornecedorInsumo): ?>
-                                    <option value="<?= $fornecedorInsumo['tfi_id']; ?>"<?= ($fornecedorInsumo['tfi_id'] == $this->assignEspecialista[0]['tfi_id']) ? 'selected' : ''; ?>><?= $fornecedorInsumo['tfi_fornecedor']; ?></option>
+                <a id="pescador_especialista_insumo"></a>
+                <fieldset class="noEditable"><legend>28.2.Fornecedor dos Insumos? </legend>
+                        <fieldset>
+
+                        <div id="base">
+                            <input type="button" name="Add" class="button-confirm" onclick="jsInsertInsumoPesca(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertinsumopesca"), null, true) ?>', <?=$this->pescador['tp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_insumo')">
+                            <select name="selectInsumo" id="dynamicInput">
+                                <?php foreach ($this->selectInsumo as $key => $insumos): ?>
+                                    <option value="<?= $insumos['tin_id']; ?>"><?= $insumos['tin_insumo']; ?></option>
                                 <?php endforeach; ?>
-                        </select>
-                 </div> 
+                            </select> 
+                            
+                            
+                        </div>
+
+                            </fieldset>
+                        <br>
+                        <table id="tblArteTipoPescas">
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="35%">Insumo</th>
+                                <th width="5%"></th>
+                            </tr>
+                            <?php foreach ($this->assign_vEspecialistaHasInsumo as $key => $vInsumo): ?>
+                                <tr id="linhaTipoCapturadaRows<?= $key ?>">
+                                    <td name="inputTipoID[]"> <?= $vInsumo['tin_id'] ?> </td>
+                                    <td name="inputTipo[]" > <?= $vInsumo['tin_insumo'] ?> </td>
+                                    <td name="inputValor[]"> <?= $vInsumo['tin_valor_insumo'] ?> </td>
+                                    <td><input type="button" class="button-del" width="5%" onclick="
+                                        jsDeleteDynamicEspecialista( <?=$vInsumo['tin_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deleteinsumopesca"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_insumo')"></td> </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                     
+               </fieldset> 
 <!-- 28.3-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Recursos /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                <div class="form-dir">
-                        <label >28.3.Recurso utilizado?</label>
-                        <select name="selectRecurso" >
-                                <?php foreach ($this->selectRecursos as $key => $recurso): ?>
-                                    <option value="<?= $recurso['trec_id']; ?>"<?= ($recurso['trec_id'] == $this->assignEspecialista[0]['trec_id']) ? 'selected' : ''; ?>><?= $recurso['trec_recurso']; ?></option>
+                <a id="pescador_especialista_insumo"></a>
+                <fieldset class="noEditable"><legend>28.3.Quais Recursos Utilizados? </legend>
+                        <fieldset>
+
+                        <div id="base">
+                            <input type="button" name="Add" class="button-confirm" onclick="jsInsertInsumoPesca(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertinsumopesca"), null, true) ?>', <?=$this->pescador['tp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_insumo')">
+                            <input type="number" required id="small" name="tp_valorInsumo" min="0" placeholder="Valor do Insumo"/>
+                            <select name="selectInsumo" id="dynamicInput">
+                                <?php foreach ($this->selectInsumo as $key => $insumos): ?>
+                                    <option value="<?= $insumos['tin_id']; ?>"><?= $insumos['tin_insumo']; ?></option>
                                 <?php endforeach; ?>
-                        </select>
-                 </div> 
-                 <table id="tabelaSemEstilo">
-                    
-                    <td><input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?>, '#pescador_especialista_insumo' )"></td>
-               </table>
+                            </select> 
+                            
+                            
+                        </div>
+
+                            </fieldset>
+                        <br>
+                        <table id="tblArteTipoPescas">
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="35%">Insumo</th>
+                                <th width="5%"></th>
+                            </tr>
+                            <?php foreach ($this->assign_vEspecialistaHasInsumo as $key => $vInsumo): ?>
+                                <tr id="linhaTipoCapturadaRows<?= $key ?>">
+                                    <td name="inputTipoID[]"> <?= $vInsumo['tin_id'] ?> </td>
+                                    <td name="inputTipo[]" > <?= $vInsumo['tin_insumo'] ?> </td>
+                                    <td><input type="button" class="button-del" width="5%" onclick="
+                                        jsDeleteDynamicEspecialista( <?=$vInsumo['tin_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deleteinsumopesca"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_insumo')"></td> </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                     
+               </fieldset> 
 <!-- 29-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Destino do Pescado /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <a id="pescador_especialista_destino"></a>
                 <fieldset class="noEditable"><legend>29.Destino do Pescado? </legend>
@@ -1352,14 +1402,40 @@ $(function() {
                         </select>
                  </div>
 <!-- 29.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Comprador pescado /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <div class="form-dir">
-                        <label >29.2.Quem compra o pescado?</label>
-                        <select name="selectCompradorPescado" >
-                                <?php foreach ($this->selectDestinoPescado as $key => $compradorPescado): ?>
-                                    <option value="<?= $compradorPescado['dp_id']; ?>"<?= ($compradorPescado['dp_id'] == $this->assignEspecialista[0]['dp_id_comprador']) ? 'selected' : ''; ?>><?= $compradorPescado['dp_destino']; ?></option>
+                <a id="pescador_especialista_destino"></a>
+                <fieldset class="noEditable"><legend>29.2.Quem compra o pescado? </legend>
+                        <fieldset>
+
+                        <div id="base">
+                            <input type="button" name="Add" class="button-confirm" onclick="jsInsertDestinoPescadoEspecialista(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertdestinopescado"), null, true) ?>', <?=$this->pescador['tp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')">
+                            <select name="selectDestinoPescado" id="dynamicInput">
+                                <?php foreach ($this->selectDestinoPescado as $key => $destinos): ?>
+                                    <option value="<?= $destinos['dp_id']; ?>"><?= $destinos['dp_destino']; ?></option>
                                 <?php endforeach; ?>
-                        </select>
-                 </div>
+                            </select> 
+                            
+                            
+                        </div>
+
+                            </fieldset>
+                        <br>
+                        <table id="tblArteTipoPescas">
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="35%">Destino</th>
+                                <th width="5%"></th>
+                            </tr>
+                            <?php foreach ($this->assign_vEspecialistaHasDestinoPescado as $key => $vDestino): ?>
+                                <tr id="linhaTipoCapturadaRows<?= $key ?>">
+                                    <td name="inputTipoID[]"> <?= $vDestino['dp_id_pescado'] ?> </td>
+                                    <td name="inputTipo[]" > <?= $vDestino['dp_destino'] ?> </td>
+                                    <td><input type="button" class="button-del" width="5%" onclick="
+                                        jsDeleteDynamicEspecialista( <?=$vDestino['dp_id_pescado']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deletedestinopescado"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')"></td> </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                     
+               </fieldset> 
 <!-- 30-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Sobra da Pesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <div class="form-dir">
                         <label >30.O que é feito com a sobra da pescaria?</label>
@@ -1470,14 +1546,40 @@ $(function() {
                      
                </fieldset> 
 <!-- 37-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Outras Habilidades /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
-                <div class="form-dir">
-                        <label >37.Possui habilidade para atuar em outra área?</label>
-                            <select name="selectOutraHabilidade" >
-                                <?php foreach ($this->assignTipoRendas as $key => $outraHabilidade): ?>
-                                    <option value="<?= $outraHabilidade['ttr_id']; ?>"<?= ($outraHabilidade['ttr_id'] == $this->assignEspecialista[0]['ttr_id_outra_habilidade']) ? 'selected' : ''; ?>><?= $outraHabilidade['ttr_descricao']; ?></option>
+                <a id="pescador_especialista_destino"></a>
+                <fieldset class="noEditable"><legend>37.Possui habilidade em outra área? </legend>
+                        <fieldset>
+
+                        <div id="base">
+                            <input type="button" name="Add" class="button-confirm" onclick="jsInsertDestinoPescadoEspecialista(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertdestinopescado"), null, true) ?>', <?=$this->pescador['tp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')">
+                            <select name="selectDestinoPescado" id="dynamicInput">
+                                <?php foreach ($this->selectDestinoPescado as $key => $destinos): ?>
+                                    <option value="<?= $destinos['dp_id']; ?>"><?= $destinos['dp_destino']; ?></option>
                                 <?php endforeach; ?>
-                        </select>
-                 </div>
+                            </select> 
+                            
+                            
+                        </div>
+
+                            </fieldset>
+                        <br>
+                        <table id="tblArteTipoPescas">
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="35%">Destino</th>
+                                <th width="5%"></th>
+                            </tr>
+                            <?php foreach ($this->assign_vEspecialistaHasDestinoPescado as $key => $vDestino): ?>
+                                <tr id="linhaTipoCapturadaRows<?= $key ?>">
+                                    <td name="inputTipoID[]"> <?= $vDestino['dp_id_pescado'] ?> </td>
+                                    <td name="inputTipo[]" > <?= $vDestino['dp_destino'] ?> </td>
+                                    <td><input type="button" class="button-del" width="5%" onclick="
+                                        jsDeleteDynamicEspecialista( <?=$vDestino['dp_id_pescado']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deletedestinopescado"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')"></td> </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                     
+               </fieldset> 
 <!-- 38-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Alternativa Renda /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
                 <div class="form-dir">
                         <label >38.Alternativa à renda?</label>
@@ -1502,12 +1604,12 @@ $(function() {
                         <label >40.Gostaria que o filho fosse pescador?</label>
                         <input type="text"  name="tp_filhoPescador" min="0" placeholder="Gostaria que o filho fosse pescador?" value="<?= $this->assignEspecialista[0]['tps_filho_seguir_profissao']?>"/>
                  </div>
-<!-- 40-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
+<!-- 41-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
                  <div class="form-dir">
                         <label >41.Grau de dependência da pesca (sem o %)?</label>
                             <input type="number" required  name="tp_dependenciaPesca" min="0" placeholder="Dependencia da Pesca" value="<?= $this->assignEspecialista[0]['tps_grau_dependencia_pesca']?>"/>
                  </div>
-                 
+<!-- 42-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                  
                  <div class="form-dir">
                         <label >42.Entrevistador:</label>
                            <select name="selectEntrevistador" >
@@ -1516,22 +1618,47 @@ $(function() {
                                 <?php endforeach; ?>
                             </select>
                  </div>
-
+<!-- 43-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/--> 
                  <div class="form-dir">
                         <label >43.Data da entrevista:</label>
                             <input type="date"  name="tp_data" min="0" placeholder="Data da Entrevista" value="<?= $this->assignEspecialista[0]['tps_data']?>"/>
                  </div>
-                 
-                 <div class="form-dir">
-                        <label >44.Embaracação Utilizada?</label>
-                        <select name="selectBarco" >
-                            <option value="0"></option>
-                                <?php foreach ($this->assignBarcos as $key => $barcos): ?>
-                                    <option value="<?= $barcos['bar_id']; ?>"<?= ($barcos['bar_id'] == $this->assignEspecialista[0]['bar_id_barco']) ? 'selected' : ''; ?>><?= $barcos['bar_nome']; ?></option>
+<!-- 44-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                  
+                 <a id="pescador_especialista_destino"></a>
+                <fieldset class="noEditable"><legend>44.Embarcações utilizadas? </legend>
+                        <fieldset>
+
+                        <div id="base">
+                            <input type="button" name="Add" class="button-confirm" onclick="jsInsertDestinoPescadoEspecialista(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertdestinopescado"), null, true) ?>', <?=$this->pescador['tp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')">
+                            <select name="selectDestinoPescado" id="dynamicInput">
+                                <?php foreach ($this->selectDestinoPescado as $key => $destinos): ?>
+                                    <option value="<?= $destinos['dp_id']; ?>"><?= $destinos['dp_destino']; ?></option>
                                 <?php endforeach; ?>
-                        </select>
-                 </div>
-                 
+                            </select> 
+                            
+                            
+                        </div>
+
+                            </fieldset>
+                        <br>
+                        <table id="tblArteTipoPescas">
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="35%">Destino</th>
+                                <th width="5%"></th>
+                            </tr>
+                            <?php foreach ($this->assign_vEspecialistaHasDestinoPescado as $key => $vDestino): ?>
+                                <tr id="linhaTipoCapturadaRows<?= $key ?>">
+                                    <td name="inputTipoID[]"> <?= $vDestino['dp_id_pescado'] ?> </td>
+                                    <td name="inputTipo[]" > <?= $vDestino['dp_destino'] ?> </td>
+                                    <td><input type="button" class="button-del" width="5%" onclick="
+                                        jsDeleteDynamicEspecialista( <?=$vDestino['dp_id_pescado']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deletedestinopescado"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')"></td> </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                     
+               </fieldset>
+<!-- 45-///_/_/_/_/_/_/_/_/_/_/_/_/_/ DependenciaPesca /_/_/_/_/_/_/_/_/_/_/_/_/_/-->                  
                  <div class="form-dir">
                         <label >45.Observação:</label>
                             <input type="text"  name="tps_obs" min="0" placeholder="Observação" value="<?= $this->assignEspecialista[0]['tps_obs']?>"/>

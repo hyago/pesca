@@ -293,4 +293,104 @@ Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
 Group by t_porto.pto_nome, date_trunc('month', vp_dhvolta) Order By consulta, pto_nome;
 
 
+Create view v_entrevista_porto_pesqueiro as
+Select t_porto.pto_nome, 'Arrasto de Fundo' as consulta, paf.paf_pesqueiro From t_arrastofundo 
+Inner Join t_monitoramento on t_arrastofundo.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_arrastofundo_has_t_pesqueiro as entpaf On t_arrastofundo.af_id = entpaf.af_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union All
+Select t_porto.pto_nome, 'Calão' as consulta, paf.paf_pesqueiro From t_calao 
+Inner Join t_monitoramento on t_calao.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_calao_has_t_pesqueiro as entpaf On t_calao.cal_id = entpaf.cal_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Coleta Manual' as consulta, paf.paf_pesqueiro From t_coletamanual 
+Inner Join t_monitoramento on t_coletamanual.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_coletamanual_has_t_pesqueiro as entpaf On t_coletamanual.cml_id = entpaf.cml_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Emalhe' as consulta, paf.paf_pesqueiro From t_emalhe 
+Inner Join t_monitoramento on t_emalhe.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_emalhe_has_t_pesqueiro as entpaf On t_emalhe.em_id = entpaf.em_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Grosseira' as consulta, paf.paf_pesqueiro From t_grosseira
+Inner Join t_monitoramento on t_grosseira.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_grosseira_has_t_pesqueiro as entpaf On t_grosseira.grs_id = entpaf.grs_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Jereré' as consulta, paf.paf_pesqueiro From t_jerere
+Inner Join t_monitoramento on t_jerere.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_jerere_has_t_pesqueiro as entpaf On t_jerere.jre_id = entpaf.jre_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Linha' as consulta, paf.paf_pesqueiro From t_linha
+Inner Join t_monitoramento on t_linha.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_linha_has_t_pesqueiro as entpaf On t_linha.lin_id = entpaf.lin_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Linha de Fundo' as consulta, paf.paf_pesqueiro From t_linhafundo
+Inner Join t_monitoramento on t_linhafundo.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_linhafundo_has_t_pesqueiro as entpaf On t_linhafundo.lf_id = entpaf.lf_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Manzuá' as consulta, paf.paf_pesqueiro From t_manzua
+Inner Join t_monitoramento on t_manzua.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_manzua_has_t_pesqueiro as entpaf On t_manzua.man_id = entpaf.man_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Mergulho' as consulta, paf.paf_pesqueiro From t_mergulho
+Inner Join t_monitoramento on t_mergulho.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_mergulho_has_t_pesqueiro as entpaf On t_mergulho.mer_id = entpaf.mer_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Ratoeira' as consulta, paf.paf_pesqueiro From t_ratoeira
+Inner Join t_monitoramento on t_ratoeira.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_ratoeira_has_t_pesqueiro as entpaf On t_ratoeira.rat_id = entpaf.rat_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Siripoia' as consulta, paf.paf_pesqueiro From t_siripoia
+Inner Join t_monitoramento on t_siripoia.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_siripoia_has_t_pesqueiro as entpaf On t_siripoia.sir_id = entpaf.sir_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Tarrafa' as consulta, paf.paf_pesqueiro From t_tarrafa
+Inner Join t_monitoramento on t_tarrafa.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_tarrafa_has_t_pesqueiro as entpaf On t_tarrafa.tar_id = entpaf.tar_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id
+Union ALL
+Select t_porto.pto_nome, 'Vara de Pesca' as consulta, paf.paf_pesqueiro From t_varapesca
+Inner Join t_monitoramento on t_varapesca.mnt_id = t_monitoramento.mnt_id 
+Inner Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+Right Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+Left Join t_varapesca_has_t_pesqueiro as entpaf On t_varapesca.vp_id = entpaf.vp_id
+Left Join t_pesqueiro_af as paf On entpaf.paf_id = paf.paf_id;
+
+
 

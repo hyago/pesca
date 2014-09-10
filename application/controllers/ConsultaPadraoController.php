@@ -37,8 +37,6 @@ class ConsultaPadraoController extends Zend_Controller_Action
         $dias = $consultaPadrao->selectDias();
         
         
-        $relatorioMensal = $consultaPadrao->selectRelatorioMensal();
-        
         $this->view->assign("totalEntrevistas", $totalEntrevistas);
         $this->view->assign("dias", $dias);
         $this->view->assign("diasByPorto", $diasByPorto);
@@ -300,6 +298,43 @@ class ConsultaPadraoController extends Zend_Controller_Action
 
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="relatorioMensal.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
+    
+    public function entrevistapesqueiroAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $modelConsulta = new Application_Model_VConsultaPadrao();
+        
+        $relatorioMensal = $modelConsulta->selectEntrevistaPesqueiro();
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Porto');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, 1, 'Arte de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, 1, 'Pesqueiro');
+        $linha = 2;
+        foreach ( $relatorioMensal as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['consulta']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $linha, $consulta['paf_pesqueiro']);
+            $linha++;
+        endforeach;
+        
+        
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="consultaPesqueiroEntrevistas.xls"');
         header('Cache-Control: max-age=0');
 
         ob_end_clean();
