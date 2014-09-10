@@ -340,5 +340,44 @@ class ConsultaPadraoController extends Zend_Controller_Action
         ob_end_clean();
         $objWriter->save('php://output');
     }
+    public function entrevistasbyhoraAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $modelConsulta = new Application_Model_VConsultaPadrao();
+        
+        $relatorioMensal = $modelConsulta->selectEntrevistasByHora();
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Arte de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, 1, 'Quantidade de Entrevistas');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, 1, 'Porto');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, 1, 'Horário');
+        $linha = 2;
+        foreach ( $relatorioMensal as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['consulta']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['quantidade']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $linha, $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, $linha, $consulta['hora_chegada']);
+            
+            $linha++;
+        endforeach;
+        
+        
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="entrevistasPorHora.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
 }
 

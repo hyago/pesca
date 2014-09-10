@@ -97,6 +97,13 @@ class Application_Model_VConsultaPadrao
         
         return $this->dbEntrevistaPortoPesqueiro->fetchAll($selectRelatorio)->toArray();
     }
+    public function selectEntrevistasByHora(){
+        $this->dbEntrevistaHora = new Application_Model_DbTable_VEntrevistasByHora();
+        
+        $selectRelatorio = $this->dbEntrevistaHora->select();
+        
+        return $this->dbEntrevistaHora->fetchAll($selectRelatorio)->toArray();
+    }
 
 }
 
