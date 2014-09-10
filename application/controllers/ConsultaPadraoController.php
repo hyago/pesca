@@ -357,13 +357,14 @@ class ConsultaPadraoController extends Zend_Controller_Action
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, 1, 'Quantidade de Entrevistas');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, 1, 'Porto');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, 1, 'Horário');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(4, 1, 'Mês/Ano');
         $linha = 2;
         foreach ( $relatorioMensal as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $linha, $consulta['consulta']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, $linha, $consulta['quantidade']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $linha, $consulta['pto_nome']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, $linha, $consulta['hora_chegada']);
-            
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(4, $linha, $consulta['mes']);
             $linha++;
         endforeach;
         
