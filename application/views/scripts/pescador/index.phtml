@@ -3,7 +3,7 @@
 
         <h2>Perfil Social->Pescador (lista limitada em 20)</h2>
 
-        <table id="tabelaSemEstilo">
+<!--        <table id="tabelaSemEstilo">
             <tr>
                 <td>
                     <a href="<?= $this->url(array("controller" => "pescador", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
@@ -30,7 +30,16 @@
                     <input type="text" name="inputApelido" placeholder="Busca por Apelido" />
                 </td>
             </tr>
-       </table>
+       </table>-->
+            <input type="button" value="Limpar" onClick="jsClearBusca('<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')"/>
+            <input type="button" value="Buscar" onClick="jsBuscaPescador(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')"/>
+            <select name="tipoBusca">
+                <option value="1">Por Nome</option>
+                <option value="2">Por Id</option>
+                <option value="3">Por Apelido</option>
+                <option value="4">Todos os Pescadores</option>
+            </select>
+            <input id="busca" name="buscaPescador" placeholder="Busca Pescador"/><br/>
         <br/>
             <div id="buscaInicial">
                 <label>Busca pela Inicial:</label>

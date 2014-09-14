@@ -3,9 +3,8 @@ $(document).ready(function() {
     if ($("fieldset").attr('id') === "Social") {
         $("#Social").show();
         $("#dadosSocial").hide();
-        $("#dadosDesembarque").hide();
-        $("#Filo").hide();
         $("#Dsbq").hide();
+        $("#Filo").hide();
         $("#Entrevista").hide();
         $("#Relatorio").hide();
         $("#RelListas").hide();
@@ -15,8 +14,9 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
-    if ($("fieldset").attr('id') === "dadosSocial") {
+    else if ($("fieldset").attr('id') === "dadosSocial") {
         $("#Social").show();
         $("#dadosSocial").show();
         $("#dadosDesembarque").hide();
@@ -31,6 +31,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if ($("fieldset").attr('id') === "Desembarque") {
         $("#Dsbq").show();
@@ -47,6 +48,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if ($("fieldset").attr('id') === "dadosDesembarque") {
         $("#Dsbq").show();
@@ -63,6 +65,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if ($("fieldset").attr('id') === "Filogenia") {
         $("#Dsbq").show();
@@ -79,6 +82,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if ($("fieldset").attr('id') === "Entrevista"){
         $("#Dsbq").show();
@@ -95,6 +99,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if ($("fieldset").attr('id') === "Relatorio"){
         $("#Relatorio").show();
@@ -111,6 +116,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if ($("fieldset").attr('id') === "RelListas"){
         $("#Relatorio").show();
@@ -127,6 +133,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if ($("fieldset").attr('id') === "RelConsolidados"){
         $("#Dsbq").hide();
@@ -143,6 +150,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
     else if($("fieldset").attr('id') === "Amostras"){
         $("#Entrevista").hide();
@@ -175,6 +183,24 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").show();
+        $("#dadosEmbarcacao").hide();
+    }
+    else if($("fieldset").attr('id') === "dadosEmbarcacao"){
+        $("#Entrevista").hide();
+        $("#Dsbq").show();
+        $("#Filo").hide();
+        $("#dadosSocial").hide();
+        $("#dadosDesembarque").hide();
+        $("#Social").hide();
+        $("#Relatorio").hide();
+        $("#RelListas").hide();
+        $("#RelConsolidados").hide();
+        $("#RelPescador").hide();
+        $("#RelPerfilSocial").hide();
+        $("#RelDesembarque").hide();
+        $("#Amostras").hide();
+        $("#Especialista").hide();
+        $("#dadosEmbarcacao").show();
     }
     else {
         $("#Entrevista").hide();
@@ -191,6 +217,7 @@ $(document).ready(function() {
         $("#RelDesembarque").hide();
         $("#Amostras").hide();
         $("#Especialista").hide();
+        $("#dadosEmbarcacao").hide();
     }
 
     $("#for-Social").click(function() {
@@ -235,6 +262,9 @@ $(document).ready(function() {
     $("#for-Especialista").click(function(){
         $("#Especialista").slideToggle();
     });
+    $("#for-dadosEmbarcacao").click(function(){
+        $("#dadosEmbarcacao").slideToggle();
+    });
     //funcoes para menu
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -249,33 +279,7 @@ $(document).ready(function() {
 });
 
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
-function jsBuscaPescadorId( frm, pag )
-{
-    if ( frm.inputId.value ) {
-        var tmpUpdate = (pag + '/index/tp_id/' + frm.inputId.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
-function jsBuscaPescadorNome( frm, pag )
-{
-    if ( frm.inputNome.value ) {
-        var tmpUpdate = (pag + '/index/tp_nome/' + frm.inputNome.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
-function jsBuscaPescadorApelido( frm, pag )
-{
-    if ( frm.inputApelido.value ) {
-        var tmpUpdate = (pag + '/index/tp_apelido/' + frm.inputApelido.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
 function jsBuscaPescadorPorto( frm, pag )
 {
     if ( frm.inputPorto.value ) {
@@ -388,11 +392,6 @@ function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
             location.replace(tmpUpdate);
 }
 
-function jsClearBuscaEntrevista( pag )
-{
-        location.hash = '';
-        location.replace( pag );
-}
 
 
 
@@ -1188,11 +1187,8 @@ function jsAtualizaPescadorEspecialista( frm, pag, idEspecialista, redirect)
             '/tfp_id/' + frm.selectFrequenciaPesca.value +
             '/tps_num_dias_pescando/'+ frm.tp_diasPescando.value +
             '/tps_hora_pescando/'+ frm.tp_horasPescando.value +
-            '/tup_id/'+ frm.selectUltimaPesca.value +
-            '/tfi_id/' + frm.selectFornecedorInsumo.value +
-            '/trec_id/' + frm.selectRecurso.value +
+            '/tup_id/'+ frm.selectUltimaPesca.value +     
             '/tfp_id_consumo/'+ frm.selectFrequenciaConsumo.value +
-            '/dp_id_comprador/'+ frm.selectCompradorPescado.value +
             '/tsp_id/' + frm.selectSobraPesca.value +
             '/tlt_id/' + frm.selectLocalTratamento.value +
             '/tps_unidade_beneficiamento/'+ frm.tp_unidadeBeneficiamento.value +
@@ -1203,14 +1199,12 @@ function jsAtualizaPescadorEspecialista( frm, pag, idEspecialista, redirect)
             '/tps_motivo_falta_pagamento/'+ frm.tp_dificuldadeColonia.value +
             '/tps_beneficio_colonia/'+ frm.tp_beneficiosColonia.value +
             '/trgp_id/' + frm.selectOrgaoRgp.value +
-            '/ttr_id_outra_habilidade/' + frm.selectOutraHabilidade.value +
             '/ttr_id_alternativa_renda/' + frm.selectAlternativaRenda.value +
             '/ttr_id_outra_profissao/' + frm.selectOutraProfissao.value +
             '/tps_filho_seguir_profissao/'+ frm.tp_filhoPescador.value +
             '/tps_grau_dependencia_pesca/' + frm.tp_dependenciaPesca.value +
             '/tu_id_entrevistador/' + frm.selectEntrevistador.value +
             '/tps_data/'+ frm.tp_data.value +
-            '/bar_id_barco/' + frm.selectBarco.value +
             '/tps_obs/' + frm.tps_obs.value +
             '/back_url/' + TmpUrl);
     
@@ -1344,6 +1338,26 @@ function jsInsertInsumoPesca(frm, pag, idPescador, idEspecialista, retorno){
     location.replace(tmpUpdate);
     
 }
+// -28.2 -------------------------------------------------------//
+function jsInsertFornecedorInsumo(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectFornecedorInsumo.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -28.3 -------------------------------------------------------//
+function jsInsertRecursos(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectRecursos.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
 
 // -29 -------------------------------------------------------//
 function jsInsertDestinoPescadoEspecialista(frm, pag, idPescador, idEspecialista, retorno){
@@ -1351,6 +1365,16 @@ function jsInsertDestinoPescadoEspecialista(frm, pag, idPescador, idEspecialista
     var TmpUrl  = (idPescador+retorno);
     
     var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectDestinoPescado.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -29.2 -------------------------------------------------------//
+function jsInsertCompradorPescado(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectCompradorPescado.value +'/back_url/' + TmpUrl);
     
     location.replace(tmpUpdate);
     
@@ -1365,6 +1389,27 @@ function jsInsertDificuldadePesca(frm, pag, idPescador, idEspecialista, retorno)
     location.replace(tmpUpdate);
     
 }
+// -37   -------------------------------------------------------//
+function jsInsertHabilidades(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectHabilidades.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+// -44   -------------------------------------------------------//
+function jsInsertEmbarcacoes(frm, pag, idPescador, idEspecialista, retorno){
+    
+    var TmpUrl  = (idPescador+retorno);
+    
+    var tmpUpdate = (pag + '/id/'+idEspecialista+'/valor/' + frm.selectEmbarcacao.value +'/back_url/' + TmpUrl);
+    
+    location.replace(tmpUpdate);
+    
+}
+
 
 function jsRedirectEspecialista(url, hash){
     var especialista = url+hash;
@@ -1383,3 +1428,60 @@ function jsDeleteDynamicEspecialista( id, idPescador, pag, idBack,back)
     }
 }
 
+
+function jsBuscaPescador(form, pag){
+    var busca;
+    if(form.tipoBusca.value === '1'){
+        busca = (pag+'/index/tp_nome/'+form.buscaPescador.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '2'){
+        busca = (pag+'/index/tp_id/'+form.buscaPescador.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '3'){
+        busca = (pag+'/index/tp_apelido/'+form.buscaPescador.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '4'){
+        busca = (pag+'/index/tp_all/'+"all");
+        location.replace(busca);
+    }
+}
+function jsBuscaFichaDiaria(form, pag){
+    var busca;
+    if(form.tipoBusca.value === '1'){
+        busca = (pag+'/index/fd_id/'+form.buscaFicha.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '2'){
+        busca = (pag+'/index/fd_data/'+form.buscaFicha.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '3'){
+        busca = (pag+'/index/fd_turno/'+form.buscaFicha.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '4'){
+        busca = (pag+'/index/pto_id/'+form.buscaFicha.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '5'){
+        busca = (pag+'/index/fd_estagiario/'+form.buscaFicha.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '6'){
+        busca = (pag+'/index/fd_monitor/'+form.buscaFicha.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '7'){
+        busca = (pag+'/index/fd_all/'+"all");
+        location.replace(busca);
+    }
+    
+}
+
+function jsClearBusca( pag ){
+        location.hash = '';
+        location.replace( pag );
+}

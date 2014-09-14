@@ -97,7 +97,7 @@ private $usuario;
         $iscas = $this->modelIsca->select(null, 'isc_tipo');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
-        print_r($especiesCamarao);
+        
         $idEntrevista = $this->_getParam('id');
         $datahoraSaida[] = split(" ",$entrevista['grs_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['grs_dhvolta']);

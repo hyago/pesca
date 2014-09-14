@@ -186,47 +186,47 @@ class PescadorController extends Zend_Controller_Action {
 
 //     /_/_/_/_/_/_/_/_/_/_/_/_/_/ UTILIZA VIEW PARA FACILITAR MONTAGEM DA CONSULTA /_/_/_/_/_/_/_/_/_/_/_/_/_/
         $model_VPescadorHasDependente = new Application_Model_VPescadorHasDependente();
-        $vPescadorHasDependente = $model_VPescadorHasDependente->selectDependentes("tp_id=" . $idPescador, "ttd_tipodependente", null);
+        $vPescadorHasDependente = $model_VPescadorHasDependente->selectDependentes("tp_id=" . $idPescador, "ttd_tipodependente");
         $this->view->assign("assign_vPescadorDependente", $vPescadorHasDependente);
 
         $model_VPescadorHasRenda = new Application_Model_VPescadorHasRenda();
-        $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $idPescador, "ttr_descricao", null);
+        $vPescadorHasRenda = $model_VPescadorHasRenda->select("tp_id=" . $idPescador, "ttr_descricao");
         $this->view->assign("assign_vPescadorRenda", $vPescadorHasRenda);
 
         $model_VPescadorHasComunidade = new Application_Model_VPescadorHasComunidade();
-        $vPescadorHasComunidade = $model_VPescadorHasComunidade->select("tp_id=" . $idPescador, "tcom_nome", null);
+        $vPescadorHasComunidade = $model_VPescadorHasComunidade->select("tp_id=" . $idPescador, "tcom_nome");
         $this->view->assign("assign_vPescadorComunidade", $vPescadorHasComunidade);
 
         $model_VPescadorHasProgramaSocial = new Application_Model_VPescadorHasProgramaSocial();
-        $vPescadorHasProgramaSocial = $model_VPescadorHasProgramaSocial->select("tp_id=" . $idPescador, "prs_programa", null);
+        $vPescadorHasProgramaSocial = $model_VPescadorHasProgramaSocial->select("tp_id=" . $idPescador, "prs_programa");
         $this->view->assign("assign_vPescadorProgramaSocial", $vPescadorHasProgramaSocial);
 
         $model_VPescadorHasTelefone = new Application_Model_VPescadorHasTelefone();
-        $vPescadorHasTelefone = $model_VPescadorHasTelefone->select("tpt_tp_id=" . $idPescador, "ttel_desc", null);
+        $vPescadorHasTelefone = $model_VPescadorHasTelefone->select("tpt_tp_id=" . $idPescador, "ttel_desc");
         $this->view->assign("assign_vPescadorHasTelefone", $vPescadorHasTelefone);
 
         $model_VPescadorHasColonia = new Application_Model_VPescadorHasColonia();
-        $vPescadorHasColonia = $model_VPescadorHasColonia->select("tp_id=" . $idPescador, "tc_nome", null);
+        $vPescadorHasColonia = $model_VPescadorHasColonia->select("tp_id=" . $idPescador, "tc_nome");
         $this->view->assign("assign_vPescadorColonia", $vPescadorHasColonia);
 
         $model_VPescadorHasAreaPesca = new Application_Model_VPescadorHasAreaPesca();
-        $vPescadorHasAreaPesca = $model_VPescadorHasAreaPesca->select("tp_id=" . $idPescador, "tareap_areapesca", null);
+        $vPescadorHasAreaPesca = $model_VPescadorHasAreaPesca->select("tp_id=" . $idPescador, "tareap_areapesca");
         $this->view->assign("assign_vPescadorAreaPesca", $vPescadorHasAreaPesca);
 
         $model_VPescadorHasArteTipoArea = new Application_Model_VPescadorHasArteTipoArea();
-        $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $idPescador, "tap_artepesca", null);
+        $vPescadorHasArteTipoArea = $model_VPescadorHasArteTipoArea->select("tp_id=" . $idPescador, "tap_artepesca");
         $this->view->assign("assign_vPescadorArteTipoArea", $vPescadorHasArteTipoArea);
 
         $VPescadorHasTipoCapturada = new Application_Model_VPescadorHasTipoCapturada();
-        $vPescadorHasTipoCapturada = $VPescadorHasTipoCapturada->select("tp_id=" . $idPescador, "itc_tipo", null);
+        $vPescadorHasTipoCapturada = $VPescadorHasTipoCapturada->select("tp_id=" . $idPescador, "itc_tipo");
         $this->view->assign("assign_vPescadorTipoCapturada", $vPescadorHasTipoCapturada);
 
         $model_VPescadorHasEmbarcacao = new Application_Model_VPescadorHasEmbarcacao();
-        $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $idPescador, "tte_tipoembarcacao", null);
+        $vPescadorHasEmbarcacao = $model_VPescadorHasEmbarcacao->select("tp_id=" . $idPescador, "tte_tipoembarcacao");
         $this->view->assign("assign_vPescadorEmbarcacao", $vPescadorHasEmbarcacao);
 
         $model_VPescadorHasPorto = new Application_Model_VPescadorHasPorto();
-        $vPescadorHasPorto = $model_VPescadorHasPorto->select("tp_id=" . $idPescador, "pto_nome", null);
+        $vPescadorHasPorto = $model_VPescadorHasPorto->select("tp_id=" . $idPescador, "pto_nome");
         $this->view->assign("assign_vPescadorPorto", $vPescadorHasPorto);
         
         
@@ -327,45 +327,59 @@ class PescadorController extends Zend_Controller_Action {
         
 /////VIEWS PESCADOR ESPECIALISTA
         
-        $vEspecialistaHasAcompanhado = $this->modelPescadorEspecialista->selectVAcompanhado("tps_id=" . $idPescador, "tacp_companhia", null);
+        $vEspecialistaHasAcompanhado = $this->modelPescadorEspecialista->selectVAcompanhado("tps_id=" . $idPescador, "tacp_companhia");
         $this->view->assign("assign_vEspecialistaHasAcompanhado", $vEspecialistaHasAcompanhado);
         
-        $vEspecialistaHasCompanhia = $this->modelPescadorEspecialista->selectVCompanhia("tps_id=" . $idPescador, "ttd_tipodependente", null);
+        $vEspecialistaHasCompanhia = $this->modelPescadorEspecialista->selectVCompanhia("tps_id=" . $idPescador, "ttd_tipodependente");
         $this->view->assign("assign_vEspecialistaHasCompanhia", $vEspecialistaHasCompanhia);
         
-        $vEspecialistaHasEstruturaResidencial = $this->modelPescadorEspecialista->selectVEstruturaResidencial("tps_id=" . $idPescador, "terd_estrutura", null);
+        $vEspecialistaHasEstruturaResidencial = $this->modelPescadorEspecialista->selectVEstruturaResidencial("tps_id=" . $idPescador, "terd_estrutura");
         $this->view->assign("assign_vEspecialistaHasEstruturaResidencial", $vEspecialistaHasEstruturaResidencial);
         
-        $vEspecialistaHasHorarioPesca = $this->modelPescadorEspecialista->selectVHorarioPesca("tps_id=" . $idPescador, "thp_horario", null);
+        $vEspecialistaHasHorarioPesca = $this->modelPescadorEspecialista->selectVHorarioPesca("tps_id=" . $idPescador, "thp_horario");
         $this->view->assign("assign_vEspecialistaHasHorarioPesca", $vEspecialistaHasHorarioPesca);
         
-        $vEspecialistaHasInsumo = $this->modelPescadorEspecialista->selectVInsumos("tps_id=" . $idPescador, "tin_insumo", null);
+        $vEspecialistaHasInsumo = $this->modelPescadorEspecialista->selectVInsumos("tps_id=" . $idPescador, "tin_insumo");
         $this->view->assign("assign_vEspecialistaHasInsumo", $vEspecialistaHasInsumo);
         
-        $vEspecialistaHasMotivoPesca = $this->modelPescadorEspecialista->selectVMotivoPesca("tps_id=" . $idPescador, "tmp_motivo", null);
+        $vEspecialistaHasMotivoPesca = $this->modelPescadorEspecialista->selectVMotivoPesca("tps_id=" . $idPescador, "tmp_motivo");
         $this->view->assign("assign_vEspecialistaHasMotivoPesca", $vEspecialistaHasMotivoPesca);
         
-        $vEspecialistaHasNoSeguro = $this->modelPescadorEspecialista->selectVNoSeguro("tps_id=" . $idPescador, "ttr_descricao", null);
+        $vEspecialistaHasNoSeguro = $this->modelPescadorEspecialista->selectVNoSeguro("tps_id=" . $idPescador, "ttr_descricao");
         $this->view->assign("assign_vEspecialistaHasNoSeguro", $vEspecialistaHasNoSeguro);
         
-        $vEspecialistaHasParentes = $this->modelPescadorEspecialista->selectVParentes("tps_id=" . $idPescador, "ttd_tipodependente", null);
+        $vEspecialistaHasParentes = $this->modelPescadorEspecialista->selectVParentes("tps_id=" . $idPescador, "ttd_tipodependente");
         $this->view->assign("assign_vEspecialistaHasParentes", $vEspecialistaHasParentes);
         
-        $vEspecialistaHasProgramaSocial = $this->modelPescadorEspecialista->selectVProgramaSocial("tps_id=" . $idPescador, "prs_programa", null);
+        $vEspecialistaHasProgramaSocial = $this->modelPescadorEspecialista->selectVProgramaSocial("tps_id=" . $idPescador, "prs_programa");
         $this->view->assign("assign_vEspecialistaHasProgramaSocial", $vEspecialistaHasProgramaSocial);
         
-        $vEspecialistaHasSeguroDefeso = $this->modelPescadorEspecialista->selectVSeguroDefeso("tps_id=" . $idPescador, "tsd_seguro", null);
+        $vEspecialistaHasSeguroDefeso = $this->modelPescadorEspecialista->selectVSeguroDefeso("tps_id=" . $idPescador, "tsd_seguro");
         $this->view->assign("assign_vEspecialistaHasSeguroDefeso", $vEspecialistaHasSeguroDefeso);
         
-        $vEspecialistaHasTipoTransporte = $this->modelPescadorEspecialista->selectVTipoTransporte("tps_id=" . $idPescador, "ttr_transporte", null);
+        $vEspecialistaHasTipoTransporte = $this->modelPescadorEspecialista->selectVTipoTransporte("tps_id=" . $idPescador, "ttr_transporte");
         $this->view->assign("assign_vEspecialistaHasTipoTransporte", $vEspecialistaHasTipoTransporte);
     
-        $vEspecialistaHasDestinoPescado = $this->modelPescadorEspecialista->selectVDestinoPescado("tps_id=".$idPescador, "dp_id_pescado", null);
+        $vEspecialistaHasDestinoPescado = $this->modelPescadorEspecialista->selectVDestinoPescado("tps_id=".$idPescador, "dp_id_pescado");
         $this->view->assign("assign_vEspecialistaHasDestinoPescado", $vEspecialistaHasDestinoPescado);
     
-        $vEspecialistaHasDificuldadeArea = $this->modelPescadorEspecialista->selectVDificuldadeArea("tps_id=".$idPescador, "tdif_id_area", null);
+        $vEspecialistaHasDificuldadeArea = $this->modelPescadorEspecialista->selectVDificuldadeArea("tps_id=".$idPescador, "tdif_id_area");
         $this->view->assign("assign_vEspecialistaHasDificuldadeArea", $vEspecialistaHasDificuldadeArea);
     
+        $vEspecialistaHasCompradorPescado = $this->modelPescadorEspecialista->selectVCompradorPescado("tps_id=".$idPescador, "dp_id");
+        $this->view->assign("assign_vEspecialistaHasCompradorPescado", $vEspecialistaHasCompradorPescado);
+        
+        $vEspecialistaHasRecursos = $this->modelPescadorEspecialista->selectVRecurso("tps_id=".$idPescador, "trec_id");
+        $this->view->assign("assign_vEspecialistaHasRecursos", $vEspecialistaHasRecursos);
+        
+        $vEspecialistaHasFornecedorInsumos = $this->modelPescadorEspecialista->selectVFornecedorInsumos("tps_id=".$idPescador, "tfi_id");
+        $this->view->assign("assign_vEspecialistaHasFornecedorInsumos", $vEspecialistaHasFornecedorInsumos);
+        
+        $vEspecialistaHasHabilidades = $this->modelPescadorEspecialista->selectVHabilidades("tps_id=".$idPescador, "ttr_id");
+        $this->view->assign("assign_vEspecialistaHasHabilidades", $vEspecialistaHasHabilidades);
+        
+        $vEspecialistaHasEmbarcacoes = $this->modelPescadorEspecialista->selectVBarco("tps_id=".$idPescador, "bar_id");
+        $this->view->assign("assign_vEspecialistaHasEmbarcacoes", $vEspecialistaHasEmbarcacoes);
         
         
     }
@@ -407,7 +421,7 @@ class PescadorController extends Zend_Controller_Action {
 
         $tp_id = $this->_getParam("id");
 
-        $dados = $this->modelPescador->select("tp_id>=" . $tp_id, array('tp_nome', 'tp_id'), null);
+        $dados = $this->modelPescador->select("tp_id>=" . $tp_id, array('tp_nome', 'tp_id'));
 
         $this->view->assign("dados", $dados);
 
@@ -1415,11 +1429,8 @@ class PescadorController extends Zend_Controller_Action {
             'selectFrequenciaPesca'             => $this->_getParam('tfp_id'),                     
             'tps_diasPescando'                  => $this->_getParam('tps_num_dias_pescando'),      
             'tps_horasPescando'                 => $this->_getParam('tps_hora_pescando'),          
-            'selectUltimaPesca'                 => $this->_getParam('tup_id'),                     
-            'selectFornecedorInsumo'            => $this->_getParam('tfi_id'),                     
-            'selectRecurso'                     => $this->_getParam('trec_id'),                                
-            'selectFrequenciaConsumo'           => $this->_getParam('tfp_id_consumo'),             
-            'selectCompradorPescado'            => $this->_getParam('dp_id_comprador'),            
+            'selectUltimaPesca'                 => $this->_getParam('tup_id'),                                                                      
+            'selectFrequenciaConsumo'           => $this->_getParam('tfp_id_consumo'),                        
             'selectSobraPesca'                  => $this->_getParam('tsp_id'),                     
             'selectLocalTratamento'             => $this->_getParam('tlt_id'),                     
             'tps_unidadeBeneficiamento'         => $this->_getParam('tps_unidade_beneficiamento'), 
@@ -1429,15 +1440,13 @@ class PescadorController extends Zend_Controller_Action {
             'tps_tempoColonizado'               => $this->_getParam('tps_tempo_em_colonia'),       
             'tps_dificuldadeColonia'            => $this->_getParam('tps_motivo_falta_pagamento'), 
             'tps_beneficiosColonia'             => $this->_getParam('tps_beneficio_colonia'),      
-            'selectOrgaoRgp'                    => $this->_getParam('trgp_id'),                                
-            'selectOutraHabilidade'             => $this->_getParam('ttr_id_outra_habilidade'),    
+            'selectOrgaoRgp'                    => $this->_getParam('trgp_id'),                                    
             'selectAlternativaRenda'            => $this->_getParam('ttr_id_alternativa_renda'),   
             'selectOutraProfissao'              => $this->_getParam('ttr_id_outra_profissao'),     
             'tps_filhoPescador'                 => $this->_getParam('tps_filho_seguir_profissao'), 
             'tps_dependenciaPesca'              => $this->_getParam('tps_grau_dependencia_pesca'), 
             'selectEntrevistador'               => $this->_getParam('tu_id_entrevistador'),        
             'tps_data'                          => $this->_getParam('tps_data'),
-            'selectBarco'                       => $this->_getParam('bar_id_barco'),
             'tps_obs'                           => $this->_getParam('tps_obs')
         );
 
@@ -1456,7 +1465,7 @@ class PescadorController extends Zend_Controller_Action {
         // normal logic goes here
     }
     
-        public function insertpescadorespecialistaAction() {
+    public function insertpescadorespecialistaAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -1844,8 +1853,9 @@ class PescadorController extends Zend_Controller_Action {
 
         return;
     }
-// -29 -------------------------------------------------------//
-    public function insertdestinopescadoAction() {
+    
+// -28.2 -------------------------------------------------------//
+    public function insertfornecedorinsumoAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -1855,13 +1865,13 @@ class PescadorController extends Zend_Controller_Action {
 
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelPescadorEspecialista->insertDestinoPescado($idPescador, $valor);
+        $this->modelPescadorEspecialista->insertFornecedorInsumos($idPescador, $valor);
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 
         return;
     }
-    public function deletedestinopescadoAction(){
+    public function deletefornecedorinsumoAction(){
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -1871,7 +1881,74 @@ class PescadorController extends Zend_Controller_Action {
 
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelPescadorEspecialista->deleteDestinoPesca($id, $idPescador);
+        $this->modelPescadorEspecialista->deleteFornecedorInsumos($id, $idPescador);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    
+// -28.3 -------------------------------------------------------//
+    public function insertrecursosAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertRecurso($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deleterecursosAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id = $this->_getParam("id");
+
+        $idPescador = $this->_getParam("tps_id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->deleteRecurso($id, $idPescador);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -29.2 -------------------------------------------------------//
+    public function insertcompradorpescadoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertCompradorPescado($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deletecompradorpescadoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id = $this->_getParam("id");
+
+        $idPescador = $this->_getParam("tps_id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->deleteCompradorPescado($id, $idPescador);
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 
@@ -1888,7 +1965,7 @@ class PescadorController extends Zend_Controller_Action {
 
         $backUrl = $this->_getParam("back_url");
 
-        $this->modelPescadorEspecialista->insertDificuldadePesca($idPescador, $valor, $preco);
+        $this->modelPescadorEspecialista->insertDificuldadePesca($idPescador, $valor);
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 
@@ -1905,6 +1982,72 @@ class PescadorController extends Zend_Controller_Action {
         $backUrl = $this->_getParam("back_url");
 
         $this->modelPescadorEspecialista->deleteDificuldadePesca($id, $idPescador);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -37 -------------------------------------------------------//
+    public function inserthabilidadeAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertHabilidades($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deletehabilidadeAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id = $this->_getParam("id");
+
+        $idPescador = $this->_getParam("tps_id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->deleteHabilidades($id, $idPescador);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+// -44 -------------------------------------------------------//
+    public function insertbarcosAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertBarco($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deletebarcosAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id = $this->_getParam("id");
+
+        $idPescador = $this->_getParam("tps_id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->deleteBarco($id, $idPescador);
 
         $this->redirect("/pescador/editar/id/" . $backUrl);
 
