@@ -3,6 +3,7 @@ $(document).ready(function() {
     if ($("fieldset").attr('id') === "Social") {
         $("#Social").show();
         $("#dadosSocial").hide();
+        $("#dadosDesembarque").hide();
         $("#Dsbq").hide();
         $("#Filo").hide();
         $("#Entrevista").hide();
