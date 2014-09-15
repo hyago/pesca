@@ -279,10 +279,6 @@ $(document).ready(function() {
 
 });
 
-
-
-
-
 function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
             var Entrevista;
             if (nomeArtePesca.toLowerCase() === "Arrasto-Fundo".toLowerCase()) {
