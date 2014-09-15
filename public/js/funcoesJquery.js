@@ -287,10 +287,10 @@ function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
             else if (nomeArtePesca.toLowerCase() === "Calão".toLowerCase()) {
                 Entrevista = 'calao';
             }
-            else if (nomeArtePesca.toLowerCase() === "Espinhel/Groseira".toLowerCase()) {
+            else if (nomeArtePesca.toLowerCase() === "Groseira".toLowerCase()) {
                 Entrevista = 'grosseira';
             }
-            else if (nomeArtePesca.toLowerCase() === "Pesca de Linha".toLowerCase()) {
+            else if (nomeArtePesca.toLowerCase() === "Linha".toLowerCase()) {
                 Entrevista = 'linha';
             }
             else if (nomeArtePesca.toLowerCase() === "Emalhe".toLowerCase()) {
