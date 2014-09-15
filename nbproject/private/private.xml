@@ -3,21 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha-fundo/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/pescador/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/calao/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/grosseira/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/EntrevistaPescadorController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/manzua/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/arrasto-fundo/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/emalhe/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/FichaDiariaController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/ArrastoFundoController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/coleta-manual/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/entrevista-pescador/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/jerere/visualizar.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha/visualizar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/equipamento/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/tipo-casco/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/material/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/cor/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/posto-combustivel/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/conservacao-pescado/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/savatagem/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/modelo/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/PostoCombustivelController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/financiador/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/marca/index.phtml</file>
         </group>
     </open-files>
 </project-private>

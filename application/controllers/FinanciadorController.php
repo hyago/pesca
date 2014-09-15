@@ -30,7 +30,7 @@ class FinanciadorController extends Zend_Controller_Action
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
-        $dadosFinanciador = $this->ModelFinanciador->select(NULL, 'tfin_fianciador', NULL);
+        $dadosFinanciador = $this->ModelFinanciador->select(NULL, 'tfin_financiador', NULL);
 
         $this->view->assign("assignFinanciador", $dadosFinanciador);
     }
@@ -54,7 +54,7 @@ class FinanciadorController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $setupDados = array('tfin_fianciador' => $this->_getParam("valor"));
+        $setupDados = array('tfin_financiador' => $this->_getParam("valor"));
 
         $this->ModelFinanciador->insert($setupDados);
 
@@ -69,7 +69,7 @@ class FinanciadorController extends Zend_Controller_Action
 
         $setupDados = array(
             'tfin_id' => $this->_getParam("id"),
-            'tfin_fianciador' => $this->_getParam("valor")
+            'tfin_financiador' => $this->_getParam("valor")
         );
 
         $this->ModelFinanciador->update($setupDados);
