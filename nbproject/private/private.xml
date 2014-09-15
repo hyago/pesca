@@ -3,13 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/ArrastoFundoController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/views/scripts/ficha-diaria/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha-fundo/visualizar.phtml</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/pescador/index.phtml</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/CalaoController.php</file>
-            <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/PescadorEspecialista.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/calao/visualizar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/grosseira/visualizar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/EntrevistaPescadorController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/manzua/visualizar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/arrasto-fundo/visualizar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/emalhe/visualizar.phtml</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/FichaDiariaController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ArrastoFundoController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/coleta-manual/visualizar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/public/js/funcoesJquery.js</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/entrevista-pescador/index.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/jerere/visualizar.phtml</file>
+            <file>file:/srv/www/htdocs/pesca/application/views/scripts/linha/visualizar.phtml</file>
         </group>
     </open-files>
 </project-private>

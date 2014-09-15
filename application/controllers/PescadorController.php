@@ -46,6 +46,7 @@ class PescadorController extends Zend_Controller_Action {
         $tp_apelido = $this->_getParam('tp_apelido');
         $tp_letra = $this->_getParam("tp_letra");
         $tp_all = $this->_getParam("tp_all");
+        $tp_especialista = $this->_getParam("tp_especialidade");
 
         if ($tp_id > 0) {
             $dados = $this->modelPescador->selectView("tp_id>=" . $tp_id, array('tp_id'), 30);
@@ -60,6 +61,9 @@ class PescadorController extends Zend_Controller_Action {
         }
         elseif($tp_all){
             $dados = $this->modelPescador->selectView(null, array('tp_nome', 'tp_id'));
+        }
+        elseif($tp_especialista){
+            $dados = $this->modelPescador->selectView("tp_especialidade IS DISTINCT FROM Null");
         }
         else {
             $dados = $this->modelPescador->selectView(null, array('tp_id DESC'), 20);

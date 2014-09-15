@@ -1448,6 +1448,10 @@ function jsBuscaPescador(form, pag){
         busca = (pag+'/index/tp_all/'+"all");
         location.replace(busca);
     }
+    else if(form.tipoBusca.value === '5'){
+        busca = (pag+'/index/tp_especialidade/especialista');
+        location.replace(busca);
+    }
 }
 function jsBuscaFichaDiaria(form, pag){
     var busca;
@@ -1477,6 +1481,60 @@ function jsBuscaFichaDiaria(form, pag){
     }
     else if(form.tipoBusca.value === '7'){
         busca = (pag+'/index/fd_all/'+"all");
+        location.replace(busca);
+    }
+    
+}
+
+function jsBuscaEntrevistas(form, pag){
+    var busca;
+ 
+    if(form.tipoBusca.value === '2'){
+        busca = (pag+'/tp_nome/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '3'){
+        busca = (pag+'/bar_nome/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '4'){
+        busca = (pag+'/tp_apelido/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '5'){
+        busca = (pag+'/porto/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '6'){
+        busca = (pag+'/ent_all/'+"all");
+        location.replace(busca);
+    }
+    
+}
+function jsBuscaTodasEntrevistas(form, pag){
+    var busca;
+    if(form.tipoBusca.value === '1'){
+        busca = (pag+'/index/data/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    if(form.tipoBusca.value === '2'){
+        busca = (pag+'/index/tp_nome/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '3'){
+        busca = (pag+'/index/bar_nome/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '4'){
+        busca = (pag+'/index/tp_apelido/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '5'){
+        busca = (pag+'/index/porto/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
+    else if(form.tipoBusca.value === '6'){
+        busca = (pag+'/index/ent_all/'+"all");
         location.replace(busca);
     }
     

@@ -2,39 +2,16 @@
         <form name="siripoia" method="post">
 
         <h2>Entrevistas Cadastradas->Pesca de Siripóia (lista limitada em 20)</h2>
-
-        <table id="tabelaSemEstilo">
-            <tr>
-
-                <td>
-                    <input type="button" size="50" value="Limpar Busca" class="button-confirmText" onclick="jsClearBuscaEntrevista('<?= $this->url(array("controller" => "siripoia", "action" => "visualizar"), null, true) ?>')">
-                </td>
-                 <td>
-                <a href="<?= $this->url(array("controller" => "siripoia", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
-                <a href="<?= $this->url(array("controller" => "siripoia", "action" => "relatoriolista"), null, true) ?>" id="botao-ancora" target="_blank">Relatório Listas</a>
-				</td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaEntrevistaId(this.form, '<?= $this->url(array("controller" => "siripoia", "action" => "visualizar"), null, true) ?>')">
-                    <input type="number" min="0" name="inputId" placeholder="Busca por ID" />
-                </td>
-                <td>
-                    <input type="button" size="50" value="Busca por Pescador" class="button-confirmText" onclick="jsBuscaPescadorEntrevista(this.form, '<?= $this->url(array("controller" => "siripoia", "action" => "visualizar"), null, true) ?>')">
-                    <input type="text" min="0" name="inputPescador" placeholder="Busca por Pescador" />
-                </td>
-
-                <td>
-                    <input type="button" size="50" value="Busca por Barco" class="button-confirmText" onclick="jsBuscaBarcoEntrevista(this.form, '<?= $this->url(array("controller" => "siripoia", "action" => "visualizar"), null, true) ?>')">
-                    <input type="text" min="0" name="inputBarco" placeholder="Busca por Barco" />
-                </td>
-                <td>
-                    <input type="button" size="50" value="Busca por Apelido" class="button-confirmText" onclick="jsBuscaApelidoEntrevista(this.form, '<?= $this->url(array("controller" => "siripoia", "action" => "visualizar"), null, true) ?>')">
-                    <input type="text" min="0" name="inputApelido" placeholder="Busca por Apelido" />
-                </td>
-            </tr>
-        </table>
-        <table>
+        <input type="button" value="Limpar" onClick="jsClearBusca('<?= $this->url(array("controller" => "siripoia", "action" => "visualizar"), null, true) ?>')"/>
+            <input type="button" value="Buscar" onClick="jsBuscaEntrevistas(this.form, '<?= $this->url(array("controller" => "siripoia", "action" => "visualizar"), null, true) ?>')"/>
+            <select name="tipoBusca">
+                <option value="2">Por Pescador</option>
+                <option value="3">Por Barco</option>
+                <option value="4">Por Apelido</option>
+                <option value="6">Listar Todas</option>
+            </select>
+            <input id="busca" name="buscaEntrevistas" placeholder="Buscar Entrevista"/><br/>
+            <table>
             <tr>
                 <th>Ficha Diária</th>
                 <th>Monitoramento</th>

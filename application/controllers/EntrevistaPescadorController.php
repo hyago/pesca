@@ -48,6 +48,7 @@ class EntrevistaPescadorController extends Zend_Controller_Action
             $dados = $this->modelEntrevistas->select(null, array('artepesca', 'tp_nome'));
         }
         elseif ($data){
+            $data = date('Y-m-d', strtotime($data));
             $dados = $this->modelEntrevistas->select("date(data) = '".$data. "'" , array('data'));
         }
         else {

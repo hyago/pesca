@@ -747,8 +747,10 @@ CREATE OR REPLACE VIEW v_pescador AS
   WHERE tp.tp_pescadordeletado = false;
 
 
-zf create db-table PescadorEspecialistaHasDestinoPescado t_pescador_especialista_has_t_destino_pescado;
-zf create db-table PescadorEspecialistaHasDificuldadeArea t_pescador_especialista_has_t_dificuldade_pesca;
 
-zf create db-table VPescadorEspecialistaHasDestinoPescado v_pescador_especialista_has_t_destino_pescado;
-zf create db-table VPescadorEspecialistaHasDificuldadeArea v_pescador_especialista_has_t_dificuldade_pesca;
+Alter Table t_pescador_especialista alter tps_filho_seguir_profissao type varchar(200);
+Alter Table t_pescador_especialista alter tps_motivo_falta_pagamento type varchar(200);
+Alter Table t_pescador_especialista alter tps_obs type varchar(300);
+Alter Table t_pescador_especialista alter tps_unidade_beneficiamento type varchar(200);
+Alter Table t_pescador_especialista alter tps_curso_beneficiamento type varchar(200);
+Alter Table t_pescador_especialista alter tps_beneficio_colonia type varchar(200);
