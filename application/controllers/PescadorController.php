@@ -1921,6 +1921,39 @@ class PescadorController extends Zend_Controller_Action {
 
         return;
     }
+    // -29.2 -------------------------------------------------------//
+    public function insertdestinopescadoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idPescador = $this->_getParam("id");
+
+        $valor = $this->_getParam("valor");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->insertDestinoPescado($idPescador, $valor);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
+    public function deletedestinopescadoAction(){
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id = $this->_getParam("id");
+
+        $idPescador = $this->_getParam("tps_id");
+
+        $backUrl = $this->_getParam("back_url");
+
+        $this->modelPescadorEspecialista->deleteDestinoPesca($id, $idPescador);
+
+        $this->redirect("/pescador/editar/id/" . $backUrl);
+
+        return;
+    }
 // -29.2 -------------------------------------------------------//
     public function insertcompradorpescadoAction() {
         $this->_helper->layout->disableLayout();

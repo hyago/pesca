@@ -1,6 +1,6 @@
  <?php
-$this->headScript()->appendFile('/js/jquery.maskedinput.min.js');
-$this->headScript()->appendFile('/js/mascaras.js');
+$this->headScript()->appendFile('js/jquery.maskedinput.min.js');
+$this->headScript()->appendFile('js/mascaras.js');
         
 
 ?>
@@ -1313,7 +1313,7 @@ $(function() {
                                     <td name="inputTipo[]" > <?= $vInsumo['tfi_fornecedor'] ?> </td>
                                     
                                     <td><input type="button" class="button-del" onclick="
-                                        jsDeleteDynamicEspecialista( <?=$vInsumo['tfi_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deletefornecedorinsumo"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_fornecedor')"></td>
+                                        jsDeleteDynamicEspecialista( <?=$vInsumo['tfi_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deletefornecedorinsumo"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_fornecedor')"/></td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>
@@ -1348,7 +1348,7 @@ $(function() {
                                     <td name="inputTipoID[]"> <?= $vRecurso['trec_id'] ?> </td>
                                     <td name="inputTipo[]" > <?= $vRecurso['trec_recurso'] ?> </td>
                                     <td><input type="button" class="button-del" width="5%" onclick="
-                                        jsDeleteDynamicEspecialista( <?=$vInsumo['tin_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deleterecursos"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_recurso')"></td>
+                                        jsDeleteDynamicEspecialista( <?=$vRecurso['trec_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deleterecursos"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_recurso')"></td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>
@@ -1402,12 +1402,12 @@ $(function() {
                  <input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?>, '#pescador_especialista_destino' )"><br/><br/>
                
 <!-- 29.2-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Comprador pescado /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
-                <a id="pescador_especialista_destino"></a>
+                <a id="pescador_especialista_comprador"></a>
                 <fieldset class="noEditable"><legend>29.2.Quem compra o pescado? </legend>
                         <fieldset>
 
                         <div id="base">
-                            <input type="button" name="Add" class="button-confirm" onclick="jsInsertCompradorPescado(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertcompradorpescado"), null, true) ?>', <?=$this->pescador['tp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')">
+                            <input type="button" name="Add" class="button-confirm" onclick="jsInsertCompradorPescado(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "insertcompradorpescado"), null, true) ?>', <?=$this->pescador['tp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_comprador')">
                             <select name="selectCompradorPescado" id="dynamicInput">
                                 <?php foreach ($this->selectDestinoPescado as $key => $destinos): ?>
                                     <option value="<?= $destinos['dp_id']; ?>"><?= $destinos['dp_destino']; ?></option>
@@ -1422,7 +1422,7 @@ $(function() {
                         <table id="tblArteTipoPescas">
                             <tr>
                                 <th width="10%">ID</th>
-                                <th width="35%">Destino</th>
+                                <th width="35%">Comprador</th>
                                 <th width="5%"></th>
                             </tr>
                             <?php foreach ($this->assign_vEspecialistaHasCompradorPescado as $key => $vDestino): ?>
@@ -1430,7 +1430,7 @@ $(function() {
                                     <td name="inputTipoID[]"> <?= $vDestino['dp_id'] ?> </td>
                                     <td name="inputTipo[]" > <?= $vDestino['dp_destino'] ?> </td>
                                     <td><input type="button" class="button-del" width="5%" onclick="
-                                        jsDeleteDynamicEspecialista( <?=$vDestino['dp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deletecompradorpescado"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_destino')"></td>
+                                        jsDeleteDynamicEspecialista( <?=$vDestino['dp_id']?>, <?=$this->assignEspecialista[0]['tp_id']?>, '<?= $this->url(array("controller" => "pescador", "action" => "deletecompradorpescado"), null, true) ?>', <?=$this->assignEspecialista[0]['tp_id']?>,'#pescador_especialista_comprador')"></td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>
@@ -1508,7 +1508,7 @@ $(function() {
                  </div>
                  
                     
-                    <input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?>, '#pescador_especialista_dificuldade')"><br/><br/>
+                    <input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?>, '#pescador_especialista_comprador')"><br/><br/>
                
 <!-- 36-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Dificuldade Área /_/_/_/_/_/_/_/_/_/_/_/_/_/-->
 <a id="pescador_especialista_dificuldade"></a>
@@ -1672,7 +1672,7 @@ $(function() {
                
                 <a href="<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>" id="botao-ancora">Voltar</a>    
                     
-                <input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?>, '#pescador_especialista_dificuldade' )">
+                <input type="button" size="50" value="Salvar Pescador Especialista" onclick="jsAtualizaPescadorEspecialista( this.form,'<?= $this->url(array("controller" => "pescador", "action" => "atualizapescadorespecialista"), null, true) ?>' ,<?= $this->assignEspecialista[0]['tp_id']?>, '#pescador_especialista_barco' )">
         </div>
         </form>
     </div>
