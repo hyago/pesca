@@ -281,66 +281,7 @@ $(document).ready(function() {
 
 
 
-function jsBuscaPescadorPorto( frm, pag )
-{
-    if ( frm.inputPorto.value ) {
-        var tmpUpdate = (pag + '/index/porto/' + frm.inputPorto.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
-function jsBuscaBarcoEntrevista( frm, pag )
-{
-    if ( frm.inputBarco.value ) {
-        var tmpUpdate = (pag + '/bar_nome/' + frm.inputBarco.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
-function jsBuscaEntrevistaId( frm, pag )
-{
-    if ( frm.inputId.value ) {
-        var tmpUpdate = (pag + '/ent_id/' + frm.inputId.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
 
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Entrevistas /_/_/_/_/_/_/_/_/_/_/_/_/_/
-function jsBuscaPescadorEntrevista( frm, pag )
-{
-    if ( frm.inputPescador.value ) {
-        var tmpUpdate = (pag + '/tp_nome/' + frm.inputPescador.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
-//Necessário quando é na index
-function jsBuscaPescadorGeral( frm, pag )
-{
-    if ( frm.inputPescador.value ) {
-        var tmpUpdate = (pag + '/index/tp_nome/' + frm.inputPescador.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
-function jsBuscaBarcoGeral( frm, pag )
-{
-    if ( frm.inputBarco.value ) {
-        var tmpUpdate = (pag + '/index/bar_nome/' + frm.inputBarco.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
-function jsBuscaData( frm, pag )
-{
-    if ( frm.inputData.value ) {
-        var tmpUpdate = (pag + '/index/data/' + frm.inputData.value  );
-        
-        location.replace( tmpUpdate );
-    }
-}
 
 function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
             var Entrevista;
@@ -397,71 +338,11 @@ function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
 
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Dependentes /_/_/_/_/_/_/_/_/_/_/_/_/_/
-function jsClearBuscaPescador( pag )
-{
-        location.hash = '';
-        location.replace( pag );
-}
-function jsBuscaTodosPescadores( pag )
-{
-        location.hash = '';
-        location.replace( pag );
-}
-
 
 
 function scrollTo(hash) {
     location.hash = "#" + hash;
     location.hash = '';
-}
-
-///_/_/_/_/_/_/_/_/_/_/_/_/_/ Fichas diárias /_/_/_/_/_/_/_/_/_/_/_/_/_/
-function jsClearBuscaFichaDiaria( pag )
-{
-    location.hash = '';
-    location.replace(pag);
-}
-function jsBuscaTodasFichas( pag )
-{
-    if ( confirm("São Aproximadamente 6mil itens, deseja realmente continuar?") ){
-        location.hash = '';
-        location.replace(pag);
-    }
-}
-
-function jsBuscaFichaDiariaId( frm, pag )
-{
-    if ( frm.inputId.value ) {
-        var tmpUpdate = (pag + '/index/fd_id/' + frm.inputId.value  );
-               
-        location.replace( tmpUpdate );
-    }
-}
-
-function jsBuscaFichaDiariaPortoData( frm, pag )
-{
-    if ( frm.selectPortoName.value ) {
-        var tmpUpdate = (pag + '/index/pto_id/' + frm.selectPortoName.value);
-        
-        location.replace( tmpUpdate );
-    }
-}
-function jsBuscaFichaDiariaData( frm, pag )
-{
-    if ( frm.inputDate.value ) {
-        var tmpUpdate = (pag + '/index/pto_id/'+'/fd_data/'+ frm.inputDate.value );
-        
-        location.replace( tmpUpdate );
-    }
-}
-
-function jsBuscaApelidoEntrevista( frm, pag )
-{
-    if ( frm.inputApelido.value ) {
-        var tmpUpdate = (pag + '/tp_apelido/' + frm.inputApelido.value  );
-        
-        location.replace( tmpUpdate );
-    }
 }
 
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Pescador_has_Endereço /_/_/_/_/_/_/_/_/_/_/_/_/_/
