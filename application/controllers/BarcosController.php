@@ -35,35 +35,50 @@ class BarcosController extends Zend_Controller_Action
         $this->view->assign("barcos", $barcos);
     }
 
-    public function novoAction(){
+    public function deleteAction() {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
-    }
-    public function editarAction(){
-        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
-            $this->_redirect('index');
-        }
-        $selectBarco = $this->modelBarcos->find($this->_getParam('id'));
-        $this->view->assign("barco", $selectBarco);
-    }
-    public function criarAction(){
+        else{
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
-        $this->modelBarcos->insert($this->getAllParams());
-
-        $this->_redirect("barcos/index");
-    }
-    public function atualizarAction(){
-
-        $this->modelBarcos->update($this->getAllParams());
-
-        $this->_redirect("barcos/index");
-    }
-    public function excluirAction() {
         $this->modelBarcos->delete($this->_getParam('id'));
 
         $this->_redirect('barcos/index');
+        }
     }
+
+
+    public function insertAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $setupDados = array('tbar_nome' => $this->_getParam("valor"));
+
+        $this->modelBarcos->insert($setupDados);
+
+        $this->_redirect("/barcos/index");
+
+        return;
+    }
+
+    public function updateAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $setupDados = array(
+            'tbar_id' => $this->_getParam("id"),
+            'tbar_nome' => $this->_getParam("valor")
+        );
+
+        $this->modelBarcos->update($setupDados);
+
+        $this->_redirect("/barcos/index");
+
+        return;
+    }
+
 
     public function relatorioAction() {
         $this->_helper->layout->disableLayout();

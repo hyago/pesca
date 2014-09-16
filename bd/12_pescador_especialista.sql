@@ -754,3 +754,8 @@ Alter Table t_pescador_especialista alter tps_obs type varchar(300);
 Alter Table t_pescador_especialista alter tps_unidade_beneficiamento type varchar(200);
 Alter Table t_pescador_especialista alter tps_curso_beneficiamento type varchar(200);
 Alter Table t_pescador_especialista alter tps_beneficio_colonia type varchar(200);
+
+Alter Table t_pescador_especialista alter tps_tempo_sustento type varchar(60);
+Alter Table t_pescador_especialista alter tps_renda_no_defeso type varchar(60);
+Alter Table t_pescador_especialista alter tps_hora_pescando type varchar(60);
+Alter Table t_pescador_especialista alter tps_tempo_em_colonia type varchar(60);

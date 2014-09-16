@@ -1021,7 +1021,7 @@ function jsDeleteDynamic( id, pag )
     }
 }
 
-function jsUpdateDynamic( id, valor, frm )
+function jsUpdateDynamic( id, valor, frm)
 {
     if ( confirm("Realmente deseja EDITAR este item?") ) {
         frm.input_valor.value = valor;

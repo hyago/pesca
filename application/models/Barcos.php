@@ -40,7 +40,7 @@ private $dbTableBarcos;
         $this->dbTableBarcos = new Application_Model_DbTable_Barcos();
         
         $dadosBarcos = array(
-            'bar_nome' => $request['nomeBarco']
+            'bar_nome' => $request['tbar_nome']
         );
         
         $this->dbTableBarcos->insert($dadosBarcos);
@@ -53,11 +53,11 @@ private $dbTableBarcos;
         $this->dbTableBarcos = new Application_Model_DbTable_Barcos();
         
         $dadosBarcos = array(
-            'bar_nome' => $request['nomeBarco']
+            'bar_nome' => $request['tbar_nome']
         );
         
         $whereBarcos= $this->dbTableBarcos->getAdapter()
-                ->quoteInto('"bar_id" = ?', $request['bar_id']);
+                ->quoteInto('"bar_id" = ?', $request['tbar_id']);
         
         $this->dbTableBarcos->update($dadosBarcos, $whereBarcos);
     }

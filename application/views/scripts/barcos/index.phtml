@@ -1,36 +1,40 @@
 
     <h2>Desembarque->Embarcações</h2>
-
-    <a href="<?= $this->url(array("controller" => "barcos", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
+<form method="post">
     <fieldset id="dadosDesembarque"></fieldset>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Embarcação</th>
-        </tr>
+ 
+    <a id="ancora_barcos"></a>
+    <fieldset class="noEditable"><legend>Embarcações:</legend>
+        <fieldset class="noEditable"><legend>Adicionar Embarcações:</legend>
+            <div id="base">
+                <input type="button" name="Add" class="button-confirm" onclick="jsInsertDynamic(this.form, '<?= $this->url(array("controller" => "barcos", "action" => "insert"), null, true) ?>', '<?= $this->url(array("controller" => "barcos", "action" => "update"), null, true) ?>')">
+                <input type="button" name="Reload" class="button-clear" onclick="jsReloadDynamic(this.form)">
 
-        <?php
-        foreach ($this->barcos as $key => $barco):
-            ?>
+                <input type="text" name="input_valor" placeholder="Embarcação" size="40"  />
+                <input readonly="" type="text" name="input_id" />
+            </div>
+        </fieldset>
+        <br>
+
+        <table id="tblPerfil">
             <tr>
-                <td><?= $barco['bar_id'] ?></td>
-                <td><?= $barco['bar_nome'] ?></td>
-
-                <td class="td-botao">
-                    <a href="<?= $this->url(array("controller" => "barcos", "action" => "editar", "id" => $barco['bar_id']), null, true) ?>">
-                        <ul id="icons" class="ui-widget ui-helper-clearfix">
-                            <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
-                        </ul>
-                    </a>
-                </td>
-
-                <td class="td-botao">
-                    <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "barcos", "action" => "excluir", "id" => $barco['bar_id']), null, true) ?>')">
-                </td>
-
+                <th width="15%">ID </th>
+                <th width="65%">Conservação</th>
+                <th width="5%"></th>
+                <th width="5%"></th>
             </tr>
-        <?php endforeach; ?>
-            
-    </table>
-    <br/><br/>
-<a href="<?= $this->url(array("controller" => "barcos", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
+            <?php foreach ($this->barcos as $key => $dados): ?>
+                <tr id="rowNumPeril<?= $key ?>">
+                    <td><?= $dados['bar_id'] ?></td>
+                    <td><?= $dados['bar_nome'] ?></td>
+                    <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dados['bar_id'] ?>', '<?= $dados['bar_nome'] ?>', this.form)"></td>
+                    <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dados['bar_id'] ?>, '<?= $this->url(array("controller" => "barcos", "action" => "delete"), null, true) ?>')"></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </fieldset>
+    <fieldset class="noBorder">
+        <br><input type="button" class="button-up" width="5%" onclick="scrollTo('top')">
+        <a href="<?= $this->url(array("controller" => "barcos", "action" => "relatorio"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório - Lista</a>
+    </fieldset>
+</form>
