@@ -22,9 +22,6 @@ class BarcosController extends Zend_Controller_Action
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
-
-
-
         $this->modelBarcos = new Application_Model_Barcos();
     }
 
@@ -78,7 +75,50 @@ class BarcosController extends Zend_Controller_Action
 
         return;
     }
-
+    public function novoAction(){
+        
+        $this->modelPorto = new Application_Model_Porto();
+        $portos = $this->modelPorto->select();
+        $this->view->assign("assignPortos", $portos);
+        
+        $this->modelPescador = new Application_Model_Pescador();
+        $pescadores = $this->modelPescador->select();
+        $this->view->assign("assignPescadores", $pescadores);
+        
+        $this->modelBarcos = new Application_Model_Barcos();
+        $barcos = $this->modelBarcos->select();
+        $this->view->assign("assignBarcos", $barcos);
+        
+        $this->modelTipoBarcos = new Application_Model_TipoEmbarcacao();
+        $tipobarcos = $this->modelTipoBarcos->select();
+        $this->view->assign("assignTipoBarcos", $tipobarcos);
+        
+        $this->modelSeguroDefeso = new Application_Model_SeguroDefeso();
+        $segurodefeso = $this->modelSeguroDefeso->select();
+        $this->view->assign("assignSeguroDefeso", $segurodefeso);
+        
+        $this->modelMaterial = new Application_Model_Material();
+        $material = $this->modelMaterial->select();
+        $this->view->assign("assignMaterial", $material);
+        
+        $this->modelTipoCasco = new Application_Model_TipoCasco();
+        $tipocasco = $this->modelTipoCasco->select();
+        $this->view->assign("assignTipoCasco", $tipocasco);
+        
+        $this->modelTipoPagamento = new Application_Model_TipoPagamento();
+        $tipopagamento = $this->modelTipoPagamento->select();
+        $this->view->assign("assignTipoPagamento", $tipopagamento);
+        
+        $this->modelEquipamento = new Application_Model_Equipamento();
+        $equipamento = $this->modelEquipamento->select();
+        $this->view->assign("assignEquipamento", $equipamento);
+        
+    }
+    public function editarAction(){
+        $this->modelCor = new Application_Model_Cor();
+        $cores = $this->modelCor->select();
+        $this->view->assign("assignCores", $cores);
+    }
 
     public function relatorioAction() {
         $this->_helper->layout->disableLayout();
