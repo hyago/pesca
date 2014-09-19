@@ -63,3 +63,36 @@ t_pescador.tp_nome, t_barco.bar_nome,
 t_especie.esp_nome,t_tarrafa_has_t_especie_capturada.spc_peso_kg,t_destinopescado.dp_destino
 Order By t_porto.pto_nome;
 
+Select t_porto.pto_nome,
+        'Coleta Manual' as artepesca,
+  	t_coletamanual.cml_dhsaida,
+  	t_coletamanual.cml_dhvolta,
+	t_coletamanual.cml_tempogasto, 
+	t_coletamanual.cml_id, 
+	t_pescador.tp_nome, 
+	t_coletamanual.cml_embarcada, 
+	t_barco.bar_nome, 
+	t_coletamanual.cml_quantpescadores, 
+	t_coletamanual.cml_tamanho,
+	t_coletamanual.cml_altura,
+	t_coletamanual.cml_malha,
+	t_coletamanual.cml_malha1,
+	t_coletamanual.cml_malha2,
+	t_coletamanual.cml_numlances,
+	t_coletamanual.cml_motor,
+	t_destinopescado.dp_destino, 
+	t_especie.esp_nome, 
+t_coletamanual_has_t_especie_capturada.spc_peso_kg From t_coletamanual
+	LEFT JOIN t_pescador ON t_coletamanual.tp_id_entrevistado = t_pescador.tp_id
+	LEFT JOIN t_barco ON t_coletamanual.bar_id = t_barco.bar_id
+	LEFT Join t_monitoramento on t_coletamanual.mnt_id = t_monitoramento.mnt_id 
+	LEFT Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id 
+	LEFT Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+	LEFT Join t_coletamanual_has_t_especie_capturada On t_coletamanual.cml_id = t_coletamanual_has_t_especie_capturada.cml_id
+	LEFT Join t_especie On t_coletamanual_has_t_especie_capturada.esp_id = t_especie.esp_id
+	LEFT Join t_destinopescado On t_coletamanual.dp_id = t_destinopescado.dp_id
+Group by t_porto.pto_nome, t_coletamanual.cml_data, t_coletamanual.cml_tempogasto,t_coletamanual.cml_id, 
+t_pescador.tp_nome, t_barco.bar_nome,t_coletamanual_tipo.tcat_tipo,
+t_especie.esp_nome,t_coletamanual_has_t_especie_capturada.spc_peso_kg,t_destinopescado.dp_destino
+Order By t_porto.pto_nome;
+

@@ -27,16 +27,14 @@ class InsumosController extends Zend_Controller_Action
     }
 
     public function indexAction() {
-        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
-            $this->_redirect('index');
-        }
+        
         $dadosInsumo = $this->ModelInsumo->select(NULL, 'tin_insumo', NULL);
 
         $this->view->assign("assignInsumo", $dadosInsumo);
     }
 
     public function deleteAction() {
-        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
         else{
@@ -51,6 +49,9 @@ class InsumosController extends Zend_Controller_Action
 
 
     public function insertAction() {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -64,6 +65,9 @@ class InsumosController extends Zend_Controller_Action
     }
 
     public function updateAction() {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 

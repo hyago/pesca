@@ -86,6 +86,9 @@ class VaraPescaController extends Zend_Controller_Action
     }
 
     public function editarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $entrevista = $this->modelVaraPesca->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
@@ -141,23 +144,35 @@ class VaraPescaController extends Zend_Controller_Action
 
 
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idVaraPesca = $this->modelVaraPesca->insert($this->_getAllParams());
 
 
         $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idVaraPesca = $this->_getParam('id_entrevista');
         $this->modelVaraPesca->update($this->_getAllParams());
 
         $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelVaraPesca->delete($this->_getParam('id'));
 
         $this->_redirect('vara-pesca/visualizar');
     }
     public function insertpesqueiroAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -178,6 +193,9 @@ class VaraPescaController extends Zend_Controller_Action
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
     public function deletepesqueiroAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -191,6 +209,9 @@ class VaraPescaController extends Zend_Controller_Action
     }
 
     public function insertespeciecapturadaAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -215,6 +236,9 @@ class VaraPescaController extends Zend_Controller_Action
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
     public function deletespecieAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -227,6 +251,9 @@ class VaraPescaController extends Zend_Controller_Action
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
     public function insertavistamentoAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -241,6 +268,9 @@ class VaraPescaController extends Zend_Controller_Action
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
     public function deleteavistamentoAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -255,6 +285,9 @@ class VaraPescaController extends Zend_Controller_Action
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
     public function insertbiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -277,6 +310,9 @@ class VaraPescaController extends Zend_Controller_Action
         $this->redirect("/vara-pesca/editar/id/" . $backUrl);
     }
     public function deletebiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 

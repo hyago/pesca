@@ -122,6 +122,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function atualizarAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idArrasto = $this->_getParam('id_entrevista');
         $this->modelArrastoFundo->update($this->_getAllParams());
 
@@ -129,18 +132,26 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function criarAction() {
-
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idArrasto = $this->modelArrastoFundo->insert($this->_getAllParams());
 
         $this->_redirect('arrasto-fundo/editar/id/' . $idArrasto);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelArrastoFundo->delete($this->_getParam('id'));
 
         $this->_redirect('arrasto-fundo/visualizar');
     }
 
     public function insertpesqueiroAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -157,6 +168,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
     public function insertbiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -179,6 +193,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
     public function deletebiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -192,6 +209,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
     
     public function insertbiopeixeAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -212,6 +232,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
     public function deletebiopeixeAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -224,6 +247,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
         $this->redirect("/arrasto-fundo/editar/id/" . $backUrl);
     }
     public function deletepesqueiroAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -238,6 +264,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     
 
     public function insertespeciecapturadaAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -259,6 +288,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function deletespecieAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -272,6 +304,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function insertavistamentoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -287,6 +322,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function deleteavistamentoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -302,6 +340,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function relatoriolistaAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -335,6 +376,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function relatorioAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -396,6 +440,9 @@ class ArrastoFundoController extends Zend_Controller_Action {
     }
 
     public function relatoriogroupespeciecapturadaAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 

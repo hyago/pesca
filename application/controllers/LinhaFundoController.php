@@ -146,6 +146,9 @@ public function visualizarAction() {
         $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $idLinhaFundo = $this->modelLinhaFundo->insert($this->_getAllParams());
 
 
@@ -153,6 +156,9 @@ public function visualizarAction() {
     }
 
     public function atualizarAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $idLinhaFundo = $this->_getParam('id_entrevista');
         $this->modelLinhaFundo->update($this->_getAllParams());
 
@@ -160,11 +166,17 @@ public function visualizarAction() {
     }
 
     public function excluirAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->modelLinhaFundo->delete($this->_getParam('id'));
 
         $this->_redirect('linha-fundo/visualizar');
     }
     public function insertpesqueiroAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -185,6 +197,9 @@ public function visualizarAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
     public function deletepesqueiroAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -198,6 +213,9 @@ public function visualizarAction() {
     }
 
     public function insertespeciecapturadaAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -221,6 +239,9 @@ public function visualizarAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
     public function deletespecieAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -233,6 +254,9 @@ public function visualizarAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
     public function insertavistamentoAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -247,6 +271,9 @@ public function visualizarAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
     public function deleteavistamentoAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -261,6 +288,9 @@ public function visualizarAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
 public function insertbiocamaraoAction() {
+    if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -283,6 +313,9 @@ public function insertbiocamaraoAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
     public function deletebiocamaraoAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -296,6 +329,9 @@ public function insertbiocamaraoAction() {
     }
     
     public function insertbiopeixeAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -316,6 +352,9 @@ public function insertbiocamaraoAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
     public function deletebiopeixeAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -328,6 +367,9 @@ public function insertbiocamaraoAction() {
         $this->redirect("/linha-fundo/editar/id/" . $backUrl);
     }
    public function relatoriolistaAction(){
+                if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -361,6 +403,9 @@ public function insertbiocamaraoAction() {
 		echo $pdf->render();
     }
     public function relatorioAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

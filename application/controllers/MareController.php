@@ -50,6 +50,9 @@ class MareController extends Zend_Controller_Action
     }
     public function criarAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelMare->insert($this->_getAllParams());
 
         $this->_redirect('mare/index');
@@ -66,6 +69,9 @@ class MareController extends Zend_Controller_Action
 
     public function atualizarAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelMare->update($this->_getAllParams());
 
         $this->_redirect('mare/index');
@@ -76,6 +82,9 @@ class MareController extends Zend_Controller_Action
 
 
 	public function relatorioAction() {
+            if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 	 $this->_helper->layout->disableLayout();
 	 $this->_helper->viewRenderer->setNoRender(true);
 

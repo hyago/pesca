@@ -87,6 +87,9 @@ public function visualizarAction() {
     }
 
     public function editarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $entrevista = $this->modelRatoeira->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
@@ -138,18 +141,27 @@ public function visualizarAction() {
         $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idRatoeira = $this->modelRatoeira->insert($this->_getAllParams());
 
 
         $this->_redirect('ratoeira/editar/id/'.$idRatoeira);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idRatoeira = $this->_getParam('id_entrevista');
         $this->modelRatoeira->update($this->_getAllParams());
 
         $this->_redirect('ratoeira/editar/id/'.$idRatoeira);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelRatoeira->delete($this->_getParam('id'));
 
         $this->_redirect('ratoeira/visualizar');

@@ -89,6 +89,9 @@ class SiripoiaController extends Zend_Controller_Action
     }
 
     public function editarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
          //$avistamentoSiripoia = new Application_Model_DbTable_VSiripoiaHasAvistamento();
         $entrevista = $this->modelSiripoia->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -141,18 +144,27 @@ class SiripoiaController extends Zend_Controller_Action
         $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idSiripoia = $this->modelSiripoia->insert($this->_getAllParams());
 
 
         $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idSiripoia = $this->_getParam('id_entrevista');
         $this->modelSiripoia->update($this->_getAllParams());
 
         $this->_redirect('siripoia/editar/id/'.$idSiripoia);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelSiripoia->delete($this->_getParam('id'));
 
         $this->_redirect('siripoia/visualizar');

@@ -127,12 +127,18 @@ private $usuario;
 
     }
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idCalao = $this->modelCalao->insert($this->_getAllParams());
 
 
         $this->_redirect('calao/editar/id/'.$idCalao);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idCalao = $this->_getParam('id_entrevista');
         $this->modelCalao->update($this->_getAllParams());
 
@@ -140,11 +146,17 @@ private $usuario;
     }
 
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelCalao->delete($this->_getParam('id'));
 
         $this->_redirect('calao/visualizar');
     }
     public function insertpesqueiroAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -161,6 +173,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function deletepesqueiroAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -173,6 +188,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function insertespeciecapturadaAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -195,6 +213,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function deletespecieAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -207,6 +228,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function insertavistamentoAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -221,6 +245,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function deleteavistamentoAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -235,6 +262,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function insertbiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -257,6 +287,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function deletebiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -270,6 +303,9 @@ private $usuario;
     }
     
     public function insertbiopeixeAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -290,6 +326,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function deletebiopeixeAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -302,6 +341,9 @@ private $usuario;
         $this->redirect("/calao/editar/id/" . $backUrl);
     }
     public function relatoriolistaAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -335,6 +377,9 @@ private $usuario;
     }
 
     public function relatorioAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

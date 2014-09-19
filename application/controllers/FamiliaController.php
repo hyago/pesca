@@ -33,13 +33,16 @@ class FamiliaController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        
         $dados = $this->modelFamilia->select();
 
         $this->view->assign("dados", $dados);
     }
 
     public function novoAction(){
-
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -51,6 +54,7 @@ class FamiliaController extends Zend_Controller_Action
 
     public function criarAction()
     {
+
         $this->modelFamilia->insert($this->_getAllParams());
 
         $this->_redirect('familia/index');
@@ -61,6 +65,7 @@ class FamiliaController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -78,7 +83,9 @@ class FamiliaController extends Zend_Controller_Action
      */
     public function atualizarAction()
     {
-
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelFamilia->update($this->_getAllParams());
 
         $this->_redirect('familia/index');
@@ -86,6 +93,9 @@ class FamiliaController extends Zend_Controller_Action
 
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -97,6 +107,9 @@ class FamiliaController extends Zend_Controller_Action
     }
 
 	public function relatorioAction() {
+            if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -166,6 +179,9 @@ class FamiliaController extends Zend_Controller_Action
    }
 
    	public function relatoriolistaAction() {
+            if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

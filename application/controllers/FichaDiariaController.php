@@ -131,7 +131,9 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function criarAction() {
-
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idFichaDiaria = $this->modelFichaDiaria->insert($this->_getAllParams());
         
         
@@ -143,6 +145,7 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function editarAction() {
+
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
 
         $this->view->assign("fichadiaria", $fichadiaria);
@@ -223,6 +226,9 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function atualizarAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idFicha = $this->_getParam('id_fichaDiaria');
         $this->modelFichaDiaria->update($this->_getAllParams());
 
@@ -231,6 +237,9 @@ class FichaDiariaController extends Zend_Controller_Action {
     }
     
     public function insertmonitoramentoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -253,6 +262,9 @@ class FichaDiariaController extends Zend_Controller_Action {
         return;
     }
     public function deletmonitoramentoAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -269,12 +281,18 @@ class FichaDiariaController extends Zend_Controller_Action {
      */
 
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelFichaDiaria->delete($this->_getParam('id'));
 
         $this->_redirect('ficha-diaria/index');
     }
     
     public function imprimirfichatodasAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -282,6 +300,9 @@ class FichaDiariaController extends Zend_Controller_Action {
     }
     
     public function imprimirfichaidAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         $tmpId = $this->_getParam('id');
@@ -290,6 +311,9 @@ class FichaDiariaController extends Zend_Controller_Action {
     }
    
     public function relatorio_completo_pdf_ficha( $where = null ) {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 

@@ -24,7 +24,9 @@ class AutenticacaoController extends Zend_Controller_Action {
      * Login de usuários
      */
     public function loginAction() {
+        $this->modelUsuario = new Application_Model_Usuario();
         $login = $this->_getParam('login');
+        $login2 = $login;
         $senha = $this->_getParam('senha');
 
         if (empty($login) || empty($senha)) {
@@ -43,9 +45,15 @@ class AutenticacaoController extends Zend_Controller_Action {
 
             if ($result->isValid()) {
                 $usuario = $authAdapter->getResultRowObject();
-
+                
                 $storage = Zend_Auth::getInstance()->getStorage();
+                
                 $storage->write($usuario);
+                //
+                $idLogin = $this->modelUsuario->selectNomeLogin($login2);
+                $idUsuario = $this->modelUsuario->selectLogin($idLogin['tl_id']);
+                $this->modelUsuario->insertLogin($idUsuario['tu_id']);
+                //
                 $this->_redirect('index');
             } else {
                 $this->_redirect('autenticacao/logout');

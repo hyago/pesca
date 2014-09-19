@@ -353,7 +353,17 @@ zf create controller  PostoCombustivel;
 zf create controller  Financiador;
 zf create controller  ConservacaoPescado;
 
+DROP TABLE t_historico_login;
 
+CREATE TABLE t_historico_login
+(
+  thl_id serial,
+  thl_dhlogin timestamp without time zone,
+  thl_dhlogoff timestamp without time zone,
+  tu_id int,
+  PRIMARY KEY (thl_id),
+  Foreign Key (tu_id) References t_usuario (tu_id)  
+)
 
   
   

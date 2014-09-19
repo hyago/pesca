@@ -41,6 +41,9 @@ class PesqueiroController extends Zend_Controller_Action
     }
 
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelPesqueiro->insert($this->_getAllParams());
 
         $this->_redirect('pesqueiro/index');
@@ -57,6 +60,9 @@ class PesqueiroController extends Zend_Controller_Action
     }
     public function atualizarAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelPesqueiro->update($this->_getAllParams());
 
         $this->_redirect('pesqueiro/index');
@@ -64,6 +70,9 @@ class PesqueiroController extends Zend_Controller_Action
 
 
     public function excluirAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }else{
@@ -76,6 +85,9 @@ class PesqueiroController extends Zend_Controller_Action
     }
 
 	public function relatorioAction() {
+            if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

@@ -131,23 +131,35 @@ class EmalheController extends Zend_Controller_Action
 
     }
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idEmalhe = $this->modelEmalhe->insert($this->_getAllParams());
 
 
         $this->_redirect('emalhe/editar/id/'.$idEmalhe);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idEmalhe = $this->_getParam('id_entrevista');
         $this->modelEmalhe->update($this->_getAllParams());
 
         $this->_redirect('emalhe/editar/id/'.$idEmalhe);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelEmalhe->delete($this->_getParam('id'));
 
         $this->_redirect('emalhe/visualizar');
     }
     public function insertpesqueiroAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -164,6 +176,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function deletepesqueiroAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -176,6 +191,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function insertespeciecapturadaAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -198,6 +216,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function deletespecieAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -210,6 +231,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function insertavistamentoAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -224,6 +248,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function deleteavistamentoAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -239,6 +266,9 @@ class EmalheController extends Zend_Controller_Action
     }
     
     public function insertbiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -261,6 +291,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function deletebiocamaraoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -274,6 +307,9 @@ class EmalheController extends Zend_Controller_Action
     }
     
     public function insertbiopeixeAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -294,6 +330,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function deletebiopeixeAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -306,6 +345,9 @@ class EmalheController extends Zend_Controller_Action
         $this->redirect("/emalhe/editar/id/" . $backUrl);
     }
     public function relatoriolistaAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -339,6 +381,9 @@ class EmalheController extends Zend_Controller_Action
     }
 
     public function relatorioAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

@@ -85,6 +85,9 @@ public function visualizarAction() {
 
 
     public function editarAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
          //$avistamentoJerere = new Application_Model_DbTable_VJerereHasAvistamento();
         $entrevista = $this->modelJerere->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -137,23 +140,35 @@ public function visualizarAction() {
         $this->view->assign('tipovenda', $tipoVenda);
     }
     public function criarAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $idJerere = $this->modelJerere->insert($this->_getAllParams());
 
 
         $this->_redirect('jerere/editar/id/'.$idJerere);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $idJerere = $this->_getParam('id_entrevista');
         $this->modelJerere->update($this->_getAllParams());
 
         $this->_redirect('jerere/editar/id/'.$idJerere);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->modelJerere->delete($this->_getParam('id'));
 
         $this->_redirect('jerere/visualizar');
     }
      public function insertpesqueiroAction(){
+         if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -174,6 +189,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function deletepesqueiroAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -186,6 +204,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function insertespeciecapturadaAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -210,6 +231,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function deletespecieAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -222,6 +246,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function insertavistamentoAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -236,6 +263,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function deleteavistamentoAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -250,6 +280,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function insertbiocamaraoAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -272,6 +305,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function deletebiocamaraoAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -285,6 +321,9 @@ public function visualizarAction() {
     }
     
     public function insertbiopeixeAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -305,6 +344,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
     public function deletebiopeixeAction() {
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -317,6 +359,9 @@ public function visualizarAction() {
         $this->redirect("/jerere/editar/id/" . $backUrl);
     }
    public function relatoriolistaAction(){
+       if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -349,6 +394,9 @@ public function visualizarAction() {
 		echo $pdf->render();
     }
     public function relatorioAction(){
+        if($this->usuario['tp_id'] == 5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

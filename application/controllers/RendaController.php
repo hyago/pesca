@@ -47,6 +47,9 @@ private $usuario;
      */
     public function criarAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelRenda->insert($this->_getAllParams());
 
         $this->_redirect('renda/index');
@@ -70,6 +73,9 @@ private $usuario;
      */
     public function atualizarAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelRenda->update($this->_getAllParams());
 
         $this->_redirect('renda/index');
@@ -80,6 +86,9 @@ private $usuario;
      */
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }

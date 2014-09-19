@@ -75,6 +75,7 @@ class UsuariosController extends Zend_Controller_Action {
      */
     public function novoAction()
     {
+        
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -95,6 +96,9 @@ class UsuariosController extends Zend_Controller_Action {
      */
     public function criarAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelUsuario->insert($this->_getAllParams());
 
         $this->_redirect('usuarios/index');
@@ -105,6 +109,7 @@ class UsuariosController extends Zend_Controller_Action {
      */
     public function editarAction()
     {
+        
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -130,6 +135,9 @@ class UsuariosController extends Zend_Controller_Action {
      */
     public function atualizarAction()
     {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelUsuario->update($this->_getAllParams());
 
         $this->_redirect('usuarios/index');
@@ -180,6 +188,9 @@ class UsuariosController extends Zend_Controller_Action {
     }
 
     public function relatorioAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 
@@ -211,6 +222,9 @@ class UsuariosController extends Zend_Controller_Action {
    }
 
     public function relatoriocompletoAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

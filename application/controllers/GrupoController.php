@@ -43,14 +43,17 @@ class GrupoController extends Zend_Controller_Action
     }
 
     public function novoAction(){
-
-        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
     }
 
     public function criarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelGrupo->insert($this->_getAllParams());
 
         $this->_redirect('grupo/index');
@@ -61,6 +64,9 @@ class GrupoController extends Zend_Controller_Action
      */
     public function editarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -74,6 +80,9 @@ class GrupoController extends Zend_Controller_Action
      */
     public function atualizarAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelGrupo->update($this->_getAllParams());
 
         $this->_redirect('grupo/index');
@@ -81,6 +90,9 @@ class GrupoController extends Zend_Controller_Action
 
     public function excluirAction()
     {
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }

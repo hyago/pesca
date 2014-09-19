@@ -48,6 +48,9 @@ class ConsultaPadraoController extends Zend_Controller_Action
     }
 
     public function relatorioAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
 	$this->_helper->viewRenderer->setNoRender(true);
         
@@ -144,6 +147,9 @@ class ConsultaPadraoController extends Zend_Controller_Action
     }
     
     public function relatorioxlsAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -271,6 +277,9 @@ class ConsultaPadraoController extends Zend_Controller_Action
     }
     
     public function relatoriomensalxlsAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -305,6 +314,9 @@ class ConsultaPadraoController extends Zend_Controller_Action
     }
     
     public function entrevistapesqueiroAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
@@ -341,6 +353,9 @@ class ConsultaPadraoController extends Zend_Controller_Action
         $objWriter->save('php://output');
     }
     public function entrevistasbyhoraAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         

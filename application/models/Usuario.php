@@ -46,6 +46,14 @@ class Application_Model_Usuario {
         $array = $usuario->fetchAll($zendObj)->toArray();
         return $array[0];
     }
+    public function selectNomeLogin($login){
+        $selectLogin = new Application_Model_DbTable_Login();
+        $zendObj = $selectLogin->select()->where("tl_login ='".$login."'");
+        
+        $array = $selectLogin->fetchAll($zendObj)->toArray();
+        return $array[0];
+        
+    }
     public function selectSenha($loginId){
         $usuario = new Application_Model_DbTable_Login();
         $zendObj = $usuario->select()->from($usuario)->where("tl_id= ".$loginId);
@@ -145,5 +153,18 @@ class Application_Model_Usuario {
 
         $dbTableUsuario->update($dadosUsuario, $whereUsuario);
     }
+    
+    public function insertLogin($idUsuario){
+        date_default_timezone_set('America/Bahia');
+        $dbTableLogin = new Application_Model_HistoricoLogin();
+        
+        $dadosLogin = array (
+            'tu_id' => $idUsuario,
+            'thl_dhlogin' => date("Y-m-d",time())
+            
+        );
+         $dbTableLogin->insert($dadosLogin);
+    }
+    
 
 }

@@ -49,7 +49,7 @@ class ColoniaController extends Zend_Controller_Action {
     public function indexAction() {
 
         $dados = $this->modelColonia->select( NULL, 'tc_nome', NULL );
-
+        print_r(time());
 
 
         $this->view->assign("dados", $dados);
@@ -84,7 +84,9 @@ class ColoniaController extends Zend_Controller_Action {
      * Cadastra uma Arte de Pesca
      */
     public function criarAction() {
-
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelColonia->insert($this->_getAllParams());
 
         $this->_redirect('colonia/index');
@@ -94,6 +96,9 @@ class ColoniaController extends Zend_Controller_Action {
      * Preenche um formulario com as informações de um usuário
      */
     public function editarAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -113,6 +118,9 @@ class ColoniaController extends Zend_Controller_Action {
      * Atualiza os dados do usuário
      */
     public function atualizarAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelColonia->update($this->_getAllParams());
 
         $this->_redirect('colonia/index');
@@ -122,6 +130,9 @@ class ColoniaController extends Zend_Controller_Action {
      *
      */
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -133,6 +144,9 @@ class ColoniaController extends Zend_Controller_Action {
     }
 
 	public function relatorioAction() {
+            if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 

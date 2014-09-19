@@ -81,7 +81,9 @@ class PescadorController extends Zend_Controller_Action {
     }
 
     public function novoAction() {
-
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select(NULL,'tmun_municipio');
         $this->view->assign("municipios", $municipios);
@@ -106,6 +108,9 @@ class PescadorController extends Zend_Controller_Action {
     }
 
     public function editarAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idPescador = $this->_getParam('id');
 
         $pescador = $this->modelPescador->find($idPescador);
@@ -400,6 +405,9 @@ class PescadorController extends Zend_Controller_Action {
     }
 
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if ($this->usuario['tp_id'] == 15 | $this->usuario['tp_id'] == 17 | $this->usuario['tp_id'] == 21) {
             $this->_redirect('index');
         } else {

@@ -85,6 +85,9 @@ class ColetaManualController extends Zend_Controller_Action
     }
 
     public function editarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         //$avistamentoColetaManual = new Application_Model_DbTable_VColetaManualHasAvistamento();
         $entrevista = $this->modelColetaManual->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -140,12 +143,18 @@ class ColetaManualController extends Zend_Controller_Action
 
 
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idColetaManual = $this->modelColetaManual->insert($this->_getAllParams());
 
 
         $this->_redirect('coleta-manual/editar/id/'.$idColetaManual);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idColetaManual = $this->_getParam('id_entrevista');
         $this->modelColetaManual->update($this->_getAllParams());
 
@@ -153,11 +162,17 @@ class ColetaManualController extends Zend_Controller_Action
     }
 
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelColetaManual->delete($this->_getParam('id'));
 
         $this->_redirect('coleta-manual/visualizar');
     }
     public function insertpesqueiroAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -178,6 +193,7 @@ class ColetaManualController extends Zend_Controller_Action
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
     }
     public function deletepesqueiroAction(){
+
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -190,6 +206,7 @@ class ColetaManualController extends Zend_Controller_Action
         $this->redirect("/coleta-manual/editar/id/" . $backUrl);
     }
     public function insertespeciecapturadaAction(){
+ 
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 

@@ -87,6 +87,9 @@ public function visualizarAction() {
     }
 
     public function editarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         //$avistamentoMergulho = new Application_Model_DbTable_VMergulhoHasAvistamento();
         $entrevista = $this->modelMergulho->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -141,18 +144,27 @@ public function visualizarAction() {
     }
 
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idMergulho = $this->modelMergulho->insert($this->_getAllParams());
 
 
         $this->_redirect('mergulho/editar/id/'.$idMergulho);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idMergulho = $this->_getParam('id_entrevista');
         $this->modelMergulho->update($this->_getAllParams());
 
         $this->_redirect('mergulho/editar/id/'.$idMergulho);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelMergulho->delete($this->_getParam('id'));
 
         $this->_redirect('mergulho/visualizar');

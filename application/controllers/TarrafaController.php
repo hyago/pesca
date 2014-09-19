@@ -79,6 +79,9 @@ public function visualizarAction() {
     }
 
     public function editarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         //$avistamentoTarrafa = new Application_Model_DbTable_VTarrafaHasAvistamento();
         $entrevista = $this->modelTarrafa->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -121,18 +124,27 @@ public function visualizarAction() {
         $this->view->assign('especies',$especies);
     }
     public function criarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idTarrafa = $this->modelTarrafa->insert($this->_getAllParams());
 
 
         $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idTarrafa = $this->_getParam('id_entrevista');
         $this->modelTarrafa->update($this->_getAllParams());
 
         $this->_redirect('tarrafa/editar/id/'.$idTarrafa);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelTarrafa->delete($this->_getParam('id'));
 
         $this->_redirect('tarrafa/visualizar');

@@ -88,6 +88,9 @@ public function visualizarAction() {
         $this->view->assign("dados", $dados);
     }
     public function editarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $entrevista = $this->modelManzua->find($this->_getParam('id'));
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
@@ -145,12 +148,18 @@ public function visualizarAction() {
         $this->_redirect('manzua/editar/id/'.$idManzua);
     }
     public function atualizarAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $idManzua = $this->_getParam('id_entrevista');
         $this->modelManzua->update($this->_getAllParams());
 
         $this->_redirect('manzua/editar/id/'.$idManzua);
     }
     public function excluirAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->modelManzua->delete($this->_getParam('id'));
 
         $this->_redirect('manzua/visualizar');

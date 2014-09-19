@@ -36,6 +36,9 @@ class FrequenciaPescaController extends Zend_Controller_Action
     }
 
     public function deleteAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
             $this->_redirect('index');
         }
@@ -51,6 +54,9 @@ class FrequenciaPescaController extends Zend_Controller_Action
 
 
     public function insertAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -64,6 +70,9 @@ class FrequenciaPescaController extends Zend_Controller_Action
     }
 
     public function updateAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
