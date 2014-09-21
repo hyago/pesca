@@ -1365,7 +1365,11 @@ function jsBuscaFichaDiaria(form, pag){
 
 function jsBuscaEntrevistas(form, pag){
     var busca;
- 
+    
+    if(form.tipoBusca.value === '1'){
+        busca = (pag+'/ent_id/'+form.buscaEntrevistas.value);
+        location.replace(busca);
+    }
     if(form.tipoBusca.value === '2'){
         busca = (pag+'/tp_nome/'+form.buscaEntrevistas.value);
         location.replace(busca);

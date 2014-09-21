@@ -156,15 +156,29 @@ class Application_Model_Usuario {
     
     public function insertLogin($idUsuario){
         date_default_timezone_set('America/Bahia');
-        $dbTableLogin = new Application_Model_HistoricoLogin();
+        $dbTableLogin = new Application_Model_DbTable_HistoricoLogin();
         
+        $datahoraLogin = date('d-m-Y').' '.date('H:i:s');
         $dadosLogin = array (
             'tu_id' => $idUsuario,
-            'thl_dhlogin' => date("Y-m-d",time())
+            'thl_dhlogin' => $datahoraLogin
             
         );
-         $dbTableLogin->insert($dadosLogin);
+         $idHistorico = $dbTableLogin->insert($dadosLogin);
+         return $idHistorico;
+    }
+    public function updateLogin($lastLogin,$idUsuario){
+        date_default_timezone_set('America/Bahia');
+        $dbTableLogin = new Application_Model_DbTable_HistoricoLogin();
+        
+        $datahoraLogin = date('d-m-Y').' '.date('H:i:s');
+        $dadosLogin = array (
+            'thl_dhlogoff' => $datahoraLogin
+        );
+         $where[] = "tu_id = ".$idUsuario;
+         $where[] = "thl_id = ".$lastLogin;
+         
+        $dbTableLogin->update($dadosLogin, $where);
     }
     
-
 }

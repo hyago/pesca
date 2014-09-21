@@ -12,6 +12,7 @@
  */
 class AutenticacaoController extends Zend_Controller_Action {
 
+    var $idHistorico;
     public function init() {
         
     }
@@ -50,9 +51,9 @@ class AutenticacaoController extends Zend_Controller_Action {
                 
                 $storage->write($usuario);
                 //
-                $idLogin = $this->modelUsuario->selectNomeLogin($login2);
+                $idLogin = $this->modelUsuario->selectNomeLogin($login);
                 $idUsuario = $this->modelUsuario->selectLogin($idLogin['tl_id']);
-                $this->modelUsuario->insertLogin($idUsuario['tu_id']);
+                $this->idHistorico = $this->modelUsuario->insertLogin($idUsuario['tu_id']);
                 //
                 $this->_redirect('index');
             } else {
@@ -65,8 +66,22 @@ class AutenticacaoController extends Zend_Controller_Action {
      * Logout de usuários
      */
     public function logoutAction() {
+        //
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()){
+            $this->modelUsuario = new Application_Model_Usuario();
+            
+            $this->modelHistorico = new Application_Model_HistoricoLogin();
+            $identity = $auth->getIdentity();
+            $identity2 = get_object_vars($identity);
+            $idUsuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
+            $lastLogin = $this->modelHistorico->select('tu_id = '.$idUsuario['tu_id'], 'thl_id DESC',1);
+            
+            $this->modelUsuario->updateLogin($lastLogin[0]['thl_id'], $idUsuario['tu_id']);
+            //
+        }
         Zend_Auth::getInstance()->clearIdentity();
-
+        
         $this->_redirect('index');
     }
 
