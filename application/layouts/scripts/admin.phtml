@@ -14,6 +14,7 @@
         echo $this->headLink() . "\n";
         echo $this->headScript() . "\n";
         ?>
+
         <title>
                 Programa de Monitoramento da Atividade Pesqueira
             </title>
@@ -109,11 +110,11 @@
                                 <li><a href="<?= $this->url(array("controller" => "pesqueiro", "action" => "index"), null, true) ?>">Pesqueiro</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "vento", "action" => "index"), null, true) ?>">Vento</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "tempo", "action" => "index"), null, true) ?>">Tempo</a></li>
-                                <li><a href="<?= $this->url(array("controller" => "barcos", "action" => "index"), null, true) ?>">Embarcações</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "mare", "action" => "index"), null, true) ?>">Maré</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "destino-pescado", "action" => "index"), null, true) ?>">Destino do Pescado</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "isca", "action" => "index"), null, true) ?>">Iscas</a></li>
                             </ul>
+                            <li><a href="<?= $this->url(array("controller" => "barcos", "action" => "index"), null, true) ?>">Embarcações</a></li>
                             <li><a id="for-dadosEmbarcacao">Dados da Embarcação</a></li>
                             <ul id="dadosEmbarcacao">
                                 <li><a href="<?= $this->url(array("controller" => "conservacao-pescado", "action" => "index"), null, true) ?>">Conservação Pescado</a></li>
@@ -126,6 +127,8 @@
                                 <li><a href="<?= $this->url(array("controller" => "posto-combustivel", "action" => "index"), null, true) ?>">Postos de Combustível</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "savatagem", "action" => "index"), null, true) ?>">Savatagem</a></li>
                                 <li><a href="<?= $this->url(array("controller" => "tipo-casco", "action" => "index"), null, true) ?>">Tipos de Casco</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tipo-motor", "action" => "index"), null, true) ?>">Tipos de Motor</a></li>
+                                <li><a href="<?= $this->url(array("controller" => "tipo-pagamento", "action" => "index"), null, true) ?>">Tipos de Pagamento</a></li>
                             </ul>
                             <li><a id="for-Amostra">Amostragem</a></li>
                             <ul id="Amostras">

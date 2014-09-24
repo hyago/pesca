@@ -27,7 +27,7 @@ Drop Table if exists t_atuacao_embarcacao_has_t_areapesca Cascade;
 Drop Table if exists t_atuacao_embarcacao_has_t_artepesca Cascade;
 Drop Table if exists t_atuacao_embarcacao_has_t_fornecedor_petrechos Cascade;
 Drop table if exists t_motor_embarcacao Cascade;
-Drop table if exists t_area_atuacao Cascade;
+Drop table if exists t_atuacao_embarcacao Cascade;
 Drop table if exists t_embarcacao_detalhada Cascade;
 Drop table if exists t_tipocasco Cascade;
 Drop table if exists t_cor Cascade;
@@ -36,6 +36,7 @@ Drop table if exists t_tipopagamento Cascade;
 Drop table if exists t_equipamento Cascade;
 Drop table if exists t_savatagem Cascade;
 Drop table if exists t_tipomotor Cascade;
+Drop table if exists t_conservacao_pescado Cascade;
 Drop table if exists t_modelo Cascade;
 Drop table if exists t_marca Cascade;
 Drop table if exists t_posto_combustivel Cascade; 
@@ -44,17 +45,101 @@ Drop table if exists t_area_atuacao Cascade;
 
 
 Create table t_tipocasco ( tcas_id serial, tcas_tipo Varchar(30), Primary Key (tcas_id) );
+Insert Into t_tipocasco (tcas_tipo)VALUES ('Plano');
+Insert Into t_tipocasco (tcas_tipo)VALUES ('Arredondado');
+Insert Into t_tipocasco (tcas_tipo)VALUES ('profundo');
+Insert Into t_tipocasco (tcas_tipo)VALUES ('V Profundo');
+
 Create table t_cor (tcor_id serial, tcor_cor Varchar(30), Primary Key(tcor_id));
+Insert Into t_cor (tcor_cor)VALUES ('Branco');
+Insert Into t_cor (tcor_cor)VALUES ('Azul');
+Insert Into t_cor (tcor_cor)VALUES ('Laranja');
+Insert Into t_cor (tcor_cor)VALUES ('Vermelho');
+Insert Into t_cor (tcor_cor)VALUES ('Amarelo');
+Insert Into t_cor (tcor_cor)VALUES ('Preto');
+Insert Into t_cor (tcor_cor)VALUES ('Cinza');
+Insert Into t_cor (tcor_cor)VALUES ('Verde');
+Insert Into t_cor (tcor_cor)VALUES ('Madeira');
+Insert Into t_cor (tcor_cor)VALUES ('Roxo');
+Insert Into t_cor (tcor_cor)VALUES ('Rosa');
+Insert Into t_cor (tcor_cor)VALUES ('Não é pintada');
+
 Create table t_material (tmt_id serial, tmt_material Varchar(50), Primary Key(tmt_id));
+Insert Into t_material (tmt_material)VALUES ('Madeira');
+Insert Into t_material (tmt_material)VALUES ('Fibra de Vidro');
+Insert Into t_material (tmt_material)VALUES ('Alumínio');
+
 Create table t_tipopagamento (tpg_id serial,tpg_pagamento Varchar(50), Primary Key(tpg_id));
+insert Into t_tipopagamento (tpg_pagamento)VALUES ('A Vista');
+insert Into t_tipopagamento (tpg_pagamento)VALUES ('Parcelado');
+insert Into t_tipopagamento (tpg_pagamento)VALUES ('Financiado');
+insert Into t_tipopagamento (tpg_pagamento)VALUES ('Doado');
+
 Create table t_equipamento (teq_id serial,teq_equipamento Varchar(50), Primary Key(teq_id));
+Insert Into t_equipamento (teq_equipamento)VALUES ('GPS');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Rádio');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Bússola');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Celular');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Rádio VHF');
+Insert Into t_equipamento (teq_equipamento)VALUES ('UHF');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Sonda');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Radar');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Outro');
+Insert Into t_equipamento (teq_equipamento)VALUES ('Nenhum');
+
+
 Create table t_savatagem (tsav_id serial, tsav_savatagem Varchar(50), Primary Key(tsav_id));
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Colete');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Boia');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Bote');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Sinalizador');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Extintor');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Luzes de navegação');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Corda');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Âncora');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Outro');
+Insert Into t_savatagem (tsav_savatagem)VALUES ('Nenhuma');
+
 Create table t_tipomotor ( tmot_id serial, tmot_tipo Varchar(50), Primary Key(tmot_id));
+Insert into t_tipomotor (tmot_tipo)VALUES ('Popa');
+Insert into t_tipomotor (tmot_tipo)VALUES ('Centro');
+Insert into t_tipomotor (tmot_tipo)VALUES ('Rabeta');
+
 Create table t_modelo ( tmod_id serial, tmod_modelo Varchar(50), Primary Key(tmod_id));
+Insert Into t_modelo (tmod_modelo)VALUES ('229');
+Insert Into t_modelo (tmod_modelo)VALUES ('352');
+Insert Into t_modelo (tmod_modelo)VALUES ('366');
+Insert Into t_modelo (tmod_modelo)VALUES ('B 11');
+Insert Into t_modelo (tmod_modelo)VALUES ('B 18');
+Insert Into t_modelo (tmod_modelo)VALUES ('BT 22');
+Insert Into t_modelo (tmod_modelo)VALUES ('BT 33');
+Insert Into t_modelo (tmod_modelo)VALUES ('NS 18');
+Insert Into t_modelo (tmod_modelo)VALUES ('CL 10');
+
 Create table t_marca (tmar_id serial, tmar_marca Varchar(50), Primary Key(tmar_id));
+Insert Into t_marca (tmar_marca)VALUES ('MWM');
+Insert Into t_marca (tmar_marca)VALUES ('Mercedes');
+Insert Into t_marca (tmar_marca)VALUES ('Yamaha');
+Insert Into t_marca (tmar_marca)VALUES ('Toyama');
+Insert Into t_marca (tmar_marca)VALUES ('Honda');
+Insert Into t_marca (tmar_marca)VALUES ('Outro');
+
 Create table t_posto_combustivel (tpc_id serial, tpc_posto Varchar(50),	Primary Key(tpc_id));
+Insert Into t_posto_combustivel (tpc_posto)VALUES ('Posto de Combustível de Ilhéus');
+Insert Into t_posto_combustivel (tpc_posto)VALUES ('Posto de Combustível de Itacaré');
+Insert Into t_posto_combustivel (tpc_posto)VALUES ('Posto de Combustível de Serra Grande');
+Insert Into t_posto_combustivel (tpc_posto)VALUES ('Terminal Pesqueiro/Bahia Pesca');
+
 Create table t_financiador (tfin_id serial, tfin_financiador Varchar(50), Primary Key(tfin_id));
+Insert Into t_financiador (tfin_financiador)VALUES ('Banco do Nordeste');
+Insert Into t_financiador (tfin_financiador)VALUES ('Colônia Z-34');
+
 Create table t_conservacao_pescado (tcp_id serial, tcp_conserva Varchar(30), Primary Key(tcp_id));
+Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Gelo');
+Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Freezer');
+Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Água');
+Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Viveiro');
+Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Geladeira');
 
 
 Create Table t_embarcacao_detalhada(
@@ -80,9 +165,9 @@ Create Table t_embarcacao_detalhada(
     ted_estado int,
     ted_pagamento int,
     tpg_id	int,
-    ted_financiamento Varchar(100),
+    ted_financiamento int,
     ted_ano_construcao int,
-
+    ted_propulsao int,
     Primary Key (ted_id),
     Foreign Key (pto_id_desembarque) References t_porto (pto_id),
     Foreign Key (tp_id_proprietario) References t_pescador (tp_id),
@@ -90,6 +175,7 @@ Create Table t_embarcacao_detalhada(
     Foreign Key (bar_id) References t_barco (bar_id),
     Foreign Key (tp_id_proprietario) References t_pescador (tp_id),
     Foreign Key (tte_id_tipobarco) References t_tipoembarcacao(tte_id),
+    Foreign Key (ted_financiamento) References t_financiador (tfin_id),
     Foreign Key (tcas_id) References t_tipocasco(tcas_id),
     Foreign Key (tpg_id) References t_tipopagamento(tpg_id)
 );
@@ -97,7 +183,6 @@ Create Table t_embarcacao_detalhada(
 Create Table t_motor_embarcacao	(
     tme_id serial,
     ted_id int,
-    tme_propulsao int,
     tmot_id int,
     tmod_id int,
     tmar_id int,
@@ -122,39 +207,62 @@ Create Table t_motor_embarcacao	(
     Foreign Key (tpg_id_motor) References t_tipopagamento (tpg_id),
     Foreign Key (tfin_id) References t_financiador (tfin_id)
 );
-Create Table t_atuacao_embarcacao(
-    tae_id serial,
-    ted_id int,
-    tae_atuacao_batimatrica int,
-    tae_autonomia int,
-    tfp_id_pesca int,
-    thp_id_pesca int,
-    tae_capacidade float,
-    tcp_id_pescado int,
-    tc_id int,
-    dp_id int,
-    dp_id_venda int,
-    ttr_id_renda int,
-    tea_id_maior int,
-    tea_id_menor int,
-    tae_concorrencia int,
-    tae_tempo_atividade int,
-    tae_data date,
-    tu_entrevistador int,
-    tu_digitador int,
-    Primary Key (tae_id),
-    Foreign Key (ted_id) References t_embarcacao_detalhada (ted_id),
-    Foreign Key (tfp_id_pesca) References t_frequencia_pesca,
-    Foreign Key (thp_id_pesca) References t_horario_pesca,
-    Foreign Key (tcp_id_pescado) References t_conservacao_pescado,
-    Foreign Key (tc_id) References t_colonia,
-    Foreign Key (dp_id) References t_destinopescado,
-    Foreign Key (dp_id_venda) References t_destinopescado,
-    Foreign Key (tea_id_maior) References t_estacao_ano,
-    Foreign Key (tea_id_menor) References t_estacao_ano,
-    Foreign Key (ttr_id_renda) References t_tiporenda,
-    Foreign Key (tu_entrevistador) References t_usuario,
-    Foreign Key (tu_digitador) References t_usuario
+CREATE TABLE t_atuacao_embarcacao
+(
+  tae_id serial NOT NULL,
+  ted_id integer,
+  tae_atuacao_batimatrica integer,
+  tae_autonomia integer,
+  tfp_id_pesca integer,
+  thp_id_pesca integer,
+  tae_capacidade double precision,
+  tcp_id_pescado integer,
+  tae_onde_adquire varchar(100),
+  dp_id integer,
+  dp_id_venda integer,
+  ttr_id_renda integer,
+  tea_id_maior integer,
+  tea_id_menor integer,
+  tae_concorrencia integer,
+  tae_tempo_atividade integer,
+  tae_data date,
+  tu_entrevistador integer,
+  tu_digitador integer,
+  tae_divisao_pescado character varying(100),
+  CONSTRAINT t_atuacao_embarcacao_pkey PRIMARY KEY (tae_id),
+  CONSTRAINT t_atuacao_embarcacao_dp_id_fkey FOREIGN KEY (dp_id)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_dp_id_venda_fkey FOREIGN KEY (dp_id_venda)
+      REFERENCES t_destinopescado (dp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_tcp_id_pescado_fkey FOREIGN KEY (tcp_id_pescado)
+      REFERENCES t_conservacao_pescado (tcp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_tea_id_maior_fkey FOREIGN KEY (tea_id_maior)
+      REFERENCES t_estacao_ano (tea_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_tea_id_menor_fkey FOREIGN KEY (tea_id_menor)
+      REFERENCES t_estacao_ano (tea_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_ted_id_fkey FOREIGN KEY (ted_id)
+      REFERENCES t_embarcacao_detalhada (ted_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_tfp_id_pesca_fkey FOREIGN KEY (tfp_id_pesca)
+      REFERENCES t_frequencia_pesca (tfp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_thp_id_pesca_fkey FOREIGN KEY (thp_id_pesca)
+      REFERENCES t_horario_pesca (thp_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_ttr_id_renda_fkey FOREIGN KEY (ttr_id_renda)
+      REFERENCES t_tiporenda (ttr_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_tu_digitador_fkey FOREIGN KEY (tu_digitador)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT t_atuacao_embarcacao_tu_entrevistador_fkey FOREIGN KEY (tu_entrevistador)
+      REFERENCES t_usuario (tu_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 ------------------------------------------------------------------------------------------------
@@ -263,116 +371,3 @@ Create Table t_atuacao_embarcacao_has_t_fornecedor_petrechos (
     Foreign Key (tfp_id) References t_fornecedor_insumos (tfi_id)
 
 );
-
-Create Table t_atuacao_embarcacao_has_t_artepesca (
-
-    taeatp_id serial,
-    tae_id int,
-    tap_id int,
-
-    Primary Key (teatp_id),
-    Foreign Key (tae_id) References t_atuacao_embarcacao (tae_id),
-    Foreign Key (tap_id) References t_artepesca (tap_id)
-
-);
-
-Create Table t_atuacao_embarcacao_has_t_fornecedor_petrechos (
-
-    taefp_id serial,
-    tae_id int,
-    tfp_id int,
-
-    Primary Key (taefp_id),
-    Foreign Key (tae_id) References t_atuacao_embarcacao (tae_id),
-    Foreign Key (tfp_id) References t_fornecedor_insumo (tfp_id)
-
-);
-
-
-zf create db-table TipoCasco t_tipocasco;
-zf create db-table Cor t_cor;
-zf create db-table Material t_material;
-zf create db-table TipoPagamento t_tipopagamento;
-zf create db-table Equipamento t_equipamento;
-zf create db-table Savatagem t_savatagem;
-zf create db-table TipoMotor t_tipomotor;
-zf create db-table Modelo t_modelo;
-zf create db-table Marca t_marca;
-zf create db-table PostoCombustivel t_posto_combustivel; 
-zf create db-table Financiador t_financiador;
-zf create db-table ConservacaoPescado t_conservacao_pescado;
-zf create db-table EmbarcacaoDetalhadaHasCor t_embarcacao_detalhada_has_t_cor; 
-zf create db-table EmbarcacaoDetalhadaHasSeguroDefeso t_embarcacao_detalhada_has_t_seguro_defeso;
-zf create db-table EmbarcacaoDetalhadaHasMaterial t_embarcacao_detalhada_has_t_material;
-zf create db-table EmbarcacaoDetalhadaHasEquipamento t_embarcacao_detalhada_has_t_equipamento;
-zf create db-table EmbarcacaoDetalhadaHasSavatagem t_embarcacao_detalhada_has_t_savatagem;
-zf create db-table MotorEmbarcacaoHasFrequenciaManutencao t_motor_embarcacao_has_t_frequencia_manutencao;
-zf create db-table AtuacaoEmbarcacaoHasAreaPesca t_atuacao_embarcacao_has_t_areapesca;
-zf create db-table AtuacaoEmbarcacaoHasArtePesca t_atuacao_embarcacao_has_t_artepesca;
-zf create db-table AtuacaoEmbarcacaoHasFornecedorPetrechos t_atuacao_embarcacao_has_t_fornecedor_petrechos;
-zf create db-table EmbarcacaoDetalhada t_embarcacao_detalhada;
-zf create db-table MotorEmbarcacao t_motor_embarcacao;
-zf create db-table AtuacaoEmbarcacao t_atuacao_embarcacao;
-
-zf create model TipoCasco;
-zf create model Cor;
-zf create model Material;
-zf create model TipoPagamento;
-zf create model Equipamento;
-zf create model Savatagem;
-zf create model TipoMotor;
-zf create model Modelo;
-zf create model Marca;
-zf create model PostoCombustivel;
-zf create model Financiador;
-zf create model ConservacaoPescado;
-zf create model EmbarcacaoDetalhadaHasCor;
-zf create model EmbarcacaoDetalhadaHasSeguroDefeso;
-zf create model EmbarcacaoDetalhadaHasMaterial;
-zf create model EmbarcacaoDetalhadaHasEquipamento;
-zf create model EmbarcacaoDetalhadaHasSavatagem;
-zf create model MotorEmbarcacaoHasFrequenciaManutencao;
-zf create model AtuacaoEmbarcacaoHasAreaPesca;
-zf create model AtuacaoEmbarcacaoHasArtePesca;
-zf create model AtuacaoEmbarcacaoHasFornecedorPetrechos;
-zf create model EmbarcacaoDetalhada;
-zf create model MotorEmbarcacao;
-zf create model AtuacaoEmbarcacao;
-
-
-zf create controller  TipoCasco;
-zf create controller  Cor;
-zf create controller  Material;
-zf create controller  TipoPagamento;
-zf create controller  Equipamento;
-zf create controller  Savatagem;
-zf create controller  TipoMotor;
-zf create controller  Modelo;
-zf create controller  Marca;
-zf create controller  PostoCombustivel;
-zf create controller  Financiador;
-zf create controller  ConservacaoPescado;
-
-DROP TABLE t_historico_login;
-
-CREATE TABLE t_historico_login
-(
-  thl_id serial,
-  thl_dhlogin timestamp without time zone,
-  thl_dhlogoff timestamp without time zone,
-  tu_id int,
-  PRIMARY KEY (thl_id),
-  Foreign Key (tu_id) References t_usuario (tu_id)  
-)
-
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-

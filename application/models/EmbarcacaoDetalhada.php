@@ -2,7 +2,7 @@
 
 class Application_Model_EmbarcacaoDetalhada
 {
-public function select($where = null, $order = null, $limit = null) {
+    public function select($where = null, $order = null, $limit = null) {
         $this->dbTableEmbarcacaoDetalhada = new Application_Model_DbTable_EmbarcacaoDetalhada();
 
         $select = $this->dbTableEmbarcacaoDetalhada->select()->from($this->dbTableEmbarcacaoDetalhada)->order($order)->limit($limit);

@@ -22,6 +22,7 @@
                 <th width="65%">Conservação</th>
                 <th width="5%"></th>
                 <th width="5%"></th>
+                <th width="5%"></th>
             </tr>
             <?php foreach ($this->barcos as $key => $dados): ?>
                 <tr id="rowNumPeril<?= $key ?>">
@@ -29,6 +30,7 @@
                     <td><?= $dados['bar_nome'] ?></td>
                     <td><input type="button" class="button-edit" width="5%" onclick="jsUpdateDynamic('<?= $dados['bar_id'] ?>', '<?= $dados['bar_nome'] ?>', this.form)"></td>
                     <td><input type="button" class="button-del" width="5%" onclick="jsDeleteDynamic(<?= $dados['bar_id'] ?>, '<?= $this->url(array("controller" => "barcos", "action" => "delete"), null, true) ?>')"></td>
+                    <td><a id="botao-ancora" href="<?=$this->url(array("controller"=>"barcos","action"=>"novo", "id" => $dados['bar_id'] ),null,true)?>">Cadastro </a>
                 </tr>
             <?php endforeach; ?>
         </table>

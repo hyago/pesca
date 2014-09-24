@@ -41,12 +41,17 @@ class Application_Model_Familia
         $this->dbTableOrdem= new Application_Model_DbTable_Ordem();
         $this->dbTableFamilia = new Application_Model_DbTable_Familia();
         
+        $ordem_filogenetica = $request['ordem_filogenetica'];
+        if(empty($ordem_filogenetica)){
+            $ordem_filogenetica = null;
+        }
+        
         $dadosFamilia = array(
-            'fam_nome' 					=> $request['nome_familia'],
-            'fam_ordem_filogenetica'	=> $request['ordem_filogenetica'],
-            'fam_tipo' 					=> $request['tipo_familia'],
-            'fam_caracteristica' 		=> $request['caracteristica_familia'],
-            'ord_id' 					=> $request['ordem_familia']
+            'fam_nome' 	=> $request['nome_familia'],
+            'fam_ordem_filogenetica'	=> $ordem_filogenetica,
+            'fam_tipo' 	=> $request['tipo_familia'],
+            'fam_caracteristica' => $request['caracteristica_familia'],
+            'ord_id' 	=> $request['ordem_familia']
         );
         
         $this->dbTableFamilia->insert($dadosFamilia);
@@ -57,10 +62,14 @@ class Application_Model_Familia
     public function update(array $request)
     {
         $this->dbTableFamilia = new Application_Model_DbTable_Familia();
-
+        
+        $ordem_filogenetica = $request['ordem_filogenetica'];
+        if(empty($ordem_filogenetica)){
+            $ordem_filogenetica = null;
+        }
         $dadosFamilia = array(
             'fam_nome' 					=> $request['nome_familia'],
-            'fam_ordem_filogenetica'	=> $request['ordem_filogenetica'],
+            'fam_ordem_filogenetica'	=> $ordem_filogenetica,
             'fam_tipo' 					=> $request['tipo_familia'],
             'fam_caracteristica' 		=> $request['caracteristica_familia'],
             'ord_id' 					=> $request['ordem_familia']

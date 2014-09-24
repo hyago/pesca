@@ -2,15 +2,31 @@
     <h2>Desembarque->Embarcações Detalhadas</h2>
     <h3>Novo</h3>
 </div>
+<script>
+        function buscar_cidades(){
+            //var mestre = $('#mestre').val();
+            var proprietario = document.getElementById("propri").selectedIndex;
+            var propMestre = $('#propMestre').val();
+            if(propMestre === '2'){
+              document.getElementById("mestre").selectedIndex = proprietario;
+            }
+        }
+</script>
 
-
-<form action="<?=$this->url(array("controller"=>"barcos","action"=>"criar"),null,true)?>" method="post">
+<form action="<?=$this->url(array("controller"=>"barcos","action"=>"embarcacaodetalhada"),null,true)?>" method="post">
     
     <fieldset id="Desembarque"><h2>Embarcação</h2>
 <!--1. -------------------------------------------------------------->        
         <div class="form-dir">
             <label>Embarcação:</label> 
-            <input type="text" name="nomeBarco" placeholder="Embarcação"/> <br />
+            <select name="embarcacao" required/>
+                <?php
+                    foreach ($this->assignBarco as $key => $barco):?>
+                        <option value="<?= $barco['bar_id'] ?>" selected><?= $barco['bar_nome'] ?></option>
+                <?php
+                     endforeach;
+                ?>
+            </select>
         </div>
 <!--2. -------------------------------------------------------------->               
         <div class="form-dir">
@@ -18,8 +34,8 @@
             <select name="portoDesembarque" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignPortos as $key => $porto):?>
+                        <option value="<?= $porto['pto_id'] ?>"><?= $porto['pto_nome'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -28,10 +44,10 @@
 <!--3. -------------------------------------------------------------->       
         <div class="form-dir">
             <label>Proprietário:</label>
-            <select name="proprietario" required/>
+            <select name="proprietario" required id="propri"/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
+                    foreach ($this->assignPescadores as $key => $pescador):?>
                         <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
                 <?php
                      endforeach;
@@ -41,25 +57,27 @@
 <!--4. -------------------------------------------------------------->       
         <div class="form-dir">
             <label>O proprietário é mestre do barco?:</label>
-            <select name="proprietarioMestre" required/>
+            <select name="proprietarioMestre" id ="propMestre" onchange="buscar_cidades()" required/>
                 <option value="" selected></option>
                 <option value="2">Sim</option>
                 <option value="1">Não</option>
             </select>
         </div>   
-<!--5. -------------------------------------------------------------->       
+<!--5. -------------------------------------------------------------->
+        
         <div class="form-dir">
             <label>Mestre:</label>
-            <select name="mestre" required/>
+            <select name="mestre" required id="mestre" onchange="buscar_cidades()"/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
+                    foreach ($this->assignPescadores as $key => $pescador):?>
                         <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
                 <?php
                      endforeach;
                 ?>
             </select>
         </div>
+        
 <!--6. -------------------------------------------------------------->       
         <div class="form-dir">
             <label>Possui outras embarcações? Quantas?</label> 
@@ -107,8 +125,8 @@
             <select name="tipoBarco" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignTipoBarcos as $key => $tipobarco):?>
+                        <option value="<?= $tipobarco['tte_id'] ?>"><?= $tipobarco['tte_tipoembarcacao'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -145,8 +163,8 @@
             <select name="portoOrigem" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignPortos as $key => $porto):?>
+                        <option value="<?= $porto['pto_id'] ?>"><?= $porto['pto_nome'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -158,8 +176,8 @@
             <select name="tipoCasco" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignTipoCasco as $key => $tipocasco):?>
+                        <option value="<?= $tipocasco['tcas_id'] ?>"><?= $tipocasco['tcas_tipo'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -177,6 +195,7 @@
                 <option value="" selected></option>
                 <option value="2">Nova</option>
                 <option value="1">Usada</option>
+                <option value="0">Não Informado</option>
             </select>
         </div>
 <!--21. -------------------------------------------------------------->       
@@ -186,6 +205,7 @@
                 <option value="" selected></option>
                 <option value="2">Sim</option>
                 <option value="1">Não</option>
+                <option value="0">Não Informado</option>
             </select>
         </div> 
 <!--22. -------------------------------------------------------------->       
@@ -194,8 +214,8 @@
             <select name="tipoPagamentoBarco" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignTipoPagamento as $key => $tipopagamento):?>
+                        <option value="<?= $tipopagamento['tpg_id'] ?>"><?= $tipopagamento['tpg_pagamento'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -207,8 +227,8 @@
             <select name="financiadorBarco" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignFinanciador as $key => $financiador):?>
+                        <option value="<?= $financiador['tfin_id'] ?>"><?= $financiador['tfin_financiador'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -224,8 +244,10 @@
             <label>Tipo de Propulsão:</label>
             <select name="tipoPropulsao" required/>
                 <option value="" selected></option>
-                <option value="2">Nova</option>
-                <option value="1">Usada</option>
+                <option value="1">Sem Propulsão</option>
+                <option value="2">Motor</option>
+                <option value="3">Remo</option>
+                <option value="0">Não Informado</option>
             </select>
         </div>
 
@@ -238,8 +260,8 @@
             <select name="tipoMotor" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignTipoMotor as $key => $motor):?>
+                        <option value="<?= $motor['tmot_id'] ?>"><?= $motor['tmot_tipo'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -251,8 +273,8 @@
             <select name="modelo" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignModelos as $key => $modelos):?>
+                        <option value="<?= $modelos['tmod_id'] ?>"><?= $modelos['tmod_modelo'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -264,8 +286,8 @@
             <select name="marca" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignMarcas as $key => $marca):?>
+                        <option value="<?= $marca['tmar_id'] ?>"><?= $marca['tmar_marca'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -297,8 +319,8 @@
             <select name="postoCombustivel" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignPostosCombustivel as $key => $posto):?>
+                        <option value="<?= $posto['tpc_id'] ?>"><?= $posto['tpc_posto'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -309,6 +331,16 @@
             <label>Ano da compra:</label> 
             <input type="text" name="anoCompraMotor" placeholder="Ano da Compra"/> <br />
         </div>
+<!--33.1. -------------------------------------------------------------->               
+        <div class="form-dir">
+            <label>Estado do Motor:</label>
+            <select name="estadoMotor" required/>
+                <option value="" selected></option>
+                <option value="2">Novo</option>
+                <option value="1">Usado</option>
+                <option value="0">Não Informado</option>
+            </select>
+        </div> 
 <!--34. -------------------------------------------------------------->               
         <div class="form-dir">
             <label>Já está paga?</label>
@@ -316,17 +348,17 @@
                 <option value="" selected></option>
                 <option value="2">Sim</option>
                 <option value="1">Não</option>
-                <option value="0">Não</option>
+                <option value="0">Não Informado</option>
             </select>
         </div> 
  <!--35. -------------------------------------------------------------->              
         <div class="form-dir">
             <label>Tipo de Pagamento:</label>
-            <select name="tipoPagamento" required/>
+            <select name="tipoPagamentoMotor" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignTipoPagamento as $key => $tipopagamentoMotor):?>
+                        <option value="<?= $tipopagamentoMotor['tpg_id'] ?>"><?= $tipopagamentoMotor['tpg_pagamento'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -335,11 +367,11 @@
  <!--36. -------------------------------------------------------------->              
         <div class="form-dir">
             <label>Se financiado, por onde?</label>
-            <select name="pescadorEntrevistado" required/>
+            <select name="financiadorMotor" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignFinanciador as $key => $financiador):?>
+                        <option value="<?= $financiador['tfin_id'] ?>"><?= $financiador['tfin_financiador'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -380,8 +412,8 @@
             <select name="frequenciaPesca" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignFrequenciaPesca as $key => $frequenciapesca):?>
+                        <option value="<?= $frequenciapesca['tfp_id'] ?>"><?= $frequenciapesca['tfp_frequencia'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -393,8 +425,8 @@
             <select name="horarioPesca" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignHorarioPesca as $key => $horariopesca):?>
+                        <option value="<?= $horariopesca['thp_id'] ?>"><?= $horariopesca['thp_horario'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -411,8 +443,8 @@
             <select name="conservacaoPescado" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignConservacaoPescado as $key => $conservacao):?>
+                        <option value="<?= $conservacao['tcp_id'] ?>"><?= $conservacao['tcp_conserva'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -421,15 +453,7 @@
  <!--46. -------------------------------------------------------------->              
         <div class="form-dir">
             <label>Onde adquire:</label>
-            <select name="ondeAdquire" required/>
-                <option value="" selected></option>
-                <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
-                <?php
-                     endforeach;
-                ?>
-            </select>
+            <input type="text" name="ondeAdquire" placeholder="Onde adquire"/><br />
         </div>
  <!--47. -------------------------------------------------------------->              
         <div class="form-dir">
@@ -442,8 +466,8 @@
             <select name="destinoPescado" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignDestinoPescado as $key => $destinoPesca):?>
+                        <option value="<?= $destinoPesca['dp_id'] ?>"><?= $destinoPesca['dp_destino'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -455,8 +479,8 @@
             <select name="compradorPescado" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignDestinoPescado as $key => $destinoPesca):?>
+                        <option value="<?= $destinoPesca['dp_id'] ?>"><?= $destinoPesca['dp_destino'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -469,8 +493,8 @@
             <select name="maiorQuantidade" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignEstacaoAno as $key => $estacaoAno):?>
+                        <option value="<?= $estacaoAno['tea_id'] ?>"><?= $estacaoAno['tea_estacao'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -480,10 +504,10 @@
         <div class="form-dir">
             <label><b>Menor</b> quantidade de pescado:</label>
             <select name="menorQuantidade" required/>
-                <option value="" selected></option>
+             <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignEstacaoAno as $key => $estacaoAno):?>
+                        <option value="<?= $estacaoAno['tea_id'] ?>"><?= $estacaoAno['tea_estacao'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -495,8 +519,8 @@
             <select name="outraAtividade" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignOutraAtividade as $key => $outraAtividade):?>
+                        <option value="<?= $outraAtividade['ttr_id'] ?>"><?= $outraAtividade['ttr_descricao'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -527,25 +551,19 @@
         </div>
  <!--56. -------------------------------------------------------------->              
         <div class="form-dir">
-            <label>Responsável pela entrevista:</label>
+            <label>Responsável pelo Lançamento:</label>
             <select name="entrevistador" required/>
-                <option value="" selected></option>
-                <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
-                <?php
-                     endforeach;
-                ?>
+                <option value="<?= $this->usuario['tu_id']; ?>"><?=$this->usuario['tu_nome']; ?></option>
             </select>
         </div>
  <!--57. -------------------------------------------------------------->              
         <div class="form-dir">
-            <label>Responsável pelo lançamento:</label>
+            <label>Responsável pela Entrevista:</label>
             <select name="lancador" required/>
                 <option value="" selected></option>
                 <?php
-                    foreach ($this->pescadores as $key => $pescador):?>
-                        <option value="<?= $pescador['tp_id'] ?>"><?= $pescador['tp_nome'] ?></option>
+                    foreach ($this->assignUsuarios as $key => $usuario):?>
+                        <option value="<?= $usuario['tu_id'] ?>"><?= $usuario['tu_nome'] ?></option>
                 <?php
                      endforeach;
                 ?>

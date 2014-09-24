@@ -238,12 +238,6 @@ class PescadorController extends Zend_Controller_Action {
         $vPescadorHasPorto = $model_VPescadorHasPorto->select("tp_id=" . $idPescador, "pto_nome");
         $this->view->assign("assign_vPescadorPorto", $vPescadorHasPorto);
         
-        
-        
-        
-        
-        
-        
 //Pescador Especialista///////////////////////////////////////////////////////////////////////
         
         $assignEspecialista = $this->modelPescadorEspecialista->select("tp_id=".$idPescador);
