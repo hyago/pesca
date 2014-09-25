@@ -532,7 +532,7 @@
                 <option value="" selected></option>
                 <?php
                     foreach ($this->assignTipoMotor as $key => $motor):?>
-                        <option value="<?= $motor['tmot_id'] ?>"<?=( $motor['tmot_id'] == $this->assignEmbarcacaoDetalhada['tmot_id'])? 'selected="selected"': '';?>><?= $motor['tmot_tipo'] ?></option>
+                        <option value="<?= $motor['tmot_id'] ?>"<?=( $motor['tmot_id'] == $this->assignMotorEmbarcacao['tmot_id'])? 'selected="selected"': '';?>><?= $motor['tmot_tipo'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -545,7 +545,7 @@
                 <option value="" selected></option>
                 <?php
                     foreach ($this->assignModelos as $key => $modelos):?>
-                        <option value="<?= $modelos['tmod_id'] ?>"<?=( $modelos['tmod_id'] == $this->assignEmbarcacaoDetalhada['tmod_id'])? 'selected="selected"': '';?>><?= $modelos['tmod_modelo'] ?></option>
+                        <option value="<?= $modelos['tmod_id'] ?>"<?=( $modelos['tmod_id'] == $this->assignMotorEmbarcacao['tmod_id'])? 'selected="selected"': '';?>><?= $modelos['tmod_modelo'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -558,7 +558,7 @@
                 <option value="" selected></option>
                 <?php
                     foreach ($this->assignMarcas as $key => $marca):?>
-                        <option value="<?= $marca['tmar_id'] ?>"<?=( $marca['tmar_id'] == $this->assignEmbarcacaoDetalhada['tmar_id'])? 'selected="selected"': '';?>><?= $marca['tmar_marca'] ?></option>
+                        <option value="<?= $marca['tmar_id'] ?>"<?=( $marca['tmar_id'] == $this->assignMotorEmbarcacao['tmar_id'])? 'selected="selected"': '';?>><?= $marca['tmar_marca'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -567,26 +567,26 @@
 <!--29. -------------------------------------------------------------->               
         <div class="form-dir">
             <label>Potência:</label> 
-            <input type="text" name="potenciaMotor" placeholder="Potência" value="<?= $this->assignEmbarcacaoDetalhada['tme_potencia'] ?>"/> <br />
+            <input type="text" name="potenciaMotor" placeholder="Potência" value="<?= $this->assignMotorEmbarcacao['tme_potencia'] ?>"/> <br />
         </div>
 <!--30. -------------------------------------------------------------->               
         <div class="form-dir">
             <label>Tipo de Combustível:</label>
             <select name="tipoCombustivel" required/>
                 <?php
-                    if($this->assignEmbarcacaoDetalhada['tme_combustivel'] == 2){
+                    if($this->assignMotorEmbarcacao['tme_combustivel'] == 2){
                         echo '<option value="2" selected>Gasolina</option>'.
-                             '<option value="1">Diesel/option>'.
+                             '<option value="1">Diesel</option>'.
                              '<option value="0">Não Respondeu</option>';
                     }
-                    else if($this->assignEmbarcacaoDetalhada['tme_combustivel'] == 1){
+                    else if($this->assignMotorEmbarcacao['tme_combustivel'] == 1){
                         echo '<option value="2">Gasolina</option>'.
-                             '<option value="1" selected>Diesel/option>'.
+                             '<option value="1" selected>Diesel</option>'.
                              '<option value="0">Não Respondeu</option>';
                     }
-                    else if($this->assignEmbarcacaoDetalhada['tme_combustivel'] == 0){
+                    else if($this->assignMotorEmbarcacao['tme_combustivel'] == 0){
                         echo '<option value="2">Gasolina</option>'.
-                             '<option value="1">Diesel/option>'.
+                             '<option value="1">Diesel</option>'.
                              '<option value="0" selected>Não Respondeu</option>';
                     }
                 ?>
@@ -596,7 +596,7 @@
 <!--31. -------------------------------------------------------------->               
         <div class="form-dir">
             <label>Capacidade de combustível:</label> 
-            <input type="text" name="capacidadeCombustivel" placeholder="Capacidade de combustível" value="<?= $this->assignEmbarcacaoDetalhada['tme_armazenamento'] ?>"/> <br />
+            <input type="text" name="capacidadeCombustivel" placeholder="Capacidade de combustível" value="<?= $this->assignMotorEmbarcacao['tme_armazenamento'] ?>"/> <br />
         </div>
 <!--32. -------------------------------------------------------------->               
         <div class="form-dir">
@@ -605,7 +605,7 @@
                 <option value="" selected></option>
                 <?php
                     foreach ($this->assignPostosCombustivel as $key => $posto):?>
-                        <option value="<?= $posto['tpc_id'] ?>" <?=( $posto['tpc_id'] == $this->assignEmbarcacaoDetalhada['tpc_id'])? 'selected="selected"': '';?>><?= $posto['tpc_posto'] ?></option>
+                        <option value="<?= $posto['tpc_id'] ?>" <?=( $posto['tpc_id'] == $this->assignMotorEmbarcacao['tpc_id'])? 'selected="selected"': '';?>><?= $posto['tpc_posto'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -614,26 +614,53 @@
 <!--33. -------------------------------------------------------------->               
         <div class="form-dir">
             <label>Ano da compra:</label> 
-            <input type="text" name="anoCompraMotor" placeholder="Ano da Compra" value="<?= $this->assignEmbarcacaoDetalhada['tme_ano_motor'] ?>"/> <br />
+            <input type="text" name="anoCompraMotor" placeholder="Ano da Compra" value="<?= $this->assignMotorEmbarcacao['tme_ano_motor'] ?>"/> <br />
         </div>
 <!--33.1. -------------------------------------------------------------->               
         <div class="form-dir">
             <label>Estado do Motor:</label>
             <select name="estadoMotor" required/>
-                <option value="" selected></option>
-                <option value="2">Novo</option>
-                <option value="1">Usado</option>
-                <option value="0">Não Informado</option>
+            <?php
+                    if($this->assignMotorEmbarcacao['tme_estado_motor'] == 2){
+                        echo '<option value="2" selected>Novo</option>'.
+                             '<option value="1">Usado</option>'.
+                             '<option value="0">Não Informado</option>';
+                    }
+                    else if($this->assignMotorEmbarcacao['tme_estado_motor'] == 1){
+                        echo '<option value="2">Novo</option>'.
+                             '<option value="1" selected>Usado</option>'.
+                             '<option value="0">Não Informado</option>';
+                    }
+                    else if($this->assignMotorEmbarcacao['tme_estado_motor'] == 0){
+                        echo '<option value="2">Novo</option>'.
+                             '<option value="1">Usado</option>'.
+                             '<option value="0" selected>Não Informado</option>';
+                    }
+                ?>
+
             </select>
         </div> 
 <!--34. -------------------------------------------------------------->               
         <div class="form-dir">
             <label>Já está paga?</label>
             <select name="jaPagoMotor" required/>
-                <option value="" selected></option>
-                <option value="2">Sim</option>
-                <option value="1">Não</option>
-                <option value="0">Não Informado</option>
+                 <?php
+                if($this->assignMotorEmbarcacao['tme_pagamento_motor'] == 2){
+                    echo '<option value="2" selected>Sim</option>'.
+                         '<option value="1">Não</option>'.
+                         '<option value="0">Não Respondeu</option>';
+                }
+                else if($this->assignMotorEmbarcacao['tme_pagamento_motor'] == 1){
+                    echo '<option value="2">Sim</option>'.
+                         '<option value="1" selected>Não</option>'.
+                         '<option value="0">Não Respondeu</option>';
+                }
+                else if($this->assignMotorEmbarcacao['tme_pagamento_motor'] == 0){
+                    echo '<option value="2">Sim</option>'.
+                         '<option value="1">Não</option>'.
+                         '<option value="0" selected>Não Respondeu</option>';
+                }
+             ?>
             </select>
         </div> 
  <!--35. -------------------------------------------------------------->              
@@ -643,7 +670,7 @@
                 <option value="" selected></option>
                 <?php
                     foreach ($this->assignTipoPagamento as $key => $tipopagamentoMotor):?>
-                        <option value="<?= $tipopagamentoMotor['tpg_id'] ?>"><?= $tipopagamentoMotor['tpg_pagamento'] ?></option>
+                        <option value="<?= $tipopagamentoMotor['tpg_id'] ?>"<?=( $tipopagamentoMotor['tpg_id'] == $this->assignMotorEmbarcacao['tpg_id_motor'])? 'selected="selected"': '';?>><?= $tipopagamentoMotor['tpg_pagamento'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -656,7 +683,7 @@
                 <option value="" selected></option>
                 <?php
                     foreach ($this->assignFinanciador as $key => $financiador):?>
-                        <option value="<?= $financiador['tfin_id'] ?>"><?= $financiador['tfin_financiador'] ?></option>
+                        <option value="<?= $financiador['tfin_id'] ?>" <?=( $financiador['tfin_id'] == $this->assignMotorEmbarcacao['tfin_id'])? 'selected="selected"': '';?>><?= $financiador['tfin_financiador'] ?></option>
                 <?php
                      endforeach;
                 ?>
@@ -665,7 +692,7 @@
  <!--37. -------------------------------------------------------------->              
         <div class="form-dir">
             <label>Ano da Fabricação:</label> 
-            <input type="text" name="anoFabricacao" placeholder="Ano da Fabricação do Motor"/> <br />
+            <input type="text" name="anoFabricacao" placeholder="Ano da Fabricação do Motor" value="<?= $this->assignMotorEmbarcacao['tme_ano_motor_fabricacao'] ?>"/> <br />
         </div>
  <br/>
 <!--37.1 -------------------------------------------------------------->  
@@ -706,12 +733,12 @@
  <!--38. -------------------------------------------------------------->              
         <div class="form-dir">
             <label>Obs:</label> 
-            <input type="text" name="obs" placeholder="Observação"/> <br />
+            <input type="text" name="obs" placeholder="Observação" value="<?= $this->assignMotorEmbarcacao['tme_obs'] ?>"/> <br />
         </div>
  <!--39. -------------------------------------------------------------->              
         <div class="form-dir">
             <label>Gasto mensal com Manutenção ($):</label> 
-            <input type="text" name="gastoMensalMotor" placeholder="Gasto Mensal"/> <br />
+            <input type="text" name="gastoMensalMotor" placeholder="Gasto Mensal" value="<?= $this->assignMotorEmbarcacao['tme_gasto_mensal'] ?>"/> <br />
         </div>
         <br/>
         <br/>
@@ -891,10 +918,23 @@
         <div class="form-dir">
             <label>Há competição entre os pescadores?</label>
             <select name="competicaoPescadores" required/>
-                <option value="" selected></option>
-                <option value="2">Sim</option>
-                <option value="1">Não</option>
-                <option value="0">Não Respondido</option>
+                 <?php
+                if($this->assignEmbarcacaoDetalhada['ted_pagamento'] == 2){
+                    echo '<option value="2" selected>Sim</option>'.
+                         '<option value="1">Não</option>'.
+                         '<option value="0">Não Respondeu</option>';
+                }
+                else if($this->assignEmbarcacaoDetalhada['ted_pagamento'] == 1){
+                    echo '<option value="2">Sim</option>'.
+                         '<option value="1" selected>Não</option>'.
+                         '<option value="0">Não Respondeu</option>';
+                }
+                else if($this->assignEmbarcacaoDetalhada['ted_pagamento'] == 0){
+                    echo '<option value="2">Sim</option>'.
+                         '<option value="1">Não</option>'.
+                         '<option value="0" selected>Não Respondeu</option>';
+                }
+             ?>
             </select>
         </div> 
  <!--54. -------------------------------------------------------------->              

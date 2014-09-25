@@ -1,6 +1,6 @@
 
 --ALTERAÇÕES CALÃO!--------------------------------------------------------------------------------
-Create table t_calao_tipo(
+Create table If Not Exists t_calao_tipo(
 	tcat_id serial,
 	tcat_tipo Varchar(30),
 	Primary Key (tcat_id)
@@ -44,13 +44,13 @@ Drop table if exists t_financiador Cascade;
 Drop table if exists t_area_atuacao Cascade;
 
 
-Create table t_tipocasco ( tcas_id serial, tcas_tipo Varchar(30), Primary Key (tcas_id) );
+Create table If Not Exists t_tipocasco ( tcas_id serial, tcas_tipo Varchar(30), Primary Key (tcas_id) );
 Insert Into t_tipocasco (tcas_tipo)VALUES ('Plano');
 Insert Into t_tipocasco (tcas_tipo)VALUES ('Arredondado');
 Insert Into t_tipocasco (tcas_tipo)VALUES ('profundo');
 Insert Into t_tipocasco (tcas_tipo)VALUES ('V Profundo');
 
-Create table t_cor (tcor_id serial, tcor_cor Varchar(30), Primary Key(tcor_id));
+Create table If Not Exists t_cor (tcor_id serial, tcor_cor Varchar(30), Primary Key(tcor_id));
 Insert Into t_cor (tcor_cor)VALUES ('Branco');
 Insert Into t_cor (tcor_cor)VALUES ('Azul');
 Insert Into t_cor (tcor_cor)VALUES ('Laranja');
@@ -64,18 +64,18 @@ Insert Into t_cor (tcor_cor)VALUES ('Roxo');
 Insert Into t_cor (tcor_cor)VALUES ('Rosa');
 Insert Into t_cor (tcor_cor)VALUES ('Não é pintada');
 
-Create table t_material (tmt_id serial, tmt_material Varchar(50), Primary Key(tmt_id));
+Create table If Not Exists t_material (tmt_id serial, tmt_material Varchar(50), Primary Key(tmt_id));
 Insert Into t_material (tmt_material)VALUES ('Madeira');
 Insert Into t_material (tmt_material)VALUES ('Fibra de Vidro');
 Insert Into t_material (tmt_material)VALUES ('Alumínio');
 
-Create table t_tipopagamento (tpg_id serial,tpg_pagamento Varchar(50), Primary Key(tpg_id));
+Create table If Not Exists t_tipopagamento (tpg_id serial,tpg_pagamento Varchar(50), Primary Key(tpg_id));
 insert Into t_tipopagamento (tpg_pagamento)VALUES ('A Vista');
 insert Into t_tipopagamento (tpg_pagamento)VALUES ('Parcelado');
 insert Into t_tipopagamento (tpg_pagamento)VALUES ('Financiado');
 insert Into t_tipopagamento (tpg_pagamento)VALUES ('Doado');
 
-Create table t_equipamento (teq_id serial,teq_equipamento Varchar(50), Primary Key(teq_id));
+Create table If Not Exists t_equipamento (teq_id serial,teq_equipamento Varchar(50), Primary Key(teq_id));
 Insert Into t_equipamento (teq_equipamento)VALUES ('GPS');
 Insert Into t_equipamento (teq_equipamento)VALUES ('Rádio');
 Insert Into t_equipamento (teq_equipamento)VALUES ('Bússola');
@@ -88,7 +88,7 @@ Insert Into t_equipamento (teq_equipamento)VALUES ('Outro');
 Insert Into t_equipamento (teq_equipamento)VALUES ('Nenhum');
 
 
-Create table t_savatagem (tsav_id serial, tsav_savatagem Varchar(50), Primary Key(tsav_id));
+Create table If Not Exists t_savatagem (tsav_id serial, tsav_savatagem Varchar(50), Primary Key(tsav_id));
 Insert Into t_savatagem (tsav_savatagem)VALUES ('Colete');
 Insert Into t_savatagem (tsav_savatagem)VALUES ('Boia');
 Insert Into t_savatagem (tsav_savatagem)VALUES ('Bote');
@@ -100,12 +100,12 @@ Insert Into t_savatagem (tsav_savatagem)VALUES ('Âncora');
 Insert Into t_savatagem (tsav_savatagem)VALUES ('Outro');
 Insert Into t_savatagem (tsav_savatagem)VALUES ('Nenhuma');
 
-Create table t_tipomotor ( tmot_id serial, tmot_tipo Varchar(50), Primary Key(tmot_id));
+Create table If Not Exists t_tipomotor ( tmot_id serial, tmot_tipo Varchar(50), Primary Key(tmot_id));
 Insert into t_tipomotor (tmot_tipo)VALUES ('Popa');
 Insert into t_tipomotor (tmot_tipo)VALUES ('Centro');
 Insert into t_tipomotor (tmot_tipo)VALUES ('Rabeta');
 
-Create table t_modelo ( tmod_id serial, tmod_modelo Varchar(50), Primary Key(tmod_id));
+Create table If Not Exists t_modelo ( tmod_id serial, tmod_modelo Varchar(50), Primary Key(tmod_id));
 Insert Into t_modelo (tmod_modelo)VALUES ('229');
 Insert Into t_modelo (tmod_modelo)VALUES ('352');
 Insert Into t_modelo (tmod_modelo)VALUES ('366');
@@ -116,7 +116,7 @@ Insert Into t_modelo (tmod_modelo)VALUES ('BT 33');
 Insert Into t_modelo (tmod_modelo)VALUES ('NS 18');
 Insert Into t_modelo (tmod_modelo)VALUES ('CL 10');
 
-Create table t_marca (tmar_id serial, tmar_marca Varchar(50), Primary Key(tmar_id));
+Create table If Not Exists t_marca (tmar_id serial, tmar_marca Varchar(50), Primary Key(tmar_id));
 Insert Into t_marca (tmar_marca)VALUES ('MWM');
 Insert Into t_marca (tmar_marca)VALUES ('Mercedes');
 Insert Into t_marca (tmar_marca)VALUES ('Yamaha');
@@ -124,17 +124,17 @@ Insert Into t_marca (tmar_marca)VALUES ('Toyama');
 Insert Into t_marca (tmar_marca)VALUES ('Honda');
 Insert Into t_marca (tmar_marca)VALUES ('Outro');
 
-Create table t_posto_combustivel (tpc_id serial, tpc_posto Varchar(50),	Primary Key(tpc_id));
+Create table If Not Exists t_posto_combustivel (tpc_id serial, tpc_posto Varchar(50),	Primary Key(tpc_id));
 Insert Into t_posto_combustivel (tpc_posto)VALUES ('Posto de Combustível de Ilhéus');
 Insert Into t_posto_combustivel (tpc_posto)VALUES ('Posto de Combustível de Itacaré');
 Insert Into t_posto_combustivel (tpc_posto)VALUES ('Posto de Combustível de Serra Grande');
 Insert Into t_posto_combustivel (tpc_posto)VALUES ('Terminal Pesqueiro/Bahia Pesca');
 
-Create table t_financiador (tfin_id serial, tfin_financiador Varchar(50), Primary Key(tfin_id));
+Create table If Not Exists t_financiador (tfin_id serial, tfin_financiador Varchar(50), Primary Key(tfin_id));
 Insert Into t_financiador (tfin_financiador)VALUES ('Banco do Nordeste');
 Insert Into t_financiador (tfin_financiador)VALUES ('Colônia Z-34');
 
-Create table t_conservacao_pescado (tcp_id serial, tcp_conserva Varchar(30), Primary Key(tcp_id));
+Create table If Not Exists t_conservacao_pescado (tcp_id serial, tcp_conserva Varchar(30), Primary Key(tcp_id));
 Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Gelo');
 Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Freezer');
 Insert Into t_conservacao_pescado (tcp_conserva)VALUES ('Água');
