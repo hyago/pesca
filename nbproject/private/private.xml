@@ -6,7 +6,7 @@
             <file>file:/srv/www/htdocs/pesca/application/models/Barcos.php</file>
             <file>file:/srv/www/htdocs/pesca/bd/14_embarcacoes.sql</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/BarcosController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
+            <file>file:/srv/www/htdocs/pesca/bd/Consultas_Entrevistas_fernanda.sql</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/barcos/editar.phtml</file>
         </group>
     </open-files>

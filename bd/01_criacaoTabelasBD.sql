@@ -3309,3 +3309,5 @@ CREATE TABLE t_historico_login
   PRIMARY KEY (thl_id),
   Foreign Key (tu_id) References t_usuario (tu_id)  
 );
+ALTER TABLE t_jerere DROP CONSTRAINT t_jerere_ttv_id_fkey;
+Alter table t_jerere Drop column ttv_id;

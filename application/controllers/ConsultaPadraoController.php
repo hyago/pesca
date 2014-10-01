@@ -26,24 +26,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $consultaPadrao = new Application_Model_VConsultaPadrao();
-        
-        $selectConsulta = $consultaPadrao->select(); 
-        $selectMonitoramentos = $consultaPadrao->selectMonitoramentos(); 
-        $selectFichas = $consultaPadrao->selectFichas();
-        $selectSubamostras = $consultaPadrao->selectSubamostras();
-        $totalEntrevistas = $consultaPadrao->selectTotalEntrevistas();
-        $diasByPorto = $consultaPadrao->selectDiasByPorto();
-        $dias = $consultaPadrao->selectDias();
-        
-        
-        $this->view->assign("totalEntrevistas", $totalEntrevistas);
-        $this->view->assign("dias", $dias);
-        $this->view->assign("diasByPorto", $diasByPorto);
-        $this->view->assign("selectSubamostras", $selectSubamostras);
-        $this->view->assign("selectFichas", $selectFichas);
-        $this->view->assign("selectConsulta", $selectConsulta);
-        $this->view->assign("selectMonitoramentos", $selectMonitoramentos);
+
         //print_r($selectConsulta);
     }
 
