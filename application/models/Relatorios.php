@@ -11,11 +11,11 @@ class Application_Model_Relatorios
         
         return $arrasto;
     }
-    public function selectArrastoHasPesqueiro($where = null, $order = null, $limit = null)
+    public function selectArrastoHasPesqueiro($where = null, $order = null, $limit = null, $distinct = false, $from = null)
     {
         $this->modelArrastoFundo = new Application_Model_ArrastoFundo();
         
-        $arrasto = $this->modelArrastoFundo->selectArrastoHasPesqueiro($where, $order, $limit);
+        $arrasto = $this->modelArrastoFundo->selectArrastoHasPesqueiro($where, $order, $limit, $distinct, $from);
         
         return $arrasto;
     }
@@ -26,6 +26,18 @@ class Application_Model_Relatorios
         $arrasto = $this->modelArrastoFundo->selectArrastoHasEspCapturadas($where, $order, $limit);
         
         return $arrasto;
+    }
+    public function selectArrastoNomeEspecies($where = null, $order = null, $limit = null, $distinct = false){
+        $this->dbTableArrastoHasEspCapturada = new Application_Model_DbTable_VArrastoFundoHasEspecieCapturada();
+
+        $select = $this->dbTableArrastoHasEspCapturada->select()->distinct($distinct)
+                ->from($this->dbTableArrastoHasEspCapturada, 'esp_nome_comum')->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableArrastoHasEspCapturada->fetchAll($select)->toArray();
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////

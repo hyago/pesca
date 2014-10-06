@@ -20,12 +20,9 @@
         <div class="form-dir">
             <label>Embarcação:</label> 
             <select name="embarcacao" required/>
-                <?php
-                    foreach ($this->assignBarco as $key => $barco):?>
+                <?php foreach ($this->assignBarco as $key => $barco):?>
                         <option value="<?= $barco['bar_id'] ?>" selected><?= $barco['bar_nome'] ?></option>
-                <?php
-                     endforeach;
-                ?>
+                <?php endforeach;?>
             </select>
         </div>
 <!--2. -------------------------------------------------------------->               

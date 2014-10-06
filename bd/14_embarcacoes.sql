@@ -43,12 +43,28 @@ Drop table if exists t_posto_combustivel Cascade;
 Drop table if exists t_financiador Cascade;
 Drop table if exists t_area_atuacao Cascade;
 
+-- Delete From t_atuacao_embarcacao;
+-- Delete From t_motor_embarcacao;
+-- Delete From t_embarcacao_detalhada;
+-- Delete From t_tipocasco;
+-- Delete From t_cor;
+-- Delete From t_material;
+-- Delete From t_tipopagamento;
+-- Delete From t_equipamento;
+-- Delete From t_savatagem;
+-- Delete From t_tipomotor;
+-- Delete From t_modelo;
+-- Delete From t_marca;
+-- Delete From t_posto_combustivel;
+-- Delete From t_financiador;
+-- Delete From t_conservacao_pescado;
 
 Create table If Not Exists t_tipocasco ( tcas_id serial, tcas_tipo Varchar(30), Primary Key (tcas_id) );
 Insert Into t_tipocasco (tcas_tipo)VALUES ('Plano');
 Insert Into t_tipocasco (tcas_tipo)VALUES ('Arredondado');
 Insert Into t_tipocasco (tcas_tipo)VALUES ('profundo');
 Insert Into t_tipocasco (tcas_tipo)VALUES ('V Profundo');
+
 
 Create table If Not Exists t_cor (tcor_id serial, tcor_cor Varchar(30), Primary Key(tcor_id));
 Insert Into t_cor (tcor_cor)VALUES ('Branco');
@@ -63,6 +79,7 @@ Insert Into t_cor (tcor_cor)VALUES ('Madeira');
 Insert Into t_cor (tcor_cor)VALUES ('Roxo');
 Insert Into t_cor (tcor_cor)VALUES ('Rosa');
 Insert Into t_cor (tcor_cor)VALUES ('Não é pintada');
+
 
 Create table If Not Exists t_material (tmt_id serial, tmt_material Varchar(50), Primary Key(tmt_id));
 Insert Into t_material (tmt_material)VALUES ('Madeira');
