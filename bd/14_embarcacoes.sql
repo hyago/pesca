@@ -388,3 +388,31 @@ Create Table t_atuacao_embarcacao_has_t_fornecedor_petrechos (
     Foreign Key (tfp_id) References t_fornecedor_insumos (tfi_id)
 
 );
+
+Drop Table t_local;
+Create Table t_local (
+
+    tl_id serial,
+    tl_local Varchar(50),
+
+    Primary Key (tl_id)
+);
+
+Alter table t_porto Add column tl_id int, add Foreign Key (tl_id) References t_local (tl_id);
+
+Update table t_porto set tl_id = 1 Where pto_id = 1;
+Update table t_porto set tl_id = 1 Where pto_id = 3;
+Update table t_porto set tl_id = 1 Where pto_id = 4;
+Update table t_porto set tl_id = 1 Where pto_id = 5;
+Update table t_porto set tl_id = 1 Where pto_id = 6;
+Update table t_porto set tl_id = 1 Where pto_id = 7;
+Update table t_porto set tl_id = 1 Where pto_id = 9;
+Update table t_porto set tl_id = 1 Where pto_id = 10;
+Update table t_porto set tl_id = 2 Where pto_id = 13;
+Update table t_porto set tl_id = 2 Where pto_id = 14;
+Update table t_porto set tl_id = 2 Where pto_id = 15;
+Update table t_porto set tl_id = 3 Where pto_id = 18;
+Update table t_porto set tl_id = 3 Where pto_id = 19;
+Update table t_porto set tl_id = 4 Where pto_id = 16;
+Update table t_porto set tl_id = 4 Where pto_id = 17;
+

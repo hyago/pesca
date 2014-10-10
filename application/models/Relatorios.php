@@ -5,20 +5,26 @@ class Application_Model_Relatorios
     //ARRASTO DE FUNDO ////////////////////////////////////////////////////////////////////
     public function selectEntrevistaArrasto($where = null, $order = null, $limit = null)
     {
-        $this->modelArrastoFundo = new Application_Model_ArrastoFundo();
         
-        $arrasto = $this->modelArrastoFundo->selectEntrevistaArrasto($where, $order, $limit);
-        
-        return $arrasto;
+        $this->dbTableArrastoFundo= new Application_Model_DbTable_VRelatorioArrastoFundo();
+        $select = $this->dbTableArrastoFundo->select()
+                ->from($this->dbTableArrastoFundo)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableArrastoFundo->fetchAll($select)->toArray();
     }
-    public function selectArrastoHasPesqueiro($where = null, $order = null, $limit = null, $distinct = false, $from = null)
+    public function selectArrastoHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelArrastoFundo = new Application_Model_ArrastoFundo();
         
-        $arrasto = $this->modelArrastoFundo->selectArrastoHasPesqueiro($where, $order, $limit, $distinct, $from);
+        $arrasto = $this->modelArrastoFundo->selectArrastoHasPesqueiro($where, $order, $limit);
         
         return $arrasto;
     }
+     
     public function selectArrastoHasEspCapturadas($where = null, $order = null, $limit = null){
          
         $this->modelArrastoFundo = new Application_Model_ArrastoFundo();
@@ -27,29 +33,22 @@ class Application_Model_Relatorios
         
         return $arrasto;
     }
-    public function selectArrastoNomeEspecies($where = null, $order = null, $limit = null, $distinct = false){
-        $this->dbTableArrastoHasEspCapturada = new Application_Model_DbTable_VArrastoFundoHasEspecieCapturada();
 
-        $select = $this->dbTableArrastoHasEspCapturada->select()->distinct($distinct)
-                ->from($this->dbTableArrastoHasEspCapturada, 'esp_nome_comum')->order($order)->limit($limit);
-
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableArrastoHasEspCapturada->fetchAll($select)->toArray();
-    }
     
     ///////////////////////////////////////////////////////////////////////////////////////
     
     //CALÃO////////////////////////////////////////////////////////////////////////////////
     public function selectEntrevistaCalao($where = null, $order = null, $limit = null)
     {
-        $this->modelCalao = new Application_Model_Calao();
-        
-        $calao = $this->modelCalao->selectEntrevistaCalao($where, $order, $limit);
-        
-        return $calao;
+        $this->dbTableCalao = new Application_Model_DbTable_VRelatorioCalao();
+        $select = $this->dbTableCalao->select()
+                ->from($this->dbTableCalao)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableCalao->fetchAll($select)->toArray();
     }
     
     public function selectCalaoHasPesqueiro($where = null, $order = null, $limit = null)
@@ -75,11 +74,15 @@ class Application_Model_Relatorios
     
     public function selectEntrevistaColetaManual($where = null, $order = null, $limit = null)
     {
-        $this->modelColetaManual = new Application_Model_ColetaManual();
-        
-        $coleta = $this->modelColetaManual->selectEntrevistaColetaManual($where, $order, $limit);
-        
-        return $coleta;
+        $this->dbTableColetaManual = new Application_Model_DbTable_VRelatorioColetaManual();
+        $select = $this->dbTableColetaManual->select()
+                ->from($this->dbTableColetaManual)->order($order)->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableColetaManual->fetchAll($select)->toArray();
     }    
     public function selectColetaManualHasEspCapturadas($where = null, $order = null, $limit = null)
     {

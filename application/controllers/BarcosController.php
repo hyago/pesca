@@ -28,7 +28,9 @@ class BarcosController extends Zend_Controller_Action
     public function indexAction()
     {
         $barcos = $this->modelBarcos->select();
-
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        $relatorioNomeEspecies = $this->modelRelatorios->maxPesqueiros();
+        print_r($relatorioNomeEspecies);
         $this->view->assign("barcos", $barcos);
     }
 
@@ -90,6 +92,7 @@ class BarcosController extends Zend_Controller_Action
         
         $this->modelEmbarcacaoDetalhada = new Application_Model_EmbarcacaoDetalhada();
         $embarcacaoDetalhada = $this->modelEmbarcacaoDetalhada->select('bar_id = '.$idBarco);
+       
         
         if(!empty($embarcacaoDetalhada[0])){
             $this->redirect('barcos/editar/id/'.$idBarco);

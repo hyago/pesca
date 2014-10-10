@@ -1,4 +1,35 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Relatorios</b> and script/action name <b>index</b></p>
+<div id="titulos">
+    <h2>Relatórios->Por Arte de Pesca</h2>
 </div>
+<form action="<?= $this->url(array("controller" => "relatorios", "action" => "gerar"), null, true) ?>">
+ <div class="esquerda">
+     <div class="form-esq">
+         <label>Relatório:</label>
+    <select name="artePesca" required>
+            <option value="" selected></option>
+            <option value="1">Arrasto de Fundo</option>
+            <option value="2">Calão</option>
+            <option value="3">Coleta Manual</option>
+            <option value="4">Emalhe</option>
+            <option value="5">Groseira</option>
+            <option value="6">Jereré</option>
+            <option value="7">Pesca Linha</option>
+            <option value="8">Linha de Fundo</option>
+            <option value="9">Manzuá</option>
+            <option value="10">Mergulho</option>
+            <option value="11">Ratoeira</option>
+            <option value="12">Siripoia</option>
+            <option value="13">Tarrafa</option>
+            <option value="14">Vara de Pesca</option>
+            <option value="15">Monitoramentos</option>
+            <option value="16">Espécies Capturadas</option>
+            <option value="17">Espécies Capturadas(Mês)</option>
+            <option value="18">Pescadores</option>                    
+    </select>
+     </div>
+     <br/>
+     
+    <div class="form-esq">     
+    <input type="submit" value="Relatório"/>
+    </div>
+ </div>
