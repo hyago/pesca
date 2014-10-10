@@ -1436,7 +1436,7 @@ Drop view if exists v_relatorio_arrastofundo;
    LEFT JOIN t_tipoembarcacao ON t_arrastofundo.tte_id = t_tipoembarcacao.tte_id
    LEFT JOIN t_destinopescado ON t_arrastofundo.dp_id = t_destinopescado.dp_id
    LEFT JOIN v_arrastofundo_has_t_especie_capturada as afespc On t_arrastofundo.af_id = afespc.af_id
-  GROUP BY t_porto.pto_nome, t_porto.tl_id, t_arrastofundo.af_id, t_pescador.tp_nome, t_pescador.tp_apelido, t_barco.bar_nome, 
+  GROUP BY t_porto.pto_nome, t_arrastofundo.af_id, t_pescador.tp_nome, t_pescador.tp_apelido, t_barco.bar_nome, 
   t_tipoembarcacao.tte_tipoembarcacao, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_ficha_diaria.fd_data, 
   t_destinopescado.dp_destino,afespc.esp_nome_comum,afespc.spc_quantidade, 
     afespc.spc_peso_kg, afespc.spc_preco, afespc.spc_af_id,afespc.esp_id
