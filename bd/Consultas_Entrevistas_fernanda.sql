@@ -1553,8 +1553,8 @@ Select t_porto.pto_nome,
 	cmlspc.esp_id
         Order By t_porto.pto_nome;
 
-Drop view if exists v_relatorio_coletamanual;
-Create view v_relatorio_coletamanual as
+Drop view if exists v_relatorio_emalhe;
+Create view v_relatorio_emalhe as
  SELECT 'Emalhe' as artepesca,
         t_emalhe.em_id, 
         t_pescador.tp_nome,
