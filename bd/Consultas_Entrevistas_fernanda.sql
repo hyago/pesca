@@ -1410,7 +1410,7 @@ CREATE OR REPLACE VIEW v_varapesca_has_t_especie_capturada AS
 
 Drop view if exists v_relatorio_arrastofundo;
  Create View v_relatorio_arrastofundo as
- SELECT 'Arrasto de Fundo' AS artepesca, t_porto.tl_id, t_arrastofundo.af_id, 
+ SELECT 'Arrasto de Fundo' AS artepesca, t_arrastofundo.af_id, 
     t_arrastofundo.tp_id_entrevistado, t_pescador.tp_nome, 
     t_pescador.tp_apelido, t_arrastofundo.bar_id, t_barco.bar_nome, 
     t_arrastofundo.tte_id, t_tipoembarcacao.tte_tipoembarcacao, 
