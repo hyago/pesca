@@ -1562,7 +1562,8 @@ Create view v_relatorio_emalhe as
         t_emalhe.bar_id,
         t_barco.bar_nome, 
         t_monitoramento.mnt_id, 
-        t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_id,
+        t_ficha_diaria.fd_data, 
         t_porto.pto_nome,
         t_emalhe.em_embarcado,
         t_emalhe.tte_id,
@@ -1645,6 +1646,7 @@ Create view v_relatorio_grosseira as
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_grosseira.grs_embarcada,
         t_grosseira.bar_id,
@@ -1664,6 +1666,7 @@ Create view v_relatorio_grosseira as
         t_grosseira.grs_numlinhas,
         t_grosseira.grs_numanzoisplinha,
         t_grosseira.isc_id,
+        t_isca.isc_tipo,
         t_grosseira.grs_obs,
         t_grosseira.mnt_id,
         t_grosseira.grs_motor,
@@ -1683,6 +1686,7 @@ Create view v_relatorio_grosseira as
    LEFT JOIN t_porto ON t_ficha_diaria.pto_id = t_porto.pto_id
    LEFT JOIN t_tipoembarcacao ON t_grosseira.tte_id = t_tipoembarcacao.tte_id
    LEFT JOIN t_destinopescado On t_grosseira.dp_id = t_destinopescado.dp_id
+   LEFT JOIN t_isca On t_grosseira.isc_id = t_isca.isc_id
    LEFT JOIN v_grosseira_has_t_especie_capturada as grsspc On t_grosseira.grs_id = grsspc.grs_id
    Group By t_grosseira.grs_id,
 	t_pescador.tp_nome,
@@ -1705,6 +1709,7 @@ Create view v_relatorio_grosseira as
         t_grosseira.grs_numlinhas,
         t_grosseira.grs_numanzoisplinha,
         t_grosseira.isc_id,
+        t_isca.isc_tipo,
         t_grosseira.grs_obs,
         t_grosseira.mnt_id,
         t_grosseira.grs_motor,
@@ -1725,6 +1730,7 @@ SELECT 'Jereré' as artepesca,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data, 
         t_porto.pto_nome,
         t_jerere.jre_id,
         t_jerere.jre_embarcada,
@@ -1808,6 +1814,7 @@ Create view v_relatorio_linha as
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data, 
         t_porto.pto_nome,
         t_linha.lin_id,
         t_linha.lin_embarcada,
@@ -1892,6 +1899,7 @@ Create view v_relatorio_linhafundo as
         t_barco.bar_nome, 
         t_monitoramento.mnt_id,
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data, 
         t_porto.pto_nome,
         t_linhafundo.lf_embarcada,
         t_linhafundo.bar_id,
@@ -1917,7 +1925,15 @@ Create view v_relatorio_linhafundo as
         t_linhafundo.mre_id,
         t_linhafundo.lf_mreviva,
         t_linhafundo.lf_motor,
-        t_linhafundo.dp_id
+        t_linhafundo.dp_id,
+        t_destinopescado.dp_destino,
+        lfspc.esp_nome_comum, 
+	lfspc.spc_quantidade, 
+	lfspc.spc_peso_kg, 
+	lfspc.spc_preco, 
+	lfspc.spc_lf_id, 
+	lfspc.esp_id,
+        lfspc.ttv_tipovenda
    FROM t_linhafundo
    LEFT JOIN t_pescador ON t_linhafundo.tp_id_entrevistado = t_pescador.tp_id
    LEFT JOIN t_barco ON t_linhafundo.bar_id = t_barco.bar_id
@@ -1955,7 +1971,15 @@ Create view v_relatorio_linhafundo as
         t_linhafundo.mre_id,
         t_linhafundo.lf_mreviva,
         t_linhafundo.lf_motor,
-        t_linhafundo.dp_id
+        t_linhafundo.dp_id,
+        t_destinopescado.dp_destino,
+        lfspc.esp_nome_comum, 
+	lfspc.spc_quantidade, 
+	lfspc.spc_peso_kg, 
+	lfspc.spc_preco, 
+	lfspc.spc_lf_id, 
+	lfspc.esp_id,
+        lfspc.ttv_tipovenda
         Order By t_porto.pto_nome;
 
 
@@ -1967,6 +1991,7 @@ Create view v_relatorio_manzua as
         t_pescador.tp_apelido,
         t_barco.bar_nome,
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_manzua.man_embarcada,
         t_manzua.bar_id,
@@ -2048,6 +2073,7 @@ SELECT t_mergulho.mer_id,
         t_barco.bar_nome, 
         t_monitoramento.mnt_id, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_mergulho.mer_embarcada,
         t_mergulho.bar_id,
@@ -2125,6 +2151,7 @@ Create view v_relatorio_ratoeira as
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_ratoeira.rat_embarcada,
         t_ratoeira.bar_id,
@@ -2205,6 +2232,7 @@ Create view v_relatorio_siripoia as
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_siripoia.sir_embarcada,
         t_siripoia.bar_id,
@@ -2284,6 +2312,7 @@ Select t_porto.pto_nome,
 	t_tarrafa.tar_data, 
 	t_tarrafa.tar_tempogasto,
         t_ficha_diaria.fd_id,
+        t_ficha_diaria.fd_data,
 	t_tarrafa.tar_id, 
         t_monitoramento.mnt_id,
 	t_pescador.tp_nome,
@@ -2348,6 +2377,7 @@ Create view v_relatorio_varapesca as
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_varapesca.vp_embarcada,
         t_varapesca.bar_id,
@@ -2433,17 +2463,3 @@ Create view v_relatorio_varapesca as
 	vpspc.esp_id
 	Order By t_porto.pto_nome;
 
-zf create db-table VRelatorioArrastoFundo v_relatorio_arrastofundo;
-zf create db-table VRelatorioCalao v_relatorio_calao;
-zf create db-table VRelatorioColetaManual v_relatorio_coletamanual;
-zf create db-table VRelatorioEmalhe v_relatorio_emalhe;
-zf create db-table VRelatorioGrosseira v_relatorio_grosseira;
-zf create db-table VRelatorioJerere v_relatorio_jerere;
-zf create db-table VRelatorioLinha v_relatorio_linha;
-zf create db-table VRelatorioLinhaFundo v_relatorio_linhafundo;
-zf create db-table VRelatorioManzua v_relatorio_manzua;
-zf create db-table VRelatorioMergulho v_relatorio_mergulho;
-zf create db-table VRelatorioRatoeira v_relatorio_ratoeira;
-zf create db-table VRelatorioSiripoia v_relatorio_siripoia;
-zf create db-table VRelatorioTarrafa v_relatorio_tarrafa;
-zf create db-table VRelatorioVaraPesca v_relatorio_varapesca;
