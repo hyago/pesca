@@ -104,6 +104,13 @@ class Application_Model_VConsultaPadrao
         
         return $this->dbEntrevistaHora->fetchAll($selectRelatorio)->toArray();
     }
+    public function selectFilogenia(){
+        $this->dbFilogenia = new Application_Model_DbTable_VFilogenia();
+        
+        $selectRelatorio = $this->dbFilogenia->select();
+        
+        return $this->dbFilogenia->fetchAll($selectRelatorio)->toArray();
+    }
 
 }
 

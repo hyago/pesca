@@ -28,9 +28,6 @@ class BarcosController extends Zend_Controller_Action
     public function indexAction()
     {
         $barcos = $this->modelBarcos->select();
-        $this->modelRelatorios = new Application_Model_Relatorios();
-        $relatorioEspecies = $this->modelRelatorios->selectNomeEspecies();
-        print_r($relatorioEspecies[0]);
         $this->view->assign("barcos", $barcos);
     }
 
