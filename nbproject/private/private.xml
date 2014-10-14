@@ -6,9 +6,11 @@
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/relatorios/index.phtml</file>
             <file>file:/srv/www/htdocs/pesca/application/models/ArrastoFundo.php</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/BarcosController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/models/Manzua.php</file>
             <file>file:/srv/www/htdocs/pesca/application/models/Relatorios.php</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/RelatoriosController.php</file>
             <file>file:/srv/www/htdocs/pesca/bd/Consultas_Entrevistas_fernanda.sql</file>
+            <file>file:/srv/www/htdocs/pesca/library/Classes/PHPExcel/Cell.php</file>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/tarrafa/index.phtml</file>
         </group>
     </open-files>

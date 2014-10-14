@@ -21,6 +21,7 @@ Select t_porto.pto_nome,
 	t_calao.cal_tempogasto, 
 	t_calao.cal_id,
         t_ficha_diaria.fd_id,
+        t_ficha_diaria.fd_data,
         t_monitoramento.mnt_id,
 	t_pescador.tp_nome,
         t_pescador.tp_apelido,
@@ -51,7 +52,7 @@ Select t_porto.pto_nome,
         Group by t_porto.pto_nome,t_ficha_diaria.fd_id,t_pescador.tp_apelido, t_calao.cal_data, t_calao.cal_tempogasto,t_calao.cal_id, 
                  t_pescador.tp_nome,t_monitoramento.mnt_id, t_barco.bar_nome,t_calao_tipo.tcat_tipo,
                  t_destinopescado.dp_destino,t_tipoembarcacao.tte_tipoembarcacao
-        Order By t_porto.pto_nome; 
+        Order By t_porto.pto_prioridade; 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 CREATE OR REPLACE VIEW v_entrevista_tarrafa AS 
 Select t_porto.pto_nome,
@@ -83,7 +84,7 @@ Select t_porto.pto_nome,
         LEFT JOIN t_tipoembarcacao ON t_tarrafa.tte_id = t_tipoembarcacao.tte_id
         Group by t_porto.pto_nome,t_ficha_diaria.fd_id,t_pescador.tp_apelido, t_tarrafa.tar_data, t_tarrafa.tar_tempogasto,t_tarrafa.tar_id, 
                 t_pescador.tp_nome,t_monitoramento.mnt_id, t_barco.bar_nome,t_destinopescado.dp_destino,t_tipoembarcacao.tte_tipoembarcacao
-        Order By t_porto.pto_nome;
+        Order By t_porto.pto_prioridade;
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 CREATE OR REPLACE VIEW v_entrevista_coletamanual AS 
 Select t_porto.pto_nome,
@@ -93,6 +94,7 @@ Select t_porto.pto_nome,
         t_coletamanual.bar_id,
         t_coletamanual.tte_id,
         t_ficha_diaria.fd_id,
+        t_ficha_diaria.fd_data,
         t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_tipoembarcacao.tte_tipoembarcacao,
@@ -122,7 +124,7 @@ Select t_porto.pto_nome,
         LEFT JOIN t_mare On t_coletamanual.mre_id = t_mare.mre_id
         Group by t_porto.pto_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido, t_coletamanual.cml_tempogasto,t_coletamanual.cml_id, 
                  t_pescador.tp_nome, t_barco.bar_nome, t_destinopescado.dp_destino,t_tipoembarcacao.tte_tipoembarcacao,t_mare.mre_tipo
-        Order By t_porto.pto_nome;
+        Order By t_porto.pto_prioridade;
 
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,6 +162,7 @@ CREATE OR REPLACE VIEW v_entrevista_emalhe AS
         t_barco.bar_nome, 
         t_monitoramento.mnt_id, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_emalhe.em_embarcado,
         t_emalhe.tte_id,
@@ -198,6 +201,7 @@ CREATE OR REPLACE VIEW v_entrevista_grosseira AS
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_grosseira.grs_embarcada,
         t_grosseira.bar_id,
@@ -236,6 +240,7 @@ CREATE OR REPLACE VIEW v_entrevista_jerere AS
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_jerere.jre_id,
         t_jerere.jre_embarcada,
@@ -277,6 +282,7 @@ CREATE OR REPLACE VIEW v_entrevista_linha AS
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_linha.lin_id,
         t_linha.lin_embarcada,
@@ -320,6 +326,7 @@ CREATE OR REPLACE VIEW v_entrevista_linhafundo AS
         t_barco.bar_nome, 
         t_monitoramento.mnt_id,
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_linhafundo.lf_embarcada,
         t_linhafundo.bar_id,
@@ -365,6 +372,7 @@ CREATE OR REPLACE VIEW v_entrevista_manzua AS
         t_pescador.tp_apelido,
         t_barco.bar_nome,
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_manzua.man_embarcada,
         t_manzua.bar_id,
@@ -408,6 +416,7 @@ CREATE OR REPLACE VIEW v_entrevista_mergulho AS
         t_barco.bar_nome, 
         t_monitoramento.mnt_id, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_mergulho.mer_embarcada,
         t_mergulho.bar_id,
@@ -447,6 +456,7 @@ CREATE OR REPLACE VIEW v_entrevista_mergulho AS
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_ratoeira.rat_embarcada,
         t_ratoeira.bar_id,
@@ -488,6 +498,7 @@ CREATE OR REPLACE VIEW v_entrevista_mergulho AS
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_siripoia.sir_embarcada,
         t_siripoia.bar_id,
@@ -530,6 +541,7 @@ CREATE OR REPLACE VIEW v_entrevista_mergulho AS
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
         t_porto.pto_nome,
         t_varapesca.vp_embarcada,
         t_varapesca.bar_id,
@@ -569,33 +581,20 @@ CREATE OR REPLACE VIEW v_entrevista_mergulho AS
    LEFT JOIN t_mare On t_varapesca.mre_id = t_mare.mre_id;
 
 
---/////////////////////////////////////////////////////////////////////////////////////////////////
-CREATE OR REPLACE VIEW v_entrevistas_monitoradas AS 
-Select  porto.pto_nome, 
-arte.tap_artepesca, 
-DATE_PART('month', ficha.fd_data) as mes, 
-DATE_PART('year', ficha.fd_data) as ano, 
-sum(monit.mnt_quantidade) as monitorados 
-From t_ficha_diaria as ficha
-    Inner Join t_monitoramento as monit On ficha.fd_id = monit.fd_id
-    Inner Join t_porto as porto On ficha.pto_id = porto.pto_id
-    Inner Join t_artepesca as arte On monit.mnt_arte = arte.tap_id
-    Where monit.mnt_monitorado Is True
-    Group By porto.pto_nome, arte.tap_artepesca, DATE_PART('month', ficha.fd_data),DATE_PART('year', ficha.fd_data)
-    Order By arte.tap_artepesca, porto.pto_nome, DATE_PART('month', ficha.fd_data) ,DATE_PART('year', ficha.fd_data);
+Drop table v_entrevistas_monitoradas;
+Drop table v_entrevista_naomonitoradas;
 
---/////////////////////////////////////////////////////////////////////////////////////////////////
-CREATE OR REPLACE VIEW v_entrevista_naomonitoradas AS 
+Create Table
 Select  porto.pto_nome, 
 arte.tap_artepesca, 
 DATE_PART('month', ficha.fd_data) as mes,
 DATE_PART('year', ficha.fd_data)  as ano, 
-sum(monit.mnt_quantidade) as monitorados 
+sum(CASE WHEN monit.mnt_monitorado Is Not True THEN 1 ELSE 0 END) as naomonitorados,
+sum(CASE WHEN monit.mnt_monitorado Is True THEN 1 ELSE 0 END) as monitorados 
 From t_ficha_diaria as ficha
     Inner Join t_monitoramento as monit On ficha.fd_id = monit.fd_id
-    Inner Join t_porto as porto On ficha.pto_id = porto.pto_id
+    Left Join t_porto as porto On ficha.pto_id = porto.pto_id
     Inner Join t_artepesca as arte On monit.mnt_arte = arte.tap_id
-    Where monit.mnt_monitorado Is Not True
     Group By porto.pto_nome, arte.tap_artepesca, DATE_PART('month', ficha.fd_data),DATE_PART('year', ficha.fd_data)
     Order By arte.tap_artepesca, porto.pto_nome, DATE_PART('month', ficha.fd_data) ,DATE_PART('year', ficha.fd_data);
 
@@ -1436,11 +1435,11 @@ Drop view if exists v_relatorio_arrastofundo;
    LEFT JOIN t_tipoembarcacao ON t_arrastofundo.tte_id = t_tipoembarcacao.tte_id
    LEFT JOIN t_destinopescado ON t_arrastofundo.dp_id = t_destinopescado.dp_id
    LEFT JOIN v_arrastofundo_has_t_especie_capturada as afespc On t_arrastofundo.af_id = afespc.af_id
-  GROUP BY t_porto.pto_nome, t_arrastofundo.af_id, t_pescador.tp_nome, t_pescador.tp_apelido, t_barco.bar_nome, 
+  GROUP BY t_porto.pto_prioridade,t_porto.pto_nome, t_arrastofundo.af_id, t_pescador.tp_nome, t_pescador.tp_apelido, t_barco.bar_nome, 
   t_tipoembarcacao.tte_tipoembarcacao, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_ficha_diaria.fd_data, 
   t_destinopescado.dp_destino,afespc.esp_nome_comum,afespc.spc_quantidade, 
     afespc.spc_peso_kg, afespc.spc_preco, afespc.spc_af_id,afespc.esp_id
-  ORDER BY t_porto.pto_nome, t_arrastofundo.af_id;
+  ORDER BY t_porto.pto_prioridade, t_arrastofundo.af_id;
 
 Drop view if exists v_relatorio_calao;
  Create View v_relatorio_calao as
@@ -1484,7 +1483,7 @@ Select t_porto.pto_nome,
 	LEFT Join t_destinopescado On t_calao.dp_id = t_destinopescado.dp_id
         LEFT JOIN t_tipoembarcacao ON t_calao.tte_id = t_tipoembarcacao.tte_id
         LEFT JOIN v_calao_has_t_especie_capturada as calspc On t_calao.cal_id = calspc.cal_id
-        Group by t_porto.pto_nome,t_ficha_diaria.fd_id,t_pescador.tp_apelido, t_calao.cal_data, t_calao.cal_tempogasto,t_calao.cal_id, 
+        Group by t_porto.pto_prioridade,t_porto.pto_nome,t_ficha_diaria.fd_id,t_pescador.tp_apelido, t_calao.cal_data, t_calao.cal_tempogasto,t_calao.cal_id, 
                  t_pescador.tp_nome,t_monitoramento.mnt_id, t_barco.bar_nome,t_calao_tipo.tcat_tipo,
                  t_destinopescado.dp_destino,t_tipoembarcacao.tte_tipoembarcacao,calspc.esp_nome_comum, 
 	 calspc.spc_quantidade, 
@@ -1492,7 +1491,7 @@ Select t_porto.pto_nome,
          calspc.spc_preco, 
          calspc.spc_cal_id, 
          calspc.esp_id
-        Order By t_porto.pto_nome; 
+        Order By t_porto.pto_prioridade; 
 
 Drop view if exists v_relatorio_coletamanual;
  Create View v_relatorio_coletamanual as
@@ -1541,7 +1540,7 @@ Select t_porto.pto_nome,
         LEFT JOIN t_tipoembarcacao ON t_coletamanual.tte_id = t_tipoembarcacao.tte_id
         LEFT JOIN t_mare On t_coletamanual.mre_id = t_mare.mre_id
         LEFT JOIN v_coletamanual_has_t_especie_capturada as cmlspc On t_coletamanual.cml_id = cmlspc.cml_id
-        Group by t_porto.pto_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, 
+        Group by t_porto.pto_prioridade,t_porto.pto_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, 
         t_pescador.tp_apelido, t_coletamanual.cml_tempogasto,t_coletamanual.cml_id, 
                  t_pescador.tp_nome, t_barco.bar_nome, t_destinopescado.dp_destino,
                  t_tipoembarcacao.tte_tipoembarcacao,t_mare.mre_tipo, cmlspc.esp_nome_comum, 
@@ -1551,7 +1550,7 @@ Select t_porto.pto_nome,
 	cmlspc.spc_cml_id, 
 	cmlspc.ttv_tipovenda, 
 	cmlspc.esp_id
-        Order By t_porto.pto_nome;
+        Order By t_porto.pto_prioridade;
 
 Drop view if exists v_relatorio_emalhe;
 Create view v_relatorio_emalhe as
@@ -1602,7 +1601,7 @@ Create view v_relatorio_emalhe as
    LEFT JOIN t_tipoembarcacao ON t_emalhe.tte_id = t_tipoembarcacao.tte_id
    LEFT JOIN t_destinopescado On t_emalhe.dp_id = t_destinopescado.dp_id
    LEFT JOIN v_emalhe_has_t_especie_capturada as emspc On t_emalhe.em_id = emspc.em_id
-   Group By t_emalhe.em_id, 
+   Group By t_porto.pto_prioridade,t_emalhe.em_id, 
         t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_emalhe.bar_id,
@@ -1635,7 +1634,7 @@ Create view v_relatorio_emalhe as
 	emspc.spc_preco, 
 	emspc.spc_em_id, 
 	emspc.esp_id
-	Order By t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 
 Drop view if exists v_relatorio_grosseira;
@@ -1688,7 +1687,7 @@ Create view v_relatorio_grosseira as
    LEFT JOIN t_destinopescado On t_grosseira.dp_id = t_destinopescado.dp_id
    LEFT JOIN t_isca On t_grosseira.isc_id = t_isca.isc_id
    LEFT JOIN v_grosseira_has_t_especie_capturada as grsspc On t_grosseira.grs_id = grsspc.grs_id
-   Group By t_grosseira.grs_id,
+   Group By t_porto.pto_prioridade,t_grosseira.grs_id,
 	t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
@@ -1721,7 +1720,7 @@ Create view v_relatorio_grosseira as
         grsspc.spc_preco, 
         grsspc.spc_grs_id, 
         grsspc.esp_id
-        Order By t_porto.pto_nome;
+        Order By t_porto.pto_prioridade;
 
 Drop view if exists v_relatorio_jerere;
 Create view v_relatorio_jerere as 
@@ -1772,7 +1771,7 @@ SELECT 'Jereré' as artepesca,
    LEFT JOIN t_destinopescado On t_jerere.dp_id = t_destinopescado.dp_id
    LEFT JOIN t_mare On t_jerere.mre_id = t_mare.mre_id
    LEFT JOIN v_jerere_has_t_especie_capturada as jrespc On t_jerere.jre_id = jrespc.jre_id
-   Group By t_pescador.tp_nome,
+   Group By t_porto.pto_prioridade,t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
@@ -1804,7 +1803,7 @@ SELECT 'Jereré' as artepesca,
 	jrespc.spc_jre_id, 
 	jrespc.ttv_tipovenda, 
 	jrespc.esp_id
-	Order By t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 
 Drop view if exists v_relatorio_linha;
@@ -1857,7 +1856,7 @@ Create view v_relatorio_linha as
    LEFT JOIN t_destinopescado On t_linha.dp_id = t_destinopescado.dp_id
    LEFT JOIN t_isca On t_linha.isc_id = t_isca.isc_id
    LEFT JOIN v_linha_has_t_especie_capturada as linspc On t_linha.lin_id = linspc.lin_id
-   Group By t_pescador.tp_nome,
+   Group By t_porto.pto_prioridade,t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
         t_ficha_diaria.fd_id, 
@@ -1888,7 +1887,7 @@ Create view v_relatorio_linha as
 	linspc.spc_preco, 
 	linspc.spc_lin_id, 
 	linspc.esp_id
-	Order By t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 Drop view if exists v_relatorio_linhafundo;
 Create view v_relatorio_linhafundo as 
@@ -1945,7 +1944,7 @@ Create view v_relatorio_linhafundo as
    LEFT JOIN t_isca On t_linhafundo.isc_id = t_isca.isc_id
    LEFT JOIN t_mare On t_linhafundo.mre_id = t_mare.mre_id
    LEFT JOIN v_linhafundo_has_t_especie_capturada as lfspc On t_linhafundo.lf_id = lfspc.lf_id
-   Group By t_linhafundo.lf_id,
+   Group By t_porto.pto_prioridade,t_linhafundo.lf_id,
 	t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
@@ -1980,7 +1979,7 @@ Create view v_relatorio_linhafundo as
 	lfspc.spc_lf_id, 
 	lfspc.esp_id,
         lfspc.ttv_tipovenda
-        Order By t_porto.pto_nome;
+        Order By t_porto.pto_prioridade;
 
 
 Drop view if exists v_relatorio_manzua;
@@ -2032,7 +2031,7 @@ Create view v_relatorio_manzua as
    LEFT JOIN t_destinopescado On t_manzua.dp_id = t_destinopescado.dp_id
    LEFT JOIN t_mare On t_manzua.mre_id = t_mare.mre_id
    LEFT JOIN v_manzua_has_t_especie_capturada as manspc On t_manzua.man_id = manspc.man_id
-   Group By t_manzua.man_id, 
+   Group By t_porto.pto_prioridade,t_manzua.man_id, 
         t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome,
@@ -2062,7 +2061,7 @@ Create view v_relatorio_manzua as
 	manspc.spc_man_id, 
 	manspc.ttv_tipovenda, 
 	manspc.esp_id
-	Order By t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 Drop view if exists v_relatorio_mergulho;
 Create view v_relatorio_mergulho as 
@@ -2112,7 +2111,7 @@ SELECT t_mergulho.mer_id,
    LEFT JOIN t_destinopescado On t_mergulho.dp_id = t_destinopescado.dp_id
    LEFT JOIN t_mare On t_mergulho.mre_id = t_mare.mre_id
    LEFT JOIN v_mergulho_has_t_especie_capturada as merspc ON t_mergulho.mer_id = merspc.mer_id
-   GROUP BY t_mergulho.mer_id,
+   GROUP BY t_porto.pto_prioridade,t_mergulho.mer_id,
         t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
@@ -2141,7 +2140,7 @@ SELECT t_mergulho.mer_id,
 	merspc.spc_mer_id, 
 	merspc.ttv_tipovenda, 
 	merspc.esp_id
-	Order By t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 Drop view if exists v_relatorio_ratoeira;
 Create view v_relatorio_ratoeira as 
@@ -2191,7 +2190,7 @@ Create view v_relatorio_ratoeira as
    LEFT JOIN t_destinopescado On t_ratoeira.dp_id = t_destinopescado.dp_id
    LEFT JOIN t_mare On t_ratoeira.mre_id = t_mare.mre_id
    LEFT JOIN v_ratoeira_has_t_especie_capturada as ratspc On t_ratoeira.rat_id = ratspc.rat_id
-   GROUP BY t_ratoeira.rat_id, 
+   GROUP BY t_porto.pto_prioridade,t_ratoeira.rat_id, 
 	t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
@@ -2222,7 +2221,7 @@ Create view v_relatorio_ratoeira as
 	ratspc.spc_preco, 
 	ratspc.spc_rat_id,  
 	ratspc.esp_id
-	ORDER BY t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 Drop view if exists v_relatorio_siripoia;
 Create view v_relatorio_siripoia as 
@@ -2273,7 +2272,7 @@ Create view v_relatorio_siripoia as
    LEFT JOIN t_destinopescado On t_siripoia.dp_id = t_destinopescado.dp_id
    LEFT JOIN t_mare On t_siripoia.mre_id = t_mare.mre_id
    LEFT JOIN v_siripoia_has_t_especie_capturada as sirspc On t_siripoia.sir_id = sirspc.sir_id
-   GROUP BY t_siripoia.sir_id, 
+   GROUP BY t_porto.pto_prioridade,t_siripoia.sir_id, 
         t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
@@ -2303,7 +2302,7 @@ Create view v_relatorio_siripoia as
 	sirspc.spc_sir_id, 
 	sirspc.ttv_tipovenda, 
 	sirspc.esp_id
-	Order By t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 Drop view if exists v_relatorio_tarrafa;
 Create view v_relatorio_tarrafa as 
@@ -2342,7 +2341,7 @@ Select t_porto.pto_nome,
 	LEFT Join t_destinopescado On t_tarrafa.dp_id = t_destinopescado.dp_id
         LEFT JOIN t_tipoembarcacao ON t_tarrafa.tte_id = t_tipoembarcacao.tte_id
         LEFT JOIN v_tarrafa_has_t_especie_capturada as tarspc On t_tarrafa.tar_id = tarspc.tar_id
-        GROUP BY t_porto.pto_nome,
+        GROUP BY t_porto.pto_prioridade,t_porto.pto_nome,
 	t_tarrafa.tar_data, 
 	t_tarrafa.tar_tempogasto,
         t_ficha_diaria.fd_id,
@@ -2366,7 +2365,7 @@ Select t_porto.pto_nome,
 	tarspc.spc_preco, 
 	tarspc.spc_tar_id, 
 	tarspc.esp_id
-	ORDER BY t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
 
 Drop view if exists v_relatorio_varapesca;
@@ -2425,7 +2424,7 @@ Create view v_relatorio_varapesca as
    LEFT JOIN t_isca On t_varapesca.isc_id = t_isca.isc_id
    LEFT JOIN t_mare On t_varapesca.mre_id = t_mare.mre_id
    LEFT JOIN v_varapesca_has_t_especie_capturada as vpspc On t_varapesca.vp_id = vpspc.vp_id
-   Group By t_varapesca.vp_id,
+   Group By t_porto.pto_prioridade,t_varapesca.vp_id,
         t_pescador.tp_nome,
         t_pescador.tp_apelido,
         t_barco.bar_nome, 
@@ -2461,5 +2460,48 @@ Create view v_relatorio_varapesca as
 	vpspc.spc_vp_id, 
 	vpspc.ttv_tipovenda, 
 	vpspc.esp_id
-	Order By t_porto.pto_nome;
+	Order By t_porto.pto_prioridade;
 
+
+Alter Table t_porto Add Column pto_prioridade serial;
+Update t_porto Set pto_prioridade = 4 Where pto_id = 1;
+Update t_porto Set pto_prioridade = 8 Where pto_id = 3;
+Update t_porto Set pto_prioridade = 7 Where pto_id = 4;
+Update t_porto Set pto_prioridade = 9 Where pto_id = 5;
+Update t_porto Set pto_prioridade = 1 Where pto_id = 6;
+Update t_porto Set pto_prioridade = 5 Where pto_id = 7;
+Update t_porto Set pto_prioridade = 6 Where pto_id = 8;
+Update t_porto Set pto_prioridade = 3 Where pto_id = 9;
+Update t_porto Set pto_prioridade = 2 Where pto_id = 10;
+Update t_porto Set pto_prioridade = 10 Where pto_id = 12;
+Update t_porto Set pto_prioridade = 11 Where pto_id = 13;
+Update t_porto Set pto_prioridade = 12 Where pto_id = 14;
+Update t_porto Set pto_prioridade = 13 Where pto_id = 15;
+Update t_porto Set pto_prioridade = 17 Where pto_id = 16;
+Update t_porto Set pto_prioridade = 18 Where pto_id = 17;
+Update t_porto Set pto_prioridade = 14 Where pto_id = 18;
+Update t_porto Set pto_prioridade = 15 Where pto_id = 19;
+Update t_porto Set pto_prioridade = 16 Where pto_id = 11001;
+
+Create View v_especies as
+SELECT esp.esp_id, 
+	esp.esp_nome, 
+	esp.esp_descritor, 
+	esp.esp_nome_comum, 
+	esp.gen_id, 
+	gen.gen_nome, 
+	gen.fam_id, 
+	fam.fam_nome,
+	fam.fam_tipo, 
+	fam.fam_caracteristica,
+	fam.ord_id,
+	ord.ord_nome,
+	ord.ord_caracteristica,
+	ord.grp_id,
+	grp.grp_nome
+  FROM t_especie as esp
+  Inner Join t_genero as gen On esp.gen_id = gen.gen_id
+  Inner Join t_familia as fam On gen.fam_id = fam.fam_id
+  Inner Join t_ordem as ord On fam.ord_id = ord.ord_id
+  Inner Join t_grupo as grp On ord.grp_id = grp.grp_id
+  Order By esp.esp_nome;

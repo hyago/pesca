@@ -29,8 +29,8 @@ class BarcosController extends Zend_Controller_Action
     {
         $barcos = $this->modelBarcos->select();
         $this->modelRelatorios = new Application_Model_Relatorios();
-        $relatorioNomeEspecies = $this->modelRelatorios->maxPesqueiros();
-        print_r($relatorioNomeEspecies);
+        $relatorioEspecies = $this->modelRelatorios->selectNomeEspecies();
+        print_r($relatorioEspecies[0]);
         $this->view->assign("barcos", $barcos);
     }
 
