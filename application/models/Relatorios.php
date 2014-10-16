@@ -33,7 +33,16 @@ class Application_Model_Relatorios
         
         return $arrasto;
     }
-     
+    public function countPesqueirosArrasto()
+    {
+        $this->dbTableArrastoHasPesqueiro = new Application_Model_DbTable_VArrastoFundoHasPesqueiro();
+        $select = $this->dbTableArrastoHasPesqueiro->select()
+                ->from('v_arrasto_has_t_pesqueiro','count(af_paf_id)')->
+                group('af_id')->
+                order('count(af_paf_id) DESC')->limit('1');
+
+        return $this->dbTableArrastoHasPesqueiro->fetchAll($select)->toArray();
+    } 
     public function selectNomeEspecies($where = null, $order = null, $limit = null){
         $this->dbTableArrastoHasEspCapturada = new Application_Model_DbTable_VArrastoFundoHasEspecieCapturada();
 

@@ -25,7 +25,9 @@ class RelatoriosController extends Zend_Controller_Action
     }
 
     public function indexAction(){
-        
+        $this->modelRelatorios = new Application_Model_Relatorios();
+         $relatorioEspecies = $this->modelRelatorios->countPesqueirosArrasto();
+         print_r($relatorioEspecies[0]['count']);
     }
     
     public function gerarAction(){
@@ -98,8 +100,8 @@ class RelatoriosController extends Zend_Controller_Action
         
         
         $relatorioEspecies = $this->modelRelatorios->selectNomeEspecies();
-        
-        $coluna = 100;
+        $maxPesqueiros = $this->modelRelatorios->countPesqueirosArrasto();
+        $coluna = $maxPesqueiros[0]['count']*6;
         foreach($relatorioEspecies as $key => $especie):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
@@ -109,7 +111,7 @@ class RelatoriosController extends Zend_Controller_Action
         $coluna= 0;
         
 
-            foreach ( $relatorioArrasto as $key => $consulta ):
+        foreach ( $relatorioArrasto as $key => $consulta ):
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['pto_nome']);
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['artepesca']);
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['fd_data']);
@@ -141,17 +143,30 @@ class RelatoriosController extends Zend_Controller_Action
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['af_obs']);
 
 
-                $Relesp = $this->modelRelatorios->selectArrastoHasEspCapturadas('af_id = '.$consulta['af_id']);
-                $coluna=100;
-           foreach($relatorioEspecies as $key => $especie):
-                foreach($Relesp as $key => $esp):
-                    if($esp['esp_nome_comum'] === $objPHPExcel->getActiveSheet()->getCellByColumnAndRow($coluna, 1)->getFormattedValue()){
-                        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $esp['spc_peso_kg']);
-                    }
-
+                
+                
+                $Pesqueiros = $this->modelRelatorios->selectArrastoHasPesqueiro('af_id = '.$consulta['af_id']);
+                
+                $coluna++;
+                foreach($Pesqueiros as $key => $nome):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $nome['paf_pesqueiro']);
                 endforeach;
-                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, '0');
-           endforeach;     
+                
+                foreach($Pesqueiros as $key => $tempo):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $tempo['t_tempopesqueiro']);
+                endforeach;
+                
+                $Relesp = $this->modelRelatorios->selectArrastoHasEspCapturadas('af_id = '.$consulta['af_id']);
+                
+                $coluna= $maxPesqueiros[0]['count']*6;
+            foreach($relatorioEspecies as $key => $especie):
+                 foreach($Relesp as $key => $esp):
+                     if($esp['esp_nome_comum'] === $objPHPExcel->getActiveSheet()->getCellByColumnAndRow($coluna, 1)->getFormattedValue()){
+                         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $esp['spc_peso_kg']);
+                     }
+                 endforeach;
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, '0');
+            endforeach;     
                 $coluna=0;
                 $linha++;
         endforeach;
