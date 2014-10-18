@@ -71,7 +71,8 @@ class Application_Model_Relatorios
     //CALÃO////////////////////////////////////////////////////////////////////////////////
     public function selectEntrevistaCalao($where = null, $order = null, $limit = null)
     {
-        $this->dbTableCalao = new Application_Model_DbTable_VRelatorioCalao();
+        
+        $this->dbTableCalao= new Application_Model_DbTable_VRelatorioCalao();
         $select = $this->dbTableCalao->select()
                 ->from($this->dbTableCalao)->order($order)->limit($limit);
 
@@ -81,31 +82,63 @@ class Application_Model_Relatorios
 
         return $this->dbTableCalao->fetchAll($select)->toArray();
     }
-    
-    public function selectCalaoHasPesqueiro($where = null, $order = null, $limit = null)
-    {
-       $this->modelCalao = new Application_Model_Calao();
-        
-        $calao = $this->modelCalao->selectCalaoHasPesqueiro($where, $order, $limit);
-        
-        return $calao;
-    }
-    public function selectCalaoHasEspCapturadas($where = null, $order = null, $limit = null){
+    public function selectCalao($where = null, $order = null, $limit = null){
         
         $this->modelCalao = new Application_Model_Calao();
         
-        $calao = $this->modelCalao->selectCalaoHasEspCapturadas($where, $order, $limit);
+        $Calao = $this->modelCalao->selectEntrevistaCalao($where, $order, $limit);
         
-        return $calao;
+        return $Calao;
+    }
+    
+    public function selectCalaoHasPesqueiro($where = null, $order = null, $limit = null)
+    {
+        $this->modelCalao = new Application_Model_Calao();
+        
+        $Calao = $this->modelCalao->selectCalaoHasPesqueiro($where, $order, $limit);
+        
+        return $Calao;
+    }
+    public function countPesqueirosCalao()
+    {
+        $this->dbTableCalaoHasPesqueiro = new Application_Model_DbTable_VCalaoHasPesqueiro();
+        $select = $this->dbTableCalaoHasPesqueiro->select()
+                ->from('v_calao_has_t_pesqueiro','count(cal_paf_id)')->
+                group('cal_id')->
+                order('count(cal_paf_id) DESC')->limit('1');
+
+        return $this->dbTableCalaoHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesCalao($where = null, $order = null, $limit = null){
+        $this->dbTableCalaoHasEspCapturada = new Application_Model_DbTable_VCalaoHasEspecieCapturada();
+
+        $select = $this->dbTableCalaoHasEspCapturada->select()
+                ->from($this->dbTableCalaoHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableCalaoHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectCalaoHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelCalao = new Application_Model_Calao();
+        
+        $Calao = $this->modelCalao->selectCalaoHasEspCapturadas($where, $order, $limit);
+        
+        return $Calao;
     }
     
     //////////////////////////////////////////////////////////////////////////////////////
     
     //COLETA MANUAL//////////////////////////////////////////////////////////////////////
     
-    public function selectEntrevistaColetaManual($where = null, $order = null, $limit = null)
+   public function selectEntrevistaColetaManual($where = null, $order = null, $limit = null)
     {
-        $this->dbTableColetaManual = new Application_Model_DbTable_VRelatorioColetaManual();
+        
+        $this->dbTableColetaManual= new Application_Model_DbTable_VRelatorioColetaManual();
         $select = $this->dbTableColetaManual->select()
                 ->from($this->dbTableColetaManual)->order($order)->limit($limit);
 
@@ -114,22 +147,54 @@ class Application_Model_Relatorios
         }
 
         return $this->dbTableColetaManual->fetchAll($select)->toArray();
-    }    
-    public function selectColetaManualHasEspCapturadas($where = null, $order = null, $limit = null)
-    {
-        $this->modelColetaManual = new Application_Model_ColetaManual();
-        
-        $coleta = $this->modelColetaManual->selectColetaManualHasEspCapturadas($where, $order, $limit);
-        
-        return $coleta;
     }
-        public function selectColetaManualHasPesqueiro($where = null, $order = null, $limit = null)
+    public function selectColetaManual($where = null, $order = null, $limit = null){
+        
+        $this->modelColetaManual = new Application_Model_ColetaManual();
+        
+        $ColetaManual = $this->modelColetaManual->selectEntrevistaColetaManual($where, $order, $limit);
+        
+        return $ColetaManual;
+    }
+    
+    public function selectColetaManualHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelColetaManual = new Application_Model_ColetaManual();
         
-        $coleta = $this->modelColetaManual->selectColetaManualHasPesqueiro($where, $order, $limit);
+        $ColetaManual = $this->modelColetaManual->selectColetaManualHasPesqueiro($where, $order, $limit);
         
-        return $coleta;
+        return $ColetaManual;
+    }
+    public function countPesqueirosColetaManual()
+    {
+        $this->dbTableColetaManualHasPesqueiro = new Application_Model_DbTable_VColetaManualHasPesqueiro();
+        $select = $this->dbTableColetaManualHasPesqueiro->select()
+                ->from('v_coletamanual_has_t_pesqueiro','count(cml_paf_id)')->
+                group('cml_id')->
+                order('count(cml_paf_id) DESC')->limit('1');
+
+        return $this->dbTableColetaManualHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesColetamanual($where = null, $order = null, $limit = null){
+        $this->dbTableColetaManualHasEspCapturada = new Application_Model_DbTable_VColetaManualHasEspecieCapturada();
+
+        $select = $this->dbTableColetaManualHasEspCapturada->select()
+                ->from($this->dbTableColetaManualHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableColetaManualHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectColetaManualHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelColetaManual = new Application_Model_ColetaManual();
+        
+        $ColetaManual = $this->modelColetaManual->selectColetaManualHasEspCapturadas($where, $order, $limit);
+        
+        return $ColetaManual;
     }
     //////////////////////////////////////////////////////////////////////////////////////
     
@@ -138,7 +203,8 @@ class Application_Model_Relatorios
     
     public function selectEntrevistaEmalhe($where = null, $order = null, $limit = null)
     {
-        $this->dbTableEmalhe = new Application_Model_DbTable_VRelatorioEmalhe();
+        
+        $this->dbTableEmalhe= new Application_Model_DbTable_VRelatorioEmalhe();
         $select = $this->dbTableEmalhe->select()
                 ->from($this->dbTableEmalhe)->order($order)->limit($limit);
 
@@ -148,20 +214,53 @@ class Application_Model_Relatorios
 
         return $this->dbTableEmalhe->fetchAll($select)->toArray();
     }
-    public function selectEmalheHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelEmalhe = new Application_Model_Emalhe();
+    public function selectEmalhe($where = null, $order = null, $limit = null){
         
-        $emalhe = $this->modelEmalhe->selectEmalheHasEspCapturadas($where, $order, $limit);
+        $this->modelEmalhe = new Application_Model_Emalhe();
         
-        return $emalhe;
+        $Emalhe = $this->modelEmalhe->selectEntrevistaEmalhe($where, $order, $limit);
+        
+        return $Emalhe;
     }
+    
     public function selectEmalheHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelEmalhe = new Application_Model_Emalhe();
         
-        $emalhe = $this->modelEmalhe->selectEmalheHasPesqueiro($where, $order, $limit);
+        $Emalhe = $this->modelEmalhe->selectEmalheHasPesqueiro($where, $order, $limit);
         
-        return $emalhe;
+        return $Emalhe;
+    }
+    public function countPesqueirosEmalhe()
+    {
+        $this->dbTableEmalheHasPesqueiro = new Application_Model_DbTable_VEmalheHasPesqueiro();
+        $select = $this->dbTableEmalheHasPesqueiro->select()
+                ->from('v_emalhe_has_t_pesqueiro','count(em_paf_id)')->
+                group('em_id')->
+                order('count(em_paf_id) DESC')->limit('1');
+
+        return $this->dbTableEmalheHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesEmalhe($where = null, $order = null, $limit = null){
+        $this->dbTableEmalheHasEspCapturada = new Application_Model_DbTable_VEmalheHasEspecieCapturada();
+
+        $select = $this->dbTableEmalheHasEspCapturada->select()
+                ->from($this->dbTableEmalheHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableEmalheHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectEmalheHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelEmalhe = new Application_Model_Emalhe();
+        
+        $Emalhe = $this->modelEmalhe->selectEmalheHasEspCapturadas($where, $order, $limit);
+        
+        return $Emalhe;
     }
     ///////////////////////////////////////////////////////////////////////////////////////
     
@@ -169,7 +268,8 @@ class Application_Model_Relatorios
     
     public function selectEntrevistaGrosseira($where = null, $order = null, $limit = null)
     {
-        $this->dbTableGrosseira = new Application_Model_DbTable_VRelatorioGrosseira();
+        
+        $this->dbTableGrosseira= new Application_Model_DbTable_VRelatorioGrosseira();
         $select = $this->dbTableGrosseira->select()
                 ->from($this->dbTableGrosseira)->order($order)->limit($limit);
 
@@ -179,18 +279,51 @@ class Application_Model_Relatorios
 
         return $this->dbTableGrosseira->fetchAll($select)->toArray();
     }
-    public function selectGrosseiraHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelGrosseira = new Application_Model_Grosseira();
+    public function selectGrosseira($where = null, $order = null, $limit = null){
         
-        $Grosseira = $this->modelGrosseira->selectGrosseiraHasEspCapturadas($where, $order, $limit);
+        $this->modelGrosseira = new Application_Model_Grosseira();
+        
+        $Grosseira = $this->modelGrosseira->selectEntrevistaGrosseira($where, $order, $limit);
         
         return $Grosseira;
     }
+    
     public function selectGrosseiraHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelGrosseira = new Application_Model_Grosseira();
         
         $Grosseira = $this->modelGrosseira->selectGrosseiraHasPesqueiro($where, $order, $limit);
+        
+        return $Grosseira;
+    }
+    public function countPesqueirosGrosseira()
+    {
+        $this->dbTableGrosseiraHasPesqueiro = new Application_Model_DbTable_VGrosseiraHasPesqueiro();
+        $select = $this->dbTableGrosseiraHasPesqueiro->select()
+                ->from('v_grosseira_has_t_pesqueiro','count(grs_paf_id)')->
+                group('grs_id')->
+                order('count(grs_paf_id) DESC')->limit('1');
+
+        return $this->dbTableGrosseiraHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesGrosseira($where = null, $order = null, $limit = null){
+        $this->dbTableGrosseiraHasEspCapturada = new Application_Model_DbTable_VGrosseiraHasEspecieCapturada();
+
+        $select = $this->dbTableGrosseiraHasEspCapturada->select()
+                ->from($this->dbTableGrosseiraHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        if(!is_null($where)){
+            $select->where($where);
+        }
+
+        return $this->dbTableGrosseiraHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectGrosseiraHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelGrosseira = new Application_Model_Grosseira();
+        
+        $Grosseira = $this->modelGrosseira->selectGrosseiraHasEspCapturadas($where, $order, $limit);
         
         return $Grosseira;
     }

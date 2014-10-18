@@ -53,6 +53,8 @@ Select t_porto.pto_nome,
                  t_pescador.tp_nome,t_monitoramento.mnt_id, t_barco.bar_nome,t_calao_tipo.tcat_tipo,
                  t_destinopescado.dp_destino,t_tipoembarcacao.tte_tipoembarcacao,t_porto.pto_prioridade
         Order By t_porto.pto_prioridade; 
+
+
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 CREATE OR REPLACE VIEW v_entrevista_tarrafa AS 
 Select t_porto.pto_nome,
