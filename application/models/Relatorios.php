@@ -3,19 +3,6 @@
 class Application_Model_Relatorios
 {
     //ARRASTO DE FUNDO ////////////////////////////////////////////////////////////////////
-    public function selectEntrevistaArrasto($where = null, $order = null, $limit = null)
-    {
-        
-        $this->dbTableArrastoFundo= new Application_Model_DbTable_VRelatorioArrastoFundo();
-        $select = $this->dbTableArrastoFundo->select()
-                ->from($this->dbTableArrastoFundo)->order($order)->limit($limit);
-
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableArrastoFundo->fetchAll($select)->toArray();
-    }
     public function selectArrasto($where = null, $order = null, $limit = null){
         
         $this->modelArrastoFundo = new Application_Model_ArrastoFundo();
@@ -43,16 +30,13 @@ class Application_Model_Relatorios
 
         return $this->dbTableArrastoHasPesqueiro->fetchAll($select)->toArray();
     } 
-    public function selectNomeEspecies($where = null, $order = null, $limit = null){
+    public function selectNomeEspecies( $limit = null){
         $this->dbTableArrastoHasEspCapturada = new Application_Model_DbTable_VArrastoFundoHasEspecieCapturada();
 
         $select = $this->dbTableArrastoHasEspCapturada->select()
                 ->from($this->dbTableArrastoHasEspCapturada,'esp_nome_comum')->distinct(true)->
                 order('esp_nome_comum')->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
 
         return $this->dbTableArrastoHasEspCapturada->fetchAll($select)->toArray();
     }
@@ -69,19 +53,7 @@ class Application_Model_Relatorios
     ///////////////////////////////////////////////////////////////////////////////////////
     
     //CALÃO////////////////////////////////////////////////////////////////////////////////
-    public function selectEntrevistaCalao($where = null, $order = null, $limit = null)
-    {
-        
-        $this->dbTableCalao= new Application_Model_DbTable_VRelatorioCalao();
-        $select = $this->dbTableCalao->select()
-                ->from($this->dbTableCalao)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableCalao->fetchAll($select)->toArray();
-    }
     public function selectCalao($where = null, $order = null, $limit = null){
         
         $this->modelCalao = new Application_Model_Calao();
@@ -109,16 +81,12 @@ class Application_Model_Relatorios
 
         return $this->dbTableCalaoHasPesqueiro->fetchAll($select)->toArray();
     } 
-    public function selectNomeEspeciesCalao($where = null, $order = null, $limit = null){
+    public function selectNomeEspeciesCalao( $limit = null){
         $this->dbTableCalaoHasEspCapturada = new Application_Model_DbTable_VCalaoHasEspecieCapturada();
 
         $select = $this->dbTableCalaoHasEspCapturada->select()
                 ->from($this->dbTableCalaoHasEspCapturada,'esp_nome_comum')->distinct(true)->
                 order('esp_nome_comum')->limit($limit);
-
-        if(!is_null($where)){
-            $select->where($where);
-        }
 
         return $this->dbTableCalaoHasEspCapturada->fetchAll($select)->toArray();
     }
@@ -135,19 +103,7 @@ class Application_Model_Relatorios
     
     //COLETA MANUAL//////////////////////////////////////////////////////////////////////
     
-   public function selectEntrevistaColetaManual($where = null, $order = null, $limit = null)
-    {
-        
-        $this->dbTableColetaManual= new Application_Model_DbTable_VRelatorioColetaManual();
-        $select = $this->dbTableColetaManual->select()
-                ->from($this->dbTableColetaManual)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableColetaManual->fetchAll($select)->toArray();
-    }
     public function selectColetaManual($where = null, $order = null, $limit = null){
         
         $this->modelColetaManual = new Application_Model_ColetaManual();
@@ -175,16 +131,13 @@ class Application_Model_Relatorios
 
         return $this->dbTableColetaManualHasPesqueiro->fetchAll($select)->toArray();
     } 
-    public function selectNomeEspeciesColetamanual($where = null, $order = null, $limit = null){
+    public function selectNomeEspeciesColetamanual( $limit = null){
         $this->dbTableColetaManualHasEspCapturada = new Application_Model_DbTable_VColetaManualHasEspecieCapturada();
 
         $select = $this->dbTableColetaManualHasEspCapturada->select()
                 ->from($this->dbTableColetaManualHasEspCapturada,'esp_nome_comum')->distinct(true)->
                 order('esp_nome_comum')->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
 
         return $this->dbTableColetaManualHasEspCapturada->fetchAll($select)->toArray();
     }
@@ -201,19 +154,7 @@ class Application_Model_Relatorios
     
     ///EMALHE//////////////////////////////////////////////////////////////////////////////
     
-    public function selectEntrevistaEmalhe($where = null, $order = null, $limit = null)
-    {
-        
-        $this->dbTableEmalhe= new Application_Model_DbTable_VRelatorioEmalhe();
-        $select = $this->dbTableEmalhe->select()
-                ->from($this->dbTableEmalhe)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableEmalhe->fetchAll($select)->toArray();
-    }
     public function selectEmalhe($where = null, $order = null, $limit = null){
         
         $this->modelEmalhe = new Application_Model_Emalhe();
@@ -241,16 +182,13 @@ class Application_Model_Relatorios
 
         return $this->dbTableEmalheHasPesqueiro->fetchAll($select)->toArray();
     } 
-    public function selectNomeEspeciesEmalhe($where = null, $order = null, $limit = null){
+    public function selectNomeEspeciesEmalhe($limit = null){
         $this->dbTableEmalheHasEspCapturada = new Application_Model_DbTable_VEmalheHasEspecieCapturada();
 
         $select = $this->dbTableEmalheHasEspCapturada->select()
                 ->from($this->dbTableEmalheHasEspCapturada,'esp_nome_comum')->distinct(true)->
                 order('esp_nome_comum')->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
 
         return $this->dbTableEmalheHasEspCapturada->fetchAll($select)->toArray();
     }
@@ -266,19 +204,7 @@ class Application_Model_Relatorios
     
     ///Grosseira//////////////////////////////////////////////////////////////////////////////
     
-    public function selectEntrevistaGrosseira($where = null, $order = null, $limit = null)
-    {
-        
-        $this->dbTableGrosseira= new Application_Model_DbTable_VRelatorioGrosseira();
-        $select = $this->dbTableGrosseira->select()
-                ->from($this->dbTableGrosseira)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableGrosseira->fetchAll($select)->toArray();
-    }
     public function selectGrosseira($where = null, $order = null, $limit = null){
         
         $this->modelGrosseira = new Application_Model_Grosseira();
@@ -306,16 +232,12 @@ class Application_Model_Relatorios
 
         return $this->dbTableGrosseiraHasPesqueiro->fetchAll($select)->toArray();
     } 
-    public function selectNomeEspeciesGrosseira($where = null, $order = null, $limit = null){
+    public function selectNomeEspeciesGrosseira($limit = null){
         $this->dbTableGrosseiraHasEspCapturada = new Application_Model_DbTable_VGrosseiraHasEspecieCapturada();
 
         $select = $this->dbTableGrosseiraHasEspCapturada->select()
                 ->from($this->dbTableGrosseiraHasEspCapturada,'esp_nome_comum')->distinct(true)->
                 order('esp_nome_comum')->limit($limit);
-
-        if(!is_null($where)){
-            $select->where($where);
-        }
 
         return $this->dbTableGrosseiraHasEspCapturada->fetchAll($select)->toArray();
     }
@@ -330,57 +252,65 @@ class Application_Model_Relatorios
     ///////////////////////////////////////////////////////////////////////////////////////
     
     ///Jerere//////////////////////////////////////////////////////////////////////////////
-    public function selectEntrevistaJerere($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableJerere = new Application_Model_DbTable_VRelatorioJerere();
-        $select = $this->dbTableJerere->select()
-                ->from($this->dbTableJerere)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableJerere->fetchAll($select)->toArray();
-    }    
-    public function selectJerereHasEspCapturadas($where = null, $order = null, $limit = null)
-    {
+    public function selectJerere($where = null, $order = null, $limit = null){
+        
         $this->modelJerere = new Application_Model_Jerere();
         
-        $coleta = $this->modelJerere->selectJerereHasEspCapturadas($where, $order, $limit);
+        $Jerere = $this->modelJerere->selectEntrevistaJerere($where, $order, $limit);
         
-        return $coleta;
+        return $Jerere;
     }
-        public function selectJerereHasPesqueiro($where = null, $order = null, $limit = null)
+    
+    public function selectJerereHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelJerere = new Application_Model_Jerere();
         
-        $coleta = $this->modelJerere->selectJerereHasPesqueiro($where, $order, $limit);
+        $Jerere = $this->modelJerere->selectJerereHasPesqueiro($where, $order, $limit);
         
-        return $coleta;
+        return $Jerere;
+    }
+    public function countPesqueirosJerere()
+    {
+        $this->dbTableJerereHasPesqueiro = new Application_Model_DbTable_VJerereHasPesqueiro();
+        $select = $this->dbTableJerereHasPesqueiro->select()
+                ->from('v_jerere_has_t_pesqueiro','count(jre_paf_id)')->
+                group('jre_id')->
+                order('count(jre_paf_id) DESC')->limit('1');
+
+        return $this->dbTableJerereHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesJerere($limit = null){
+        $this->dbTableJerereHasEspCapturada = new Application_Model_DbTable_VJerereHasEspecieCapturada();
+
+        $select = $this->dbTableJerereHasEspCapturada->select()
+                ->from($this->dbTableJerereHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        return $this->dbTableJerereHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectJerereHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelJerere = new Application_Model_Jerere();
+        
+        $Jerere = $this->modelJerere->selectJerereHasEspCapturadas($where, $order, $limit);
+        
+        return $Jerere;
     }
     //////////////////////////////////////////////////////////////////////////////////////
     
     ///Linha//////////////////////////////////////////////////////////////////////////////
     
-    public function selectEntrevistaLinha($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableLinha = new Application_Model_DbTable_VRelatorioLinha();
-        $select = $this->dbTableLinha->select()
-                ->from($this->dbTableLinha)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableLinha->fetchAll($select)->toArray();
-    }
-    public function selectLinhaHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelLinha = new Application_Model_Linha();
+    public function selectLinha($where = null, $order = null, $limit = null){
         
-        $Linha = $this->modelLinha->selectLinhaHasEspCapturadas($where, $order, $limit);
+        $this->modelLinha = new Application_Model_Linha();
+        
+        $Linha = $this->modelLinha->selectEntrevistaLinha($where, $order, $limit);
         
         return $Linha;
     }
+    
     public function selectLinhaHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelLinha = new Application_Model_Linha();
@@ -389,29 +319,46 @@ class Application_Model_Relatorios
         
         return $Linha;
     }
+    public function countPesqueirosLinha()
+    {
+        $this->dbTableLinhaHasPesqueiro = new Application_Model_DbTable_VLinhaHasPesqueiro();
+        $select = $this->dbTableLinhaHasPesqueiro->select()
+                ->from('v_linha_has_t_pesqueiro','count(lin_paf_id)')->
+                group('lin_id')->
+                order('count(lin_paf_id) DESC')->limit('1');
+
+        return $this->dbTableLinhaHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesLinha( $limit = null){
+        $this->dbTableLinhaHasEspCapturada = new Application_Model_DbTable_VLinhaHasEspecieCapturada();
+
+        $select = $this->dbTableLinhaHasEspCapturada->select()
+                ->from($this->dbTableLinhaHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        return $this->dbTableLinhaHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectLinhaHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelLinha = new Application_Model_Linha();
+        
+        $Linha = $this->modelLinha->selectLinhaHasEspCapturadas($where, $order, $limit);
+        
+        return $Linha;
+    }
     ///////////////////////////////////////////////////////////////////////////////////////
     
     ///LinhaFundo//////////////////////////////////////////////////////////////////////////////
-    
-    public function selectEntrevistaLinhaFundo($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableLinhaFundo = new Application_Model_DbTable_VRelatorioLinhaFundo();
-        $select = $this->dbTableLinhaFundo->select()
-                ->from($this->dbTableLinhaFundo)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableLinhaFundo->fetchAll($select)->toArray();
-    }
-    public function selectLinhaFundoHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelLinhaFundo = new Application_Model_LinhaFundo();
+    public function selectLinhaFundo($where = null, $order = null, $limit = null){
         
-        $LinhaFundo = $this->modelLinhaFundo->selectLinhaFundoHasEspCapturadas($where, $order, $limit);
+        $this->modelLinhaFundo = new Application_Model_LinhaFundo();
+        
+        $LinhaFundo = $this->modelLinhaFundo->selectEntrevistaLinhaFundo($where, $order, $limit);
         
         return $LinhaFundo;
     }
+    
     public function selectLinhaFundoHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelLinhaFundo = new Application_Model_LinhaFundo();
@@ -420,29 +367,47 @@ class Application_Model_Relatorios
         
         return $LinhaFundo;
     }
+    public function countPesqueirosLinhaFundo()
+    {
+        $this->dbTableLinhaFundoHasPesqueiro = new Application_Model_DbTable_VLinhaFundoHasPesqueiro();
+        $select = $this->dbTableLinhaFundoHasPesqueiro->select()
+                ->from('v_linhafundo_has_t_pesqueiro','count(lf_paf_id)')->
+                group('lf_id')->
+                order('count(lf_paf_id) DESC')->limit('1');
+
+        return $this->dbTableLinhaFundoHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesLinhaFundo( $limit = null){
+        $this->dbTableLinhaFundoHasEspCapturada = new Application_Model_DbTable_VLinhaFundoHasEspecieCapturada();
+
+        $select = $this->dbTableLinhaFundoHasEspCapturada->select()
+                ->from($this->dbTableLinhaFundoHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+
+        return $this->dbTableLinhaFundoHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectLinhaFundoHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelLinhaFundo = new Application_Model_LinhaFundo();
+        
+        $LinhaFundo = $this->modelLinhaFundo->selectLinhaFundoHasEspCapturadas($where, $order, $limit);
+        
+        return $LinhaFundo;
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////
     
     ///Manzua//////////////////////////////////////////////////////////////////////////////
-    
-    public function selectEntrevistaManzua($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableManzua = new Application_Model_DbTable_VRelatorioManzua();
-        $select = $this->dbTableManzua->select()
-                ->from($this->dbTableManzua)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableManzua->fetchAll($select)->toArray();
-    }
-    public function selectManzuaHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelManzua = new Application_Model_Manzua();
+    public function selectManzua($where = null, $order = null, $limit = null){
         
-        $Manzua = $this->modelManzua->selectManzuaHasEspCapturadas($where, $order, $limit);
+        $this->modelManzua = new Application_Model_Manzua();
+        
+        $Manzua = $this->modelManzua->selectEntrevistaManzua($where, $order, $limit);
         
         return $Manzua;
     }
+    
     public function selectManzuaHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelManzua = new Application_Model_Manzua();
@@ -451,29 +416,46 @@ class Application_Model_Relatorios
         
         return $Manzua;
     }
+    public function countPesqueirosManzua()
+    {
+        $this->dbTableManzuaHasPesqueiro = new Application_Model_DbTable_VManzuaHasPesqueiro();
+        $select = $this->dbTableManzuaHasPesqueiro->select()
+                ->from('v_manzua_has_t_pesqueiro','count(man_paf_id)')->
+                group('man_id')->
+                order('count(man_paf_id) DESC')->limit('1');
+
+        return $this->dbTableManzuaHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesManzua( $limit = null){
+        $this->dbTableManzuaHasEspCapturada = new Application_Model_DbTable_VManzuaHasEspecieCapturada();
+
+        $select = $this->dbTableManzuaHasEspCapturada->select()
+                ->from($this->dbTableManzuaHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        return $this->dbTableManzuaHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectManzuaHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelManzua = new Application_Model_Manzua();
+        
+        $Manzua = $this->modelManzua->selectManzuaHasEspCapturadas($where, $order, $limit);
+        
+        return $Manzua;
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////
     
     ///Mergulho//////////////////////////////////////////////////////////////////////////////
-    
-    public function selectEntrevistaMergulho($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableMergulho = new Application_Model_DbTable_VRelatorioMergulho();
-        $select = $this->dbTableMergulho->select()
-                ->from($this->dbTableMergulho)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableMergulho->fetchAll($select)->toArray();
-    }
-    public function selectMergulhoHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelMergulho = new Application_Model_Mergulho();
+    public function selectMergulho($where = null, $order = null, $limit = null){
         
-        $Mergulho = $this->modelMergulho->selectMergulhoHasEspCapturadas($where, $order, $limit);
+        $this->modelMergulho = new Application_Model_Mergulho();
+        
+        $Mergulho = $this->modelMergulho->selectEntrevistaMergulho($where, $order, $limit);
         
         return $Mergulho;
     }
+    
     public function selectMergulhoHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelMergulho = new Application_Model_Mergulho();
@@ -482,29 +464,47 @@ class Application_Model_Relatorios
         
         return $Mergulho;
     }
+    public function countPesqueirosMergulho()
+    {
+        $this->dbTableMergulhoHasPesqueiro = new Application_Model_DbTable_VMergulhoHasPesqueiro();
+        $select = $this->dbTableMergulhoHasPesqueiro->select()
+                ->from('v_mergulho_has_t_pesqueiro','count(mer_paf_id)')->
+                group('mer_id')->
+                order('count(mer_paf_id) DESC')->limit('1');
+
+        return $this->dbTableMergulhoHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesMergulho( $limit = null){
+        $this->dbTableMergulhoHasEspCapturada = new Application_Model_DbTable_VMergulhoHasEspecieCapturada();
+
+        $select = $this->dbTableMergulhoHasEspCapturada->select()
+                ->from($this->dbTableMergulhoHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        return $this->dbTableMergulhoHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectMergulhoHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelMergulho = new Application_Model_Mergulho();
+        
+        $Mergulho = $this->modelMergulho->selectMergulhoHasEspCapturadas($where, $order, $limit);
+        
+        return $Mergulho;
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////
     
     ///Ratoeira//////////////////////////////////////////////////////////////////////////////
     
-    public function selectEntrevistaRatoeira($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableRatoeira = new Application_Model_DbTable_VRelatorioRatoeira();
-        $select = $this->dbTableRatoeira->select()
-                ->from($this->dbTableRatoeira)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableRatoeira->fetchAll($select)->toArray();
-    }
-    public function selectRatoeiraHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelRatoeira = new Application_Model_Ratoeira();
+    public function selectRatoeira($where = null, $order = null, $limit = null){
         
-        $Ratoeira = $this->modelRatoeira->selectRatoeiraHasEspCapturadas($where, $order, $limit);
+        $this->modelRatoeira = new Application_Model_Ratoeira();
+        
+        $Ratoeira = $this->modelRatoeira->selectEntrevistaRatoeira($where, $order, $limit);
         
         return $Ratoeira;
     }
+    
     public function selectRatoeiraHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelRatoeira = new Application_Model_Ratoeira();
@@ -513,29 +513,47 @@ class Application_Model_Relatorios
         
         return $Ratoeira;
     }
+    public function countPesqueirosRatoeira()
+    {
+        $this->dbTableRatoeiraHasPesqueiro = new Application_Model_DbTable_VRatoeiraHasPesqueiro();
+        $select = $this->dbTableRatoeiraHasPesqueiro->select()
+                ->from('v_ratoeira_has_t_pesqueiro','count(rat_paf_id)')->
+                group('rat_id')->
+                order('count(rat_paf_id) DESC')->limit('1');
+
+        return $this->dbTableRatoeiraHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesRatoeira($limit = null){
+        $this->dbTableRatoeiraHasEspCapturada = new Application_Model_DbTable_VRatoeiraHasEspecieCapturada();
+
+        $select = $this->dbTableRatoeiraHasEspCapturada->select()
+                ->from($this->dbTableRatoeiraHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+
+        return $this->dbTableRatoeiraHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectRatoeiraHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelRatoeira = new Application_Model_Ratoeira();
+        
+        $Ratoeira = $this->modelRatoeira->selectRatoeiraHasEspCapturadas($where, $order, $limit);
+        
+        return $Ratoeira;
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////
     
     ///Siripoia//////////////////////////////////////////////////////////////////////////////
-    
-    public function selectEntrevistaSiripoia($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableSiripoia = new Application_Model_DbTable_VRelatorioSiripoia();
-        $select = $this->dbTableSiripoia->select()
-                ->from($this->dbTableSiripoia)->order($order)->limit($limit);
 
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableSiripoia->fetchAll($select)->toArray();
-    }
-    public function selectSiripoiaHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelSiripoia = new Application_Model_Siripoia();
+    public function selectSiripoia($where = null, $order = null, $limit = null){
         
-        $Siripoia = $this->modelSiripoia->selectSiripoiaHasEspCapturadas($where, $order, $limit);
+        $this->modelSiripoia = new Application_Model_Siripoia();
+        
+        $Siripoia = $this->modelSiripoia->selectEntrevistaSiripoia($where, $order, $limit);
         
         return $Siripoia;
     }
+    
     public function selectSiripoiaHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelSiripoia = new Application_Model_Siripoia();
@@ -544,29 +562,47 @@ class Application_Model_Relatorios
         
         return $Siripoia;
     }
+    public function countPesqueirosSiripoia()
+    {
+        $this->dbTableSiripoiaHasPesqueiro = new Application_Model_DbTable_VSiripoiaHasPesqueiro();
+        $select = $this->dbTableSiripoiaHasPesqueiro->select()
+                ->from('v_siripoia_has_t_pesqueiro','count(sir_paf_id)')->
+                group('sir_id')->
+                order('count(sir_paf_id) DESC')->limit('1');
+
+        return $this->dbTableSiripoiaHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesSiripoia( $limit = null){
+        $this->dbTableSiripoiaHasEspCapturada = new Application_Model_DbTable_VSiripoiaHasEspecieCapturada();
+
+        $select = $this->dbTableSiripoiaHasEspCapturada->select()
+                ->from($this->dbTableSiripoiaHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+
+        return $this->dbTableSiripoiaHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectSiripoiaHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelSiripoia = new Application_Model_Siripoia();
+        
+        $Siripoia = $this->modelSiripoia->selectSiripoiaHasEspCapturadas($where, $order, $limit);
+        
+        return $Siripoia;
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////
     
     ///Tarrafa//////////////////////////////////////////////////////////////////////////////
     
-    public function selectEntrevistaTarrafa($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableTarrafa = new Application_Model_DbTable_VRelatorioTarrafa();
-        $select = $this->dbTableTarrafa->select()
-                ->from($this->dbTableTarrafa)->order($order)->limit($limit);
-
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableTarrafa->fetchAll($select)->toArray();
-    }
-    public function selectTarrafaHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelTarrafa = new Application_Model_Tarrafa();
+    public function selectTarrafa($where = null, $order = null, $limit = null){
         
-        $Tarrafa = $this->modelTarrafa->selectTarrafaHasEspCapturadas($where, $order, $limit);
+        $this->modelTarrafa = new Application_Model_Tarrafa();
+        
+        $Tarrafa = $this->modelTarrafa->selectEntrevistaTarrafa($where, $order, $limit);
         
         return $Tarrafa;
     }
+    
     public function selectTarrafaHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelTarrafa = new Application_Model_Tarrafa();
@@ -575,34 +611,78 @@ class Application_Model_Relatorios
         
         return $Tarrafa;
     }
+    public function countPesqueirosTarrafa()
+    {
+        $this->dbTableTarrafaHasPesqueiro = new Application_Model_DbTable_VTarrafaHasPesqueiro();
+        $select = $this->dbTableTarrafaHasPesqueiro->select()
+                ->from('v_Tarrafa_has_t_pesqueiro','count(tar_paf_id)')->
+                group('tar_id')->
+                order('count(tar_paf_id) DESC')->limit('1');
+
+        return $this->dbTableTarrafaHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesTarrafa( $limit = null){
+        $this->dbTableTarrafaHasEspCapturada = new Application_Model_DbTable_VTarrafaHasEspecieCapturada();
+
+        $select = $this->dbTableTarrafaHasEspCapturada->select()
+                ->from($this->dbTableTarrafaHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        return $this->dbTableTarrafaHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectTarrafaHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelTarrafa = new Application_Model_Tarrafa();
+        
+        $Tarrafa = $this->modelTarrafa->selectTarrafaHasEspCapturadas($where, $order, $limit);
+        
+        return $Tarrafa;
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////
     
     ///VaraPesca//////////////////////////////////////////////////////////////////////////////
     
-    public function selectEntrevistaVaraPesca($where = null, $order = null, $limit = null)
-    {
-        $this->dbTableVaraPesca = new Application_Model_DbTable_VRelatorioVaraPesca();
-        $select = $this->dbTableVaraPesca->select()
-                ->from($this->dbTableVaraPesca)->order($order)->limit($limit);
-
-        if(!is_null($where)){
-            $select->where($where);
-        }
-
-        return $this->dbTableVaraPesca->fetchAll($select)->toArray();
-    }
-    public function selectVaraPescaHasEspCapturadas($where = null, $order = null, $limit = null){
-         $this->modelVaraPesca = new Application_Model_VaraPesca();
+    public function selectVaraPesca($where = null, $order = null, $limit = null){
         
-        $VaraPesca = $this->modelVaraPesca->selectVaraPescaHasEspCapturadas($where, $order, $limit);
+        $this->modelVaraPesca = new Application_Model_VaraPesca();
+        
+        $VaraPesca = $this->modelVaraPesca->selectEntrevistaVaraPesca($where, $order, $limit);
         
         return $VaraPesca;
     }
+    
     public function selectVaraPescaHasPesqueiro($where = null, $order = null, $limit = null)
     {
         $this->modelVaraPesca = new Application_Model_VaraPesca();
         
         $VaraPesca = $this->modelVaraPesca->selectVaraPescaHasPesqueiro($where, $order, $limit);
+        
+        return $VaraPesca;
+    }
+    public function countPesqueirosVaraPesca()
+    {
+        $this->dbTableVaraPescaHasPesqueiro = new Application_Model_DbTable_VVaraPescaHasPesqueiro();
+        $select = $this->dbTableVaraPescaHasPesqueiro->select()
+                ->from('v_varapesca_has_t_pesqueiro','count(vp_paf_id)')->
+                group('vp_id')->
+                order('count(vp_paf_id) DESC')->limit('1');
+
+        return $this->dbTableVaraPescaHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    public function selectNomeEspeciesVaraPesca( $limit = null){
+        $this->dbTableVaraPescaHasEspCapturada = new Application_Model_DbTable_VVaraPescaHasEspecieCapturada();
+
+        $select = $this->dbTableVaraPescaHasEspCapturada->select()
+                ->from($this->dbTableVaraPescaHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+        return $this->dbTableVaraPescaHasEspCapturada->fetchAll($select)->toArray();
+    }
+    public function selectVaraPescaHasEspCapturadas($where = null, $order = null, $limit = null){
+         
+        $this->modelVaraPesca = new Application_Model_VaraPesca();
+        
+        $VaraPesca = $this->modelVaraPesca->selectVaraPescaHasEspCapturadas($where, $order, $limit);
         
         return $VaraPesca;
     }
