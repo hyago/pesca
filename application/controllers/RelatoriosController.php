@@ -318,7 +318,7 @@ class RelatoriosController extends Zend_Controller_Action
                          $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $esp[$tipoRel]);
                      }
                  endforeach;
-                 if($coluna < $lastcolumn){
+                 if($coluna < $lastcolumn-1){
                     $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, '0');
                  }
                  else{
@@ -1785,7 +1785,7 @@ class RelatoriosController extends Zend_Controller_Action
                          $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $esp[$tipoRel]);
                      }
                  endforeach;
-                    if($coluna < $lastcolumn){
+                    if($coluna < $lastcolumn-1){
                     $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, '0');
                  }
                  else{
