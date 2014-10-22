@@ -30,6 +30,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function gerarAction(){
+        
         $valueRelatorio = $this->_getAllParams();
         
         $rel = $valueRelatorio['tipoRelatorio'];
@@ -60,6 +61,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
 
     public function relatoriocompletoarrastoAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -210,6 +212,7 @@ class RelatoriosController extends Zend_Controller_Action
     
     
     public function relatoriocompletocoletamanualAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -345,6 +348,7 @@ class RelatoriosController extends Zend_Controller_Action
     
     
     public function relatoriocompletocalaoAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -467,6 +471,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletoemalheAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -601,6 +606,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletogroseiraAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -737,6 +743,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletojerereAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -878,6 +885,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
    public function relatoriocompletolinhaAction() {
+       
         set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
@@ -1014,6 +1022,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletolinhafundoAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -1150,6 +1159,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
      public function relatoriocompletomanzuaAction() {
+         set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -1286,6 +1296,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletomergulhoAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -1419,6 +1430,7 @@ class RelatoriosController extends Zend_Controller_Action
     
     
     public function relatoriocompletoratoeiraAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -1555,6 +1567,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletosiripoiaAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -1691,6 +1704,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletotarrafaAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -1811,6 +1825,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletovarapescaAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -1961,6 +1976,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletoAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -2150,6 +2166,7 @@ class RelatoriosController extends Zend_Controller_Action
     
     
     public function relatoriocompletomonitoramentosAction(){
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -2200,6 +2217,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletoespeciesAction(){
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -2249,6 +2267,7 @@ class RelatoriosController extends Zend_Controller_Action
         $objWriter->save('php://output');
     }
     public function relatoriocompletoespeciesmesAction(){
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
@@ -2301,6 +2320,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
     public function relatoriocompletopescadoresAction(){
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
