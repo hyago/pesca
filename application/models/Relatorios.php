@@ -615,7 +615,7 @@ class Application_Model_Relatorios
     {
         $this->dbTableTarrafaHasPesqueiro = new Application_Model_DbTable_VTarrafaHasPesqueiro();
         $select = $this->dbTableTarrafaHasPesqueiro->select()
-                ->from('v_Tarrafa_has_t_pesqueiro','count(tar_paf_id)')->
+                ->from('v_tarrafa_has_t_pesqueiro','count(tar_paf_id)')->
                 group('tar_id')->
                 order('count(tar_paf_id) DESC')->limit('1');
 

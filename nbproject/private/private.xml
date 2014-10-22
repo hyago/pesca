@@ -12,27 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VEspeciesCapturadasByMes.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByRatoeira.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByEmalhe.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByVaraPesca.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/RelatoriosController.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByLinha.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByJerere.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByPortos.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByGrosseira.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByTarrafa.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorBySiripoia.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByArrasto.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByColetaManual.php</file>
             <file>file:/srv/www/htdocs/pesca/application/models/Relatorios.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByProjeto.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByManzua.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByLinhaFundo.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByMunicipio.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/RelatoriosController.php</file>
             <file>file:/srv/www/htdocs/pesca/bd/Consultas_Entrevistas_fernanda.sql</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByMergulho.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/DbTable/VPescadorByCalao.php</file>
         </group>
     </open-files>
 </project-private>
