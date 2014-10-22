@@ -50,7 +50,7 @@ class RelatoriosController extends Zend_Controller_Action
             case 12:$this->_redirect("/relatorios/relatoriocompletosiripoia/".$rel);break;
             case 13:$this->_redirect("/relatorios/relatoriocompletotarrafa/".$rel);break;
             case 14:$this->_redirect("/relatorios/relatoriocompletovarapesca/".$rel);break;
-            case 15:$this->_rerirect("/relatorios/relatoriocompleto/".$rel);break;
+            case 15:$this->_redirect("/relatorios/relatoriocompleto/".$rel);break;
             case 16:$this->_redirect("/relatorios/relatoriocompletomonitoramentos");break;
             case 17:$this->_redirect("/relatorios/relatoriocompletoespecies");break;
             case 18:$this->_redirect("/relatorios/relatoriocompletoespeciesmes");break;
@@ -196,7 +196,7 @@ class RelatoriosController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
-        if($var === '1'){
+        if($var === '1' || $var === '0'){
             $tipoRel = 'spc_peso_kg';
         }
         if($var === '2'){
@@ -2147,5 +2147,156 @@ class RelatoriosController extends Zend_Controller_Action
         $objWriter->save('php://output');
     }
     
+    
+    public function relatoriocompletomonitoramentosAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        
+        $monitoramentos = $this->modelRelatorios->selectMonitoramentos();
+        
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna,   $linha, 'Porto de Desembarque');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Arte de pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Mês');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Ano');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Não Monitorados');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Monitorados');
+        
+        $coluna= 0;
+        $linha++;
+        foreach ( $monitoramentos as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tap_artepesca']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['mes']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ano']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['naomonitorados']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['monitorados']);
+            $coluna=0;
+            $linha++;
+        endforeach;    
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="monitoramentos.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
+    
+    public function relatoriocompletoespeciesAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        
+        $monitoramentos = $this->modelRelatorios->selectEspeciesCapturadas();
+        
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna,   $linha, 'Porto de Desembarque');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Arte de pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Espécie');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Nome Comum');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Peso Total');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade Total');
+        
+        $coluna= 0;
+        $linha++;
+        foreach ( $monitoramentos as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['arte']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['esp_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['esp_nome_comum']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['peso']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['quantidade']);
+            $coluna=0;
+            $linha++;
+        endforeach;    
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Espécies Capturadas.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
+    public function relatoriocompletoespeciesmesAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        
+        $monitoramentos = $this->modelRelatorios->selectEspeciesCapturadasMes();
+        
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna,   $linha, 'Porto de Desembarque');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Arte de pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Mês/Ano');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Espécie');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Nome Comum');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Peso Total');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade Total');
+        
+        $coluna= 0;
+        $linha++;
+        foreach ( $monitoramentos as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['arte']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['mes'].'/'.$consulta['ano']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['esp_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['esp_nome_comum']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['peso']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['quantidade']);
+            $coluna=0;
+            $linha++;
+        endforeach;    
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Espécies Capturadas Por Mês.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
 }
 

@@ -326,7 +326,7 @@
                     <tr id="itemLinhaFundoRows">
                         <td name="inputIdEntrevista"> <?= $vLinhaFundoAvistamento['avs_id'] ?> </td>
                         <td name="inputAvistamento" > <?= $vLinhaFundoAvistamento['avs_descricao'] ?> </td>
-                        <td><input type="button" class="button-del" width="5%" onclick="jsDeleteAvistamento(<?= $this->entrevista['lf_id'] ?>, '<?= $this->url(array("controller" => "linhafundo", "action" => "deleteavistamento"), null, true) ?>', <?= $vLinhaFundoAvistamento['avs_id'] ?>)"></td>
+                        <td><input type="button" class="button-del" width="5%" onclick="jsDeleteAvistamento(<?= $this->entrevista['lf_id'] ?>, '<?= $this->url(array("controller" => "linha-fundo", "action" => "deleteavistamento"), null, true) ?>', <?= $vLinhaFundoAvistamento['avs_id'] ?>)"></td>
                     </tr>
                 <?php endforeach; ?>
             </table>

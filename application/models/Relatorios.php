@@ -689,7 +689,52 @@ class Application_Model_Relatorios
 /////////////////////////////////////////////////////////////////////////////////////////////
     
    //Entrevistas Monitoradas////////////////////////////////////////////////////////////////
-   
+   public function selectMonitoramentos($where = null, $order = null, $limit = null){
+        $this->dbTableVMonitoramentos = new Application_Model_DbTable_VMonitoramentos();
+
+        $select = $this->dbTableVMonitoramentos->select()
+                ->from($this->dbTableVMonitoramentos)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->dbTableVMonitoramentos->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //Entrevistas Monitoradas////////////////////////////////////////////////////////////////
+   public function selectEspeciesCapturadas($where = null, $order = null, $limit = null){
+        $this->dbTableVEspeciesCapturadas = new Application_Model_DbTable_VEspeciesCapturadas();
+
+        $select = $this->dbTableVEspeciesCapturadas->select()
+                ->from($this->dbTableVEspeciesCapturadas)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->dbTableVEspeciesCapturadas->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+     //Entrevistas Monitoradas////////////////////////////////////////////////////////////////
+   public function selectEspeciesCapturadasMes($where = null, $order = null, $limit = null){
+        $this->dbTableVEspeciesCapturadas = new Application_Model_DbTable_VEspeciesCapturadasByMes();
+
+        $select = $this->dbTableVEspeciesCapturadas->select()
+                ->from($this->dbTableVEspeciesCapturadas)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->dbTableVEspeciesCapturadas->fetchAll($select)->toArray();
+    }
     
     
    /////////////////////////////////////////////////////////////////////////////////////////////

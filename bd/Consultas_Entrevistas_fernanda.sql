@@ -690,8 +690,8 @@ From t_ficha_diaria as ficha
     Inner Join t_monitoramento as monit On ficha.fd_id = monit.fd_id
     Left Join t_porto as porto On ficha.pto_id = porto.pto_id
     Inner Join t_artepesca as arte On monit.mnt_arte = arte.tap_id
-    Group By porto.pto_nome, arte.tap_artepesca, DATE_PART('month', ficha.fd_data),DATE_PART('year', ficha.fd_data)
-    Order By arte.tap_artepesca, porto.pto_nome, DATE_PART('month', ficha.fd_data) ,DATE_PART('year', ficha.fd_data);
+    Group By porto.pto_nome, porto.pto_prioridade, arte.tap_artepesca, DATE_PART('month', ficha.fd_data),DATE_PART('year', ficha.fd_data)
+    Order By porto.pto_prioridade, arte.tap_artepesca, porto.pto_nome, DATE_PART('month', ficha.fd_data) ,DATE_PART('year', ficha.fd_data);
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 CREATE OR REPLACE VIEW v_especies_capturadas AS
@@ -904,7 +904,8 @@ Left Join t_varapesca on t_monitoramento.mnt_id = t_varapesca.mnt_id
 Left Join t_varapesca_has_t_especie_capturada on t_varapesca.vp_id = t_varapesca_has_t_especie_capturada.vp_id
 Inner Join t_especie on t_varapesca_has_t_especie_capturada.esp_id = t_especie.esp_id
 Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum;
+Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+Order By t_porto.pto_prioridade;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 CREATE OR REPLACE VIEW v_especies_capturadas_by_mes AS
@@ -1171,8 +1172,8 @@ From t_pescador as pescador
 Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_arrastofundo as
@@ -1184,8 +1185,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_arrastofundo as arrasto On pescador.tp_id = arrasto.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_calao as
@@ -1197,8 +1198,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_calao as calao On pescador.tp_id = calao.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_coletamanual as
@@ -1210,8 +1211,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_coletamanual as coletamanual On pescador.tp_id = coletamanual.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_emalhe as
@@ -1223,8 +1224,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_emalhe as emalhe On pescador.tp_id = emalhe.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_grosseira as
@@ -1236,8 +1237,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_grosseira as grosseira On pescador.tp_id = grosseira.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_jerere as
@@ -1249,8 +1250,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_jerere as jerere On pescador.tp_id = jerere.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_linha as
@@ -1262,8 +1263,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_linha as linha On pescador.tp_id = linha.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_linhafundo as
@@ -1275,8 +1276,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_linhafundo as linhafundo On pescador.tp_id = linhafundo.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_manzua as
@@ -1288,8 +1289,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_manzua as manzua On pescador.tp_id = manzua.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_mergulho as
@@ -1301,8 +1302,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_mergulho as mergulho On pescador.tp_id = mergulho.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_ratoeira as
@@ -1314,8 +1315,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_ratoeira as ratoeira On pescador.tp_id = ratoeira.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_siripoia as
@@ -1327,8 +1328,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_siripoia as siripoia On pescador.tp_id = siripoia.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_tarrafa as
@@ -1340,8 +1341,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_tarrafa as tarrafa On pescador.tp_id = tarrafa.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 Create or replace view v_pescadores_by_varapesca as
@@ -1353,8 +1354,8 @@ Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_i
 Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
 Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
 Left Join t_varapesca as varapesca On pescador.tp_id = varapesca.tp_id_entrevistado
-Group By porto.pto_nome, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_nome, pescador.tp_nome;
+Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+Order By porto.pto_prioridade, pescador.tp_nome;
 
 
 DROP VIEW v_arrastofundo_has_t_especie_capturada Cascade;
