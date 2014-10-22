@@ -2298,5 +2298,190 @@ class RelatoriosController extends Zend_Controller_Action
         ob_end_clean();
         $objWriter->save('php://output');
     }
+    
+    public function relatoriocompletopescadoresAction(){
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        
+        $pescadores = $this->modelRelatorios->selectPescadorByProjeto();
+        
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna,   $linha, 'Porto de Desembarque');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Pescador');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Projeto');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Monitoramentos em Arrasto de Fundo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Calão');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Coleta Manual');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Emalhe');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Grosseira');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Jereré');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Linha');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Linha de Fundo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Manzuá');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Mergulho');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Ratoeira');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Siripoia');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tarrafa');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Vara de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Total de Monitoramentos');
+        
+        $coluna= 0;
+        $linha++;
+        foreach ( $pescadores as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tp_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tpr_descricao']);
+            $coluna=0;
+            $linha++;
+        endforeach;
+        
+        $arrasto = $this->modelRelatorios->selectPescadorByArrasto();
+        $linha = 2;
+        $coluna+=3;
+        foreach ( $arrasto as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $calao = $this->modelRelatorios->selectPescadorByCalao();
+        foreach ( $calao as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $coleta = $this->modelRelatorios->selectPescadorByColeta();
+        foreach ( $coleta as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $emalhe = $this->modelRelatorios->selectPescadorByEmalhe();
+        foreach ( $emalhe as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $grosseira = $this->modelRelatorios->selectPescadorByGrosseira();
+        foreach ( $grosseira as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $jerere = $this->modelRelatorios->selectPescadorByJerere();
+        foreach ( $jerere as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $linha_pesca = $this->modelRelatorios->selectPescadorByLinha();
+        foreach ( $linha_pesca as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $linhafundo = $this->modelRelatorios->selectPescadorByLinhaFundo();
+        foreach ( $linhafundo as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $manzua = $this->modelRelatorios->selectPescadorByManzua();
+        foreach ( $manzua as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $mergulho = $this->modelRelatorios->selectPescadorByMergulho();
+        foreach ( $mergulho as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $ratoeira = $this->modelRelatorios->selectPescadorByRatoeira();
+        foreach ( $ratoeira as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $siripoia = $this->modelRelatorios->selectPescadorBySiripoia();
+        foreach ( $siripoia as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $tarrafa = $this->modelRelatorios->selectPescadorByTarrafa();
+        foreach ( $tarrafa as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $linha = 2;
+        $coluna++;
+        
+        $varapesca = $this->modelRelatorios->selectPescadorByVaraPesca();
+        foreach ( $varapesca as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $consulta['quantidade']);
+            $linha++;
+        endforeach;
+        $ultimaLinha = $linha;
+        $linha = 2;
+        $coluna++;
+        
+        $i = 2;
+        $j = 2;
+        for($i; $i < $ultimaLinha; $i++):
+            $formula = '=SUM(D'.$i.':Q'.$i.')';
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $formula);
+            $linha++;
+        endfor;
+        
+        $formula = '=SUM(R'.$j.':R'.($i-1).')';
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha, $formula);
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Pescadores Monitorados.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
 }
 

@@ -738,5 +738,239 @@ class Application_Model_Relatorios
     
     
    /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadorByProjeto($where = null, $order = null, $limit = null){
+        $this->dbTableVPescadorByProjeto = new Application_Model_DbTable_VPescadorByProjeto();
+
+        $select = $this->dbTableVPescadorByProjeto->select()
+                ->from($this->dbTableVPescadorByProjeto)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->dbTableVPescadorByProjeto->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadorByArrasto($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByArrasto();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByCalao($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByCalao();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByColeta($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByColetaManual();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByEmalhe($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByEmalhe();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByGrosseira($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByGrosseira();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByJerere($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByJerere();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByLinha($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByLinha();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByLinhaFundo($where = null, $order = null, $limit = null){
+       $this->selectEntrevista = new Application_Model_DbTable_VPescadorByLinhaFundo();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    public function selectPescadorByManzua($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByManzua();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadorByMergulho($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByMergulho();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadorByRatoeira($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByRatoeira();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadorBySiripoia($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorBySiripoia();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadorByTarrafa($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByTarrafa();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadorByVaraPesca($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VPescadorByVaraPesca();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
+    
+    
+   /////////////////////////////////////////////////////////////////////////////////////////////
+
+    
 }
 

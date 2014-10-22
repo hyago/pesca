@@ -4,7 +4,7 @@ class Application_Model_DbTable_VPescadorByArrasto extends Zend_Db_Table_Abstrac
 {
 
     protected $_name = 'v_pescadores_by_arrastofundo';
-
+    protected $_primary = 'arte';
 
 }
 
