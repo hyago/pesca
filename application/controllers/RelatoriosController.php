@@ -878,6 +878,7 @@ class RelatoriosController extends Zend_Controller_Action
     }
     
    public function relatoriocompletolinhaAction() {
+        set_time_limit(300);
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
