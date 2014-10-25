@@ -971,6 +971,15 @@ class Application_Model_Relatorios
     
    /////////////////////////////////////////////////////////////////////////////////////////////
 
-    
+    public function selectEspecies( $limit = null){
+        $this->especies = new Application_Model_DbTable_VLinhaFundoHasEspecieCapturada();
+
+        $select = $this->dbTableLinhaFundoHasEspCapturada->select()
+                ->from($this->dbTableLinhaFundoHasEspCapturada,'esp_nome_comum')->distinct(true)->
+                order('esp_nome_comum')->limit($limit);
+
+
+        return $this->dbTableLinhaFundoHasEspCapturada->fetchAll($select)->toArray();
+    }
 }
 

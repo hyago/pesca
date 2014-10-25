@@ -327,7 +327,7 @@ function jsEditarEntrevistas(nomeArtePesca,idEntrevista) {
                 Entrevista = 'error';
             var pag = (Entrevista + '/editar');
             var tmpUpdate = (pag + '/id/' + idEntrevista);
-            location.replace(tmpUpdate);
+            window.open(tmpUpdate, "_blank");
 }
 
 

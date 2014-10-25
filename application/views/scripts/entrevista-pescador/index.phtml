@@ -36,10 +36,15 @@
                     <td><?= date("d-m-Y", strtotime($entrevista['data']))  ?></td>
 
                     <td>
-                       <input type="button" width="10%" target="_blank" value ="Editar" onclick="jsEditarEntrevistas('<?= $entrevista['artepesca']?>',<?= $entrevista['id'] ?>)"/></td>
-
+                        <a value="Editar" id="abas" href="javascript:onclick=jsEditarEntrevistas('<?= $entrevista['artepesca']?>',<?= $entrevista['id'] ?>)">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all" title="Entrevista"><span class="ui-icon ui-icon-pencil"></span></li>
+                            </ul>
+                            
+                        </a>    
                     </td>
 
+                    
          
 
                     </a>
