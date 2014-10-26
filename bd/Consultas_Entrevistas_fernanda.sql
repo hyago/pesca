@@ -110,7 +110,7 @@ Select t_local.tl_local,t_porto.pto_nome,
         t_coletamanual.cml_dhsaida::time as hsaida,
         t_coletamanual.cml_dhvolta::date as dvolta,
         t_coletamanual.cml_dhvolta::time as hvolta,
-        ( t_coletamanual.cml_dhvolta::date - t_coletamanual.cml_dhsaida::date)+1+1 as dias,
+        ( t_coletamanual.cml_dhvolta::date - t_coletamanual.cml_dhsaida::date)+1 as dias,
         t_coletamanual.cml_tempogasto,
         t_coletamanual.cml_obs,
         t_coletamanual.mnt_id,
@@ -139,7 +139,7 @@ Select t_local.tl_local,t_porto.pto_nome,
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 CREATE OR REPLACE VIEW v_entrevista_arrasto AS 
- SELECT t_local.tl_local,t_local.tl_local, 'Arrasto de Fundo' AS artepesca, t_arrastofundo.af_id, 
+ SELECT t_local.tl_local, 'Arrasto de Fundo' AS artepesca, t_arrastofundo.af_id, 
     t_arrastofundo.tp_id_entrevistado, t_pescador.tp_nome, 
     t_pescador.tp_apelido, t_arrastofundo.bar_id, t_barco.bar_nome, 
     t_arrastofundo.tte_id, t_tipoembarcacao.tte_tipoembarcacao, 
@@ -149,7 +149,7 @@ CREATE OR REPLACE VIEW v_entrevista_arrasto AS
     t_arrastofundo.af_dhsaida::time without time zone AS hsaida, 
     t_arrastofundo.af_dhvolta::date AS dvolta, 
     t_arrastofundo.af_dhvolta::time without time zone AS hvolta, 
-    (t_arrastofundo.af_dhvolta::date - t_arrastofundo.af_dhsaida::date)+1+1 AS dias,
+    (t_arrastofundo.af_dhvolta::date - t_arrastofundo.af_dhsaida::date)+1 AS dias,
     t_arrastofundo.af_diesel, t_arrastofundo.af_oleo, 
     t_arrastofundo.af_alimento, t_arrastofundo.af_gelo, t_arrastofundo.af_obs, 
     t_arrastofundo.af_motor, t_arrastofundo.dp_id, t_destinopescado.dp_destino
