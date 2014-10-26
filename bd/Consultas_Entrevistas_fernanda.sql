@@ -674,833 +674,833 @@ t_destinopescado.dp_destino,t_porto.pto_prioridade,t_mare.mre_tipo,t_isca.isc_ti
   ORDER BY t_porto.pto_prioridade, t_varapesca.vp_id;
 
 
-Drop view if exists v_entrevistas_monitoradas;
-Drop view if exists v_entrevista_naomonitoradas;
-
-Drop View if exists v_monitoramentos;
-Create View  v_monitoramentos as
-Select  porto.pto_nome, 
-arte.tap_artepesca, 
-DATE_PART('month', ficha.fd_data) as mes,
-DATE_PART('year', ficha.fd_data)  as ano, 
-sum(CASE WHEN monit.mnt_monitorado Is Not True THEN 1 ELSE 0 END) as naomonitorados,
-sum(CASE WHEN monit.mnt_monitorado Is True THEN 1 ELSE 0 END) as monitorados 
-From t_ficha_diaria as ficha
-    Inner Join t_monitoramento as monit On ficha.fd_id = monit.fd_id
-    Left Join t_porto as porto On ficha.pto_id = porto.pto_id
-    Inner Join t_artepesca as arte On monit.mnt_arte = arte.tap_id
-    Group By porto.pto_nome, porto.pto_prioridade, arte.tap_artepesca, DATE_PART('month', ficha.fd_data),DATE_PART('year', ficha.fd_data)
-    Order By porto.pto_prioridade, arte.tap_artepesca, porto.pto_nome, DATE_PART('month', ficha.fd_data) ,DATE_PART('year', ficha.fd_data);
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-CREATE OR REPLACE VIEW v_especies_capturadas AS
-Select t_porto.pto_nome, 
-'Arrasto de Fundo' as arte, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_arrastofundo on t_monitoramento.mnt_id = t_arrastofundo.mnt_id
-Left Join t_arrastofundo_has_t_especie_capturada on t_arrastofundo.af_id = t_arrastofundo_has_t_especie_capturada.af_id
-Inner Join t_especie on t_arrastofundo_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Calão' as arte, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_calao on t_monitoramento.mnt_id = t_calao.mnt_id
-Left Join t_calao_has_t_especie_capturada on t_calao.cal_id = t_calao_has_t_especie_capturada.cal_id
-Inner Join t_especie on t_calao_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Coleta Manual' as arte, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_coletamanual on t_monitoramento.mnt_id = t_coletamanual.mnt_id
-Left Join t_coletamanual_has_t_especie_capturada on t_coletamanual.cml_id = t_coletamanual_has_t_especie_capturada.cml_id
-Inner Join t_especie on t_coletamanual_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Emalhe' as arte, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_emalhe on t_monitoramento.mnt_id = t_emalhe.mnt_id
-Left Join t_emalhe_has_t_especie_capturada on t_emalhe.em_id = t_emalhe_has_t_especie_capturada.em_id
-Inner Join t_especie on t_emalhe_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Jereré' as arte, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_jerere on t_monitoramento.mnt_id = t_jerere.mnt_id
-Left Join t_jerere_has_t_especie_capturada on t_jerere.jre_id = t_jerere_has_t_especie_capturada.jre_id
-Inner Join t_especie on t_jerere_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Linha' as arte, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_linha on t_monitoramento.mnt_id = t_linha.mnt_id
-Left Join t_linha_has_t_especie_capturada on t_linha.lin_id = t_linha_has_t_especie_capturada.lin_id
-Inner Join t_especie on t_linha_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Linha de Fundo' as arte, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_linhafundo on t_monitoramento.mnt_id = t_linhafundo.mnt_id
-Left Join t_linhafundo_has_t_especie_capturada on t_linhafundo.lf_id = t_linhafundo_has_t_especie_capturada.lf_id
-Inner Join t_especie on t_linhafundo_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-
-Union All
-Select t_porto.pto_nome, 
-'Grosseira' as arte,  
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_grosseira on t_monitoramento.mnt_id = t_grosseira.mnt_id
-Left Join t_grosseira_has_t_especie_capturada on t_grosseira.grs_id = t_grosseira_has_t_especie_capturada.grs_id
-Inner Join t_especie on t_grosseira_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-
-Union All
-Select t_porto.pto_nome, 
-'Manzuá' as arte,   
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_manzua on t_monitoramento.mnt_id = t_manzua.mnt_id
-Left Join t_manzua_has_t_especie_capturada on t_manzua.man_id = t_manzua_has_t_especie_capturada.man_id
-Inner Join t_especie on t_manzua_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Mergulho' as arte,   
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_mergulho on t_monitoramento.mnt_id = t_mergulho.mnt_id
-Left Join t_mergulho_has_t_especie_capturada on t_mergulho.mer_id = t_mergulho_has_t_especie_capturada.mer_id
-Inner Join t_especie on t_mergulho_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Ratoeira' as arte,   
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_ratoeira on t_monitoramento.mnt_id = t_ratoeira.mnt_id
-Left Join t_ratoeira_has_t_especie_capturada on t_ratoeira.rat_id = t_ratoeira_has_t_especie_capturada.rat_id
-Inner Join t_especie on t_ratoeira_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Siripoia' as arte,   
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_siripoia on t_monitoramento.mnt_id = t_siripoia.mnt_id
-Left Join t_siripoia_has_t_especie_capturada on t_siripoia.sir_id = t_siripoia_has_t_especie_capturada.sir_id
-Inner Join t_especie on t_siripoia_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Tarrafa' as arte,   
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_tarrafa on t_monitoramento.mnt_id = t_tarrafa.mnt_id
-Left Join t_tarrafa_has_t_especie_capturada on t_tarrafa.tar_id = t_tarrafa_has_t_especie_capturada.tar_id
-Inner Join t_especie on t_tarrafa_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-
-Union All
-Select t_porto.pto_nome, 
-'Varapesca' as arte,   
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_varapesca on t_monitoramento.mnt_id = t_varapesca.mnt_id
-Left Join t_varapesca_has_t_especie_capturada on t_varapesca.vp_id = t_varapesca_has_t_especie_capturada.vp_id
-Inner Join t_especie on t_varapesca_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
-Order By t_porto.pto_prioridade;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-CREATE OR REPLACE VIEW v_especies_capturadas_by_mes AS
-Select t_porto.pto_nome, 
-'Arrasto de Fundo' as arte, 
-DATE_PART('month', t_ficha_diaria.fd_data)as mes,
-DATE_PART('year', t_ficha_diaria.fd_data) as ano,
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_arrastofundo on t_monitoramento.mnt_id = t_arrastofundo.mnt_id
-Left Join t_arrastofundo_has_t_especie_capturada on t_arrastofundo.af_id = t_arrastofundo_has_t_especie_capturada.af_id
-Inner Join t_especie on t_arrastofundo_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Calão' as arte, 
-DATE_PART('month', t_ficha_diaria.fd_data)as mes,
-DATE_PART('year', t_ficha_diaria.fd_data) as ano,
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_calao on t_monitoramento.mnt_id = t_calao.mnt_id
-Left Join t_calao_has_t_especie_capturada on t_calao.cal_id = t_calao_has_t_especie_capturada.cal_id
-Inner Join t_especie on t_calao_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Coleta Manual' as arte, 
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_coletamanual on t_monitoramento.mnt_id = t_coletamanual.mnt_id
-Left Join t_coletamanual_has_t_especie_capturada on t_coletamanual.cml_id = t_coletamanual_has_t_especie_capturada.cml_id
-Inner Join t_especie on t_coletamanual_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Emalhe' as arte, 
-DATE_PART('month', t_ficha_diaria.fd_data)as mes,
-DATE_PART('year', t_ficha_diaria.fd_data) as ano,
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_emalhe on t_monitoramento.mnt_id = t_emalhe.mnt_id
-Left Join t_emalhe_has_t_especie_capturada on t_emalhe.em_id = t_emalhe_has_t_especie_capturada.em_id
-Inner Join t_especie on t_emalhe_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Jereré' as arte, 
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_jerere on t_monitoramento.mnt_id = t_jerere.mnt_id
-Left Join t_jerere_has_t_especie_capturada on t_jerere.jre_id = t_jerere_has_t_especie_capturada.jre_id
-Inner Join t_especie on t_jerere_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Linha' as arte, 
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_linha on t_monitoramento.mnt_id = t_linha.mnt_id
-Left Join t_linha_has_t_especie_capturada on t_linha.lin_id = t_linha_has_t_especie_capturada.lin_id
-Inner Join t_especie on t_linha_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Linha de Fundo' as arte, 
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_linhafundo on t_monitoramento.mnt_id = t_linhafundo.mnt_id
-Left Join t_linhafundo_has_t_especie_capturada on t_linhafundo.lf_id = t_linhafundo_has_t_especie_capturada.lf_id
-Inner Join t_especie on t_linhafundo_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-
-Union All
-Select t_porto.pto_nome, 
-'Grosseira' as arte,  
-DATE_PART('month', t_ficha_diaria.fd_data)as mes,
-DATE_PART('year', t_ficha_diaria.fd_data) as ano,
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_grosseira on t_monitoramento.mnt_id = t_grosseira.mnt_id
-Left Join t_grosseira_has_t_especie_capturada on t_grosseira.grs_id = t_grosseira_has_t_especie_capturada.grs_id
-Inner Join t_especie on t_grosseira_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-
-Union All
-Select t_porto.pto_nome, 
-'Manzuá' as arte,   
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_manzua on t_monitoramento.mnt_id = t_manzua.mnt_id
-Left Join t_manzua_has_t_especie_capturada on t_manzua.man_id = t_manzua_has_t_especie_capturada.man_id
-Inner Join t_especie on t_manzua_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Mergulho' as arte,   
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano,  
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_mergulho on t_monitoramento.mnt_id = t_mergulho.mnt_id
-Left Join t_mergulho_has_t_especie_capturada on t_mergulho.mer_id = t_mergulho_has_t_especie_capturada.mer_id
-Inner Join t_especie on t_mergulho_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Ratoeira' as arte,   
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_ratoeira on t_monitoramento.mnt_id = t_ratoeira.mnt_id
-Left Join t_ratoeira_has_t_especie_capturada on t_ratoeira.rat_id = t_ratoeira_has_t_especie_capturada.rat_id
-Inner Join t_especie on t_ratoeira_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Siripoia' as arte,   
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_siripoia on t_monitoramento.mnt_id = t_siripoia.mnt_id
-Left Join t_siripoia_has_t_especie_capturada on t_siripoia.sir_id = t_siripoia_has_t_especie_capturada.sir_id
-Inner Join t_especie on t_siripoia_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Tarrafa' as arte,   
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_tarrafa on t_monitoramento.mnt_id = t_tarrafa.mnt_id
-Left Join t_tarrafa_has_t_especie_capturada on t_tarrafa.tar_id = t_tarrafa_has_t_especie_capturada.tar_id
-Inner Join t_especie on t_tarrafa_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data)
-
-Union All
-Select t_porto.pto_nome, 
-'Varapesca' as arte,  
-DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
-DATE_PART('year', t_ficha_diaria.fd_data) as ano,  
-t_especie.esp_nome, 
-t_especie.esp_nome_comum, 
-sum(spc_peso_kg) as peso, 
-sum(spc_quantidade) as quantidade 
-from  t_ficha_diaria
-Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
-Left Join t_varapesca on t_monitoramento.mnt_id = t_varapesca.mnt_id
-Left Join t_varapesca_has_t_especie_capturada on t_varapesca.vp_id = t_varapesca_has_t_especie_capturada.vp_id
-Inner Join t_especie on t_varapesca_has_t_especie_capturada.esp_id = t_especie.esp_id
-Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
-Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
-DATE_PART('year', t_ficha_diaria.fd_data);
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_projeto as
-select 
-porto.pto_nome, 
-pescador.tp_nome,
-projeto.tpr_descricao
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_arrastofundo as
-select 
-'Arrasto' as arte,
-count(arrasto.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_arrastofundo as arrasto On pescador.tp_id = arrasto.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_calao as
-select 
-'Calão' as arte,
-count(calao.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_calao as calao On pescador.tp_id = calao.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_coletamanual as
-select 
-'Coleta Manual' as arte,
-count(coletamanual.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_coletamanual as coletamanual On pescador.tp_id = coletamanual.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_emalhe as
-select 
-'Emalhe' as arte,
-count(emalhe.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_emalhe as emalhe On pescador.tp_id = emalhe.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_grosseira as
-select 
-'Grosseira' as arte,
-count(grosseira.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_grosseira as grosseira On pescador.tp_id = grosseira.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_jerere as
-select 
-'Jereré' as arte,
-count(jerere.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_jerere as jerere On pescador.tp_id = jerere.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_linha as
-select 
-'Linha' as arte,
-count(linha.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_linha as linha On pescador.tp_id = linha.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_linhafundo as
-select 
-'Linha de Fundo' as arte,
-count(linhafundo.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_linhafundo as linhafundo On pescador.tp_id = linhafundo.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_manzua as
-select 
-'Manzuá' as arte,
-count(manzua.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_manzua as manzua On pescador.tp_id = manzua.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_mergulho as
-select 
-'Mergulho' as arte,
-count(mergulho.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_mergulho as mergulho On pescador.tp_id = mergulho.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_ratoeira as
-select 
-'Ratoeira' as arte,
-count(ratoeira.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_ratoeira as ratoeira On pescador.tp_id = ratoeira.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_siripoia as
-select 
-'Siripóia' as arte,
-count(siripoia.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_siripoia as siripoia On pescador.tp_id = siripoia.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_tarrafa as
-select 
-'Tarrafa' as arte,
-count(tarrafa.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_tarrafa as tarrafa On pescador.tp_id = tarrafa.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
---/////////////////////////////////////////////////////////////////////////////////////////////////
-Create or replace view v_pescadores_by_varapesca as
-select 
-'Vara de Pescar' as arte,
-count(varapesca.tp_id_entrevistado) as quantidade
-From t_pescador as pescador
-Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
-Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
-Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
-Left Join t_varapesca as varapesca On pescador.tp_id = varapesca.tp_id_entrevistado
-Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
-Order By porto.pto_prioridade, pescador.tp_nome;
-
-
-DROP VIEW v_arrastofundo_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_arrastofundo_has_t_especie_capturada AS 
- SELECT entrevista.af_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_af_id, especie.esp_id
-   FROM t_arrastofundo entrevista, t_especie especie, 
-    t_arrastofundo_has_t_especie_capturada espcapt
-  WHERE entrevista.af_id = espcapt.af_id AND especie.esp_id = espcapt.esp_id;
-
-DROP VIEW v_coletamanual_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_coletamanual_has_t_especie_capturada AS 
- SELECT entrevista.cml_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_cml_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_coletamanual entrevista
-   LEFT JOIN t_coletamanual_has_t_especie_capturada espcapt ON entrevista.cml_id = espcapt.cml_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
-
-DROP VIEW v_calao_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_calao_has_t_especie_capturada AS 
- SELECT entrevista.cal_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_cal_id, especie.esp_id
-   FROM t_calao entrevista, t_especie especie, 
-    t_calao_has_t_especie_capturada espcapt
-  WHERE entrevista.cal_id = espcapt.cal_id AND especie.esp_id = espcapt.esp_id;
-
-DROP VIEW v_emalhe_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_emalhe_has_t_especie_capturada AS 
- SELECT entrevista.em_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_em_id, especie.esp_id
-   FROM t_emalhe entrevista, t_especie especie, 
-    t_emalhe_has_t_especie_capturada espcapt
-  WHERE entrevista.em_id = espcapt.em_id AND especie.esp_id = espcapt.esp_id;
-
-DROP VIEW v_grosseira_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_grosseira_has_t_especie_capturada AS 
- SELECT entrevista.grs_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_grs_id, especie.esp_id
-   FROM t_grosseira entrevista, t_especie especie, 
-    t_grosseira_has_t_especie_capturada espcapt
-  WHERE entrevista.grs_id = espcapt.grs_id AND especie.esp_id = espcapt.esp_id;
-
-DROP VIEW v_jerere_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_jerere_has_t_especie_capturada AS 
- SELECT entrevista.jre_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_jre_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_jerere entrevista
-   LEFT JOIN t_jerere_has_t_especie_capturada espcapt ON entrevista.jre_id = espcapt.jre_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
-
-DROP VIEW v_linha_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_linha_has_t_especie_capturada AS 
- SELECT entrevista.lin_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_lin_id, especie.esp_id
-   FROM t_linha entrevista, t_especie especie, 
-    t_linha_has_t_especie_capturada espcapt
-  WHERE entrevista.lin_id = espcapt.lin_id AND especie.esp_id = espcapt.esp_id;
-
-DROP VIEW v_linhafundo_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_linhafundo_has_t_especie_capturada AS 
- SELECT entrevista.lf_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_lf_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_linhafundo entrevista
-   LEFT JOIN t_linhafundo_has_t_especie_capturada espcapt ON entrevista.lf_id = espcapt.lf_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
-
-DROP VIEW v_manzua_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_manzua_has_t_especie_capturada AS 
- SELECT entrevista.man_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_man_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_manzua entrevista
-   LEFT JOIN t_manzua_has_t_especie_capturada espcapt ON entrevista.man_id = espcapt.man_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
-
-DROP VIEW v_mergulho_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_mergulho_has_t_especie_capturada AS 
- SELECT entrevista.mer_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_mer_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_mergulho entrevista
-   LEFT JOIN t_mergulho_has_t_especie_capturada espcapt ON entrevista.mer_id = espcapt.mer_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
-
-DROP VIEW v_ratoeira_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_ratoeira_has_t_especie_capturada AS 
- SELECT entrevista.rat_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_rat_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_ratoeira entrevista
-   LEFT JOIN t_ratoeira_has_t_especie_capturada espcapt ON entrevista.rat_id = espcapt.rat_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
-
-DROP VIEW v_siripoia_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_siripoia_has_t_especie_capturada AS 
- SELECT entrevista.sir_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_sir_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_siripoia entrevista
-   LEFT JOIN t_siripoia_has_t_especie_capturada espcapt ON entrevista.sir_id = espcapt.sir_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
-
-DROP VIEW v_tarrafa_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_tarrafa_has_t_especie_capturada AS 
- SELECT entrevista.tar_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_tar_id, especie.esp_id
-   FROM t_tarrafa entrevista, t_especie especie, 
-    t_tarrafa_has_t_especie_capturada espcapt
-  WHERE entrevista.tar_id = espcapt.tar_id AND especie.esp_id = espcapt.esp_id;
-
-
-DROP VIEW v_varapesca_has_t_especie_capturada Cascade;
-
-CREATE OR REPLACE VIEW v_varapesca_has_t_especie_capturada AS 
- SELECT entrevista.vp_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
-    espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_vp_id, 
-    tvenda.ttv_tipovenda, especie.esp_id
-   FROM t_varapesca entrevista
-   LEFT JOIN t_varapesca_has_t_especie_capturada espcapt ON entrevista.vp_id = espcapt.vp_id
-   LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
-   LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;   
-
-
+-- Drop view if exists v_entrevistas_monitoradas;
+-- Drop view if exists v_entrevista_naomonitoradas;
+-- 
+-- Drop View if exists v_monitoramentos;
+-- Create View  v_monitoramentos as
+-- Select  porto.pto_nome, 
+-- arte.tap_artepesca, 
+-- DATE_PART('month', ficha.fd_data) as mes,
+-- DATE_PART('year', ficha.fd_data)  as ano, 
+-- sum(CASE WHEN monit.mnt_monitorado Is Not True THEN 1 ELSE 0 END) as naomonitorados,
+-- sum(CASE WHEN monit.mnt_monitorado Is True THEN 1 ELSE 0 END) as monitorados 
+-- From t_ficha_diaria as ficha
+--     Inner Join t_monitoramento as monit On ficha.fd_id = monit.fd_id
+--     Left Join t_porto as porto On ficha.pto_id = porto.pto_id
+--     Inner Join t_artepesca as arte On monit.mnt_arte = arte.tap_id
+--     Group By porto.pto_nome, porto.pto_prioridade, arte.tap_artepesca, DATE_PART('month', ficha.fd_data),DATE_PART('year', ficha.fd_data)
+--     Order By porto.pto_prioridade, arte.tap_artepesca, porto.pto_nome, DATE_PART('month', ficha.fd_data) ,DATE_PART('year', ficha.fd_data);
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- CREATE OR REPLACE VIEW v_especies_capturadas AS
+-- Select t_porto.pto_nome, 
+-- 'Arrasto de Fundo' as arte, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_arrastofundo on t_monitoramento.mnt_id = t_arrastofundo.mnt_id
+-- Left Join t_arrastofundo_has_t_especie_capturada on t_arrastofundo.af_id = t_arrastofundo_has_t_especie_capturada.af_id
+-- Inner Join t_especie on t_arrastofundo_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Calão' as arte, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_calao on t_monitoramento.mnt_id = t_calao.mnt_id
+-- Left Join t_calao_has_t_especie_capturada on t_calao.cal_id = t_calao_has_t_especie_capturada.cal_id
+-- Inner Join t_especie on t_calao_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Coleta Manual' as arte, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_coletamanual on t_monitoramento.mnt_id = t_coletamanual.mnt_id
+-- Left Join t_coletamanual_has_t_especie_capturada on t_coletamanual.cml_id = t_coletamanual_has_t_especie_capturada.cml_id
+-- Inner Join t_especie on t_coletamanual_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Emalhe' as arte, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_emalhe on t_monitoramento.mnt_id = t_emalhe.mnt_id
+-- Left Join t_emalhe_has_t_especie_capturada on t_emalhe.em_id = t_emalhe_has_t_especie_capturada.em_id
+-- Inner Join t_especie on t_emalhe_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Jereré' as arte, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_jerere on t_monitoramento.mnt_id = t_jerere.mnt_id
+-- Left Join t_jerere_has_t_especie_capturada on t_jerere.jre_id = t_jerere_has_t_especie_capturada.jre_id
+-- Inner Join t_especie on t_jerere_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Linha' as arte, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_linha on t_monitoramento.mnt_id = t_linha.mnt_id
+-- Left Join t_linha_has_t_especie_capturada on t_linha.lin_id = t_linha_has_t_especie_capturada.lin_id
+-- Inner Join t_especie on t_linha_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Linha de Fundo' as arte, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_linhafundo on t_monitoramento.mnt_id = t_linhafundo.mnt_id
+-- Left Join t_linhafundo_has_t_especie_capturada on t_linhafundo.lf_id = t_linhafundo_has_t_especie_capturada.lf_id
+-- Inner Join t_especie on t_linhafundo_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Grosseira' as arte,  
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_grosseira on t_monitoramento.mnt_id = t_grosseira.mnt_id
+-- Left Join t_grosseira_has_t_especie_capturada on t_grosseira.grs_id = t_grosseira_has_t_especie_capturada.grs_id
+-- Inner Join t_especie on t_grosseira_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Manzuá' as arte,   
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_manzua on t_monitoramento.mnt_id = t_manzua.mnt_id
+-- Left Join t_manzua_has_t_especie_capturada on t_manzua.man_id = t_manzua_has_t_especie_capturada.man_id
+-- Inner Join t_especie on t_manzua_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Mergulho' as arte,   
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_mergulho on t_monitoramento.mnt_id = t_mergulho.mnt_id
+-- Left Join t_mergulho_has_t_especie_capturada on t_mergulho.mer_id = t_mergulho_has_t_especie_capturada.mer_id
+-- Inner Join t_especie on t_mergulho_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Ratoeira' as arte,   
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_ratoeira on t_monitoramento.mnt_id = t_ratoeira.mnt_id
+-- Left Join t_ratoeira_has_t_especie_capturada on t_ratoeira.rat_id = t_ratoeira_has_t_especie_capturada.rat_id
+-- Inner Join t_especie on t_ratoeira_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Siripoia' as arte,   
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_siripoia on t_monitoramento.mnt_id = t_siripoia.mnt_id
+-- Left Join t_siripoia_has_t_especie_capturada on t_siripoia.sir_id = t_siripoia_has_t_especie_capturada.sir_id
+-- Inner Join t_especie on t_siripoia_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Tarrafa' as arte,   
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_tarrafa on t_monitoramento.mnt_id = t_tarrafa.mnt_id
+-- Left Join t_tarrafa_has_t_especie_capturada on t_tarrafa.tar_id = t_tarrafa_has_t_especie_capturada.tar_id
+-- Inner Join t_especie on t_tarrafa_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Varapesca' as arte,   
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_varapesca on t_monitoramento.mnt_id = t_varapesca.mnt_id
+-- Left Join t_varapesca_has_t_especie_capturada on t_varapesca.vp_id = t_varapesca_has_t_especie_capturada.vp_id
+-- Inner Join t_especie on t_varapesca_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum
+-- Order By t_porto.pto_prioridade;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- CREATE OR REPLACE VIEW v_especies_capturadas_by_mes AS
+-- Select t_porto.pto_nome, 
+-- 'Arrasto de Fundo' as arte, 
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes,
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano,
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_arrastofundo on t_monitoramento.mnt_id = t_arrastofundo.mnt_id
+-- Left Join t_arrastofundo_has_t_especie_capturada on t_arrastofundo.af_id = t_arrastofundo_has_t_especie_capturada.af_id
+-- Inner Join t_especie on t_arrastofundo_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Calão' as arte, 
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes,
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano,
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_calao on t_monitoramento.mnt_id = t_calao.mnt_id
+-- Left Join t_calao_has_t_especie_capturada on t_calao.cal_id = t_calao_has_t_especie_capturada.cal_id
+-- Inner Join t_especie on t_calao_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Coleta Manual' as arte, 
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_coletamanual on t_monitoramento.mnt_id = t_coletamanual.mnt_id
+-- Left Join t_coletamanual_has_t_especie_capturada on t_coletamanual.cml_id = t_coletamanual_has_t_especie_capturada.cml_id
+-- Inner Join t_especie on t_coletamanual_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Emalhe' as arte, 
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes,
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano,
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_emalhe on t_monitoramento.mnt_id = t_emalhe.mnt_id
+-- Left Join t_emalhe_has_t_especie_capturada on t_emalhe.em_id = t_emalhe_has_t_especie_capturada.em_id
+-- Inner Join t_especie on t_emalhe_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Jereré' as arte, 
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_jerere on t_monitoramento.mnt_id = t_jerere.mnt_id
+-- Left Join t_jerere_has_t_especie_capturada on t_jerere.jre_id = t_jerere_has_t_especie_capturada.jre_id
+-- Inner Join t_especie on t_jerere_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome,  t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Linha' as arte, 
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_linha on t_monitoramento.mnt_id = t_linha.mnt_id
+-- Left Join t_linha_has_t_especie_capturada on t_linha.lin_id = t_linha_has_t_especie_capturada.lin_id
+-- Inner Join t_especie on t_linha_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Linha de Fundo' as arte, 
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_linhafundo on t_monitoramento.mnt_id = t_linhafundo.mnt_id
+-- Left Join t_linhafundo_has_t_especie_capturada on t_linhafundo.lf_id = t_linhafundo_has_t_especie_capturada.lf_id
+-- Inner Join t_especie on t_linhafundo_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Grosseira' as arte,  
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes,
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano,
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_grosseira on t_monitoramento.mnt_id = t_grosseira.mnt_id
+-- Left Join t_grosseira_has_t_especie_capturada on t_grosseira.grs_id = t_grosseira_has_t_especie_capturada.grs_id
+-- Inner Join t_especie on t_grosseira_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Manzuá' as arte,   
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_manzua on t_monitoramento.mnt_id = t_manzua.mnt_id
+-- Left Join t_manzua_has_t_especie_capturada on t_manzua.man_id = t_manzua_has_t_especie_capturada.man_id
+-- Inner Join t_especie on t_manzua_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Mergulho' as arte,   
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano,  
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_mergulho on t_monitoramento.mnt_id = t_mergulho.mnt_id
+-- Left Join t_mergulho_has_t_especie_capturada on t_mergulho.mer_id = t_mergulho_has_t_especie_capturada.mer_id
+-- Inner Join t_especie on t_mergulho_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Ratoeira' as arte,   
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_ratoeira on t_monitoramento.mnt_id = t_ratoeira.mnt_id
+-- Left Join t_ratoeira_has_t_especie_capturada on t_ratoeira.rat_id = t_ratoeira_has_t_especie_capturada.rat_id
+-- Inner Join t_especie on t_ratoeira_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Siripoia' as arte,   
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_siripoia on t_monitoramento.mnt_id = t_siripoia.mnt_id
+-- Left Join t_siripoia_has_t_especie_capturada on t_siripoia.sir_id = t_siripoia_has_t_especie_capturada.sir_id
+-- Inner Join t_especie on t_siripoia_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Tarrafa' as arte,   
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano, 
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_tarrafa on t_monitoramento.mnt_id = t_tarrafa.mnt_id
+-- Left Join t_tarrafa_has_t_especie_capturada on t_tarrafa.tar_id = t_tarrafa_has_t_especie_capturada.tar_id
+-- Inner Join t_especie on t_tarrafa_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data)
+-- 
+-- Union All
+-- Select t_porto.pto_nome, 
+-- 'Varapesca' as arte,  
+-- DATE_PART('month', t_ficha_diaria.fd_data)as mes, 
+-- DATE_PART('year', t_ficha_diaria.fd_data) as ano,  
+-- t_especie.esp_nome, 
+-- t_especie.esp_nome_comum, 
+-- sum(spc_peso_kg) as peso, 
+-- sum(spc_quantidade) as quantidade 
+-- from  t_ficha_diaria
+-- Left Join t_monitoramento on t_ficha_diaria.fd_id = t_monitoramento.mnt_id
+-- Left Join t_varapesca on t_monitoramento.mnt_id = t_varapesca.mnt_id
+-- Left Join t_varapesca_has_t_especie_capturada on t_varapesca.vp_id = t_varapesca_has_t_especie_capturada.vp_id
+-- Inner Join t_especie on t_varapesca_has_t_especie_capturada.esp_id = t_especie.esp_id
+-- Inner Join t_porto On t_ficha_diaria.pto_id = t_porto.pto_id
+-- Group By t_porto.pto_nome, t_especie.esp_nome, t_especie.esp_nome_comum, DATE_PART('month', t_ficha_diaria.fd_data), 
+-- DATE_PART('year', t_ficha_diaria.fd_data);
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_projeto as
+-- select 
+-- porto.pto_nome, 
+-- pescador.tp_nome,
+-- projeto.tpr_descricao
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_arrastofundo as
+-- select 
+-- 'Arrasto' as arte,
+-- count(arrasto.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_arrastofundo as arrasto On pescador.tp_id = arrasto.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_calao as
+-- select 
+-- 'Calão' as arte,
+-- count(calao.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_calao as calao On pescador.tp_id = calao.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_coletamanual as
+-- select 
+-- 'Coleta Manual' as arte,
+-- count(coletamanual.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_coletamanual as coletamanual On pescador.tp_id = coletamanual.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_emalhe as
+-- select 
+-- 'Emalhe' as arte,
+-- count(emalhe.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_emalhe as emalhe On pescador.tp_id = emalhe.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_grosseira as
+-- select 
+-- 'Grosseira' as arte,
+-- count(grosseira.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_grosseira as grosseira On pescador.tp_id = grosseira.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_jerere as
+-- select 
+-- 'Jereré' as arte,
+-- count(jerere.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_jerere as jerere On pescador.tp_id = jerere.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_linha as
+-- select 
+-- 'Linha' as arte,
+-- count(linha.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_linha as linha On pescador.tp_id = linha.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_linhafundo as
+-- select 
+-- 'Linha de Fundo' as arte,
+-- count(linhafundo.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_linhafundo as linhafundo On pescador.tp_id = linhafundo.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_manzua as
+-- select 
+-- 'Manzuá' as arte,
+-- count(manzua.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_manzua as manzua On pescador.tp_id = manzua.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_mergulho as
+-- select 
+-- 'Mergulho' as arte,
+-- count(mergulho.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_mergulho as mergulho On pescador.tp_id = mergulho.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_ratoeira as
+-- select 
+-- 'Ratoeira' as arte,
+-- count(ratoeira.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_ratoeira as ratoeira On pescador.tp_id = ratoeira.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_siripoia as
+-- select 
+-- 'Siripóia' as arte,
+-- count(siripoia.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_siripoia as siripoia On pescador.tp_id = siripoia.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_tarrafa as
+-- select 
+-- 'Tarrafa' as arte,
+-- count(tarrafa.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_tarrafa as tarrafa On pescador.tp_id = tarrafa.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- --/////////////////////////////////////////////////////////////////////////////////////////////////
+-- Create or replace view v_pescadores_by_varapesca as
+-- select 
+-- 'Vara de Pescar' as arte,
+-- count(varapesca.tp_id_entrevistado) as quantidade
+-- From t_pescador as pescador
+-- Left Join t_pescador_has_t_porto on pescador.tp_id = t_pescador_has_t_porto.tp_id
+-- Left Join t_porto as porto On t_pescador_has_t_porto.pto_id = porto.pto_id
+-- Left Join t_projeto as projeto On pescador.tpr_id = projeto.tpr_id
+-- Left Join t_varapesca as varapesca On pescador.tp_id = varapesca.tp_id_entrevistado
+-- Group By porto.pto_nome, porto.pto_prioridade, pescador.tp_nome,projeto.tpr_descricao
+-- Order By porto.pto_prioridade, pescador.tp_nome;
+-- 
+-- 
+-- DROP VIEW v_arrastofundo_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_arrastofundo_has_t_especie_capturada AS 
+--  SELECT entrevista.af_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_af_id, especie.esp_id
+--    FROM t_arrastofundo entrevista, t_especie especie, 
+--     t_arrastofundo_has_t_especie_capturada espcapt
+--   WHERE entrevista.af_id = espcapt.af_id AND especie.esp_id = espcapt.esp_id;
+-- 
+-- DROP VIEW v_coletamanual_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_coletamanual_has_t_especie_capturada AS 
+--  SELECT entrevista.cml_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_cml_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_coletamanual entrevista
+--    LEFT JOIN t_coletamanual_has_t_especie_capturada espcapt ON entrevista.cml_id = espcapt.cml_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
+-- 
+-- DROP VIEW v_calao_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_calao_has_t_especie_capturada AS 
+--  SELECT entrevista.cal_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_cal_id, especie.esp_id
+--    FROM t_calao entrevista, t_especie especie, 
+--     t_calao_has_t_especie_capturada espcapt
+--   WHERE entrevista.cal_id = espcapt.cal_id AND especie.esp_id = espcapt.esp_id;
+-- 
+-- DROP VIEW v_emalhe_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_emalhe_has_t_especie_capturada AS 
+--  SELECT entrevista.em_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_em_id, especie.esp_id
+--    FROM t_emalhe entrevista, t_especie especie, 
+--     t_emalhe_has_t_especie_capturada espcapt
+--   WHERE entrevista.em_id = espcapt.em_id AND especie.esp_id = espcapt.esp_id;
+-- 
+-- DROP VIEW v_grosseira_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_grosseira_has_t_especie_capturada AS 
+--  SELECT entrevista.grs_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_grs_id, especie.esp_id
+--    FROM t_grosseira entrevista, t_especie especie, 
+--     t_grosseira_has_t_especie_capturada espcapt
+--   WHERE entrevista.grs_id = espcapt.grs_id AND especie.esp_id = espcapt.esp_id;
+-- 
+-- DROP VIEW v_jerere_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_jerere_has_t_especie_capturada AS 
+--  SELECT entrevista.jre_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_jre_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_jerere entrevista
+--    LEFT JOIN t_jerere_has_t_especie_capturada espcapt ON entrevista.jre_id = espcapt.jre_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
+-- 
+-- DROP VIEW v_linha_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_linha_has_t_especie_capturada AS 
+--  SELECT entrevista.lin_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_lin_id, especie.esp_id
+--    FROM t_linha entrevista, t_especie especie, 
+--     t_linha_has_t_especie_capturada espcapt
+--   WHERE entrevista.lin_id = espcapt.lin_id AND especie.esp_id = espcapt.esp_id;
+-- 
+-- DROP VIEW v_linhafundo_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_linhafundo_has_t_especie_capturada AS 
+--  SELECT entrevista.lf_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_lf_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_linhafundo entrevista
+--    LEFT JOIN t_linhafundo_has_t_especie_capturada espcapt ON entrevista.lf_id = espcapt.lf_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
+-- 
+-- DROP VIEW v_manzua_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_manzua_has_t_especie_capturada AS 
+--  SELECT entrevista.man_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_man_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_manzua entrevista
+--    LEFT JOIN t_manzua_has_t_especie_capturada espcapt ON entrevista.man_id = espcapt.man_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
+-- 
+-- DROP VIEW v_mergulho_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_mergulho_has_t_especie_capturada AS 
+--  SELECT entrevista.mer_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_mer_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_mergulho entrevista
+--    LEFT JOIN t_mergulho_has_t_especie_capturada espcapt ON entrevista.mer_id = espcapt.mer_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
+-- 
+-- DROP VIEW v_ratoeira_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_ratoeira_has_t_especie_capturada AS 
+--  SELECT entrevista.rat_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_rat_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_ratoeira entrevista
+--    LEFT JOIN t_ratoeira_has_t_especie_capturada espcapt ON entrevista.rat_id = espcapt.rat_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
+-- 
+-- DROP VIEW v_siripoia_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_siripoia_has_t_especie_capturada AS 
+--  SELECT entrevista.sir_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_sir_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_siripoia entrevista
+--    LEFT JOIN t_siripoia_has_t_especie_capturada espcapt ON entrevista.sir_id = espcapt.sir_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;
+-- 
+-- DROP VIEW v_tarrafa_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_tarrafa_has_t_especie_capturada AS 
+--  SELECT entrevista.tar_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_tar_id, especie.esp_id
+--    FROM t_tarrafa entrevista, t_especie especie, 
+--     t_tarrafa_has_t_especie_capturada espcapt
+--   WHERE entrevista.tar_id = espcapt.tar_id AND especie.esp_id = espcapt.esp_id;
+-- 
+-- 
+-- DROP VIEW v_varapesca_has_t_especie_capturada Cascade;
+-- 
+-- CREATE OR REPLACE VIEW v_varapesca_has_t_especie_capturada AS 
+--  SELECT entrevista.vp_id, especie.esp_nome_comum, espcapt.spc_quantidade, 
+--     espcapt.spc_peso_kg, espcapt.spc_preco, espcapt.spc_vp_id, 
+--     tvenda.ttv_tipovenda, especie.esp_id
+--    FROM t_varapesca entrevista
+--    LEFT JOIN t_varapesca_has_t_especie_capturada espcapt ON entrevista.vp_id = espcapt.vp_id
+--    LEFT JOIN t_especie especie ON especie.esp_id = espcapt.esp_id
+--    LEFT JOIN t_tipo_venda tvenda ON espcapt.ttv_id = tvenda.ttv_id;   
+-- 
+-- 
 
 -- Drop view if exists v_relatorio_arrastofundo;
 --  Create View v_relatorio_arrastofundo as
@@ -2578,26 +2578,61 @@ CREATE OR REPLACE VIEW v_varapesca_has_t_especie_capturada AS
 -- Update t_porto Set pto_prioridade = 15 Where pto_id = 19;
 -- Update t_porto Set pto_prioridade = 16 Where pto_id = 11001;
 
-Drop View if exists v_especies;
-Create View v_especies as
-SELECT esp.esp_id, 
-	esp.esp_nome, 
-	esp.esp_descritor, 
-	esp.esp_nome_comum, 
-	esp.gen_id, 
-	gen.gen_nome, 
-	gen.fam_id, 
-	fam.fam_nome,
-	fam.fam_tipo, 
-	fam.fam_caracteristica,
-	fam.ord_id,
-	ord.ord_nome,
-	ord.ord_caracteristica,
-	ord.grp_id,
-	grp.grp_nome
-  FROM t_especie as esp
-  Inner Join t_genero as gen On esp.gen_id = gen.gen_id
-  Inner Join t_familia as fam On gen.fam_id = fam.fam_id
-  Inner Join t_ordem as ord On fam.ord_id = ord.ord_id
-  Inner Join t_grupo as grp On ord.grp_id = grp.grp_id
-  Order By esp.esp_nome;
+-- CREATE TABLE t_local
+-- (
+--   tl_id serial NOT NULL,
+--   tl_local character varying(50),
+--   CONSTRAINT t_local_pkey PRIMARY KEY (tl_id)
+-- );
+-- Alter table t_porto Add column tl_id int;
+-- Alter table t_porto Add Foreign Key (tl_id) references t_local; 
+-- 
+-- Insert into t_local(tl_id,tl_local) values(1,'Ilhéus Marinho');
+-- Insert into t_local(tl_id,tl_local) values(2,'Ilhéus Rio Almada');
+-- Insert into t_local(tl_id,tl_local) values(3,'Uruçuca');
+-- Insert into t_local(tl_id,tl_local) values(4,'Itacaré');
+-- 
+-- Update t_porto Set tl_id =1 Where pto_id = 1;
+-- Update t_porto Set tl_id =1 Where pto_id = 3;
+-- Update t_porto Set tl_id =1 Where pto_id = 4;
+-- Update t_porto Set tl_id =1 Where pto_id = 5;
+-- Update t_porto Set tl_id =1 Where pto_id = 6;
+-- Update t_porto Set tl_id =1 Where pto_id = 7;
+-- Update t_porto Set tl_id =1 Where pto_id = 8;
+-- Update t_porto Set tl_id =1 Where pto_id = 9;
+-- Update t_porto Set tl_id =1 Where pto_id = 10;
+-- Update t_porto Set tl_id =2  Where pto_id =12;
+-- Update t_porto Set tl_id =2  Where pto_id =13;
+-- Update t_porto Set tl_id =2  Where pto_id =14;
+-- Update t_porto Set tl_id =2  Where pto_id =15;
+-- Update t_porto Set tl_id =4 Where pto_id = 16;
+-- Update t_porto Set tl_id =4 Where pto_id = 17;
+-- Update t_porto Set tl_id =3 Where pto_id = 18;
+-- Update t_porto Set tl_id =3 Where pto_id = 19;
+-- Update t_porto Set tl_id =2 Where pto_id = 11001;
+-- 
+-- 
+-- 
+-- Drop View if exists v_especies;
+-- Create View v_especies as
+-- SELECT esp.esp_id, 
+-- 	esp.esp_nome, 
+-- 	esp.esp_descritor, 
+-- 	esp.esp_nome_comum, 
+-- 	esp.gen_id, 
+-- 	gen.gen_nome, 
+-- 	gen.fam_id, 
+-- 	fam.fam_nome,
+-- 	fam.fam_tipo, 
+-- 	fam.fam_caracteristica,
+-- 	fam.ord_id,
+-- 	ord.ord_nome,
+-- 	ord.ord_caracteristica,
+-- 	ord.grp_id,
+-- 	grp.grp_nome
+--   FROM t_especie as esp
+--   Inner Join t_genero as gen On esp.gen_id = gen.gen_id
+--   Inner Join t_familia as fam On gen.fam_id = fam.fam_id
+--   Inner Join t_ordem as ord On fam.ord_id = ord.ord_id
+--   Inner Join t_grupo as grp On ord.grp_id = grp.grp_id
+--   Order By esp.esp_nome;
