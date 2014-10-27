@@ -102,6 +102,7 @@ Select t_local.tl_local,t_porto.pto_nome,
         t_ficha_diaria.fd_id,
         t_ficha_diaria.fd_data,
         t_pescador.tp_nome,
+        t_barco.bar_nome, 
         t_pescador.tp_apelido,
         t_tipoembarcacao.tte_tipoembarcacao,
         t_coletamanual.tp_id_entrevistado,
@@ -131,7 +132,8 @@ Select t_local.tl_local,t_porto.pto_nome,
         LEFT JOIN t_tipoembarcacao ON t_coletamanual.tte_id = t_tipoembarcacao.tte_id
         LEFT JOIN t_mare On t_coletamanual.mre_id = t_mare.mre_id
         LEFT JOIN t_local ON t_porto.tl_id = t_local.tl_id
-        Group by t_porto.pto_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido, t_coletamanual.cml_tempogasto,t_coletamanual.cml_id, 
+        Group by t_porto.pto_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, 
+        t_pescador.tp_apelido, t_coletamanual.cml_tempogasto,t_coletamanual.cml_id, 
                  t_pescador.tp_nome, t_barco.bar_nome, t_destinopescado.dp_destino,
                  t_local.tl_local,t_tipoembarcacao.tte_tipoembarcacao,t_mare.mre_tipo,t_porto.pto_prioridade
         Order By t_porto.pto_prioridade;
