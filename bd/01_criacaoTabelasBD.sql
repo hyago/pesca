@@ -890,6 +890,7 @@ CREATE OR REPLACE VIEW v_pescador_porto AS
 -- -----------------------------------------------------
 -- VIEW Pescador
 -- -----------------------------------------------------
+DROP VIEW v_pescador;
 CREATE OR REPLACE VIEW v_pescador AS 
  SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tp_matricula, tp.tp_apelido, 
     tp.tp_filiacaopai, tp.tp_filiacaomae, tp.tp_ctps, tp.tp_pis, tp.tp_inss, 

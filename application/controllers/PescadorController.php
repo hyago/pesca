@@ -983,6 +983,13 @@ class PescadorController extends Zend_Controller_Action {
 
         $this->relpdfpescador( 'tp_id = ' . $pescadorId );
     }
+    public function imprimirpescadorAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $pescadorId = $this->_getParam('id_pescador');
+
+        $this->relpdfpescador();
+    }
     
     public function relpdfpescador( $where = null) {
         $this->_helper->layout->disableLayout();
