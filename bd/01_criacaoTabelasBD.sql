@@ -874,44 +874,48 @@ CREATE OR REPLACE VIEW V_COLONIA AS
  T_ENDERECO.TMUN_ID, T_MUNICIPIO.TMUN_MUNICIPIO, T_MUNICIPIO.TUF_SIGLA
  FROM T_COLONIA LEFT JOIN T_ENDERECO ON T_COLONIA.TE_ID = T_ENDERECO.TE_ID LEFT JOIN T_MUNICIPIO ON T_ENDERECO.TMUN_ID = T_MUNICIPIO.TMUN_ID;
 
+
+DROP VIEW v_pescador_porto;
+
+CREATE OR REPLACE VIEW v_pescador_porto AS 
+ SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tpr_id, tpr.tpr_descricao, 
+    tp.tp_pescadordeletado, pto.pto_nome, loc.tl_local
+   FROM t_pescador tp
+   LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
+   LEFT JOIN t_pescador_has_t_porto tppto ON tppto.tp_id = tp.tp_id
+   LEFT JOIN t_porto pto ON tppto.pto_id = pto.pto_id
+   LEFT JOIN t_local loc ON pto.tl_id = loc.tl_id
+  WHERE tp.tp_pescadordeletado = false;
+
 -- -----------------------------------------------------
 -- VIEW Pescador
 -- -----------------------------------------------------
-CREATE OR REPLACE VIEW V_PESCADOR AS
-SELECT
-TP.TP_ID, TP.TP_NOME,
-TP.TP_SEXO, TP.TP_MATRICULA,
-TP.TP_APELIDO, TP.TP_FILIACAOPAI,
-TP.TP_FILIACAOMAE, TP.TP_CTPS,
-TP.TP_PIS, TP.TP_INSS,
-TP.TP_NIT_CEI, TP.TP_RG,
-TP.TP_CMA, TP.TP_RGB_MAA_IBAMA,
-TP.TP_CIR_CAP_PORTO, TP.TP_CPF,
-TP.TP_DATANASC,
-TP.TP_DTA_CAD,
-TP.TP_ESPECIFICIDADE, TP.ESC_ID, TESC.ESC_NIVEL,
-TP.TMUN_ID_NATURAL, TM.TMUN_MUNICIPIO "munnat", TM.TUF_SIGLA "signat",
-TP.TE_ID, TE.TE_LOGRADOURO, TE.TE_NUMERO,
-TE.TE_COMP, TE.TE_BAIRRO, TE.TE_CEP,
-TE.TMUN_ID, TMI.TMUN_MUNICIPIO, TMI.TUF_SIGLA,
-TP_RESP_LAN, tlan.tu_nome as tu_nome_lan,
-TP_RESP_CAD, tcad.tu_nome as tu_nome_cad,
-TP_OBS,
-COL.TC_ID,  TC.TC_NOME,
-TCOM.TCOM_ID,  TCOM.TCOM_NOME
-FROM
-T_PESCADOR AS TP
-LEFT JOIN T_MUNICIPIO AS TM ON TP.TMUN_ID_NATURAL = TM.TMUN_ID
-
-LEFT JOIN T_ENDERECO AS TE ON TP.TE_ID = TE.TE_ID
-LEFT JOIN T_escolaridade AS TESC ON TP.ESC_ID = TESC.ESC_ID
-LEFT JOIN T_usuario AS TLAN ON TP.TP_RESP_LAN = TLAN.TU_id
-LEFT JOIN T_usuario AS TCAD ON TP.TP_RESP_CAD = TCAD.TU_id
-LEFT JOIN T_PESCADOR_HAS_T_COMUNIDADE AS COM ON COM.TP_ID=TP.TP_ID
-LEFT JOIN T_COMUNIDADE AS TCOM ON TCOM.TCOM_ID = COM.TCOM_ID
-LEFT JOIN T_PESCADOR_HAS_T_COLONIA AS COL ON COL.TP_ID=TP.TP_ID
-LEFT JOIN T_MUNICIPIO AS TMI ON TE.TMUN_ID = TMI.TMUN_ID
-LEFT JOIN T_COLONIA AS TC ON TC.TC_ID = COL.TC_ID;
+CREATE OR REPLACE VIEW v_pescador AS 
+ SELECT tp.tp_id, tp.tp_nome, tp.tp_sexo, tp.tp_matricula, tp.tp_apelido, 
+    tp.tp_filiacaopai, tp.tp_filiacaomae, tp.tp_ctps, tp.tp_pis, tp.tp_inss, 
+    tp.tp_nit_cei, tp.tp_rg, tp.tp_cma, tp.tp_rgb_maa_ibama, 
+    tp.tp_cir_cap_porto, tp.tp_cpf, tp.tp_datanasc, tp.tp_dta_cad, 
+    tp.tp_especificidade, tp.esc_id, tesc.esc_nivel, tp.tmun_id_natural, 
+    tm.tmun_municipio AS munnat, tm.tuf_sigla AS signat, tp.te_id, 
+    te.te_logradouro, te.te_numero, te.te_comp, te.te_bairro, te.te_cep, 
+    te.tmun_id, tmi.tmun_municipio, tmi.tuf_sigla, tp.tp_resp_lan, 
+    tlan.tu_nome AS tu_nome_lan, tp.tp_resp_cad, tcad.tu_nome AS tu_nome_cad, 
+    tp.tp_obs, col.tc_id, tc.tc_nome, tcom.tcom_id, tcom.tcom_nome, tp.tpr_id, 
+    tpr.tpr_descricao, tp.tp_pescadordeletado, tp.tp_especialidade, pto.pto_nome, pto.tl_local
+   FROM t_pescador tp
+   LEFT JOIN t_municipio tm ON tp.tmun_id_natural = tm.tmun_id
+   LEFT JOIN t_endereco te ON tp.te_id = te.te_id
+   LEFT JOIN t_escolaridade tesc ON tp.esc_id = tesc.esc_id
+   LEFT JOIN t_usuario tlan ON tp.tp_resp_lan = tlan.tu_id
+   LEFT JOIN t_usuario tcad ON tp.tp_resp_cad = tcad.tu_id
+   LEFT JOIN t_pescador_has_t_comunidade com ON com.tp_id = tp.tp_id
+   LEFT JOIN t_comunidade tcom ON tcom.tcom_id = com.tcom_id
+   LEFT JOIN t_pescador_has_t_colonia col ON col.tp_id = tp.tp_id
+   LEFT JOIN t_municipio tmi ON te.tmun_id = tmi.tmun_id
+   LEFT JOIN t_colonia tc ON tc.tc_id = col.tc_id
+   LEFT JOIN t_projeto tpr ON tp.tpr_id = tpr.tpr_id
+   LEFT JOIN v_pescador_porto pto On tp.tp_id = pto.tp_id
+  WHERE tp.tp_pescadordeletado = false;
 
 -- -------------------------------------q----------------
 -- VIEW Pescador

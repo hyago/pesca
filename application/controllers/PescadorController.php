@@ -989,7 +989,7 @@ class PescadorController extends Zend_Controller_Action {
         $this->_helper->viewRenderer->setNoRender(true);
 
         $localModelPescador = new Application_Model_Pescador();
-        $localPescador = $localModelPescador->selectView($where, array('tcom_nome', 'tp_nome', 'tp_id'), NULL);
+        $localPescador = $localModelPescador->selectView($where, array('pto_nome', 'tp_nome', 'tp_id'), NULL);
 
         $localModelTelefone = new Application_Model_VPescadorHasTelefone();
         $localModelDependente = new Application_Model_VPescadorHasDependente();
@@ -1018,10 +1018,14 @@ class PescadorController extends Zend_Controller_Action {
         $countNPescPag = 0;
         $contPescador = 0;  
         foreach ($localPescador as $key => $pescador):
+            
             $modeloRelatorio->setLegValue(30, 'Nome: ', $pescador['tp_nome']);
             $modeloRelatorio->setLegValueAlinhadoDireita(460, 70, 'Código: ', $pescador['tp_id']);
             $modeloRelatorio->setLegValue(530, 'Sexo: ', $pescador['tp_sexo']);
 
+            $modeloRelatorio->setNewLine();
+            $modeloRelatorio->setLegValue(30, 'Porto: ', $pescador['pto_nome']);
+            $modeloRelatorio->setLegValue(250, 'Local: ', $pescador['tl_local']);
             $modeloRelatorio->setNewLine();
             if ($pescador['tp_datanasc']) {
                 $localDate = date("d/m/Y", strtotime($pescador['tp_datanasc']));
