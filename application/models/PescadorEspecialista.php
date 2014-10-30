@@ -14,6 +14,17 @@ class Application_Model_PescadorEspecialista
 
         return $dao->fetchAll($select)->toArray();
     }
+    
+    public function selectView($where = null, $order = null, $limit = null) {
+        $dao = new Application_Model_DbTable_VPescadorEspecialista();
+        $select = $dao->select()->from($dao)->order($order)->limit($limit);
+
+        if (!is_null($where)) {
+            $select->where($where);
+        }
+
+        return $dao->fetchAll($select)->toArray();
+    }
 
 //    public function selectView($where = null, $order = null, $limit = null) {
 //        $dao = new Application_Model_DbTable_VPescadorEspecialista();
@@ -768,6 +779,48 @@ class Application_Model_PescadorEspecialista
         
         $dbTable->delete($dadosPescador);
     }
+    public function countAcompanhados()
+    {
+        $this->dbTableArrastoHasPesqueiro = new Application_Model_DbTable_VPescadorEspecialistaHasAcompanhado();
+        $select = $this->dbTableArrastoHasPesqueiro->select()
+                ->from('v_pescador_especialista_has_t_acompanhado','count(tps_id)')->
+                group('tacp_id')->
+                order('count(tps_id) DESC')->limit('1');
+
+        return $this->dbTableArrastoHasPesqueiro->fetchAll($select)->toArray();
+    } 
     
+    public function countBarcos()
+    {
+        $this->dbTableArrastoHasPesqueiro = new Application_Model_DbTable_VPescadorEspecialistaHasBarco();
+        $select = $this->dbTableArrastoHasPesqueiro->select()
+                ->from('v_pescador_especialista_has_t_barco','count(tps_id)')->
+                group('bar_id')->
+                order('count(tps_id) DESC')->limit('1');
+
+        return $this->dbTableArrastoHasPesqueiro->fetchAll($select)->toArray();
+    } 
+    
+    public function countCompanhias()
+    {
+        $this->dbTableArrastoHasPesqueiro = new Application_Model_DbTable_VPescadorEspecialistaHasCompanhias();
+        $select = $this->dbTableArrastoHasPesqueiro->select()
+                ->from('v_pescador_especialista_has_t_companhia','count(tps_id)')->
+                group('ttd_id')->
+                order('count(tps_id) DESC')->limit('1');
+
+        return $this->dbTableArrastoHasPesqueiro->fetchAll($select)->toArray();
+    }
+    
+    public function countCompradorPescado()
+    {
+        $this->dbTableArrastoHasPesqueiro = new Application_Model_DbTable_VPescadorEspecialistaHasCompanhias();
+        $select = $this->dbTableArrastoHasPesqueiro->select()
+                ->from('v_pescador_especialista_has_t_companhia','count(tps_id)')->
+                group('ttd_id')->
+                order('count(tps_id) DESC')->limit('1');
+
+        return $this->dbTableArrastoHasPesqueiro->fetchAll($select)->toArray();
+    } 
 }
 

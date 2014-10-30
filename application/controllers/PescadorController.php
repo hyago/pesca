@@ -2103,4 +2103,249 @@ class PescadorController extends Zend_Controller_Action {
 
         return;
     }
+    
+    public function relatorioespecialistaAction(){
+        set_time_limit(300);
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        
+        $this->modelEspecialista = new Application_Model_PescadorEspecialista();
+
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $quant= 21;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna,   $linha, 'Código');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Pescador');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Porto');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Nascimento');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Idade');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Estado Civil');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade de Filhos');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tempo em residência');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Municipio de Origem');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tipo de Residência');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Pessoas na casa');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tempo de sustento com pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Menor Renda');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Estação');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Maior Renda');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Estação');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Renda no Defeso');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tempo de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tutor da pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Profissão antes da pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Mora onde pesca?');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Pesca com embarcação?');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Pescadores na família');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Frequência da pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Dias Pescando');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Horas Pescando');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Ultima Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Frequencia Consumo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Sobra da Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Local de Tratamento');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Unidade de Beneficiamento');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Curso de Beneficiamento');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Associação de pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Colônia');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tempo em Colônia');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Motivo falta de Pagamento');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Benefícios da Colônia');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Emissor do RGP');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Alternativa de Renda');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Outra Profissão');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Filhos Seguirem profissão?');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tempo de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Grau de dependência da pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Entrevistador');
+        
+        $countAcp= $this->modelEspecialista->countAcompanhados();
+        
+        for($i=0; $i<$countAcp[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Acompanhamentos');
+        }
+        
+        
+        $linha = 2;
+        $coluna= 0;
+        $relatorioEspecialista = $this->modelEspecialista->selectView();
+        
+        foreach ( $relatorioEspecialista as $key => $especialista ):
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $especialista['tp_id']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tp_nome']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['pto_nome']);
+                    $consulta['tps_data_nasc']=date('d/M/Y', $consulta['tps_data_nasc']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_data_nasc']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_idade']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tec_estado']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_filhos']);
+		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_tempo_residencia']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tre_residencia']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tmun_municipio']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_pessoas_na_casa']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_tempo_sustento']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_renda_menor_ano']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tea_menor']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_renda_maior_ano']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tea_maior']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_renda_no_defeso']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_tempo_pesca']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tutor']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['antes']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_mora_onde_pesca']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_embarcado']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_num_familiar_pescador']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['frequencia_pesca']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_num_dias_pescando']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_hora_pescando']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tup_pesca']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['consumo']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tsp_sobra']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tlt_local']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_unidade_beneficiamento']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_curso_beneficiamento']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tasp_associacao']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tc_nome']);
+		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_tempo_em_colonia']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_motivo_falta_pagamento']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['trgp_emissor']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_beneficio_colonia']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['alternativa']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['outra']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_filho_seguir_profissao']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_tempo_de_pesca']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_grau_dependencia_pesca']);
+		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['entrevistador']);
+                
+                $acompanhado = $this->modelEspecialista->selectVAcompanhado('tps_id = '.$especialista['tp_id']);
+                
+                foreach($acompanhado as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tacp_companhia']);
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tpstacp_quantidade']);
+                endforeach;
+                
+                $companhia = $this->modelEspecialista->selectVCompanhia('tps_id = '.$especialista['tp_id']);
+                
+                foreach($companhia as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttd_tipodependente']);
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tpstcp_quantidade']);
+                endforeach;
+                
+                $estrutura = $this->modelEspecialista->selectVEstruturaResidencial('tps_id = '.$especialista['tp_id']);
+                
+                foreach($estrutura as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['terd_estrutura']);
+                endforeach;
+                
+                $horario = $this->modelEspecialista->selectVHorarioPesca('tps_id = '.$especialista['tp_id']);
+                
+                foreach($horario as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['thp_horario']);
+                endforeach;
+                
+                $insumos = $this->modelEspecialista->selectVInsumos('tps_id = '.$especialista['tp_id']);
+                
+                foreach($insumos as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tin_insumo']);
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tin_valor_insumo']);
+                endforeach;
+                
+                $noseguro = $this->modelEspecialista->selectVNoSeguro('tps_id = '.$especialista['tp_id']);
+                
+                foreach($noseguro as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttr_descricao']);
+                endforeach;
+                
+                $parentes = $this->modelEspecialista->selectVParentes('tps_id = '.$especialista['tp_id']);
+                
+                foreach($parentes as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttd_tipodependente']);
+                endforeach;
+                
+                $programaSocial = $this->modelEspecialista->selectVProgramaSocial('tps_id = '.$especialista['tp_id']);
+                
+                foreach($programaSocial as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['prs_programa']);
+                endforeach;
+                
+                $seguro = $this->modelEspecialista->selectVSeguroDefeso('tps_id = '.$especialista['tp_id']);
+                
+                foreach($seguro as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tacp_companhia']);
+                endforeach;
+                
+                $tipoTransporte = $this->modelEspecialista->selectVTipoTransporte('tps_id = '.$especialista['tp_id']);
+                
+                foreach($tipoTransporte as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tsd_seguro']);
+                endforeach;
+                
+                $destino = $this->modelEspecialista->selectVDestinoPescado('tps_id = '.$especialista['tp_id']);
+                
+                foreach($destino as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['dp_destino']);
+         
+                endforeach;
+                
+                $dificuldades = $this->modelEspecialista->selectVDificuldadeArea('tps_id = '.$especialista['tp_id']);
+                
+                foreach($dificuldades as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tdif_dificuldade']);
+                   
+                endforeach;
+                
+                $recurso = $this->modelEspecialista->selectVRecurso('tps_id = '.$especialista['tp_id']);
+                
+                foreach($recurso as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['trec_recurso']);
+                endforeach;
+                
+                $fornecedorinsumos = $this->modelEspecialista->selectVFornecedorInsumos('tps_id = '.$especialista['tp_id']);
+                
+                foreach($fornecedorinsumos as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tfi_fornecedor']);
+                   
+                endforeach;
+                
+                $comprador = $this->modelEspecialista->selectVCompradorPescado('tps_id = '.$especialista['tp_id']);
+                
+                foreach($comprador as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['dp_destino']);
+                endforeach;
+                
+                $habilidades = $this->modelEspecialista->selectVHabilidades('tps_id = '.$especialista['tp_id']);
+                
+                foreach($habilidades as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttr_descricao']);
+                endforeach;
+                
+                $barcos = $this->modelEspecialista->selectVBarco('tps_id = '.$especialista['tp_id']);
+                
+                foreach($barcos as $key => $consulta):
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['bar_nome']);
+                endforeach;
+                
+                $coluna = 0;
+                $linha++;
+        endforeach;
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="relatorioEspecialista.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    
+    } 
 }

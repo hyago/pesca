@@ -759,3 +759,93 @@ Alter Table t_pescador_especialista alter tps_tempo_sustento type varchar(60);
 Alter Table t_pescador_especialista alter tps_renda_no_defeso type varchar(60);
 Alter Table t_pescador_especialista alter tps_hora_pescando type varchar(60);
 Alter Table t_pescador_especialista alter tps_tempo_em_colonia type varchar(60);
+
+
+Create or Replace view v_pescador_especialista as
+Select  esp.tp_id,
+	pesc.tp_nome,
+        esp.tp_resp_cad,
+        resp.tu_nome,
+        esp.pto_id,
+        pto.pto_nome,
+        esp.tps_data_nasc,
+        esp.tps_idade,
+        esp.tec_id,
+        ec.tec_estado, 
+        esp.tps_filhos,
+        esp.tps_tempo_residencia,
+        esp.to_id,
+        mun.tmun_municipio,
+        esp.tre_id,
+        resi.tre_residencia,
+        esp.tps_pessoas_na_casa,
+        esp.tps_tempo_sustento,
+        esp.tps_renda_menor_ano,
+        esp.tea_id_menor,
+        menor.tea_estacao as tea_menor,
+        esp.tps_renda_maior_ano,
+        esp.tea_id_maior,
+        maior.tea_estacao  as tea_maior,
+        esp.tps_renda_no_defeso,
+        esp.tps_tempo_de_pesca,
+        esp.ttd_id_tutor_pesca,
+        td.ttd_tipodependente as tutor,
+        esp.ttr_id_antes_pesca,
+        ants.ttr_descricao as antes,
+        esp.tps_mora_onde_pesca,
+        esp.tps_embarcado,
+        esp.tps_num_familiar_pescador,
+        esp.tfp_id,
+        fp.tfp_frequencia as frequencia_pesca,
+        esp.tps_num_dias_pescando,
+        esp.tps_hora_pescando,
+        esp.tup_id,
+        up.tup_pesca,
+        esp.tfp_id_consumo,
+        cons.tfp_frequencia as consumo,
+        esp.tsp_id,
+        spes.tsp_sobra,
+        esp.tlt_id,
+        lt.tlt_local,
+        esp.tps_unidade_beneficiamento,
+        esp.tps_curso_beneficiamento,
+        esp.tasp_id,
+        asp.tasp_associacao,
+        esp.tc_id,
+        col.tc_nome,
+        esp.tps_tempo_em_colonia,
+        esp.tps_motivo_falta_pagamento,
+        esp.tps_beneficio_colonia,
+        esp.trgp_id,
+        rgp.trgp_emissor,
+        esp.ttr_id_alternativa_renda,
+        alt.ttr_descricao as alternativa,
+        esp.ttr_id_outra_profissao,
+        outr.ttr_descricao as outra,
+        esp.tps_filho_seguir_profissao,
+        esp.tps_grau_dependencia_pesca,
+        esp.tu_id_entrevistador,
+        entr.tu_nome as entrevistador,
+        esp.tps_data 
+ From t_pescador_especialista as esp
+ Left Join t_porto as pto On esp.pto_id = pto.pto_id
+ Left Join t_associacao_pesca as asp On esp.tasp_id = asp.tasp_id
+ Left Join t_colonia as col On esp.tc_id = col.tc_id
+ Left Join t_estacao_ano as maior On esp.tea_id_maior = maior.tea_id
+ Left Join t_estacao_ano as menor On esp.tea_id_menor = menor.tea_id
+ Left Join t_estado_civil as ec On esp.tec_id = ec.tec_id
+ Left Join t_frequencia_pesca as cons On esp.tfp_id_consumo = cons.tfp_id
+ Left Join t_frequencia_pesca as fp On esp.tfp_id = fp.tfp_id
+ Left Join t_local_tratamento as lt On esp.tlt_id = lt.tlt_id
+ Left Join t_municipio as mun On esp.to_id = mun.tmun_id
+ Left Join t_pescador as pesc On esp.tp_id = pesc.tp_id
+ Left Join t_usuario as resp On esp.tp_resp_cad = resp.tu_id
+ Left Join t_residencia as resi On esp.tre_id = resi.tre_id
+ Left Join t_rgp_orgao as rgp On esp.trgp_id = rgp.trgp_id
+ Left Join t_sobra_pesca as spes On esp.tsp_id = spes.tsp_id
+ Left Join t_tipodependente as td On esp.ttd_id_tutor_pesca = td.ttd_id
+ Left Join t_tiporenda as alt On esp.ttr_id_alternativa_renda = alt.ttr_id
+ Left Join t_tiporenda as ants On esp.ttr_id_antes_pesca = ants.ttr_id
+ Left Join t_tiporenda as outr On esp.ttr_id_outra_profissao = outr.ttr_id
+ Left Join t_usuario as entr On esp.tu_id_entrevistador = entr.tu_id
+ Left Join t_ultima_pesca as up On esp.tup_id = up.tup_id;
