@@ -840,9 +840,9 @@ class Application_Model_PescadorEspecialista
         
         
         $select = $this->dbTableCount->select()
-                ->from('v_pescador_especialista_has_'.$tabela,'count(tps_id)')->
-                group($group)->
-                order('count(tps_id) DESC')->limit('1');
+                ->from('v_pescador_especialista_has_'.$tabela,'count(tps'.$group.')')->
+                group('tps_id')->
+                order('count(tps'.$group.') DESC')->limit('1');
 
         return $this->dbTableCount->fetchAll($select)->toArray();
     } 
