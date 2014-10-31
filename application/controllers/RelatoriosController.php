@@ -25,8 +25,10 @@ class RelatoriosController extends Zend_Controller_Action
     }
 
     public function indexAction(){
-        $this->modelRelatorios = new Application_Model_Relatorios();
-
+        $this->modelEspecialista  = new Application_Model_PescadorEspecialista();
+        
+        $countAcp= $this->modelEspecialista->countColunas('t_acompanhado','tacp_id');
+        print_r($countAcp[0]);
     }
     
     public function gerarAction(){
@@ -34,6 +36,7 @@ class RelatoriosController extends Zend_Controller_Action
         $valueRelatorio = $this->_getAllParams();
         
         $this->modelRelatorios = new Application_Model_Relatorios();
+        
         
         $rel = $valueRelatorio['tipoRelatorio'];
         $rel = 'id/'.$rel;
