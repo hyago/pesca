@@ -658,7 +658,7 @@ CREATE OR REPLACE VIEW v_pescador_especialista_has_t_estrutura_residencial AS
    FROM t_pescador_especialista_has_t_estrutura_residencial as hasestr, t_estrutura_residencial as estrutura
   WHERE hasestr.terd_id = estrutura.terd_id;
 
---Alter table t_pescador_especialista_has_t_programa_social Drop Constraint t_pescador_especialista_has_t_programa_social_pkey, Add column tpsprs_id serial, Add Primary Key (tpsprs_id);
+Alter table t_pescador_especialista_has_t_programa_social Drop Constraint t_pescador_especialista_has_t_programa_social_pkey, Add column tpsprs_id serial, Add Primary Key (tpsprs_id);
 CREATE OR REPLACE VIEW v_pescador_especialista_has_t_programa_social AS 
  SELECT hasprogsocial.tps_id, hasprogsocial.prs_id, social.prs_programa, hasprogsocial.tpsprs_id
    FROM t_pescador_especialista_has_t_programa_social as hasprogsocial, t_programasocial as social
