@@ -2166,93 +2166,27 @@ class PescadorController extends Zend_Controller_Action {
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tempo de Pesca');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Grau de dependência da pesca');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Entrevistador');
-        
-        $countAcp= $this->modelEspecialista->countColunas('t_acompanhado','tacp_id');
-        
-        for($i=0; $i<$countAcp[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Acompanhamentos');
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade');
-        }
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Como vai pescar?');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Companhias');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Possui em casa');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Horario Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Insumo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Valor');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Renda no Seguro');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Parentes Pescadores');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Programa Social');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Seguro Defeso');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Transportes');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Destino da Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Dificuldade da Área');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Recurso Utilizado');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Fornecedor de Insumos');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Comprador Pescado');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Habilidades');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Embarcações');
 
-        $countCp= $this->modelEspecialista->countColunas('t_companhia','tcp_id');
-        for($i=0; $i<$countCp[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Companhias');
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade');
-        }
-        
-        $countEst = $this->modelEspecialista->countColunas('t_estrutura_residencial', 'terd_id');
-        for($i=0; $i<$countEst[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Possui em casa');
-        }
-        
-        $countHp = $this->modelEspecialista->countColunas('t_horario_pesca', 'thp_id');
-        for($i=0; $i<$countHp[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Horario Pesca');
-        }
-        $countIn = $this->modelEspecialista->countColunas('t_insumo', 'tin_id');
-        for($i=0; $i<$countIn[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Insumo');
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Valor');
-        }
-        $countNs = $this->modelEspecialista->countColunas('t_no_seguro', 'ttr_id');
-        for($i=0; $i<$countNs[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Renda no Seguro');
-        }
-        
-        $countPar = $this->modelEspecialista->countColunas('t_parentes', 'ttd_id');
-        for($i=0; $i<$countPar[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Parentes');
-        }
-        
-        $countPs = $this->modelEspecialista->countColunas('t_programa_social', 'prs_id');
-        for($i=0; $i<$countPs[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Programa Social');
-        }
-        
-        $countSeg = $this->modelEspecialista->countColunas('t_seguro_defeso', 'tsd_id');
-        for($i=0; $i<$countSeg[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Seguro Defeso');
-        }
-        
-        $countTran = $this->modelEspecialista->countColunas('t_tipo_transporte', 'ttr_id');
-        for($i=0; $i<$countTran[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Transportes');
-        }
-        
-        $countDes = $this->modelEspecialista->countColunas('t_destino_pescado', 'dp_id');
-        for($i=0; $i<$countDes[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Destino da Pesca');
-        }
-        
-        $countDif = $this->modelEspecialista->countColunas('t_dificuldade_area', 'tdif_id');
-        for($i=0; $i<$countDif[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Dificuldade da Área');
-        }
-        
-        $countRec = $this->modelEspecialista->countColunas('t_recurso', 'rec_id');
-        for($i=0; $i<$countRec[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Recurso Utilizado');
-        }
-        
-        $countFin = $this->modelEspecialista->countColunas('t_fornecedor_insumos', 'fi_id');
-        for($i=0; $i<$countFin[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Fornecedor de Insumos');
-        }
-        
-        $countComp = $this->modelEspecialista->countColunas('t_comprador_pescado', 'dp_id');
-        for($i=0; $i<$countComp[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Comprador Pescado');
-        }
-        
-        $countHab = $this->modelEspecialista->countColunas('t_habilidades', 'ttr_id');
-        for($i=0; $i<$countHab[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Habilidades');
-        }
-        
-        $countBar = $this->modelEspecialista->countColunas('t_barco', 'bar_id');
-        for($i=0; $i<$countBar[0]['count']; $i++){
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Embarcações');
-        }
         
         $linha = 2;
         $coluna= 0;
@@ -2305,114 +2239,146 @@ class PescadorController extends Zend_Controller_Action {
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_grau_dependencia_pesca']);
 		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['entrevistador']);
                 
+                $coluna++;
                 $acompanhado = $this->modelEspecialista->selectVAcompanhado('tps_id = '.$especialista['tp_id']);
-                $coluna = $countAcp[0]['count']+$quant;
                 foreach($acompanhado as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tacp_companhia']);
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tpstacp_quantidade']);
+                    $acomp.=$consulta['tacp_companhia'].',';
+                    $quant.=$consulta['tpstacp_quantidade'].',';
                 endforeach;
+                    
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($acomp,0,-1));
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($quant,0,-1));
                 
-                $companhia = $this->modelEspecialista->selectVCompanhia('tps_id = '.$especialista['tp_id']);
-                $coluna += $countCp[0]['count'];
+                    $companhia = $this->modelEspecialista->selectVCompanhia('tps_id = '.$especialista['tp_id']);
                 foreach($companhia as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttd_tipodependente']);
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tpstcp_quantidade']);
+                    $comp.= $consulta['ttd_tipodependente'].',';
+                    $quant_comp.=$consulta['tpstcp_quantidade'].',';
                 endforeach;
-                
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($comp,0,-1));
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($quant_comp,0,-1));
+                              
                 $estrutura = $this->modelEspecialista->selectVEstruturaResidencial('tps_id = '.$especialista['tp_id']);
-                $coluna += $countEst[0]['count'];
+                
                 foreach($estrutura as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['terd_estrutura']);
+                    $est.=$consulta['terd_estrutura'].',';
                 endforeach;
+                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($est,0,-1));
                 
                 $horario = $this->modelEspecialista->selectVHorarioPesca('tps_id = '.$especialista['tp_id']);
-                $coluna += $countHp[0]['count'];
+                
                 foreach($horario as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['thp_horario']);
+                    $hora.=$consulta['thp_horario'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($hora,0,-1));
+               
                 
                 $insumos = $this->modelEspecialista->selectVInsumos('tps_id = '.$especialista['tp_id']);
-                $coluna += $countIn[0]['count'];
+               
                 foreach($insumos as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tin_insumo']);
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tin_valor_insumo']);
+                    $insumo.=$consulta['tin_insumo'].',';
+                    $valr.=$consulta['tin_valor_insumo'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($insumo,0,-1));
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($valr,0,-1));
+                
                 
                 $noseguro = $this->modelEspecialista->selectVNoSeguro('tps_id = '.$especialista['tp_id']);
-                $coluna += $countNs[0]['count'];
+                
                 foreach($noseguro as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttr_descricao']);
+                    $noseg.=$consulta['ttr_descricao'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($noseg,0,-1));
                 
                 $parentes = $this->modelEspecialista->selectVParentes('tps_id = '.$especialista['tp_id']);
-                $coluna += $countPar[0]['count'];
+               
                 foreach($parentes as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttd_tipodependente']);
+                    $part.=$consulta['ttd_tipodependente'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($part,0,-1));
+                
                 
                 $programaSocial = $this->modelEspecialista->selectVProgramaSocial('tps_id = '.$especialista['tp_id']);
-                $coluna += $countPs[0]['count'];
+
                 foreach($programaSocial as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['prs_programa']);
+                    $progsoc.=$consulta['prs_programa'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($progsoc,0,-1));
                 
                 $seguro = $this->modelEspecialista->selectVSeguroDefeso('tps_id = '.$especialista['tp_id']);
-                $coluna += $countPs[0]['count'];
+
                 foreach($seguro as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tacp_companhia']);
+                    $seg.= $consulta['tsd_seguro'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($seg,0,-1));
                 
                 $tipoTransporte = $this->modelEspecialista->selectVTipoTransporte('tps_id = '.$especialista['tp_id']);
-                $coluna += $countTran[0]['count'];
+
                 foreach($tipoTransporte as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tsd_seguro']);
+                    $tran.=$consulta['ttr_transporte'].',';
                 endforeach;
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($tran,0,-1));
                 
                 $destino = $this->modelEspecialista->selectVDestinoPescado('tps_id = '.$especialista['tp_id']);
-                $coluna += $countDes[0]['count'];
+                
                 foreach($destino as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['dp_destino']);
-         
+                    $dest.=$consulta['dp_destino'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($dest,0,-1));
+                
                 
                 $dificuldades = $this->modelEspecialista->selectVDificuldadeArea('tps_id = '.$especialista['tp_id']);
-                $coluna += $countDif[0]['count'];
+                
                 foreach($dificuldades as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tdif_dificuldade']);
-                   
+                    $difc.=$consulta['tdif_dificuldade'].',';
                 endforeach;
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($difc,0,-1));
+                   
                 
                 $recurso = $this->modelEspecialista->selectVRecurso('tps_id = '.$especialista['tp_id']);
-                $coluna += $countRec[0]['count'];
+
                 foreach($recurso as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['trec_recurso']);
+                    $rec.=$consulta['trec_recurso'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, substr($rec,0,-1));
                 
                 $fornecedorinsumos = $this->modelEspecialista->selectVFornecedorInsumos('tps_id = '.$especialista['tp_id']);
-                $coluna += $countFin[0]['count'];
-                foreach($fornecedorinsumos as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['tfi_fornecedor']);
-                   
-                endforeach;
                 
-                $comprador = $this->modelEspecialista->selectVCompradorPescado('tps_id = '.$especialista['tp_id']);
-                $coluna += $countComp[0]['count'];
-                foreach($comprador as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['dp_destino']);
+                foreach($fornecedorinsumos as $key => $consulta):
+                    $fornc.=$consulta['tfi_fornecedor'].',';
                 endforeach;
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($fornc,0,-1));
+                   
+                $comprador = $this->modelEspecialista->selectVCompradorPescado('tps_id = '.$especialista['tp_id']);
+                
+                foreach($comprador as $key => $consulta):
+                    $compr.=$consulta['dp_destino'].',';
+                endforeach;
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($compr,0,-1));
                 
                 $habilidades = $this->modelEspecialista->selectVHabilidades('tps_id = '.$especialista['tp_id']);
-                $coluna += $countHab[0]['count'];
+
                 foreach($habilidades as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['ttr_descricao']);
+                    $habi.=$consulta['ttr_descricao'].',';
                 endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($habi,0,-1));
                 
                 $barcos = $this->modelEspecialista->selectVBarco('tps_id = '.$especialista['tp_id']);
-                $coluna += $countBar[0]['count'];
                 foreach($barcos as $key => $consulta):
-                    $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['bar_nome']);
+                    $barcs.=$consulta['bar_nome'];
+                    if(!empty($consulta['bar_nome'])){
+                        $barcs.=',';
+                    }
                 endforeach;
-                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($barcs,0,-1));
                 $coluna = 0;
                 $linha++;
         endforeach;
