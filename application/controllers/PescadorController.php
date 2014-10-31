@@ -2167,12 +2167,92 @@ class PescadorController extends Zend_Controller_Action {
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Grau de dependência da pesca');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Entrevistador');
         
-        $countAcp= $this->modelEspecialista->countAcompanhados();
+        $countAcp= $this->modelEspecialista->countColunas('t_acompanhado','tacp_id');
         
         for($i=0; $i<$countAcp[0]['count']; $i++){
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Acompanhamentos');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade');
+        }
+
+        $countCp= $this->modelEspecialista->countColunas('t_companhia','ttd_id');
+        for($i=0; $i<$countCp[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Companhias');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade');
         }
         
+        $countEst = $this->modelEspecialista->countColunas('t_estrutura_residencial', 'terd_id');
+        for($i=0; $i<$countEst[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Possui em casa');
+        }
+        
+        $countHp = $this->modelEspecialista->countColunas('t_horario_pesca', 'thp_id');
+        for($i=0; $i<$countHp[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Horario Pesca');
+        }
+        $countIn = $this->modelEspecialista->countColunas('t_insumo', 'tin_id');
+        for($i=0; $i<$countIn[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Insumo');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Valor');
+        }
+        $countNs = $this->modelEspecialista->countColunas('t_no_seguro', 'ttr_id');
+        for($i=0; $i<$countNs[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Renda no Seguro');
+        }
+        
+        $countPar = $this->modelEspecialista->countColunas('t_parentes', 'ttd_id_parente');
+        for($i=0; $i<$countPar[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Parentes');
+        }
+        
+        $countPs = $this->modelEspecialista->countColunas('t_programa_social', 'prs_id');
+        for($i=0; $i<$countPs[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Programa Social');
+        }
+        
+        $countSeg = $this->modelEspecialista->countColunas('t_seguro_defeso', 'tsd_id');
+        for($i=0; $i<$countSeg[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Seguro Defeso');
+        }
+        
+        $countTran = $this->modelEspecialista->countColunas('t_tipo_transporte', 'ttr_id');
+        for($i=0; $i<$countTran[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Transportes');
+        }
+        
+        $countDes = $this->modelEspecialista->countColunas('t_destino_pescado', 'dp_id_pescado');
+        for($i=0; $i<$countDes[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Destino da Pesca');
+        }
+        
+        $countDif = $this->modelEspecialista->countColunas('t_dificuldade_area', 'tdif_id_area');
+        for($i=0; $i<$countDif[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Dificuldade da Área');
+        }
+        
+        $countRec = $this->modelEspecialista->countColunas('t_recurso', 'trec_id');
+        for($i=0; $i<$countRec[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Recurso Utilizado');
+        }
+        
+        $countFin = $this->modelEspecialista->countColunas('t_fornecedor_insumos', 'tfi_id');
+        for($i=0; $i<$countFin[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Fornecedor de Insumos');
+        }
+        
+        $countComp = $this->modelEspecialista->countColunas('t_comprador_pescado', 'dp_id');
+        for($i=0; $i<$countComp[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Comprador Pescado');
+        }
+        
+        $countHab = $this->modelEspecialista->countColunas('t_habilidades', 'ttr_id');
+        for($i=0; $i<$countHab[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Habilidades');
+        }
+        
+        $countBar = $this->modelEspecialista->countColunas('t_barco', 'bar_id');
+        for($i=0; $i<$countBar[0]['count']; $i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Embarcações');
+        }
         
         $linha = 2;
         $coluna= 0;

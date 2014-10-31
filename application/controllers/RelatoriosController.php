@@ -58,7 +58,7 @@ class RelatoriosController extends Zend_Controller_Action
             case 17:$this->_redirect("/relatorios/relatoriocompletoespecies");break;
             case 18:$this->_redirect("/relatorios/relatoriocompletoespeciesmes");break;
             case 19:$this->_redirect("/relatorios/relatoriocompletopescadores");break;
-            
+            case 20:$this->_redirect("/pescador/relatorioespecialista");break;
         }
     }
     public function verificaRelatorio($var){
