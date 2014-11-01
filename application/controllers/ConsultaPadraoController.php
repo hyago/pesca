@@ -437,5 +437,147 @@ class ConsultaPadraoController extends Zend_Controller_Action
         ob_end_clean();
         $objWriter->save('php://output');
     }
+    
+    public function avistamentosAction() {
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++,   $linha, 'Arte de Pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Código');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Avistamento');
+
+        $avistamentosArrasto = new Application_Model_ArrastoFundo();
+        $relatorioArrasto = $avistamentosArrasto->selectArrastoHasAvistamento();
+        $coluna = 0;
+        $linha++;
+        foreach ( $relatorioArrasto as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Arrasto de Fundo');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['af_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosCalao = new Application_Model_Calao();
+        $relatorioCalao = $avistamentosCalao->selectCalaoHasAvistamento();
+        foreach ( $relatorioCalao as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Calao');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['cal_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosColetaManual = new Application_Model_ColetaManual();
+        $relatorioColetaManual = $avistamentosColetaManual->selectColetaManualHasAvistamento();
+        foreach ( $relatorioColetaManual as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'ColetaManual');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['cml_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosEmalhe = new Application_Model_Emalhe();
+        $relatorioEmalhe = $avistamentosEmalhe->selectEmalheHasAvistamento();
+        foreach ( $relatorioEmalhe as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Emalhe');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['em_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosGrosseira = new Application_Model_Grosseira();
+        $relatorioGrosseira = $avistamentosGrosseira->selectGrosseiraHasAvistamento();
+        foreach ( $relatorioGrosseira as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Grosseira');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['grs_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosJerere = new Application_Model_Jerere();
+        $relatorioJerere = $avistamentosJerere->selectJerereHasAvistamento();
+        foreach ( $relatorioJerere as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Jerere');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['jre_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosMergulho = new Application_Model_Mergulho();
+        $relatorioMergulho = $avistamentosMergulho->selectMergulhoHasAvistamento();
+        foreach ( $relatorioMergulho as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Mergulho');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['mer_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosRatoeira = new Application_Model_Ratoeira();
+        $relatorioRatoeira = $avistamentosRatoeira->selectRatoeiraHasAvistamento();
+        foreach ( $relatorioRatoeira as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Ratoeira');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['rat_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosSiripoia = new Application_Model_Siripoia();
+        $relatorioSiripoia = $avistamentosSiripoia->selectSiripoiaHasAvistamento();
+        foreach ( $relatorioSiripoia as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Siripoia');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['sir_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosTarrafa = new Application_Model_Tarrafa();
+        $relatorioTarrafa = $avistamentosTarrafa->selectTarrafaHasAvistamento();
+        foreach ( $relatorioTarrafa as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Tarrafa');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['tar_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $avistamentosVaraPesca = new Application_Model_VaraPesca();
+        $relatorioVaraPesca = $avistamentosVaraPesca->selectVaraPescaHasAvistamento();
+        foreach ( $relatorioVaraPesca as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'VaraPesca');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['vp_id']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $coluna = 0;
+            $linha++;
+        endforeach;
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="relatorioAvistamentos.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
 }
 

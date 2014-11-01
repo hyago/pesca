@@ -27,22 +27,25 @@
             <option value="18">Espécies Capturadas(Mês)</option>
             <option value="19">Pescadores</option>       
             <option value="20">Pescadores Especialistas</option>
+            <option value="21">Avistamentos</option>
     </select>
      </div>
      <div class="form-esq">
          <label>Tipo de Saída:</label>
-    <select name="tipoRelatorio">
-            <option value="0" selected>Padrão</option>
-            <option value="1">Peso</option>
-            <option value="2">Quantidade</option>
-            <option value="3">Preço</option>
-            
-               
-    </select>
+            <select name="tipoRelatorio">
+                    <option value="0" selected>Padrão</option>
+                    <option value="1">Peso</option>
+                    <option value="2">Quantidade</option>
+                    <option value="3">Preço</option>
+            </select>
      </div>
-     <br/>
+     <div class="form-esq">
+         <label>Por Data até:</label>
+         <input type="date" name="dataRelatorio"/>
+     </div>
+
      
     <div class="form-esq">     
-    <input type="submit" value="Relatório"/>
+        <input type="submit" value="Relatório"/>
     </div>
  </div>
