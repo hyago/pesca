@@ -854,4 +854,3 @@ Select  esp.tp_id,
  Left Join t_usuario as entr On esp.tu_id_entrevistador = entr.tu_id
  Left Join t_ultima_pesca as up On esp.tup_id = up.tup_id;
 
-Alter 
