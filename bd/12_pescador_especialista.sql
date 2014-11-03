@@ -763,10 +763,11 @@ Alter Table t_pescador_especialista alter tps_renda_no_defeso type varchar(60);
 Alter Table t_pescador_especialista alter tps_hora_pescando type varchar(60);
 Alter Table t_pescador_especialista alter tps_tempo_em_colonia type varchar(60);
 
-
+Drop view v_pescador_especialista;
 Create or Replace view v_pescador_especialista as
 Select  esp.tp_id,
 	pesc.tp_nome,
+        pesc.tp_apelido,
         esp.tp_resp_cad,
         resp.tu_nome,
         esp.pto_id,
@@ -852,3 +853,5 @@ Select  esp.tp_id,
  Left Join t_tiporenda as outr On esp.ttr_id_outra_profissao = outr.ttr_id
  Left Join t_usuario as entr On esp.tu_id_entrevistador = entr.tu_id
  Left Join t_ultima_pesca as up On esp.tup_id = up.tup_id;
+
+Alter 

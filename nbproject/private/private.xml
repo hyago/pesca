@@ -5,7 +5,7 @@
             <url>application/controllers/RelatoriosController.php</url>
             <bookmark id="3">
                 <name/>
-                <line>193</line>
+                <line>208</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,11 +14,9 @@
         <group>
             <file>file:/srv/www/htdocs/pesca/application/views/scripts/relatorios/index.phtml</file>
             <file>file:/srv/www/htdocs/pesca/bd/12_pescador_especialista.sql</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/Relatorios.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/ConsultaPadraoController.php</file>
             <file>file:/srv/www/htdocs/pesca/application/controllers/RelatoriosController.php</file>
-            <file>file:/srv/www/htdocs/pesca/bd/views_especialistas.sql</file>
-            <file>file:/srv/www/htdocs/pesca/application/models/PescadorEspecialista.php</file>
-            <file>file:/srv/www/htdocs/pesca/application/controllers/PescadorController.php</file>
+            <file>file:/srv/www/htdocs/pesca/application/controllers/FichaDiariaController.php</file>
         </group>
     </open-files>
 </project-private>

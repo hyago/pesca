@@ -961,7 +961,13 @@ class PescadorController extends Zend_Controller_Action {
         ob_end_clean();
         $objWriter->save('php://output');
     }
-
+//    public function gerarAction(){
+//        $relatorio = $this->_getAllParams();
+//        
+//        switch($relatorio['tipoRelatorio']){
+//            case '1': $this->
+//        }
+//    }
     public function imprimirtodospescadoresAction() {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
@@ -2205,6 +2211,7 @@ class PescadorController extends Zend_Controller_Action {
         foreach ( $relatorioEspecialista as $key => $especialista ):
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $especialista['tp_id']);
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tp_nome']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tp_apelido']);
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['pto_nome']);
                     $consulta['tps_data_nasc']=date('d/M/Y', $consulta['tps_data_nasc']);
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_data_nasc']);
@@ -2322,6 +2329,7 @@ class PescadorController extends Zend_Controller_Action {
                 
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($progsoc,0,-1)));
                 unset($progsoc);
+                
                 $seguro = $this->modelEspecialista->selectVSeguroDefeso('tps_id = '.$especialista['tp_id']);
                 
                 foreach($seguro as $key => $consulta):
@@ -2330,6 +2338,7 @@ class PescadorController extends Zend_Controller_Action {
                 
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($seg,0,-1)));
                 unset($seg);
+                
                 $tipoTransporte = $this->modelEspecialista->selectVTipoTransporte('tps_id = '.$especialista['tp_id']);
 
                 foreach($tipoTransporte as $key => $consulta):
@@ -2337,6 +2346,7 @@ class PescadorController extends Zend_Controller_Action {
                 endforeach;
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($tran,0,-1)));
                 unset($tran);
+                
                 $destino = $this->modelEspecialista->selectVDestinoPescado('tps_id = '.$especialista['tp_id']);
                 
                 foreach($destino as $key => $consulta):
@@ -2362,13 +2372,24 @@ class PescadorController extends Zend_Controller_Action {
                 
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $this->naopossui(substr($rec,0,-1)));
                 unset($rec);
+                
+                $motivo = $this->modelEspecialista->selectVMotivoPesca('tps_id = '.$especialista['tp_id']);
+
+                foreach($motivo as $key => $consulta):
+                    $mot.=$consulta['tmp_motivo'].',';
+                endforeach;
+                
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $this->naopossui(substr($mot,0,-1)));
+                unset($mot);
+                
                 $fornecedorinsumos = $this->modelEspecialista->selectVFornecedorInsumos('tps_id = '.$especialista['tp_id']);
                 
                 foreach($fornecedorinsumos as $key => $consulta):
                     $fornc.=$consulta['tfi_fornecedor'].',';
                 endforeach;
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($fornc,0,-1)));
-                unset($fornc);   
+                unset($fornc); 
+                
                 $comprador = $this->modelEspecialista->selectVCompradorPescado('tps_id = '.$especialista['tp_id']);
                 
                 foreach($comprador as $key => $consulta):
@@ -2376,6 +2397,7 @@ class PescadorController extends Zend_Controller_Action {
                 endforeach;
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($compr,0,-1)));
                 unset($compr);
+                
                 $habilidades = $this->modelEspecialista->selectVHabilidades('tps_id = '.$especialista['tp_id']);
 
                 foreach($habilidades as $key => $consulta):
@@ -2384,6 +2406,7 @@ class PescadorController extends Zend_Controller_Action {
                 
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($habi,0,-1)));
                 unset($habi);
+                
                 $barcos = $this->modelEspecialista->selectVBarco('tps_id = '.$especialista['tp_id']);
                 foreach($barcos as $key => $consulta):
                     $barcs.=$consulta['bar_nome'];
