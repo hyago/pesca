@@ -25,10 +25,6 @@ class RelatoriosController extends Zend_Controller_Action
     }
 
     public function indexAction(){
-        $this->modelEspecialista  = new Application_Model_PescadorEspecialista();
-        
-        $countAcp= $this->modelEspecialista->countColunas('t_acompanhado','tacp_id');
-        print_r($countAcp[0]);
     }
     
     public function gerarAction(){

@@ -2198,8 +2198,8 @@ class PescadorController extends Zend_Controller_Action {
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Transportes');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Destino da Pesca');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Dificuldade da Área');
-        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Motivo por ser Pescador');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Recurso Utilizado');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Motivo por ser Pescador');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Fornecedor de Insumos');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Comprador Pescado');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Habilidades');
@@ -2372,7 +2372,7 @@ class PescadorController extends Zend_Controller_Action {
                     $rec.=$consulta['trec_recurso'].',';
                 endforeach;
                 
-                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $this->naopossui(substr($rec,0,-1)));
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($rec,0,-1)));
                 unset($rec);
                 
                 $motivo = $this->modelEspecialista->selectVMotivoPesca('tps_id = '.$especialista['tp_id']);
@@ -2381,7 +2381,7 @@ class PescadorController extends Zend_Controller_Action {
                     $mot.=$consulta['tmp_motivo'].',';
                 endforeach;
                 
-                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $this->naopossui(substr($mot,0,-1)));
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($mot,0,-1)));
                 unset($mot);
                 
                 $fornecedorinsumos = $this->modelEspecialista->selectVFornecedorInsumos('tps_id = '.$especialista['tp_id']);
