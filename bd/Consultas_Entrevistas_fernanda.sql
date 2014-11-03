@@ -111,6 +111,7 @@ Select t_local.tl_local,t_porto.pto_nome,
         t_coletamanual.cml_dhsaida::time as hsaida,
         t_coletamanual.cml_dhvolta::date as dvolta,
         t_coletamanual.cml_dhvolta::time as hvolta,
+        t_coletamanual.cml_dhvolta - t_coletamanual.cml_dhsaida as horas
         ( t_coletamanual.cml_dhvolta::date - t_coletamanual.cml_dhsaida::date)+1 as dias,
         t_coletamanual.cml_tempogasto,
         t_coletamanual.cml_obs,

@@ -38,7 +38,7 @@ class RelatoriosController extends Zend_Controller_Action
         $rel = 'id/'.$rel;
         
         $data = $valueRelatorio['dataRelatorio'];
-        $data = 'data/'.$data;
+        $data = '/data/'.$data;
         switch($valueRelatorio['artePesca']){
             
             case 1: $this->_redirect("/relatorios/relatoriocompletoarrasto/".$data);break;
@@ -73,7 +73,7 @@ class RelatoriosController extends Zend_Controller_Action
         if($var === '2'){
             $tipoRel = 'spc_quantidade';
         }
-        else{
+        if($var === '3'){
             $tipoRel = 'spc_preco';
         }
         return $tipoRel;
@@ -3104,7 +3104,7 @@ class RelatoriosController extends Zend_Controller_Action
         foreach ( $monitoramentos as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha,   $consulta['pto_nome']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['arte']);
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['mes'].'/'.$consulta['ano']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['mes'].$consulta['ano']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['esp_nome']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['esp_nome_comum']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['peso']);
