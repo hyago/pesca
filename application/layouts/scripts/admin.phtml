@@ -5,7 +5,6 @@
         <base href="http://<?= $_SERVER['HTTP_HOST'] . $this->baseUrl() ?>/" />
         <?php
         $this->headLink()->prependStylesheet('/css/estilo-admin.css');
-        $this->headLink()->prependStylesheet('/css/basic.css');
         $this->headLink()->appendStylesheet('/css/smoothness/jquery-ui-1.10.3.custom.min.css');
         $this->headScript()->prependFile('/js/jquery-1.10.2.min.js');
         $this->headScript()->appendFile('/js/jquery-ui-1.10.3.custom.min.js');
@@ -15,22 +14,7 @@
         echo $this->headLink() . "\n";
         echo $this->headScript() . "\n";
         ?>
-	<script type="text/javascript" src="http://filamentgroup.github.com/EnhanceJS/enhance.js"></script>
-	<script type="text/javascript">
-		// Run capabilities test
-		enhance({
-			loadScripts: [
-				{src: '/js/excanvas.js', iecondition: 'all'},
-				'/js/jquery.js',
-				'/js/visualize.jQuery.js',
-				'/js/example.js'
-			],
-			loadStyles: [
-				'/css/visualize.css',
-				'/css/visualize-dark.css'
-			]
-		});
-        </script>
+	
         <title>
                 Programa de Monitoramento da Atividade Pesqueira
             </title>
