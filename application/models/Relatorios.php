@@ -981,5 +981,22 @@ class Application_Model_Relatorios
 
         return $this->especies->fetchAll($select)->toArray();
     }
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    
+    public function selectPescadores($where = false){
+        $this->pescadores = new Application_Model_DbTable_VPescador;
+        
+        $select = $this->pescadores->select()
+                ->from($this->pescadores, array('count(tp_id)','pto_nome'))->
+                order('pto_nome')->group('pto_nome');
+         if ($where == false) {
+            $select->where('pto_nome IS NOT NULL');
+        }       
+        
+        return $this->pescadores->fetchAll($select)->toArray();
+    }
+    
+    
 }
 

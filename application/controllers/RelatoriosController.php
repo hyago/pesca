@@ -16,7 +16,6 @@ class RelatoriosController extends Zend_Controller_Action
          if ( $auth->hasIdentity() ){
           $identity = $auth->getIdentity();
           $identity2 = get_object_vars($identity);
-
         }
 
         $this->modelUsuario = new Application_Model_Usuario();
@@ -26,7 +25,12 @@ class RelatoriosController extends Zend_Controller_Action
 
     public function indexAction(){
     }
-    
+    public function graficosAction(){
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        $pescadoresPorto = $this->modelRelatorios->selectPescadores();
+        
+        $this->view->assign("portos",$pescadoresPorto);
+    }
     public function gerarAction(){
         
         $valueRelatorio = $this->_getAllParams();

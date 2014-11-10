@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title>Charting</title>
+	<link href="css/basic.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="http://filamentgroup.github.com/EnhanceJS/enhance.js"></script>
+	<script type="text/javascript">
+		// Run capabilities test
+		enhance({
+			loadScripts: [
+				{src: 'js/excanvas.js', iecondition: 'all'},
+				'js/jquery.js',
+				'js/visualize.jQuery.js',
+				'js/example.js'
+			],
+			loadStyles: [
+				'css/visualize.css',
+				'css/visualize-dark.css'
+			]
+		});
+        </script>
+        <style type="text/css">
+    	/*some demo styles*/
+    	body { font-size: 62.5%; }
+    	.enhanced h2, .enhanced pre { margin: 3em 20px .5em; }
+    	.enhanced pre { width: 50%; overflow: auto; font-size: 1.4em; margin-top: 0; background: #444; padding: 15px; color: #fff; }
+        </style>
+</head>
+<div id="titulos">
+    <h2>Relatórios->Gráficos</h2>
+</div>
+
+
+<table >
+
+	<thead>
+		<tr>
+			<td scope="col">Portos</td>
+			<th scope="col">Pescadores</th>
+                        
+		</tr>
+	</thead>
+	<tbody>
+            <?php foreach ($this->portos as $key => $porto): ?>
+		<tr>
+			<th scope="row"><?= $porto['pto_nome']?></th>
+			<td><?= $porto['count']?></td>
+		</tr>
+            <?php endforeach;?>
+	</tbody>
+</table>
