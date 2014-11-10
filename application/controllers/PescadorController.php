@@ -2448,15 +2448,11 @@ class PescadorController extends Zend_Controller_Action {
                 
                 $tipobarcos = $this->modelPescadorHasTipoEmbarcacao->select('tp_id = '.$especialista['tp_id']);
                 foreach($tipobarcos as $key => $consulta):
-                    if($consulta['tpte_dono'] === '1'){
-                        $tbarcos = 'Sim';
-                    }
-                    else if($consulta['tpte_dono'] === '0'){
-                        $tbarcos = 'Não';
-                    }
-                    $tbarcos.=',';
+                    
+                    $tbarcos.=$consulta['tpte_dono'].',';
+                    
                 endforeach;
-                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($tbarcos,0,-1)));
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, substr($tbarcos,0,-1));
                 unset($tbarcos);
                 
                 $coluna = 0;
