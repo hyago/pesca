@@ -2130,7 +2130,10 @@ class PescadorController extends Zend_Controller_Action {
         
         
         $this->modelEspecialista = new Application_Model_PescadorEspecialista();
-
+        $this->modelPescadorHasDependentes = new Application_Model_VPescadorHasDependente();
+        $this->modelPescadorHasColonias = new Application_Model_VPescadorHasColonia();
+        $this->modelPescadorHasTipoEmbarcacao = new Application_Model_VPescadorHasEmbarcacao();
+        
         require_once "../library/Classes/PHPExcel.php";
 
         $objPHPExcel = new PHPExcel();
@@ -2182,6 +2185,7 @@ class PescadorController extends Zend_Controller_Action {
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Filhos Seguirem profissão?');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Tempo de Pesca');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Grau de dependência da pesca');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Escolaridade');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Entrevistador');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Como vai pescar?');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Quantidade');
@@ -2204,7 +2208,9 @@ class PescadorController extends Zend_Controller_Action {
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Comprador Pescado');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Habilidades');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Embarcações');
-
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Dependentes');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Colônias');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Dono das Embarcações?');
         
         $linha = 2;
         $coluna= 0;
@@ -2256,7 +2262,8 @@ class PescadorController extends Zend_Controller_Action {
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_filho_seguir_profissao']);
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_tempo_de_pesca']);
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['tps_grau_dependencia_pesca']);
-		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['entrevistador']);
+		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['esc_nivel']);
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $especialista['entrevistador']);
                 
                 $coluna++;
                 $acompanhado = $this->modelEspecialista->selectVAcompanhado('tps_id = '.$especialista['tp_id']);
@@ -2418,6 +2425,37 @@ class PescadorController extends Zend_Controller_Action {
                 endforeach;
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($barcs,0,-1)));
                 unset($barcs);
+                
+                $dependentes = $this->modelPescadorHasDependentes->selectDependentes('tp_id = '.$especialista['tp_id']);
+                foreach($dependentes as $key => $consulta):
+                    $deps.=$consulta['ttd_tipodependente'];
+                    if(!empty($consulta['ttd_tipodependente'])){
+                        $deps.=',';
+                    }
+                endforeach;
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($deps,0,-1)));
+                unset($deps);
+                
+                $colonias = $this->modelPescadorHasColonias->select('tp_id = '.$especialista['tp_id']);
+                foreach($colonias as $key => $consulta):
+                    $cols.=$consulta['tc_nome'];
+                    if(!empty($consulta['tc_nome'])){
+                        $cols.=',';
+                    }
+                endforeach;
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($cols,0,-1)));
+                unset($cols);
+                
+                $tipobarcos = $this->modelPescadorHasTipoEmbarcacao->select('tp_id = '.$especialista['tp_id']);
+                foreach($tipobarcos as $key => $consulta):
+                    $tbarcos.=$consulta['tpte_dono'];
+                    if(!empty($consulta['tpte_dono'])){
+                        $tbarcos.=',';
+                    }
+                endforeach;
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $this->naopossui(substr($tbarcos,0,-1)));
+                unset($tbarcos);
+                
                 $coluna = 0;
                 $linha++;
         endforeach;
