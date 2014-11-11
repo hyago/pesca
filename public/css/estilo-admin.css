@@ -338,6 +338,15 @@ input {
     border-radius: 3px;
     border-color:#8b8386;
 }
+.forDate{
+    float: right;
+}
+.data{
+    float: none;
+    height: 22px;
+    border-radius: 3px;
+    border-color:#8b8386;
+}
 input.tamanho{
     width: 50px;
 }
