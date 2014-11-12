@@ -22,9 +22,9 @@ $.fn.visualize = function(options, container){
 			colors: ['#be1e2d','#666699','#92d5ea','#ee8310','#8d10ee','#5a3b16','#26a4ed','#f45a90','#e9e744','#CDBE70','#00FF7F','#228B22','#696969','#68228B','#00FFFF','#8B3A3A','#CD8162'],
 			textColors: [], //corresponds with colors array. null/undefined items will fall back to CSS
 			parseDirection: 'x', //which direction to parse the table data
-			pieMargin: 20, //pie charts only - spacing around pie
+			pieMargin: 40, //pie charts only - spacing around pie
 			pieLabelsAsPercent: true,
-			pieLabelPos: 'inside',
+			pieLabelPos: 'outside',
 			lineWeight: 4, //for line and area - stroke weight
 			barGroupMargin: 10,
 			barMargin: 1, //space around bars in bar chart (added to both sides of bar)

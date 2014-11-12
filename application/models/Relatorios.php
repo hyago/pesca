@@ -984,19 +984,30 @@ class Application_Model_Relatorios
     
     ///////////////////////////////////////////////////////////////////////////////////////////
     
-    public function selectPescadores($where = false){
+    public function selectPescadores($consulta, $where = false){
         $this->pescadores = new Application_Model_DbTable_VPescador;
         
         $select = $this->pescadores->select()
-                ->from($this->pescadores, array('count(tp_id)','pto_nome'))->
-                order('pto_nome')->group('pto_nome');
+                ->from($this->pescadores, array('count(tp_id)',$consulta))->
+                order($consulta)->group($consulta);
          if ($where == false) {
-            $select->where('pto_nome IS NOT NULL');
+            $select->where($consulta.' IS NOT NULL');
         }       
         
         return $this->pescadores->fetchAll($select)->toArray();
     }
-    
+    public function selectValorEspecies($where = null, $order = null, $limit = null){
+        $this->selectEntrevista = new Application_Model_DbTable_VValorEspecies();
+
+        $select = $this->selectEntrevista->select()
+                ->from($this->selectEntrevista)->
+                order($order)->limit($limit);
+
+         if (!is_null($where)) {
+            $select->where($where);
+        }
+        return $this->selectEntrevista->fetchAll($select)->toArray();
+    }
     
 }
 

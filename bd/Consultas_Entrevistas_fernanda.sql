@@ -2639,3 +2639,60 @@ t_destinopescado.dp_destino,t_porto.pto_prioridade,t_mare.mre_tipo,t_isca.isc_ti
 --   Inner Join t_ordem as ord On fam.ord_id = ord.ord_id
 --   Inner Join t_grupo as grp On ord.grp_id = grp.grp_id
 --   Order By esp.esp_nome;
+
+Create view v_valor_especies as
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_arrastofundo_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_calao_has_t_especie_capturada 
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_coletamanual_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_emalhe_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_jerere_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_grosseira_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_linha_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_linhafundo_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_manzua_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_mergulho_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_ratoeira_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_siripoia_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_tarrafa_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id
+  Union All
+SELECT esp_nome_comum, max(spc_preco) as max, min(spc_preco) as min, avg(spc_preco) as media, esp_id
+  FROM v_tarrafa_has_t_especie_capturada
+  Group By esp_nome_comum, esp_id;

@@ -87,3 +87,11 @@ CREATE OR REPLACE VIEW v_entrevista_varapesca AS
  SELECT t_varapesca.vp_id, t_pescador.tp_nome, t_barco.bar_nome, t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_pescador.tp_apelido
    FROM t_varapesca
    Left Join t_pescador On t_varapesca.tp_id_entrevistado = t_pescador.tp_id Left Join t_barco ON t_varapesca.bar_id = t_barco.bar_id Left Join t_monitoramento On t_varapesca.mnt_id = t_monitoramento.mnt_id Left Join t_ficha_diaria On t_monitoramento.fd_id = t_ficha_diaria.fd_id;
+
+Update t_ratoeira Set mnt_id = 15206 Where rat_id = 1008;
+
+Update t_manzua Set mnt_id = 2136 Where man_id = 3577;
+
+Update t_jerere Set mnt_id = 15207 Where mnt_id = 911;
+
+Delete from t_linha_has_t_biometria_camarao Where tlin_id = 11935;

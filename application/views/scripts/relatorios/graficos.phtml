@@ -1,56 +1,7 @@
-<!DOCTYPE html>
-<head>
-        
-        <?php
-        $this->headLink()->prependStylesheet('../css/basic.css');
-
-
-        echo $this->headLink() . "\n";
-        echo $this->headScript() . "\n";
-        ?>
-	<script type="text/javascript" src="http://filamentgroup.github.com/EnhanceJS/enhance.js"></script>
-        <script type="text/javascript">
-		// Run capabilities test
-		enhance({
-			loadScripts: [
-				{src: 'js/excanvas.js', iecondition: 'all'},
-				'js/jquery.js',
-				'js/visualize.jQuery.js',
-				'js/example.js'
-			],
-			loadStyles: [
-				'css/visualize.css',
-				'css/visualize-dark.css'
-			]	
-		});   
-        </script>
-        <style type="text/css">
-    	/*some demo styles*/
-    	body { font-size: 62.5%; }
-    	.enhanced h2, .enhanced pre { margin: 3em 20px .5em; }
-    	.enhanced pre { width: 50%; overflow: auto; font-size: 1.4em; margin-top: 0; background: #444; padding: 15px; color: #fff; }
-        </style>
-</head>
 <div id="titulos">
     <h2>Relatórios->Gráficos</h2>
 </div>
-
-
-<table >
-
-	<thead>
-		<tr>
-			<td scope="col">Portos</td>
-			<th scope="col">Pescadores</th>
-                        
-		</tr>
-	</thead>
-	<tbody>
-            <?php foreach ($this->portos as $key => $porto): ?>
-		<tr>
-			<th scope="row"><?= $porto['pto_nome']?></th>
-			<td><?= $porto['count']?></td>
-		</tr>
-            <?php endforeach;?>
-	</tbody>
-</table>
+<a href="<?= $this->url(array("controller" => "relatorios", "action" => "pescadoresporto"), null, true) ?>" id="botao-ancora">Pescadores por Porto</a><br/>
+<a href="<?= $this->url(array("controller" => "relatorios", "action" => "pescadorescolonia"), null, true) ?>" id="botao-ancora">Pescadores por Colônias</a><br/>
+<a href="<?= $this->url(array("controller" => "relatorios", "action" => "pescadoresescolaridade"), null, true) ?>" id="botao-ancora">Pescadores por Escolaridade</a><br/>
+<a href="<?= $this->url(array("controller" => "relatorios", "action" => "monitoramentos"), null, true) ?>" id="botao-ancora">Monitoramentos</a><br/>

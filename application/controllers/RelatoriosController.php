@@ -8,7 +8,7 @@ class RelatoriosController extends Zend_Controller_Action
         if(!Zend_Auth::getInstance()->hasIdentity()){
             $this->_redirect('index');
         }
-
+        
         $this->_helper->layout->setLayout('admin');
 
 
@@ -21,22 +21,46 @@ class RelatoriosController extends Zend_Controller_Action
         $this->modelUsuario = new Application_Model_Usuario();
         $this->usuario = $this->modelUsuario->selectLogin($identity2['tl_id']);
         $this->view->assign("usuario",$this->usuario);
+        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+            $this->_redirect('index');
+        }
     }
 
     public function indexAction(){
     }
     public function graficosAction(){
+        
+    }
+    public function pescadoresportoAction(){
         $this->modelRelatorios = new Application_Model_Relatorios();
-        $pescadoresPorto = $this->modelRelatorios->selectPescadores();
+        $pescadoresPorto = $this->modelRelatorios->selectPescadores('pto_nome');
         
         $this->view->assign("portos",$pescadoresPorto);
+    }
+    public function pescadorescoloniaAction(){
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        $pescadoresColonias = $this->modelRelatorios->selectPescadores('tc_nome');
+        
+        $this->view->assign("colonias",$pescadoresColonias);
+    }
+    public function pescadoresescolaridadeAction(){
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        $pescadoresEscolaridade = $this->modelRelatorios->selectPescadores('esc_nivel');
+        
+        $this->view->assign("escolaridades",$pescadoresEscolaridade);
+    }
+    
+    public function monitoramentosAction(){
+        $consultaPadrao = new Application_Model_VConsultaPadrao();
+        $selectMonitoramentos = $consultaPadrao->selectMonitoramentos();
+        
+        $this->view->assign("monitoramentos",$selectMonitoramentos);
     }
     public function gerarAction(){
         
         $valueRelatorio = $this->_getAllParams();
-        
-        
-        
+
         $rel = $valueRelatorio['tipoRelatorio'];
         $rel = 'id/'.$rel;
         
@@ -81,7 +105,7 @@ class RelatoriosController extends Zend_Controller_Action
             case 4:$this->_redirect("/relatorios/relatoriocompletopescadores");break;
             case 5:$this->_redirect("/pescador/relatorioespecialista");break;
             case 6:$this->_redirect("/consulta-padrao/avistamentos");break;
-            
+            case 7:$this->_redirect("/relatorios/valorespecies");break;
         }
         
     }
@@ -3325,6 +3349,55 @@ class RelatoriosController extends Zend_Controller_Action
 
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="Pescadores Monitorados.xls"');
+        header('Cache-Control: max-age=0');
+
+        ob_end_clean();
+        $objWriter->save('php://output');
+    }
+    
+    public function valorespeciesAction(){
+        set_time_limit(300);
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        
+        $monitoramentos = $this->modelRelatorios->selectValorEspecies();
+        
+        
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna,   $linha, 'Espécie');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Valor Máximo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Valor Mínimo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Média Geral');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'ID');
+        
+        $coluna= 0;
+        $linha++;
+        foreach ( $monitoramentos as $key => $consulta ):
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['esp_nome_comum']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['max']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['min']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['media']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, $consulta['esp_id']);
+            $coluna=0;
+            $linha++;
+        endforeach;    
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        ob_end_clean();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Valor das Espécies.xls"');
         header('Cache-Control: max-age=0');
 
         ob_end_clean();
