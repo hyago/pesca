@@ -32,11 +32,82 @@ class RelatoriosController extends Zend_Controller_Action
     public function graficosAction(){
         
     }
+    
     public function pescadoresportoAction(){
         $this->modelRelatorios = new Application_Model_Relatorios();
         $pescadoresPorto = $this->modelRelatorios->selectPescadores('pto_nome');
-        
         $this->view->assign("portos",$pescadoresPorto);
+    }
+    public function pescadoresportoxlsAction(){
+        
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        $sheet->getPageMargins()->setTop(0.6);
+        $sheet->getPageMargins()->setBottom(0.6);
+        $sheet->getPageMargins()->setHeader(0.4);
+        $sheet->getPageMargins()->setFooter(0.4);
+        $sheet->getPageMargins()->setLeft(0.4);
+        $sheet->getPageMargins()->setRight(0.4);
+        $objPHPExcel->getProperties()->setTitle("Exemplo");
+        $objPHPExcel->getProperties()->setCreator("Exemplo");
+        $objPHPExcel->getProperties()->setLastModifiedBy("Exemplo");
+        $objPHPExcel->getProperties()->setCompany("Exemplo");
+
+        $data = array(utf8_encode('Janeiro'), utf8_encode('Fevereiro'), utf8_encode('Março'), utf8_encode('Abril'), utf8_encode('Maio'), utf8_encode('Junho'), utf8_encode('Julho'), utf8_encode('Agosto'), utf8_encode('Setembro'), utf8_encode('Outubro'), utf8_encode('Novembro'), utf8_encode('Dezembro'));
+        $row = 1;
+        foreach($data as $point) {
+          $sheet->setCellValueByColumnAndRow(0, $row++, $point);
+        }
+
+        $data = array(12.5, 56.1, 51, 89, 45, 42, 22.7, 15, 8, 2, 0.9, 10);
+        $row = 1;
+        foreach($data as $point) {
+          $sheet->setCellValueByColumnAndRow(1, $row++, $point);
+        }
+
+        $values = new PHPExcel_Chart_DataSeriesValues('Number', 'Worksheet!$B$1:$B$12');
+
+        $categories = new PHPExcel_Chart_DataSeriesValues('String', 'Worksheet!$A$1:$A$12');
+        
+        $series = new PHPExcel_Chart_DataSeries(
+          PHPExcel_Chart_DataSeries::TYPE_BARCHART,
+          PHPExcel_Chart_DataSeries::GROUPING_CLUSTERED,  
+          array(0),                                       
+          array(),                                        
+          array($categories), 
+          array($values)  
+        );
+        $series->setPlotDirection(PHPExcel_Chart_DataSeries::DIRECTION_COL);
+        
+        $layout = new PHPExcel_Chart_Layout();
+        $plotarea = new PHPExcel_Chart_PlotArea($layout, array($series));
+        
+        $chart = new PHPExcel_Chart('exemplo', null, null, $plotarea);
+        
+
+        $title = new PHPExcel_Chart_Title(null, $layout);
+        $title->setCaption(utf8_encode('Gráfico PHPExcel Chart Class'));
+
+        $chart->setTopLeftPosition('D1');
+        $chart->setBottomRightPosition('K15');
+        $chart->setTitle($title);
+        
+        $sheet->addChart($chart);
+        
+        $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        
+        $writer->setIncludeCharts(TRUE);
+        
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="grafico_phpexcel_chart_class.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        
     }
     public function pescadorescoloniaAction(){
         $this->modelRelatorios = new Application_Model_Relatorios();
