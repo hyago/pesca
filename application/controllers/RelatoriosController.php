@@ -98,9 +98,11 @@ class RelatoriosController extends Zend_Controller_Action
         
         $writer->setIncludeCharts(TRUE);
         
+        ob_end_clean();
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="grafico_phpexcel_chart_class.xlsx"');
         header('Cache-Control: max-age=0');
+        ob_end_clean();
         $writer->save('php://output');
         
     }
