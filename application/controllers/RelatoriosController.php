@@ -47,32 +47,27 @@ class RelatoriosController extends Zend_Controller_Action
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         $sheet = $objPHPExcel->getActiveSheet();
-        $sheet->getPageMargins()->setTop(0.6);
-        $sheet->getPageMargins()->setBottom(0.6);
-        $sheet->getPageMargins()->setHeader(0.4);
-        $sheet->getPageMargins()->setFooter(0.4);
-        $sheet->getPageMargins()->setLeft(0.4);
-        $sheet->getPageMargins()->setRight(0.4);
-        $objPHPExcel->getProperties()->setTitle("Exemplo");
-        $objPHPExcel->getProperties()->setCreator("Exemplo");
-        $objPHPExcel->getProperties()->setLastModifiedBy("Exemplo");
-        $objPHPExcel->getProperties()->setCompany("Exemplo");
-
-        $data = array(utf8_encode('Janeiro'), utf8_encode('Fevereiro'), utf8_encode('Março'), utf8_encode('Abril'), utf8_encode('Maio'), utf8_encode('Junho'), utf8_encode('Julho'), utf8_encode('Agosto'), utf8_encode('Setembro'), utf8_encode('Outubro'), utf8_encode('Novembro'), utf8_encode('Dezembro'));
-        $row = 1;
-        foreach($data as $point) {
-          $sheet->setCellValueByColumnAndRow(0, $row++, $point);
+        $this->modelRelatorios = new Application_Model_Relatorios();
+        $pescadoresPorto = $this->modelRelatorios->selectPescadores('pto_nome');
+        
+        $coluna=0;
+        $linha=1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Porto de Desembarque');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Quantidade de Pescadores');
+        
+        $linha++;
+        $coluna=0;
+        foreach($pescadoresPorto as $consulta){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['pto_nome']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['count']);
+            $linha++;
+            $coluna=0;
         }
+        
+        
+        $values = new PHPExcel_Chart_DataSeriesValues('Number', 'Worksheet!$B$2:$B$18');
 
-        $data = array(12.5, 56.1, 51, 89, 45, 42, 22.7, 15, 8, 2, 0.9, 10);
-        $row = 1;
-        foreach($data as $point) {
-          $sheet->setCellValueByColumnAndRow(1, $row++, $point);
-        }
-
-        $values = new PHPExcel_Chart_DataSeriesValues('Number', 'Worksheet!$B$1:$B$12');
-
-        $categories = new PHPExcel_Chart_DataSeriesValues('String', 'Worksheet!$A$1:$A$12');
+        $categories = new PHPExcel_Chart_DataSeriesValues('String', 'Worksheet!$A$2:$A$18');
         
         $series = new PHPExcel_Chart_DataSeries(
           PHPExcel_Chart_DataSeries::TYPE_BARCHART,
