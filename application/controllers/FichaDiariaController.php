@@ -276,6 +276,26 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->redirect("/ficha-diaria/editar/id/" . $backUrl);
     }
+    
+    public function editarmonitoramentoAction(){
+        
+        $backUrl = $this->_getParam('id_ficha');
+        
+        $this->modelMonitoramento->update($this->_getAllParams());
+        
+        $this->redirect("/ficha-diaria/editar/id/".$backUrl);
+    }
+    public function monitoramentoAction(){
+         $monitoramento = $this->_getParam('idmnt');
+         $fichadiaria = $this->_getParam('id');
+         
+         $dadosMonitoramento = $this->modelMonitoramento->select('mnt_id = '.$monitoramento);
+         $artepesca = $this->modelArtePesca->select("tap_arteficha <> '' ",'tap_id');
+         
+         $this->view->assign('fichadiaria', $fichadiaria);
+         $this->view->assign('artepesca', $artepesca);
+         $this->view->assign('monitoramento', $dadosMonitoramento[0]);
+    }
     /*
      * 
      */

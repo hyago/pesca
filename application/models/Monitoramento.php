@@ -45,20 +45,14 @@ class Application_Model_Monitoramento
         $this->dbTableMonitoramento = new Application_Model_DbTable_Monitoramento();
         
         $dadosMonitoramento = array(
-            
-            't_estagiario_tu_id' => $request['select_nome_estagiario'],
-            't_monitor_tu_id1' => $request['select_nome_monitor'],
-            'fd_data' => $request['data_ficha'], 
-            'fd_turno' => $request['select_turno'],
-            'obs' => $request['observacao'],
-            'pto_id' => $request['select_nome_porto'],
-            'tmp_id' => $request['select_tempo'],
-            'vnt_id' => $request['select_vento']
+            'mnt_monitorado' => $request['monitorado'],
+            'mnt_arte' => $request['artePesca'],
+            'mnt_quantidade' => $request['quantidade']
         );
  
         
         $whereMonitoramento = $this->dbTableMonitoramento->getAdapter()
-                ->quoteInto('"fd_id" = ?', $request[0]);
+                ->quoteInto('"mnt_id" = ?', $request['id_mnt']);
         
         
         $this->dbTableMonitoramento->update($dadosMonitoramento, $whereMonitoramento);

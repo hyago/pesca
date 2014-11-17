@@ -2,40 +2,7 @@
 
 <fieldset id="Desembarque"></fieldset>
  <form name="indexFichaDiaria" method="post">
-<!--<table id="tabelaSemEstilo">
-    <tr>
-        <td width="37%">
-            </td>
-        <td>
-            <input type="button" size="50" value="Limpar Busca" class="button-confirmText" onclick="jsClearBuscaFichaDiaria('<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
-        </td>
-        <td>
-            <input type="button" size="50" value="Listar Todos" class="button-confirmText" onclick="jsBuscaTodasFichas('<?= $this->url(array("controller" => "ficha-diaria", "action" => "index", "fd_all"=>"all"), null, true) ?>')">
-        </td>
-    </tr>
-</table>
-<table id="tabelaSemEstilo">
-    <tr>
-        <td>
-            <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaFichaDiariaId(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
-            <input type="number" min="0" name="inputId" placeholder="Busca por ID" />
-        </td>
-        <td width="35%">
-            <input type="button" size="50" value="Busca por Porto" class="button-confirmText" onclick="jsBuscaFichaDiariaPortoData(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
-            <div class="form-dir">
-                <select name="selectPortoName" id="selectPortoID">
-                    <?php foreach ($this->assignDadosPorto as $key => $localPorto): ?>
-                        <option value="<?= $localPorto['pto_id']; ?>"><?= $localPorto['pto_nome']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-        </td> 
-        <td>
-            <input type="button" size="50" value="Busca por Data" class="button-confirmText" onclick="jsBuscaFichaDiariaData(this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')">
-            <input type="date" name="inputDate" placeholder="Busca por Data" />
-        </td>
-    </tr>
-</table>-->
+
      <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
         
      <input type="button" value="Limpar" onClick="jsClearBusca('<?= $this->url(array("controller" => "ficha-diaria", "action" => "index"), null, true) ?>')"/>
@@ -74,6 +41,7 @@
                 </ul>
             </a>
         </td>
+        
         <td width="20%" class="td-botao">
             <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "ficha-diaria", "action" => "excluir", "id" => $fichadiaria['fd_id']), null, true) ?>')">
         </td>

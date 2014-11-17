@@ -185,7 +185,13 @@
                         <td name="inputMonitorada" > <?= $vMonitoramento['mnt_monitorado'] ?> </td>
                         <td name="inputArtedePesca"> <?= $vMonitoramento['tap_artepesca'] ?> </td>
                         <td name="inputQuantidade" > <?= $vMonitoramento['mnt_quantidade'] ?> </td>
-                        
+                        <td width="10%" class="td-botao">
+                            <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"monitoramento", "id" => $vMonitoramento['fd_id'], "idmnt" => $vMonitoramento['mnt_id']),null,true)?>">
+                                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                    <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
+                                </ul>
+                            </a>
+                        </td>
                         <td><input type="button" class="button-del" width="5%" onclick="jsDeleteMonitoramento(<?= $vMonitoramento['mnt_id'] ?>, this.form, '<?= $this->url(array("controller" => "ficha-diaria", "action" => "deletmonitoramento"), null, true) ?>', <?= $vMonitoramento['fd_id'] ?>)"></td>
                         <td><input type="button" width="10%" target="_blank" value ="Nova Entrevista" onclick="jsEntrevista('<?= $vMonitoramento['tap_artepesca'] ?>', <?= $vMonitoramento['mnt_id'] ?>, <?= $vMonitoramento['fd_id'] ?>)" <?php if($vMonitoramento['mnt_monitorado']== 'Não'){ echo "disabled='True'";} ?>/></td>
 
