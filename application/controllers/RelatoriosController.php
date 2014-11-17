@@ -95,9 +95,9 @@ class RelatoriosController extends Zend_Controller_Action
         $sheet->addChart($chart);
         
         $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        ob_end_clean();
-        $writer->setIncludeCharts(TRUE);
         
+        $writer->setIncludeCharts(TRUE);
+        ob_end_clean();
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="grafico_phpexcel_chart_class.xls"');
         header('Cache-Control: max-age=0');
