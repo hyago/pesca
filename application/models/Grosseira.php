@@ -169,6 +169,7 @@ private $dbTableGrosseira;
         }
         
         $dadosGrosseira = array(
+            'mnt_id' => $request['id_monitoramento'],
             'grs_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
             'grs_motor'=> $request['motor'],

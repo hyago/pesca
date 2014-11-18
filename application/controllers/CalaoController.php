@@ -140,18 +140,34 @@ private $usuario;
             $this->_redirect('index');
         }
         $idCalao = $this->_getParam('id_entrevista');
-        $this->modelCalao->update($this->_getAllParams());
-
-        $this->_redirect('calao/editar/id/'.$idCalao);
+        
+        $monitoramento = $this->modelMonitoramento->select('mnt_id='.$this->_getParam('id_monitoramento'));
+        
+        
+        if($monitoramento[0]['fd_id'] != $this->_getParam('id_fichaDiaria')){
+            $this->_redirect('arrasto-fundo/error');  
+        }
+        else{
+            $this->modelCalao->update($this->_getAllParams());
+            $this->_redirect('calao/editar/id/'.$idCalao);
+        }
+        
     }
 
     public function excluirAction() {
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
+        
+        
         $this->modelCalao->delete($this->_getParam('id'));
-
-        $this->_redirect('calao/visualizar');
+        $idFicha = $this->_getParam('id_ficha');
+        if(empty($idFicha)){
+            $this->_redirect('calao/visualizar');
+        }
+        else{
+            $this->_redirect('ficha-diaria/editar/id/'.$idFicha);
+        }
     }
     public function insertpesqueiroAction(){
         if($this->usuario['tp_id']==5){

@@ -157,9 +157,17 @@ class VaraPescaController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $idVaraPesca = $this->_getParam('id_entrevista');
+        $monitoramento = $this->modelMonitoramento->select('mnt_id='.$this->_getParam('id_monitoramento'));
+        
+        
+        if($monitoramento[0]['fd_id'] != $this->_getParam('id_fichaDiaria')){
+            $this->_redirect('arrasto-fundo/error');  
+        }
+        else{
         $this->modelVaraPesca->update($this->_getAllParams());
 
         $this->_redirect('vara-pesca/editar/id/'.$idVaraPesca);
+        }
     }
     public function excluirAction() {
         if($this->usuario['tp_id']==5){
@@ -167,7 +175,13 @@ class VaraPescaController extends Zend_Controller_Action
         }
         $this->modelVaraPesca->delete($this->_getParam('id'));
 
-        $this->_redirect('vara-pesca/visualizar');
+        $idFicha = $this->_getParam('id_ficha');
+        if(empty($idFicha)){
+            $this->_redirect('vara-pesca/visualizar');
+        }
+        else{
+            $this->_redirect('ficha-diaria/editar/id/'.$idFicha);
+        }
     }
     public function insertpesqueiroAction(){
         if($this->usuario['tp_id']==5){

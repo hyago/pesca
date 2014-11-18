@@ -123,6 +123,7 @@ class Application_Model_Tarrafa
 
 
         $dadosTarrafa = array(
+            'mnt_id' => $request['id_monitoramento'],
             'tar_embarcado' => $request['embarcada'],
             'tar_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

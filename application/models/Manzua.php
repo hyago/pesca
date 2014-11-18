@@ -113,6 +113,7 @@ class Application_Model_Manzua
         }
         
         $dadosManzua = array(
+            'mnt_id' => $request['id_monitoramento'],
             'man_embarcada' => $request['embarcada'],
             'man_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

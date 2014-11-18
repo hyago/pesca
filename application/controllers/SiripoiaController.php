@@ -157,9 +157,17 @@ class SiripoiaController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $idSiripoia = $this->_getParam('id_entrevista');
-        $this->modelSiripoia->update($this->_getAllParams());
+        $monitoramento = $this->modelMonitoramento->select('mnt_id='.$this->_getParam('id_monitoramento'));
+        
+        
+        if($monitoramento[0]['fd_id'] != $this->_getParam('id_fichaDiaria')){
+            $this->_redirect('arrasto-fundo/error');  
+        }
+        else{
+            $this->modelSiripoia->update($this->_getAllParams());
 
-        $this->_redirect('siripoia/editar/id/'.$idSiripoia);
+            $this->_redirect('siripoia/editar/id/'.$idSiripoia);
+        }
     }
     public function excluirAction() {
         if($this->usuario['tp_id']==5){
@@ -167,7 +175,13 @@ class SiripoiaController extends Zend_Controller_Action
         }
         $this->modelSiripoia->delete($this->_getParam('id'));
 
-        $this->_redirect('siripoia/visualizar');
+        $idFicha = $this->_getParam('id_ficha');
+        if(empty($idFicha)){
+            $this->_redirect('siripoia/visualizar');
+        }
+        else{
+            $this->_redirect('ficha-diaria/editar/id/'.$idFicha);
+        }
     }
      public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

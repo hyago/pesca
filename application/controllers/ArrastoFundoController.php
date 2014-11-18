@@ -126,11 +126,22 @@ class ArrastoFundoController extends Zend_Controller_Action {
             $this->_redirect('index');
         }
         $idArrasto = $this->_getParam('id_entrevista');
-        $this->modelArrastoFundo->update($this->_getAllParams());
-
+        
+        $monitoramento = $this->modelMonitoramento->select('mnt_id='.$this->_getParam('id_monitoramento'));
+        
+        
+        if($monitoramento[0]['fd_id'] != $this->_getParam('id_fichaDiaria')){
+            $this->_redirect('arrasto-fundo/error');  
+        }
+        else{
+            $this->modelArrastoFundo->update($this->_getAllParams());
+        }
         $this->_redirect('arrasto-fundo/editar/id/' . $idArrasto);
     }
 
+    public function errorAction(){
+        
+    }
     public function criarAction() {
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
@@ -145,7 +156,14 @@ class ArrastoFundoController extends Zend_Controller_Action {
         }
         $this->modelArrastoFundo->delete($this->_getParam('id'));
 
-        $this->_redirect('arrasto-fundo/visualizar');
+        $idFicha = $this->_getParam('id_ficha');
+        if(empty($idFicha)){
+            $this->_redirect('arrasto-fundo/visualizar');
+        }
+        else{
+            $this->_redirect('ficha-diaria/editar/id/'.$idFicha);
+        }
+
     }
 
     public function insertpesqueiroAction() {

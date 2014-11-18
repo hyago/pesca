@@ -167,6 +167,7 @@ class Application_Model_LinhaFundo
         
         
         $dadosLinhaFundo = array(
+            'mnt_id' => $request['id_monitoramento'],
             'lf_embarcada' => $request['embarcada'],
             'lf_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

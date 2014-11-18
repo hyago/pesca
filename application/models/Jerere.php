@@ -126,6 +126,7 @@ class Application_Model_Jerere
         
         
         $dadosJerere = array(
+            'mnt_id' => $request['id_monitoramento'],
             'jre_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
             'tte_id' => $request['tipoBarco'],

@@ -113,6 +113,7 @@ class Application_Model_Ratoeira
         }
         
         $dadosRatoeira = array(
+            'mnt_id' => $request['id_monitoramento'],
             'rat_embarcada' => $request['embarcada'],
             'rat_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

@@ -109,7 +109,9 @@ class Application_Model_ArrastoFundo
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
-
+        $this->modelMonitoramento = new Application_Model_Monitoramento();
+        
+        
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
 
@@ -145,8 +147,10 @@ class Application_Model_ArrastoFundo
         if(empty($gelo)){
             $gelo = NULL;
         }
-
+        
+        
         $dadosArrastoFundo = array(
+            'mnt_id' => $request['id_monitoramento'],
             'af_embarcado' => $request['embarcada'],
             'af_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

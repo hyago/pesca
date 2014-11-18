@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-esq">
                     <label>ID monitoramento:</label>
-                    <input type="text" name="id_monitoramento" placeholder="ID" disabled="true" value="<?= $this->monitoramento['mnt_id'] ?>" /><br />
+                    <input type="text" name="id_monitoramento" placeholder="ID"  value="<?= $this->monitoramento['mnt_id'] ?>" /><br />
                 </div>
                 <div class="form-esq">
                     <label for="tipo">ID Entrevista:</label>
@@ -159,7 +159,7 @@
                     <input type="text" name="combustivel" placeholder="Combustível" value="<?=$this->entrevista['man_combustivel']?>"/><br />
                 </div>
                 <input type="hidden" name="id_entrevista" value="<?= $this->entrevista['man_id'] ?>"/><br />
-                
+                <input type="hidden" name="id_fichaDiaria" value="<?= $this->monitoramento['fd_id'] ?>" /><br />
                 <div class="Submit">
                     <input type="submit" value="Salvar Alterações"/>
                 </div>

@@ -108,6 +108,7 @@ class Application_Model_VaraPesca
     {
         $this->dbTableSubamostra = new Application_Model_DbTable_Subamostra();
         $this->dbTableVaraPesca = new Application_Model_DbTable_VaraPesca();
+        $this->dbTableFichaDiaria = new Application_Model_FichaDiaria();
         
         $timestampSaida = $request['dataSaida']." ".$request['horaSaida'];
         $timestampVolta = $request['dataVolta']." ".$request['horaVolta'];
@@ -154,7 +155,9 @@ class Application_Model_VaraPesca
             $gelo = NULL;
         }
         
+        
         $dadosVaraPesca = array(
+            'mnt_id' => $request['id_monitoramento'],
             'vp_embarcada' => $request['embarcada'],
             'vp_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

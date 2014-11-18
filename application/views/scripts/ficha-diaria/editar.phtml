@@ -212,7 +212,7 @@
                 <th>Pescador</th>
                 <th>Barco</th>
             </tr>
-
+            
             <?php foreach ($this->arrastofundo as $key => $entrevistaArrasto): ?>
                 <tr>
                     <td>Arrasto de Fundo</td>
@@ -230,7 +230,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "arrasto-fundo", "action" => "excluir", "id" => $entrevistaArrasto['af_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "arrasto-fundo", "action" => "excluir", "id" => $entrevistaArrasto['af_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -254,7 +254,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "calao", "action" => "excluir", "id" => $entrevistaCalao['cal_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "calao", "action" => "excluir", "id" => $entrevistaCalao['cal_id'], "id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -278,7 +278,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "coleta-manual", "action" => "excluir", "id" => $entrevistaColetaManual['cml_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "coleta-manual", "action" => "excluir", "id" => $entrevistaColetaManual['cml_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -302,7 +302,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "emalhe", "action" => "excluir", "id" => $entrevistaEmalhe['em_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "emalhe", "action" => "excluir", "id" => $entrevistaEmalhe['em_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -326,7 +326,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "grosseira", "action" => "excluir", "id" => $entrevistaGrosseira['grs_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "grosseira", "action" => "excluir", "id" => $entrevistaGrosseira['grs_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -350,7 +350,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "jerere", "action" => "excluir", "id" => $entrevistaJerere['jre_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "jerere", "action" => "excluir", "id" => $entrevistaJerere['jre_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -374,7 +374,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "linha", "action" => "excluir", "id" => $entrevistaLinha['lin_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "linha", "action" => "excluir", "id" => $entrevistaLinha['lin_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -398,7 +398,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "linha-fundo", "action" => "excluir", "id" => $entrevistaLinhaFundo['lf_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "linha-fundo", "action" => "excluir", "id" => $entrevistaLinhaFundo['lf_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -422,7 +422,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "manzua", "action" => "excluir", "id" => $entrevistaManzua['man_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "manzua", "action" => "excluir", "id" => $entrevistaManzua['man_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -446,7 +446,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "mergulho", "action" => "excluir", "id" => $entrevistaMergulho['mer_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "mergulho", "action" => "excluir", "id" => $entrevistaMergulho['mer_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -470,7 +470,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "ratoeira", "action" => "excluir", "id" => $entrevistaRatoeira['rat_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "ratoeira", "action" => "excluir", "id" => $entrevistaRatoeira['rat_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -494,7 +494,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "siripoia", "action" => "excluir", "id" => $entrevistaSiripoia['sir_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "siripoia", "action" => "excluir", "id" => $entrevistaSiripoia['sir_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -518,7 +518,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "tarrafa", "action" => "excluir", "id" => $entrevistaTarrafa['tar_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "tarrafa", "action" => "excluir", "id" => $entrevistaTarrafa['tar_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>
@@ -542,7 +542,7 @@
                     </td>
 
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "vara-pesca", "action" => "excluir", "id" => $entrevistaVaraPesca['vp_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "vara-pesca", "action" => "excluir", "id" => $entrevistaVaraPesca['vp_id'],"id_ficha" => $this->fichadiaria['fd_id']), null, true) ?>')">
                     </td>
 
                     </a>

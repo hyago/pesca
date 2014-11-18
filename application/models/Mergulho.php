@@ -118,6 +118,7 @@ private $dbTableMergulho;
         }
         
         $dadosMergulho = array(
+            'mnt_id' => $request['id_monitoramento'],
             'mer_embarcada' => $request['embarcada'],
             'mer_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

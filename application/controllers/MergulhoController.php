@@ -157,17 +157,30 @@ public function visualizarAction() {
             $this->_redirect('index');
         }
         $idMergulho = $this->_getParam('id_entrevista');
-        $this->modelMergulho->update($this->_getAllParams());
-
-        $this->_redirect('mergulho/editar/id/'.$idMergulho);
+        $monitoramento = $this->modelMonitoramento->select('mnt_id='.$this->_getParam('id_monitoramento'));
+        
+        
+        if($monitoramento[0]['fd_id'] != $this->_getParam('id_fichaDiaria')){
+            $this->_redirect('arrasto-fundo/error');  
+        }
+        else{
+            $this->modelMergulho->update($this->_getAllParams());
+            $this->_redirect('mergulho/editar/id/'.$idMergulho);
+        }
     }
     public function excluirAction() {
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
         $this->modelMergulho->delete($this->_getParam('id'));
-
-        $this->_redirect('mergulho/visualizar');
+        
+        $idFicha = $this->_getParam('id_ficha');
+        if(empty($idFicha)){
+            $this->_redirect('mergulho/visualizar');
+        }
+        else{
+            $this->_redirect('ficha-diaria/editar/id/'.$idFicha);
+        }
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

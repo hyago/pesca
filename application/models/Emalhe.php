@@ -184,6 +184,7 @@ class Application_Model_Emalhe
         
         
         $dadosEmalhe = array(
+            'mnt_id' => $request['id_monitoramento'],
             'em_embarcado' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
             'em_motor'=> $request['motor'],

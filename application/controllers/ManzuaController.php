@@ -152,9 +152,16 @@ public function visualizarAction() {
             $this->_redirect('index');
         }
         $idManzua = $this->_getParam('id_entrevista');
-        $this->modelManzua->update($this->_getAllParams());
-
-        $this->_redirect('manzua/editar/id/'.$idManzua);
+        $monitoramento = $this->modelMonitoramento->select('mnt_id='.$this->_getParam('id_monitoramento'));
+        
+        
+        if($monitoramento[0]['fd_id'] != $this->_getParam('id_fichaDiaria')){
+            $this->_redirect('arrasto-fundo/error');  
+        }
+        else{
+            $this->modelManzua->update($this->_getAllParams());
+            $this->_redirect('manzua/editar/id/'.$idManzua);
+        }
     }
     public function excluirAction() {
         if($this->usuario['tp_id']==5){
@@ -162,7 +169,13 @@ public function visualizarAction() {
         }
         $this->modelManzua->delete($this->_getParam('id'));
 
-        $this->_redirect('manzua/visualizar');
+        $idFicha = $this->_getParam('id_ficha');
+        if(empty($idFicha)){
+            $this->_redirect('manzua/visualizar');
+        }
+        else{
+            $this->_redirect('ficha-diaria/editar/id/'.$idFicha);
+        }
     }
     public function insertpesqueiroAction(){
         $this->_helper->layout->disableLayout();

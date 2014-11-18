@@ -168,6 +168,7 @@ private $dbTableLinha;
         }
         
         $dadosLinha = array(
+            'mnt_id' => $request['id_monitoramento'],
             'lin_embarcada' => $request['embarcada'],
             'bar_id' => $request['nomeBarco'],
             'lin_motor'=> $request['motor'],

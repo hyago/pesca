@@ -160,9 +160,16 @@ public function visualizarAction() {
             $this->_redirect('index');
         }
         $idLinhaFundo = $this->_getParam('id_entrevista');
-        $this->modelLinhaFundo->update($this->_getAllParams());
-
-        $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
+        $monitoramento = $this->modelMonitoramento->select('mnt_id='.$this->_getParam('id_monitoramento'));
+        
+        
+        if($monitoramento[0]['fd_id'] != $this->_getParam('id_fichaDiaria')){
+            $this->_redirect('arrasto-fundo/error');  
+        }
+        else{
+            $this->modelLinhaFundo->update($this->_getAllParams());
+            $this->_redirect('linha-fundo/editar/id/'.$idLinhaFundo);
+        }
     }
 
     public function excluirAction() {
@@ -171,7 +178,13 @@ public function visualizarAction() {
         }
         $this->modelLinhaFundo->delete($this->_getParam('id'));
 
-        $this->_redirect('linha-fundo/visualizar');
+        $idFicha = $this->_getParam('id_ficha');
+        if(empty($idFicha)){
+            $this->_redirect('linha-fundo/visualizar');
+        }
+        else{
+            $this->_redirect('ficha-diaria/editar/id/'.$idFicha);
+        }
     }
     public function insertpesqueiroAction(){
         if($this->usuario['tp_id'] == 5){

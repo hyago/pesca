@@ -155,6 +155,7 @@ class Application_Model_Calao
         }
         
         $dadosCalao = array(
+            'mnt_id' => $request['id_monitoramento'],
             'cal_embarcada' => $request['embarcada'],
             'cal_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],

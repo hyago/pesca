@@ -112,6 +112,7 @@ class Application_Model_Siripoia
             $combustivel = null;
         }
         $dadosSiripoia = array(
+            'mnt_id' => $request['id_monitoramento'],
             'sir_embarcada' => $request['embarcada'],
             'sir_motor'=> $request['motor'],
             'bar_id' => $request['nomeBarco'],
