@@ -292,6 +292,7 @@ class Application_Model_ArrastoFundo
 
     public function selectArrastoHasAvistamento($where = null, $order = null, $limit = null)
     {
+ 
         $this->dbTableArrastoFundoAvistamento = new Application_Model_DbTable_VArrastoFundoHasAvistamento();
         $selectAvist = $this->dbTableArrastoFundoAvistamento->select()
                 ->from($this->dbTableArrastoFundoAvistamento)->order($order)->limit($limit);

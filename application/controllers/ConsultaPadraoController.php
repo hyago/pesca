@@ -456,7 +456,8 @@ class ConsultaPadraoController extends Zend_Controller_Action
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++,   $linha, 'Arte de Pesca');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Código');
         $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Avistamento');
-
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Data');
+        
         $avistamentosArrasto = new Application_Model_ArrastoFundo();
         $relatorioArrasto = $avistamentosArrasto->selectArrastoHasAvistamento();
         $coluna = 0;
@@ -465,6 +466,8 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Arrasto de Fundo');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['af_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
+            
             $coluna = 0;
             $linha++;
         endforeach;
@@ -475,6 +478,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Calao');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['cal_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -485,6 +489,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'ColetaManual');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['cml_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -495,6 +500,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Emalhe');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['em_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -505,6 +511,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Grosseira');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['grs_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -515,6 +522,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Jerere');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['jre_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -525,6 +533,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Mergulho');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['mer_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -535,6 +544,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Ratoeira');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['rat_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -545,6 +555,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Siripoia');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['sir_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -555,6 +566,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'Tarrafa');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['tar_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['tar_data']);
             $coluna = 0;
             $linha++;
         endforeach;
@@ -565,6 +577,7 @@ class ConsultaPadraoController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, 'VaraPesca');
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['vp_id']);
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['avs_descricao']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha, $consulta['fd_data']);
             $coluna = 0;
             $linha++;
         endforeach;
