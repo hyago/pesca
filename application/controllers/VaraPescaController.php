@@ -173,8 +173,12 @@ class VaraPescaController extends Zend_Controller_Action
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
-        $this->modelVaraPesca->delete($this->_getParam('id'));
-
+        $id = $this->_getParam('id');
+        if($this->usuario['tp_id']==1){
+            $this->modelVaraPesca->deletePesqueiro($id);
+        }
+        $this->modelVaraPesca->delete($id);
+        
         $idFicha = $this->_getParam('id_ficha');
         if(empty($idFicha)){
             $this->_redirect('vara-pesca/visualizar');

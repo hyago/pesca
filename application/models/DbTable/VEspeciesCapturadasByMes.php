@@ -4,7 +4,7 @@ class Application_Model_DbTable_VEspeciesCapturadasByMes extends Zend_Db_Table_A
 {
 
     protected $_name = 'v_especies_capturadas_by_mes';
-    protected $_primary = 'esp_nome';
+    protected $_primary = 'esp_id';
 
 }
 

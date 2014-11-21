@@ -240,14 +240,17 @@ class Application_Model_VaraPesca
         $this->dbTableTVaraPescaHasPesqueiro->insert($dadosPesqueiro);
         return;
     }
-    public function deletePesqueiro($idPesqueiro){
+    public function deletePesqueiro($idPesqueiro,$idEntrevista= null){
         $this->dbTableTVaraPescaHasPesqueiro = new Application_Model_DbTable_VaraPescaHasPesqueiro();       
-                
-        $whereVaraPescaHasPesqueiro = $this->dbTableTVaraPescaHasPesqueiro->getAdapter()
+        if(empty($idEntrevista)){
+            $whereVaraPescaHasPesqueiro = $this->dbTableTVaraPescaHasPesqueiro->getAdapter()
                 ->quoteInto('"vp_paf_id" = ?', $idPesqueiro);
-        
+        }
+        else{
+            $whereVaraPescaHasPesqueiro = $this->dbTableTVaraPescaHasPesqueiro->getAdapter()
+                ->quoteInto('"af_id" = ?', $idEntrevista);
+        }
         $this->dbTableTVaraPescaHasPesqueiro->delete($whereVaraPescaHasPesqueiro);
-        
     }
     public function selectVaraPescaHasEspCapturadas($where = null, $order = null, $limit = null){
         $this->dbTableVaraPescaHasEspCapturada = new Application_Model_DbTable_VVaraPescaHasEspecieCapturada();
