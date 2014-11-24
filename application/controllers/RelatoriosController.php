@@ -131,28 +131,35 @@ class RelatoriosController extends Zend_Controller_Action
         $rel = $valueRelatorio['tipoRelatorio'];
         $rel = 'id/'.$rel;
         
-        $dia = $valueRelatorio['dia'];
-        $mes = $valueRelatorio['mes'];
-        $ano = $valueRelatorio['ano'];
+        $dia = $valueRelatorio['dia_ini'];
+        $mes = $valueRelatorio['mes_ini'];
+        $ano = $valueRelatorio['ano_ini'];
         $data = $ano.'-'.$mes.'-'.$dia;
         $data = '/data/'.$data;
+        
+        $diafim = $valueRelatorio['dia_fim'];
+        $mesfim = $valueRelatorio['mes_fim'];
+        $anofim = $valueRelatorio['ano_fim'];
+        $datafim = $anofim.'-'.$mesfim.'-'.$diafim;
+        
+        $datafim = '/datafim/'.$datafim;
         switch($valueRelatorio['artePesca']){
             
-            case 1: $this->_redirect("/relatorios/relatoriocompletoarrasto/".$data);break;
-            case 2:$this->_redirect("/relatorios/relatoriocompletocalao/".$rel.$data);break;
-            case 3:$this->_redirect("/relatorios/relatoriocompletocoletamanual/".$rel.$data);break;
-            case 4:$this->_redirect("/relatorios/relatoriocompletoemalhe/".$rel.$data);break;
-            case 5:$this->_redirect("/relatorios/relatoriocompletogroseira/".$rel.$data);break;
-            case 6:$this->_redirect("/relatorios/relatoriocompletojerere/".$rel.$data);break;
-            case 7:$this->_redirect("/relatorios/relatoriocompletolinha/".$rel.$data);break;
-            case 8:$this->_redirect("/relatorios/relatoriocompletolinhafundo/".$rel.$data);break;
-            case 9:$this->_redirect("/relatorios/relatoriocompletomanzua/".$rel.$data);break;
-            case 10:$this->_redirect("/relatorios/relatoriocompletomergulho/".$rel.$data);break;
-            case 11:$this->_redirect("/relatorios/relatoriocompletoratoeira/".$rel.$data);break;
-            case 12:$this->_redirect("/relatorios/relatoriocompletosiripoia/".$rel.$data);break;
-            case 13:$this->_redirect("/relatorios/relatoriocompletotarrafa/".$rel.$data);break;
-            case 14:$this->_redirect("/relatorios/relatoriocompletovarapesca/".$rel.$data);break;
-            case 15:$this->_redirect("/relatorios/relatoriocompleto/".$rel.$data);break;
+            case 1: $this->_redirect("/relatorios/relatoriocompletoarrasto".$data.$datafim);break;
+            case 2:$this->_redirect("/relatorios/relatoriocompletocalao/".$rel.$data.$datafim);break;
+            case 3:$this->_redirect("/relatorios/relatoriocompletocoletamanual/".$rel.$data.$datafim);break;
+            case 4:$this->_redirect("/relatorios/relatoriocompletoemalhe/".$rel.$data.$datafim);break;
+            case 5:$this->_redirect("/relatorios/relatoriocompletogroseira/".$rel.$data.$datafim);break;
+            case 6:$this->_redirect("/relatorios/relatoriocompletojerere/".$rel.$data.$datafim);break;
+            case 7:$this->_redirect("/relatorios/relatoriocompletolinha/".$rel.$data.$datafim);break;
+            case 8:$this->_redirect("/relatorios/relatoriocompletolinhafundo/".$rel.$data.$datafim);break;
+            case 9:$this->_redirect("/relatorios/relatoriocompletomanzua/".$rel.$data.$datafim);break;
+            case 10:$this->_redirect("/relatorios/relatoriocompletomergulho/".$rel.$data.$datafim);break;
+            case 11:$this->_redirect("/relatorios/relatoriocompletoratoeira/".$rel.$data.$datafim);break;
+            case 12:$this->_redirect("/relatorios/relatoriocompletosiripoia/".$rel.$data.$datafim);break;
+            case 13:$this->_redirect("/relatorios/relatoriocompletotarrafa/".$rel.$data.$datafim);break;
+            case 14:$this->_redirect("/relatorios/relatoriocompletovarapesca/".$rel.$data.$datafim);break;
+            case 15:$this->_redirect("/relatorios/relatoriocompleto/".$rel.$data.$datafim);break;
             case 16:$this->_redirect("/relatorios/relatoriocompletomonitoramentos");break;
             case 17:$this->_redirect("/relatorios/relatoriocompletoespecies");break;
             case 18:$this->_redirect("/relatorios/relatoriocompletoespeciesmes");break;
@@ -210,15 +217,20 @@ class RelatoriosController extends Zend_Controller_Action
         }
         return $mare;
     }
-    public function data($data){
+    public function dataFinal($data){
         
-        if(empty($data)){
+        if($data=='--'){
             $data = date('Y-m-j');
         }
 
         return $data;
     }
-
+    public function dataInicial($data){
+        if($data == '--'){
+            $data = '2013-01-01';
+        }
+        return $data;
+    }
     public function relatoriocompletoarrastoAction() {
         set_time_limit(300);
         if($this->usuario['tp_id']==5){
@@ -229,8 +241,10 @@ class RelatoriosController extends Zend_Controller_Action
         
         
         $date =  $this->_getParam('data');
+        $datend = $this->_getParam('datafim');
         
-        $data = $this->data($date);
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         $this->modelRelatorios = new Application_Model_Relatorios();
 
         require_once "../library/Classes/PHPExcel.php";
@@ -270,7 +284,9 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioArrasto = $this->modelRelatorios->selectArrasto("fd_data <= '". $data."'");
+        
+        $relatorioArrasto = $this->modelRelatorios->selectArrasto("fd_data between '". $data."'"." and '".$datafim."'");
+        
         $linha = 2;
         $coluna= 0;
         
@@ -359,7 +375,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -397,7 +416,7 @@ class RelatoriosController extends Zend_Controller_Action
         endforeach;
         $lastcolumn = $coluna;
         
-        $relatorioArrasto = $this->modelRelatorios->selectColetaManual("dvolta <= '". $data."'");
+        $relatorioArrasto = $this->modelRelatorios->selectColetaManual("dvolta between '". $data."'"." and '".$datafim."'");
 
         $linha = 2;
         $coluna= 0;
@@ -489,7 +508,11 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
+        
         require_once "../library/Classes/PHPExcel.php";
 
         $objPHPExcel = new PHPExcel();
@@ -529,7 +552,7 @@ class RelatoriosController extends Zend_Controller_Action
         $lastcolumn = $coluna;
         $linha = 2;
         $coluna= 0;
-        $relatorioCalao = $this->modelRelatorios->selectCalao("cal_data <= '". $data."'");
+        $relatorioCalao = $this->modelRelatorios->selectCalao("cal_data between '". $data."'"." and '".$datafim."'");
 
         foreach ( $relatorioCalao as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -614,7 +637,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         require_once "../library/Classes/PHPExcel.php";
 
         $objPHPExcel = new PHPExcel();
@@ -656,7 +682,7 @@ class RelatoriosController extends Zend_Controller_Action
         endforeach;
         $lastcolumn = $coluna;
 
-        $relatorioArrasto = $this->modelRelatorios->selectEmalhe("drecolhimento <= '". $data."'");
+        $relatorioArrasto = $this->modelRelatorios->selectEmalhe("drecolhimento between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -747,7 +773,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
        
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         require_once "../library/Classes/PHPExcel.php";
 
         $objPHPExcel = new PHPExcel();
@@ -788,7 +817,7 @@ class RelatoriosController extends Zend_Controller_Action
         endforeach;
         $lastcolumn = $coluna;
 
-        $relatorioArrasto = $this->modelRelatorios->selectGrosseira("fd_data <= '". $data."'");
+        $relatorioArrasto = $this->modelRelatorios->selectGrosseira("fd_data between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -881,7 +910,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -920,7 +952,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioJerere = $this->modelRelatorios->selectJerere("fd_data <= '". $data."'");
+        $relatorioJerere = $this->modelRelatorios->selectJerere("fd_data between '". $data."'"." and '".$datafim."'");
 
         
         $linha = 2;
@@ -1012,7 +1044,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         require_once "../library/Classes/PHPExcel.php";
 
         $objPHPExcel = new PHPExcel();
@@ -1052,7 +1087,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioLinha = $this->modelRelatorios->selectLinha("fd_data <= '". $data."'");
+        $relatorioLinha = $this->modelRelatorios->selectLinha("fd_data between '". $data."'"." and '".$datafim."'");
       
         $linha = 2;
         $coluna= 0;
@@ -1142,7 +1177,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -1184,7 +1222,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioLinhaFundo = $this->modelRelatorios->selectLinhaFundo("fd_data <= '". $data."'");
+        $relatorioLinhaFundo = $this->modelRelatorios->selectLinhaFundo("fd_data between '". $data."'"." and '".$datafim."'");
       
         $linha = 2;
         $coluna= 0;
@@ -1275,7 +1313,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
     
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -1314,7 +1355,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioManzua = $this->modelRelatorios->selectManzua("fd_data <= '". $data."'");
+        $relatorioManzua = $this->modelRelatorios->selectManzua("fd_data between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -1406,7 +1447,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -1443,7 +1487,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioMergulho = $this->modelRelatorios->selectMergulho("fd_data <= '". $data."'");
+        $relatorioMergulho = $this->modelRelatorios->selectMergulho("fd_data between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -1533,7 +1577,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -1573,7 +1620,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioRatoeira = $this->modelRelatorios->selectRatoeira("fd_data <= '". $data."'");
+        $relatorioRatoeira = $this->modelRelatorios->selectRatoeira("fd_data between '". $data."'"." and '".$datafim."'");
         $linha = 2;
         $coluna= 0;
 
@@ -1662,7 +1709,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -1701,7 +1751,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioSiripoia = $this->modelRelatorios->selectSiripoia("fd_data <= '". $data."'");
+        $relatorioSiripoia = $this->modelRelatorios->selectSiripoia("fd_data between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -1790,7 +1840,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
         
@@ -1826,7 +1879,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioTarrafa = $this->modelRelatorios->selectTarrafa("tar_data <= '". $data."'");
+        $relatorioTarrafa = $this->modelRelatorios->selectTarrafa("tar_data between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -1911,7 +1964,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         require_once "../library/Classes/PHPExcel.php";
 
@@ -1956,7 +2012,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioVaraPesca = $this->modelRelatorios->selectVaraPesca("fd_data <= '". $data."'");
+        $relatorioVaraPesca = $this->modelRelatorios->selectVaraPesca("fd_data between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -2052,7 +2108,10 @@ class RelatoriosController extends Zend_Controller_Action
         $tipoRel = $this->verificaRelatorio($var);
         
         $date =  $this->_getParam('data');
-        $data = $this->data($date);
+        $datend = $this->_getParam('datafim');
+        
+        $data = $this->dataInicial($date);
+        $datafim = $this->dataFinal($datend);
         
         $this->modelRelatorios = new Application_Model_Relatorios();
 
@@ -2110,7 +2169,7 @@ class RelatoriosController extends Zend_Controller_Action
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna++, $linha,$especie['esp_nome_comum']);
         endforeach;
         $lastcolumn = $coluna;
-        $relatorioCalao = $this->modelRelatorios->selectCalao("cal_data <= '". $data."'");
+        $relatorioCalao = $this->modelRelatorios->selectCalao("cal_data between '". $data."'"." and '".$datafim."'");
         
         $linha = 2;
         $coluna= 0;
@@ -2181,7 +2240,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
 
-        $relatorioColeta = $this->modelRelatorios->selectColetaManual("dvolta <= '". $data."'");
+        $relatorioColeta = $this->modelRelatorios->selectColetaManual("dvolta between '". $data."'"." and '".$datafim."'");
 
         foreach ( $relatorioColeta as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2256,7 +2315,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioEmalhe = $this->modelRelatorios->selectEmalhe("fd_data <= '". $data."'");
+        $relatorioEmalhe = $this->modelRelatorios->selectEmalhe("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach($relatorioEmalhe as $key=> $consulta):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2326,7 +2385,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioGrosseira = $this->modelRelatorios->selectGrosseira("fd_data <= '". $data."'");
+        $relatorioGrosseira = $this->modelRelatorios->selectGrosseira("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioGrosseira as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2399,7 +2458,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioJerere = $this->modelRelatorios->selectJerere("fd_data <= '". $data."'");
+        $relatorioJerere = $this->modelRelatorios->selectJerere("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioJerere as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2473,7 +2532,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioLinha = $this->modelRelatorios->selectLinha("fd_data <= '". $data."'");
+        $relatorioLinha = $this->modelRelatorios->selectLinha("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioLinha as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2550,7 +2609,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioLinhaFundo = $this->modelRelatorios->selectLinhaFundo("fd_data <= '". $data."'");
+        $relatorioLinhaFundo = $this->modelRelatorios->selectLinhaFundo("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioLinhaFundo as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2625,7 +2684,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioManzua = $this->modelRelatorios->selectManzua("fd_data <= '". $data."'");
+        $relatorioManzua = $this->modelRelatorios->selectManzua("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioManzua as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2699,7 +2758,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioMergulho = $this->modelRelatorios->selectMergulho("fd_data <= '". $data."'");
+        $relatorioMergulho = $this->modelRelatorios->selectMergulho("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioMergulho as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2774,7 +2833,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioRatoeira = $this->modelRelatorios->selectRatoeira("fd_data <= '". $data."'");
+        $relatorioRatoeira = $this->modelRelatorios->selectRatoeira("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioRatoeira as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2848,7 +2907,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioSiripoia = $this->modelRelatorios->selectSiripoia("fd_data <= '". $data."'");
+        $relatorioSiripoia = $this->modelRelatorios->selectSiripoia("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioSiripoia as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2923,7 +2982,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioTarrafa = $this->modelRelatorios->selectTarrafa("tar_data <= '". $data."'");
+        $relatorioTarrafa = $this->modelRelatorios->selectTarrafa("tar_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioTarrafa as $key => $consulta ):
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna, $linha,   $consulta['tl_local']);
@@ -2995,7 +3054,7 @@ class RelatoriosController extends Zend_Controller_Action
             $linha++;
         endforeach;
         
-        $relatorioVaraPesca = $this->modelRelatorios->selectVaraPesca("fd_data <= '". $data."'");
+        $relatorioVaraPesca = $this->modelRelatorios->selectVaraPesca("fd_data between '". $data."'"." and '".$datafim."'");
         
         foreach ( $relatorioVaraPesca as $key => $consulta ):
             
