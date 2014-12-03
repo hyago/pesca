@@ -54,7 +54,7 @@ class FichaDiariaController extends Zend_Controller_Action {
     /*
      * Lista todas as artes de pesca
      */
-
+    
     public function indexAction() {
         $fd_id = $this->_getParam("fd_id");
         $pto_id = $this->_getParam("pto_id");
@@ -95,7 +95,11 @@ class FichaDiariaController extends Zend_Controller_Action {
         $this->view->assign("dados", $dados);
     }
 
-
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Exibe formulário para cadastro de um usuário
      */
@@ -139,7 +143,7 @@ class FichaDiariaController extends Zend_Controller_Action {
         
         $this->_redirect("/ficha-diaria/editar/id/" . $idFichaDiaria);
     }
-
+    
     /*
      * Preenche um formulario com as informações de um usuário
      */
@@ -147,7 +151,8 @@ class FichaDiariaController extends Zend_Controller_Action {
     public function editarAction() {
 
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        $this->naoexiste($fichadiaria);
+        
         $this->view->assign("fichadiaria", $fichadiaria);
         //--------------------------------------
         $porto = $this->modelPorto->select(null, 'pto_id');

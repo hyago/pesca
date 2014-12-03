@@ -49,7 +49,12 @@ private $usuario;
 
         $this->view->assign("dados", $dados);
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Exibe formulário para cadastro de um usuário
      */
@@ -78,14 +83,14 @@ private $usuario;
      */
     public function editarAction()
     {
-        if($this->usuario['tp_id']==5){
-            $this->_redirect('index');
-        }
-        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
+        
+        if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21 | $this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
         $comunidade = $this->modelComunidade->find($this->_getParam('id'));
-
+        $this->naoexiste($comunidade);
+        
+        
         $this->view->assign("comunidade", $comunidade);
     }
 

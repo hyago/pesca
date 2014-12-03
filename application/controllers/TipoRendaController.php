@@ -43,7 +43,12 @@ class TipoRendaController extends Zend_Controller_Action
             $this->_redirect('index');
         }
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Cadastra uma Area de Pesca
      */
@@ -66,7 +71,9 @@ class TipoRendaController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $tipoRenda = $this->ModeloTipoRenda->find($this->_getParam('id'));
-
+        $this->naoexiste($tipoRenda);
+        
+        
         $this->view->assign("assignTipoRenda", $tipoRenda);
     }
 

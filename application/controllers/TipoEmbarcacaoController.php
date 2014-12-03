@@ -49,7 +49,12 @@ private $usuario;
 
         $this->view->assign("dados", $dados);
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Exibe formulário para cadastro de um usuário
      */
@@ -82,7 +87,8 @@ private $usuario;
             $this->_redirect('index');
         }
         $tipoEmbarcacao = $this->modelTipoEmbarcacao->find($this->_getParam('id'));
-
+        $this->naoexiste($tipoEmbarcacao);
+        
         $this->view->assign("tipoEmbarcacao", $tipoEmbarcacao);
     }
 

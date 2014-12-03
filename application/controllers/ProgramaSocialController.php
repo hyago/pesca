@@ -43,6 +43,12 @@ private $usuario;
         }
     }
 
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
     /*
      * Cadastra uma Area de Pesca
      */
@@ -66,7 +72,8 @@ private $usuario;
             $this->_redirect('index');
         }
         $programaSocial = $this->modelProgramaSocial->find($this->_getParam('id'));
-
+        $this->naoexiste($programaSocial);
+        
         $this->view->assign("programasSocial", $programaSocial);
     }
 

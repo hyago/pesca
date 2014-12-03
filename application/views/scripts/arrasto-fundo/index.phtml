@@ -1,10 +1,11 @@
+
 <div id="titulos">
     <h2>Desembarque->Arrasto de Fundo</h2>
     <h3>Entrevista</h3>
 </div>
 
 <div class="esquerda-entrevista">
-    <form action="<?=$this->url(array("controller"=>"arrasto-fundo","action"=>"criar"),null,true)?>">
+    <form method="post" action="<?=$this->url(array("controller"=>"arrasto-fundo","action"=>"criar"),null,true)?>" name="entrevista" onSubmit="return verificaData()">
         <fieldset id="Entrevista">
             <div class="esquerda">
                 <div class="form-esq">

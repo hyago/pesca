@@ -39,7 +39,13 @@ class SiripoiaController extends Zend_Controller_Action
         $this->modelMaturidade = new Application_Model_Maturidade();
 
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -50,9 +56,11 @@ class SiripoiaController extends Zend_Controller_Action
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        $this->naoexiste($monitoramento);
 
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        $this->naoexiste($fichadiaria);
+        
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -94,6 +102,7 @@ class SiripoiaController extends Zend_Controller_Action
         }
          //$avistamentoSiripoia = new Application_Model_DbTable_VSiripoiaHasAvistamento();
         $entrevista = $this->modelSiripoia->find($this->_getParam('id'));
+        $this->naoexiste($entrevista);
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
@@ -101,6 +110,7 @@ class SiripoiaController extends Zend_Controller_Action
         $especies = $this->modelEspecie->select(null, 'esp_nome_comum');
         $especiesCamarao = $this->modelEspecie->select('gen_id = 99 or gen_id = 100 or gen_id = 101');
         $monitoramento = $this->modelMonitoramento->find($entrevista['mnt_id']);
+        $this->naoexiste($monitoramento);
         $avistamentos = $this->modelAvistamento->select(null, 'avs_descricao');
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');

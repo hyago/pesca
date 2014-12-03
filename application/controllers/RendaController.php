@@ -27,7 +27,7 @@ private $usuario;
 
         $this->modelRenda = new Application_Model_Renda();
     }
-
+    
     public function indexAction()
     {
         $renda = $this->modelRenda->select(null, 'ren_id', null);
@@ -35,6 +35,12 @@ private $usuario;
         $this->view->assign("rendas", $renda);
     }
 
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
     public function novoAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
@@ -64,7 +70,9 @@ private $usuario;
             $this->_redirect('index');
         }
         $renda = $this->modelRenda->find($this->_getParam('id'));
-
+        $this->naoexiste($renda);
+        
+        
         $this->view->assign("rendas", $renda);
     }
 

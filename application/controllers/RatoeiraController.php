@@ -49,8 +49,10 @@ private $usuario;
         $mare = $this->modelMare->select();
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        $this->naoexiste($monitoramento);
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        $this->naoexiste($fichadiaria);
+        
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -62,8 +64,14 @@ private $usuario;
         $this->view->assign('especies',$especies);
 
     }
-
-public function visualizarAction() {
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
+    public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
@@ -75,7 +83,7 @@ public function visualizarAction() {
             $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_nome ~* '" . $ent_pescador . "'", array('tp_nome DESC', 'rat_id'));
         } elseif ($ent_barco) {
             $dados = $this->modelRatoeira->selectEntrevistaRatoeira("bar_nome ~* '" . $ent_barco . "'", array('bar_nome DESC', 'rat_id'));
-       }
+        }
         elseif ($ent_apelido){
             $dados = $this->modelRatoeira->selectEntrevistaRatoeira("tp_apelido ~* '" . $ent_apelido . "'", array('tp_apelido DESC', 'rat_id'), 20);
         }
@@ -91,6 +99,7 @@ public function visualizarAction() {
             $this->_redirect('index');
         }
         $entrevista = $this->modelRatoeira->find($this->_getParam('id'));
+        $this->naoexiste($entrevista);
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');

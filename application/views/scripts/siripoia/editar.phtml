@@ -4,7 +4,7 @@
 </div>
 
 <div class="esquerda-entrevista">
-    <form  action="<?= $this->url(array("controller" => "siripoia", "action" => "atualizar"), null, true) ?>">
+    <form  action="<?= $this->url(array("controller" => "siripoia", "action" => "atualizar"), null, true) ?>" name="entrevista" onSubmit="return verificaData()">
         <fieldset id="Entrevista">
             <div class="esquerda">
                 <div class="form-esq">

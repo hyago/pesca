@@ -60,7 +60,12 @@ private $usuario;
             $this->_redirect('index');
         }
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Cadastra uma Area de Pesca
      */
@@ -84,7 +89,7 @@ private $usuario;
             $this->_redirect('index');
         }
         $areaPesca = $this->modelAreaPesca->find($this->_getParam('id'));
-
+        $this->naoexiste($areaPesca);
         $this->view->assign("areaPesca", $areaPesca);
     }
 

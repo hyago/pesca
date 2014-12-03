@@ -42,10 +42,13 @@ class EmalheController extends Zend_Controller_Action
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        $this->naoexiste($monitoramento);
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
 
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        $this->naoexiste($fichadiaria);
+        
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
         $this->view->assign('destinos', $destinos);
@@ -55,7 +58,11 @@ class EmalheController extends Zend_Controller_Action
 
 
     }
-
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
@@ -82,6 +89,7 @@ class EmalheController extends Zend_Controller_Action
     public function editarAction(){
         //$avistamentoEmalhe = new Application_Model_DbTable_VEmalheHasAvistamento();
         $entrevista = $this->modelEmalhe->find($this->_getParam('id'));
+        $this->naoexiste($entrevista);
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
@@ -94,6 +102,8 @@ class EmalheController extends Zend_Controller_Action
 
 
         $idEntrevista = $this->_getParam('id');
+        
+        
         $datahoraSaida[] = split(" ",$entrevista['em_dhlancamento']);
         $datahoraVolta[] = split(" ",$entrevista['em_dhrecolhimento']);
 

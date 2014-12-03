@@ -35,7 +35,11 @@ class TipoCapturadaController extends Zend_Controller_Action
 
         $this->view->assign("tipoCapturada", $tipoCapturada);
     }
-
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     public function novoAction()
     {
         if($this->usuario['tp_id']==15 | $this->usuario['tp_id'] ==17 | $this->usuario['tp_id']==21){
@@ -65,7 +69,8 @@ class TipoCapturadaController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $tipoCapturada = $this->modelTipoCapturada->find($this->_getParam('id'));
-
+        $this->naoexiste($tipoCapturada);
+        
         $this->view->assign("tipoCapturada", $tipoCapturada);
     }
 

@@ -79,7 +79,6 @@ class PescadorController extends Zend_Controller_Action {
 
         $this->view->assign("pescador", $usuario);
     }
-
     public function novoAction() {
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
@@ -106,17 +105,31 @@ class PescadorController extends Zend_Controller_Action {
 
         $this->_redirect('pescador/index');
     }
-
+    
+    public function toerror($var){
+        if(empty($var)){
+            $this->redirect('exception/error');
+        }
+    }
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
     public function editarAction() {
         if($this->usuario['tp_id']==5){
             $this->_redirect('index');
         }
         $idPescador = $this->_getParam('id');
+        
+        $this->toerror($idPescador);
 
         $pescador = $this->modelPescador->find($idPescador);
+        
+        $this->naoexiste($pescador);
         $this->view->assign("pescador", $pescador);
         
-
         $modelMunicipio = new Application_Model_Municipio();
         $municipios = $modelMunicipio->select(NULL,'tmun_municipio');
         $this->view->assign("municipios", $municipios);

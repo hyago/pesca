@@ -52,9 +52,10 @@ class LinhaFundoController extends Zend_Controller_Action
 
 
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-
+        $this->naoexiste($monitoramento);
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        $this->naoexiste($fichadiaria);
+        
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -67,8 +68,13 @@ class LinhaFundoController extends Zend_Controller_Action
         $this->view->assign('iscas', $isca);
 
     }
-
-public function visualizarAction() {
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
         $ent_barco = $this->_getParam("bar_nome");
@@ -94,6 +100,7 @@ public function visualizarAction() {
     public function editarAction(){
          //$avistamentoLinhaFundo = new Application_Model_DbTable_VLinhaFundoHasAvistamento();
         $entrevista = $this->modelLinhaFundo->find($this->_getParam('id'));
+        $this->naoexiste($entrevista);
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');

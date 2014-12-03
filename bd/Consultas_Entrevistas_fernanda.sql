@@ -218,52 +218,52 @@
 --   ORDER BY t_porto.pto_prioridade, t_emalhe.em_id;
 -- 
 -- --/////////////////////////////////////////////////////////////////////////////////////////////////
--- CREATE OR REPLACE VIEW v_entrevista_grosseira AS 
---  SELECT t_local.tl_local,t_grosseira.grs_id,
---         'Grosseira' as artepesca,
---         t_pescador.tp_nome,
---         t_pescador.tp_apelido,
---         t_barco.bar_nome, 
---         t_ficha_diaria.fd_id, 
---         t_ficha_diaria.fd_data,
---         t_porto.pto_nome,
---         t_grosseira.grs_embarcada,
---         t_grosseira.bar_id,
---         t_grosseira.tte_id,
---         t_tipoembarcacao.tte_tipoembarcacao,
---         t_grosseira.tp_id_entrevistado,
---         t_grosseira.grs_numpescadores,
---         t_grosseira.grs_dhsaida::date as dsaida,
---         t_grosseira.grs_dhsaida::time as hsaida,
---         t_grosseira.grs_dhvolta::date as dvolta,
---         t_grosseira.grs_dhvolta::time as hvolta,
---         ( t_grosseira.grs_dhvolta::date - t_grosseira.grs_dhsaida::date)+1 as dias,
---         t_grosseira.grs_diesel,
---         t_grosseira.grs_oleo,
---         t_grosseira.grs_alimento,
---         t_grosseira.grs_gelo,
---         t_grosseira.grs_numlinhas,
---         t_grosseira.grs_numanzoisplinha,
---         t_grosseira.isc_id,
---         t_grosseira.grs_obs,
---         t_grosseira.mnt_id,
---         t_grosseira.grs_motor,
---         t_grosseira.dp_id,
---         t_destinopescado.dp_destino
---         FROM t_grosseira
---    LEFT JOIN t_pescador ON t_grosseira.tp_id_entrevistado = t_pescador.tp_id
---    LEFT JOIN t_barco ON t_grosseira.bar_id = t_barco.bar_id
---    LEFT JOIN t_monitoramento ON t_grosseira.mnt_id = t_monitoramento.mnt_id
---    LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
---    LEFT JOIN t_porto ON t_ficha_diaria.pto_id = t_porto.pto_id
---    LEFT JOIN t_tipoembarcacao ON t_grosseira.tte_id = t_tipoembarcacao.tte_id
---    LEFT JOIN t_destinopescado On t_grosseira.dp_id = t_destinopescado.dp_id
---     LEFT JOIN t_local ON t_porto.tl_id = t_local.tl_id
--- GROUP BY t_porto.pto_nome, t_grosseira.grs_id, t_pescador.tp_nome, 
---   t_pescador.tp_apelido, t_local.tl_local,t_barco.bar_nome, t_tipoembarcacao.tte_tipoembarcacao, 
---   t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_ficha_diaria.fd_data, 
--- t_destinopescado.dp_destino,t_porto.pto_prioridade
---   ORDER BY t_porto.pto_prioridade, t_grosseira.grs_id;;
+CREATE OR REPLACE VIEW v_entrevista_grosseira AS 
+ SELECT t_local.tl_local,t_grosseira.grs_id,
+        'Groseira' as artepesca,
+        t_pescador.tp_nome,
+        t_pescador.tp_apelido,
+        t_barco.bar_nome, 
+        t_ficha_diaria.fd_id, 
+        t_ficha_diaria.fd_data,
+        t_porto.pto_nome,
+        t_grosseira.grs_embarcada,
+        t_grosseira.bar_id,
+        t_grosseira.tte_id,
+        t_tipoembarcacao.tte_tipoembarcacao,
+        t_grosseira.tp_id_entrevistado,
+        t_grosseira.grs_numpescadores,
+        t_grosseira.grs_dhsaida::date as dsaida,
+        t_grosseira.grs_dhsaida::time as hsaida,
+        t_grosseira.grs_dhvolta::date as dvolta,
+        t_grosseira.grs_dhvolta::time as hvolta,
+        ( t_grosseira.grs_dhvolta::date - t_grosseira.grs_dhsaida::date)+1 as dias,
+        t_grosseira.grs_diesel,
+        t_grosseira.grs_oleo,
+        t_grosseira.grs_alimento,
+        t_grosseira.grs_gelo,
+        t_grosseira.grs_numlinhas,
+        t_grosseira.grs_numanzoisplinha,
+        t_grosseira.isc_id,
+        t_grosseira.grs_obs,
+        t_grosseira.mnt_id,
+        t_grosseira.grs_motor,
+        t_grosseira.dp_id,
+        t_destinopescado.dp_destino
+        FROM t_grosseira
+   LEFT JOIN t_pescador ON t_grosseira.tp_id_entrevistado = t_pescador.tp_id
+   LEFT JOIN t_barco ON t_grosseira.bar_id = t_barco.bar_id
+   LEFT JOIN t_monitoramento ON t_grosseira.mnt_id = t_monitoramento.mnt_id
+   LEFT JOIN t_ficha_diaria ON t_monitoramento.fd_id = t_ficha_diaria.fd_id
+   LEFT JOIN t_porto ON t_ficha_diaria.pto_id = t_porto.pto_id
+   LEFT JOIN t_tipoembarcacao ON t_grosseira.tte_id = t_tipoembarcacao.tte_id
+   LEFT JOIN t_destinopescado On t_grosseira.dp_id = t_destinopescado.dp_id
+    LEFT JOIN t_local ON t_porto.tl_id = t_local.tl_id
+GROUP BY t_porto.pto_nome, t_grosseira.grs_id, t_pescador.tp_nome, 
+  t_pescador.tp_apelido, t_local.tl_local,t_barco.bar_nome, t_tipoembarcacao.tte_tipoembarcacao, 
+  t_monitoramento.mnt_id, t_ficha_diaria.fd_id, t_ficha_diaria.fd_data, 
+t_destinopescado.dp_destino,t_porto.pto_prioridade
+  ORDER BY t_porto.pto_prioridade, t_grosseira.grs_id;
 -- 
 -- --/////////////////////////////////////////////////////////////////////////////////////////////////
 -- CREATE OR REPLACE VIEW v_entrevista_jerere AS 

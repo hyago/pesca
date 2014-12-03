@@ -45,9 +45,11 @@ private $usuario;
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
+        $this->naoexiste($monitoramento);
         $tipocalao = $this->modelTipoCalao->select(null, 'tcat_id');
         
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
+        $this->naoexiste($fichadiaria);
         
         $this->view->assign('tipoCalao', $tipocalao);
         $this->view->assign('fichaDiaria', $fichadiaria);
@@ -58,7 +60,13 @@ private $usuario;
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
 
     }
-
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
+    
     public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
@@ -84,6 +92,7 @@ private $usuario;
 
     public function editarAction(){
         $entrevista = $this->modelCalao->find($this->_getParam('id'));
+        $this->naoexiste($entrevista);
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
@@ -96,7 +105,7 @@ private $usuario;
         $tipocalao = $this->modelTipoCalao->select(null, 'tcat_id');
         
         $idEntrevista = $this->_getParam('id');
-
+        
         $vCalao = $this->modelCalao->selectCalaoHasPesqueiro('cal_id='.$idEntrevista);
 
         $vEspecieCapturadas = $this->modelCalao->selectCalaoHasEspCapturadas('cal_id='.$idEntrevista);

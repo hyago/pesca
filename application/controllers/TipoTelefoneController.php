@@ -45,7 +45,12 @@ class TipoTelefoneController extends Zend_Controller_Action
             $this->_redirect('index');
         }
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Cadastra uma Area de Pesca
      */
@@ -68,7 +73,8 @@ class TipoTelefoneController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $tipoTelefone = $this->modeloTipoTelefone->find($this->_getParam('id'));
-
+        $this->naoexiste($tipoTelefone);
+        
         $this->view->assign("assignTipoTelefone", $tipoTelefone);
     }
 

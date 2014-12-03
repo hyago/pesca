@@ -44,7 +44,12 @@ class TipoDependenteController extends Zend_Controller_Action
             $this->_redirect('index');
         }
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Cadastra uma Area de Pesca
      */
@@ -68,7 +73,8 @@ class TipoDependenteController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $tipoDependente = $this->modeloTipoDependente->find($this->_getParam('id'));
-
+        $this->naoexiste($tipoDependente);
+        
         $this->view->assign("assignTipoDependente", $tipoDependente);
     }
 

@@ -55,6 +55,12 @@ class ColoniaController extends Zend_Controller_Action {
         $this->view->assign("dados", $dados);
     }
 
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
     public function visualizarAction() {
         $colonia = $this->modelColonia->find($this->_getParam('id'));
 
@@ -103,6 +109,8 @@ class ColoniaController extends Zend_Controller_Action {
             $this->_redirect('index');
         }
         $colonia = $this->modelColonia->find($this->_getParam('id'));
+        $this->naoexiste($colonia);
+        
         $municipios = $this->modelMunicipio->select(null, 'tmun_municipio');
         $endereco = $this->modelEndereco->select();
         $comunidades = $this->modelComunidade->select(null, 'tcom_nome');

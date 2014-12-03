@@ -39,7 +39,11 @@ class ArtePescaController extends Zend_Controller_Action
 
         $this->modelArtePesca = new Application_Model_ArtePesca();
     }
-
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     /*
      * Lista todas as artes de pesca
      */
@@ -88,7 +92,7 @@ class ArtePescaController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $artePesca = $this->modelArtePesca->find($this->_getParam('id'));
-
+        $this->naoexiste($artePesca);
         $this->view->assign("artePesca", $artePesca);
     }
 

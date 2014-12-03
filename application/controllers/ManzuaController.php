@@ -38,7 +38,11 @@ class ManzuaController extends Zend_Controller_Action
         $this->modelTipoVenda = new Application_Model_TipoVenda();
         $this->modelMaturidade = new Application_Model_Maturidade();
     }
-
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     public function indexAction()
     {
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
@@ -50,9 +54,10 @@ class ManzuaController extends Zend_Controller_Action
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-
+        $this->naoexiste($monitoramento);
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        $this->naoexiste($fichadiaria);
+        
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -92,6 +97,7 @@ public function visualizarAction() {
             $this->_redirect('index');
         }
         $entrevista = $this->modelManzua->find($this->_getParam('id'));
+        $this->naoexiste($entrevista);
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');

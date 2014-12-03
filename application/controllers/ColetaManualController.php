@@ -48,9 +48,11 @@ class ColetaManualController extends Zend_Controller_Action
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-
+        $this->naoexiste($monitoramento);
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        $this->naoexiste($fichadiaria);
+        
+        
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -60,7 +62,11 @@ class ColetaManualController extends Zend_Controller_Action
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
 
     }
-
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
     public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
@@ -104,6 +110,8 @@ class ColetaManualController extends Zend_Controller_Action
 
 
         $idEntrevista = $this->_getParam('id');
+        $this->naoexiste($idEntrevista);
+        
         $datahoraSaida[] = split(" ",$entrevista['cml_dhsaida']);
         $datahoraVolta[] = split(" ",$entrevista['cml_dhvolta']);
 

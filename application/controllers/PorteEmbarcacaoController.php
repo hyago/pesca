@@ -35,6 +35,12 @@ class PorteEmbarcacaoController extends Zend_Controller_Action
 
         $this->view->assign("dados", $dados);
     }
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
 
     public function novoAction()
     {
@@ -52,10 +58,10 @@ class PorteEmbarcacaoController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $this->modelPorteEmbarcacao->insert($this->_getAllParams());
-
+        
         $this->_redirect('porte-embarcacao/index');
     }
-
+    
     /*
      * Preenche um formulario com as informações de um usuário
      */
@@ -65,7 +71,8 @@ class PorteEmbarcacaoController extends Zend_Controller_Action
             $this->_redirect('index');
         }
         $porteEmb = $this->modelPorteEmbarcacao->find($this->_getParam('id'));
-
+        $this->naoexiste($porteEmb);
+        
         $this->view->assign("porteEmbarcacao", $porteEmb);
     }
 

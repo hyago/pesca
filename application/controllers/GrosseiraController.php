@@ -47,9 +47,10 @@ private $usuario;
         $destinos = $this->modelDestinoPescado->select(null, 'dp_destino');
 
         $monitoramento = $this->modelMonitoramento->find($this->_getParam("idMonitoramento"));
-
+        $this->naoexiste($monitoramento);
         $fichadiaria = $this->modelFichaDiaria->find($this->_getParam('id'));
-
+        $this->naoexiste($fichadiaria);
+            
         $this->view->assign('destinos', $destinos);
         $this->view->assign('fichaDiaria', $fichadiaria);
         $this->view->assign('monitoramento', $monitoramento);
@@ -59,7 +60,13 @@ private $usuario;
         $this->view->assign('tipoEmbarcacoes',$tipoEmbarcacoes);
 
     }
-
+    
+    public function naoexiste($var){
+        if(empty($var)){
+            $this->redirect('exception/naoexiste');
+        }
+    }
+    
     public function visualizarAction() {
         $ent_id = $this->_getParam("ent_id");
         $ent_pescador = $this->_getParam("tp_nome");
@@ -86,6 +93,7 @@ private $usuario;
     public function editarAction(){
          //$avistamentoGrosseira = new Application_Model_DbTable_VGrosseiraHasAvistamento();
         $entrevista = $this->modelGrosseira->find($this->_getParam('id'));
+        $this->naoexiste($entrevista);
         $pescadores = $this->modelPescador->select(null, 'tp_nome');
         $barcos = $this->modelBarcos->select(null, 'bar_nome');
         $tipoEmbarcacoes = $this->modelTipoEmbarcacao->select(null, 'tte_tipoembarcacao');
