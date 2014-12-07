@@ -177,7 +177,15 @@ class Application_Model_ArrastoFundo
         $this->dbTableArrastoFundo->update($dadosArrastoFundo, $whereArrastoFundo);
 
     }
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
 
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idArrastoFundo)
     {
         $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();

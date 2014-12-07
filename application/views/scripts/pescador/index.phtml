@@ -3,33 +3,6 @@
 
         <h2>Perfil Social->Pescador (lista limitada em 20)</h2>
 
-<!--        <table id="tabelaSemEstilo">
-            <tr>
-                <td>
-                    </td>
-                <td>
-                    <input type="button" size="50" value="Limpar Busca" class="button-confirmText" onclick="jsClearBuscaPescador('<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
-                </td>
-                <td>
-                    <input type="button" size="50" value="Listar todos" class="button-confirmText" onclick="jsBuscaTodosPescadores('<?=$this->url(array("controller" => "pescador", "action" => "index", "tp_all" => "all"), null, true) ?>')">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" size="50" value="Busca por ID" class="button-confirmText" onclick="jsBuscaPescadorId(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
-                    <input type="number" min="0" name="inputId" placeholder="Busca por ID" />
-                </td>
-
-                <td>
-                    <input type="button" size="50" value="Busca por nome" class="button-confirmText" onclick="jsBuscaPescadorNome(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
-                    <input type="text" name="inputNome" placeholder="Busca por Nome" />
-                </td>
-                <td>
-                    <input type="button" size="50" value="Busca por Apelido" class="button-confirmText" onclick="jsBuscaPescadorApelido(this.form, '<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')">
-                    <input type="text" name="inputApelido" placeholder="Busca por Apelido" />
-                </td>
-            </tr>
-       </table>-->
             <a href="<?= $this->url(array("controller" => "pescador", "action" => "novo"), null, true) ?>" id="botao-ancora">Novo</a>
                 
             <input type="button" value="Limpar" onClick="jsClearBusca('<?= $this->url(array("controller" => "pescador", "action" => "index"), null, true) ?>')"/>
@@ -99,7 +72,11 @@
                         </a>
                     </td>
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
+                        <a  name="Excluir"  onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "excluir", "id" => $pescador['tp_id']), null, true) ?>')">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all" title="Imprimir"><span class="ui-icon ui-icon-close"></span></li>
+                            </ul>
+                        </a>
                     </td>
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirpescadorid", "id_pescador" => $pescador['tp_id']), null, true) ?>">

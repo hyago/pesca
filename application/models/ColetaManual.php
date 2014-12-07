@@ -84,7 +84,15 @@ private $dbTableColetaManual;
         $insertColetaManual =$this->dbTableColetaManual->insert($dadosColetaManual);
         return $insertColetaManual;
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_ColetaManual();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function update(array $request)
     {
         $this->dbTableColetaManual = new Application_Model_DbTable_ColetaManual();

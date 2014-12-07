@@ -184,7 +184,15 @@ class Application_Model_Calao
         
         $this->dbTableCalao->update($dadosCalao, $whereCalao);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Calao();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idCalao)
     {
         $this->dbTableCalao = new Application_Model_DbTable_Calao();       

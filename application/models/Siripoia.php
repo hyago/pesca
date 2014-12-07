@@ -139,7 +139,15 @@ class Application_Model_Siripoia
         
         $this->dbTableSiripoia->update($dadosSiripoia, $whereSiripoia);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Siripoia();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idSiripoia)
     {
         $this->dbTableSiripoia = new Application_Model_DbTable_Siripoia();       

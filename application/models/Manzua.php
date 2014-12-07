@@ -138,7 +138,15 @@ class Application_Model_Manzua
         
         $this->dbTableManzua->update($dadosManzua, $whereManzua);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Manzua();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idManzua)
     {
         $this->dbTableManzua = new Application_Model_DbTable_Manzua();       

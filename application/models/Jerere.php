@@ -153,7 +153,15 @@ class Application_Model_Jerere
         
         $this->dbTableJerere->update($dadosJerere, $whereJerere);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Jerere();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idJerere)
     {
         $this->dbTableJerere = new Application_Model_DbTable_Jerere();       

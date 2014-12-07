@@ -213,7 +213,15 @@ class Application_Model_Emalhe
         
         $this->dbTableEmalhe->update($dadosEmalhe, $whereEmalhe);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Emalhe();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idEmalhe)
     {
         $this->dbTableEmalhe = new Application_Model_DbTable_Emalhe();       

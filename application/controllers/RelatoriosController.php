@@ -3529,5 +3529,60 @@ class RelatoriosController extends Zend_Controller_Action
         ob_end_clean();
         $objWriter->save('php://output');
     }
+    
+    public function biometrias(){
+        set_time_limit(300);
+        if($this->usuario['tp_id']==5){
+            $this->_redirect('index');
+        }
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        
+        $modelArrasto =    new Application_Model_ArrastoFundo;
+        $modelCalao=       new Application_Model_Calao;
+        $modelColetaManual=new Application_Model_ColetaManual;
+        $modelEmalhe=      new Application_Model_Emalhe;
+        $modelGrosseira=   new Application_Model_Grosseira;
+        $modelJerere=      new Application_Model_Jerere;
+        $modelLinha=       new Application_Model_Linha;
+        $modelLinhaFundo=  new Application_Model_LinhaFundo;
+        $modelManzua=      new Application_Model_Manzua;
+        $modelMergulho=    new Application_Model_Mergulho;
+        $modelRatoeira=    new Application_Model_Ratoeira;
+        $modelSiripoia=    new Application_Model_Siripoia;
+        $modelTarrafa=     new Application_Model_Tarrafa;
+        $modelVaraPesca =  new Application_Model_VaraPesca;
+        
+        $modelArrasto->selectVBioCamarao();
+        $modelCalao->selectVBioCamarao();
+        $modelColetaManual->selectVBioCamarao();
+        $modelEmalhe->selectVBioCamarao();
+        $modelGrosseira->selectVBioCamarao();
+        $modelJerere->selectVBioCamarao();
+        $modelLinha->selectVBioCamarao();
+        $modelLinhaFundo->selectVBioCamarao();
+        $modelManzua->selectVBioCamarao();
+        $modelMergulho->selectVBioCamarao();
+        $modelRatoeira->selectVBioCamarao();
+        $modelSiripoia->selectVBioCamarao();
+        $modelTarrafa->selectVBioCamarao();
+        $modelVaraPesca->selectVBioCamarao();
+                
+        require_once "../library/Classes/PHPExcel.php";
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $coluna = 0;
+        $linha = 1;
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($coluna,   $linha, 'Espécie');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Valor Máximo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Valor Mínimo');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'Média Geral');
+        $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(++$coluna, $linha, 'ID');
+        
+        $coluna= 0;
+        $linha++;
+    }
 }
 

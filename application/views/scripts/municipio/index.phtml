@@ -27,7 +27,12 @@
                 </td>
 
                 <td class="td-botao">
-                    <input type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "municipio", "action" => "excluir", "id" => $municipio['tmun_id']), null, true) ?>')">
+                    <a value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "municipio", "action" => "excluir", "id" => $municipio['tmun_id']), null, true) ?>')">
+                        <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-close"></span></li>
+                        </ul>
+                    </a> 
+                
                 </td>
 
             </tr>

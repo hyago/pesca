@@ -275,7 +275,10 @@ $(function() {
                             <td name="inputTipoDependenteID[]"> <?= $vPescadorHasDependente['ttd_id'] ?> </td>
                             <td name="inputTipoDependente[]" > <?= $vPescadorHasDependente['ttd_tipodependente'] ?> </td>
                             <td name="inputQuantidadeDependente[]" > <?= $vPescadorHasDependente['tptd_quantidade'] ?> </td>
-                            <td><input type="button" class="button-del" width="5%" onclick="jsDeletePescadorHasDependente(<?= $vPescadorHasDependente['ttd_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhasdependente"), null, true) ?>')"></td>
+                            <td>
+                                <input type="button" class="button-del" width="5%" onclick="jsDeletePescadorHasDependente(<?= $vPescadorHasDependente['ttd_id'] ?>, this.form, '<?= $this->url(array("controller" => "pescador", "action" => "deletepescadorhasdependente"), null, true) ?>')">
+                            </td>
+                            
                         </tr>
                     <?php endforeach; ?>
                 </table>

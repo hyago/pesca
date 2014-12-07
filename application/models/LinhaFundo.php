@@ -197,7 +197,15 @@ class Application_Model_LinhaFundo
         
         $this->dbTableLinhaFundo->update($dadosLinhaFundo, $whereLinhaFundo);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_ArrastoFundo();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idLinhaFundo)
     {
         $this->dbTableLinhaFundo = new Application_Model_DbTable_LinhaFundo();       

@@ -140,7 +140,15 @@ class Application_Model_Ratoeira
         
         $this->dbTableRatoeira->update($dadosRatoeira, $whereRatoeira);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Ratoeira();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idRatoeira)
     {
         $this->dbTableRatoeira = new Application_Model_DbTable_Ratoeira();       

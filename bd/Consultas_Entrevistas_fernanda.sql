@@ -2445,187 +2445,187 @@ t_destinopescado.dp_destino,t_porto.pto_prioridade
 --   Group By esp_nome_comum, esp_id;
 
 
-Drop view v_especies_capturadas_by_mes;
-CREATE OR REPLACE VIEW v_especies_capturadas_by_mes AS
-SELECT  'Arrasto de Fundo' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_arrastofundo_has_t_especie_capturada as afspc
-  Left Join v_entrevista_arrasto as eaf On afspc.af_id = eaf.af_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Calão' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_calao_has_t_especie_capturada as afspc
-  Left Join v_entrevista_calao as eaf On afspc.cal_id = eaf.cal_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Coleta Manual' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_coletamanual_has_t_especie_capturada as afspc
-  Left Join v_entrevista_coletamanual as eaf On afspc.cml_id = eaf.cml_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Emalhe' as arte,
-eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_emalhe_has_t_especie_capturada as afspc
-  Left Join v_entrevista_emalhe as eaf On afspc.em_id = eaf.em_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Jereré' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_jerere_has_t_especie_capturada as afspc
-  Left Join v_entrevista_jerere as eaf On afspc.jre_id = eaf.jre_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Groseira' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_grosseira_has_t_especie_capturada as afspc
-  Left Join v_entrevista_grosseira as eaf On afspc.grs_id = eaf.grs_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Linha' as arte,
-eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_linha_has_t_especie_capturada as afspc
-  Left Join v_entrevista_linha as eaf On afspc.lin_id = eaf.lin_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All 
-SELECT  'Linha de Fundo' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_linhafundo_has_t_especie_capturada as afspc
-  Left Join v_entrevista_linhafundo as eaf On afspc.lf_id = eaf.lf_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Manzuá' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_manzua_has_t_especie_capturada as afspc
-  Left Join v_entrevista_manzua as eaf On afspc.man_id = eaf.man_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Mergulho' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_mergulho_has_t_especie_capturada as afspc
-  Left Join v_entrevista_mergulho as eaf On afspc.mer_id = eaf.mer_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Ratoeira' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_ratoeira_has_t_especie_capturada as afspc
-  Left Join v_entrevista_ratoeira as eaf On afspc.rat_id = eaf.rat_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'siripoia' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_siripoia_has_t_especie_capturada as afspc
-  Left Join v_entrevista_siripoia as eaf On afspc.sir_id = eaf.sir_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Tarrafa' as arte,
-eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.tar_data) as mes,
-	date_part('year'::text, eaf.tar_data) as ano
-  FROM v_tarrafa_has_t_especie_capturada as afspc
-  Left Join v_entrevista_tarrafa as eaf On afspc.tar_id = eaf.tar_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-Union All
-SELECT  'Vara de Pesca' as arte,
-	eaf.tl_local,
-	eaf.pto_nome,
-	esp_nome_comum, 
-	sum(spc_quantidade) as quantidade, 
-	sum(spc_peso_kg) as peso, 
-	esp_id,
-	date_part('month'::text, eaf.fd_data) as mes,
-	date_part('year'::text, eaf.fd_data) as ano
-  FROM v_varapesca_has_t_especie_capturada as afspc
-  Left Join v_entrevista_varapesca as eaf On afspc.vp_id = eaf.vp_id
-  Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
-  Order By arte,tl_local;
+-- Drop view v_especies_capturadas_by_mes;
+-- CREATE OR REPLACE VIEW v_especies_capturadas_by_mes AS
+-- SELECT  'Arrasto de Fundo' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_arrastofundo_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_arrasto as eaf On afspc.af_id = eaf.af_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Calão' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_calao_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_calao as eaf On afspc.cal_id = eaf.cal_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Coleta Manual' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_coletamanual_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_coletamanual as eaf On afspc.cml_id = eaf.cml_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Emalhe' as arte,
+-- eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_emalhe_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_emalhe as eaf On afspc.em_id = eaf.em_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Jereré' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_jerere_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_jerere as eaf On afspc.jre_id = eaf.jre_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Groseira' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_grosseira_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_grosseira as eaf On afspc.grs_id = eaf.grs_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Linha' as arte,
+-- eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_linha_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_linha as eaf On afspc.lin_id = eaf.lin_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All 
+-- SELECT  'Linha de Fundo' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_linhafundo_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_linhafundo as eaf On afspc.lf_id = eaf.lf_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Manzuá' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_manzua_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_manzua as eaf On afspc.man_id = eaf.man_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Mergulho' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_mergulho_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_mergulho as eaf On afspc.mer_id = eaf.mer_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Ratoeira' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_ratoeira_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_ratoeira as eaf On afspc.rat_id = eaf.rat_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'siripoia' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_siripoia_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_siripoia as eaf On afspc.sir_id = eaf.sir_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Tarrafa' as arte,
+-- eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.tar_data) as mes,
+-- 	date_part('year'::text, eaf.tar_data) as ano
+--   FROM v_tarrafa_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_tarrafa as eaf On afspc.tar_id = eaf.tar_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+-- Union All
+-- SELECT  'Vara de Pesca' as arte,
+-- 	eaf.tl_local,
+-- 	eaf.pto_nome,
+-- 	esp_nome_comum, 
+-- 	sum(spc_quantidade) as quantidade, 
+-- 	sum(spc_peso_kg) as peso, 
+-- 	esp_id,
+-- 	date_part('month'::text, eaf.fd_data) as mes,
+-- 	date_part('year'::text, eaf.fd_data) as ano
+--   FROM v_varapesca_has_t_especie_capturada as afspc
+--   Left Join v_entrevista_varapesca as eaf On afspc.vp_id = eaf.vp_id
+--   Group By pto_nome,mes,ano, esp_nome_comum, esp_id, eaf.tl_local
+--   Order By arte,tl_local;

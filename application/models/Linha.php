@@ -198,7 +198,15 @@ private $dbTableLinha;
         
         $this->dbTableLinha->update($dadosLinha, $whereLinha);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Linha();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idLinha)
     {
         $this->dbTableLinha = new Application_Model_DbTable_Linha();       

@@ -144,7 +144,15 @@ private $dbTableMergulho;
         
         $this->dbTableMergulho->update($dadosMergulho, $whereMergulho);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Mergulho();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idMergulho)
     {
         $this->dbTableMergulho = new Application_Model_DbTable_Mergulho();       

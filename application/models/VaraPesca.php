@@ -189,7 +189,15 @@ class Application_Model_VaraPesca
         
         $this->dbTableVaraPesca->update($dadosVaraPesca, $whereVaraPesca);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_VaraPesca();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idVaraPesca)
     {
         $this->dbTableVaraPesca = new Application_Model_DbTable_VaraPesca();       

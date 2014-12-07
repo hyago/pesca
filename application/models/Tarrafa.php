@@ -149,7 +149,15 @@ class Application_Model_Tarrafa
 
         $this->dbTableTarrafa->update($dadosTarrafa, $whereTarrafa);
     }
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Tarrafa();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
 
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idTarrafa)
     {
         $this->dbTableTarrafa = new Application_Model_DbTable_Tarrafa();

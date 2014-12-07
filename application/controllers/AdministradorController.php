@@ -39,6 +39,47 @@ class AdministradorController extends Zend_Controller_Action
             $this->view->assign("pescadorDeletado", $pescadorDeletado);
         }
     }
+    
+    public function deleteAction(){
+        $idPescador = $this->getParam('id');
+        
+        $idMantido = $this->getParam('idMantido');
+        
+        $modelArrasto= new Application_Model_ArrastoFundo;
+        $modelCalao= new Application_Model_Calao;
+        $modelColetaManual= new Application_Model_ColetaManual;
+        $modelEmalhe= new Application_Model_Emalhe;
+        $modelGrosseira= new Application_Model_Grosseira;
+        $modelJerere= new Application_Model_Jerere;
+        $modelLinha= new Application_Model_Linha;
+        $modelLinhaFundo= new Application_Model_LinhaFundo;
+        $modelManzua= new Application_Model_Manzua;
+        $modelMergulho= new Application_Model_Mergulho;
+        $modelRatoeira= new Application_Model_Ratoeira;
+        $modelSiripoia= new Application_Model_Siripoia;
+        $modelTarrafa= new Application_Model_Tarrafa;
+        $modelVaraPesca= new Application_Model_VaraPesca;
+        
+        
+        $modelArrasto->updatePescador($idPescador, $idMantido);
+        $modelCalao->updatePescador($idPescador, $idMantido);
+        $modelColetaManual->updatePescador($idPescador, $idMantido);
+        $modelEmalhe->updatePescador($idPescador, $idMantido);
+        $modelGrosseira->updatePescador($idPescador, $idMantido);
+        $modelJerere->updatePescador($idPescador, $idMantido);
+        $modelLinha->updatePescador($idPescador, $idMantido); 
+        $modelLinhaFundo->updatePescador($idPescador, $idMantido);
+        $modelManzua->updatePescador($idPescador, $idMantido);
+        $modelMergulho->updatePescador($idPescador, $idMantido);
+        $modelRatoeira->updatePescador($idPescador, $idMantido);
+        $modelSiripoia->updatePescador($idPescador, $idMantido);
+        $modelTarrafa->updatePescador($idPescador, $idMantido);
+        $modelVaraPesca->updatePescador($idPescador, $idMantido);
+        
+        
+        
+        
+    }
 
 
 }

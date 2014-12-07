@@ -199,7 +199,15 @@ private $dbTableGrosseira;
         
         $this->dbTableGrosseira->update($dadosGrosseira, $whereGrosseira);
     }
-    
+    public function updatePescador($idPescador,$idMantido){
+        $this->dbTableArrastoFundo = new Application_Model_DbTable_Grosseira();
+        
+        $wherePescador = $this->dbTableArrastoFundo->getAdapter()
+                ->quoteInto('"tp_id_entrevistado" = ?', $idPescador);
+
+
+        $this->dbTableArrastoFundo->update($idMantido, $wherePescador);
+    }
     public function delete($idGrosseira)
     {
         $this->dbTableGrosseira = new Application_Model_DbTable_Grosseira();       
