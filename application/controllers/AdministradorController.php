@@ -45,6 +45,8 @@ class AdministradorController extends Zend_Controller_Action
         
         $idMantido = $this->getParam('idMantido');
         
+        $modelAdministrador = new Application_Model_Administrador();
+        
         $modelArrasto= new Application_Model_ArrastoFundo;
         $modelCalao= new Application_Model_Calao;
         $modelColetaManual= new Application_Model_ColetaManual;
@@ -75,10 +77,21 @@ class AdministradorController extends Zend_Controller_Action
         $modelSiripoia->updatePescador($idPescador, $idMantido);
         $modelTarrafa->updatePescador($idPescador, $idMantido);
         $modelVaraPesca->updatePescador($idPescador, $idMantido);
+
+        $modelAdministrador->deletePescadorHasArea($idPescador);
+        $modelAdministrador->deletePescadorHasArteTipo($idPescador);
+        $modelAdministrador->deletePescadorHasColonia($idPescador);
+        $modelAdministrador->deletePescadorHasComunidade($idPescador);
+        $modelAdministrador->deletePescadorHasDependente($idPescador);
+        $modelAdministrador->deletePescadorHasEmbarcacoes($idPescador);
+        $modelAdministrador->deletePescadorHasPorto($idPescador);
+        $modelAdministrador->deletePescadorHasProgramaSocial($idPescador);
+        $modelAdministrador->deletePescadorHasRenda($idPescador);
+        $modelAdministrador->deletePescadorHasTelefone($idPescador);
+        $modelAdministrador->deletePescadorHasTipo($idPescador);
+        $modelAdministrador->deletePescador($idPescador);
         
-        
-        
-        
+        $this->redirect('administrador/index');
     }
 
 

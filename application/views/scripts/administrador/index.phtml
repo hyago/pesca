@@ -19,7 +19,7 @@
                         </a>
                     </td>
                     <td class="td-botao">
-                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "pescador", "action" => "restaure", "id" => $pescador['tp_id']), null, true) ?>')">
+                        <input type="button" name="Excluir" class="button-del" onclick="beforeDelete('<?= $this->url(array("controller" => "administrador", "action" => "delete", "id" => $pescador['tp_id'], "idMantido" => $pescador['tp_obs']), null, true) ?>')">
                     </td>
                     <td class="td-botao">
                         <a href="<?= $this->url(array("controller" => "pescador", "action" => "imprimirpescadorid", "id_pescador" => $pescador['tp_id']), null, true) ?>">
