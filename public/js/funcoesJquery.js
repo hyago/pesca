@@ -815,7 +815,7 @@ function jsInsertEspecieCapturadaTipoVenda(frm, pag, entrevista){
     if(frm.SelectEspecie.value === ""){
         alert("Selecione uma espécie!");
     }
-    else if(frm.quantidade.value === "" || frm.peso.value === ""){
+    else if(frm.quantidade.value === "" && frm.peso.value === ""){
         alert("A Quantidade e o Peso não podem ser vazios, por favor insira um deles!");
     }
     else{
@@ -830,7 +830,7 @@ function jsInsertEspecieCapturada(frm, pag, entrevista){
     if(frm.SelectEspecie.value === ""){
         alert("Selecione uma espécie!");
     }
-    else if(frm.quantidade.value === "" || frm.peso.value === ""){
+    else if(frm.quantidade.value === "" && frm.peso.value === ""){
         alert("A Quantidade e o Peso não podem ser vazios, por favor insira um deles!");
     }
     else{
