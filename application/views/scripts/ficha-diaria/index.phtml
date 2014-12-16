@@ -34,7 +34,7 @@
         <td width="10%"><?= $fichadiaria['pto_nome'] ?></td>
         <td width="30%"><?= $fichadiaria['t_estagiario'] ?></td>
         <td width="20%"><?= $fichadiaria['t_monitor'] ?></td>
-        <td width="10%" class="td-botao">
+        <td class="td-botao">
             <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"editar", "id" => $fichadiaria['fd_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-pencil"></span></li>
@@ -42,7 +42,7 @@
             </a>
         </td>
         
-        <td width="20%" class="td-botao">
+        <td  class="td-botao">
             <a type="button" value="Excluir" onclick="beforeDelete('<?= $this->url(array("controller" => "ficha-diaria", "action" => "excluir", "id" => $fichadiaria['fd_id']), null, true) ?>')">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Excluir"><span class="ui-icon ui-icon-close"></span></li>
@@ -50,7 +50,7 @@
              </a>
             
         </td>
-        <td width="5%" class="td-botao">
+        <td  class="td-botao">
             <a href="<?=$this->url(array("controller"=>"ficha-diaria","action"=>"imprimirfichaid", "id" => $fichadiaria['fd_id']),null,true)?>">
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li class="ui-state-default ui-corner-all" title="Imprimir"><span class="ui-icon ui-icon-print"></span></li>
@@ -60,5 +60,7 @@
     </tr>
     <?php endforeach; ?>
 </table>
+            <br/>
+            <br/>
      <a href="<?= $this->url(array("controller" => "ficha-diaria", "action" => "imprimirfichatodas"), null, true) ?>" id="botao-ancora" target="_blank">Gerar Relatório</a>
  </form>

@@ -4,9 +4,9 @@ body{
 }
 
 #geral {
-    font-size: 12px;
+    font-size: 85%;
     margin: 0 auto;
-    width: 900px;
+    width: 100%;
     background: #f8f8ff;
 }
 
@@ -33,7 +33,7 @@ body{
 
 #menu{
     float: left;
-    width: 900px;
+    width: 100%;
     background: #5F302B;//#8B8386;
     min-height: 45px;
 }
@@ -56,7 +56,7 @@ body{
     float: left;
     margin: 10px 0;
     padding: 5px 10px;
-    font-size: 13px;
+    font-size: 100%;
     color: #fff;
     text-decoration: none;
     border-right: 1px solid #fff;
@@ -93,7 +93,7 @@ body{
 #conteudo-geral
 {
     float: left;
-    width: 900px;
+    width: 100%;
     background: #f8f8ff;
 }
 
@@ -102,7 +102,7 @@ body{
     min-height: 350px;
     clear: right;
     float: right;
-    width: 670px;
+    width: 80%;
     padding: 0px 10px 0 0;
     margin: 0;
     display: inline;
@@ -171,28 +171,30 @@ body{
 
 
 
-#rodape {
+#rodape 
+{
     clear: both;
     background: #f8f8ff;
-    text-align: left;
     height: 70px;
 }
 
-#parceiros {
-    margin: 0px;
-    width: 1000px;
+#parceiros 
+{
+    width: 100%;
     height: 70px;
     background: #f8f8ff;
 }
 
-#parceiros ul {
+#parceiros ul 
+{
     list-style: none;
 }
 
-#parceiros ul li {
+#parceiros ul li 
+{
     display: inline;
-    margin-left: 0px;
-    margin-right: 123px;
+    width: 100%;
+    margin-left: 12%;
 }
 
 #icons {
@@ -249,34 +251,34 @@ tbody tr:nth-child(odd) {
 #esquerda_base{
     float: left;
     padding: 0;
-    width: 400px;
+    width: 50%;
     height: auto;
 }
 
 .esquerda{
     float: left;
     padding: 0;
-    width: 330px;
+    width: 50%;
     height: auto;
 }
 
 .direita{
     float: right;
     padding: 0;
-    width: 310px;
+    width: 50%;
     height: auto;
 }
 .esquerda-entrevista{
     float: left;
     padding: 0;
-    width: 680px;
+    width: 80%;
     height: auto;
 }
 
 .direita-entrevista{
     float: right;
     margin-left: 30px;
-    width: 330px;
+    width: 50%;
     height: auto;
     margin-top: -62px;
 }
@@ -300,11 +302,14 @@ tbody tr:nth-child(odd) {
 #pescador_especialista{
     float: left;
     padding: 0;
-    width: 630px;
+    width: 90%;
     height: auto;
 }
-#pescador_especialista input, select{
-    width: 220px;
+#pescador_especialista input{
+    width: 250px;
+}
+#pescador_especialista select{
+    width: 255px;
 }
 #pescador_especialista .button-confirm, .button-del{
     width: 30px;
@@ -316,7 +321,7 @@ tbody tr:nth-child(odd) {
 
 
 select{
-    width: 168px;
+    width: 245px;
     height: 25px;
     background: white;
     float: right;
@@ -334,6 +339,7 @@ select.amostragem{
 
 input {
     float: right;
+    width: 240px;
     height: 22px;
     border-radius: 3px;
     border-color:#8b8386;
@@ -501,6 +507,7 @@ input.button-especialista{
     background-position: 0px 0px;  /* equivalent to 'top left' */
     border-color: #CCC;            /*assuming we don't want any borders */
     cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    width: 30px;
     padding-left: 22px;
     vertical-align: middle; /* align the text vertically centered */
 }
