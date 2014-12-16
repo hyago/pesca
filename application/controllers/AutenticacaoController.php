@@ -57,11 +57,11 @@ class AutenticacaoController extends Zend_Controller_Action {
                 //
                 $this->_redirect('index');
             } else {
-                $this->_redirect('autenticacao/logout');
+                $this->_redirect('falha');
             }
         }
     }
-
+    public function falhaAction(){}
     /*
      * Logout de usuários
      */

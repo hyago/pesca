@@ -7,12 +7,9 @@
             <?php
                 $this->headLink()->prependStylesheet('/css/estilo.css');
                 $this->headLink()->appendStylesheet('/css/smoothness/jquery-ui-1.10.3.custom.min.css');
-                $this->headScript()->prependFile('/js/jquery-1.10.2.min.js');
-                $this->headScript()->appendFile('/js/jquery-ui-1.10.3.custom.min.js');
-                $this->headScript()->appendFile('/js/jquery-ui-functions.js');
+
 
                 echo $this->headLink() . "\n";
-                echo $this->headScript() . "\n";
             ?>
 
             <title>
@@ -38,7 +35,7 @@
                     <li><a href="<?= $this->url(array("controller" => "sobre", "action" => "index"), null, true) ?>">Sobre</a></li>
                 </ul>
                 <div id="login">
-                    <form method="post" action="<?= $this->url(array('controller' => 'autenticacao', 'action' => 'login'), null, true) ?>">
+                    <form method="post" action="<?= $this->url(array('controller' => 'autenticacao', 'action' => 'login'), null, true) ?>" >
                         <input type="text" name="login" class="login" PlaceHolder="Usuário" id="user" required>
                         <input type="password" name="senha" class="login" PlaceHolder="Senha" id="senha" required>
                         <input type="submit" value="Entrar" />

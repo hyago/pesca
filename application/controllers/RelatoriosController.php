@@ -36,7 +36,17 @@ class RelatoriosController extends Zend_Controller_Action
     public function pescadoresportoAction(){
         $this->modelRelatorios = new Application_Model_Relatorios();
         $pescadoresPorto = $this->modelRelatorios->selectPescadores('pto_nome');
-        $this->view->assign("portos",$pescadoresPorto);
+        
+        foreach($pescadoresPorto as $key => $porto):
+            $array_porto[] = $porto['pto_nome'];
+            $array_quantidade[] = $porto['count'];
+        endforeach;
+        
+        $js_porto = json_encode($array_porto);
+        $js_quantidade = json_encode($array_quantidade);
+
+        $this->view->assign("array_porto",$js_porto);
+        $this->view->assign("array_quantidade",$js_quantidade);
     }
     public function pescadoresportoxlsAction(){
         
@@ -109,7 +119,16 @@ class RelatoriosController extends Zend_Controller_Action
         $this->modelRelatorios = new Application_Model_Relatorios();
         $pescadoresColonias = $this->modelRelatorios->selectPescadores('tc_nome');
         
-        $this->view->assign("colonias",$pescadoresColonias);
+        foreach($pescadoresColonias as $key => $colonia):
+            $array_colonia[] = $colonia['tc_nome'];
+            $array_quantidade[] = $colonia['count'];
+        endforeach;
+        
+        $js_colonia = json_encode($array_colonia);
+        $js_quantidade = json_encode($array_quantidade);
+        
+        $this->view->assign("array_quantidade", $js_quantidade);
+        $this->view->assign("array_colonia",$js_colonia);
     }
     public function pescadoresescolaridadeAction(){
         $this->modelRelatorios = new Application_Model_Relatorios();

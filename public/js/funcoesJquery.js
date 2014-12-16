@@ -749,7 +749,7 @@ function beforeDelete(id)
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/ Entrevista_has_Pesqueiro /_/_/_/_/_/_/_/_/_/_/_/_/_/
 function jsDeletePesqueiro(fichaId,pag, idEntHasPesqueiro) {
     var TmpUrl = (+fichaId + '#base');
-
+    
     var tmpUpdate = (pag + '/id/' + idEntHasPesqueiro + '/back_url/' + TmpUrl);
 
     if (confirm("Realmente deseja excluir este item?")) {
@@ -759,57 +759,85 @@ function jsDeletePesqueiro(fichaId,pag, idEntHasPesqueiro) {
 function jsInsertPesqueiro(frm, pag, entrevista) {
 
         var TmpUrl = (entrevista + '#base');
+        if(frm.nomePesqueiro.value === ""){
+            alert("Selecione um pesqueiro!");
+        }
+        else{
+            var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoPesqueiro/' + frm.tempoPesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
 
-        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoPesqueiro/' + frm.tempoPesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
-
-        location.replace(tmpUpdate);
+            location.replace(tmpUpdate);
+        }
 }
 
 function jsInsertPesqueiroWithoutTime(frm, pag, entrevista) {
 
         var TmpUrl = (entrevista + '#base');
+        if(frm.nomePesqueiro.value === ""){
+            alert("Selecione um pesqueiro!");
+        }
+        else{
+            var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
 
-        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
-
-        location.replace(tmpUpdate);
+            location.replace(tmpUpdate);
+        }
 }
 
 
 function jsInsertPesqueiroWithTime(frm, pag, entrevista) {
 
         var TmpUrl = (entrevista + '#base');
+        if(frm.nomePesqueiro.value === ""){
+            alert("Selecione um pesqueiro!");
+        }
+        else{
+            var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
 
-        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
-
-        location.replace(tmpUpdate);
+            location.replace(tmpUpdate);
+        }
 }
 
 function jsInsertPesqueiroWithTimeAndRange(frm, pag, entrevista) {
 
         var TmpUrl = (entrevista + '#base');
+        if(frm.nomePesqueiro.value === ""){
+            alert("Selecione um pesqueiro!");
+        }
+        else{
+            var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/distAPesqueiro/'+ frm.distAPesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
 
-        var tmpUpdate = (pag + '/nomePesqueiro/' + frm.nomePesqueiro.value + '/tempoAPesqueiro/' + frm.tempoAPesqueiro.value +'/distAPesqueiro/'+ frm.distAPesqueiro.value + '/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
-
-        location.replace(tmpUpdate);
+            location.replace(tmpUpdate);
+        }
 }
 
 function jsInsertEspecieCapturadaTipoVenda(frm, pag, entrevista){
     
     var TmpUrl  = (entrevista+ '#base');
-    
-    var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista + '/id_tipovenda/'+frm.tipoVenda.value+'/back_url/' + TmpUrl);
-    
-    location.replace(tmpUpdate);
-    
+    if(frm.SelectEspecie.value === ""){
+        alert("Selecione uma espécie!");
+    }
+    else if(frm.quantidade.value === "" || frm.peso.value === ""){
+        alert("A Quantidade e o Peso não podem ser vazios, por favor insira um deles!");
+    }
+    else{
+        var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista + '/id_tipovenda/'+frm.tipoVenda.value+'/back_url/' + TmpUrl);
+        
+        location.replace(tmpUpdate);
+    }
 }
 function jsInsertEspecieCapturada(frm, pag, entrevista){
     
     var TmpUrl  = (entrevista+ '#base');
-    
-    var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista +'/back_url/' + TmpUrl);
-    
-    location.replace(tmpUpdate);
-    
+    if(frm.SelectEspecie.value === ""){
+        alert("Selecione uma espécie!");
+    }
+    else if(frm.quantidade.value === "" || frm.peso.value === ""){
+        alert("A Quantidade e o Peso não podem ser vazios, por favor insira um deles!");
+    }
+    else{
+        var tmpUpdate = (pag + '/selectEspecie/' + frm.SelectEspecie.value + '/quantidade/' + frm.quantidade.value + '/peso/' + frm.peso.value + '/precokg/' + frm.precokg.value + '/id_entrevista/' + entrevista +'/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+    }
 }
 
 
@@ -825,10 +853,14 @@ function jsDeleteEspecieCapturada(fichaId, pag, idEntHasEspecie) {
 function jsInsertAvistamento(frm, pag, entrevista){
     
     var TmpUrl  = (entrevista+ '#base');
-    
-    var tmpUpdate = (pag + '/SelectAvistamento/' + frm.SelectAvistamento.value +'/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
-    
-    location.replace(tmpUpdate);
+    if(frm.SelectAvistamento.value === ""){
+        alert("Selecione um avistamento!");
+    }
+    else{
+        var tmpUpdate = (pag + '/SelectAvistamento/' + frm.SelectAvistamento.value +'/id_entrevista/' + entrevista + '/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+    }
     
 }
 function jsDeleteAvistamento(fichaId, pag, idAvistamento) {
@@ -962,13 +994,19 @@ function relatorioIndividualPescador(id_pescador){
 function jsInsertAmostraCamarao(frm, pag, idEntrevista){
     
     var TmpUrl  = (idEntrevista+ '#base_camarao');
-    
-    var tmpUpdate = (pag + '/id/' +idEntrevista+ '/SelectEspecie/'+ frm.SelectEspecieCamarao.value +
-    '/SelectSexo/' + frm.SelectSexoCamarao.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + 
-    '/comprimentoCabeca/'+ frm.comprimentoCabeca.value + '/peso/'+frm.pesoCamarao.value+'/back_url/' + TmpUrl);
-    
-    location.replace(tmpUpdate);
-    
+    if(frm.comprimentoCabeca.value===""){
+        alert("Digite o Comprimento da Cabeça");
+    }
+    else if(frm.pesoCamarao.value === ""){
+        alert("Digite o Peso do Camarão");
+    }
+    else{
+        var tmpUpdate = (pag + '/id/' +idEntrevista+ '/SelectEspecie/'+ frm.SelectEspecieCamarao.value +
+        '/SelectSexo/' + frm.SelectSexoCamarao.value +'/SelectMaturidade/' + frm.SelectMaturidade.value + 
+        '/comprimentoCabeca/'+ frm.comprimentoCabeca.value + '/peso/'+frm.pesoCamarao.value+'/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+    }
 }
 
 function jsDeleteUnidade( pag, idEntrevista ,idUnidade, retorno) {
@@ -984,13 +1022,19 @@ function jsDeleteUnidade( pag, idEntrevista ,idUnidade, retorno) {
 function jsInsertAmostraPeixe(frm, pag, idEntrevista){
     
     var TmpUrl  = (idEntrevista+ '#base_peixe');
-    
-    var tmpUpdate = (pag + '/id/'+idEntrevista+'/SelectSexo/' + frm.SelectSexoPeixe.value +
-    '/SelectEspecie/' + frm.SelectEspeciePeixe.value + '/comprimento/'+ frm.comprimentoPeixe.value + 
-    '/peso/'+frm.pesoPeixe.value+'/back_url/' + TmpUrl);
-    
-    location.replace(tmpUpdate);
-    
+    if(frm.comprimentoPeixe.value===""){
+        alert("Digite o Comprimento do Peixe");
+    }
+    else if(frm.pesoPeixe.value === ""){
+        alert("Digite o Peso do Camarão");
+    }
+    else{
+        var tmpUpdate = (pag + '/id/'+idEntrevista+'/SelectSexo/' + frm.SelectSexoPeixe.value +
+        '/SelectEspecie/' + frm.SelectEspeciePeixe.value + '/comprimento/'+ frm.comprimentoPeixe.value + 
+        '/peso/'+frm.pesoPeixe.value+'/back_url/' + TmpUrl);
+
+        location.replace(tmpUpdate);
+    }
 }
 //Insert para views dinâmicas
 function jsInsertDynamic(frm, pag, pag_update)

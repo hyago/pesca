@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <head>
         
         <?php
@@ -47,4 +47,55 @@
 		</tr>
             <?php endforeach;?>
 	</tbody>
-</table>
+</table>-->
+
+<script src="js/Chart.min.js"></script>
+<script type="text/javascript">
+    var randomScalingFactor = function(){ return Math.round(Math.random()*300)};
+    var options = {
+        responsive:true
+    };
+
+    var data = {
+        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+        datasets: [
+            {
+                label: "Dados primários",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            },
+            {
+                label: "Dados secundários",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40, 19, 86, 27, 90, 200, 87, 20, 50, 20]
+            },
+            {
+                label: "Dados Terceário",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 28, 20, 19, 46, 17, 10, 100, 77, 10, 20, 10]
+            }
+        ]
+    };
+    window.onload = function(){
+        var ctx = document.getElementById("GraficoLine").getContext("2d");
+        var LineChart = new Chart(ctx).Line(data, options);
+    };
+</script>
+<div class="box-chart">
+  <canvas id="GraficoLine" style="width:100%;"></canvas>
+</div>

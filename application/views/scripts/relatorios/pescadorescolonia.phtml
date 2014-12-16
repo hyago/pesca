@@ -1,55 +1,37 @@
 
-<head>
-        
-        <?php
-        $this->headLink()->prependStylesheet('../css/basic.css');
 
-
-        echo $this->headLink() . "\n";
-        echo $this->headScript() . "\n";
-        ?>
-	<script type="text/javascript" src="http://filamentgroup.github.com/EnhanceJS/enhance.js"></script>
-        <script type="text/javascript">
-		// Run capabilities test
-		enhance({
-			loadScripts: [
-				{src: 'js/excanvas.js', iecondition: 'all'},
-				'js/jquery.js',
-				'js/visualize.jQuery.js',
-				'js/example.js'
-			],
-			loadStyles: [
-				'css/visualize.css',
-				'css/visualize-light.css'
-			]	
-		});   
-        </script>
-        <style type="text/css">
-    	/*some demo styles*/
-    	body { font-size: 62.5%; }
-    	.enhanced pre { margin: 3em 20px .5em; }
-    	.enhanced pre { width: 50%; overflow: auto; font-size: 1.4em; margin-top: 0; background: #444; padding: 15px; color: #fff; }
-        </style>
-</head>
 <div id="titulos">
     <h2>Relatórios->Pescadores Por Colônias</h2>
+</div> 
+<script src="js/Chart.min.js"></script>
+<script type="text/javascript">
+
+    var options = {
+        responsive:true,
+
+    };
+
+    var data = {
+        labels: <?= $this->array_colonia ?>,
+        datasets: [
+            {
+                label: "Pescadores",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: <?= $this->array_quantidade ?>
+            }
+
+        ]
+    };
+    window.onload = function(){
+        var ctx = document.getElementById("GraficoLine").getContext("2d");
+        var LineChart = new Chart(ctx).Line(data, options);
+    };
+</script>
+<div class="box-chart">
+  <canvas id="GraficoLine" style="width:100%;"></canvas>
 </div>
-
-
-<table >
-
-	<thead>
-		<tr>
-                    <td scope="col">Colônias</td>
-                    <th scope="col">Pescadores</th>
-		</tr>
-	</thead>
-	<tbody>
-            <?php foreach ($this->colonias as $key => $colonia): ?>
-		<tr>
-			<th scope="row"><?= $colonia['tc_nome']?></th>
-			<td><?= $colonia['count']?></td>
-		</tr>
-            <?php endforeach;?>
-	</tbody>
-</table>

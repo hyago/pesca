@@ -4,9 +4,9 @@ body{
 }
 #geral
 {   
-        font-size: 13px;
+        font-size: 0.9em;
 	margin: 0 auto;
-	width: 900px;
+	width: 100%;
 	background: #f8f8ff;
 }
 
@@ -34,9 +34,9 @@ body{
 
 #menu
 {
-        font-size: 12px;
+        font-size: 0.8em;
 	float: left;
-	width: 900px;
+	width: 100%;
 	background: #5F302B;
 	min-height: 45px;
 }
@@ -88,13 +88,13 @@ body{
 #conteudo-geral
 {
 	float: left;
-	width: 900px;
+	width: 100%;
 	background: #f8f8ff;
 }
 
 #conteudo
 {
-	width: 900px;
+	width: 100%;
 	min-height: 350px;
 	padding: 20px 0;
 	text-align: justify;
@@ -184,13 +184,11 @@ body{
 #rodape {
     clear: both;
     background: #f8f8ff;
-    //text-align: left;
     height: 70px;
 }
 
 #parceiros {
-    margin: 0px;
-    width: 1000px;
+    width: 100%;
     height: 70px;
     background: #f8f8ff;
 }
@@ -201,12 +199,12 @@ body{
 
 #parceiros ul li {
     display: inline;
-    margin-left: 0px;
-    margin-right: 123px;
+    width: 100%;
+    margin-left: 12%;
 }
 
 input[type=submit]{
-    font-size: 80%;
+    font-size: 0.9em;
 }
 
 .imgefeito { 
