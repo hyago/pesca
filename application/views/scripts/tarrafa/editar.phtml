@@ -152,8 +152,8 @@
 <fieldset class="noEditable"><legend>Pesqueiro:</legend>
     <fieldset class="noEditable"><legend>Pesqueiro e tempo no pesqueiro:</legend>
             <div id="base">
-                <input onclick="jsInsertPesqueiroWithoutTime(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
-                <select style="float:left;" name="nomePesqueiro">
+                <input class="responsivo" onclick="jsInsertPesqueiroWithoutTime(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertpesqueiro"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
+                <select class="responsivo" style="float:left;" name="nomePesqueiro">
                     <option value="" selected></option>
                     <?php foreach ($this->pesqueiros as $key => $pesqueiro): ?>
                         <option value="<?= $pesqueiro['paf_id']; ?>"><?= $pesqueiro['paf_pesqueiro']; ?></option>
@@ -185,18 +185,18 @@
         <fieldset class="noEditable"><legend>Dados das Espécies Capturadas:</legend>
 
             <div id="base">
-                <input onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
+                <input class="responsivo" onclick="jsInsertEspecieCapturada(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertespeciecapturada"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
                 <select style="float:left;" name="SelectEspecie" class="espc">
                     <option value="" selected></option>
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <input style="float:left;" type="text" name="quantidade" placeholder="Quantidade" size="10px">
-                <input style="float:left;" type="text" name="peso" placeholder="Peso" size="10px">
-                <input style="float:left;" type="text" name="precokg" placeholder="Preço por kg" size="10px">
+                <input class="responsivo" style="float:left;" type="text" name="quantidade" placeholder="Quantidade" size="10px">
+                <input class="responsivo" style="float:left;" type="text" name="peso" placeholder="Peso" size="10px">
+                <input class="responsivo" style="float:left;" type="text" name="precokg" placeholder="Preço por kg" size="10px">
 
-                <input type="hidden" name="id_entrevista"  value="<?= $this->entrevista['tar_id'] ?>"/>
+                <input class="responsivo" type="hidden" name="id_entrevista"  value="<?= $this->entrevista['tar_id'] ?>"/>
 
             </div>
 
@@ -229,9 +229,9 @@
     <fieldset class="noEditable"><legend>Avistamento:</legend>
         <fieldset class="noEditable"><legend>O Que foi avistado:</legend>
             <div id="base">
-                <input onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
+                <input class="responsivo" onclick="jsInsertAvistamento(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertavistamento"), null, true) ?>', '<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
                 
-                <select style="float:left;" name="SelectAvistamento">
+                <select class="responsivo" style="float:left;" name="SelectAvistamento">
                     <option value="" selected></option>
                     <?php foreach ($this->avistamentos as $key => $avistamento): ?>
                         <option value="<?= $avistamento['avs_id']; ?>"><?= $avistamento['avs_descricao']; ?></option>
@@ -265,22 +265,22 @@
         <fieldset class="noEditable"><legend>Dados das Amostras:</legend>
 
             <div id="base_peixe">
-                <input onclick="jsInsertAmostraPeixe(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertbiopeixe"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
+                <input class="responsivo" onclick="jsInsertAmostraPeixe(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertbiopeixe"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
                 
-                <select style="float:left;" name="SelectEspeciePeixe">
+                <select class="responsivo" style="float:left;" name="SelectEspeciePeixe">
                     <?php foreach ($this->especies as $key => $especie): ?>
                         <option value="<?= $especie['esp_id']; ?>"><?= $especie['esp_nome_comum']; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <input style="float:left;" type="text" name="comprimentoPeixe" placeholder="Comprimento" size="10px">
+                <input class="responsivo" style="float:left;" type="text" name="comprimentoPeixe" placeholder="Comprimento" size="10px">
 
-                <select style="float:left;" class="amostragem" name="SelectSexoPeixe" style="width:5px">
+                <select class="responsivo" style="float:left;" class="amostragem" name="SelectSexoPeixe" style="width:5px">
                     <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
                     <option value="I">Indefinido</option>
                 </select>
                 
-                <input style="float:left;" type="text" name="pesoPeixe" placeholder="Peso" size="10px">
+                <input class="responsivo" style="float:left;" type="text" name="pesoPeixe" placeholder="Peso" size="10px">
 
                 
             </div>
@@ -318,27 +318,27 @@
         <fieldset class="noEditable"><legend>Dados das Amostras:</legend>
 
             <div id="base_camarao">
-                <input onclick="jsInsertAmostraCamarao(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertbiocamarao"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
+                <input class="responsivo" onclick="jsInsertAmostraCamarao(this.form, '<?= $this->url(array("controller" => "tarrafa", "action" => "insertbiocamarao"), null, true) ?>','<?=$this->entrevista['tar_id']?>')" type="button" value="Adicionar" />
                 
-                <select style="float:left;" name="SelectEspecieCamarao">
+                <select class="responsivo" style="float:left;" name="SelectEspecieCamarao">
                     <?php foreach ($this->especieCamarao as $key => $especieCamarao): ?>
                         <option value="<?= $especieCamarao['esp_id']; ?>"><?= $especieCamarao['esp_nome_comum']; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <select style="float:left;" class="amostragem" name="SelectSexoCamarao" >
+                <select class="responsivo" style="float:left;" class="amostragem" name="SelectSexoCamarao" >
                     <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
                     <option value="I">Indefinido</option>
                 </select>
-                <select style="float:left;" class="amostragem" name="SelectMaturidade">
+                <select class="responsivo" style="float:left;" class="amostragem" name="SelectMaturidade">
                     <?php foreach ($this->maturidade as $key => $maturidade): ?>
                         <option value="<?= $maturidade['tmat_id']; ?>"><?= $maturidade['tmat_tipo']; ?></option>
                     <?php endforeach; ?>
                 </select>
                 
-                <input style="float:left;" type="text" name="comprimentoCabeca" placeholder="Comp. Carapaça" size="10px">
+                <input class="responsivo" style="float:left;" type="text" name="comprimentoCabeca" placeholder="Comp. Carapaça" size="10px">
 
-                <input style="float:left;" type="text" name="pesoCamarao" placeholder="Peso" size="10px">
+                <input class="responsivo" style="float:left;" type="text" name="pesoCamarao" placeholder="Peso" size="10px">
 
 
             </div>
