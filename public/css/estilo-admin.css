@@ -255,15 +255,16 @@ tbody tr:nth-child(odd) {
 .esquerda{
     //float: left;
 
-    width: 50%;
+    width: 48%;
     height: auto;
 }
 
 .direita{
     float: right;
     padding: 0;
-    width: 50%;
+    width: 48%;
     height: auto;
+    margin-top: -450px;
 }
 .esquerda-entrevista{
     float: left;

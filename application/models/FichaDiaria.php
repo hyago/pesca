@@ -114,6 +114,6 @@ class Application_Model_FichaDiaria
         
         return $this->dbTableFichaDiaria->fetchAll($select)->toArray();
     }
-
+    
 }
 

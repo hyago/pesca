@@ -124,7 +124,7 @@ class FichaDiariaController extends Zend_Controller_Action {
         $this->view->assign("dados_vento", $vento);
         //-------------------------------------------
         
-        $usuario = $this->modelEstagiario->select(null, 'tu_nome');
+        $usuario = $this->modelEstagiario->select('tu_usuariodeletado = FALSE', 'tu_nome');
 
         $this->view->assign("users", $usuario);
         //--------------------------------------------
@@ -171,7 +171,7 @@ class FichaDiariaController extends Zend_Controller_Action {
 
         $this->view->assign("artesPesca", $artePesca);
         //---------------------------------------------
-        $usuario = $this->modelEstagiario->select();
+        $usuario = $this->modelEstagiario->select('tu_usuariodeletado = FALSE', 'tu_nome');
 
         $this->view->assign("users", $usuario);
         //--------------------------------------------

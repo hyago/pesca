@@ -180,5 +180,6 @@ class Application_Model_Usuario {
          
         $dbTableLogin->update($dadosLogin, $where);
     }
+
     
 }

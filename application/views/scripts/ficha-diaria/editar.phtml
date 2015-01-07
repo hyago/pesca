@@ -59,14 +59,19 @@
                     if($this->fichadiaria['fd_turno'] == "Matutino"){
                         echo '<option nome="turno" value="Matutino" selected>Matutino</option>';
                         echo '<option nome="turno" value="Vespertino">Vespertino</option>';
+                        echo '<option name="turno" value="Matutino/Vespertino">Matutino/Vespertino</option>';
                     }
-                    else {
+                    else if($this->fichadiaria['fd_turno'] == "Vespertino") {
                         echo '<option nome="turno" value="Matutino" >Matutino</option>';
                         echo '<option nome="turno" value="Vespertino" selected>Vespertino</option>';
+                        echo '<option name="turno" value="Matutino/Vespertino">Matutino/Vespertino</option>';
+                    }
+                    else{
+                        echo '<option nome="turno" value="Matutino">Matutino</option>';
+                        echo '<option nome="turno" value="Vespertino">Vespertino</option>';
+                        echo '<option name="turno" value="Matutino/Vespertino" selected>Matutino/Vespertino</option>';
                     }
                 ?>
-		
-                
             </select>
         </div>
 
